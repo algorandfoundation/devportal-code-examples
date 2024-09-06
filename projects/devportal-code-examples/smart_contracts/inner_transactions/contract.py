@@ -3,7 +3,7 @@ from algopy.arc4 import abimethod
 
 
 class InnerTransactions(ARC4Contract):
-    # EXAMPLE:payment
+    # example:payment
     @abimethod()
     def payment(self) -> UInt64:
         result = itxn.Payment(amount=5000, receiver=Txn.sender, fee=0).submit()
@@ -12,4 +12,4 @@ class InnerTransactions(ARC4Contract):
     # fee is set to 0 by default. Manually set here for demonstration purposes.
     #  The `Sender` for the above is implied to be Global.current_application_address().
     # If a different sender is needed, it'd have to be an account that has been rekeyed to the application address. 
-    # EXAMPLE:payment
+    # example:payment
