@@ -18,6 +18,7 @@ artifacts = 'smart_contracts/artifacts'
 command = "poetry run python -m smart_contracts deploy"
 environment_secrets = [
   "DEPLOYER_MNEMONIC",
+  "DISPENSER_MNEMONIC",
 ]
 
 [project.deploy.localnet]
@@ -28,7 +29,17 @@ environment_secrets = []
 build = { commands = [
   'poetry run python -m smart_contracts build',
 ], description = 'Build all smart contracts in the project' }
+test = { commands = [
+  'poetry run pytest',
+], description = 'Run smart contract tests' }
+audit = { commands = [
+  'poetry export --without=dev -o requirements.txt',
+  'poetry run pip-audit -r requirements.txt',
+], description = 'Audit with pip-audit' }
 lint = { commands = [
+  'poetry run black --check --diff .',
+  'poetry run ruff check .',
+  'poetry run mypy',
 ], description = 'Perform linting' }
 audit-teal = { commands = [
   # 🚨 IMPORTANT 🚨: For strict TEAL validation, remove --exclude statements. The default starter contract is not for production. Ensure thorough testing and adherence to best practices in smart contract development. This is not a replacement for a professional audit.
