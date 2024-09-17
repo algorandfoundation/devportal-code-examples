@@ -1,0 +1,61 @@
+#pragma version 10
+
+smart_contracts.hello_world.contract.HelloWorld.approval_program:
+    callsub __puya_arc4_router__
+    return
+
+
+// smart_contracts.hello_world.contract.HelloWorld.__puya_arc4_router__() -> uint64:
+__puya_arc4_router__:
+    proto 0 1
+    txn NumAppArgs
+    bz __puya_arc4_router___bare_routing@5
+    method "hello(string)string"
+    txna ApplicationArgs 0
+    match __puya_arc4_router___hello_route@2
+    int 0
+    retsub
+
+__puya_arc4_router___hello_route@2:
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    txna ApplicationArgs 1
+    extract 2 0
+    callsub hello
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    byte 0x151f7c75
+    swap
+    concat
+    log
+    int 1
+    retsub
+
+__puya_arc4_router___bare_routing@5:
+    txn OnCompletion
+    bnz __puya_arc4_router___after_if_else@9
+    txn ApplicationID
+    !
+    assert // is creating
+    int 1
+    retsub
+
+__puya_arc4_router___after_if_else@9:
+    int 0
+    retsub
+
+
+// smart_contracts.hello_world.contract.HelloWorld.hello(name: bytes) -> bytes:
+hello:
+    proto 1 1
+    byte "Hello, "
+    frame_dig -1
+    concat
+    retsub
