@@ -22,9 +22,13 @@ class InnerTransactions(ARC4Contract):
         result = itxn.Payment(amount=5000, receiver=Txn.sender, fee=0).submit()
         return result.amount
 
-    # fee is set to 0 by default. Manually set here for demonstration purposes.
-    # The `Sender` for the above is implied to be Global.current_application_address().
-    # If a different sender is needed, it'd have to be an account that has been rekeyed to the application address.
+    """
+    fee is set to 0 by default. Manually set here for demonstration purposes.
+    The `Sender` for the above is implied to be Global.current_application_address().
+
+    If a different sender is needed, it'd have to be an account that has been
+    rekeyed to the application address.
+    """
     # example: PAYMENT
 
     # example: ASSET_CREATE
@@ -58,7 +62,9 @@ class InnerTransactions(ARC4Contract):
         ).submit()
 
     """
-    A zero amount asset transfer to one's self is a special type of asset transfer that is used to opt-in to an asset.
+    A zero amount asset transfer to one's self is a special type of asset transfer
+    that is used to opt-in to an asset.
+
     To send an asset transfer, the asset must be an available resource.
     Refer the Resource Availability section for more information.
     """
@@ -93,7 +99,10 @@ class InnerTransactions(ARC4Contract):
             fee=0,
         ).submit()
 
-    # To freeze an asset, the asset must be a freezable asset by having an account with freeze authority.
+    """
+    To freeze an asset, the asset must be a freezable asset
+    by having an account with freeze authority.
+    """
     # example: ASSET_FREEZE
 
     # example: ASSET_REVOKE
@@ -109,8 +118,12 @@ class InnerTransactions(ARC4Contract):
             fee=0,
         ).submit()
 
-    # To revoke an asset, the asset must be a revocable asset by having an account with clawback authority.
-    # Sender is implied to be current_application_address
+    """
+    To revoke an asset, the asset must be a revocable asset
+    by having an account with clawback authority.
+
+    Sender is implied to be current_application_address
+    """
     # example: ASSET_REVOKE
 
     # example: ASSET_CONFIG
@@ -163,8 +176,12 @@ class InnerTransactions(ARC4Contract):
     # example: GROUPED_INNER_TXNS
 
     # example: DEPLOY_APP
-    # HelloWorld class is a contract class defined in a different file. It is imported in the beginning of this file.
-    # from ..hello_world.contract import HelloWorld
+    """
+    HelloWorld class is a contract class defined in a different file.
+    It is imported in the beginning of this file.
+
+    from ..hello_world.contract import HelloWorld
+    """
 
     @abimethod
     def deploy_app(self) -> UInt64:
