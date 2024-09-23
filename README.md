@@ -1,4 +1,4 @@
-# devportal-code-examples
+# python-contract-examples
 
 Welcome to your new AlgoKit project!
 

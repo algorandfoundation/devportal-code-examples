@@ -11,15 +11,12 @@ path = ".algokit/generators/create_env_file"
 
 [project]
 type = 'contract'
-name = 'devportal-code-examples'
+name = 'python-contract-examples'
 artifacts = 'smart_contracts/artifacts'
 
 [project.deploy]
 command = "poetry run python -m smart_contracts deploy"
-environment_secrets = [
-  "DEPLOYER_MNEMONIC",
-  "DISPENSER_MNEMONIC",
-]
+environment_secrets = ["DEPLOYER_MNEMONIC", "DISPENSER_MNEMONIC"]
 
 [project.deploy.localnet]
 environment_secrets = []
