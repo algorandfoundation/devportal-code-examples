@@ -93,7 +93,7 @@ class InnerTransactions(ARC4Contract):
     @abimethod
     def asset_freeze(self, acct_to_be_frozen: Account, asset: Asset) -> None:
         itxn.AssetFreeze(
-            freeze_account=acct_to_be_frozen,  # The account that has freeze authority on the asset.
+            freeze_account=acct_to_be_frozen, # account to be frozen
             freeze_asset=asset,
             frozen=True,
             fee=0,
