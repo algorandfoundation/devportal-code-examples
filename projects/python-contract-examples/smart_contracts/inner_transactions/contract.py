@@ -39,7 +39,7 @@ class InnerTransactions(ARC4Contract):
             decimals=0,
             unit_name="ML",
             asset_name="Mona Lisa",
-            url="https://en.wikipedia.org/wiki/Mona_Lisa",
+            url="https://link_to_ipfs/Mona_Lisa",
             manager=Global.current_application_address,
             reserve=Global.current_application_address,
             freeze=Global.current_application_address,
