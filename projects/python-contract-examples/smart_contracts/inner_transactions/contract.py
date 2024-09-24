@@ -35,8 +35,8 @@ class InnerTransactions(ARC4Contract):
     @abimethod
     def asset_create(self) -> UInt64:
         itxn_result = itxn.AssetConfig(
-            total=1000,
-            decimals=0,
+            total=100,
+            decimals=2,
             unit_name="ML",
             asset_name="Mona Lisa",
             url="https://link_to_ipfs/Mona_Lisa",
