@@ -35,11 +35,11 @@ class InnerTransactions(ARC4Contract):
     @abimethod
     def asset_create(self) -> UInt64:
         itxn_result = itxn.AssetConfig(
-            total=1000,
-            decimals=0,
+            total=100,
+            decimals=2,
             unit_name="ML",
             asset_name="Mona Lisa",
-            url="https://en.wikipedia.org/wiki/Mona_Lisa",
+            url="https://link_to_ipfs/Mona_Lisa",
             manager=Global.current_application_address,
             reserve=Global.current_application_address,
             freeze=Global.current_application_address,
@@ -93,7 +93,7 @@ class InnerTransactions(ARC4Contract):
     @abimethod
     def asset_freeze(self, acct_to_be_frozen: Account, asset: Asset) -> None:
         itxn.AssetFreeze(
-            freeze_account=acct_to_be_frozen,  # The account that has freeze authority on the asset.
+            freeze_account=acct_to_be_frozen,  # account to be frozen
             freeze_asset=asset,
             frozen=True,
             fee=0,
