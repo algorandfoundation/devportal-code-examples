@@ -11,19 +11,22 @@ see the [Solas documentation](https://solas.algorand.foundation/doc/content-deve
 
 ### Setup Repository
 
-Clone the repository if it has not been done already.
+1. Clone the repository if it has not been done already.
 This only has to be done once to set up the project
 
 ```bash
 git clone git@github.com:algorandfoundation/devportal-code-examples.git
 ```
 
-Update the latest changes from the remote repository
+2. Update the latest changes from the remote repository
 
 ```bash
 git fetch
 ```
 
+3. Start localnet with `algokit localnet start`
+4. Bootstrap all of the projects for the first time with `algokit project bootstrap all` at the ROOT directory
+5. Run the tests with `algokit project run test`
 #### Feature branches
 
 Please use the following convention when naming branches for clarity:
@@ -46,8 +49,11 @@ Changes must be done via a Pull Request (PR).
 Ensure the following acceptance criteria are met before submitting a PR:
 
 - Ensure there are no typos in the content
-- Ensure `pnpm run lint` passes
-- Ensure `pnpm run build` passes
+- Ensure `algokit project run audit` passes
+- Ensure `algokit project run test` passes
+- Ensure `algokit project run lint` passes
+- Ensure `algokit project run build` passes
+- Ensure `algokit project run audit-teal` passes
 
 ## Code example guidelines
 
