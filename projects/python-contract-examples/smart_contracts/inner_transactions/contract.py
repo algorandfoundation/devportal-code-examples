@@ -34,7 +34,23 @@ class InnerTransactions(ARC4Contract):
 
     # example: ASSET_CREATE
     @abimethod
-    def asset_create(self) -> UInt64:
+    def fungible_asset_create(self) -> UInt64:
+        itxn_result = itxn.AssetConfig(
+            total=100_000_000_000,
+            decimals=10,
+            unit_name="RP",
+            asset_name="Royalty Points",
+        ).submit()
+
+        return itxn_result.created_asset.id
+
+    @abimethod
+    def non_fungible_asset_create(self) -> UInt64:
+        """
+        Following the ARC3 standard, the total supply must be 1 for a non-fungible asset.
+        If you want to create fractional NFTs, `total` * `decimals` point must be 1.
+        ex) total=100, decimals=2, 100 * 0.01 = 1
+        """
         itxn_result = itxn.AssetConfig(
             total=100,
             decimals=2,
@@ -45,7 +61,6 @@ class InnerTransactions(ARC4Contract):
             reserve=Global.current_application_address,
             freeze=Global.current_application_address,
             clawback=Global.current_application_address,
-            fee=0,
         ).submit()
 
         return itxn_result.created_asset.id
