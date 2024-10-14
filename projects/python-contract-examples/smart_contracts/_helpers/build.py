@@ -42,6 +42,7 @@ def build(output_dir: Path, contract_path: Path) -> Path:
 
     app_spec_file_names = [file.name for file in output_dir.glob("*.arc32.json")]
 
+    app_spec_file_name = None
     for app_spec_file_name in app_spec_file_names:
         if app_spec_file_name is None:
             raise Exception(
@@ -72,4 +73,5 @@ def build(output_dir: Path, contract_path: Path) -> Path:
                     f"Could not generate typed client:\n{generate_result.stdout}"
                 )
 
-    return output_dir / app_spec_file_name
+    if app_spec_file_name:
+        return output_dir / app_spec_file_name
