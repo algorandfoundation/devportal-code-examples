@@ -39,25 +39,25 @@ def main(action: str, contract_name: str | None = None) -> None:
                 build(artifact_path / contract.name, contract.path)
         case "deploy":
             for contract in filtered_contracts:
-                output_dir = artifact_path / contract.name
-                app_spec_file_name = next(
-                    (
-                        file.name
-                        for file in output_dir.iterdir()
-                        if file.is_file() and file.suffixes == [".arc32", ".json"]
-                    ),
-                    None,
-                )
-                if app_spec_file_name is None:
-                    raise Exception("Could not deploy app, .arc32.json file not found")
-                app_spec_path = output_dir / app_spec_file_name
                 if contract.deploy:
+                    output_dir = artifact_path / contract.name
+                    app_spec_file_name = next(
+                        (
+                            file.name
+                            for file in output_dir.iterdir()
+                            if file.is_file() and file.suffixes == [".arc32", ".json"]
+                        ),
+                        None,
+                    )
+                    if app_spec_file_name is None:
+                        raise Exception("Could not deploy app, .arc32.json file not found")
+                    app_spec_path = output_dir / app_spec_file_name
                     logger.info(f"Deploying app {contract.name}")
                     deploy(app_spec_path, contract.deploy)
         case "all":
             for contract in filtered_contracts:
                 logger.info(f"Building app at {contract.path}")
-                app_spec_path = build(artifact_path / contract.name, contract.path)
+                app_spec_path = build(artifact_path / contract.name, contract.path)  # type: ignore
                 if contract.deploy:
                     logger.info(f"Deploying {contract.path.name}")
                     deploy(app_spec_path, contract.deploy)
