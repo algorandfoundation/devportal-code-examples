@@ -50,7 +50,9 @@ def main(action: str, contract_name: str | None = None) -> None:
                         None,
                     )
                     if app_spec_file_name is None:
-                        raise Exception("Could not deploy app, .arc32.json file not found")
+                        raise Exception(
+                            "Could not deploy app, .arc32.json file not found"
+                        )
                     app_spec_path = output_dir / app_spec_file_name
                     logger.info(f"Deploying app {contract.name}")
                     deploy(app_spec_path, contract.deploy)
