@@ -10,6 +10,7 @@ from algopy import (
 )
 
 
+# example: LSIG_SELFPAYMENT
 @logicsig
 def self_payment() -> bool:
     """
@@ -27,3 +28,6 @@ def self_payment() -> bool:
         and Txn.last_valid == TemplateVar[UInt64]("LAST_ROUND")
         and Txn.lease == op.sha256(b"self-payment")
     )
+
+
+# example: LSIG_SELFPAYMENT

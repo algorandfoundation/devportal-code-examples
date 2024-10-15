@@ -11,6 +11,7 @@ from algopy import (
 from algopy.op import GTxn
 
 
+# example: LSIG_SUBSIDIZEAPPCALL
 @logicsig
 def subsidize_app_call() -> bool:
     """
@@ -32,3 +33,6 @@ def subsidize_app_call() -> bool:
         == TemplateVar[Application]("KNOWN_APP")
         and GTxn.fee(Txn.group_index - 1) == 0
     )
+
+
+# example: LSIG_SUBSIDIZEAPPCALL
