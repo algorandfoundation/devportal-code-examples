@@ -4,6 +4,7 @@ from algopy import (
     ARC4Contract,
     Asset,
     Global,
+    String,
     Txn,
     UInt64,
     arc4,
@@ -33,7 +34,23 @@ class InnerTransactions(ARC4Contract):
 
     # example: ASSET_CREATE
     @abimethod
-    def asset_create(self) -> UInt64:
+    def fungible_asset_create(self) -> UInt64:
+        itxn_result = itxn.AssetConfig(
+            total=100_000_000_000,
+            decimals=2,
+            unit_name="RP",
+            asset_name="Royalty Points",
+        ).submit()
+
+        return itxn_result.created_asset.id
+
+    @abimethod
+    def non_fungible_asset_create(self) -> UInt64:
+        """
+        Following the ARC3 standard, the total supply must be 1 for a non-fungible asset.
+        If you want to create fractional NFTs, `total` * `decimals` point must be 1.
+        ex) total=100, decimals=2, 100 * 0.01 = 1
+        """
         itxn_result = itxn.AssetConfig(
             total=100,
             decimals=2,
@@ -44,7 +61,6 @@ class InnerTransactions(ARC4Contract):
             reserve=Global.current_application_address,
             freeze=Global.current_application_address,
             clawback=Global.current_application_address,
-            fee=0,
         ).submit()
 
         return itxn_result.created_asset.id
@@ -185,6 +201,9 @@ class InnerTransactions(ARC4Contract):
 
     @abimethod
     def deploy_app(self) -> UInt64:
+        """
+        This method uses the itxn.ApplicationCall to deploy the HelloWorld contract.
+        """
         compiled_contract = compile_contract(HelloWorld)
 
         app_txn = itxn.ApplicationCall(
@@ -196,27 +215,32 @@ class InnerTransactions(ARC4Contract):
 
         return app.id
 
+    @abimethod
+    def arc4_deploy_app(self) -> UInt64:
+        """
+        This method uses the arc4.arc4_create to deploy the HelloWorld contract.
+        """
+        app_txn = arc4.arc4_create(HelloWorld)
+
+        return app_txn.created_app.id
+
     # example: DEPLOY_APP
 
     # example: NOOP_APP_CALL
     @abimethod
-    def noop_app_call(self, app_id: Application) -> tuple[arc4.String, arc4.String]:
+    def noop_app_call(self, app_id: Application) -> tuple[arc4.String, String]:
         # invoke an ABI method
         call_txn = itxn.ApplicationCall(
             app_id=app_id,
             app_args=(arc4.arc4_signature("hello(string)string"), arc4.String("World")),
-            fee=0,
         ).submit()
         # extract result
         first_hello_world_result = arc4.String.from_log(call_txn.last_log)
 
         # OR, call it automatic ARC4 encoding, type validation and result handling
-        second_hello_world_result, call_txn = arc4.abi_call[
-            arc4.String
-        ](  # declare return type
-            "hello(string)string",  # method signature to call
+        second_hello_world_result, call_txn = arc4.abi_call(  # declare return type
+            HelloWorld.hello,  # method signature to call
             "again",  # abi method arguments
-            fee=0,
             app_id=app_id,
         )
 

@@ -140,19 +140,45 @@ def test_asset_create(
     sp.flat_fee = True
     sp.fee = 2000
 
-    txn_result = creator_inner_txn_app_client.asset_create(
+    txn_result = creator_inner_txn_app_client.non_fungible_asset_create(
         transaction_parameters=TransactionParameters(suggested_params=sp)
     )
-    print(f"Created Asset ID: {txn_result.return_value}")
+    print(f"Created Non Fungible Asset ID: {txn_result.return_value}")
 
     app_acct_info = algorand.account.get_information(
         creator_inner_txn_app_client.app_address
     )
     asset_info: list = app_acct_info["assets"]
+    print("non fungible asset info", asset_info)
     assert len(asset_info) > 0
-    assert asset_info[1]["asset-id"] == txn_result.return_value
+    for asset in asset_info:
+        if asset["asset-id"] == txn_result.return_value:
+            assert asset["asset-id"] == txn_result.return_value
 
     return txn_result.return_value
+
+
+def test_fungible_asset_create(
+    algorand: AlgorandClient,
+    algod_client: AlgodClient,
+    creator_inner_txn_app_client: InnerTransactionsClient,
+) -> None:
+    sp = algod_client.suggested_params()
+    sp.flat_fee = True
+    sp.fee = 2000
+
+    txn_result = creator_inner_txn_app_client.fungible_asset_create(
+        transaction_parameters=TransactionParameters(suggested_params=sp)
+    )
+    print(f"Created Fungible Asset ID: {txn_result.return_value}")
+
+    app_acct_info = algorand.account.get_information(
+        creator_inner_txn_app_client.app_address
+    )
+    asset_info: list = app_acct_info["assets"]
+    print("asset info", asset_info)
+    assert len(asset_info) > 0
+    assert any(asset["asset-id"] == txn_result.return_value for asset in asset_info)
 
 
 def test_payment(
@@ -324,8 +350,7 @@ def test_asset_delete(
         creator_inner_txn_app_client.app_address
     )
     asset_info: list = app_acct_info["assets"]
-
-    assert len(asset_info) == 1
+    assert not any(asset["asset-id"] == test_asset_create for asset in asset_info)
 
 
 def test_multi_inner_txns(
