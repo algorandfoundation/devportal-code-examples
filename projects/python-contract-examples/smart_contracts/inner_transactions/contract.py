@@ -37,7 +37,7 @@ class InnerTransactions(ARC4Contract):
     def fungible_asset_create(self) -> UInt64:
         itxn_result = itxn.AssetConfig(
             total=100_000_000_000,
-            decimals=10,
+            decimals=2,
             unit_name="RP",
             asset_name="Royalty Points",
         ).submit()

@@ -49,9 +49,9 @@ Changes must be done via a Pull Request (PR).
 Ensure the following acceptance criteria are met before submitting a PR:
 
 - Ensure there are no typos in the content
-- Ensure `algokit project run audit` passes
 - Ensure `algokit project run lint` passes
 - Ensure `algokit project run build` passes
+- Ensure `algokit project run audit` passes
 - Ensure `algokit project run audit-teal` passes
 - Ensure `algokit project run test` passes. Make sure to have the localnet running with `algokit localnet start`
 
