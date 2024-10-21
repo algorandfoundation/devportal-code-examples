@@ -2,6 +2,7 @@ import logging
 import subprocess
 from pathlib import Path
 from shutil import rmtree
+from typing import Optional
 
 logger = logging.getLogger(__name__)
 deployment_extension = "py"
@@ -15,7 +16,7 @@ def _get_output_path(output_dir: Path, deployment_extension: str) -> Path:
     )
 
 
-def build(output_dir: Path, contract_path: Path) -> Path:
+def build(output_dir: Path, contract_path: Path) -> Optional[Path]:
     output_dir = output_dir.resolve()
     if output_dir.exists():
         rmtree(output_dir)
@@ -42,6 +43,7 @@ def build(output_dir: Path, contract_path: Path) -> Path:
 
     app_spec_file_names = [file.name for file in output_dir.glob("*.arc32.json")]
 
+    app_spec_file_name = None
     for app_spec_file_name in app_spec_file_names:
         if app_spec_file_name is None:
             raise Exception(
@@ -72,4 +74,6 @@ def build(output_dir: Path, contract_path: Path) -> Path:
                     f"Could not generate typed client:\n{generate_result.stdout}"
                 )
 
-    return output_dir / app_spec_file_name
+    if app_spec_file_name:
+        return output_dir / app_spec_file_name
+    return None
