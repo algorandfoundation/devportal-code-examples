@@ -23,20 +23,15 @@ from algosdk.atomic_transaction_composer import (
 
 _APP_SPEC_JSON = r"""{
     "hints": {
-        "arc4_uint64(uint64,uint64)uint64": {
-            "call_config": {
-                "no_op": "CALL"
-            }
-        },
-        "arc4_address(address)address": {
+        "arc4_static_array()void": {
             "call_config": {
                 "no_op": "CALL"
             }
         }
     },
     "source": {
-        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMuYXJjNF90eXBlcy5jb250cmFjdC5BcmM0VHlwZXMuYXBwcm92YWxfcHJvZ3JhbToKICAgIGNhbGxzdWIgX19wdXlhX2FyYzRfcm91dGVyX18KICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5hcmM0X3R5cGVzLmNvbnRyYWN0LkFyYzRUeXBlcy5fX3B1eWFfYXJjNF9yb3V0ZXJfXygpIC0+IHVpbnQ2NDoKX19wdXlhX2FyYzRfcm91dGVyX186CiAgICBwcm90byAwIDEKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBfX3B1eWFfYXJjNF9yb3V0ZXJfX19iYXJlX3JvdXRpbmdANgogICAgbWV0aG9kICJhcmM0X3VpbnQ2NCh1aW50NjQsdWludDY0KXVpbnQ2NCIKICAgIG1ldGhvZCAiYXJjNF9hZGRyZXNzKGFkZHJlc3MpYWRkcmVzcyIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIF9fcHV5YV9hcmM0X3JvdXRlcl9fX2FyYzRfdWludDY0X3JvdXRlQDIgX19wdXlhX2FyYzRfcm91dGVyX19fYXJjNF9hZGRyZXNzX3JvdXRlQDMKICAgIGludCAwCiAgICByZXRzdWIKCl9fcHV5YV9hcmM0X3JvdXRlcl9fX2FyYzRfdWludDY0X3JvdXRlQDI6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gaXMgbm90IGNyZWF0aW5nCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBjYWxsc3ViIGFyYzRfdWludDY0CiAgICBieXRlIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnQgMQogICAgcmV0c3ViCgpfX3B1eWFfYXJjNF9yb3V0ZXJfX19hcmM0X2FkZHJlc3Nfcm91dGVAMzoKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBpcyBub3QgY3JlYXRpbmcKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGNhbGxzdWIgYXJjNF9hZGRyZXNzCiAgICBieXRlIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnQgMQogICAgcmV0c3ViCgpfX3B1eWFfYXJjNF9yb3V0ZXJfX19iYXJlX3JvdXRpbmdANjoKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBfX3B1eWFfYXJjNF9yb3V0ZXJfX19hZnRlcl9pZl9lbHNlQDEwCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgYXNzZXJ0IC8vIGlzIGNyZWF0aW5nCiAgICBpbnQgMQogICAgcmV0c3ViCgpfX3B1eWFfYXJjNF9yb3V0ZXJfX19hZnRlcl9pZl9lbHNlQDEwOgogICAgaW50IDAKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5hcmM0X3R5cGVzLmNvbnRyYWN0LkFyYzRUeXBlcy5hcmM0X3VpbnQ2NChhOiBieXRlcywgYjogYnl0ZXMpIC0+IGJ5dGVzOgphcmM0X3VpbnQ2NDoKICAgIHByb3RvIDIgMQogICAgZnJhbWVfZGlnIC0yCiAgICBidG9pCiAgICBmcmFtZV9kaWcgLTEKICAgIGJ0b2kKICAgICsKICAgIGl0b2IKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5hcmM0X3R5cGVzLmNvbnRyYWN0LkFyYzRUeXBlcy5hcmM0X2FkZHJlc3MoYWRkcmVzczogYnl0ZXMpIC0+IGJ5dGVzOgphcmM0X2FkZHJlc3M6CiAgICBwcm90byAxIDEKICAgIGZyYW1lX2RpZyAtMQogICAgYWNjdF9wYXJhbXNfZ2V0IEFjY3RCYWxhbmNlCiAgICBidXJ5IDEKICAgIGFzc2VydCAvLyBhY2NvdW50IGZ1bmRlZAogICAgZnJhbWVfZGlnIC0xCiAgICBhY2N0X3BhcmFtc19nZXQgQWNjdFRvdGFsQXNzZXRzCiAgICBidXJ5IDEKICAgIGFzc2VydCAvLyBhY2NvdW50IGZ1bmRlZAogICAgZnJhbWVfZGlnIC0xCiAgICByZXRzdWIK",
-        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMuYXJjNF90eXBlcy5jb250cmFjdC5BcmM0VHlwZXMuY2xlYXJfc3RhdGVfcHJvZ3JhbToKICAgIGludCAxCiAgICByZXR1cm4K"
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMuYXJjNF90eXBlcy5jb250cmFjdC5BcmM0U3RhdGljQXJyYXkuYXBwcm92YWxfcHJvZ3JhbToKICAgIGNhbGxzdWIgX19wdXlhX2FyYzRfcm91dGVyX18KICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5hcmM0X3R5cGVzLmNvbnRyYWN0LkFyYzRTdGF0aWNBcnJheS5fX3B1eWFfYXJjNF9yb3V0ZXJfXygpIC0+IHVpbnQ2NDoKX19wdXlhX2FyYzRfcm91dGVyX186CiAgICBwcm90byAwIDEKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBfX3B1eWFfYXJjNF9yb3V0ZXJfX19iYXJlX3JvdXRpbmdANQogICAgbWV0aG9kICJhcmM0X3N0YXRpY19hcnJheSgpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIF9fcHV5YV9hcmM0X3JvdXRlcl9fX2FyYzRfc3RhdGljX2FycmF5X3JvdXRlQDIKICAgIGludCAwCiAgICByZXRzdWIKCl9fcHV5YV9hcmM0X3JvdXRlcl9fX2FyYzRfc3RhdGljX2FycmF5X3JvdXRlQDI6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gaXMgbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIGFyYzRfc3RhdGljX2FycmF5CiAgICBpbnQgMQogICAgcmV0c3ViCgpfX3B1eWFfYXJjNF9yb3V0ZXJfX19iYXJlX3JvdXRpbmdANToKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBfX3B1eWFfYXJjNF9yb3V0ZXJfX19hZnRlcl9pZl9lbHNlQDkKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gaXMgY3JlYXRpbmcKICAgIGludCAxCiAgICByZXRzdWIKCl9fcHV5YV9hcmM0X3JvdXRlcl9fX2FmdGVyX2lmX2Vsc2VAOToKICAgIGludCAwCiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMuYXJjNF90eXBlcy5jb250cmFjdC5BcmM0U3RhdGljQXJyYXkuYXJjNF9zdGF0aWNfYXJyYXkoKSAtPiB2b2lkOgphcmM0X3N0YXRpY19hcnJheToKICAgIHByb3RvIDAgMAogICAgaW50IDAKICAgIGR1cAoKYXJjNF9zdGF0aWNfYXJyYXlfZm9yX2hlYWRlckAxOgogICAgZnJhbWVfZGlnIDEKICAgIGludCA0CiAgICA8CiAgICBieiBhcmM0X3N0YXRpY19hcnJheV9hZnRlcl9mb3JANAogICAgZnJhbWVfZGlnIDEKICAgIGR1cAogICAgaW50IDQKICAgICoKICAgIGJ5dGUgMHgwMDAwMDAwMTAwMDAwMDBhMDAwMDAwZmYwMDAwMDA4MAogICAgc3dhcAogICAgaW50IDQKICAgIGV4dHJhY3QzIC8vIG9uIGVycm9yOiBJbmRleCBhY2Nlc3MgaXMgb3V0IG9mIGJvdW5kcwogICAgYnRvaQogICAgZnJhbWVfZGlnIDAKICAgICsKICAgIGZyYW1lX2J1cnkgMAogICAgaW50IDEKICAgICsKICAgIGZyYW1lX2J1cnkgMQogICAgYiBhcmM0X3N0YXRpY19hcnJheV9mb3JfaGVhZGVyQDEKCmFyYzRfc3RhdGljX2FycmF5X2FmdGVyX2ZvckA0OgogICAgZnJhbWVfZGlnIDAKICAgIGludCAzOTQKICAgID09CiAgICBhc3NlcnQKICAgIHJldHN1Ygo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMuYXJjNF90eXBlcy5jb250cmFjdC5BcmM0U3RhdGljQXJyYXkuY2xlYXJfc3RhdGVfcHJvZ3JhbToKICAgIGludCAxCiAgICByZXR1cm4K"
     },
     "state": {
         "global": {
@@ -59,36 +54,15 @@ _APP_SPEC_JSON = r"""{
         }
     },
     "contract": {
-        "name": "Arc4Types",
+        "name": "Arc4StaticArray",
         "methods": [
             {
-                "name": "arc4_uint64",
-                "args": [
-                    {
-                        "type": "uint64",
-                        "name": "a"
-                    },
-                    {
-                        "type": "uint64",
-                        "name": "b"
-                    }
-                ],
+                "name": "arc4_static_array",
+                "args": [],
                 "returns": {
-                    "type": "uint64"
+                    "type": "void"
                 },
-                "desc": "This won't compile because you can't do math operations on arc4.UInt64 type.\nAll arc4 types are backed by byte arrays on the AVM.  c = a + b"
-            },
-            {
-                "name": "arc4_address",
-                "args": [
-                    {
-                        "type": "address",
-                        "name": "address"
-                    }
-                ],
-                "returns": {
-                    "type": "address"
-                }
+                "desc": "You can create a static array directly from the contract."
             }
         ],
         "networks": {}
@@ -171,25 +145,12 @@ def _convert_deploy_args(
 
 
 @dataclasses.dataclass(kw_only=True)
-class Arc4Uint64Args(_ArgsBase[int]):
-    """This won't compile because you can't do math operations on arc4.UInt64 type.
-    All arc4 types are backed by byte arrays on the AVM.  c = a + b"""
-
-    a: int
-    b: int
+class Arc4StaticArrayArgs(_ArgsBase[None]):
+    """You can create a static array directly from the contract."""
 
     @staticmethod
     def method() -> str:
-        return "arc4_uint64(uint64,uint64)uint64"
-
-
-@dataclasses.dataclass(kw_only=True)
-class Arc4AddressArgs(_ArgsBase[str]):
-    address: str
-
-    @staticmethod
-    def method() -> str:
-        return "arc4_address(address)address"
+        return "arc4_static_array()void"
 
 
 @dataclasses.dataclass(kw_only=True)
@@ -223,50 +184,19 @@ class Composer:
     def execute(self) -> AtomicTransactionResponse:
         return self.app_client.execute_atc(self.atc)
 
-    def arc4_uint64(
+    def arc4_static_array(
         self,
         *,
-        a: int,
-        b: int,
         transaction_parameters: algokit_utils.TransactionParameters | None = None,
     ) -> "Composer":
-        """This won't compile because you can't do math operations on arc4.UInt64 type.
-        All arc4 types are backed by byte arrays on the AVM.  c = a + b
+        """You can create a static array directly from the contract.
         
-        Adds a call to `arc4_uint64(uint64,uint64)uint64` ABI method
+        Adds a call to `arc4_static_array()void` ABI method
         
-        :param int a: The `a` ABI parameter
-        :param int b: The `b` ABI parameter
         :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
         :returns Composer: This Composer instance"""
 
-        args = Arc4Uint64Args(
-            a=a,
-            b=b,
-        )
-        self.app_client.compose_call(
-            self.atc,
-            call_abi_method=args.method(),
-            transaction_parameters=_convert_call_transaction_parameters(transaction_parameters),
-            **_as_dict(args, convert_all=True),
-        )
-        return self
-
-    def arc4_address(
-        self,
-        *,
-        address: str,
-        transaction_parameters: algokit_utils.TransactionParameters | None = None,
-    ) -> "Composer":
-        """Adds a call to `arc4_address(address)address` ABI method
-        
-        :param str address: The `address` ABI parameter
-        :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
-        :returns Composer: This Composer instance"""
-
-        args = Arc4AddressArgs(
-            address=address,
-        )
+        args = Arc4StaticArrayArgs()
         self.app_client.compose_call(
             self.atc,
             call_abi_method=args.method(),
@@ -308,8 +238,8 @@ class Composer:
         return self
 
 
-class Arc4TypesClient:
-    """A class for interacting with the Arc4Types app providing high productivity and
+class Arc4StaticArrayClient:
+    """A class for interacting with the Arc4StaticArray app providing high productivity and
     strongly typed methods to deploy and call the app"""
 
     @typing.overload
@@ -357,7 +287,7 @@ class Arc4TypesClient:
         app_name: str | None = None,
     ) -> None:
         """
-        Arc4TypesClient can be created with an app_id to interact with an existing application, alternatively
+        Arc4StaticArrayClient can be created with an app_id to interact with an existing application, alternatively
         it can be created with a creator and indexer_client specified to find existing applications by name and creator.
         
         :param AlgodClient algod_client: AlgoSDK algod client
@@ -434,49 +364,19 @@ class Arc4TypesClient:
     def suggested_params(self, value: algosdk.transaction.SuggestedParams | None) -> None:
         self.app_client.suggested_params = value
 
-    def arc4_uint64(
+    def arc4_static_array(
         self,
         *,
-        a: int,
-        b: int,
         transaction_parameters: algokit_utils.TransactionParameters | None = None,
-    ) -> algokit_utils.ABITransactionResponse[int]:
-        """This won't compile because you can't do math operations on arc4.UInt64 type.
-        All arc4 types are backed by byte arrays on the AVM.  c = a + b
+    ) -> algokit_utils.ABITransactionResponse[None]:
+        """You can create a static array directly from the contract.
         
-        Calls `arc4_uint64(uint64,uint64)uint64` ABI method
+        Calls `arc4_static_array()void` ABI method
         
-        :param int a: The `a` ABI parameter
-        :param int b: The `b` ABI parameter
         :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
-        :returns algokit_utils.ABITransactionResponse[int]: The result of the transaction"""
+        :returns algokit_utils.ABITransactionResponse[None]: The result of the transaction"""
 
-        args = Arc4Uint64Args(
-            a=a,
-            b=b,
-        )
-        result = self.app_client.call(
-            call_abi_method=args.method(),
-            transaction_parameters=_convert_call_transaction_parameters(transaction_parameters),
-            **_as_dict(args, convert_all=True),
-        )
-        return result
-
-    def arc4_address(
-        self,
-        *,
-        address: str,
-        transaction_parameters: algokit_utils.TransactionParameters | None = None,
-    ) -> algokit_utils.ABITransactionResponse[str]:
-        """Calls `arc4_address(address)address` ABI method
-        
-        :param str address: The `address` ABI parameter
-        :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
-        :returns algokit_utils.ABITransactionResponse[str]: The result of the transaction"""
-
-        args = Arc4AddressArgs(
-            address=address,
-        )
+        args = Arc4StaticArrayArgs()
         result = self.app_client.call(
             call_abi_method=args.method(),
             transaction_parameters=_convert_call_transaction_parameters(transaction_parameters),

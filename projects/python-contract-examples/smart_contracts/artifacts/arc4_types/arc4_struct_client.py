@@ -23,24 +23,44 @@ from algosdk.atomic_transaction_composer import (
 
 _APP_SPEC_JSON = r"""{
     "hints": {
-        "arc4_uint64(uint64,uint64)uint64": {
+        "add_todo(string)(string,bool)[]": {
             "call_config": {
                 "no_op": "CALL"
             }
         },
-        "arc4_address(address)address": {
+        "complete_todo(string)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "return_todo(string)(string,bool)": {
+            "structs": {
+                "output": {
+                    "name": "Todo",
+                    "elements": [
+                        [
+                            "task",
+                            "string"
+                        ],
+                        [
+                            "completed",
+                            "bool"
+                        ]
+                    ]
+                }
+            },
             "call_config": {
                 "no_op": "CALL"
             }
         }
     },
     "source": {
-        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMuYXJjNF90eXBlcy5jb250cmFjdC5BcmM0VHlwZXMuYXBwcm92YWxfcHJvZ3JhbToKICAgIGNhbGxzdWIgX19wdXlhX2FyYzRfcm91dGVyX18KICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5hcmM0X3R5cGVzLmNvbnRyYWN0LkFyYzRUeXBlcy5fX3B1eWFfYXJjNF9yb3V0ZXJfXygpIC0+IHVpbnQ2NDoKX19wdXlhX2FyYzRfcm91dGVyX186CiAgICBwcm90byAwIDEKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBfX3B1eWFfYXJjNF9yb3V0ZXJfX19iYXJlX3JvdXRpbmdANgogICAgbWV0aG9kICJhcmM0X3VpbnQ2NCh1aW50NjQsdWludDY0KXVpbnQ2NCIKICAgIG1ldGhvZCAiYXJjNF9hZGRyZXNzKGFkZHJlc3MpYWRkcmVzcyIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIF9fcHV5YV9hcmM0X3JvdXRlcl9fX2FyYzRfdWludDY0X3JvdXRlQDIgX19wdXlhX2FyYzRfcm91dGVyX19fYXJjNF9hZGRyZXNzX3JvdXRlQDMKICAgIGludCAwCiAgICByZXRzdWIKCl9fcHV5YV9hcmM0X3JvdXRlcl9fX2FyYzRfdWludDY0X3JvdXRlQDI6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gaXMgbm90IGNyZWF0aW5nCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBjYWxsc3ViIGFyYzRfdWludDY0CiAgICBieXRlIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnQgMQogICAgcmV0c3ViCgpfX3B1eWFfYXJjNF9yb3V0ZXJfX19hcmM0X2FkZHJlc3Nfcm91dGVAMzoKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBpcyBub3QgY3JlYXRpbmcKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGNhbGxzdWIgYXJjNF9hZGRyZXNzCiAgICBieXRlIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnQgMQogICAgcmV0c3ViCgpfX3B1eWFfYXJjNF9yb3V0ZXJfX19iYXJlX3JvdXRpbmdANjoKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBfX3B1eWFfYXJjNF9yb3V0ZXJfX19hZnRlcl9pZl9lbHNlQDEwCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgYXNzZXJ0IC8vIGlzIGNyZWF0aW5nCiAgICBpbnQgMQogICAgcmV0c3ViCgpfX3B1eWFfYXJjNF9yb3V0ZXJfX19hZnRlcl9pZl9lbHNlQDEwOgogICAgaW50IDAKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5hcmM0X3R5cGVzLmNvbnRyYWN0LkFyYzRUeXBlcy5hcmM0X3VpbnQ2NChhOiBieXRlcywgYjogYnl0ZXMpIC0+IGJ5dGVzOgphcmM0X3VpbnQ2NDoKICAgIHByb3RvIDIgMQogICAgZnJhbWVfZGlnIC0yCiAgICBidG9pCiAgICBmcmFtZV9kaWcgLTEKICAgIGJ0b2kKICAgICsKICAgIGl0b2IKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5hcmM0X3R5cGVzLmNvbnRyYWN0LkFyYzRUeXBlcy5hcmM0X2FkZHJlc3MoYWRkcmVzczogYnl0ZXMpIC0+IGJ5dGVzOgphcmM0X2FkZHJlc3M6CiAgICBwcm90byAxIDEKICAgIGZyYW1lX2RpZyAtMQogICAgYWNjdF9wYXJhbXNfZ2V0IEFjY3RCYWxhbmNlCiAgICBidXJ5IDEKICAgIGFzc2VydCAvLyBhY2NvdW50IGZ1bmRlZAogICAgZnJhbWVfZGlnIC0xCiAgICBhY2N0X3BhcmFtc19nZXQgQWNjdFRvdGFsQXNzZXRzCiAgICBidXJ5IDEKICAgIGFzc2VydCAvLyBhY2NvdW50IGZ1bmRlZAogICAgZnJhbWVfZGlnIC0xCiAgICByZXRzdWIK",
-        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMuYXJjNF90eXBlcy5jb250cmFjdC5BcmM0VHlwZXMuY2xlYXJfc3RhdGVfcHJvZ3JhbToKICAgIGludCAxCiAgICByZXR1cm4K"
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMuYXJjNF90eXBlcy5jb250cmFjdC5BcmM0U3RydWN0LmFwcHJvdmFsX3Byb2dyYW06CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fZW50cnlwb2ludEAyCiAgICBjYWxsc3ViIF9faW5pdF9fCgptYWluX2VudHJ5cG9pbnRAMjoKICAgIGNhbGxzdWIgX19wdXlhX2FyYzRfcm91dGVyX18KICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5hcmM0X3R5cGVzLmNvbnRyYWN0LkFyYzRTdHJ1Y3QuX19wdXlhX2FyYzRfcm91dGVyX18oKSAtPiB1aW50NjQ6Cl9fcHV5YV9hcmM0X3JvdXRlcl9fOgogICAgcHJvdG8gMCAxCiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogX19wdXlhX2FyYzRfcm91dGVyX19fYmFyZV9yb3V0aW5nQDcKICAgIG1ldGhvZCAiYWRkX3RvZG8oc3RyaW5nKShzdHJpbmcsYm9vbClbXSIKICAgIG1ldGhvZCAiY29tcGxldGVfdG9kbyhzdHJpbmcpdm9pZCIKICAgIG1ldGhvZCAicmV0dXJuX3RvZG8oc3RyaW5nKShzdHJpbmcsYm9vbCkiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBfX3B1eWFfYXJjNF9yb3V0ZXJfX19hZGRfdG9kb19yb3V0ZUAyIF9fcHV5YV9hcmM0X3JvdXRlcl9fX2NvbXBsZXRlX3RvZG9fcm91dGVAMyBfX3B1eWFfYXJjNF9yb3V0ZXJfX19yZXR1cm5fdG9kb19yb3V0ZUA0CiAgICBpbnQgMAogICAgcmV0c3ViCgpfX3B1eWFfYXJjNF9yb3V0ZXJfX19hZGRfdG9kb19yb3V0ZUAyOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGlzIG5vdCBjcmVhdGluZwogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgY2FsbHN1YiBhZGRfdG9kbwogICAgYnl0ZSAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50IDEKICAgIHJldHN1YgoKX19wdXlhX2FyYzRfcm91dGVyX19fY29tcGxldGVfdG9kb19yb3V0ZUAzOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGlzIG5vdCBjcmVhdGluZwogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgY2FsbHN1YiBjb21wbGV0ZV90b2RvCiAgICBpbnQgMQogICAgcmV0c3ViCgpfX3B1eWFfYXJjNF9yb3V0ZXJfX19yZXR1cm5fdG9kb19yb3V0ZUA0OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGlzIG5vdCBjcmVhdGluZwogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgY2FsbHN1YiByZXR1cm5fdG9kbwogICAgYnl0ZSAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50IDEKICAgIHJldHN1YgoKX19wdXlhX2FyYzRfcm91dGVyX19fYmFyZV9yb3V0aW5nQDc6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBibnogX19wdXlhX2FyYzRfcm91dGVyX19fYWZ0ZXJfaWZfZWxzZUAxMQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBpcyBjcmVhdGluZwogICAgaW50IDEKICAgIHJldHN1YgoKX19wdXlhX2FyYzRfcm91dGVyX19fYWZ0ZXJfaWZfZWxzZUAxMToKICAgIGludCAwCiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMuYXJjNF90eXBlcy5jb250cmFjdC5BcmM0U3RydWN0LmFkZF90b2RvKHRhc2s6IGJ5dGVzKSAtPiBieXRlczoKYWRkX3RvZG86CiAgICBwcm90byAxIDEKICAgIGJ5dGUgMHgwMDAzMDAKICAgIGZyYW1lX2RpZyAtMQogICAgY29uY2F0CiAgICBpbnQgMAogICAgYnl0ZSAidG9kb3MiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudG9kb3MgZXhpc3RzCiAgICBpbnQgMAogICAgZXh0cmFjdF91aW50MTYKICAgIGJueiBhZGRfdG9kb19lbHNlX2JvZHlAMgogICAgYnl0ZSAweDAwMDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZSAweDAwMDEKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZSAidG9kb3MiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgYiBhZGRfdG9kb19hZnRlcl9pZl9lbHNlQDMKCmFkZF90b2RvX2Vsc2VfYm9keUAyOgogICAgaW50IDAKICAgIGJ5dGUgInRvZG9zIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvZG9zIGV4aXN0cwogICAgYnl0ZSAweDAwMDIKICAgIHVuY292ZXIgMgogICAgY29uY2F0CiAgICBzd2FwCiAgICBkdXAKICAgIGludCAwCiAgICBleHRyYWN0X3VpbnQxNgogICAgc3dhcAogICAgZXh0cmFjdCAyIDAKICAgIGludCAxCiAgICB1bmNvdmVyIDMKICAgIGNhbGxzdWIgZHluYW1pY19hcnJheV9jb25jYXRfZHluYW1pY19lbGVtZW50CiAgICBieXRlICJ0b2RvcyIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CgphZGRfdG9kb19hZnRlcl9pZl9lbHNlQDM6CiAgICBpbnQgMAogICAgYnl0ZSAidG9kb3MiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudG9kb3MgZXhpc3RzCiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMuYXJjNF90eXBlcy5jb250cmFjdC5BcmM0U3RydWN0LmNvbXBsZXRlX3RvZG8odGFzazogYnl0ZXMpIC0+IHZvaWQ6CmNvbXBsZXRlX3RvZG86CiAgICBwcm90byAxIDAKICAgIGJ5dGUgIiIKICAgIGR1cAogICAgaW50IDAKICAgIGJ5dGUgInRvZG9zIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvZG9zIGV4aXN0cwogICAgaW50IDAKICAgIGV4dHJhY3RfdWludDE2CiAgICBpbnQgMAoKY29tcGxldGVfdG9kb19mb3JfaGVhZGVyQDE6CiAgICBmcmFtZV9kaWcgMwogICAgZnJhbWVfZGlnIDIKICAgIDwKICAgIGJ6IGNvbXBsZXRlX3RvZG9fYWZ0ZXJfZm9yQDYKICAgIGludCAwCiAgICBieXRlICJ0b2RvcyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi50b2RvcyBleGlzdHMKICAgIGR1cAogICAgZXh0cmFjdCAyIDAKICAgIGZyYW1lX2RpZyAzCiAgICBkdXAKICAgIGNvdmVyIDMKICAgIGludCAyCiAgICAqCiAgICBkdXAKICAgIGZyYW1lX2J1cnkgMAogICAgZGlnIDEKICAgIHN3YXAKICAgIGV4dHJhY3RfdWludDE2CiAgICBjb3ZlciAzCiAgICBzd2FwCiAgICBpbnQgMAogICAgZXh0cmFjdF91aW50MTYKICAgIHVuY292ZXIgMgogICAgaW50IDEKICAgICsKICAgIGR1cAogICAgY292ZXIgNAogICAgZHVwCiAgICBjb3ZlciAyCiAgICAtIC8vIG9uIGVycm9yOiBJbmRleCBhY2Nlc3MgaXMgb3V0IG9mIGJvdW5kcwogICAgc3dhcAogICAgZGlnIDIKICAgIGxlbgogICAgY292ZXIgMgogICAgaW50IDIKICAgICoKICAgIGR1cAogICAgZnJhbWVfYnVyeSAxCiAgICBkaWcgMwogICAgc3dhcAogICAgZXh0cmFjdF91aW50MTYKICAgIHN3YXAKICAgIHNlbGVjdAogICAgc3dhcAogICAgY292ZXIgMgogICAgc3Vic3RyaW5nMwogICAgZHVwCiAgICBpbnQgMAogICAgZXh0cmFjdF91aW50MTYKICAgIHN3YXAKICAgIGR1cAogICAgbGVuCiAgICBzd2FwCiAgICBjb3ZlciAyCiAgICBzdWJzdHJpbmczCiAgICBmcmFtZV9kaWcgLTEKICAgID09CiAgICBieiBjb21wbGV0ZV90b2RvX2FmdGVyX2lmX2Vsc2VANAogICAgaW50IDAKICAgIGJ5dGUgInRvZG9zIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvZG9zIGV4aXN0cwogICAgZHVwCiAgICBleHRyYWN0IDIgMAogICAgZHVwCiAgICBmcmFtZV9kaWcgMAogICAgZXh0cmFjdF91aW50MTYKICAgIGNvdmVyIDIKICAgIHN3YXAKICAgIGludCAwCiAgICBleHRyYWN0X3VpbnQxNgogICAgdW5jb3ZlciAzCiAgICAtIC8vIG9uIGVycm9yOiBJbmRleCBhY2Nlc3MgaXMgb3V0IG9mIGJvdW5kcwogICAgZGlnIDEKICAgIGxlbgogICAgc3dhcAogICAgZGlnIDIKICAgIGZyYW1lX2RpZyAxCiAgICBleHRyYWN0X3VpbnQxNgogICAgc3dhcAogICAgc2VsZWN0CiAgICBzd2FwCiAgICBjb3ZlciAyCiAgICBzdWJzdHJpbmczCiAgICBpbnQgMTYKICAgIGludCAxCiAgICBzZXRiaXQKICAgIGludCAwCiAgICBieXRlICJ0b2RvcyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi50b2RvcyBleGlzdHMKICAgIHN3YXAKICAgIGZyYW1lX2RpZyAzCiAgICBjYWxsc3ViIGR5bmFtaWNfYXJyYXlfcmVwbGFjZV9keW5hbWljX2VsZW1lbnQKICAgIGJ5dGUgInRvZG9zIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIGIgY29tcGxldGVfdG9kb19hZnRlcl9mb3JANgoKY29tcGxldGVfdG9kb19hZnRlcl9pZl9lbHNlQDQ6CiAgICBmcmFtZV9idXJ5IDMKICAgIGIgY29tcGxldGVfdG9kb19mb3JfaGVhZGVyQDEKCmNvbXBsZXRlX3RvZG9fYWZ0ZXJfZm9yQDY6CiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMuYXJjNF90eXBlcy5jb250cmFjdC5BcmM0U3RydWN0LnJldHVybl90b2RvKHRhc2s6IGJ5dGVzKSAtPiBieXRlczoKcmV0dXJuX3RvZG86CiAgICBwcm90byAxIDEKICAgIGludCAwCiAgICBieXRlICIiCiAgICBkdXAKICAgIGludCAwCiAgICBkdXAKICAgIGJ5dGUgInRvZG9zIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvZG9zIGV4aXN0cwogICAgaW50IDAKICAgIGV4dHJhY3RfdWludDE2CiAgICBpbnQgMAoKcmV0dXJuX3RvZG9fZm9yX2hlYWRlckAxOgogICAgZnJhbWVfZGlnIDUKICAgIGZyYW1lX2RpZyA0CiAgICA8CiAgICBieiByZXR1cm5fdG9kb19hZnRlcl9mb3JANgogICAgaW50IDAKICAgIGJ5dGUgInRvZG9zIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvZG9zIGV4aXN0cwogICAgZHVwCiAgICBleHRyYWN0IDIgMAogICAgZnJhbWVfZGlnIDUKICAgIGR1cAogICAgY292ZXIgMwogICAgaW50IDIKICAgICoKICAgIGR1cAogICAgZnJhbWVfYnVyeSAxCiAgICBkaWcgMQogICAgc3dhcAogICAgZXh0cmFjdF91aW50MTYKICAgIGNvdmVyIDMKICAgIHN3YXAKICAgIGludCAwCiAgICBleHRyYWN0X3VpbnQxNgogICAgdW5jb3ZlciAyCiAgICBpbnQgMQogICAgKwogICAgZHVwCiAgICBmcmFtZV9idXJ5IDUKICAgIGR1cAogICAgY292ZXIgMgogICAgLSAvLyBvbiBlcnJvcjogSW5kZXggYWNjZXNzIGlzIG91dCBvZiBib3VuZHMKICAgIHN3YXAKICAgIGRpZyAyCiAgICBsZW4KICAgIGNvdmVyIDIKICAgIGludCAyCiAgICAqCiAgICBkdXAKICAgIGZyYW1lX2J1cnkgMgogICAgZGlnIDMKICAgIHN3YXAKICAgIGV4dHJhY3RfdWludDE2CiAgICBzd2FwCiAgICBzZWxlY3QKICAgIHN3YXAKICAgIGNvdmVyIDIKICAgIHN1YnN0cmluZzMKICAgIGR1cAogICAgaW50IDAKICAgIGV4dHJhY3RfdWludDE2CiAgICBzd2FwCiAgICBkdXAKICAgIGxlbgogICAgc3dhcAogICAgY292ZXIgMgogICAgc3Vic3RyaW5nMwogICAgZnJhbWVfZGlnIC0xCiAgICA9PQogICAgYnogcmV0dXJuX3RvZG9fZm9yX2hlYWRlckAxCiAgICBpbnQgMAogICAgYnl0ZSAidG9kb3MiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudG9kb3MgZXhpc3RzCiAgICBkdXAKICAgIGV4dHJhY3QgMiAwCiAgICBkdXAKICAgIGZyYW1lX2RpZyAxCiAgICBleHRyYWN0X3VpbnQxNgogICAgY292ZXIgMgogICAgc3dhcAogICAgaW50IDAKICAgIGV4dHJhY3RfdWludDE2CiAgICBmcmFtZV9kaWcgNQogICAgLSAvLyBvbiBlcnJvcjogSW5kZXggYWNjZXNzIGlzIG91dCBvZiBib3VuZHMKICAgIGRpZyAxCiAgICBsZW4KICAgIHN3YXAKICAgIGRpZyAyCiAgICBmcmFtZV9kaWcgMgogICAgZXh0cmFjdF91aW50MTYKICAgIHN3YXAKICAgIHNlbGVjdAogICAgc3dhcAogICAgY292ZXIgMgogICAgc3Vic3RyaW5nMwogICAgZnJhbWVfYnVyeSAwCiAgICBpbnQgMQogICAgZnJhbWVfYnVyeSAzCiAgICBiIHJldHVybl90b2RvX2Zvcl9oZWFkZXJAMQoKcmV0dXJuX3RvZG9fYWZ0ZXJfZm9yQDY6CiAgICBmcmFtZV9kaWcgMwogICAgYXNzZXJ0CiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMuYXJjNF90eXBlcy5jb250cmFjdC5BcmM0U3RydWN0Ll9faW5pdF9fKCkgLT4gdm9pZDoKX19pbml0X186CiAgICBwcm90byAwIDAKICAgIGJ5dGUgInRvZG9zIgogICAgYnl0ZSAweDAwMDAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICByZXRzdWIKCgovLyBfcHV5YV9saWIuYXJjNC5keW5hbWljX2FycmF5X2NvbmNhdF9keW5hbWljX2VsZW1lbnQoYXJyYXlfaXRlbXNfY291bnQ6IHVpbnQ2NCwgYXJyYXlfaGVhZF9hbmRfdGFpbDogYnl0ZXMsIG5ld19pdGVtc19jb3VudDogdWludDY0LCBuZXdfaGVhZF9hbmRfdGFpbDogYnl0ZXMpIC0+IGJ5dGVzOgpkeW5hbWljX2FycmF5X2NvbmNhdF9keW5hbWljX2VsZW1lbnQ6CiAgICBwcm90byA0IDEKICAgIGJ5dGUgIiIKICAgIGJ5dGUgMHgKICAgIGZyYW1lX2RpZyAtMgogICAgaW50IDIKICAgICoKICAgIGZyYW1lX2RpZyAtNAogICAgaW50IDIKICAgICoKICAgIGludCAwCgpkeW5hbWljX2FycmF5X2NvbmNhdF9keW5hbWljX2VsZW1lbnRfZm9yX2hlYWRlckAxOgogICAgZnJhbWVfZGlnIDQKICAgIGZyYW1lX2RpZyAzCiAgICA8CiAgICBieiBkeW5hbWljX2FycmF5X2NvbmNhdF9keW5hbWljX2VsZW1lbnRfYWZ0ZXJfZm9yQDQKICAgIGZyYW1lX2RpZyAtMwogICAgZnJhbWVfZGlnIDQKICAgIGR1cAogICAgY292ZXIgMgogICAgZXh0cmFjdF91aW50MTYKICAgIGZyYW1lX2RpZyAyCiAgICArCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgZnJhbWVfZGlnIDEKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZnJhbWVfYnVyeSAxCiAgICBpbnQgMgogICAgKwogICAgZnJhbWVfYnVyeSA0CiAgICBiIGR5bmFtaWNfYXJyYXlfY29uY2F0X2R5bmFtaWNfZWxlbWVudF9mb3JfaGVhZGVyQDEKCmR5bmFtaWNfYXJyYXlfY29uY2F0X2R5bmFtaWNfZWxlbWVudF9hZnRlcl9mb3JANDoKICAgIGZyYW1lX2RpZyAtMwogICAgbGVuCiAgICBmcmFtZV9idXJ5IDAKICAgIGludCAwCiAgICBmcmFtZV9idXJ5IDQKCmR5bmFtaWNfYXJyYXlfY29uY2F0X2R5bmFtaWNfZWxlbWVudF9mb3JfaGVhZGVyQDU6CiAgICBmcmFtZV9kaWcgNAogICAgZnJhbWVfZGlnIDIKICAgIDwKICAgIGJ6IGR5bmFtaWNfYXJyYXlfY29uY2F0X2R5bmFtaWNfZWxlbWVudF9hZnRlcl9mb3JAOAogICAgZnJhbWVfZGlnIC0xCiAgICBmcmFtZV9kaWcgNAogICAgZHVwCiAgICBjb3ZlciAyCiAgICBleHRyYWN0X3VpbnQxNgogICAgZnJhbWVfZGlnIDAKICAgICsKICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBmcmFtZV9kaWcgMQogICAgc3dhcAogICAgY29uY2F0CiAgICBmcmFtZV9idXJ5IDEKICAgIGludCAyCiAgICArCiAgICBmcmFtZV9idXJ5IDQKICAgIGIgZHluYW1pY19hcnJheV9jb25jYXRfZHluYW1pY19lbGVtZW50X2Zvcl9oZWFkZXJANQoKZHluYW1pY19hcnJheV9jb25jYXRfZHluYW1pY19lbGVtZW50X2FmdGVyX2ZvckA4OgogICAgZnJhbWVfZGlnIC00CiAgICBmcmFtZV9kaWcgLTIKICAgICsKICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBmcmFtZV9kaWcgMQogICAgY29uY2F0CiAgICBmcmFtZV9kaWcgLTMKICAgIGZyYW1lX2RpZyAzCiAgICBmcmFtZV9kaWcgMAogICAgc3Vic3RyaW5nMwogICAgY29uY2F0CiAgICBmcmFtZV9kaWcgLTEKICAgIGxlbgogICAgZnJhbWVfZGlnIC0xCiAgICBmcmFtZV9kaWcgMgogICAgdW5jb3ZlciAyCiAgICBzdWJzdHJpbmczCiAgICBjb25jYXQKICAgIGZyYW1lX2J1cnkgMAogICAgcmV0c3ViCgoKLy8gX3B1eWFfbGliLmFyYzQuZHluYW1pY19hcnJheV9yZXBsYWNlX2R5bmFtaWNfZWxlbWVudChzb3VyY2U6IGJ5dGVzLCBuZXdfaXRlbTogYnl0ZXMsIGluZGV4OiB1aW50NjQpIC0+IGJ5dGVzOgpkeW5hbWljX2FycmF5X3JlcGxhY2VfZHluYW1pY19lbGVtZW50OgogICAgcHJvdG8gMyAxCiAgICBmcmFtZV9kaWcgLTMKICAgIHN1YnN0cmluZyAwIDIKICAgIGR1cAogICAgYnRvaQogICAgZnJhbWVfZGlnIC0zCiAgICBleHRyYWN0IDIgMAogICAgZnJhbWVfZGlnIC0yCiAgICBmcmFtZV9kaWcgLTEKICAgIHVuY292ZXIgMwogICAgY2FsbHN1YiBzdGF0aWNfYXJyYXlfcmVwbGFjZV9keW5hbWljX2VsZW1lbnQKICAgIGNvbmNhdAogICAgcmV0c3ViCgoKLy8gX3B1eWFfbGliLmFyYzQuc3RhdGljX2FycmF5X3JlcGxhY2VfZHluYW1pY19lbGVtZW50KGFycmF5X2hlYWRfYW5kX3RhaWw6IGJ5dGVzLCBuZXdfaXRlbTogYnl0ZXMsIGluZGV4OiB1aW50NjQsIGFycmF5X2xlbmd0aDogdWludDY0KSAtPiBieXRlczoKc3RhdGljX2FycmF5X3JlcGxhY2VfZHluYW1pY19lbGVtZW50OgogICAgcHJvdG8gNCAxCiAgICBmcmFtZV9kaWcgLTIKICAgIGludCAyCiAgICAqCiAgICBmcmFtZV9kaWcgLTQKICAgIHN3YXAKICAgIGV4dHJhY3RfdWludDE2CiAgICBmcmFtZV9kaWcgLTIKICAgIGludCAxCiAgICArCiAgICBpbnQgMgogICAgKgogICAgZHVwCiAgICBjb3ZlciAyCiAgICBmcmFtZV9kaWcgLTQKICAgIHN3YXAKICAgIGV4dHJhY3RfdWludDE2CiAgICBmcmFtZV9kaWcgLTQKICAgIGxlbgogICAgZnJhbWVfZGlnIC0xCiAgICBmcmFtZV9kaWcgLTIKICAgIC0KICAgIGludCAxCiAgICAtCiAgICBkaWcgMQogICAgdW5jb3ZlciAzCiAgICB1bmNvdmVyIDIKICAgIHNlbGVjdAogICAgZHVwCiAgICBkaWcgMwogICAgLQogICAgY292ZXIgMwogICAgZnJhbWVfZGlnIC0zCiAgICBsZW4KICAgIGNvdmVyIDMKICAgIGZyYW1lX2RpZyAtNAogICAgaW50IDAKICAgIHVuY292ZXIgNAogICAgc3Vic3RyaW5nMwogICAgZnJhbWVfZGlnIC0zCiAgICBjb25jYXQKICAgIGZyYW1lX2RpZyAtNAogICAgdW5jb3ZlciAyCiAgICB1bmNvdmVyIDMKICAgIHN1YnN0cmluZzMKICAgIGNvbmNhdAogICAgZnJhbWVfZGlnIC0xCiAgICBpbnQgMgogICAgKgoKc3RhdGljX2FycmF5X3JlcGxhY2VfZHluYW1pY19lbGVtZW50X2Zvcl9oZWFkZXJAMToKICAgIGZyYW1lX2RpZyAwCiAgICBmcmFtZV9kaWcgNAogICAgPAogICAgYnogc3RhdGljX2FycmF5X3JlcGxhY2VfZHluYW1pY19lbGVtZW50X2FmdGVyX2ZvckA0CiAgICBmcmFtZV9kaWcgMwogICAgZHVwCiAgICBmcmFtZV9kaWcgMAogICAgZHVwCiAgICBjb3ZlciAzCiAgICBleHRyYWN0X3VpbnQxNgogICAgZnJhbWVfZGlnIDIKICAgICsKICAgIGZyYW1lX2RpZyAxCiAgICAtCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgZGlnIDIKICAgIHN3YXAKICAgIHJlcGxhY2UzCiAgICBmcmFtZV9idXJ5IDMKICAgIGludCAyCiAgICArCiAgICBmcmFtZV9idXJ5IDAKICAgIGIgc3RhdGljX2FycmF5X3JlcGxhY2VfZHluYW1pY19lbGVtZW50X2Zvcl9oZWFkZXJAMQoKc3RhdGljX2FycmF5X3JlcGxhY2VfZHluYW1pY19lbGVtZW50X2FmdGVyX2ZvckA0OgogICAgZnJhbWVfZGlnIDMKICAgIGZyYW1lX2J1cnkgMAogICAgcmV0c3ViCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMuYXJjNF90eXBlcy5jb250cmFjdC5BcmM0U3RydWN0LmNsZWFyX3N0YXRlX3Byb2dyYW06CiAgICBpbnQgMQogICAgcmV0dXJuCg=="
     },
     "state": {
         "global": {
-            "num_byte_slices": 0,
+            "num_byte_slices": 1,
             "num_uints": 0
         },
         "local": {
@@ -50,7 +70,12 @@ _APP_SPEC_JSON = r"""{
     },
     "schema": {
         "global": {
-            "declared": {},
+            "declared": {
+                "todos": {
+                    "type": "bytes",
+                    "key": "todos"
+                }
+            },
             "reserved": {}
         },
         "local": {
@@ -59,35 +84,42 @@ _APP_SPEC_JSON = r"""{
         }
     },
     "contract": {
-        "name": "Arc4Types",
+        "name": "Arc4Struct",
         "methods": [
             {
-                "name": "arc4_uint64",
+                "name": "add_todo",
                 "args": [
                     {
-                        "type": "uint64",
-                        "name": "a"
-                    },
-                    {
-                        "type": "uint64",
-                        "name": "b"
+                        "type": "string",
+                        "name": "task"
                     }
                 ],
                 "returns": {
-                    "type": "uint64"
-                },
-                "desc": "This won't compile because you can't do math operations on arc4.UInt64 type.\nAll arc4 types are backed by byte arrays on the AVM.  c = a + b"
+                    "type": "(string,bool)[]"
+                }
             },
             {
-                "name": "arc4_address",
+                "name": "complete_todo",
                 "args": [
                     {
-                        "type": "address",
-                        "name": "address"
+                        "type": "string",
+                        "name": "task"
                     }
                 ],
                 "returns": {
-                    "type": "address"
+                    "type": "void"
+                }
+            },
+            {
+                "name": "return_todo",
+                "args": [
+                    {
+                        "type": "string",
+                        "name": "task"
+                    }
+                ],
+                "returns": {
+                    "type": "(string,bool)"
                 }
             }
         ],
@@ -171,25 +203,62 @@ def _convert_deploy_args(
 
 
 @dataclasses.dataclass(kw_only=True)
-class Arc4Uint64Args(_ArgsBase[int]):
-    """This won't compile because you can't do math operations on arc4.UInt64 type.
-    All arc4 types are backed by byte arrays on the AVM.  c = a + b"""
-
-    a: int
-    b: int
+class AddTodoArgs(_ArgsBase[list[tuple[str, bool]]]):
+    task: str
 
     @staticmethod
     def method() -> str:
-        return "arc4_uint64(uint64,uint64)uint64"
+        return "add_todo(string)(string,bool)[]"
 
 
 @dataclasses.dataclass(kw_only=True)
-class Arc4AddressArgs(_ArgsBase[str]):
-    address: str
+class CompleteTodoArgs(_ArgsBase[None]):
+    task: str
 
     @staticmethod
     def method() -> str:
-        return "arc4_address(address)address"
+        return "complete_todo(string)void"
+
+
+@dataclasses.dataclass(kw_only=True)
+class Todo:
+    task: str
+    completed: bool
+
+
+@dataclasses.dataclass(kw_only=True)
+class ReturnTodoArgs(_ArgsBase[Todo]):
+    task: str
+
+    @staticmethod
+    def method() -> str:
+        return "return_todo(string)(string,bool)"
+
+
+class ByteReader:
+    def __init__(self, data: bytes):
+        self._data = data
+
+    @property
+    def as_bytes(self) -> bytes:
+        return self._data
+
+    @property
+    def as_str(self) -> str:
+        return self._data.decode("utf8")
+
+    @property
+    def as_base64(self) -> str:
+        return base64.b64encode(self._data).decode("utf8")
+
+    @property
+    def as_hex(self) -> str:
+        return self._data.hex()
+
+
+class GlobalState:
+    def __init__(self, data: dict[bytes, bytes | int]):
+        self.todos = ByteReader(typing.cast(bytes, data.get(b"todos")))
 
 
 @dataclasses.dataclass(kw_only=True)
@@ -223,26 +292,20 @@ class Composer:
     def execute(self) -> AtomicTransactionResponse:
         return self.app_client.execute_atc(self.atc)
 
-    def arc4_uint64(
+    def add_todo(
         self,
         *,
-        a: int,
-        b: int,
+        task: str,
         transaction_parameters: algokit_utils.TransactionParameters | None = None,
     ) -> "Composer":
-        """This won't compile because you can't do math operations on arc4.UInt64 type.
-        All arc4 types are backed by byte arrays on the AVM.  c = a + b
+        """Adds a call to `add_todo(string)(string,bool)[]` ABI method
         
-        Adds a call to `arc4_uint64(uint64,uint64)uint64` ABI method
-        
-        :param int a: The `a` ABI parameter
-        :param int b: The `b` ABI parameter
+        :param str task: The `task` ABI parameter
         :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
         :returns Composer: This Composer instance"""
 
-        args = Arc4Uint64Args(
-            a=a,
-            b=b,
+        args = AddTodoArgs(
+            task=task,
         )
         self.app_client.compose_call(
             self.atc,
@@ -252,20 +315,43 @@ class Composer:
         )
         return self
 
-    def arc4_address(
+    def complete_todo(
         self,
         *,
-        address: str,
+        task: str,
         transaction_parameters: algokit_utils.TransactionParameters | None = None,
     ) -> "Composer":
-        """Adds a call to `arc4_address(address)address` ABI method
+        """Adds a call to `complete_todo(string)void` ABI method
         
-        :param str address: The `address` ABI parameter
+        :param str task: The `task` ABI parameter
         :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
         :returns Composer: This Composer instance"""
 
-        args = Arc4AddressArgs(
-            address=address,
+        args = CompleteTodoArgs(
+            task=task,
+        )
+        self.app_client.compose_call(
+            self.atc,
+            call_abi_method=args.method(),
+            transaction_parameters=_convert_call_transaction_parameters(transaction_parameters),
+            **_as_dict(args, convert_all=True),
+        )
+        return self
+
+    def return_todo(
+        self,
+        *,
+        task: str,
+        transaction_parameters: algokit_utils.TransactionParameters | None = None,
+    ) -> "Composer":
+        """Adds a call to `return_todo(string)(string,bool)` ABI method
+        
+        :param str task: The `task` ABI parameter
+        :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
+        :returns Composer: This Composer instance"""
+
+        args = ReturnTodoArgs(
+            task=task,
         )
         self.app_client.compose_call(
             self.atc,
@@ -308,8 +394,8 @@ class Composer:
         return self
 
 
-class Arc4TypesClient:
-    """A class for interacting with the Arc4Types app providing high productivity and
+class Arc4StructClient:
+    """A class for interacting with the Arc4Struct app providing high productivity and
     strongly typed methods to deploy and call the app"""
 
     @typing.overload
@@ -357,7 +443,7 @@ class Arc4TypesClient:
         app_name: str | None = None,
     ) -> None:
         """
-        Arc4TypesClient can be created with an app_id to interact with an existing application, alternatively
+        Arc4StructClient can be created with an app_id to interact with an existing application, alternatively
         it can be created with a creator and indexer_client specified to find existing applications by name and creator.
         
         :param AlgodClient algod_client: AlgoSDK algod client
@@ -434,26 +520,26 @@ class Arc4TypesClient:
     def suggested_params(self, value: algosdk.transaction.SuggestedParams | None) -> None:
         self.app_client.suggested_params = value
 
-    def arc4_uint64(
+    def get_global_state(self) -> GlobalState:
+        """Returns the application's global state wrapped in a strongly typed class with options to format the stored value"""
+
+        state = typing.cast(dict[bytes, bytes | int], self.app_client.get_global_state(raw=True))
+        return GlobalState(state)
+
+    def add_todo(
         self,
         *,
-        a: int,
-        b: int,
+        task: str,
         transaction_parameters: algokit_utils.TransactionParameters | None = None,
-    ) -> algokit_utils.ABITransactionResponse[int]:
-        """This won't compile because you can't do math operations on arc4.UInt64 type.
-        All arc4 types are backed by byte arrays on the AVM.  c = a + b
+    ) -> algokit_utils.ABITransactionResponse[list[tuple[str, bool]]]:
+        """Calls `add_todo(string)(string,bool)[]` ABI method
         
-        Calls `arc4_uint64(uint64,uint64)uint64` ABI method
-        
-        :param int a: The `a` ABI parameter
-        :param int b: The `b` ABI parameter
+        :param str task: The `task` ABI parameter
         :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
-        :returns algokit_utils.ABITransactionResponse[int]: The result of the transaction"""
+        :returns algokit_utils.ABITransactionResponse[list[tuple[str, bool]]]: The result of the transaction"""
 
-        args = Arc4Uint64Args(
-            a=a,
-            b=b,
+        args = AddTodoArgs(
+            task=task,
         )
         result = self.app_client.call(
             call_abi_method=args.method(),
@@ -462,26 +548,51 @@ class Arc4TypesClient:
         )
         return result
 
-    def arc4_address(
+    def complete_todo(
         self,
         *,
-        address: str,
+        task: str,
         transaction_parameters: algokit_utils.TransactionParameters | None = None,
-    ) -> algokit_utils.ABITransactionResponse[str]:
-        """Calls `arc4_address(address)address` ABI method
+    ) -> algokit_utils.ABITransactionResponse[None]:
+        """Calls `complete_todo(string)void` ABI method
         
-        :param str address: The `address` ABI parameter
+        :param str task: The `task` ABI parameter
         :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
-        :returns algokit_utils.ABITransactionResponse[str]: The result of the transaction"""
+        :returns algokit_utils.ABITransactionResponse[None]: The result of the transaction"""
 
-        args = Arc4AddressArgs(
-            address=address,
+        args = CompleteTodoArgs(
+            task=task,
         )
         result = self.app_client.call(
             call_abi_method=args.method(),
             transaction_parameters=_convert_call_transaction_parameters(transaction_parameters),
             **_as_dict(args, convert_all=True),
         )
+        return result
+
+    def return_todo(
+        self,
+        *,
+        task: str,
+        transaction_parameters: algokit_utils.TransactionParameters | None = None,
+    ) -> algokit_utils.ABITransactionResponse[Todo]:
+        """Calls `return_todo(string)(string,bool)` ABI method
+        
+        :param str task: The `task` ABI parameter
+        :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
+        :returns algokit_utils.ABITransactionResponse[Todo]: The result of the transaction"""
+
+        args = ReturnTodoArgs(
+            task=task,
+        )
+        result = self.app_client.call(
+            call_abi_method=args.method(),
+            transaction_parameters=_convert_call_transaction_parameters(transaction_parameters),
+            **_as_dict(args, convert_all=True),
+        )
+        elements = self.app_spec.hints[args.method()].structs["output"]["elements"]
+        result_dict = {element[0]: value for element, value in zip(elements, result.return_value)}
+        result.return_value = Todo(**result_dict)
         return result
 
     def create_bare(
