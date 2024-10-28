@@ -3,9 +3,10 @@ import logging
 import algokit_utils
 from algosdk.v2client.algod import AlgodClient
 from algosdk.v2client.indexer import IndexerClient
+
 from smart_contracts.artifacts.arc4_types.arc4_types_client import (
-        Arc4TypesClient,
-    )
+    Arc4TypesClient,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -17,7 +18,6 @@ def deploy(
     app_spec: algokit_utils.ApplicationSpecification,
     deployer: algokit_utils.Account,
 ) -> None:
-
 
     app_client = Arc4TypesClient(
         algod_client,
