@@ -1,16 +1,15 @@
 import pytest
-from algokit_utils import TransactionParameters
 from algokit_utils.beta.account_manager import AddressAndSigner
 from algokit_utils.beta.algorand_client import (
     AlgorandClient,
-    AssetCreateParams,
-    AssetOptInParams,
     PayParams,
 )
 from algokit_utils.config import config
 from algosdk.v2client.algod import AlgodClient
 
-from smart_contracts.artifacts.arc4_types.arc4_static_array_client import Arc4StaticArrayClient
+from smart_contracts.artifacts.arc4_types.arc4_static_array_client import (
+    Arc4StaticArrayClient,
+)
 from smart_contracts.artifacts.arc4_types.arc4_struct_client import Arc4StructClient
 from smart_contracts.artifacts.arc4_types.arc4_types_client import Arc4TypesClient
 
@@ -85,6 +84,7 @@ def arc4_statc_array_app_client(
 
     return client
 
+
 @pytest.fixture(scope="session")
 def arc4_struct_app_client(
     algod_client: AlgodClient, creator: AddressAndSigner, algorand: AlgorandClient
@@ -113,6 +113,7 @@ def arc4_struct_app_client(
     )
 
     return client
+
 
 @pytest.fixture(scope="session")
 def arc4_types_app_client(
@@ -143,6 +144,7 @@ def arc4_types_app_client(
 
     return client
 
+
 def test_arc4_uint64(
     arc4_types_app_client: Arc4TypesClient,
 ) -> None:
@@ -154,9 +156,9 @@ def test_arc4_uint64(
     # Check the result
     assert result.return_value == 3
 
+
 def test_arc4_address(
-    arc4_types_app_client: Arc4TypesClient,
-    creator : AddressAndSigner
+    arc4_types_app_client: Arc4TypesClient, creator: AddressAndSigner
 ) -> None:
     """Test the arc4_address method"""
 
@@ -166,23 +168,44 @@ def test_arc4_address(
     # Check the result
     assert result.return_value == arc4_types_app_client.sender
 
-def test_arc4_static_array(
-    arc4_statc_array_app_client: Arc4StaticArrayClient
-) -> None:
+
+def test_arc4_static_array(arc4_statc_array_app_client: Arc4StaticArrayClient) -> None:
     """Test the arc4_static_array method"""
 
     # Call the arc4_static_array method
     arc4_statc_array_app_client.arc4_static_array()
 
-def test_arc4_struct_add_todo(
-    arc4_struct_app_client: Arc4StructClient
-) -> None:
+
+def test_arc4_struct_add_todo(arc4_struct_app_client: Arc4StructClient) -> None:
     """Test the add_todo method"""
 
     # Call the add_todo method
-    result = arc4_struct_app_client.add_todo(task="task")
-    print(result.return_value)
+    result = arc4_struct_app_client.add_todo(task="wash the dishes")
 
-    assert result.return_value[0][0] == "task"
-    assert result.return_value[0][1] == False
+    assert result.return_value[0][0] == "wash the dishes"
+    assert result.return_value[0][1] is False
     assert len(result.return_value) == 1
+
+
+def test_arc4_struct_complete_and_return_todo(
+    arc4_struct_app_client: Arc4StructClient,
+) -> None:
+    """Test the complete_todo method"""
+
+    # Call the add_todo method
+    result = arc4_struct_app_client.add_todo(task="walk my dogs")
+
+    result = arc4_struct_app_client.return_todo(task="walk my dogs")
+
+    # Check the result
+    assert result.return_value.task == "walk my dogs"
+    assert result.return_value.completed is False
+
+    # Call the complete_todo method
+    arc4_struct_app_client.complete_todo(task="walk my dogs")
+
+    result = arc4_struct_app_client.return_todo(task="walk my dogs")
+
+    # Check the result
+    assert result.return_value.task == "walk my dogs"
+    assert result.return_value.completed is True
