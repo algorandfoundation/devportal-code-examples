@@ -157,16 +157,31 @@ def test_arc4_uint64(
     assert result.return_value == 3
 
 
-def test_arc4_address(
-    arc4_types_app_client: Arc4TypesClient, creator: AddressAndSigner
+def test_arc4_address_properties(
+    arc4_types_app_client: Arc4TypesClient,
+    creator: AddressAndSigner,
+    algorand: AlgorandClient,
 ) -> None:
-    """Test the arc4_address method"""
+    """Test the arc4_address_properties method"""
 
     # Call the arc4_address method
-    result = arc4_types_app_client.arc4_address(address=creator.address)
+    result = arc4_types_app_client.arc4_address_properties(address=creator.address)
+
+    creator_info = algorand.account.get_information(creator.address)
+
+    assert result.return_value == creator_info["amount"]
+
+
+def test_arc4_address_return(
+    arc4_types_app_client: Arc4TypesClient, creator: AddressAndSigner
+) -> None:
+    """Test the arc4_address_return method"""
+
+    # Call the arc4_address method
+    result = arc4_types_app_client.arc4_address_return(address=creator.address)
 
     # Check the result
-    assert result.return_value == arc4_types_app_client.sender
+    assert result.return_value == creator.address
 
 
 def test_arc4_static_array(arc4_statc_array_app_client: Arc4StaticArrayClient) -> None:

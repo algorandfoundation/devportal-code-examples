@@ -10,18 +10,18 @@ class Arc4Types(ARC4Contract):
     @abimethod()
     def arc4_uint64(self, a: arc4.UInt64, b: arc4.UInt64) -> arc4.UInt64:
         """
-        This won't compile because you can't do math operations on arc4.UInt64 type.
-        All arc4 types are backed by byte arrays on the AVM.
-        c = a + b
+        Math operations (like a + b) are not supported on arc4.UInt64 types
+        since they are internally represented as byte arrays in the AVM.
+        Use the .native property to perform arithmetic operations.
         """
 
-        # This is how you can do math operations on arc4.UInt64 type.
+        # Use the native integers to perform arithmetic
         c = a.native + b.native
 
         return arc4.UInt64(c)
 
     @abimethod()
-    def arc4_address(self, address: arc4.Address) -> arc4.Address:
+    def arc4_address_properties(self, address: arc4.Address) -> UInt64:
         underlying_bytes = (
             address.bytes
         )  # This will return the underlying bytes of the address.
@@ -29,8 +29,20 @@ class Arc4Types(ARC4Contract):
         account = (
             address.native
         )  # This will return the account type of the given address.
-        bal = account.balance
-        num_asset_holding = account.total_assets
+
+        bal = account.balance  # returns the balance of the account
+        total_asset = (
+            account.total_assets
+        )  # returns the total assets held in the account
+
+        return bal
+
+    @abimethod()
+    def arc4_address_return(self, address: arc4.Address) -> arc4.Address:
+
+        account = (
+            address.native
+        )  # This will return the account type of the given address.
 
         """
         You can't return an Account type because it is a reference type.
@@ -95,7 +107,7 @@ class Arc4Struct(ARC4Contract):
 
     @abimethod()
     def add_todo(self, task: arc4.String) -> Todos:
-        todo = Todo(task=task, completed=arc4.Bool(False)) # noqa: FBT003
+        todo = Todo(task=task, completed=arc4.Bool(False))  # noqa: FBT003
 
         if self.todos.value.length == 0:
             self.todos.value = Todos(todo.copy())
@@ -109,7 +121,7 @@ class Arc4Struct(ARC4Contract):
 
         for index in urange(self.todos.value.length):
             if self.todos.value[index].task == task:
-                self.todos.value[index].completed = arc4.Bool(True) # noqa: FBT003
+                self.todos.value[index].completed = arc4.Bool(True)  # noqa: FBT003
                 break
 
     @abimethod()
