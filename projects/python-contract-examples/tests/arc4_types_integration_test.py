@@ -12,6 +12,7 @@ from smart_contracts.artifacts.arc4_types.arc4_static_array_client import (
     Arc4StaticArrayClient,
 )
 from smart_contracts.artifacts.arc4_types.arc4_struct_client import Arc4StructClient
+from smart_contracts.artifacts.arc4_types.arc4_tuple_client import Arc4TupleClient
 from smart_contracts.artifacts.arc4_types.arc4_types_client import Arc4TypesClient
 
 
@@ -98,6 +99,36 @@ def arc4_dynamic_array_app_client(
     )
 
     client = Arc4DynamicArrayClient(
+        algod_client,
+        sender=creator.address,
+        signer=creator.signer,
+    )
+
+    client.create_bare()
+
+    algorand.send.payment(
+        PayParams(
+            sender=creator.address,
+            receiver=client.app_address,
+            amount=1000000,  # 1 Algo
+        )
+    )
+
+    return client
+
+
+@pytest.fixture(scope="session")
+def arc4_tuple_app_client(
+    algod_client: AlgodClient, creator: AddressAndSigner, algorand: AlgorandClient
+) -> Arc4TupleClient:
+    """Deploy the arc4 static array App and create an app client the creator will use to interact with the contract"""
+
+    config.configure(
+        debug=True,
+        # trace_all=True,
+    )
+
+    client = Arc4TupleClient(
         algod_client,
         sender=creator.address,
         signer=creator.signer,
@@ -303,3 +334,13 @@ def test_arc4_struct_complete_and_return_todo(
     # Check the result
     assert result.return_value.task == "walk my dogs"
     assert result.return_value.completed is True
+
+
+def test_arc4_tuple(
+    arc4_tuple_app_client: Arc4TupleClient,
+) -> None:
+    """Test the arc4_tuple method"""
+
+    result = arc4_tuple_app_client.arc4_tuple(a=(4, "This is a good string.", 100, [1, 2, 3]))
+
+    assert result.return_value == "This is a good string."
