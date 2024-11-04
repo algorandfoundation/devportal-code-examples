@@ -209,3 +209,17 @@ class Arc4Struct(ARC4Contract):
         assert exist
 
         return todo_to_return
+
+
+class Arc4Tuple(ARC4Contract):
+
+    @abimethod()
+    def arc4_tuple(self, a: arc4.Tuple[arc4.UInt8, arc4.String, arc4.UInt64, arc4.DynamicArray[arc4.UInt32]]) -> arc4.String:
+        """An arc4.Tuple is a heterogeneous collection of arc4 types."""
+
+        total = a[0].native + a[2].native
+
+        for x in a[3]:
+            total += x.native
+
+        return a[1]
