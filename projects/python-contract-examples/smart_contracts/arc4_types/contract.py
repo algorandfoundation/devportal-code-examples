@@ -21,6 +21,23 @@ class Arc4Types(ARC4Contract):
         return arc4.UInt64(c)
 
     @abimethod()
+    def arc4_uint_n(
+        self, a: arc4.UInt8, b: arc4.UInt16, c: arc4.UInt32, d: arc4.UInt64
+    ) -> arc4.UInt64:
+        """
+        The encoding of arc4 integers will be smaller if it uses fewer bits.
+        Ultimately, they are all represented with native UInt64.
+        """
+        assert a.bytes.length == 1
+        assert b.bytes.length == 2
+        assert c.bytes.length == 4
+        assert d.bytes.length == 8
+
+        total = a.native + b.native + c.native + d.native
+
+        return arc4.UInt64(total)
+
+    @abimethod()
     def arc4_address_properties(self, address: arc4.Address) -> UInt64:
         underlying_bytes = (
             address.bytes

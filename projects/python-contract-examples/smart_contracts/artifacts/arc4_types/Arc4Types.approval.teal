@@ -9,12 +9,13 @@ smart_contracts.arc4_types.contract.Arc4Types.approval_program:
 __puya_arc4_router__:
     proto 0 1
     txn NumAppArgs
-    bz __puya_arc4_router___bare_routing@7
+    bz __puya_arc4_router___bare_routing@8
     method "arc4_uint64(uint64,uint64)uint64"
+    method "arc4_uint_n(uint8,uint16,uint32,uint64)uint64"
     method "arc4_address_properties(address)uint64"
     method "arc4_address_return(address)address"
     txna ApplicationArgs 0
-    match __puya_arc4_router___arc4_uint64_route@2 __puya_arc4_router___arc4_address_properties_route@3 __puya_arc4_router___arc4_address_return_route@4
+    match __puya_arc4_router___arc4_uint64_route@2 __puya_arc4_router___arc4_uint_n_route@3 __puya_arc4_router___arc4_address_properties_route@4 __puya_arc4_router___arc4_address_return_route@5
     int 0
     retsub
 
@@ -34,7 +35,25 @@ __puya_arc4_router___arc4_uint64_route@2:
     int 1
     retsub
 
-__puya_arc4_router___arc4_address_properties_route@3:
+__puya_arc4_router___arc4_uint_n_route@3:
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    txna ApplicationArgs 1
+    txna ApplicationArgs 2
+    txna ApplicationArgs 3
+    txna ApplicationArgs 4
+    callsub arc4_uint_n
+    byte 0x151f7c75
+    swap
+    concat
+    log
+    int 1
+    retsub
+
+__puya_arc4_router___arc4_address_properties_route@4:
     txn OnCompletion
     !
     assert // OnCompletion is NoOp
@@ -50,7 +69,7 @@ __puya_arc4_router___arc4_address_properties_route@3:
     int 1
     retsub
 
-__puya_arc4_router___arc4_address_return_route@4:
+__puya_arc4_router___arc4_address_return_route@5:
     txn OnCompletion
     !
     assert // OnCompletion is NoOp
@@ -65,16 +84,16 @@ __puya_arc4_router___arc4_address_return_route@4:
     int 1
     retsub
 
-__puya_arc4_router___bare_routing@7:
+__puya_arc4_router___bare_routing@8:
     txn OnCompletion
-    bnz __puya_arc4_router___after_if_else@11
+    bnz __puya_arc4_router___after_if_else@12
     txn ApplicationID
     !
     assert // is creating
     int 1
     retsub
 
-__puya_arc4_router___after_if_else@11:
+__puya_arc4_router___after_if_else@12:
     int 0
     retsub
 
@@ -84,6 +103,44 @@ arc4_uint64:
     proto 2 1
     frame_dig -2
     btoi
+    frame_dig -1
+    btoi
+    +
+    itob
+    retsub
+
+
+// smart_contracts.arc4_types.contract.Arc4Types.arc4_uint_n(a: bytes, b: bytes, c: bytes, d: bytes) -> bytes:
+arc4_uint_n:
+    proto 4 1
+    frame_dig -4
+    len
+    int 1
+    ==
+    assert
+    frame_dig -3
+    len
+    int 2
+    ==
+    assert
+    frame_dig -2
+    len
+    int 4
+    ==
+    assert
+    frame_dig -1
+    len
+    int 8
+    ==
+    assert
+    frame_dig -4
+    btoi
+    frame_dig -3
+    btoi
+    +
+    frame_dig -2
+    btoi
+    +
     frame_dig -1
     btoi
     +
