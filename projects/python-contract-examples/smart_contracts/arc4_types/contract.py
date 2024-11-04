@@ -1,7 +1,7 @@
 # pyright: reportMissingModuleSource=false
 import typing as t
 
-from algopy import ARC4Contract, GlobalState, UInt64, arc4, urange
+from algopy import ARC4Contract, GlobalState, UInt64, arc4, urange, String, Bytes
 from algopy.arc4 import abimethod
 
 
@@ -50,6 +50,13 @@ class Arc4Types(ARC4Contract):
         total = a.native + b.native + c.native
 
         return arc4.UInt512(total)
+
+    @abimethod()
+    def arc4_byte(self, a: arc4.Byte) -> arc4.Byte:
+        """
+        An arc4.Byte is essentially an alias for an 8-bit integer.
+        """
+        return arc4.Byte(a.native + 1)
 
     @abimethod()
     def arc4_address_properties(self, address: arc4.Address) -> UInt64:
@@ -121,6 +128,39 @@ class Arc4StaticArray(ARC4Contract):
         aliased_static[0] = arc4.UInt8(100)
         aliased_static.pop()
         """
+
+
+class Arc4DynamicArray(ARC4Contract):
+
+    @abimethod()
+    def arc4_dynamic_array(self, name: arc4.String) -> arc4.String:
+        """
+        Dynamic Arrays have variable size and capacity.
+        They are similar to native Python lists because they can also append, extend, and pop.
+        """
+        dynamic_string_array = arc4.DynamicArray[arc4.String](arc4.String("Hello"))
+
+        extension = arc4.DynamicArray[arc4.String](arc4.String(" world"), arc4.String(", "))
+        dynamic_string_array.extend(extension)
+
+        dynamic_string_array.append(name)
+        dynamic_string_array.append(arc4.String("!"))
+        dynamic_string_array.pop()
+
+        greeting = String()
+        for x in dynamic_string_array:
+            greeting += x.native
+
+        return arc4.String(greeting)
+
+    @abimethod()
+    def arc4_dynamic_bytes(self) -> arc4.DynamicBytes:
+        """arc4.DynamicBytes are essentially an arc4.DynamicArray[arc4.Bytes] and some convenience methods."""
+        dynamic_bytes = arc4.DynamicBytes(b"\xFF\xFF\xFF")
+
+        dynamic_bytes[0] = arc4.Byte(0)
+
+        return dynamic_bytes
 
 
 class Todo(arc4.Struct):

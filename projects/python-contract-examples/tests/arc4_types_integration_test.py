@@ -7,6 +7,7 @@ from algokit_utils.beta.algorand_client import (
 from algokit_utils.config import config
 from algosdk.v2client.algod import AlgodClient
 
+from smart_contracts.artifacts.arc4_types.arc4_dynamic_array_client import Arc4DynamicArrayClient, SimulateOptions
 from smart_contracts.artifacts.arc4_types.arc4_static_array_client import (
     Arc4StaticArrayClient,
 )
@@ -67,6 +68,36 @@ def arc4_statc_array_app_client(
     )
 
     client = Arc4StaticArrayClient(
+        algod_client,
+        sender=creator.address,
+        signer=creator.signer,
+    )
+
+    client.create_bare()
+
+    algorand.send.payment(
+        PayParams(
+            sender=creator.address,
+            receiver=client.app_address,
+            amount=1000000,  # 1 Algo
+        )
+    )
+
+    return client
+
+
+@pytest.fixture(scope="session")
+def arc4_dynamic_array_app_client(
+    algod_client: AlgodClient, creator: AddressAndSigner, algorand: AlgorandClient
+) -> Arc4DynamicArrayClient:
+    """Deploy the arc4 static array App and create an app client the creator will use to interact with the contract"""
+
+    config.configure(
+        debug=True,
+        # trace_all=True,
+    )
+
+    client = Arc4DynamicArrayClient(
         algod_client,
         sender=creator.address,
         signer=creator.signer,
@@ -177,6 +208,16 @@ def test_arc4_biguint_n(
     assert result.return_value == 2**65 + 2**129 + 2**257
 
 
+def test_arc4_byte(
+    arc4_types_app_client: Arc4TypesClient,
+) -> None:
+    """Test the arc4_byte method"""
+
+    result = arc4_types_app_client.arc4_byte(a=5)
+
+    assert result.return_value == 6
+
+
 def test_arc4_address_properties(
     arc4_types_app_client: Arc4TypesClient,
     creator: AddressAndSigner,
@@ -209,6 +250,24 @@ def test_arc4_static_array(arc4_statc_array_app_client: Arc4StaticArrayClient) -
 
     # Call the arc4_static_array method
     arc4_statc_array_app_client.arc4_static_array()
+
+
+def test_arc4_dynamic_array(arc4_dynamic_array_app_client: Arc4DynamicArrayClient) -> None:
+    """Test the arc4_dynamic_array method"""
+
+    # Call the arc4_static_array method with simulate to avoid opcode budget constraints.
+    result = arc4_dynamic_array_app_client.compose().arc4_dynamic_array(name="John").simulate(SimulateOptions(extra_opcode_budget=700))
+
+    assert result.abi_results[0].return_value == "Hello world, John"
+
+
+def test_arc4_dynamic_bytes(arc4_dynamic_array_app_client: Arc4DynamicArrayClient) -> None:
+    """Test the arc4_dynamic_bytes method"""
+
+    # Call the arc4_static_array method.
+    result = arc4_dynamic_array_app_client.arc4_dynamic_bytes()
+
+    assert result.return_value == [0, 255, 255]
 
 
 def test_arc4_struct_add_todo(arc4_struct_app_client: Arc4StructClient) -> None:
