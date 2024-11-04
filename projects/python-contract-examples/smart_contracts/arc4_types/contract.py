@@ -38,6 +38,20 @@ class Arc4Types(ARC4Contract):
         return arc4.UInt64(total)
 
     @abimethod()
+    def arc4_biguint_n(self, a: arc4.UInt128, b: arc4.UInt256, c: arc4.UInt512) -> arc4.UInt512:
+        """
+        Integers with larger bit size are supported up to 512 bits.
+        Ultimately, they are all represented with native BigUInt.
+        """
+        assert a.bytes.length == 16
+        assert b.bytes.length == 32
+        assert c.bytes.length == 64
+
+        total = a.native + b.native + c.native
+
+        return arc4.UInt512(total)
+
+    @abimethod()
     def arc4_address_properties(self, address: arc4.Address) -> UInt64:
         underlying_bytes = (
             address.bytes

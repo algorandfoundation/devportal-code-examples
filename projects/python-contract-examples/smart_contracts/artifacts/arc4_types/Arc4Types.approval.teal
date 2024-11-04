@@ -9,13 +9,14 @@ smart_contracts.arc4_types.contract.Arc4Types.approval_program:
 __puya_arc4_router__:
     proto 0 1
     txn NumAppArgs
-    bz __puya_arc4_router___bare_routing@8
+    bz __puya_arc4_router___bare_routing@9
     method "arc4_uint64(uint64,uint64)uint64"
     method "arc4_uint_n(uint8,uint16,uint32,uint64)uint64"
+    method "arc4_biguint_n(uint128,uint256,uint512)uint512"
     method "arc4_address_properties(address)uint64"
     method "arc4_address_return(address)address"
     txna ApplicationArgs 0
-    match __puya_arc4_router___arc4_uint64_route@2 __puya_arc4_router___arc4_uint_n_route@3 __puya_arc4_router___arc4_address_properties_route@4 __puya_arc4_router___arc4_address_return_route@5
+    match __puya_arc4_router___arc4_uint64_route@2 __puya_arc4_router___arc4_uint_n_route@3 __puya_arc4_router___arc4_biguint_n_route@4 __puya_arc4_router___arc4_address_properties_route@5 __puya_arc4_router___arc4_address_return_route@6
     int 0
     retsub
 
@@ -53,7 +54,24 @@ __puya_arc4_router___arc4_uint_n_route@3:
     int 1
     retsub
 
-__puya_arc4_router___arc4_address_properties_route@4:
+__puya_arc4_router___arc4_biguint_n_route@4:
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    txna ApplicationArgs 1
+    txna ApplicationArgs 2
+    txna ApplicationArgs 3
+    callsub arc4_biguint_n
+    byte 0x151f7c75
+    swap
+    concat
+    log
+    int 1
+    retsub
+
+__puya_arc4_router___arc4_address_properties_route@5:
     txn OnCompletion
     !
     assert // OnCompletion is NoOp
@@ -69,7 +87,7 @@ __puya_arc4_router___arc4_address_properties_route@4:
     int 1
     retsub
 
-__puya_arc4_router___arc4_address_return_route@5:
+__puya_arc4_router___arc4_address_return_route@6:
     txn OnCompletion
     !
     assert // OnCompletion is NoOp
@@ -84,16 +102,16 @@ __puya_arc4_router___arc4_address_return_route@5:
     int 1
     retsub
 
-__puya_arc4_router___bare_routing@8:
+__puya_arc4_router___bare_routing@9:
     txn OnCompletion
-    bnz __puya_arc4_router___after_if_else@12
+    bnz __puya_arc4_router___after_if_else@13
     txn ApplicationID
     !
     assert // is creating
     int 1
     retsub
 
-__puya_arc4_router___after_if_else@12:
+__puya_arc4_router___after_if_else@13:
     int 0
     retsub
 
@@ -145,6 +163,40 @@ arc4_uint_n:
     btoi
     +
     itob
+    retsub
+
+
+// smart_contracts.arc4_types.contract.Arc4Types.arc4_biguint_n(a: bytes, b: bytes, c: bytes) -> bytes:
+arc4_biguint_n:
+    proto 3 1
+    frame_dig -3
+    len
+    int 16
+    ==
+    assert
+    frame_dig -2
+    len
+    int 32
+    ==
+    assert
+    frame_dig -1
+    len
+    int 64
+    ==
+    assert
+    frame_dig -3
+    frame_dig -2
+    b+
+    frame_dig -1
+    b+
+    dup
+    len
+    int 64
+    <=
+    assert // overflow
+    int 64
+    bzero
+    b|
     retsub
 
 
