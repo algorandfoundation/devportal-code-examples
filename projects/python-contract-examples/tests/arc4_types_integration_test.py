@@ -157,6 +157,16 @@ def test_arc4_uint64(
     assert result.return_value == 3
 
 
+def test_arc4_uint_n(
+    arc4_types_app_client: Arc4TypesClient,
+) -> None:
+    """Test the arc4_uint_n method"""
+
+    result = arc4_types_app_client.arc4_uint_n(a=100, b=1_000, c=100_000, d=100_000)
+
+    assert result.return_value == 201_100
+
+
 def test_arc4_address_properties(
     arc4_types_app_client: Arc4TypesClient,
     creator: AddressAndSigner,
