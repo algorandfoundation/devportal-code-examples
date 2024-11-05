@@ -7,7 +7,10 @@ from algokit_utils.beta.algorand_client import (
 from algokit_utils.config import config
 from algosdk.v2client.algod import AlgodClient
 
-from smart_contracts.artifacts.arc4_types.arc4_dynamic_array_client import Arc4DynamicArrayClient, SimulateOptions
+from smart_contracts.artifacts.arc4_types.arc4_dynamic_array_client import (
+    Arc4DynamicArrayClient,
+    SimulateOptions,
+)
 from smart_contracts.artifacts.arc4_types.arc4_static_array_client import (
     Arc4StaticArrayClient,
 )
@@ -283,16 +286,24 @@ def test_arc4_static_array(arc4_statc_array_app_client: Arc4StaticArrayClient) -
     arc4_statc_array_app_client.arc4_static_array()
 
 
-def test_arc4_dynamic_array(arc4_dynamic_array_app_client: Arc4DynamicArrayClient) -> None:
+def test_arc4_dynamic_array(
+    arc4_dynamic_array_app_client: Arc4DynamicArrayClient,
+) -> None:
     """Test the arc4_dynamic_array method"""
 
     # Call the arc4_static_array method with simulate to avoid opcode budget constraints.
-    result = arc4_dynamic_array_app_client.compose().arc4_dynamic_array(name="John").simulate(SimulateOptions(extra_opcode_budget=700))
+    result = (
+        arc4_dynamic_array_app_client.compose()
+        .arc4_dynamic_array(name="John")
+        .simulate(SimulateOptions(extra_opcode_budget=700))
+    )
 
     assert result.abi_results[0].return_value == "Hello world, John"
 
 
-def test_arc4_dynamic_bytes(arc4_dynamic_array_app_client: Arc4DynamicArrayClient) -> None:
+def test_arc4_dynamic_bytes(
+    arc4_dynamic_array_app_client: Arc4DynamicArrayClient,
+) -> None:
     """Test the arc4_dynamic_bytes method"""
 
     # Call the arc4_static_array method.
@@ -341,6 +352,8 @@ def test_arc4_tuple(
 ) -> None:
     """Test the arc4_tuple method"""
 
-    result = arc4_tuple_app_client.arc4_tuple(a=(4, "This is a good string.", 100, [1, 2, 3]))
+    result = arc4_tuple_app_client.arc4_tuple(
+        a=(4, "This is a good string.", 100, [1, 2, 3])
+    )
 
     assert result.return_value == "This is a good string."

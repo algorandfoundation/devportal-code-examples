@@ -1,7 +1,7 @@
 # pyright: reportMissingModuleSource=false
 import typing as t
 
-from algopy import ARC4Contract, GlobalState, UInt64, arc4, urange, String, Bytes
+from algopy import ARC4Contract, GlobalState, String, UInt64, arc4, urange
 from algopy.arc4 import abimethod
 
 
@@ -38,7 +38,9 @@ class Arc4Types(ARC4Contract):
         return arc4.UInt64(total)
 
     @abimethod()
-    def arc4_biguint_n(self, a: arc4.UInt128, b: arc4.UInt256, c: arc4.UInt512) -> arc4.UInt512:
+    def arc4_biguint_n(
+        self, a: arc4.UInt128, b: arc4.UInt256, c: arc4.UInt512
+    ) -> arc4.UInt512:
         """
         Integers with larger bit size are supported up to 512 bits.
         Ultimately, they are all represented with native BigUInt.
@@ -60,7 +62,7 @@ class Arc4Types(ARC4Contract):
 
     @abimethod()
     def arc4_address_properties(self, address: arc4.Address) -> UInt64:
-        underlying_bytes = (
+        underlying_bytes = (  # noqa: F841
             address.bytes
         )  # This will return the underlying bytes of the address.
 
@@ -69,7 +71,7 @@ class Arc4Types(ARC4Contract):
         )  # This will return the account type of the given address.
 
         bal = account.balance  # returns the balance of the account
-        total_asset = (
+        total_asset = (  # noqa: F841
             account.total_assets
         )  # returns the total assets held in the account
 
@@ -140,7 +142,9 @@ class Arc4DynamicArray(ARC4Contract):
         """
         dynamic_string_array = arc4.DynamicArray[arc4.String](arc4.String("Hello"))
 
-        extension = arc4.DynamicArray[arc4.String](arc4.String(" world"), arc4.String(", "))
+        extension = arc4.DynamicArray[arc4.String](
+            arc4.String(" world"), arc4.String(", ")
+        )
         dynamic_string_array.extend(extension)
 
         dynamic_string_array.append(name)
@@ -214,7 +218,12 @@ class Arc4Struct(ARC4Contract):
 class Arc4Tuple(ARC4Contract):
 
     @abimethod()
-    def arc4_tuple(self, a: arc4.Tuple[arc4.UInt8, arc4.String, arc4.UInt64, arc4.DynamicArray[arc4.UInt32]]) -> arc4.String:
+    def arc4_tuple(
+        self,
+        a: arc4.Tuple[
+            arc4.UInt8, arc4.String, arc4.UInt64, arc4.DynamicArray[arc4.UInt32]
+        ],
+    ) -> arc4.String:
         """An arc4.Tuple is a heterogeneous collection of arc4 types."""
 
         total = a[0].native + a[2].native
