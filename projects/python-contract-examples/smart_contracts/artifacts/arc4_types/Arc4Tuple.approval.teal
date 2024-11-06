@@ -9,21 +9,22 @@ smart_contracts.arc4_types.contract.Arc4Tuple.approval_program:
 __puya_arc4_router__:
     proto 0 1
     txn NumAppArgs
-    bz __puya_arc4_router___bare_routing@5
-    method "arc4_tuple((uint8,string,uint64,uint32[]))string"
+    bz __puya_arc4_router___bare_routing@6
+    method "arc4_tuple_argument((uint8,string,uint64,uint32[]))string"
+    method "arc4_tuple_return()(uint128,string)"
     txna ApplicationArgs 0
-    match __puya_arc4_router___arc4_tuple_route@2
+    match __puya_arc4_router___arc4_tuple_argument_route@2 __puya_arc4_router___arc4_tuple_return_route@3
     int 0
     retsub
 
-__puya_arc4_router___arc4_tuple_route@2:
+__puya_arc4_router___arc4_tuple_argument_route@2:
     txn OnCompletion
     !
     assert // OnCompletion is NoOp
     txn ApplicationID
     assert // is not creating
     txna ApplicationArgs 1
-    callsub arc4_tuple
+    callsub arc4_tuple_argument
     byte 0x151f7c75
     swap
     concat
@@ -31,22 +32,36 @@ __puya_arc4_router___arc4_tuple_route@2:
     int 1
     retsub
 
-__puya_arc4_router___bare_routing@5:
+__puya_arc4_router___arc4_tuple_return_route@3:
     txn OnCompletion
-    bnz __puya_arc4_router___after_if_else@9
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    callsub arc4_tuple_return
+    byte 0x151f7c75
+    swap
+    concat
+    log
+    int 1
+    retsub
+
+__puya_arc4_router___bare_routing@6:
+    txn OnCompletion
+    bnz __puya_arc4_router___after_if_else@10
     txn ApplicationID
     !
     assert // is creating
     int 1
     retsub
 
-__puya_arc4_router___after_if_else@9:
+__puya_arc4_router___after_if_else@10:
     int 0
     retsub
 
 
-// smart_contracts.arc4_types.contract.Arc4Tuple.arc4_tuple(a: bytes) -> bytes:
-arc4_tuple:
+// smart_contracts.arc4_types.contract.Arc4Tuple.arc4_tuple_argument(a: bytes) -> bytes:
+arc4_tuple_argument:
     proto 1 1
     frame_dig -1
     extract 0 1 // on error: Index access is out of bounds
@@ -69,11 +84,11 @@ arc4_tuple:
     extract_uint16
     int 0
 
-arc4_tuple_for_header@1:
+arc4_tuple_argument_for_header@1:
     frame_dig 4
     frame_dig 3
     <
-    bz arc4_tuple_after_for@4
+    bz arc4_tuple_argument_after_for@4
     frame_dig 2
     extract 2 0
     frame_dig 4
@@ -90,9 +105,9 @@ arc4_tuple_for_header@1:
     int 1
     +
     frame_bury 4
-    b arc4_tuple_for_header@1
+    b arc4_tuple_argument_for_header@1
 
-arc4_tuple_after_for@4:
+arc4_tuple_argument_after_for@4:
     frame_dig -1
     int 1
     extract_uint16
@@ -101,4 +116,11 @@ arc4_tuple_after_for@4:
     frame_dig 1
     substring3
     frame_bury 0
+    retsub
+
+
+// smart_contracts.arc4_types.contract.Arc4Tuple.arc4_tuple_return() -> bytes:
+arc4_tuple_return:
+    proto 0 1
+    byte 0x0000000000000000000000000000002a0012000d68656c6c6f2c20776f726c6421
     retsub

@@ -218,7 +218,7 @@ class Arc4Struct(ARC4Contract):
 class Arc4Tuple(ARC4Contract):
 
     @abimethod()
-    def arc4_tuple(
+    def arc4_tuple_argument(
         self,
         a: arc4.Tuple[
             arc4.UInt8, arc4.String, arc4.UInt64, arc4.DynamicArray[arc4.UInt32]
@@ -232,3 +232,10 @@ class Arc4Tuple(ARC4Contract):
             total += x.native
 
         return a[1]
+
+    @abimethod()
+    def arc4_tuple_return(self) -> arc4.Tuple[arc4.UInt128, arc4.String]:
+        """An arc4.Tuple can be returned when more than one return value is needed."""
+        arc4_tuple = arc4.Tuple((arc4.UInt128(42), arc4.String("hello, world!")))
+
+        return arc4_tuple

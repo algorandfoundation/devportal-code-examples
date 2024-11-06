@@ -347,13 +347,23 @@ def test_arc4_struct_complete_and_return_todo(
     assert result.return_value.completed is True
 
 
-def test_arc4_tuple(
+def test_arc4_tuple_argument(
     arc4_tuple_app_client: Arc4TupleClient,
 ) -> None:
-    """Test the arc4_tuple method"""
+    """Test the arc4_tuple_argument method"""
 
-    result = arc4_tuple_app_client.arc4_tuple(
+    result = arc4_tuple_app_client.arc4_tuple_argument(
         a=(4, "This is a good string.", 100, [1, 2, 3])
     )
 
     assert result.return_value == "This is a good string."
+
+
+def test_arc4_tuple_return(
+    arc4_tuple_app_client: Arc4TupleClient,
+) -> None:
+    """Test the arc4_tuple_return method"""
+
+    result = arc4_tuple_app_client.arc4_tuple_return()
+
+    assert result.return_value == [42, "hello, world!"]
