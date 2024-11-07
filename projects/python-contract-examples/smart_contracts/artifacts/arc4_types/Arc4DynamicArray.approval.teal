@@ -25,6 +25,12 @@ __puya_arc4_router___arc4_dynamic_array_route@2:
     assert // is not creating
     txna ApplicationArgs 1
     callsub arc4_dynamic_array
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
     byte 0x151f7c75
     swap
     concat
@@ -63,19 +69,49 @@ __puya_arc4_router___after_if_else@10:
 // smart_contracts.arc4_types.contract.Arc4DynamicArray.arc4_dynamic_array(name: bytes) -> bytes:
 arc4_dynamic_array:
     proto 1 1
-    byte 0x00010002000548656c6c6f
-    byte 0x000620776f726c6400022c20
-    int 2
-    callsub dynamic_array_concat_byte_length_head
     frame_dig -1
-    int 1
-    callsub dynamic_array_concat_byte_length_head
+    len
+    int 4
+    +
+    itob
+    extract 6 2
+    byte 0x0004
+    swap
+    concat
+    frame_dig -1
+    concat
     byte 0x000121
+    concat
+    byte 0x0002
+    swap
+    concat
+    dup
+    int 0
+    extract_uint16
+    swap
+    extract 2 0
+    swap
+    dup
+    int 2
+    *
+    swap
+    dig 2
+    len
+    swap
+    cover 3
+    substring3
+    byte 0x00010002000648656c6c6f20
+    swap
+    uncover 2
+    callsub dynamic_array_concat_byte_length_head
+    dupn 2
+    callsub dynamic_array_pop_byte_length_head
+    bury 1
+    callsub dynamic_array_pop_byte_length_head
+    bury 1
+    byte 0x0006776f726c6421
     int 1
     callsub dynamic_array_concat_byte_length_head
-    callsub dynamic_array_pop_byte_length_head
-    dup
-    uncover 2
     pop
     byte ""
     swap
@@ -115,12 +151,6 @@ arc4_dynamic_array_for_header@1:
 
 arc4_dynamic_array_after_for@4:
     frame_dig 1
-    dup
-    len
-    itob
-    extract 6 2
-    swap
-    concat
     frame_bury 0
     retsub
 

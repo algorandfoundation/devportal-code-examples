@@ -23,19 +23,19 @@ from algosdk.atomic_transaction_composer import (
 
 _APP_SPEC_JSON = r"""{
     "hints": {
-        "arc4_tuple_argument((uint8,string,uint64,uint32[]))string": {
+        "add_contact_info((string,string,uint64,uint8[]))uint64": {
             "call_config": {
                 "no_op": "CALL"
             }
         },
-        "arc4_tuple_return()(uint128,string)": {
+        "return_contact()(string,string,uint64)": {
             "call_config": {
                 "no_op": "CALL"
             }
         }
     },
     "source": {
-        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMuYXJjNF90eXBlcy5jb250cmFjdC5BcmM0VHVwbGUuYXBwcm92YWxfcHJvZ3JhbToKICAgIGNhbGxzdWIgX19wdXlhX2FyYzRfcm91dGVyX18KICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5hcmM0X3R5cGVzLmNvbnRyYWN0LkFyYzRUdXBsZS5fX3B1eWFfYXJjNF9yb3V0ZXJfXygpIC0+IHVpbnQ2NDoKX19wdXlhX2FyYzRfcm91dGVyX186CiAgICBwcm90byAwIDEKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBfX3B1eWFfYXJjNF9yb3V0ZXJfX19iYXJlX3JvdXRpbmdANgogICAgbWV0aG9kICJhcmM0X3R1cGxlX2FyZ3VtZW50KCh1aW50OCxzdHJpbmcsdWludDY0LHVpbnQzMltdKSlzdHJpbmciCiAgICBtZXRob2QgImFyYzRfdHVwbGVfcmV0dXJuKCkodWludDEyOCxzdHJpbmcpIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggX19wdXlhX2FyYzRfcm91dGVyX19fYXJjNF90dXBsZV9hcmd1bWVudF9yb3V0ZUAyIF9fcHV5YV9hcmM0X3JvdXRlcl9fX2FyYzRfdHVwbGVfcmV0dXJuX3JvdXRlQDMKICAgIGludCAwCiAgICByZXRzdWIKCl9fcHV5YV9hcmM0X3JvdXRlcl9fX2FyYzRfdHVwbGVfYXJndW1lbnRfcm91dGVAMjoKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBpcyBub3QgY3JlYXRpbmcKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGNhbGxzdWIgYXJjNF90dXBsZV9hcmd1bWVudAogICAgYnl0ZSAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50IDEKICAgIHJldHN1YgoKX19wdXlhX2FyYzRfcm91dGVyX19fYXJjNF90dXBsZV9yZXR1cm5fcm91dGVAMzoKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBpcyBub3QgY3JlYXRpbmcKICAgIGNhbGxzdWIgYXJjNF90dXBsZV9yZXR1cm4KICAgIGJ5dGUgMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludCAxCiAgICByZXRzdWIKCl9fcHV5YV9hcmM0X3JvdXRlcl9fX2JhcmVfcm91dGluZ0A2OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgYm56IF9fcHV5YV9hcmM0X3JvdXRlcl9fX2FmdGVyX2lmX2Vsc2VAMTAKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gaXMgY3JlYXRpbmcKICAgIGludCAxCiAgICByZXRzdWIKCl9fcHV5YV9hcmM0X3JvdXRlcl9fX2FmdGVyX2lmX2Vsc2VAMTA6CiAgICBpbnQgMAogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzLmFyYzRfdHlwZXMuY29udHJhY3QuQXJjNFR1cGxlLmFyYzRfdHVwbGVfYXJndW1lbnQoYTogYnl0ZXMpIC0+IGJ5dGVzOgphcmM0X3R1cGxlX2FyZ3VtZW50OgogICAgcHJvdG8gMSAxCiAgICBmcmFtZV9kaWcgLTEKICAgIGV4dHJhY3QgMCAxIC8vIG9uIGVycm9yOiBJbmRleCBhY2Nlc3MgaXMgb3V0IG9mIGJvdW5kcwogICAgYnRvaQogICAgZnJhbWVfZGlnIC0xCiAgICBleHRyYWN0IDMgOCAvLyBvbiBlcnJvcjogSW5kZXggYWNjZXNzIGlzIG91dCBvZiBib3VuZHMKICAgIGJ0b2kKICAgICsKICAgIGZyYW1lX2RpZyAtMQogICAgaW50IDExCiAgICBleHRyYWN0X3VpbnQxNgogICAgZHVwCiAgICBmcmFtZV9kaWcgLTEKICAgIGxlbgogICAgZnJhbWVfZGlnIC0xCiAgICBjb3ZlciAyCiAgICBzdWJzdHJpbmczCiAgICBkdXAKICAgIGludCAwCiAgICBleHRyYWN0X3VpbnQxNgogICAgaW50IDAKCmFyYzRfdHVwbGVfYXJndW1lbnRfZm9yX2hlYWRlckAxOgogICAgZnJhbWVfZGlnIDQKICAgIGZyYW1lX2RpZyAzCiAgICA8CiAgICBieiBhcmM0X3R1cGxlX2FyZ3VtZW50X2FmdGVyX2ZvckA0CiAgICBmcmFtZV9kaWcgMgogICAgZXh0cmFjdCAyIDAKICAgIGZyYW1lX2RpZyA0CiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGludCA0CiAgICAqCiAgICBpbnQgNAogICAgZXh0cmFjdDMgLy8gb24gZXJyb3I6IEluZGV4IGFjY2VzcyBpcyBvdXQgb2YgYm91bmRzCiAgICBidG9pCiAgICBmcmFtZV9kaWcgMAogICAgKwogICAgZnJhbWVfYnVyeSAwCiAgICBpbnQgMQogICAgKwogICAgZnJhbWVfYnVyeSA0CiAgICBiIGFyYzRfdHVwbGVfYXJndW1lbnRfZm9yX2hlYWRlckAxCgphcmM0X3R1cGxlX2FyZ3VtZW50X2FmdGVyX2ZvckA0OgogICAgZnJhbWVfZGlnIC0xCiAgICBpbnQgMQogICAgZXh0cmFjdF91aW50MTYKICAgIGZyYW1lX2RpZyAtMQogICAgc3dhcAogICAgZnJhbWVfZGlnIDEKICAgIHN1YnN0cmluZzMKICAgIGZyYW1lX2J1cnkgMAogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzLmFyYzRfdHlwZXMuY29udHJhY3QuQXJjNFR1cGxlLmFyYzRfdHVwbGVfcmV0dXJuKCkgLT4gYnl0ZXM6CmFyYzRfdHVwbGVfcmV0dXJuOgogICAgcHJvdG8gMCAxCiAgICBieXRlIDB4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMmEwMDEyMDAwZDY4NjU2YzZjNmYyYzIwNzc2ZjcyNmM2NDIxCiAgICByZXRzdWIK",
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMuYXJjNF90eXBlcy5jb250cmFjdC5BcmM0VHVwbGUuYXBwcm92YWxfcHJvZ3JhbToKICAgIGNhbGxzdWIgX19wdXlhX2FyYzRfcm91dGVyX18KICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5hcmM0X3R5cGVzLmNvbnRyYWN0LkFyYzRUdXBsZS5fX3B1eWFfYXJjNF9yb3V0ZXJfXygpIC0+IHVpbnQ2NDoKX19wdXlhX2FyYzRfcm91dGVyX186CiAgICBwcm90byAwIDEKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBfX3B1eWFfYXJjNF9yb3V0ZXJfX19iYXJlX3JvdXRpbmdANgogICAgbWV0aG9kICJhZGRfY29udGFjdF9pbmZvKChzdHJpbmcsc3RyaW5nLHVpbnQ2NCx1aW50OFtdKSl1aW50NjQiCiAgICBtZXRob2QgInJldHVybl9jb250YWN0KCkoc3RyaW5nLHN0cmluZyx1aW50NjQpIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggX19wdXlhX2FyYzRfcm91dGVyX19fYWRkX2NvbnRhY3RfaW5mb19yb3V0ZUAyIF9fcHV5YV9hcmM0X3JvdXRlcl9fX3JldHVybl9jb250YWN0X3JvdXRlQDMKICAgIGludCAwCiAgICByZXRzdWIKCl9fcHV5YV9hcmM0X3JvdXRlcl9fX2FkZF9jb250YWN0X2luZm9fcm91dGVAMjoKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBpcyBub3QgY3JlYXRpbmcKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGNhbGxzdWIgYWRkX2NvbnRhY3RfaW5mbwogICAgaXRvYgogICAgYnl0ZSAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50IDEKICAgIHJldHN1YgoKX19wdXlhX2FyYzRfcm91dGVyX19fcmV0dXJuX2NvbnRhY3Rfcm91dGVAMzoKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBpcyBub3QgY3JlYXRpbmcKICAgIGNhbGxzdWIgcmV0dXJuX2NvbnRhY3QKICAgIGJ5dGUgMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludCAxCiAgICByZXRzdWIKCl9fcHV5YV9hcmM0X3JvdXRlcl9fX2JhcmVfcm91dGluZ0A2OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgYm56IF9fcHV5YV9hcmM0X3JvdXRlcl9fX2FmdGVyX2lmX2Vsc2VAMTAKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gaXMgY3JlYXRpbmcKICAgIGludCAxCiAgICByZXRzdWIKCl9fcHV5YV9hcmM0X3JvdXRlcl9fX2FmdGVyX2lmX2Vsc2VAMTA6CiAgICBpbnQgMAogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzLmFyYzRfdHlwZXMuY29udHJhY3QuQXJjNFR1cGxlLmFkZF9jb250YWN0X2luZm8oY29udGFjdDogYnl0ZXMpIC0+IHVpbnQ2NDoKYWRkX2NvbnRhY3RfaW5mbzoKICAgIHByb3RvIDEgMQogICAgZnJhbWVfZGlnIC0xCiAgICBpbnQgMAogICAgZXh0cmFjdF91aW50MTYKICAgIGZyYW1lX2RpZyAtMQogICAgaW50IDIKICAgIGV4dHJhY3RfdWludDE2CiAgICBmcmFtZV9kaWcgLTEKICAgIHVuY292ZXIgMgogICAgZGlnIDIKICAgIHN1YnN0cmluZzMKICAgIHN3YXAKICAgIGZyYW1lX2RpZyAtMQogICAgaW50IDEyCiAgICBleHRyYWN0X3VpbnQxNgogICAgZnJhbWVfZGlnIC0xCiAgICB1bmNvdmVyIDIKICAgIGRpZyAyCiAgICBzdWJzdHJpbmczCiAgICBjb3ZlciAyCiAgICBmcmFtZV9kaWcgLTEKICAgIGV4dHJhY3QgNCA4IC8vIG9uIGVycm9yOiBJbmRleCBhY2Nlc3MgaXMgb3V0IG9mIGJvdW5kcwogICAgY292ZXIgMwogICAgZnJhbWVfZGlnIC0xCiAgICBsZW4KICAgIGZyYW1lX2RpZyAtMQogICAgY292ZXIgMgogICAgc3Vic3RyaW5nMwogICAgZHVwCiAgICBjb3ZlciA0CiAgICBjb3ZlciA0CiAgICBleHRyYWN0IDIgMAogICAgYnl0ZSAiSm9obiBXb29kcyIKICAgID09CiAgICBhc3NlcnQKICAgIGV4dHJhY3QgMiAwCiAgICBieXRlICJqb2huQHNvbWV0aGluZy5jb20iCiAgICA9PQogICAgYXNzZXJ0CiAgICBieXRlIDB4MDAwMDAwMDAyMTFkMWFlMwogICAgYj09CiAgICBhc3NlcnQKICAgIGludCAwCiAgICBzd2FwCiAgICBpbnQgMAogICAgZXh0cmFjdF91aW50MTYKICAgIGludCAwCgphZGRfY29udGFjdF9pbmZvX2Zvcl9oZWFkZXJAMToKICAgIGZyYW1lX2RpZyAzCiAgICBmcmFtZV9kaWcgMgogICAgPAogICAgYnogYWRkX2NvbnRhY3RfaW5mb19hZnRlcl9mb3JANAogICAgZnJhbWVfZGlnIDAKICAgIGV4dHJhY3QgMiAwCiAgICBmcmFtZV9kaWcgMwogICAgZHVwCiAgICBjb3ZlciAyCiAgICBpbnQgMQogICAgZXh0cmFjdDMgLy8gb24gZXJyb3I6IEluZGV4IGFjY2VzcyBpcyBvdXQgb2YgYm91bmRzCiAgICBidG9pCiAgICBmcmFtZV9kaWcgMQogICAgKwogICAgZnJhbWVfYnVyeSAxCiAgICBpbnQgMQogICAgKwogICAgZnJhbWVfYnVyeSAzCiAgICBiIGFkZF9jb250YWN0X2luZm9fZm9yX2hlYWRlckAxCgphZGRfY29udGFjdF9pbmZvX2FmdGVyX2ZvckA0OgogICAgZnJhbWVfZGlnIDEKICAgIGZyYW1lX2J1cnkgMAogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzLmFyYzRfdHlwZXMuY29udHJhY3QuQXJjNFR1cGxlLnJldHVybl9jb250YWN0KCkgLT4gYnl0ZXM6CnJldHVybl9jb250YWN0OgogICAgcHJvdG8gMCAxCiAgICBieXRlIDB4MDAwYzAwMTMwMDAwMDAwMDIxMWQxYWUzMDAwNTQxNmM2OTYzNjUwMDEzNjE2YzY5NjM2NTQwNzM2ZjZkNjU3NDY4Njk2ZTY3MmU2MzZmNmQKICAgIHJldHN1Ygo=",
         "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMuYXJjNF90eXBlcy5jb250cmFjdC5BcmM0VHVwbGUuY2xlYXJfc3RhdGVfcHJvZ3JhbToKICAgIGludCAxCiAgICByZXR1cm4K"
     },
     "state": {
@@ -62,23 +62,23 @@ _APP_SPEC_JSON = r"""{
         "name": "Arc4Tuple",
         "methods": [
             {
-                "name": "arc4_tuple_argument",
+                "name": "add_contact_info",
                 "args": [
                     {
-                        "type": "(uint8,string,uint64,uint32[])",
-                        "name": "a"
+                        "type": "(string,string,uint64,uint8[])",
+                        "name": "contact"
                     }
                 ],
                 "returns": {
-                    "type": "string"
+                    "type": "uint64"
                 },
                 "desc": "An arc4.Tuple is a heterogeneous collection of arc4 types."
             },
             {
-                "name": "arc4_tuple_return",
+                "name": "return_contact",
                 "args": [],
                 "returns": {
-                    "type": "(uint128,string)"
+                    "type": "(string,string,uint64)"
                 },
                 "desc": "An arc4.Tuple can be returned when more than one return value is needed."
             }
@@ -163,23 +163,23 @@ def _convert_deploy_args(
 
 
 @dataclasses.dataclass(kw_only=True)
-class Arc4TupleArgumentArgs(_ArgsBase[str]):
+class AddContactInfoArgs(_ArgsBase[int]):
     """An arc4.Tuple is a heterogeneous collection of arc4 types."""
 
-    a: tuple[int, str, int, list[int]]
+    contact: tuple[str, str, int, list[int]]
 
     @staticmethod
     def method() -> str:
-        return "arc4_tuple_argument((uint8,string,uint64,uint32[]))string"
+        return "add_contact_info((string,string,uint64,uint8[]))uint64"
 
 
 @dataclasses.dataclass(kw_only=True)
-class Arc4TupleReturnArgs(_ArgsBase[tuple[int, str]]):
+class ReturnContactArgs(_ArgsBase[tuple[str, str, int]]):
     """An arc4.Tuple can be returned when more than one return value is needed."""
 
     @staticmethod
     def method() -> str:
-        return "arc4_tuple_return()(uint128,string)"
+        return "return_contact()(string,string,uint64)"
 
 
 @dataclasses.dataclass(kw_only=True)
@@ -213,22 +213,22 @@ class Composer:
     def execute(self) -> AtomicTransactionResponse:
         return self.app_client.execute_atc(self.atc)
 
-    def arc4_tuple_argument(
+    def add_contact_info(
         self,
         *,
-        a: tuple[int, str, int, list[int]],
+        contact: tuple[str, str, int, list[int]],
         transaction_parameters: algokit_utils.TransactionParameters | None = None,
     ) -> "Composer":
         """An arc4.Tuple is a heterogeneous collection of arc4 types.
         
-        Adds a call to `arc4_tuple_argument((uint8,string,uint64,uint32[]))string` ABI method
+        Adds a call to `add_contact_info((string,string,uint64,uint8[]))uint64` ABI method
         
-        :param tuple[int, str, int, list[int]] a: The `a` ABI parameter
+        :param tuple[str, str, int, list[int]] contact: The `contact` ABI parameter
         :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
         :returns Composer: This Composer instance"""
 
-        args = Arc4TupleArgumentArgs(
-            a=a,
+        args = AddContactInfoArgs(
+            contact=contact,
         )
         self.app_client.compose_call(
             self.atc,
@@ -238,19 +238,19 @@ class Composer:
         )
         return self
 
-    def arc4_tuple_return(
+    def return_contact(
         self,
         *,
         transaction_parameters: algokit_utils.TransactionParameters | None = None,
     ) -> "Composer":
         """An arc4.Tuple can be returned when more than one return value is needed.
         
-        Adds a call to `arc4_tuple_return()(uint128,string)` ABI method
+        Adds a call to `return_contact()(string,string,uint64)` ABI method
         
         :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
         :returns Composer: This Composer instance"""
 
-        args = Arc4TupleReturnArgs()
+        args = ReturnContactArgs()
         self.app_client.compose_call(
             self.atc,
             call_abi_method=args.method(),
@@ -418,22 +418,22 @@ class Arc4TupleClient:
     def suggested_params(self, value: algosdk.transaction.SuggestedParams | None) -> None:
         self.app_client.suggested_params = value
 
-    def arc4_tuple_argument(
+    def add_contact_info(
         self,
         *,
-        a: tuple[int, str, int, list[int]],
+        contact: tuple[str, str, int, list[int]],
         transaction_parameters: algokit_utils.TransactionParameters | None = None,
-    ) -> algokit_utils.ABITransactionResponse[str]:
+    ) -> algokit_utils.ABITransactionResponse[int]:
         """An arc4.Tuple is a heterogeneous collection of arc4 types.
         
-        Calls `arc4_tuple_argument((uint8,string,uint64,uint32[]))string` ABI method
+        Calls `add_contact_info((string,string,uint64,uint8[]))uint64` ABI method
         
-        :param tuple[int, str, int, list[int]] a: The `a` ABI parameter
+        :param tuple[str, str, int, list[int]] contact: The `contact` ABI parameter
         :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
-        :returns algokit_utils.ABITransactionResponse[str]: The result of the transaction"""
+        :returns algokit_utils.ABITransactionResponse[int]: The result of the transaction"""
 
-        args = Arc4TupleArgumentArgs(
-            a=a,
+        args = AddContactInfoArgs(
+            contact=contact,
         )
         result = self.app_client.call(
             call_abi_method=args.method(),
@@ -442,19 +442,19 @@ class Arc4TupleClient:
         )
         return result
 
-    def arc4_tuple_return(
+    def return_contact(
         self,
         *,
         transaction_parameters: algokit_utils.TransactionParameters | None = None,
-    ) -> algokit_utils.ABITransactionResponse[tuple[int, str]]:
+    ) -> algokit_utils.ABITransactionResponse[tuple[str, str, int]]:
         """An arc4.Tuple can be returned when more than one return value is needed.
         
-        Calls `arc4_tuple_return()(uint128,string)` ABI method
+        Calls `return_contact()(string,string,uint64)` ABI method
         
         :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
-        :returns algokit_utils.ABITransactionResponse[tuple[int, str]]: The result of the transaction"""
+        :returns algokit_utils.ABITransactionResponse[tuple[str, str, int]]: The result of the transaction"""
 
-        args = Arc4TupleReturnArgs()
+        args = ReturnContactArgs()
         result = self.app_client.call(
             call_abi_method=args.method(),
             transaction_parameters=_convert_call_transaction_parameters(transaction_parameters),

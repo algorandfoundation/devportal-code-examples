@@ -124,10 +124,13 @@ class Arc4StaticArray(ARC4Contract):
 
         assert (aliased_static[0].native + aliased_static[index].native) == 202
 
+        aliased_static[0] = arc4.UInt8(202)
+
+        assert aliased_static[0].native == 202
+
         """
-        You can't modify the elements of a static array.
+        You can't add or pop values from a static array because it has a fixed size.
         so this won't compile:
-        aliased_static[0] = arc4.UInt8(100)
         aliased_static.pop()
         """
 
@@ -135,27 +138,28 @@ class Arc4StaticArray(ARC4Contract):
 class Arc4DynamicArray(ARC4Contract):
 
     @abimethod()
-    def arc4_dynamic_array(self, name: arc4.String) -> arc4.String:
+    def arc4_dynamic_array(self, name: arc4.String) -> String:
         """
         Dynamic Arrays have variable size and capacity.
         They are similar to native Python lists because they can also append, extend, and pop.
         """
-        dynamic_string_array = arc4.DynamicArray[arc4.String](arc4.String("Hello"))
+        dynamic_string_array = arc4.DynamicArray[arc4.String](arc4.String("Hello "))
 
         extension = arc4.DynamicArray[arc4.String](
-            arc4.String(" world"), arc4.String(", ")
+            name, arc4.String("!")
         )
         dynamic_string_array.extend(extension)
 
-        dynamic_string_array.append(name)
-        dynamic_string_array.append(arc4.String("!"))
-        dynamic_string_array.pop()
-
+        copied_dynamic_string_array = dynamic_string_array.copy()
+        copied_dynamic_string_array.pop()
+        copied_dynamic_string_array.pop()
+        copied_dynamic_string_array.append(arc4.String("world!"))
+        
         greeting = String()
         for x in dynamic_string_array:
             greeting += x.native
 
-        return arc4.String(greeting)
+        return greeting
 
     @abimethod()
     def arc4_dynamic_bytes(self) -> arc4.DynamicBytes:
@@ -215,27 +219,32 @@ class Arc4Struct(ARC4Contract):
         return todo_to_return
 
 
+contact_info_tuple = arc4.Tuple[arc4.String, arc4.String, arc4.UInt64, arc4.DynamicArray[arc4.UInt8]] # name, email, phone
+
 class Arc4Tuple(ARC4Contract):
 
     @abimethod()
-    def arc4_tuple_argument(
+    def add_contact_info(
         self,
-        a: arc4.Tuple[
-            arc4.UInt8, arc4.String, arc4.UInt64, arc4.DynamicArray[arc4.UInt32]
-        ],
-    ) -> arc4.String:
+        contact: contact_info_tuple
+    ) -> UInt64:
         """An arc4.Tuple is a heterogeneous collection of arc4 types."""
+        name, email, phone, donate_history = contact.native
 
-        total = a[0].native + a[2].native
+        assert name.native == "John Woods"
+        assert email.native == "john@something.com"
+        assert phone == arc4.UInt64(555_555_555)
 
-        for x in a[3]:
-            total += x.native
+        total_donation = UInt64(0)
 
-        return a[1]
+        for x in donate_history:
+            total_donation += x.native
+
+        return total_donation
 
     @abimethod()
-    def arc4_tuple_return(self) -> arc4.Tuple[arc4.UInt128, arc4.String]:
+    def return_contact(self) -> arc4.Tuple[arc4.String, arc4.String, arc4.UInt64]:
         """An arc4.Tuple can be returned when more than one return value is needed."""
-        arc4_tuple = arc4.Tuple((arc4.UInt128(42), arc4.String("hello, world!")))
+        arc4_tuple = arc4.Tuple((arc4.String("Alice"), arc4.String("alice@something.com"), arc4.UInt64(555_555_555)))
 
         return arc4_tuple
