@@ -191,25 +191,25 @@ Todos: t.TypeAlias = arc4.DynamicArray[Todo]
 class Arc4Struct(ARC4Contract):
 
     def __init__(self) -> None:
-        self.todos = GlobalState(Todos())
+        self.todos = Todos()
 
     @abimethod()
     def add_todo(self, task: arc4.String) -> Todos:
         todo = Todo(task=task, completed=arc4.Bool(False))  # noqa: FBT003
 
-        if self.todos.value.length == 0:
-            self.todos.value = Todos(todo.copy())
+        if not self.todos:
+            self.todos = Todos(todo.copy())
         else:
-            self.todos.value.append(todo.copy())
+            self.todos.append(todo.copy())
 
-        return self.todos.value
+        return self.todos
 
     @abimethod()
     def complete_todo(self, task: arc4.String) -> None:
 
-        for index in urange(self.todos.value.length):
-            if self.todos.value[index].task == task:
-                self.todos.value[index].completed = arc4.Bool(True)  # noqa: FBT003
+        for index in urange(self.todos.length):
+            if self.todos[index].task == task:
+                self.todos[index].completed = arc4.Bool(True)  # noqa: FBT003
                 break
 
     @abimethod()
@@ -217,10 +217,10 @@ class Arc4Struct(ARC4Contract):
         todo_to_return: Todo
 
         exist = False
-        for index in urange(self.todos.value.length):
+        for index in urange(self.todos.length):
 
-            if self.todos.value[index].task == task:
-                todo_to_return = self.todos.value[index].copy()
+            if self.todos[index].task == task:
+                todo_to_return = self.todos[index].copy()
                 exist = True
 
         assert exist
