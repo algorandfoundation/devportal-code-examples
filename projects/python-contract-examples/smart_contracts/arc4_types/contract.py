@@ -1,7 +1,8 @@
 # pyright: reportMissingModuleSource=false
 import typing as t
 
-from algopy import ARC4Contract, GlobalState, String, UInt64, arc4, urange
+# from algopy import ARC4Contract, GlobalState, String, UInt64, arc4, urange
+from algopy import *
 from algopy.arc4 import abimethod
 
 
@@ -232,6 +233,9 @@ contact_info_tuple = arc4.Tuple[arc4.String, arc4.String, arc4.UInt64, arc4.Dyna
 
 class Arc4Tuple(ARC4Contract):
 
+    def __init__(self) -> None:
+        self.contact_info = GlobalState(contact_info_tuple((arc4.String(""), arc4.String(""), arc4.UInt64(0), arc4.DynamicArray[arc4.UInt8]())))
+
     @abimethod()
     def add_contact_info(
         self,
@@ -249,11 +253,36 @@ class Arc4Tuple(ARC4Contract):
         for x in donate_history:
             total_donation += x.native
 
+        self.contact_info.value = contact
+
         return total_donation
 
     @abimethod()
-    def return_contact(self) -> arc4.Tuple[arc4.String, arc4.String, arc4.UInt64]:
+    def return_contact(self) -> arc4.Tuple[arc4.String, arc4.String, arc4.UInt64, arc4.DynamicArray[arc4.UInt8]]:
         """An arc4.Tuple can be returned when more than one return value is needed."""
-        arc4_tuple = arc4.Tuple((arc4.String("Alice"), arc4.String("alice@something.com"), arc4.UInt64(555_555_555)))
+        # arc4_tuple = arc4.Tuple((arc4.String("Alice"), arc4.String("alice@something.com"), arc4.UInt64(555_555_555)))
+        
 
-        return arc4_tuple
+        return self.contact_info.value
+
+class TransactionTypes(ARC4Contract):
+
+    @abimethod
+    def paymentTxn(self, pay:gtxn.PaymentTransaction) -> UInt64:
+        assert pay.amount > 0
+        assert pay.receiver == Global.current_application_address
+        assert pay.sender == Txn.sender
+
+        return pay.amount
+    
+    @abimethod
+    def assetTransferTxn(self, asset_transfer: gtxn.AssetTransferTransaction) -> UInt64:
+        assert Global.current_application_address.is_opted_in(asset_transfer.xfer_asset), "Asset not opted in"
+
+        assert asset_transfer.asset_amount > 0
+        assert asset_transfer.asset_receiver == Global.current_application_address
+        assert asset_transfer.sender == Txn.sender
+
+        return asset_transfer.asset_amount
+    
+
