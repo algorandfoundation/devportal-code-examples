@@ -309,7 +309,7 @@ def test_arc4_dynamic_bytes(
     # Call the arc4_static_array method.
     result = arc4_dynamic_array_app_client.arc4_dynamic_bytes()
 
-    assert result.return_value == [0, 255, 255]
+    assert result.return_value == [0, 255, 255, 170, 187, 255]
 
 
 def test_arc4_struct_add_todo(arc4_struct_app_client: Arc4StructClient) -> None:

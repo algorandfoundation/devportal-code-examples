@@ -173,6 +173,10 @@ class Arc4DynamicArray(ARC4Contract):
 
         dynamic_bytes[0] = arc4.Byte(0)
 
+        dynamic_bytes.extend(arc4.DynamicBytes(b"\xAA\xBB\xCC"))
+        dynamic_bytes.pop()
+        dynamic_bytes.append(arc4.Byte(255))
+
         return dynamic_bytes
 
 

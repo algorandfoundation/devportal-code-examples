@@ -161,6 +161,54 @@ arc4_dynamic_bytes:
     byte 0x0003ffffff
     byte 0x00
     replace2 2
+    extract 2 0
+    byte 0xaabbcc
+    concat
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    int 1
+    callsub dynamic_array_pop_fixed_size
+    bury 1
+    extract 2 0
+    byte 0xff
+    concat
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    retsub
+
+
+// _puya_lib.arc4.dynamic_array_pop_fixed_size(array: bytes, fixed_byte_size: uint64) -> bytes, bytes:
+dynamic_array_pop_fixed_size:
+    proto 2 2
+    frame_dig -2
+    int 0
+    extract_uint16
+    int 1
+    -
+    itob
+    extract 6 0
+    frame_dig -2
+    swap
+    replace2 0
+    dup
+    len
+    frame_dig -1
+    -
+    dup2
+    frame_dig -1
+    extract3
+    cover 2
+    int 0
+    swap
+    substring3
     retsub
 
 
