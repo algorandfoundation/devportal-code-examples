@@ -166,6 +166,11 @@ class Arc4DynamicArray(ARC4Contract):
         """arc4.DynamicBytes are essentially an arc4.DynamicArray[arc4.Bytes] and some convenience methods."""
         dynamic_bytes = arc4.DynamicBytes(b"\xFF\xFF\xFF")
 
+        # arc4.DynamicBytes can return the native bytearray instead of accessing every single index of the array.
+        # This is only true for arc4.DynamicBytes because, as an example, an arc4.DynamicArray[arc4.UInt64]
+        #  doesn't have a native equivalent.
+        native_dynamic_bytes = dynamic_bytes.native  # noqa: F841
+
         dynamic_bytes[0] = arc4.Byte(0)
 
         return dynamic_bytes
