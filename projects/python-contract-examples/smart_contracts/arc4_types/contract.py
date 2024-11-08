@@ -1,15 +1,24 @@
 # pyright: reportMissingModuleSource=false
 import typing as t
 
-# from algopy import ARC4Contract, GlobalState, String, UInt64, arc4, urange
-from algopy import *
+from algopy import (
+    ARC4Contract,
+    Global,
+    GlobalState,
+    String,
+    Txn,
+    UInt64,
+    arc4,
+    gtxn,
+    urange,
+)
 from algopy.arc4 import abimethod
 
 
 class Arc4Types(ARC4Contract):
 
     @abimethod()
-    def arc4_uint64(self, a: arc4.UInt64, b: arc4.UInt64) -> arc4.UInt64:
+    def add_arc4_uint64(self, a: arc4.UInt64, b: arc4.UInt64) -> arc4.UInt64:
         """
         Math operations (like a + b) are not supported on arc4.UInt64 types
         since they are internally represented as byte arrays in the AVM.
@@ -22,7 +31,7 @@ class Arc4Types(ARC4Contract):
         return arc4.UInt64(c)
 
     @abimethod()
-    def arc4_uint_n(
+    def add_arc4_uint_n(
         self, a: arc4.UInt8, b: arc4.UInt16, c: arc4.UInt32, d: arc4.UInt64
     ) -> arc4.UInt64:
         """
@@ -39,7 +48,7 @@ class Arc4Types(ARC4Contract):
         return arc4.UInt64(total)
 
     @abimethod()
-    def arc4_biguint_n(
+    def add_arc4_biguint_n(
         self, a: arc4.UInt128, b: arc4.UInt256, c: arc4.UInt512
     ) -> arc4.UInt512:
         """
@@ -136,26 +145,33 @@ class Arc4StaticArray(ARC4Contract):
         """
 
 
+goodbye: t.TypeAlias = arc4.DynamicArray[arc4.String]
+
+
 class Arc4DynamicArray(ARC4Contract):
 
+    @abimethod
+    def goodbye(self, name: arc4.String) -> goodbye:
+        bye = goodbye(arc4.String("Good bye "), name)
+
+        return bye
+
     @abimethod()
-    def arc4_dynamic_array(self, name: arc4.String) -> String:
+    def hello(self, name: arc4.String) -> String:
         """
         Dynamic Arrays have variable size and capacity.
         They are similar to native Python lists because they can also append, extend, and pop.
         """
         dynamic_string_array = arc4.DynamicArray[arc4.String](arc4.String("Hello "))
 
-        extension = arc4.DynamicArray[arc4.String](
-            name, arc4.String("!")
-        )
+        extension = arc4.DynamicArray[arc4.String](name, arc4.String("!"))
         dynamic_string_array.extend(extension)
 
         copied_dynamic_string_array = dynamic_string_array.copy()
         copied_dynamic_string_array.pop()
         copied_dynamic_string_array.pop()
         copied_dynamic_string_array.append(arc4.String("world!"))
-        
+
         greeting = String()
         for x in dynamic_string_array:
             greeting += x.native
@@ -229,60 +245,58 @@ class Arc4Struct(ARC4Contract):
         return todo_to_return
 
 
-contact_info_tuple = arc4.Tuple[arc4.String, arc4.String, arc4.UInt64, arc4.DynamicArray[arc4.UInt8]] # name, email, phone
+contact_info_tuple = arc4.Tuple[
+    arc4.String, arc4.String, arc4.UInt64
+]  # name, email, phone
+
 
 class Arc4Tuple(ARC4Contract):
 
     def __init__(self) -> None:
-        self.contact_info = GlobalState(contact_info_tuple((arc4.String(""), arc4.String(""), arc4.UInt64(0), arc4.DynamicArray[arc4.UInt8]())))
+        self.contact_info = GlobalState(
+            contact_info_tuple((arc4.String(""), arc4.String(""), arc4.UInt64(0)))
+        )
 
     @abimethod()
-    def add_contact_info(
-        self,
-        contact: contact_info_tuple
-    ) -> UInt64:
+    def add_contact_info(self, contact: contact_info_tuple) -> UInt64:
         """An arc4.Tuple is a heterogeneous collection of arc4 types."""
-        name, email, phone, donate_history = contact.native
+        name, email, phone = contact.native
 
         assert name.native == "John Woods"
         assert email.native == "john@something.com"
         assert phone == arc4.UInt64(555_555_555)
 
-        total_donation = UInt64(0)
-
-        for x in donate_history:
-            total_donation += x.native
-
         self.contact_info.value = contact
 
-        return total_donation
+        return phone.native
 
     @abimethod()
-    def return_contact(self) -> arc4.Tuple[arc4.String, arc4.String, arc4.UInt64, arc4.DynamicArray[arc4.UInt8]]:
+    def return_contact(self) -> arc4.Tuple[arc4.String, arc4.String, arc4.UInt64]:
         """An arc4.Tuple can be returned when more than one return value is needed."""
-        # arc4_tuple = arc4.Tuple((arc4.String("Alice"), arc4.String("alice@something.com"), arc4.UInt64(555_555_555)))
-        
 
         return self.contact_info.value
+
 
 class TransactionTypes(ARC4Contract):
 
     @abimethod
-    def paymentTxn(self, pay:gtxn.PaymentTransaction) -> UInt64:
+    def payment_txn(self, pay: gtxn.PaymentTransaction) -> UInt64:
         assert pay.amount > 0
         assert pay.receiver == Global.current_application_address
         assert pay.sender == Txn.sender
 
         return pay.amount
-    
+
     @abimethod
-    def assetTransferTxn(self, asset_transfer: gtxn.AssetTransferTransaction) -> UInt64:
-        assert Global.current_application_address.is_opted_in(asset_transfer.xfer_asset), "Asset not opted in"
+    def asset_transfer_txn(
+        self, asset_transfer: gtxn.AssetTransferTransaction
+    ) -> UInt64:
+        assert Global.current_application_address.is_opted_in(
+            asset_transfer.xfer_asset
+        ), "Asset not opted in"
 
         assert asset_transfer.asset_amount > 0
         assert asset_transfer.asset_receiver == Global.current_application_address
         assert asset_transfer.sender == Txn.sender
 
         return asset_transfer.asset_amount
-    
-
