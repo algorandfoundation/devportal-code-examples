@@ -251,6 +251,7 @@ contact_info_tuple = arc4.Tuple[
 
 
 class Arc4Tuple(ARC4Contract):
+    
 
     def __init__(self) -> None:
         self.contact_info = GlobalState(
@@ -262,8 +263,8 @@ class Arc4Tuple(ARC4Contract):
         """An arc4.Tuple is a heterogeneous collection of arc4 types."""
         name, email, phone = contact.native
 
-        assert name.native == "John Woods"
-        assert email.native == "john@something.com"
+        assert name.native == "Alice"
+        assert email.native == "alice@something.com"
         assert phone == arc4.UInt64(555_555_555)
 
         self.contact_info.value = contact
