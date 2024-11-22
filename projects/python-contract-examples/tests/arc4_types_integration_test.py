@@ -216,7 +216,7 @@ def test_arc4_uint64(
     """Test the arc4_uint64 method"""
 
     # Call the arc4_uint64 method
-    result = arc4_types_app_client.arc4_uint64(a=1, b=2)
+    result = arc4_types_app_client.add_arc4_uint64(a=1, b=2)
 
     # Check the result
     assert result.return_value == 3
@@ -227,7 +227,7 @@ def test_arc4_uint_n(
 ) -> None:
     """Test the arc4_uint_n method"""
 
-    result = arc4_types_app_client.arc4_uint_n(a=100, b=1_000, c=100_000, d=100_000)
+    result = arc4_types_app_client.add_arc4_uint_n(a=100, b=1_000, c=100_000, d=100_000)
 
     assert result.return_value == 201_100
 
@@ -237,7 +237,7 @@ def test_arc4_biguint_n(
 ) -> None:
     """Test the arc4_uint_n method"""
 
-    result = arc4_types_app_client.arc4_biguint_n(a=2**65, b=2**129, c=2**257)
+    result = arc4_types_app_client.add_arc4_biguint_n(a=2**65, b=2**129, c=2**257)
 
     assert result.return_value == 2**65 + 2**129 + 2**257
 
@@ -294,11 +294,11 @@ def test_arc4_dynamic_array(
     # Call the arc4_static_array method with simulate to avoid opcode budget constraints.
     result = (
         arc4_dynamic_array_app_client.compose()
-        .arc4_dynamic_array(name="John")
+        .hello(name="John")
         .simulate(SimulateOptions(extra_opcode_budget=700))
     )
 
-    assert result.abi_results[0].return_value == "Hello world, John"
+    assert result.abi_results[0].return_value == "Hello John!"
 
 
 def test_arc4_dynamic_bytes(
@@ -347,23 +347,23 @@ def test_arc4_struct_complete_and_return_todo(
     assert result.return_value.completed is True
 
 
-def test_arc4_tuple_argument(
+def test_tuple_add_contact_info(
     arc4_tuple_app_client: Arc4TupleClient,
 ) -> None:
-    """Test the arc4_tuple_argument method"""
+    """Test the add_contact_info method"""
 
-    result = arc4_tuple_app_client.arc4_tuple_argument(
-        a=(4, "This is a good string.", 100, [1, 2, 3])
+    result = arc4_tuple_app_client.add_contact_info(
+        contact=("Alice", "alice@something.com", 555_555_555)
     )
 
-    assert result.return_value == "This is a good string."
+    assert result.return_value == 555_555_555
 
 
-def test_arc4_tuple_return(
+def test_tuple_return_contact(
     arc4_tuple_app_client: Arc4TupleClient,
 ) -> None:
-    """Test the arc4_tuple_return method"""
+    """Test the return_contact method"""
 
-    result = arc4_tuple_app_client.arc4_tuple_return()
+    result = arc4_tuple_app_client.return_contact()
 
-    assert result.return_value == [42, "hello, world!"]
+    assert result.return_value == ["Alice", "alice@something.com", 555_555_555]

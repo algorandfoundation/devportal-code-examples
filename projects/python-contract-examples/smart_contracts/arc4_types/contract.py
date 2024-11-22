@@ -17,6 +17,7 @@ from algopy.arc4 import abimethod
 
 class Arc4Types(ARC4Contract):
 
+    # example: ARC4_UINT64
     @abimethod()
     def add_arc4_uint64(self, a: arc4.UInt64, b: arc4.UInt64) -> arc4.UInt64:
         """
@@ -29,7 +30,9 @@ class Arc4Types(ARC4Contract):
         c = a.native + b.native
 
         return arc4.UInt64(c)
+    # example: ARC4_UINT64
 
+    # example: ARC4_UINTN
     @abimethod()
     def add_arc4_uint_n(
         self, a: arc4.UInt8, b: arc4.UInt16, c: arc4.UInt32, d: arc4.UInt64
@@ -46,7 +49,9 @@ class Arc4Types(ARC4Contract):
         total = a.native + b.native + c.native + d.native
 
         return arc4.UInt64(total)
+    # example: ARC4_UINTN
 
+    # example: ARC4_BIGUINT
     @abimethod()
     def add_arc4_biguint_n(
         self, a: arc4.UInt128, b: arc4.UInt256, c: arc4.UInt512
@@ -62,14 +67,18 @@ class Arc4Types(ARC4Contract):
         total = a.native + b.native + c.native
 
         return arc4.UInt512(total)
+    # example: ARC4_BIGUINT
 
+    # example: ARC4_BYTES
     @abimethod()
     def arc4_byte(self, a: arc4.Byte) -> arc4.Byte:
         """
         An arc4.Byte is essentially an alias for an 8-bit integer.
         """
         return arc4.Byte(a.native + 1)
+    # example: ARC4_BYTES
 
+    # example: ARC4_ADDRESS
     @abimethod()
     def arc4_address_properties(self, address: arc4.Address) -> UInt64:
         underlying_bytes = (  # noqa: F841
@@ -103,8 +112,9 @@ class Arc4Types(ARC4Contract):
         assert converted_address == address
 
         return converted_address
+    # example: ARC4_ADDRESS
 
-
+# example: ARC4_STATIC_ARRAY
 AliasedStaticArray: t.TypeAlias = arc4.StaticArray[arc4.UInt8, t.Literal[1]]
 
 
@@ -143,8 +153,9 @@ class Arc4StaticArray(ARC4Contract):
         so this won't compile:
         aliased_static.pop()
         """
+# example: ARC4_STATIC_ARRAY
 
-
+# example: ARC4_DYNAMIC_ARRAY
 goodbye: t.TypeAlias = arc4.DynamicArray[arc4.String]
 
 
@@ -177,7 +188,9 @@ class Arc4DynamicArray(ARC4Contract):
             greeting += x.native
 
         return greeting
+# example: ARC4_DYNAMIC_ARRAY
 
+    # example: ARC4_DYNAMIC_BYTES   
     @abimethod()
     def arc4_dynamic_bytes(self) -> arc4.DynamicBytes:
         """arc4.DynamicBytes are essentially an arc4.DynamicArray[arc4.Bytes] and some convenience methods."""
@@ -195,8 +208,9 @@ class Arc4DynamicArray(ARC4Contract):
         dynamic_bytes.append(arc4.Byte(255))
 
         return dynamic_bytes
+    # example: ARC4_DYNAMIC_BYTES
 
-
+# example: ARC4_STRUCT
 class Todo(arc4.Struct):
     task: arc4.String
     completed: arc4.Bool
@@ -243,8 +257,9 @@ class Arc4Struct(ARC4Contract):
         assert exist
 
         return todo_to_return
+# example: ARC4_STRUCT
 
-
+# example: ARC4_TUPLE
 contact_info_tuple = arc4.Tuple[
     arc4.String, arc4.String, arc4.UInt64
 ]  # name, email, phone
@@ -276,28 +291,4 @@ class Arc4Tuple(ARC4Contract):
         """An arc4.Tuple can be returned when more than one return value is needed."""
 
         return self.contact_info.value
-
-
-class TransactionTypes(ARC4Contract):
-
-    @abimethod
-    def payment_txn(self, pay: gtxn.PaymentTransaction) -> UInt64:
-        assert pay.amount > 0
-        assert pay.receiver == Global.current_application_address
-        assert pay.sender == Txn.sender
-
-        return pay.amount
-
-    @abimethod
-    def asset_transfer_txn(
-        self, asset_transfer: gtxn.AssetTransferTransaction
-    ) -> UInt64:
-        assert Global.current_application_address.is_opted_in(
-            asset_transfer.xfer_asset
-        ), "Asset not opted in"
-
-        assert asset_transfer.asset_amount > 0
-        assert asset_transfer.asset_receiver == Global.current_application_address
-        assert asset_transfer.sender == Txn.sender
-
-        return asset_transfer.asset_amount
+# example: ARC4_TUPLE
