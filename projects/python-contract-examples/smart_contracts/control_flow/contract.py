@@ -51,19 +51,19 @@ class MatchStatements(ARC4Contract):
     def get_day(self, date: UInt64) -> String:
 
         match date:
-            case UInt64(1):
+            case UInt64(0):
                 return String("Monday")
-            case UInt64(2):
+            case UInt64(1):
                 return String("Tuesday")
-            case UInt64(3):
+            case UInt64(2):
                 return String("Wednesday")
-            case UInt64(4):
+            case UInt64(3):
                 return String("Thursday")
-            case UInt64(5):
+            case UInt64(4):
                 return String("Friday")
-            case UInt64(6):
+            case UInt64(5):
                 return String("Saturday")
-            case UInt64(7):
+            case UInt64(6):
                 return String("Sunday")
             case _:
                 return String("Invalid day")
@@ -79,21 +79,21 @@ class WhileLoopExample(ARC4Contract):
     def loop(self) -> UInt64:
 
         num = UInt64(10)
-        loop_num = UInt64(0)
+        loop_count = UInt64(0)
 
         while num > 0:
             if num > 5:
                 num -= 1
-                loop_num += 1
+                loop_count += 1
                 continue
 
             num -= 2
-            loop_num += 1
+            loop_count += 1
 
             if num == 1:
                 break
 
-        return loop_num
+        return loop_count
 
 
 # example: WHILE_LOOP
