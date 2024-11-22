@@ -228,6 +228,7 @@ def test_while_loop(
     while_loop_app_client: while_loop_example_client.WhileLoopExampleClient,
 ) -> None:
 
-    txn_result = while_loop_app_client.clean_rooms()
+    txn_result = while_loop_app_client.loop()
+    print(f"loop result: {txn_result.return_value}")
 
-    assert txn_result.return_value == 0
+    assert txn_result.return_value == 7

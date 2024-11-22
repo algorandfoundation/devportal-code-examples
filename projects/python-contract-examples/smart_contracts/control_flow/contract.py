@@ -76,28 +76,24 @@ class MatchStatements(ARC4Contract):
 class WhileLoopExample(ARC4Contract):
 
     @arc4.abimethod
-    def clean_rooms(self) -> UInt64:
+    def loop(self) -> UInt64:
 
-        # Clean all rooms except the closet
-        robot_energy = UInt64(100)
-        current_room = String("kitchen")
+        num = UInt64(10)
+        loop_num = UInt64(0)
 
-        while robot_energy > 0:
-            if current_room == "closet":
-                current_room = String("kitchen")
+        while num > 0:
+            if num > 5:
+                num -= 1
+                loop_num += 1
                 continue
 
-            if current_room == "kitchen":
-                current_room = String("living room")
-            elif current_room == "living room":
-                current_room = String("closet")
+            num -= 2
+            loop_num += 1
 
-            robot_energy -= 50
-
-            if robot_energy == 0:
+            if num == 1:
                 break
 
-        return robot_energy
+        return loop_num
 
 
 # example: WHILE_LOOP

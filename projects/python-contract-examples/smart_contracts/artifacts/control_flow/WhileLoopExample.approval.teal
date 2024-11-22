@@ -10,19 +10,19 @@ __puya_arc4_router__:
     proto 0 1
     txn NumAppArgs
     bz __puya_arc4_router___bare_routing@5
-    method "clean_rooms()uint64"
+    method "loop()uint64"
     txna ApplicationArgs 0
-    match __puya_arc4_router___clean_rooms_route@2
+    match __puya_arc4_router___loop_route@2
     int 0
     retsub
 
-__puya_arc4_router___clean_rooms_route@2:
+__puya_arc4_router___loop_route@2:
     txn OnCompletion
     !
     assert // OnCompletion is NoOp
     txn ApplicationID
     assert // is not creating
-    callsub clean_rooms
+    callsub loop
     itob
     byte 0x151f7c75
     swap
@@ -45,52 +45,47 @@ __puya_arc4_router___after_if_else@9:
     retsub
 
 
-// smart_contracts.control_flow.contract.WhileLoopExample.clean_rooms() -> uint64:
-clean_rooms:
+// smart_contracts.control_flow.contract.WhileLoopExample.loop() -> uint64:
+loop:
     proto 0 1
     byte ""
-    int 100
-    byte "kitchen"
+    int 10
+    int 0
 
-clean_rooms_while_top@1:
-    frame_dig 1
-    dup
+loop_while_top@1:
+    frame_dig 2
     frame_bury 0
-    bz clean_rooms_after_while@12
-    frame_dig 2
-    byte "closet"
-    ==
-    bz clean_rooms_after_if_else@4
-    byte "kitchen"
-    frame_bury 2
-    b clean_rooms_while_top@1
-
-clean_rooms_after_if_else@4:
-    frame_dig 2
-    byte "kitchen"
-    ==
-    bz clean_rooms_else_body@6
-    byte "living room"
-    frame_bury 2
-    b clean_rooms_after_if_else@9
-
-clean_rooms_else_body@6:
-    frame_dig 2
-    byte "living room"
-    ==
-    bz clean_rooms_after_if_else@9
-    byte "closet"
-    frame_bury 2
-
-clean_rooms_after_if_else@9:
     frame_dig 1
-    int 50
+    bz loop_after_while@7
+    frame_dig 1
+    int 5
+    >
+    bz loop_after_if_else@4
+    frame_dig 1
+    int 1
+    -
+    frame_bury 1
+    frame_dig 2
+    int 1
+    +
+    frame_bury 2
+    b loop_while_top@1
+
+loop_after_if_else@4:
+    frame_dig 1
+    int 2
     -
     dup
     frame_bury 1
-    bnz clean_rooms_while_top@1
-    frame_dig 1
+    frame_dig 2
+    int 1
+    +
+    frame_bury 2
+    int 1
+    ==
+    bz loop_while_top@1
+    frame_dig 2
     frame_bury 0
 
-clean_rooms_after_while@12:
+loop_after_while@7:
     retsub
