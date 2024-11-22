@@ -1,0 +1,91 @@
+#pragma version 10
+
+smart_contracts.control_flow.contract.WhileLoopExample.approval_program:
+    callsub __puya_arc4_router__
+    return
+
+
+// smart_contracts.control_flow.contract.WhileLoopExample.__puya_arc4_router__() -> uint64:
+__puya_arc4_router__:
+    proto 0 1
+    txn NumAppArgs
+    bz __puya_arc4_router___bare_routing@5
+    method "loop()uint64"
+    txna ApplicationArgs 0
+    match __puya_arc4_router___loop_route@2
+    int 0
+    retsub
+
+__puya_arc4_router___loop_route@2:
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    callsub loop
+    itob
+    byte 0x151f7c75
+    swap
+    concat
+    log
+    int 1
+    retsub
+
+__puya_arc4_router___bare_routing@5:
+    txn OnCompletion
+    bnz __puya_arc4_router___after_if_else@9
+    txn ApplicationID
+    !
+    assert // is creating
+    int 1
+    retsub
+
+__puya_arc4_router___after_if_else@9:
+    int 0
+    retsub
+
+
+// smart_contracts.control_flow.contract.WhileLoopExample.loop() -> uint64:
+loop:
+    proto 0 1
+    byte ""
+    int 10
+    int 0
+
+loop_while_top@1:
+    frame_dig 2
+    frame_bury 0
+    frame_dig 1
+    bz loop_after_while@7
+    frame_dig 1
+    int 5
+    >
+    bz loop_after_if_else@4
+    frame_dig 1
+    int 1
+    -
+    frame_bury 1
+    frame_dig 2
+    int 1
+    +
+    frame_bury 2
+    b loop_while_top@1
+
+loop_after_if_else@4:
+    frame_dig 1
+    int 2
+    -
+    dup
+    frame_bury 1
+    frame_dig 2
+    int 1
+    +
+    frame_bury 2
+    int 1
+    ==
+    bz loop_while_top@1
+    frame_dig 2
+    frame_bury 0
+
+loop_after_while@7:
+    retsub
