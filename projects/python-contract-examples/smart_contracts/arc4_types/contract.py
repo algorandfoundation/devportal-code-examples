@@ -3,13 +3,10 @@ import typing as t
 
 from algopy import (
     ARC4Contract,
-    Global,
     GlobalState,
     String,
-    Txn,
     UInt64,
     arc4,
-    gtxn,
     urange,
 )
 from algopy.arc4 import abimethod
@@ -30,6 +27,7 @@ class Arc4Types(ARC4Contract):
         c = a.native + b.native
 
         return arc4.UInt64(c)
+
     # example: ARC4_UINT64
 
     # example: ARC4_UINTN
@@ -49,6 +47,7 @@ class Arc4Types(ARC4Contract):
         total = a.native + b.native + c.native + d.native
 
         return arc4.UInt64(total)
+
     # example: ARC4_UINTN
 
     # example: ARC4_BIGUINT
@@ -67,6 +66,7 @@ class Arc4Types(ARC4Contract):
         total = a.native + b.native + c.native
 
         return arc4.UInt512(total)
+
     # example: ARC4_BIGUINT
 
     # example: ARC4_BYTES
@@ -76,6 +76,7 @@ class Arc4Types(ARC4Contract):
         An arc4.Byte is essentially an alias for an 8-bit integer.
         """
         return arc4.Byte(a.native + 1)
+
     # example: ARC4_BYTES
 
     # example: ARC4_ADDRESS
@@ -112,7 +113,9 @@ class Arc4Types(ARC4Contract):
         assert converted_address == address
 
         return converted_address
+
     # example: ARC4_ADDRESS
+
 
 # example: ARC4_STATIC_ARRAY
 AliasedStaticArray: t.TypeAlias = arc4.StaticArray[arc4.UInt8, t.Literal[1]]
@@ -153,6 +156,8 @@ class Arc4StaticArray(ARC4Contract):
         so this won't compile:
         aliased_static.pop()
         """
+
+
 # example: ARC4_STATIC_ARRAY
 
 # example: ARC4_DYNAMIC_ARRAY
@@ -188,9 +193,10 @@ class Arc4DynamicArray(ARC4Contract):
             greeting += x.native
 
         return greeting
-# example: ARC4_DYNAMIC_ARRAY
 
-    # example: ARC4_DYNAMIC_BYTES   
+    # example: ARC4_DYNAMIC_ARRAY
+
+    # example: ARC4_DYNAMIC_BYTES
     @abimethod()
     def arc4_dynamic_bytes(self) -> arc4.DynamicBytes:
         """arc4.DynamicBytes are essentially an arc4.DynamicArray[arc4.Bytes] and some convenience methods."""
@@ -208,7 +214,9 @@ class Arc4DynamicArray(ARC4Contract):
         dynamic_bytes.append(arc4.Byte(255))
 
         return dynamic_bytes
+
     # example: ARC4_DYNAMIC_BYTES
+
 
 # example: ARC4_STRUCT
 class Todo(arc4.Struct):
@@ -257,6 +265,8 @@ class Arc4Struct(ARC4Contract):
         assert exist
 
         return todo_to_return
+
+
 # example: ARC4_STRUCT
 
 # example: ARC4_TUPLE
@@ -266,7 +276,6 @@ contact_info_tuple = arc4.Tuple[
 
 
 class Arc4Tuple(ARC4Contract):
-    
 
     def __init__(self) -> None:
         self.contact_info = GlobalState(
@@ -291,4 +300,6 @@ class Arc4Tuple(ARC4Contract):
         """An arc4.Tuple can be returned when more than one return value is needed."""
 
         return self.contact_info.value
+
+
 # example: ARC4_TUPLE
