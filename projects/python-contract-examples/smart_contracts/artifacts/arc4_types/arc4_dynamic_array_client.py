@@ -97,7 +97,7 @@ _APP_SPEC_JSON = r"""{
                 "returns": {
                     "type": "byte[]"
                 },
-                "desc": "arc4.DynamicBytes are essentially an arc4.DynamicArray[arc4.Bytes] and some convenience methods."
+                "desc": "arc4.DynamicBytes is essentially an arc4.DynamicArray[arc4.Byte] with additional convenience methods"
             }
         ],
         "networks": {}
@@ -202,7 +202,7 @@ class HelloArgs(_ArgsBase[str]):
 
 @dataclasses.dataclass(kw_only=True)
 class Arc4DynamicBytesArgs(_ArgsBase[bytes | bytearray]):
-    """arc4.DynamicBytes are essentially an arc4.DynamicArray[arc4.Bytes] and some convenience methods."""
+    """arc4.DynamicBytes is essentially an arc4.DynamicArray[arc4.Byte] with additional convenience methods"""
 
     @staticmethod
     def method() -> str:
@@ -294,7 +294,7 @@ class Composer:
         *,
         transaction_parameters: algokit_utils.TransactionParameters | None = None,
     ) -> "Composer":
-        """arc4.DynamicBytes are essentially an arc4.DynamicArray[arc4.Bytes] and some convenience methods.
+        """arc4.DynamicBytes is essentially an arc4.DynamicArray[arc4.Byte] with additional convenience methods
         
         Adds a call to `arc4_dynamic_bytes()byte[]` ABI method
         
@@ -521,7 +521,7 @@ class Arc4DynamicArrayClient:
         *,
         transaction_parameters: algokit_utils.TransactionParameters | None = None,
     ) -> algokit_utils.ABITransactionResponse[bytes | bytearray]:
-        """arc4.DynamicBytes are essentially an arc4.DynamicArray[arc4.Bytes] and some convenience methods.
+        """arc4.DynamicBytes is essentially an arc4.DynamicArray[arc4.Byte] with additional convenience methods
         
         Calls `arc4_dynamic_bytes()byte[]` ABI method
         
