@@ -199,7 +199,7 @@ def test_for_loops(
     txn_result = for_loop_app_client.for_loop()
     print(f"for_loop result: {txn_result.return_value}")
 
-    assert txn_result.return_value == [0, 1, 2, 3]
+    assert txn_result.return_value == [3, 2, 1, 0]
 
 
 def test_match_statements(

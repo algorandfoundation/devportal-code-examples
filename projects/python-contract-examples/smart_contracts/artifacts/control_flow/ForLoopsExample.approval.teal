@@ -80,32 +80,31 @@ for_loop_for_body@2:
 
 for_loop_after_for@5:
     int 0
-    frame_bury 3
+    frame_bury 0
+    int 1
+    frame_bury 2
 
 for_loop_for_header@6:
-    frame_dig 3
-    int 4
+    frame_dig 2
+    int 5
     <
-    dup
-    frame_bury 0
     bz for_loop_after_for@9
-    frame_dig 3
-    dup
-    itob
-    extract 7 1
     frame_dig 0
-    assert // Index access is out of bounds
-    frame_dig 1
-    dig 2
-    uncover 2
-    replace3
-    frame_bury 1
+    frame_dig 2
+    dup
+    cover 2
+    +
+    frame_bury 0
     int 1
     +
-    frame_bury 3
+    frame_bury 2
     b for_loop_for_header@6
 
 for_loop_after_for@9:
+    frame_dig 0
+    int 10
+    ==
+    assert
     frame_dig 1
     frame_bury 0
     retsub

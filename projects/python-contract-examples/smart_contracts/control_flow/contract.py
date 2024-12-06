@@ -36,8 +36,13 @@ class ForLoopsExample(ARC4Contract):
         for index, item in uenumerate(reversed(urange(4))):  # [3, 2, 1, 0]
             array[index] = arc4.UInt8(item)
 
-        for index in urange(4):  # [0, 1, 2, 3]
-            array[index] = arc4.UInt8(index)
+        x = UInt64(0)
+
+        for item in urange(1, 5):  # [1, 2, 3, 4]
+            x += item
+
+        assert x == 10
+
         return array
 
 
