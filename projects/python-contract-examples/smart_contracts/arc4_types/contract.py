@@ -26,6 +26,7 @@ class Arc4Types(ARC4Contract):
         # Use the native integers to perform arithmetic
         c = a.native + b.native
 
+        # Convert back to arc4.UInt64 for ABI compatability before returning
         return arc4.UInt64(c)
 
     # example: ARC4_UINT64
