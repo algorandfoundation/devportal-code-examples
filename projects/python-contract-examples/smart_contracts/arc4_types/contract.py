@@ -199,7 +199,7 @@ class Arc4DynamicArray(ARC4Contract):
     # example: ARC4_DYNAMIC_BYTES
     @abimethod()
     def arc4_dynamic_bytes(self) -> arc4.DynamicBytes:
-        """arc4.DynamicBytes are essentially an arc4.DynamicArray[arc4.Bytes] and some convenience methods."""
+        """arc4.DynamicBytes is essentially an arc4.DynamicArray[arc4.Byte] with additional convenience methods"""
         dynamic_bytes = arc4.DynamicBytes(b"\xFF\xFF\xFF")
 
         # arc4.DynamicBytes can return the native bytearray instead of accessing every single index of the array.
