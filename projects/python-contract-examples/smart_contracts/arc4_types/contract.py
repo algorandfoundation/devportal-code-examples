@@ -40,10 +40,10 @@ class Arc4Types(ARC4Contract):
         The encoding of arc4 integers will be smaller if it uses fewer bits.
         Ultimately, they are all represented with native UInt64.
         """
-        assert a.bytes.length == 1
-        assert b.bytes.length == 2
-        assert c.bytes.length == 4
-        assert d.bytes.length == 8
+        assert a.bytes.length == 1  # UInt8 = 1 byte
+        assert b.bytes.length == 2  # UInt16 = 2 bytes
+        assert c.bytes.length == 4  # UInt32 = 4 bytes
+        assert d.bytes.length == 8  # UInt64 = 8 bytes
 
         total = a.native + b.native + c.native + d.native
 
