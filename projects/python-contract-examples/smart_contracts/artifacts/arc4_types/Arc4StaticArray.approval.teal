@@ -1,0 +1,84 @@
+#pragma version 10
+
+smart_contracts.arc4_types.contract.Arc4StaticArray.approval_program:
+    callsub __puya_arc4_router__
+    return
+
+
+// smart_contracts.arc4_types.contract.Arc4StaticArray.__puya_arc4_router__() -> uint64:
+__puya_arc4_router__:
+    proto 0 1
+    txn NumAppArgs
+    bz __puya_arc4_router___bare_routing@5
+    method "arc4_static_array()void"
+    txna ApplicationArgs 0
+    match __puya_arc4_router___arc4_static_array_route@2
+    int 0
+    retsub
+
+__puya_arc4_router___arc4_static_array_route@2:
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    callsub arc4_static_array
+    int 1
+    retsub
+
+__puya_arc4_router___bare_routing@5:
+    txn OnCompletion
+    bnz __puya_arc4_router___after_if_else@9
+    txn ApplicationID
+    !
+    assert // is creating
+    int 1
+    retsub
+
+__puya_arc4_router___after_if_else@9:
+    int 0
+    retsub
+
+
+// smart_contracts.arc4_types.contract.Arc4StaticArray.arc4_static_array() -> void:
+arc4_static_array:
+    proto 0 0
+    int 0
+    dup
+
+arc4_static_array_for_header@1:
+    frame_dig 1
+    int 4
+    <
+    bz arc4_static_array_after_for@4
+    frame_dig 1
+    dup
+    int 4
+    *
+    byte 0x000000010000000a000000ff00000080
+    swap
+    int 4
+    extract3 // on error: Index access is out of bounds
+    btoi
+    frame_dig 0
+    +
+    frame_bury 0
+    int 1
+    +
+    frame_bury 1
+    b arc4_static_array_for_header@1
+
+arc4_static_array_after_for@4:
+    frame_dig 0
+    int 394
+    ==
+    assert
+    byte 0x65
+    byte 0xca
+    replace2 0
+    extract 0 1 // on error: Index access is out of bounds
+    btoi
+    int 202
+    ==
+    assert
+    retsub
