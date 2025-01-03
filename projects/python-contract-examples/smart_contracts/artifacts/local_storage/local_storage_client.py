@@ -63,7 +63,7 @@ _APP_SPEC_JSON = r"""{
                 "no_op": "CALL"
             }
         },
-        "get_local_data_with_default_int(account)uint64": {
+        "set_local_int(account,uint64)void": {
             "call_config": {
                 "no_op": "CALL"
             }
