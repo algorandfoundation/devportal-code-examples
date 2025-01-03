@@ -10,8 +10,8 @@ from algopy import (
 )
 
 
-# example: LOCAL_STORAGE
 class LocalStorage(ARC4Contract):
+    # example: INIT_LOCAL_STORAGE
     def __init__(self) -> None:
         ## Initialise local storages
         self.local_int = LocalState(UInt64)  # Uint64
@@ -21,11 +21,17 @@ class LocalStorage(ARC4Contract):
         self.local_application = LocalState(Application)  # Application
         self.local_account = LocalState(Account)  # Account
 
+    # example: INIT_LOCAL_STORAGE
+
+    # example: CONTAIN_PROPERTY_LOCAL_STATE
     @arc4.abimethod
     def contains_local_data(self, for_account: Account) -> bool:
         assert for_account in self.local_int  # Uint64
         return True
 
+    # example: CONTAIN_PROPERTY_LOCAL_STATE
+
+    # example: CONTAIN_PROPERTY_LOCAL_STATE_EXAMPLES
     @arc4.abimethod
     def contains_local_data_example(self, for_account: Account) -> bool:
         assert for_account in self.local_int  # Uint64
@@ -36,26 +42,30 @@ class LocalStorage(ARC4Contract):
         assert for_account in self.local_account  # Account
         return True
 
-    # delete local data
-    @arc4.abimethod
-    def delete_local_data(self, for_account: Account) -> None:
-        del self.local_account[for_account]  # Uint64
+    # example: CONTAIN_PROPERTY_LOCAL_STATE_EXAMPLES
 
-    @arc4.abimethod
-    def delete_local_data_example(self, for_account: Account) -> bool:
-        del self.local_int[for_account]  # Uint64
-        del self.local_bytes[for_account]  # Bytes
-        del self.local_bool[for_account]  # Bool
-        del self.local_asset[for_account]  # Asset
-        del self.local_application[for_account]  # Application
-        del self.local_account[for_account]  # Account
-        return True
-
-    # get item
+    # example: READ_LOCAL_STATE
     @arc4.abimethod
     def get_item_local_data(self, for_account: Account) -> UInt64:
         return self.local_int[for_account]
 
+    # get function
+    @arc4.abimethod
+    def get_local_data_with_default_int(self, for_account: Account) -> UInt64:
+        return self.local_int.get(for_account, default=UInt64(0))  # Uint64
+
+    # maybe function
+    @arc4.abimethod
+    def maybe_local_data(self, for_account: Account) -> tuple[UInt64, bool]:
+        # used to get data or assert int
+        result, exists = self.local_int.maybe(for_account)  # Uint64
+        if not exists:
+            result = UInt64(0)
+        return result, exists
+
+    # example: READ_LOCAL_STATE
+
+    # example: READ_LOCAL_STATE_EXAMPLES
     @arc4.abimethod
     def get_item_local_data_example(self, for_account: Account) -> bool:
         assert self.local_int[for_account] == UInt64(
@@ -69,43 +79,6 @@ class LocalStorage(ARC4Contract):
         )  # Application
         assert self.local_account[for_account] == Account(Bytes(b"Hello"))  # Account
         return True
-
-    # set item
-    @arc4.abimethod
-    def set_local_int(self, for_account: Account, value: UInt64) -> None:
-        self.local_int[for_account] = value  # Uint64
-
-    @arc4.abimethod
-    def set_local_data_example(
-        self,
-        for_account: Account,
-        value_asset: Asset,
-        value_account: Account,
-        value_appln: Application,
-        value_byte: Bytes,
-        *,
-        value_bool: bool,
-    ) -> bool:
-        self.local_bytes[for_account] = value_byte  # Bytes
-        assert self.local_bytes[for_account] == value_byte
-
-        self.local_bool[for_account] = value_bool  # Bool
-        assert self.local_bool[for_account] == value_bool
-
-        self.local_asset[for_account] = value_asset  # Asset
-        assert self.local_asset[for_account] == value_asset
-
-        self.local_application[for_account] = value_appln  # Application
-        assert self.local_application[for_account] == value_appln
-
-        self.local_account[for_account] = value_account  # Account
-        assert self.local_account[for_account] == value_account
-        return True
-
-    # get function
-    @arc4.abimethod
-    def get_local_data_with_default_int(self, for_account: Account) -> UInt64:
-        return self.local_int.get(for_account, default=UInt64(0))  # Uint64
 
     @arc4.abimethod
     def get_local_data_with_default(self, for_account: Account) -> bool:
@@ -135,15 +108,6 @@ class LocalStorage(ARC4Contract):
 
         return True
 
-    # maybe function
-    @arc4.abimethod
-    def maybe_local_data(self, for_account: Account) -> tuple[UInt64, bool]:
-        # used to get data or assert int
-        result, exists = self.local_int.maybe(for_account)  # Uint64
-        if not exists:
-            result = UInt64(0)
-        return result, exists
-
     @arc4.abimethod
     def maybe_local_data_example(self, for_account: Account) -> bool:
         result, exists = self.local_int.maybe(for_account)  # Uint64
@@ -170,3 +134,62 @@ class LocalStorage(ARC4Contract):
         assert exists, "no data for account"
         assert result_account == Account(Bytes(b"Hello"))
         return True
+
+    # example: READ_LOCAL_STATE_EXAMPLES
+
+    # example: WRITE_LOCAL_STATE
+    @arc4.abimethod
+    def set_local_int(self, for_account: Account, value: UInt64) -> None:
+        self.local_int[for_account] = value  # Uint64
+
+    # example: WRITE_LOCAL_STATE
+
+    # example: WRITE_LOCAL_STATE_EXAMPLES
+    @arc4.abimethod
+    def set_local_data_example(
+        self,
+        for_account: Account,
+        value_asset: Asset,
+        value_account: Account,
+        value_appln: Application,
+        value_byte: Bytes,
+        *,
+        value_bool: bool,
+    ) -> bool:
+        self.local_bytes[for_account] = value_byte  # Bytes
+        assert self.local_bytes[for_account] == value_byte
+
+        self.local_bool[for_account] = value_bool  # Bool
+        assert self.local_bool[for_account] == value_bool
+
+        self.local_asset[for_account] = value_asset  # Asset
+        assert self.local_asset[for_account] == value_asset
+
+        self.local_application[for_account] = value_appln  # Application
+        assert self.local_application[for_account] == value_appln
+
+        self.local_account[for_account] = value_account  # Account
+        assert self.local_account[for_account] == value_account
+        return True
+
+    # example: WRITE_LOCAL_STATE_EXAMPLES
+
+    # example: DELETE_LOCAL_STATE
+    @arc4.abimethod
+    def delete_local_data(self, for_account: Account) -> None:
+        del self.local_account[for_account]  # Uint64
+
+    # example: DELETE_LOCAL_STATE
+
+    # example: DELETE_LOCAL_STATE_EXAMPLES
+    @arc4.abimethod
+    def delete_local_data_example(self, for_account: Account) -> bool:
+        del self.local_int[for_account]  # Uint64
+        del self.local_bytes[for_account]  # Bytes
+        del self.local_bool[for_account]  # Bool
+        del self.local_asset[for_account]  # Asset
+        del self.local_application[for_account]  # Application
+        del self.local_account[for_account]  # Account
+        return True
+
+    # example: DELETE_LOCAL_STATE_EXAMPLES

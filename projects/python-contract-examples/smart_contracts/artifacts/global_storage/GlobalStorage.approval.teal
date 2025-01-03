@@ -1,0 +1,492 @@
+#pragma version 10
+
+smart_contracts.global_storage.contract.GlobalStorage.approval_program:
+    txn ApplicationID
+    bnz main_entrypoint@2
+    callsub __init__
+
+main_entrypoint@2:
+    callsub __puya_arc4_router__
+    return
+
+
+// smart_contracts.global_storage.contract.GlobalStorage.__puya_arc4_router__() -> uint64:
+__puya_arc4_router__:
+    proto 0 1
+    txn NumAppArgs
+    bz __puya_arc4_router___bare_routing@13
+    method "get_global_state()uint64"
+    method "maybe_global_state()(uint64,bool)"
+    method "get_global_state_example()bool"
+    method "maybe_global_state_example()bool"
+    method "check_global_state_example()bool"
+    method "set_global_state(byte[])void"
+    method "set_global_state_example(byte[],asset,bool)void"
+    method "del_global_state()bool"
+    method "del_global_state_example()bool"
+    txna ApplicationArgs 0
+    match __puya_arc4_router___get_global_state_route@2 __puya_arc4_router___maybe_global_state_route@3 __puya_arc4_router___get_global_state_example_route@4 __puya_arc4_router___maybe_global_state_example_route@5 __puya_arc4_router___check_global_state_example_route@6 __puya_arc4_router___set_global_state_route@7 __puya_arc4_router___set_global_state_example_route@8 __puya_arc4_router___del_global_state_route@9 __puya_arc4_router___del_global_state_example_route@10
+    int 0
+    retsub
+
+__puya_arc4_router___get_global_state_route@2:
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    callsub get_global_state
+    itob
+    byte 0x151f7c75
+    swap
+    concat
+    log
+    int 1
+    retsub
+
+__puya_arc4_router___maybe_global_state_route@3:
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    callsub maybe_global_state
+    swap
+    itob
+    byte 0x00
+    int 0
+    uncover 3
+    setbit
+    concat
+    byte 0x151f7c75
+    swap
+    concat
+    log
+    int 1
+    retsub
+
+__puya_arc4_router___get_global_state_example_route@4:
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    callsub get_global_state_example
+    byte 0x00
+    int 0
+    uncover 2
+    setbit
+    byte 0x151f7c75
+    swap
+    concat
+    log
+    int 1
+    retsub
+
+__puya_arc4_router___maybe_global_state_example_route@5:
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    callsub maybe_global_state_example
+    byte 0x00
+    int 0
+    uncover 2
+    setbit
+    byte 0x151f7c75
+    swap
+    concat
+    log
+    int 1
+    retsub
+
+__puya_arc4_router___check_global_state_example_route@6:
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    callsub check_global_state_example
+    byte 0x00
+    int 0
+    uncover 2
+    setbit
+    byte 0x151f7c75
+    swap
+    concat
+    log
+    int 1
+    retsub
+
+__puya_arc4_router___set_global_state_route@7:
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    txna ApplicationArgs 1
+    extract 2 0
+    callsub set_global_state
+    int 1
+    retsub
+
+__puya_arc4_router___set_global_state_example_route@8:
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    txna ApplicationArgs 1
+    extract 2 0
+    txna ApplicationArgs 2
+    btoi
+    txnas Assets
+    txna ApplicationArgs 3
+    int 0
+    getbit
+    callsub set_global_state_example
+    int 1
+    retsub
+
+__puya_arc4_router___del_global_state_route@9:
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    callsub del_global_state
+    byte 0x00
+    int 0
+    uncover 2
+    setbit
+    byte 0x151f7c75
+    swap
+    concat
+    log
+    int 1
+    retsub
+
+__puya_arc4_router___del_global_state_example_route@10:
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    callsub del_global_state_example
+    byte 0x00
+    int 0
+    uncover 2
+    setbit
+    byte 0x151f7c75
+    swap
+    concat
+    log
+    int 1
+    retsub
+
+__puya_arc4_router___bare_routing@13:
+    txn OnCompletion
+    bnz __puya_arc4_router___after_if_else@17
+    txn ApplicationID
+    !
+    assert // is creating
+    int 1
+    retsub
+
+__puya_arc4_router___after_if_else@17:
+    int 0
+    retsub
+
+
+// smart_contracts.global_storage.contract.GlobalStorage.get_global_state() -> uint64:
+get_global_state:
+    proto 0 1
+    int 0
+    byte "global_int_full"
+    app_global_get_ex
+    int 0
+    cover 2
+    select
+    retsub
+
+
+// smart_contracts.global_storage.contract.GlobalStorage.maybe_global_state() -> uint64, uint64:
+maybe_global_state:
+    proto 0 2
+    int 0
+    byte "global_int_full"
+    app_global_get_ex
+    dup
+    uncover 2
+    swap
+    bnz maybe_global_state_after_if_else@2
+    int 0
+    frame_bury 1
+
+maybe_global_state_after_if_else@2:
+    frame_dig 1
+    frame_dig 0
+    uncover 3
+    uncover 3
+    retsub
+
+
+// smart_contracts.global_storage.contract.GlobalStorage.get_global_state_example() -> uint64:
+get_global_state_example:
+    proto 0 1
+    int 0
+    byte "global_int_full"
+    app_global_get_ex
+    int 0
+    cover 2
+    select
+    int 50
+    ==
+    assert
+    int 0
+    byte "global_int_simplified"
+    app_global_get_ex
+    assert // check self.global_int_simplified exists
+    int 10
+    ==
+    assert
+    int 0
+    byte "global_int_no_default"
+    app_global_get_ex
+    int 0
+    cover 2
+    select
+    !
+    assert
+    int 0
+    byte "global_bytes_full"
+    app_global_get_ex
+    byte 0x64656661756c74
+    cover 2
+    select
+    byte 0x48656c6c6f
+    ==
+    assert
+    int 1
+    retsub
+
+
+// smart_contracts.global_storage.contract.GlobalStorage.maybe_global_state_example() -> uint64:
+maybe_global_state_example:
+    proto 0 1
+    int 0
+    byte "global_int_full"
+    app_global_get_ex
+    assert
+    int 50
+    ==
+    assert
+    int 0
+    byte "global_bytes_full"
+    app_global_get_ex
+    assert
+    byte 0x48656c6c6f
+    ==
+    assert
+    int 0
+    byte "global_bytes_full"
+    app_global_get_ex
+    bury 1
+    !
+    assert
+    int 0
+    byte "global_bytes_full"
+    app_global_get_ex
+    assert // check self.global_bytes_full exists
+    byte 0x48656c6c6f
+    ==
+    assert
+    int 0
+    byte "global_bool_no_default"
+    app_global_get_ex
+    assert
+    assert
+    int 0
+    byte "global_asset"
+    app_global_get_ex
+    assert
+    int 10
+    ==
+    assert
+    int 0
+    byte "global_application"
+    app_global_get_ex
+    assert
+    int 10
+    ==
+    assert
+    int 1
+    retsub
+
+
+// smart_contracts.global_storage.contract.GlobalStorage.check_global_state_example() -> uint64:
+check_global_state_example:
+    proto 0 1
+    int 0
+    byte "global_int_full"
+    app_global_get_ex
+    assert // check self.global_int_full exists
+    int 50
+    ==
+    assert
+    int 0
+    byte "global_bytes_full"
+    app_global_get_ex
+    assert // check self.global_bytes_full exists
+    byte 0x48656c6c6f
+    ==
+    assert
+    int 0
+    byte "global_int_simplified"
+    app_global_get_ex
+    assert // check self.global_int_simplified exists
+    int 10
+    ==
+    assert
+    int 0
+    byte "global_bytes_simplified"
+    app_global_get_ex
+    assert // check self.global_bytes_simplified exists
+    byte 0x48656c6c6f
+    ==
+    assert
+    int 0
+    byte "global_bool_simplified"
+    app_global_get_ex
+    assert // check self.global_bool_simplified exists
+    assert
+    int 0
+    byte "global_int_no_default"
+    app_global_get_ex
+    bury 1
+    !
+    assert
+    int 0
+    byte "global_bytes_no_default"
+    app_global_get_ex
+    bury 1
+    !
+    assert
+    int 0
+    byte "global_bool_no_default"
+    app_global_get_ex
+    bury 1
+    !
+    assert
+    int 0
+    byte "global_asset"
+    app_global_get_ex
+    assert // check self.global_asset exists
+    int 10
+    ==
+    assert
+    int 0
+    byte "global_application"
+    app_global_get_ex
+    assert // check self.global_application exists
+    int 10
+    ==
+    assert
+    int 0
+    byte "global_account"
+    app_global_get_ex
+    assert // check self.global_account exists
+    int 0
+    assert // Address length is 32 bytes
+    byte 0x48656c6c6f
+    ==
+    assert
+    int 1
+    retsub
+
+
+// smart_contracts.global_storage.contract.GlobalStorage.set_global_state(value: bytes) -> void:
+set_global_state:
+    proto 1 0
+    byte "global_bytes_full"
+    frame_dig -1
+    app_global_put
+    retsub
+
+
+// smart_contracts.global_storage.contract.GlobalStorage.set_global_state_example(value_bytes: bytes, value_asset: uint64, value_bool: uint64) -> void:
+set_global_state_example:
+    proto 3 0
+    byte "global_bytes_no_default"
+    frame_dig -3
+    app_global_put
+    int 0
+    byte "global_bytes_no_default"
+    app_global_get_ex
+    assert // check self.global_bytes_no_default exists
+    frame_dig -3
+    ==
+    assert
+    byte "global_bool_no_default"
+    frame_dig -1
+    app_global_put
+    int 0
+    byte "global_bool_no_default"
+    app_global_get_ex
+    assert // check self.global_bool_no_default exists
+    assert
+    byte "global_asset"
+    frame_dig -2
+    app_global_put
+    int 0
+    byte "global_asset"
+    app_global_get_ex
+    assert // check self.global_asset exists
+    frame_dig -2
+    ==
+    assert
+    retsub
+
+
+// smart_contracts.global_storage.contract.GlobalStorage.del_global_state() -> uint64:
+del_global_state:
+    proto 0 1
+    byte "global_int_full"
+    app_global_del
+    int 1
+    retsub
+
+
+// smart_contracts.global_storage.contract.GlobalStorage.del_global_state_example() -> uint64:
+del_global_state_example:
+    proto 0 1
+    byte "global_bytes_no_default"
+    app_global_del
+    byte "global_bool_no_default"
+    app_global_del
+    byte "global_asset"
+    app_global_del
+    int 1
+    retsub
+
+
+// smart_contracts.global_storage.contract.GlobalStorage.__init__() -> void:
+__init__:
+    proto 0 0
+    byte "global_int_full"
+    int 50
+    app_global_put
+    byte "global_int_simplified"
+    int 10
+    app_global_put
+    byte "global_bytes_full"
+    byte 0x48656c6c6f
+    app_global_put
+    byte "global_bytes_simplified"
+    byte 0x48656c6c6f
+    app_global_put
+    byte "global_bool_simplified"
+    int 1
+    app_global_put
+    retsub
