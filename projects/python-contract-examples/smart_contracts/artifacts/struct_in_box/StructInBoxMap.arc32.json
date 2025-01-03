@@ -1,0 +1,146 @@
+{
+    "hints": {
+        "box_map_test()bool": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "box_map_set(uint64,(string,uint64,uint64))bool": {
+            "call_config": {
+                "no_op": "CALL"
+            },
+            "structs": {
+                "value": {
+                    "name": "UserStruct",
+                    "elements": [
+                        [
+                            "name",
+                            "string"
+                        ],
+                        [
+                            "id",
+                            "uint64"
+                        ],
+                        [
+                            "asset",
+                            "uint64"
+                        ]
+                    ]
+                }
+            }
+        },
+        "box_map_get(uint64)(string,uint64,uint64)": {
+            "call_config": {
+                "no_op": "CALL"
+            },
+            "structs": {
+                "output": {
+                    "name": "UserStruct",
+                    "elements": [
+                        [
+                            "name",
+                            "string"
+                        ],
+                        [
+                            "id",
+                            "uint64"
+                        ],
+                        [
+                            "asset",
+                            "uint64"
+                        ]
+                    ]
+                }
+            }
+        },
+        "box_map_exists(uint64)bool": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMuc3RydWN0X2luX2JveC5jb250cmFjdC5TdHJ1Y3RJbkJveE1hcC5hcHByb3ZhbF9wcm9ncmFtOgogICAgY2FsbHN1YiBfX3B1eWFfYXJjNF9yb3V0ZXJfXwogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLnN0cnVjdF9pbl9ib3guY29udHJhY3QuU3RydWN0SW5Cb3hNYXAuX19wdXlhX2FyYzRfcm91dGVyX18oKSAtPiB1aW50NjQ6Cl9fcHV5YV9hcmM0X3JvdXRlcl9fOgogICAgcHJvdG8gMCAxCiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogX19wdXlhX2FyYzRfcm91dGVyX19fYmFyZV9yb3V0aW5nQDgKICAgIG1ldGhvZCAiYm94X21hcF90ZXN0KClib29sIgogICAgbWV0aG9kICJib3hfbWFwX3NldCh1aW50NjQsKHN0cmluZyx1aW50NjQsdWludDY0KSlib29sIgogICAgbWV0aG9kICJib3hfbWFwX2dldCh1aW50NjQpKHN0cmluZyx1aW50NjQsdWludDY0KSIKICAgIG1ldGhvZCAiYm94X21hcF9leGlzdHModWludDY0KWJvb2wiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBfX3B1eWFfYXJjNF9yb3V0ZXJfX19ib3hfbWFwX3Rlc3Rfcm91dGVAMiBfX3B1eWFfYXJjNF9yb3V0ZXJfX19ib3hfbWFwX3NldF9yb3V0ZUAzIF9fcHV5YV9hcmM0X3JvdXRlcl9fX2JveF9tYXBfZ2V0X3JvdXRlQDQgX19wdXlhX2FyYzRfcm91dGVyX19fYm94X21hcF9leGlzdHNfcm91dGVANQogICAgaW50IDAKICAgIHJldHN1YgoKX19wdXlhX2FyYzRfcm91dGVyX19fYm94X21hcF90ZXN0X3JvdXRlQDI6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gaXMgbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIGJveF9tYXBfdGVzdAogICAgYnl0ZSAweDAwCiAgICBpbnQgMAogICAgdW5jb3ZlciAyCiAgICBzZXRiaXQKICAgIGJ5dGUgMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludCAxCiAgICByZXRzdWIKCl9fcHV5YV9hcmM0X3JvdXRlcl9fX2JveF9tYXBfc2V0X3JvdXRlQDM6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gaXMgbm90IGNyZWF0aW5nCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBjYWxsc3ViIGJveF9tYXBfc2V0CiAgICBieXRlIDB4MDAKICAgIGludCAwCiAgICB1bmNvdmVyIDIKICAgIHNldGJpdAogICAgYnl0ZSAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50IDEKICAgIHJldHN1YgoKX19wdXlhX2FyYzRfcm91dGVyX19fYm94X21hcF9nZXRfcm91dGVANDoKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBpcyBub3QgY3JlYXRpbmcKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGNhbGxzdWIgYm94X21hcF9nZXQKICAgIGJ5dGUgMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludCAxCiAgICByZXRzdWIKCl9fcHV5YV9hcmM0X3JvdXRlcl9fX2JveF9tYXBfZXhpc3RzX3JvdXRlQDU6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gaXMgbm90IGNyZWF0aW5nCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBjYWxsc3ViIGJveF9tYXBfZXhpc3RzCiAgICBieXRlIDB4MDAKICAgIGludCAwCiAgICB1bmNvdmVyIDIKICAgIHNldGJpdAogICAgYnl0ZSAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50IDEKICAgIHJldHN1YgoKX19wdXlhX2FyYzRfcm91dGVyX19fYmFyZV9yb3V0aW5nQDg6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBibnogX19wdXlhX2FyYzRfcm91dGVyX19fYWZ0ZXJfaWZfZWxzZUAxMgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBpcyBjcmVhdGluZwogICAgaW50IDEKICAgIHJldHN1YgoKX19wdXlhX2FyYzRfcm91dGVyX19fYWZ0ZXJfaWZfZWxzZUAxMjoKICAgIGludCAwCiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMuc3RydWN0X2luX2JveC5jb250cmFjdC5TdHJ1Y3RJbkJveE1hcC5ib3hfbWFwX3Rlc3QoKSAtPiB1aW50NjQ6CmJveF9tYXBfdGVzdDoKICAgIHByb3RvIDAgMQogICAgYnl0ZSAweDc1NzM2NTcyNzMwMDAwMDAwMDAwMDAwMDAwCiAgICBib3hfZGVsCiAgICBwb3AKICAgIGJ5dGUgMHg3NTczNjU3MjczMDAwMDAwMDAwMDAwMDAwMAogICAgYnl0ZSAweDAwMTIwMDAwMDAwMDAwMDAwMDQ2MDAwMDAwMDAwMDAwMDAwMjAwMDg3NDY1NzM3NDRlNjE2ZDY1CiAgICBib3hfcHV0CiAgICBieXRlIDB4NzU3MzY1NzI3MzAwMDAwMDAwMDAwMDAwMDAKICAgIGJveF9sZW4KICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnVzZXJfbWFwIGVudHJ5IGV4aXN0cwogICAgaW50IDI4CiAgICA9PQogICAgYXNzZXJ0CiAgICBieXRlIDB4NzU3MzY1NzI3MzAwMDAwMDAwMDAwMDAwMDAKICAgIGJveF9sZW4KICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnVzZXJfbWFwIGVudHJ5IGV4aXN0cwogICAgaW50IDI4CiAgICA9PQogICAgYXNzZXJ0CiAgICBpbnQgMQogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzLnN0cnVjdF9pbl9ib3guY29udHJhY3QuU3RydWN0SW5Cb3hNYXAuYm94X21hcF9zZXQoa2V5OiBieXRlcywgdmFsdWU6IGJ5dGVzKSAtPiB1aW50NjQ6CmJveF9tYXBfc2V0OgogICAgcHJvdG8gMiAxCiAgICBieXRlICJ1c2VycyIKICAgIGZyYW1lX2RpZyAtMgogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9kZWwKICAgIHBvcAogICAgZHVwCiAgICBmcmFtZV9kaWcgLTEKICAgIGJveF9wdXQKICAgIGJveF9nZXQKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnVzZXJfbWFwIGVudHJ5IGV4aXN0cwogICAgZnJhbWVfZGlnIC0xCiAgICA9PQogICAgYXNzZXJ0CiAgICBpbnQgMQogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzLnN0cnVjdF9pbl9ib3guY29udHJhY3QuU3RydWN0SW5Cb3hNYXAuYm94X21hcF9nZXQoa2V5OiBieXRlcykgLT4gYnl0ZXM6CmJveF9tYXBfZ2V0OgogICAgcHJvdG8gMSAxCiAgICBieXRlICJ1c2VycyIKICAgIGZyYW1lX2RpZyAtMQogICAgY29uY2F0CiAgICBib3hfZ2V0CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi51c2VyX21hcCBlbnRyeSBleGlzdHMKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5zdHJ1Y3RfaW5fYm94LmNvbnRyYWN0LlN0cnVjdEluQm94TWFwLmJveF9tYXBfZXhpc3RzKGtleTogYnl0ZXMpIC0+IHVpbnQ2NDoKYm94X21hcF9leGlzdHM6CiAgICBwcm90byAxIDEKICAgIGJ5dGUgInVzZXJzIgogICAgZnJhbWVfZGlnIC0xCiAgICBjb25jYXQKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgcmV0c3ViCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMuc3RydWN0X2luX2JveC5jb250cmFjdC5TdHJ1Y3RJbkJveE1hcC5jbGVhcl9zdGF0ZV9wcm9ncmFtOgogICAgaW50IDEKICAgIHJldHVybgo="
+    },
+    "state": {
+        "global": {
+            "num_byte_slices": 0,
+            "num_uints": 0
+        },
+        "local": {
+            "num_byte_slices": 0,
+            "num_uints": 0
+        }
+    },
+    "schema": {
+        "global": {
+            "declared": {},
+            "reserved": {}
+        },
+        "local": {
+            "declared": {},
+            "reserved": {}
+        }
+    },
+    "contract": {
+        "name": "StructInBoxMap",
+        "methods": [
+            {
+                "name": "box_map_test",
+                "args": [],
+                "readonly": false,
+                "returns": {
+                    "type": "bool"
+                }
+            },
+            {
+                "name": "box_map_set",
+                "args": [
+                    {
+                        "type": "uint64",
+                        "name": "key"
+                    },
+                    {
+                        "type": "(string,uint64,uint64)",
+                        "name": "value"
+                    }
+                ],
+                "readonly": false,
+                "returns": {
+                    "type": "bool"
+                }
+            },
+            {
+                "name": "box_map_get",
+                "args": [
+                    {
+                        "type": "uint64",
+                        "name": "key"
+                    }
+                ],
+                "readonly": false,
+                "returns": {
+                    "type": "(string,uint64,uint64)"
+                }
+            },
+            {
+                "name": "box_map_exists",
+                "args": [
+                    {
+                        "type": "uint64",
+                        "name": "key"
+                    }
+                ],
+                "readonly": false,
+                "returns": {
+                    "type": "bool"
+                }
+            }
+        ],
+        "networks": {}
+    },
+    "bare_call_config": {
+        "no_op": "CREATE"
+    }
+}
