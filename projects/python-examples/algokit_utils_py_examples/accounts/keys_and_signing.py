@@ -1,5 +1,4 @@
-from typing import List
-from algokit_utils import *
+from algokit_utils import AlgoAmount, AlgorandClient, PaymentParams
 
 
 def keys_and_signing() -> None:
@@ -32,13 +31,13 @@ def keys_and_signing() -> None:
     algorand_client.account.set_default_signer(random_account1.signer)
 
     """
-    Returns the TransactionSigner for the given sender address. 
+    Returns the TransactionSigner for the given sender address.
     If no signer has been registered for that address then the default signer is used if registered.
     """
     signer = algorand_client.account.get_signer(random_account1.address)
 
     """
-    random_account1 is a `SigningAccount` that already has a signer. 
+    random_account1 is a `SigningAccount` that already has a signer.
     Therefore you can just send transactions through the algorand client without manually signing.
     """
     algorand_client.send.payment(

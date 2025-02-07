@@ -83,7 +83,7 @@ class Arc4Types(ARC4Contract):
     # example: ARC4_ADDRESS
     @abimethod()
     def arc4_address_properties(self, address: arc4.Address) -> UInt64:
-        underlying_bytes = (  # noqa: F841
+        underlying_bytes = (
             address.bytes
         )  # This will return the underlying bytes of the address.
 
@@ -92,7 +92,7 @@ class Arc4Types(ARC4Contract):
         )  # This will return the account type of the given address.
 
         bal = account.balance  # returns the balance of the account
-        total_asset = (  # noqa: F841
+        total_asset = (
             account.total_assets
         )  # returns the total assets held in the account
 
@@ -201,16 +201,16 @@ class Arc4DynamicArray(ARC4Contract):
     @abimethod()
     def arc4_dynamic_bytes(self) -> arc4.DynamicBytes:
         """arc4.DynamicBytes is essentially an arc4.DynamicArray[arc4.Byte] with additional convenience methods"""
-        dynamic_bytes = arc4.DynamicBytes(b"\xFF\xFF\xFF")
+        dynamic_bytes = arc4.DynamicBytes(b"\xff\xff\xff")
 
         # arc4.DynamicBytes can return the native bytearray instead of accessing every single index of the array.
         # This is only true for arc4.DynamicBytes because, as an example, an arc4.DynamicArray[arc4.UInt64]
         #  doesn't have a native equivalent.
-        native_dynamic_bytes = dynamic_bytes.native  # noqa: F841
+        native_dynamic_bytes = dynamic_bytes.native
 
         dynamic_bytes[0] = arc4.Byte(0)
 
-        dynamic_bytes.extend(arc4.DynamicBytes(b"\xAA\xBB\xCC"))
+        dynamic_bytes.extend(arc4.DynamicBytes(b"\xaa\xbb\xcc"))
         dynamic_bytes.pop()
         dynamic_bytes.append(arc4.Byte(255))
 

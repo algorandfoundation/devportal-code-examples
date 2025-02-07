@@ -1,4 +1,4 @@
-from algokit_utils import *
+from algokit_utils import AlgoAmount, AlgorandClient
 
 
 def account_code_example() -> None:
@@ -28,17 +28,6 @@ def account_code_example() -> None:
     """
     env_account = algorand_client.account.from_environment(
         name="MY_ACCOUNT", fund_with=AlgoAmount(algo=10)
-    )
-
-    """
-    Create a 1-of-2 multisig account that requires
-    only 1 signature from the 2 possible signers to authorize transactions
-    """
-    multisig_account = algorand_client.account.multisig(
-        metadata=MultisigMetadata(
-            version=1, threshold=1, addrs=[random_account.address, kmd_account.address]
-        ),
-        signing_accounts=[random_account, kmd_account],
     )
 
     """
