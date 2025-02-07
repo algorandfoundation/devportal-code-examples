@@ -15,6 +15,9 @@ jobs:
       - name: Install poetry
         run: pipx install poetry
 
+      - name: Upgrade poetry
+        run: poetry self update
+
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
