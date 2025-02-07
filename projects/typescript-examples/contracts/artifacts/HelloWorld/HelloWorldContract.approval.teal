@@ -1,0 +1,91 @@
+#pragma version 10
+#pragma typetrack false
+
+// @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
+main:
+    // HelloWorld/contract.algo.ts:20
+    // export default class HelloWorldContract extends Intermediate {
+    txn NumAppArgs
+    bz main_bare_routing@7
+    pushbytess 0x3aad6d86 0x3d25ae31 // method "sayHello(string,string)string", method "sayBananas()string"
+    txna ApplicationArgs 0
+    match main_sayHello_route@3 main_sayBananas_route@4
+
+main_after_if_else@11:
+    // HelloWorld/contract.algo.ts:20
+    // export default class HelloWorldContract extends Intermediate {
+    pushint 0 // 0
+    return
+
+main_sayBananas_route@4:
+    // HelloWorld/contract.algo.ts:11
+    // @arc4.abimethod({ allowActions: ["NoOp"], readonly: true })
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    pushbytes 0x151f7c75000742616e616e6173
+    log
+    pushint 1 // 1
+    return
+
+main_sayHello_route@3:
+    // HelloWorld/contract.algo.ts:27
+    // public sayHello(firstName: string, lastName: string): string {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // HelloWorld/contract.algo.ts:20
+    // export default class HelloWorldContract extends Intermediate {
+    txna ApplicationArgs 1
+    extract 2 0
+    txna ApplicationArgs 2
+    extract 2 0
+    // HelloWorld/contract.algo.ts:27
+    // public sayHello(firstName: string, lastName: string): string {
+    callsub sayHello
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    pushbytes 0x151f7c75
+    swap
+    concat
+    log
+    pushint 1 // 1
+    return
+
+main_bare_routing@7:
+    // HelloWorld/contract.algo.ts:20
+    // export default class HelloWorldContract extends Intermediate {
+    txn OnCompletion
+    bnz main_after_if_else@11
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    pushint 1 // 1
+    return
+
+
+// HelloWorld/contract.algo.ts::HelloWorldContract.sayHello(firstName: bytes, lastName: bytes) -> bytes:
+sayHello:
+    // HelloWorld/contract.algo.ts:27
+    // public sayHello(firstName: string, lastName: string): string {
+    proto 2 1
+    // HelloWorld/contract.algo.ts:28
+    // const result = `Hello ${firstName} ${lastName}`;
+    pushbytes "Hello "
+    frame_dig -2
+    concat
+    pushbytes " "
+    concat
+    frame_dig -1
+    concat
+    // HelloWorld/contract.algo.ts:29
+    // return result;
+    retsub
