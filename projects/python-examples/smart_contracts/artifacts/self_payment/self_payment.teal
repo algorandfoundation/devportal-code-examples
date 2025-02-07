@@ -1,46 +1,192 @@
 #pragma version 10
+#pragma typetrack false
 
-smart_contracts.self_payment.contract.self_payment:
+// smart_contracts.self_payment.contract.self_payment() -> uint64:
+main:
+    intcblock 1 TMPL_LAST_ROUND
+    bytecblock TMPL_TARGET_NETWORK_GENESIS
+    // smart_contracts/self_payment/contract.py:20
+    // Txn.type_enum == TransactionType.Payment
     txn TypeEnum
-    int pay
+    intc_0 // pay
     ==
+    // smart_contracts/self_payment/contract.py:20-29
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == Global.min_txn_fee
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # Acquiring a lease with last_round and a non-empty lease field prevents replay attacks.
+    // and Txn.last_valid == TemplateVar[UInt64]("LAST_ROUND")
+    // and Txn.lease == op.sha256(b"self-payment")
     bz main_bool_false@10
+    // smart_contracts/self_payment/contract.py:21
+    // and Txn.receiver == Txn.sender
     txn Receiver
     txn Sender
     ==
+    // smart_contracts/self_payment/contract.py:20-29
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == Global.min_txn_fee
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # Acquiring a lease with last_round and a non-empty lease field prevents replay attacks.
+    // and Txn.last_valid == TemplateVar[UInt64]("LAST_ROUND")
+    // and Txn.lease == op.sha256(b"self-payment")
     bz main_bool_false@10
+    // smart_contracts/self_payment/contract.py:22
+    // and Txn.amount == 0
     txn Amount
+    // smart_contracts/self_payment/contract.py:20-29
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == Global.min_txn_fee
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # Acquiring a lease with last_round and a non-empty lease field prevents replay attacks.
+    // and Txn.last_valid == TemplateVar[UInt64]("LAST_ROUND")
+    // and Txn.lease == op.sha256(b"self-payment")
     bnz main_bool_false@10
+    // smart_contracts/self_payment/contract.py:23
+    // and Txn.rekey_to == Global.zero_address
     txn RekeyTo
     global ZeroAddress
     ==
+    // smart_contracts/self_payment/contract.py:20-29
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == Global.min_txn_fee
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # Acquiring a lease with last_round and a non-empty lease field prevents replay attacks.
+    // and Txn.last_valid == TemplateVar[UInt64]("LAST_ROUND")
+    // and Txn.lease == op.sha256(b"self-payment")
     bz main_bool_false@10
+    // smart_contracts/self_payment/contract.py:24
+    // and Txn.close_remainder_to == Global.zero_address
     txn CloseRemainderTo
     global ZeroAddress
     ==
+    // smart_contracts/self_payment/contract.py:20-29
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == Global.min_txn_fee
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # Acquiring a lease with last_round and a non-empty lease field prevents replay attacks.
+    // and Txn.last_valid == TemplateVar[UInt64]("LAST_ROUND")
+    // and Txn.lease == op.sha256(b"self-payment")
     bz main_bool_false@10
+    // smart_contracts/self_payment/contract.py:25
+    // and Txn.fee == Global.min_txn_fee
     txn Fee
     global MinTxnFee
     ==
+    // smart_contracts/self_payment/contract.py:20-29
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == Global.min_txn_fee
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # Acquiring a lease with last_round and a non-empty lease field prevents replay attacks.
+    // and Txn.last_valid == TemplateVar[UInt64]("LAST_ROUND")
+    // and Txn.lease == op.sha256(b"self-payment")
     bz main_bool_false@10
+    // smart_contracts/self_payment/contract.py:26
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
     global GenesisHash
-    byte TMPL_TARGET_NETWORK_GENESIS
+    bytec_0 // TMPL_TARGET_NETWORK_GENESIS
     ==
+    // smart_contracts/self_payment/contract.py:20-29
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == Global.min_txn_fee
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # Acquiring a lease with last_round and a non-empty lease field prevents replay attacks.
+    // and Txn.last_valid == TemplateVar[UInt64]("LAST_ROUND")
+    // and Txn.lease == op.sha256(b"self-payment")
     bz main_bool_false@10
+    // smart_contracts/self_payment/contract.py:27-28
+    // # Acquiring a lease with last_round and a non-empty lease field prevents replay attacks.
+    // and Txn.last_valid == TemplateVar[UInt64]("LAST_ROUND")
     txn LastValid
-    int TMPL_LAST_ROUND
+    intc_1 // TMPL_LAST_ROUND
     ==
+    // smart_contracts/self_payment/contract.py:20-29
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == Global.min_txn_fee
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # Acquiring a lease with last_round and a non-empty lease field prevents replay attacks.
+    // and Txn.last_valid == TemplateVar[UInt64]("LAST_ROUND")
+    // and Txn.lease == op.sha256(b"self-payment")
     bz main_bool_false@10
+    // smart_contracts/self_payment/contract.py:29
+    // and Txn.lease == op.sha256(b"self-payment")
     txn Lease
-    byte 0x73656c662d7061796d656e74
+    pushbytes 0x73656c662d7061796d656e74
     sha256
     ==
+    // smart_contracts/self_payment/contract.py:20-29
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == Global.min_txn_fee
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # Acquiring a lease with last_round and a non-empty lease field prevents replay attacks.
+    // and Txn.last_valid == TemplateVar[UInt64]("LAST_ROUND")
+    // and Txn.lease == op.sha256(b"self-payment")
     bz main_bool_false@10
-    int 1
-    b main_bool_merge@11
+    intc_0 // 1
+    // smart_contracts/self_payment/contract.py:19-30
+    // return (
+    //     Txn.type_enum == TransactionType.Payment
+    //     and Txn.receiver == Txn.sender
+    //     and Txn.amount == 0
+    //     and Txn.rekey_to == Global.zero_address
+    //     and Txn.close_remainder_to == Global.zero_address
+    //     and Txn.fee == Global.min_txn_fee
+    //     and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    //     # Acquiring a lease with last_round and a non-empty lease field prevents replay attacks.
+    //     and Txn.last_valid == TemplateVar[UInt64]("LAST_ROUND")
+    //     and Txn.lease == op.sha256(b"self-payment")
+    // )
+    return
 
 main_bool_false@10:
-    int 0
-
-main_bool_merge@11:
+    pushint 0 // 0
+    // smart_contracts/self_payment/contract.py:19-30
+    // return (
+    //     Txn.type_enum == TransactionType.Payment
+    //     and Txn.receiver == Txn.sender
+    //     and Txn.amount == 0
+    //     and Txn.rekey_to == Global.zero_address
+    //     and Txn.close_remainder_to == Global.zero_address
+    //     and Txn.fee == Global.min_txn_fee
+    //     and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    //     # Acquiring a lease with last_round and a non-empty lease field prevents replay attacks.
+    //     and Txn.last_valid == TemplateVar[UInt64]("LAST_ROUND")
+    //     and Txn.lease == op.sha256(b"self-payment")
+    // )
     return

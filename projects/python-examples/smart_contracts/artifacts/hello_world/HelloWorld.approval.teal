@@ -1,29 +1,36 @@
 #pragma version 10
+#pragma typetrack false
 
-smart_contracts.hello_world.contract.HelloWorld.approval_program:
-    callsub __puya_arc4_router__
+// algopy.arc4.ARC4Contract.approval_program() -> uint64:
+main:
+    // smart_contracts/hello_world/contract.py:6
+    // class HelloWorld(ARC4Contract):
+    txn NumAppArgs
+    bz main_bare_routing@6
+    pushbytes 0x02bece11 // method "hello(string)string"
+    txna ApplicationArgs 0
+    match main_hello_route@3
+
+main_after_if_else@10:
+    // smart_contracts/hello_world/contract.py:6
+    // class HelloWorld(ARC4Contract):
+    pushint 0 // 0
     return
 
-
-// smart_contracts.hello_world.contract.HelloWorld.__puya_arc4_router__() -> uint64:
-__puya_arc4_router__:
-    proto 0 1
-    txn NumAppArgs
-    bz __puya_arc4_router___bare_routing@5
-    method "hello(string)string"
-    txna ApplicationArgs 0
-    match __puya_arc4_router___hello_route@2
-    int 0
-    retsub
-
-__puya_arc4_router___hello_route@2:
+main_hello_route@3:
+    // smart_contracts/hello_world/contract.py:7
+    // @abimethod()
     txn OnCompletion
     !
-    assert // OnCompletion is NoOp
+    assert // OnCompletion is not NoOp
     txn ApplicationID
-    assert // is not creating
+    assert // can only call when not creating
+    // smart_contracts/hello_world/contract.py:6
+    // class HelloWorld(ARC4Contract):
     txna ApplicationArgs 1
     extract 2 0
+    // smart_contracts/hello_world/contract.py:7
+    // @abimethod()
     callsub hello
     dup
     len
@@ -31,31 +38,34 @@ __puya_arc4_router___hello_route@2:
     extract 6 2
     swap
     concat
-    byte 0x151f7c75
+    pushbytes 0x151f7c75
     swap
     concat
     log
-    int 1
-    retsub
+    pushint 1 // 1
+    return
 
-__puya_arc4_router___bare_routing@5:
+main_bare_routing@6:
+    // smart_contracts/hello_world/contract.py:6
+    // class HelloWorld(ARC4Contract):
     txn OnCompletion
-    bnz __puya_arc4_router___after_if_else@9
+    bnz main_after_if_else@10
     txn ApplicationID
     !
-    assert // is creating
-    int 1
-    retsub
-
-__puya_arc4_router___after_if_else@9:
-    int 0
-    retsub
+    assert // can only call when creating
+    pushint 1 // 1
+    return
 
 
 // smart_contracts.hello_world.contract.HelloWorld.hello(name: bytes) -> bytes:
 hello:
+    // smart_contracts/hello_world/contract.py:7-8
+    // @abimethod()
+    // def hello(self, name: String) -> String:
     proto 1 1
-    byte "Hello, "
+    // smart_contracts/hello_world/contract.py:9
+    // return "Hello, " + name
+    pushbytes "Hello, "
     frame_dig -1
     concat
     retsub

@@ -1,0 +1,156 @@
+{
+  "version": 3,
+  "sources": [
+    "../../self_payment/contract.py"
+  ],
+  "mappings": "AAmBQ;;AAAiB;AAAjB;AAAA;;;AACI;;AAAgB;;AAAhB;AADJ;;;AAEI;;AAFJ;;;AAGI;;AAAgB;;AAAhB;AAHJ;;;AAII;;AAA0B;;AAA1B;AAJJ;;;AAKI;;AAAW;;AAAX;AALJ;;;AAMI;;AAAuB;AAAvB;AANJ;;;AAQI;;AAAkB;AAAlB;AARJ;;;AASI;;AAAuB;;;;;;;;;;;;;;AAAV;AAAb;AATJ;;;;AADJ;;;AAAA",
+  "op_pc_offset": 2,
+  "pc_events": {
+    "0": {
+      "op": "txn TypeEnum",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "2": {
+      "op": "intc_0 // pay",
+      "defined_out": [
+        "pay",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "pay"
+      ]
+    },
+    "3": {
+      "op": "==",
+      "defined_out": [
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "4": {
+      "op": "bz main_bool_false@10",
+      "stack_out": []
+    },
+    "7": {
+      "op": "txn Receiver"
+    },
+    "9": {
+      "op": "txn Sender"
+    },
+    "11": {
+      "op": "=="
+    },
+    "12": {
+      "op": "bz main_bool_false@10"
+    },
+    "15": {
+      "op": "txn Amount"
+    },
+    "17": {
+      "op": "bnz main_bool_false@10"
+    },
+    "20": {
+      "op": "txn RekeyTo"
+    },
+    "22": {
+      "op": "global ZeroAddress"
+    },
+    "24": {
+      "op": "=="
+    },
+    "25": {
+      "op": "bz main_bool_false@10"
+    },
+    "28": {
+      "op": "txn CloseRemainderTo"
+    },
+    "30": {
+      "op": "global ZeroAddress"
+    },
+    "32": {
+      "op": "=="
+    },
+    "33": {
+      "op": "bz main_bool_false@10"
+    },
+    "36": {
+      "op": "txn Fee"
+    },
+    "38": {
+      "op": "global MinTxnFee"
+    },
+    "40": {
+      "op": "=="
+    },
+    "41": {
+      "op": "bz main_bool_false@10"
+    },
+    "44": {
+      "op": "global GenesisHash"
+    },
+    "46": {
+      "op": "bytec_0 // TMPL_TARGET_NETWORK_GENESIS"
+    },
+    "47": {
+      "op": "=="
+    },
+    "48": {
+      "op": "bz main_bool_false@10"
+    },
+    "51": {
+      "op": "txn LastValid"
+    },
+    "53": {
+      "op": "intc_1 // TMPL_LAST_ROUND"
+    },
+    "54": {
+      "op": "=="
+    },
+    "55": {
+      "op": "bz main_bool_false@10"
+    },
+    "58": {
+      "op": "txn Lease"
+    },
+    "60": {
+      "op": "pushbytes 0x73656c662d7061796d656e74"
+    },
+    "74": {
+      "op": "sha256"
+    },
+    "75": {
+      "op": "=="
+    },
+    "76": {
+      "op": "bz main_bool_false@10"
+    },
+    "79": {
+      "op": "intc_0 // 1"
+    },
+    "80": {
+      "op": "return"
+    },
+    "81": {
+      "block": "main_bool_false@10",
+      "stack_in": [],
+      "op": "pushint 0 // 0",
+      "defined_out": [
+        "and_result%0#0"
+      ],
+      "stack_out": [
+        "and_result%0#0"
+      ]
+    },
+    "83": {
+      "op": "return"
+    }
+  }
+}

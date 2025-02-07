@@ -1,218 +1,85 @@
 #pragma version 10
+#pragma typetrack false
 
-smart_contracts.local_storage.contract.LocalStorage.approval_program:
-    callsub __puya_arc4_router__
+// smart_contracts.local_storage.contract.LocalStorage.__algopy_entrypoint_with_init() -> uint64:
+main:
+    intcblock 0 1 10
+    bytecblock 0x151f7c75 "local_int" 0x00 "local_account" "local_bytes" "local_bool" "local_asset" "local_application" 0x48656c6c6f 0x44656661756c742056616c7565
+    // smart_contracts/local_storage/contract.py:13
+    // class LocalStorage(ARC4Contract):
+    txn NumAppArgs
+    bz main_bare_routing@17
+    pushbytess 0xe6bcc075 0x155a16ab 0xc0621bde 0x96710870 0x57596171 0xc21cee78 0x81c6f03e 0x0f0c1d82 0xf1a77d16 0x812dee17 0x5bb7f47d 0x91763acb // method "contains_local_data(account)bool", method "contains_local_data_example(account)bool", method "get_item_local_data(account)uint64", method "get_local_data_with_default_int(account)uint64", method "maybe_local_data(account)(uint64,bool)", method "get_item_local_data_example(account)bool", method "get_local_data_with_default(account)bool", method "maybe_local_data_example(account)bool", method "set_local_int(account,uint64)void", method "set_local_data_example(account,asset,account,application,byte[],bool)bool", method "delete_local_data(account)void", method "delete_local_data_example(account)bool"
+    txna ApplicationArgs 0
+    match main_contains_local_data_route@5 main_contains_local_data_example_route@6 main_get_item_local_data_route@7 main_get_local_data_with_default_int_route@8 main_maybe_local_data_route@9 main_get_item_local_data_example_route@10 main_get_local_data_with_default_route@11 main_maybe_local_data_example_route@12 main_set_local_int_route@13 main_set_local_data_example_route@14 main_delete_local_data_route@15 main_delete_local_data_example_route@16
+
+main_after_if_else@19:
+    // smart_contracts/local_storage/contract.py:13
+    // class LocalStorage(ARC4Contract):
+    intc_0 // 0
     return
 
-
-// smart_contracts.local_storage.contract.LocalStorage.__puya_arc4_router__() -> uint64:
-__puya_arc4_router__:
-    proto 0 1
-    txn NumAppArgs
-    bz __puya_arc4_router___bare_routing@16
-    method "contains_local_data(account)bool"
-    method "contains_local_data_example(account)bool"
-    method "get_item_local_data(account)uint64"
-    method "get_local_data_with_default_int(account)uint64"
-    method "maybe_local_data(account)(uint64,bool)"
-    method "get_item_local_data_example(account)bool"
-    method "get_local_data_with_default(account)bool"
-    method "maybe_local_data_example(account)bool"
-    method "set_local_int(account,uint64)void"
-    method "set_local_data_example(account,asset,account,application,byte[],bool)bool"
-    method "delete_local_data(account)void"
-    method "delete_local_data_example(account)bool"
-    txna ApplicationArgs 0
-    match __puya_arc4_router___contains_local_data_route@2 __puya_arc4_router___contains_local_data_example_route@3 __puya_arc4_router___get_item_local_data_route@4 __puya_arc4_router___get_local_data_with_default_int_route@5 __puya_arc4_router___maybe_local_data_route@6 __puya_arc4_router___get_item_local_data_example_route@7 __puya_arc4_router___get_local_data_with_default_route@8 __puya_arc4_router___maybe_local_data_example_route@9 __puya_arc4_router___set_local_int_route@10 __puya_arc4_router___set_local_data_example_route@11 __puya_arc4_router___delete_local_data_route@12 __puya_arc4_router___delete_local_data_example_route@13
-    int 0
-    retsub
-
-__puya_arc4_router___contains_local_data_route@2:
+main_delete_local_data_example_route@16:
+    // smart_contracts/local_storage/contract.py:184-185
+    // # example: DELETE_LOCAL_STATE_EXAMPLES
+    // @arc4.abimethod
     txn OnCompletion
     !
-    assert // OnCompletion is NoOp
+    assert // OnCompletion is not NoOp
     txn ApplicationID
-    assert // is not creating
+    assert // can only call when not creating
+    // smart_contracts/local_storage/contract.py:13
+    // class LocalStorage(ARC4Contract):
     txna ApplicationArgs 1
     btoi
     txnas Accounts
-    callsub contains_local_data
-    byte 0x00
-    int 0
+    // smart_contracts/local_storage/contract.py:184-185
+    // # example: DELETE_LOCAL_STATE_EXAMPLES
+    // @arc4.abimethod
+    callsub delete_local_data_example
+    bytec_2 // 0x00
+    intc_0 // 0
     uncover 2
     setbit
-    byte 0x151f7c75
+    bytec_0 // 0x151f7c75
     swap
     concat
     log
-    int 1
-    retsub
+    intc_1 // 1
+    return
 
-__puya_arc4_router___contains_local_data_example_route@3:
+main_delete_local_data_route@15:
+    // smart_contracts/local_storage/contract.py:177-178
+    // # example: DELETE_LOCAL_STATE
+    // @arc4.abimethod
     txn OnCompletion
     !
-    assert // OnCompletion is NoOp
+    assert // OnCompletion is not NoOp
     txn ApplicationID
-    assert // is not creating
+    assert // can only call when not creating
+    // smart_contracts/local_storage/contract.py:13
+    // class LocalStorage(ARC4Contract):
     txna ApplicationArgs 1
     btoi
     txnas Accounts
-    callsub contains_local_data_example
-    byte 0x00
-    int 0
-    uncover 2
-    setbit
-    byte 0x151f7c75
-    swap
-    concat
-    log
-    int 1
-    retsub
+    // smart_contracts/local_storage/contract.py:177-178
+    // # example: DELETE_LOCAL_STATE
+    // @arc4.abimethod
+    callsub delete_local_data
+    intc_1 // 1
+    return
 
-__puya_arc4_router___get_item_local_data_route@4:
+main_set_local_data_example_route@14:
+    // smart_contracts/local_storage/contract.py:147-148
+    // # example: WRITE_LOCAL_STATE_EXAMPLES
+    // @arc4.abimethod
     txn OnCompletion
     !
-    assert // OnCompletion is NoOp
+    assert // OnCompletion is not NoOp
     txn ApplicationID
-    assert // is not creating
-    txna ApplicationArgs 1
-    btoi
-    txnas Accounts
-    callsub get_item_local_data
-    itob
-    byte 0x151f7c75
-    swap
-    concat
-    log
-    int 1
-    retsub
-
-__puya_arc4_router___get_local_data_with_default_int_route@5:
-    txn OnCompletion
-    !
-    assert // OnCompletion is NoOp
-    txn ApplicationID
-    assert // is not creating
-    txna ApplicationArgs 1
-    btoi
-    txnas Accounts
-    callsub get_local_data_with_default_int
-    itob
-    byte 0x151f7c75
-    swap
-    concat
-    log
-    int 1
-    retsub
-
-__puya_arc4_router___maybe_local_data_route@6:
-    txn OnCompletion
-    !
-    assert // OnCompletion is NoOp
-    txn ApplicationID
-    assert // is not creating
-    txna ApplicationArgs 1
-    btoi
-    txnas Accounts
-    callsub maybe_local_data
-    swap
-    itob
-    byte 0x00
-    int 0
-    uncover 3
-    setbit
-    concat
-    byte 0x151f7c75
-    swap
-    concat
-    log
-    int 1
-    retsub
-
-__puya_arc4_router___get_item_local_data_example_route@7:
-    txn OnCompletion
-    !
-    assert // OnCompletion is NoOp
-    txn ApplicationID
-    assert // is not creating
-    txna ApplicationArgs 1
-    btoi
-    txnas Accounts
-    callsub get_item_local_data_example
-    byte 0x00
-    int 0
-    uncover 2
-    setbit
-    byte 0x151f7c75
-    swap
-    concat
-    log
-    int 1
-    retsub
-
-__puya_arc4_router___get_local_data_with_default_route@8:
-    txn OnCompletion
-    !
-    assert // OnCompletion is NoOp
-    txn ApplicationID
-    assert // is not creating
-    txna ApplicationArgs 1
-    btoi
-    txnas Accounts
-    callsub get_local_data_with_default
-    byte 0x00
-    int 0
-    uncover 2
-    setbit
-    byte 0x151f7c75
-    swap
-    concat
-    log
-    int 1
-    retsub
-
-__puya_arc4_router___maybe_local_data_example_route@9:
-    txn OnCompletion
-    !
-    assert // OnCompletion is NoOp
-    txn ApplicationID
-    assert // is not creating
-    txna ApplicationArgs 1
-    btoi
-    txnas Accounts
-    callsub maybe_local_data_example
-    byte 0x00
-    int 0
-    uncover 2
-    setbit
-    byte 0x151f7c75
-    swap
-    concat
-    log
-    int 1
-    retsub
-
-__puya_arc4_router___set_local_int_route@10:
-    txn OnCompletion
-    !
-    assert // OnCompletion is NoOp
-    txn ApplicationID
-    assert // is not creating
-    txna ApplicationArgs 1
-    btoi
-    txnas Accounts
-    txna ApplicationArgs 2
-    btoi
-    callsub set_local_int
-    int 1
-    retsub
-
-__puya_arc4_router___set_local_data_example_route@11:
-    txn OnCompletion
-    !
-    assert // OnCompletion is NoOp
-    txn ApplicationID
-    assert // is not creating
+    assert // can only call when not creating
+    // smart_contracts/local_storage/contract.py:13
+    // class LocalStorage(ARC4Contract):
     txna ApplicationArgs 1
     btoi
     txnas Accounts
@@ -228,130 +95,377 @@ __puya_arc4_router___set_local_data_example_route@11:
     txna ApplicationArgs 5
     extract 2 0
     txna ApplicationArgs 6
-    int 0
+    intc_0 // 0
     getbit
+    // smart_contracts/local_storage/contract.py:147-148
+    // # example: WRITE_LOCAL_STATE_EXAMPLES
+    // @arc4.abimethod
     callsub set_local_data_example
-    byte 0x00
-    int 0
+    bytec_2 // 0x00
+    intc_0 // 0
     uncover 2
     setbit
-    byte 0x151f7c75
+    bytec_0 // 0x151f7c75
     swap
     concat
     log
-    int 1
-    retsub
+    intc_1 // 1
+    return
 
-__puya_arc4_router___delete_local_data_route@12:
+main_set_local_int_route@13:
+    // smart_contracts/local_storage/contract.py:140-141
+    // # example: WRITE_LOCAL_STATE
+    // @arc4.abimethod
     txn OnCompletion
     !
-    assert // OnCompletion is NoOp
+    assert // OnCompletion is not NoOp
     txn ApplicationID
-    assert // is not creating
+    assert // can only call when not creating
+    // smart_contracts/local_storage/contract.py:13
+    // class LocalStorage(ARC4Contract):
     txna ApplicationArgs 1
     btoi
     txnas Accounts
-    callsub delete_local_data
-    int 1
-    retsub
+    txna ApplicationArgs 2
+    btoi
+    // smart_contracts/local_storage/contract.py:140-141
+    // # example: WRITE_LOCAL_STATE
+    // @arc4.abimethod
+    callsub set_local_int
+    intc_1 // 1
+    return
 
-__puya_arc4_router___delete_local_data_example_route@13:
+main_maybe_local_data_example_route@12:
+    // smart_contracts/local_storage/contract.py:111
+    // @arc4.abimethod
     txn OnCompletion
     !
-    assert // OnCompletion is NoOp
+    assert // OnCompletion is not NoOp
     txn ApplicationID
-    assert // is not creating
+    assert // can only call when not creating
+    // smart_contracts/local_storage/contract.py:13
+    // class LocalStorage(ARC4Contract):
     txna ApplicationArgs 1
     btoi
     txnas Accounts
-    callsub delete_local_data_example
-    byte 0x00
-    int 0
+    // smart_contracts/local_storage/contract.py:111
+    // @arc4.abimethod
+    callsub maybe_local_data_example
+    bytec_2 // 0x00
+    intc_0 // 0
     uncover 2
     setbit
-    byte 0x151f7c75
+    bytec_0 // 0x151f7c75
     swap
     concat
     log
-    int 1
-    retsub
+    intc_1 // 1
+    return
 
-__puya_arc4_router___bare_routing@16:
+main_get_local_data_with_default_route@11:
+    // smart_contracts/local_storage/contract.py:83
+    // @arc4.abimethod
     txn OnCompletion
-    bnz __puya_arc4_router___after_if_else@20
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/local_storage/contract.py:13
+    // class LocalStorage(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txnas Accounts
+    // smart_contracts/local_storage/contract.py:83
+    // @arc4.abimethod
+    callsub get_local_data_with_default
+    bytec_2 // 0x00
+    intc_0 // 0
+    uncover 2
+    setbit
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_get_item_local_data_example_route@10:
+    // smart_contracts/local_storage/contract.py:68-69
+    // # example: READ_LOCAL_STATE_EXAMPLES
+    // @arc4.abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/local_storage/contract.py:13
+    // class LocalStorage(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txnas Accounts
+    // smart_contracts/local_storage/contract.py:68-69
+    // # example: READ_LOCAL_STATE_EXAMPLES
+    // @arc4.abimethod
+    callsub get_item_local_data_example
+    bytec_2 // 0x00
+    intc_0 // 0
+    uncover 2
+    setbit
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_maybe_local_data_route@9:
+    // smart_contracts/local_storage/contract.py:57-58
+    // # maybe function
+    // @arc4.abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/local_storage/contract.py:13
+    // class LocalStorage(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txnas Accounts
+    // smart_contracts/local_storage/contract.py:57-58
+    // # maybe function
+    // @arc4.abimethod
+    callsub maybe_local_data
+    swap
+    itob
+    bytec_2 // 0x00
+    intc_0 // 0
+    uncover 3
+    setbit
+    concat
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_get_local_data_with_default_int_route@8:
+    // smart_contracts/local_storage/contract.py:52-53
+    // # get function
+    // @arc4.abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/local_storage/contract.py:13
+    // class LocalStorage(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txnas Accounts
+    // smart_contracts/local_storage/contract.py:52-53
+    // # get function
+    // @arc4.abimethod
+    callsub get_local_data_with_default_int
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_get_item_local_data_route@7:
+    // smart_contracts/local_storage/contract.py:47-48
+    // # example: READ_LOCAL_STATE
+    // @arc4.abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/local_storage/contract.py:13
+    // class LocalStorage(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txnas Accounts
+    // smart_contracts/local_storage/contract.py:47-48
+    // # example: READ_LOCAL_STATE
+    // @arc4.abimethod
+    callsub get_item_local_data
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_contains_local_data_example_route@6:
+    // smart_contracts/local_storage/contract.py:34-35
+    // # example: CONTAIN_PROPERTY_LOCAL_STATE_EXAMPLES
+    // @arc4.abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/local_storage/contract.py:13
+    // class LocalStorage(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txnas Accounts
+    // smart_contracts/local_storage/contract.py:34-35
+    // # example: CONTAIN_PROPERTY_LOCAL_STATE_EXAMPLES
+    // @arc4.abimethod
+    callsub contains_local_data_example
+    bytec_2 // 0x00
+    intc_0 // 0
+    uncover 2
+    setbit
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_contains_local_data_route@5:
+    // smart_contracts/local_storage/contract.py:26-27
+    // # example: CONTAIN_PROPERTY_LOCAL_STATE
+    // @arc4.abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/local_storage/contract.py:13
+    // class LocalStorage(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txnas Accounts
+    // smart_contracts/local_storage/contract.py:26-27
+    // # example: CONTAIN_PROPERTY_LOCAL_STATE
+    // @arc4.abimethod
+    callsub contains_local_data
+    bytec_2 // 0x00
+    intc_0 // 0
+    uncover 2
+    setbit
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_bare_routing@17:
+    // smart_contracts/local_storage/contract.py:13
+    // class LocalStorage(ARC4Contract):
+    txn OnCompletion
+    bnz main_after_if_else@19
     txn ApplicationID
     !
-    assert // is creating
-    int 1
-    retsub
-
-__puya_arc4_router___after_if_else@20:
-    int 0
-    retsub
+    assert // can only call when creating
+    intc_1 // 1
+    return
 
 
 // smart_contracts.local_storage.contract.LocalStorage.contains_local_data(for_account: bytes) -> uint64:
 contains_local_data:
+    // smart_contracts/local_storage/contract.py:26-28
+    // # example: CONTAIN_PROPERTY_LOCAL_STATE
+    // @arc4.abimethod
+    // def contains_local_data(self, for_account: Account) -> bool:
     proto 1 1
+    // smart_contracts/local_storage/contract.py:29
+    // assert for_account in self.local_int  # Uint64
     frame_dig -1
-    int 0
-    byte "local_int"
+    intc_0 // 0
+    bytec_1 // "local_int"
     app_local_get_ex
     bury 1
     assert
-    int 1
+    // smart_contracts/local_storage/contract.py:30
+    // return True
+    intc_1 // 1
     retsub
 
 
 // smart_contracts.local_storage.contract.LocalStorage.contains_local_data_example(for_account: bytes) -> uint64:
 contains_local_data_example:
+    // smart_contracts/local_storage/contract.py:34-36
+    // # example: CONTAIN_PROPERTY_LOCAL_STATE_EXAMPLES
+    // @arc4.abimethod
+    // def contains_local_data_example(self, for_account: Account) -> bool:
     proto 1 1
+    // smart_contracts/local_storage/contract.py:37
+    // assert for_account in self.local_int  # Uint64
     frame_dig -1
-    int 0
-    byte "local_int"
+    intc_0 // 0
+    bytec_1 // "local_int"
     app_local_get_ex
     bury 1
     assert
+    // smart_contracts/local_storage/contract.py:38
+    // assert for_account in self.local_bytes  # Bytes
     frame_dig -1
-    int 0
-    byte "local_bytes"
+    intc_0 // 0
+    bytec 4 // "local_bytes"
     app_local_get_ex
     bury 1
     assert
+    // smart_contracts/local_storage/contract.py:39
+    // assert for_account in self.local_bool  # Bool
     frame_dig -1
-    int 0
-    byte "local_bool"
+    intc_0 // 0
+    bytec 5 // "local_bool"
     app_local_get_ex
     bury 1
     assert
+    // smart_contracts/local_storage/contract.py:40
+    // assert for_account in self.local_asset  # Asset
     frame_dig -1
-    int 0
-    byte "local_asset"
+    intc_0 // 0
+    bytec 6 // "local_asset"
     app_local_get_ex
     bury 1
     assert
+    // smart_contracts/local_storage/contract.py:41
+    // assert for_account in self.local_application  # Application
     frame_dig -1
-    int 0
-    byte "local_application"
+    intc_0 // 0
+    bytec 7 // "local_application"
     app_local_get_ex
     bury 1
     assert
+    // smart_contracts/local_storage/contract.py:42
+    // assert for_account in self.local_account  # Account
     frame_dig -1
-    int 0
-    byte "local_account"
+    intc_0 // 0
+    bytec_3 // "local_account"
     app_local_get_ex
     bury 1
     assert
-    int 1
+    // smart_contracts/local_storage/contract.py:43
+    // return True
+    intc_1 // 1
     retsub
 
 
 // smart_contracts.local_storage.contract.LocalStorage.get_item_local_data(for_account: bytes) -> uint64:
 get_item_local_data:
+    // smart_contracts/local_storage/contract.py:47-49
+    // # example: READ_LOCAL_STATE
+    // @arc4.abimethod
+    // def get_item_local_data(self, for_account: Account) -> UInt64:
     proto 1 1
+    // smart_contracts/local_storage/contract.py:50
+    // return self.local_int[for_account]
     frame_dig -1
-    int 0
-    byte "local_int"
+    intc_0 // 0
+    bytec_1 // "local_int"
     app_local_get_ex
     assert // check self.local_int exists for account
     retsub
@@ -359,12 +473,18 @@ get_item_local_data:
 
 // smart_contracts.local_storage.contract.LocalStorage.get_local_data_with_default_int(for_account: bytes) -> uint64:
 get_local_data_with_default_int:
+    // smart_contracts/local_storage/contract.py:52-54
+    // # get function
+    // @arc4.abimethod
+    // def get_local_data_with_default_int(self, for_account: Account) -> UInt64:
     proto 1 1
+    // smart_contracts/local_storage/contract.py:55
+    // return self.local_int.get(for_account, default=UInt64(0))  # Uint64
     frame_dig -1
-    int 0
-    byte "local_int"
+    intc_0 // 0
+    bytec_1 // "local_int"
     app_local_get_ex
-    int 0
+    intc_0 // 0
     cover 2
     select
     retsub
@@ -372,19 +492,32 @@ get_local_data_with_default_int:
 
 // smart_contracts.local_storage.contract.LocalStorage.maybe_local_data(for_account: bytes) -> uint64, uint64:
 maybe_local_data:
+    // smart_contracts/local_storage/contract.py:57-59
+    // # maybe function
+    // @arc4.abimethod
+    // def maybe_local_data(self, for_account: Account) -> tuple[UInt64, bool]:
     proto 1 2
+    // smart_contracts/local_storage/contract.py:60-61
+    // # used to get data or assert int
+    // result, exists = self.local_int.maybe(for_account)  # Uint64
     frame_dig -1
-    int 0
-    byte "local_int"
+    intc_0 // 0
+    bytec_1 // "local_int"
     app_local_get_ex
     dup
     uncover 2
     swap
+    // smart_contracts/local_storage/contract.py:62
+    // if not exists:
     bnz maybe_local_data_after_if_else@2
-    int 0
+    // smart_contracts/local_storage/contract.py:63
+    // result = UInt64(0)
+    intc_0 // 0
     frame_bury 1
 
 maybe_local_data_after_if_else@2:
+    // smart_contracts/local_storage/contract.py:64
+    // return result, exists
     frame_dig 1
     frame_dig 0
     uncover 3
@@ -394,186 +527,358 @@ maybe_local_data_after_if_else@2:
 
 // smart_contracts.local_storage.contract.LocalStorage.get_item_local_data_example(for_account: bytes) -> uint64:
 get_item_local_data_example:
+    // smart_contracts/local_storage/contract.py:68-70
+    // # example: READ_LOCAL_STATE_EXAMPLES
+    // @arc4.abimethod
+    // def get_item_local_data_example(self, for_account: Account) -> bool:
     proto 1 1
+    // smart_contracts/local_storage/contract.py:71
+    // assert self.local_int[for_account] == UInt64(
     frame_dig -1
-    int 0
-    byte "local_int"
+    intc_0 // 0
+    bytec_1 // "local_int"
     app_local_get_ex
     assert // check self.local_int exists for account
-    int 10
+    // smart_contracts/local_storage/contract.py:71-73
+    // assert self.local_int[for_account] == UInt64(
+    //     10
+    // )  # Uint64 - returns guranteed data
+    intc_2 // 10
     ==
     assert
+    // smart_contracts/local_storage/contract.py:74
+    // assert self.local_bytes[for_account] == b"Hello"  # Bytes
     frame_dig -1
-    int 0
-    byte "local_bytes"
+    intc_0 // 0
+    bytec 4 // "local_bytes"
     app_local_get_ex
     assert // check self.local_bytes exists for account
-    byte 0x48656c6c6f
+    bytec 8 // 0x48656c6c6f
     ==
     assert
+    // smart_contracts/local_storage/contract.py:75
+    // assert bool(self.local_bool[for_account])  # Bool
     frame_dig -1
-    int 0
-    byte "local_bool"
+    intc_0 // 0
+    bytec 5 // "local_bool"
     app_local_get_ex
     assert // check self.local_bool exists for account
     assert
+    // smart_contracts/local_storage/contract.py:76
+    // assert self.local_asset[for_account] == Asset(UInt64(10))  # Asset
     frame_dig -1
-    int 0
-    byte "local_asset"
+    intc_0 // 0
+    bytec 6 // "local_asset"
     app_local_get_ex
     assert // check self.local_asset exists for account
-    int 10
+    intc_2 // 10
     ==
     assert
+    // smart_contracts/local_storage/contract.py:77
+    // assert self.local_application[for_account] == Application(
     frame_dig -1
-    int 0
-    byte "local_application"
+    intc_0 // 0
+    bytec 7 // "local_application"
     app_local_get_ex
     assert // check self.local_application exists for account
-    int 10
+    // smart_contracts/local_storage/contract.py:78
+    // UInt64(10)
+    intc_2 // 10
+    // smart_contracts/local_storage/contract.py:77-79
+    // assert self.local_application[for_account] == Application(
+    //     UInt64(10)
+    // )  # Application
     ==
     assert
+    // smart_contracts/local_storage/contract.py:80
+    // assert self.local_account[for_account] == Account(Bytes(b"Hello"))  # Account
     frame_dig -1
-    int 0
-    byte "local_account"
+    intc_0 // 0
+    bytec_3 // "local_account"
     app_local_get_ex
     assert // check self.local_account exists for account
-    int 0
+    intc_0 // 0
     assert // Address length is 32 bytes
-    byte 0x48656c6c6f
+    bytec 8 // 0x48656c6c6f
     ==
     assert
-    int 1
+    // smart_contracts/local_storage/contract.py:81
+    // return True
+    intc_1 // 1
     retsub
 
 
 // smart_contracts.local_storage.contract.LocalStorage.get_local_data_with_default(for_account: bytes) -> uint64:
 get_local_data_with_default:
+    // smart_contracts/local_storage/contract.py:83-84
+    // @arc4.abimethod
+    // def get_local_data_with_default(self, for_account: Account) -> bool:
     proto 1 1
+    // smart_contracts/local_storage/contract.py:85
+    // assert self.local_int.get(for_account, default=UInt64(0)) == UInt64(
     frame_dig -1
-    int 0
-    byte "local_int"
+    intc_0 // 0
+    bytec_1 // "local_int"
     app_local_get_ex
-    int 0
+    intc_0 // 0
     cover 2
     select
-    int 10
+    // smart_contracts/local_storage/contract.py:85-87
+    // assert self.local_int.get(for_account, default=UInt64(0)) == UInt64(
+    //     10
+    // )  # Uint64
+    intc_2 // 10
     ==
     assert
+    // smart_contracts/local_storage/contract.py:88-90
+    // assert self.local_bytes.get(
+    //     for_account, default=Bytes(b"Default Value")
+    // ) == Bytes(
     frame_dig -1
-    int 0
-    byte "local_bytes"
+    intc_0 // 0
+    // smart_contracts/local_storage/contract.py:88
+    // assert self.local_bytes.get(
+    bytec 4 // "local_bytes"
+    // smart_contracts/local_storage/contract.py:88-90
+    // assert self.local_bytes.get(
+    //     for_account, default=Bytes(b"Default Value")
+    // ) == Bytes(
     app_local_get_ex
-    byte 0x44656661756c742056616c7565
+    // smart_contracts/local_storage/contract.py:89
+    // for_account, default=Bytes(b"Default Value")
+    bytec 9 // 0x44656661756c742056616c7565
+    // smart_contracts/local_storage/contract.py:88-90
+    // assert self.local_bytes.get(
+    //     for_account, default=Bytes(b"Default Value")
+    // ) == Bytes(
     cover 2
     select
-    byte 0x48656c6c6f
+    // smart_contracts/local_storage/contract.py:90-92
+    // ) == Bytes(
+    //     b"Hello"
+    // )  # Bytes
+    bytec 8 // 0x48656c6c6f
+    // smart_contracts/local_storage/contract.py:88-92
+    // assert self.local_bytes.get(
+    //     for_account, default=Bytes(b"Default Value")
+    // ) == Bytes(
+    //     b"Hello"
+    // )  # Bytes
     ==
     assert
+    // smart_contracts/local_storage/contract.py:93
+    // assert bool(self.local_bool.get(for_account, default=False))  # Bool
     frame_dig -1
-    int 0
-    byte "local_bool"
+    intc_0 // 0
+    bytec 5 // "local_bool"
     app_local_get_ex
-    int 0
+    intc_0 // 0
     cover 2
     select
     assert
+    // smart_contracts/local_storage/contract.py:95
+    // assert self.local_asset.get(for_account, default=Asset(UInt64(0))) == Asset(
     frame_dig -1
-    int 0
-    byte "local_asset"
+    intc_0 // 0
+    bytec 6 // "local_asset"
     app_local_get_ex
-    int 0
+    intc_0 // 0
     cover 2
     select
-    int 10
+    // smart_contracts/local_storage/contract.py:96
+    // UInt64(10)
+    intc_2 // 10
+    // smart_contracts/local_storage/contract.py:95-97
+    // assert self.local_asset.get(for_account, default=Asset(UInt64(0))) == Asset(
+    //     UInt64(10)
+    // )  # Asset
     ==
     assert
+    // smart_contracts/local_storage/contract.py:98-100
+    // assert self.local_application.get(
+    //     for_account, default=Application(UInt64(0))
+    // ) == Application(
     frame_dig -1
-    int 0
-    byte "local_application"
+    intc_0 // 0
+    // smart_contracts/local_storage/contract.py:98
+    // assert self.local_application.get(
+    bytec 7 // "local_application"
+    // smart_contracts/local_storage/contract.py:98-100
+    // assert self.local_application.get(
+    //     for_account, default=Application(UInt64(0))
+    // ) == Application(
     app_local_get_ex
-    int 0
+    // smart_contracts/local_storage/contract.py:99
+    // for_account, default=Application(UInt64(0))
+    intc_0 // 0
+    // smart_contracts/local_storage/contract.py:98-100
+    // assert self.local_application.get(
+    //     for_account, default=Application(UInt64(0))
+    // ) == Application(
     cover 2
     select
-    int 10
+    // smart_contracts/local_storage/contract.py:101
+    // UInt64(10)
+    intc_2 // 10
+    // smart_contracts/local_storage/contract.py:98-102
+    // assert self.local_application.get(
+    //     for_account, default=Application(UInt64(0))
+    // ) == Application(
+    //     UInt64(10)
+    // )  # Application
     ==
     assert
-    int 0
+    // smart_contracts/local_storage/contract.py:104
+    // for_account, default=Account(Bytes(b"Default Value"))
+    intc_0 // 0
     assert // Address length is 32 bytes
+    // smart_contracts/local_storage/contract.py:103-105
+    // assert self.local_account.get(
+    //     for_account, default=Account(Bytes(b"Default Value"))
+    // ) == Account(
     frame_dig -1
-    int 0
-    byte "local_account"
+    intc_0 // 0
+    // smart_contracts/local_storage/contract.py:103
+    // assert self.local_account.get(
+    bytec_3 // "local_account"
+    // smart_contracts/local_storage/contract.py:103-105
+    // assert self.local_account.get(
+    //     for_account, default=Account(Bytes(b"Default Value"))
+    // ) == Account(
     app_local_get_ex
-    byte 0x44656661756c742056616c7565
+    // smart_contracts/local_storage/contract.py:104
+    // for_account, default=Account(Bytes(b"Default Value"))
+    bytec 9 // 0x44656661756c742056616c7565
+    // smart_contracts/local_storage/contract.py:103-105
+    // assert self.local_account.get(
+    //     for_account, default=Account(Bytes(b"Default Value"))
+    // ) == Account(
     cover 2
     select
-    byte 0x48656c6c6f
+    // smart_contracts/local_storage/contract.py:106
+    // Bytes(b"Hello")
+    bytec 8 // 0x48656c6c6f
+    // smart_contracts/local_storage/contract.py:103-107
+    // assert self.local_account.get(
+    //     for_account, default=Account(Bytes(b"Default Value"))
+    // ) == Account(
+    //     Bytes(b"Hello")
+    // )  # Account
     ==
     assert
-    int 1
+    // smart_contracts/local_storage/contract.py:109
+    // return True
+    intc_1 // 1
     retsub
 
 
 // smart_contracts.local_storage.contract.LocalStorage.maybe_local_data_example(for_account: bytes) -> uint64:
 maybe_local_data_example:
+    // smart_contracts/local_storage/contract.py:111-112
+    // @arc4.abimethod
+    // def maybe_local_data_example(self, for_account: Account) -> bool:
     proto 1 1
+    // smart_contracts/local_storage/contract.py:113
+    // result, exists = self.local_int.maybe(for_account)  # Uint64
     frame_dig -1
-    int 0
-    byte "local_int"
+    intc_0 // 0
+    bytec_1 // "local_int"
     app_local_get_ex
+    // smart_contracts/local_storage/contract.py:114
+    // assert exists, "no data for account"
     assert // no data for account
-    int 10
+    // smart_contracts/local_storage/contract.py:115
+    // assert result == UInt64(10)
+    intc_2 // 10
     ==
     assert
+    // smart_contracts/local_storage/contract.py:117
+    // result_bytes, exists = self.local_bytes.maybe(for_account)  # Bytes
     frame_dig -1
-    int 0
-    byte "local_bytes"
+    intc_0 // 0
+    bytec 4 // "local_bytes"
     app_local_get_ex
+    // smart_contracts/local_storage/contract.py:118
+    // assert exists, "no data for account"
     assert // no data for account
-    byte 0x48656c6c6f
+    // smart_contracts/local_storage/contract.py:119
+    // assert result_bytes == b"Hello"
+    bytec 8 // 0x48656c6c6f
     ==
     assert
+    // smart_contracts/local_storage/contract.py:121
+    // result_bool, exists = self.local_bool.maybe(for_account)  # Bool
     frame_dig -1
-    int 0
-    byte "local_bool"
+    intc_0 // 0
+    bytec 5 // "local_bool"
     app_local_get_ex
+    // smart_contracts/local_storage/contract.py:122
+    // assert exists, "no data for account"
     assert // no data for account
+    // smart_contracts/local_storage/contract.py:123
+    // assert bool(result_bool)
     assert
+    // smart_contracts/local_storage/contract.py:125
+    // result_asset, exists = self.local_asset.maybe(for_account)  # Asset
     frame_dig -1
-    int 0
-    byte "local_asset"
+    intc_0 // 0
+    bytec 6 // "local_asset"
     app_local_get_ex
+    // smart_contracts/local_storage/contract.py:126
+    // assert exists, "no data for account"
     assert // no data for account
-    int 10
+    // smart_contracts/local_storage/contract.py:127
+    // assert result_asset == Asset(UInt64(10))
+    intc_2 // 10
     ==
     assert
+    // smart_contracts/local_storage/contract.py:129
+    // result_appln, exists = self.local_application.maybe(for_account)  # Application
     frame_dig -1
-    int 0
-    byte "local_application"
+    intc_0 // 0
+    bytec 7 // "local_application"
     app_local_get_ex
+    // smart_contracts/local_storage/contract.py:130
+    // assert exists, "no data for account"
     assert // no data for account
-    int 10
+    // smart_contracts/local_storage/contract.py:131
+    // assert result_appln == Application(UInt64(10))
+    intc_2 // 10
     ==
     assert
+    // smart_contracts/local_storage/contract.py:133
+    // result_account, exists = self.local_account.maybe(for_account)  # Account
     frame_dig -1
-    int 0
-    byte "local_account"
+    intc_0 // 0
+    bytec_3 // "local_account"
     app_local_get_ex
+    // smart_contracts/local_storage/contract.py:134
+    // assert exists, "no data for account"
     assert // no data for account
-    int 0
+    // smart_contracts/local_storage/contract.py:135
+    // assert result_account == Account(Bytes(b"Hello"))
+    intc_0 // 0
     assert // Address length is 32 bytes
-    byte 0x48656c6c6f
+    bytec 8 // 0x48656c6c6f
     ==
     assert
-    int 1
+    // smart_contracts/local_storage/contract.py:136
+    // return True
+    intc_1 // 1
     retsub
 
 
 // smart_contracts.local_storage.contract.LocalStorage.set_local_int(for_account: bytes, value: uint64) -> void:
 set_local_int:
+    // smart_contracts/local_storage/contract.py:140-142
+    // # example: WRITE_LOCAL_STATE
+    // @arc4.abimethod
+    // def set_local_int(self, for_account: Account, value: UInt64) -> None:
     proto 2 0
+    // smart_contracts/local_storage/contract.py:143
+    // self.local_int[for_account] = value  # Uint64
     frame_dig -2
-    byte "local_int"
+    bytec_1 // "local_int"
     frame_dig -1
     app_local_put
     retsub
@@ -581,100 +886,159 @@ set_local_int:
 
 // smart_contracts.local_storage.contract.LocalStorage.set_local_data_example(for_account: bytes, value_asset: uint64, value_account: bytes, value_appln: uint64, value_byte: bytes, value_bool: uint64) -> uint64:
 set_local_data_example:
+    // smart_contracts/local_storage/contract.py:147-158
+    // # example: WRITE_LOCAL_STATE_EXAMPLES
+    // @arc4.abimethod
+    // def set_local_data_example(
+    //     self,
+    //     for_account: Account,
+    //     value_asset: Asset,
+    //     value_account: Account,
+    //     value_appln: Application,
+    //     value_byte: Bytes,
+    //     *,
+    //     value_bool: bool,
+    // ) -> bool:
     proto 6 1
+    // smart_contracts/local_storage/contract.py:159
+    // self.local_bytes[for_account] = value_byte  # Bytes
     frame_dig -6
-    byte "local_bytes"
+    bytec 4 // "local_bytes"
     frame_dig -2
     app_local_put
+    // smart_contracts/local_storage/contract.py:160
+    // assert self.local_bytes[for_account] == value_byte
     frame_dig -6
-    int 0
-    byte "local_bytes"
+    intc_0 // 0
+    bytec 4 // "local_bytes"
     app_local_get_ex
     assert // check self.local_bytes exists for account
     frame_dig -2
     ==
     assert
+    // smart_contracts/local_storage/contract.py:162
+    // self.local_bool[for_account] = value_bool  # Bool
     frame_dig -6
-    byte "local_bool"
+    bytec 5 // "local_bool"
     frame_dig -1
     app_local_put
+    // smart_contracts/local_storage/contract.py:163
+    // assert self.local_bool[for_account] == value_bool
     frame_dig -6
-    int 0
-    byte "local_bool"
+    intc_0 // 0
+    bytec 5 // "local_bool"
     app_local_get_ex
     assert // check self.local_bool exists for account
     frame_dig -1
     ==
     assert
+    // smart_contracts/local_storage/contract.py:165
+    // self.local_asset[for_account] = value_asset  # Asset
     frame_dig -6
-    byte "local_asset"
+    bytec 6 // "local_asset"
     frame_dig -5
     app_local_put
+    // smart_contracts/local_storage/contract.py:166
+    // assert self.local_asset[for_account] == value_asset
     frame_dig -6
-    int 0
-    byte "local_asset"
+    intc_0 // 0
+    bytec 6 // "local_asset"
     app_local_get_ex
     assert // check self.local_asset exists for account
     frame_dig -5
     ==
     assert
+    // smart_contracts/local_storage/contract.py:168
+    // self.local_application[for_account] = value_appln  # Application
     frame_dig -6
-    byte "local_application"
+    bytec 7 // "local_application"
     frame_dig -3
     app_local_put
+    // smart_contracts/local_storage/contract.py:169
+    // assert self.local_application[for_account] == value_appln
     frame_dig -6
-    int 0
-    byte "local_application"
+    intc_0 // 0
+    bytec 7 // "local_application"
     app_local_get_ex
     assert // check self.local_application exists for account
     frame_dig -3
     ==
     assert
+    // smart_contracts/local_storage/contract.py:171
+    // self.local_account[for_account] = value_account  # Account
     frame_dig -6
-    byte "local_account"
+    bytec_3 // "local_account"
     frame_dig -4
     app_local_put
+    // smart_contracts/local_storage/contract.py:172
+    // assert self.local_account[for_account] == value_account
     frame_dig -6
-    int 0
-    byte "local_account"
+    intc_0 // 0
+    bytec_3 // "local_account"
     app_local_get_ex
     assert // check self.local_account exists for account
     frame_dig -4
     ==
     assert
-    int 1
+    // smart_contracts/local_storage/contract.py:173
+    // return True
+    intc_1 // 1
     retsub
 
 
 // smart_contracts.local_storage.contract.LocalStorage.delete_local_data(for_account: bytes) -> void:
 delete_local_data:
+    // smart_contracts/local_storage/contract.py:177-179
+    // # example: DELETE_LOCAL_STATE
+    // @arc4.abimethod
+    // def delete_local_data(self, for_account: Account) -> None:
     proto 1 0
+    // smart_contracts/local_storage/contract.py:180
+    // del self.local_account[for_account]  # Uint64
     frame_dig -1
-    byte "local_account"
+    bytec_3 // "local_account"
     app_local_del
     retsub
 
 
 // smart_contracts.local_storage.contract.LocalStorage.delete_local_data_example(for_account: bytes) -> uint64:
 delete_local_data_example:
+    // smart_contracts/local_storage/contract.py:184-186
+    // # example: DELETE_LOCAL_STATE_EXAMPLES
+    // @arc4.abimethod
+    // def delete_local_data_example(self, for_account: Account) -> bool:
     proto 1 1
+    // smart_contracts/local_storage/contract.py:187
+    // del self.local_int[for_account]  # Uint64
     frame_dig -1
-    byte "local_int"
+    bytec_1 // "local_int"
     app_local_del
+    // smart_contracts/local_storage/contract.py:188
+    // del self.local_bytes[for_account]  # Bytes
     frame_dig -1
-    byte "local_bytes"
+    bytec 4 // "local_bytes"
     app_local_del
+    // smart_contracts/local_storage/contract.py:189
+    // del self.local_bool[for_account]  # Bool
     frame_dig -1
-    byte "local_bool"
+    bytec 5 // "local_bool"
     app_local_del
+    // smart_contracts/local_storage/contract.py:190
+    // del self.local_asset[for_account]  # Asset
     frame_dig -1
-    byte "local_asset"
+    bytec 6 // "local_asset"
     app_local_del
+    // smart_contracts/local_storage/contract.py:191
+    // del self.local_application[for_account]  # Application
     frame_dig -1
-    byte "local_application"
+    bytec 7 // "local_application"
     app_local_del
+    // smart_contracts/local_storage/contract.py:192
+    // del self.local_account[for_account]  # Account
     frame_dig -1
-    byte "local_account"
+    bytec_3 // "local_account"
     app_local_del
-    int 1
+    // smart_contracts/local_storage/contract.py:193
+    // return True
+    intc_1 // 1
     retsub

@@ -1,567 +1,568 @@
 #pragma version 10
+#pragma typetrack false
 
-smart_contracts.arc4_types.contract.Arc4Struct.approval_program:
+// smart_contracts.arc4_types.contract.Arc4Struct.__algopy_entrypoint_with_init() -> uint64:
+main:
+    intcblock 0 2 1
+    bytecblock "todos" 0x 0x0000 0x151f7c75 0x0002
     txn ApplicationID
-    bnz main_entrypoint@2
-    callsub __init__
+    bnz main_after_if_else@2
+    // smart_contracts/arc4_types/contract.py:234
+    // self.todos = Todos()
+    bytec_0 // "todos"
+    bytec_2 // 0x0000
+    app_global_put
 
-main_entrypoint@2:
-    callsub __puya_arc4_router__
+main_after_if_else@2:
+    // smart_contracts/arc4_types/contract.py:231
+    // class Arc4Struct(ARC4Contract):
+    txn NumAppArgs
+    bz main_bare_routing@8
+    pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d // method "add_todo(string)(string,bool)[]", method "complete_todo(string)void", method "return_todo(string)(string,bool)"
+    txna ApplicationArgs 0
+    match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7
+
+main_after_if_else@10:
+    // smart_contracts/arc4_types/contract.py:231
+    // class Arc4Struct(ARC4Contract):
+    intc_0 // 0
     return
 
-
-// smart_contracts.arc4_types.contract.Arc4Struct.__puya_arc4_router__() -> uint64:
-__puya_arc4_router__:
-    proto 0 1
-    txn NumAppArgs
-    bz __puya_arc4_router___bare_routing@7
-    method "add_todo(string)(string,bool)[]"
-    method "complete_todo(string)void"
-    method "return_todo(string)(string,bool)"
-    txna ApplicationArgs 0
-    match __puya_arc4_router___add_todo_route@2 __puya_arc4_router___complete_todo_route@3 __puya_arc4_router___return_todo_route@4
-    int 0
-    retsub
-
-__puya_arc4_router___add_todo_route@2:
+main_return_todo_route@7:
+    // smart_contracts/arc4_types/contract.py:255
+    // @abimethod()
     txn OnCompletion
     !
-    assert // OnCompletion is NoOp
+    assert // OnCompletion is not NoOp
     txn ApplicationID
-    assert // is not creating
+    assert // can only call when not creating
+    // smart_contracts/arc4_types/contract.py:231
+    // class Arc4Struct(ARC4Contract):
     txna ApplicationArgs 1
-    callsub add_todo
-    byte 0x151f7c75
-    swap
-    concat
-    log
-    int 1
-    retsub
-
-__puya_arc4_router___complete_todo_route@3:
-    txn OnCompletion
-    !
-    assert // OnCompletion is NoOp
-    txn ApplicationID
-    assert // is not creating
-    txna ApplicationArgs 1
-    callsub complete_todo
-    int 1
-    retsub
-
-__puya_arc4_router___return_todo_route@4:
-    txn OnCompletion
-    !
-    assert // OnCompletion is NoOp
-    txn ApplicationID
-    assert // is not creating
-    txna ApplicationArgs 1
+    // smart_contracts/arc4_types/contract.py:255
+    // @abimethod()
     callsub return_todo
-    byte 0x151f7c75
+    bytec_3 // 0x151f7c75
     swap
     concat
     log
-    int 1
-    retsub
+    intc_2 // 1
+    return
 
-__puya_arc4_router___bare_routing@7:
+main_complete_todo_route@6:
+    // smart_contracts/arc4_types/contract.py:247
+    // @abimethod()
     txn OnCompletion
-    bnz __puya_arc4_router___after_if_else@11
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/arc4_types/contract.py:231
+    // class Arc4Struct(ARC4Contract):
+    txna ApplicationArgs 1
+    // smart_contracts/arc4_types/contract.py:247
+    // @abimethod()
+    callsub complete_todo
+    intc_2 // 1
+    return
+
+main_add_todo_route@5:
+    // smart_contracts/arc4_types/contract.py:236
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/arc4_types/contract.py:231
+    // class Arc4Struct(ARC4Contract):
+    txna ApplicationArgs 1
+    // smart_contracts/arc4_types/contract.py:236
+    // @abimethod()
+    callsub add_todo
+    bytec_3 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_2 // 1
+    return
+
+main_bare_routing@8:
+    // smart_contracts/arc4_types/contract.py:231
+    // class Arc4Struct(ARC4Contract):
+    txn OnCompletion
+    bnz main_after_if_else@10
     txn ApplicationID
     !
-    assert // is creating
-    int 1
-    retsub
-
-__puya_arc4_router___after_if_else@11:
-    int 0
-    retsub
+    assert // can only call when creating
+    intc_2 // 1
+    return
 
 
 // smart_contracts.arc4_types.contract.Arc4Struct.add_todo(task: bytes) -> bytes:
 add_todo:
+    // smart_contracts/arc4_types/contract.py:236-237
+    // @abimethod()
+    // def add_todo(self, task: arc4.String) -> Todos:
     proto 1 1
-    byte 0x000300
+    intc_0 // 0
+    dupn 2
+    bytec_1 // ""
+    dupn 3
+    // smart_contracts/arc4_types/contract.py:238
+    // todo = Todo(task=task, completed=arc4.Bool(False))  # noqa: FBT003
+    pushbytes 0x000300
     frame_dig -1
     concat
-    int 0
-    byte "todos"
+    // smart_contracts/arc4_types/contract.py:240
+    // if not self.todos:
+    intc_0 // 0
+    bytec_0 // "todos"
     app_global_get_ex
     assert // check self.todos exists
-    byte 0x0000
+    bytec_2 // 0x0000
     ==
     bz add_todo_else_body@2
-    byte 0x0002
+    // smart_contracts/arc4_types/contract.py:241
+    // self.todos = Todos(todo.copy())
+    bytec 4 // 0x0002
     swap
     concat
-    byte 0x0001
+    pushbytes 0x0001
     swap
     concat
-    byte "todos"
-    swap
-    app_global_put
-    b add_todo_after_if_else@3
-
-add_todo_else_body@2:
-    int 0
-    byte "todos"
-    app_global_get_ex
-    assert // check self.todos exists
-    byte 0x0002
-    uncover 2
-    concat
-    swap
-    dup
-    int 0
-    extract_uint16
-    swap
-    extract 2 0
-    int 1
-    uncover 3
-    callsub dynamic_array_concat_dynamic_element
-    byte "todos"
+    bytec_0 // "todos"
     swap
     app_global_put
 
 add_todo_after_if_else@3:
-    int 0
-    byte "todos"
+    // smart_contracts/arc4_types/contract.py:245
+    // return self.todos
+    intc_0 // 0
+    bytec_0 // "todos"
     app_global_get_ex
     assert // check self.todos exists
+    frame_bury 0
     retsub
+
+add_todo_else_body@2:
+    // smart_contracts/arc4_types/contract.py:243
+    // self.todos.append(todo.copy())
+    intc_0 // 0
+    bytec_0 // "todos"
+    app_global_get_ex
+    assert // check self.todos exists
+    bytec 4 // 0x0002
+    uncover 2
+    concat
+    frame_bury 2
+    dup
+    intc_0 // 0
+    extract_uint16
+    dup
+    cover 2
+    frame_bury 3
+    extract 2 0
+    frame_bury 0
+    bytec_1 // 0x
+    frame_bury 1
+    intc_1 // 2
+    *
+    frame_bury 6
+    intc_0 // 0
+    frame_bury 4
+
+add_todo_for_header@5:
+    frame_dig 4
+    frame_dig 6
+    <
+    bz add_todo_after_for@7
+    frame_dig 0
+    frame_dig 4
+    dup
+    cover 2
+    extract_uint16
+    intc_1 // 2
+    +
+    itob
+    extract 6 2
+    frame_dig 1
+    swap
+    concat
+    frame_bury 1
+    intc_1 // 2
+    +
+    frame_bury 4
+    b add_todo_for_header@5
+
+add_todo_after_for@7:
+    frame_dig 0
+    len
+    frame_bury 5
+    intc_0 // 0
+    frame_bury 4
+
+add_todo_for_header@8:
+    frame_dig 4
+    intc_1 // 2
+    <
+    bz add_todo_after_for@10
+    frame_dig 2
+    frame_dig 4
+    dup
+    cover 2
+    extract_uint16
+    frame_dig 5
+    +
+    itob
+    extract 6 2
+    frame_dig 1
+    swap
+    concat
+    frame_bury 1
+    intc_1 // 2
+    +
+    frame_bury 4
+    b add_todo_for_header@8
+
+add_todo_after_for@10:
+    frame_dig 3
+    // smart_contracts/arc4_types/contract.py:243
+    // self.todos.append(todo.copy())
+    intc_2 // 1
+    +
+    itob
+    extract 6 2
+    frame_dig 1
+    concat
+    frame_dig 0
+    frame_dig 6
+    frame_dig 5
+    substring3
+    concat
+    frame_dig 2
+    dup
+    len
+    intc_1 // 2
+    swap
+    substring3
+    concat
+    // smart_contracts/arc4_types/contract.py:243
+    // self.todos.append(todo.copy())
+    bytec_0 // "todos"
+    swap
+    app_global_put
+    b add_todo_after_if_else@3
 
 
 // smart_contracts.arc4_types.contract.Arc4Struct.complete_todo(task: bytes) -> void:
 complete_todo:
+    // smart_contracts/arc4_types/contract.py:247-248
+    // @abimethod()
+    // def complete_todo(self, task: arc4.String) -> None:
     proto 1 0
-    byte ""
+    intc_0 // 0
     dup
-    int 0
-    byte "todos"
+    bytec_1 // ""
+    dupn 4
+    // smart_contracts/arc4_types/contract.py:250
+    // for index in urange(self.todos.length):
+    intc_0 // 0
+    bytec_0 // "todos"
     app_global_get_ex
     assert // check self.todos exists
-    int 0
+    intc_0 // 0
     extract_uint16
-    int 0
+    intc_0 // 0
 
 complete_todo_for_header@1:
-    frame_dig 3
-    frame_dig 2
+    // smart_contracts/arc4_types/contract.py:250
+    // for index in urange(self.todos.length):
+    frame_dig 8
+    frame_dig 7
     <
     bz complete_todo_after_for@6
-    int 0
-    byte "todos"
+    // smart_contracts/arc4_types/contract.py:251
+    // if self.todos[index].task == task:
+    intc_0 // 0
+    bytec_0 // "todos"
     app_global_get_ex
     assert // check self.todos exists
     dup
     extract 2 0
-    frame_dig 3
+    frame_dig 8
     dup
     cover 3
-    int 2
+    intc_1 // 2
     *
     dup
-    frame_bury 0
+    frame_bury 3
     dig 1
     swap
     extract_uint16
-    cover 3
-    swap
-    int 0
-    extract_uint16
     uncover 2
-    int 1
+    intc_0 // 0
+    extract_uint16
+    uncover 3
+    intc_2 // 1
     +
     dup
     cover 4
-    dup
-    cover 2
-    - // on error: Index access is out of bounds
     swap
-    dig 2
+    dig 1
+    - // on error: Index access is out of bounds
+    dig 3
     len
-    cover 2
-    int 2
+    uncover 2
+    intc_1 // 2
     *
     dup
-    frame_bury 1
-    dig 3
+    frame_bury 2
+    dig 4
     swap
     extract_uint16
-    swap
+    uncover 2
     select
-    swap
-    cover 2
     substring3
     dup
-    int 0
+    intc_0 // 0
     extract_uint16
-    swap
-    dup
+    dig 1
     len
-    swap
-    cover 2
     substring3
     frame_dig -1
     ==
     bz complete_todo_after_if_else@4
-    int 0
-    byte "todos"
+    // smart_contracts/arc4_types/contract.py:252
+    // self.todos[index].completed = arc4.Bool(True)  # noqa: FBT003
+    intc_0 // 0
+    bytec_0 // "todos"
     app_global_get_ex
     assert // check self.todos exists
     dup
     extract 2 0
     dup
-    frame_dig 0
-    extract_uint16
-    cover 2
-    swap
-    int 0
-    extract_uint16
-    uncover 3
-    - // on error: Index access is out of bounds
-    dig 1
-    len
-    swap
-    dig 2
-    frame_dig 1
-    extract_uint16
-    swap
-    select
-    swap
-    cover 2
-    substring3
-    int 16
-    int 1
-    setbit
-    int 0
-    byte "todos"
-    app_global_get_ex
-    assert // check self.todos exists
-    swap
     frame_dig 3
-    callsub dynamic_array_replace_dynamic_element
-    byte "todos"
-    swap
-    app_global_put
-    b complete_todo_after_for@6
-
-complete_todo_after_if_else@4:
-    frame_bury 3
-    b complete_todo_for_header@1
-
-complete_todo_after_for@6:
-    retsub
-
-
-// smart_contracts.arc4_types.contract.Arc4Struct.return_todo(task: bytes) -> bytes:
-return_todo:
-    proto 1 1
-    int 0
-    byte ""
-    dup
-    int 0
-    dup
-    byte "todos"
-    app_global_get_ex
-    assert // check self.todos exists
-    int 0
     extract_uint16
-    int 0
-
-return_todo_for_header@1:
-    frame_dig 5
-    frame_dig 4
-    <
-    bz return_todo_after_for@6
-    int 0
-    byte "todos"
-    app_global_get_ex
-    assert // check self.todos exists
-    dup
-    extract 2 0
-    frame_dig 5
-    dup
-    cover 3
-    int 2
-    *
-    dup
-    frame_bury 1
-    dig 1
-    swap
+    dig 2
+    intc_0 // 0
     extract_uint16
-    cover 3
-    swap
-    int 0
-    extract_uint16
-    uncover 2
-    int 1
-    +
-    dup
-    frame_bury 5
-    dup
-    cover 2
+    uncover 4
     - // on error: Index access is out of bounds
-    swap
     dig 2
     len
-    cover 2
-    int 2
-    *
-    dup
-    frame_bury 2
     dig 3
-    swap
+    frame_dig 2
     extract_uint16
-    swap
+    dup2
+    uncover 4
     select
-    swap
-    cover 2
-    substring3
-    dup
-    int 0
-    extract_uint16
-    swap
-    dup
-    len
-    swap
-    cover 2
-    substring3
-    frame_dig -1
-    ==
-    bz return_todo_for_header@1
-    int 0
-    byte "todos"
-    app_global_get_ex
-    assert // check self.todos exists
-    dup
-    extract 2 0
-    dup
-    frame_dig 1
-    extract_uint16
-    cover 2
-    swap
-    int 0
-    extract_uint16
-    frame_dig 5
-    - // on error: Index access is out of bounds
-    dig 1
-    len
-    swap
-    dig 2
-    frame_dig 2
-    extract_uint16
-    swap
-    select
-    swap
-    cover 2
-    substring3
-    frame_bury 0
-    int 1
-    frame_bury 3
-    b return_todo_for_header@1
-
-return_todo_after_for@6:
-    frame_dig 3
-    assert
-    retsub
-
-
-// smart_contracts.arc4_types.contract.Arc4Struct.__init__() -> void:
-__init__:
-    proto 0 0
-    byte "todos"
-    byte 0x0000
-    app_global_put
-    retsub
-
-
-// _puya_lib.arc4.dynamic_array_concat_dynamic_element(array_items_count: uint64, array_head_and_tail: bytes, new_items_count: uint64, new_head_and_tail: bytes) -> bytes:
-dynamic_array_concat_dynamic_element:
-    proto 4 1
-    byte ""
-    byte 0x
-    frame_dig -2
-    int 2
-    *
-    frame_dig -4
-    int 2
-    *
-    int 0
-
-dynamic_array_concat_dynamic_element_for_header@1:
-    frame_dig 4
-    frame_dig 3
-    <
-    bz dynamic_array_concat_dynamic_element_after_for@4
-    frame_dig -3
-    frame_dig 4
-    dup
-    cover 2
-    extract_uint16
-    frame_dig 2
-    +
-    itob
-    extract 6 2
-    frame_dig 1
-    swap
-    concat
-    frame_bury 1
-    int 2
-    +
-    frame_bury 4
-    b dynamic_array_concat_dynamic_element_for_header@1
-
-dynamic_array_concat_dynamic_element_after_for@4:
-    frame_dig -3
-    len
-    frame_bury 0
-    int 0
-    frame_bury 4
-
-dynamic_array_concat_dynamic_element_for_header@5:
-    frame_dig 4
-    frame_dig 2
-    <
-    bz dynamic_array_concat_dynamic_element_after_for@8
-    frame_dig -1
-    frame_dig 4
-    dup
-    cover 2
-    extract_uint16
-    frame_dig 0
-    +
-    itob
-    extract 6 2
-    frame_dig 1
-    swap
-    concat
-    frame_bury 1
-    int 2
-    +
-    frame_bury 4
-    b dynamic_array_concat_dynamic_element_for_header@5
-
-dynamic_array_concat_dynamic_element_after_for@8:
-    frame_dig -4
-    frame_dig -2
-    +
-    itob
-    extract 6 2
-    frame_dig 1
-    concat
-    frame_dig -3
-    frame_dig 3
-    frame_dig 0
-    substring3
-    concat
-    frame_dig -1
-    len
-    frame_dig -1
-    frame_dig 2
+    dig 4
+    dig 4
     uncover 2
     substring3
-    concat
-    frame_bury 0
-    retsub
-
-
-// _puya_lib.arc4.dynamic_array_replace_dynamic_element(source: bytes, new_item: bytes, index: uint64) -> bytes:
-dynamic_array_replace_dynamic_element:
-    proto 3 1
-    frame_dig -3
+    pushint 16 // 16
+    intc_2 // 1
+    setbit
+    uncover 5
     substring 0 2
     dup
+    frame_bury 1
     btoi
-    frame_dig -3
-    extract 2 0
-    frame_dig -2
-    frame_dig -1
-    uncover 3
-    callsub static_array_replace_dynamic_element
-    concat
-    retsub
-
-
-// _puya_lib.arc4.static_array_replace_dynamic_element(array_head_and_tail: bytes, new_item: bytes, index: uint64, array_length: uint64) -> bytes:
-static_array_replace_dynamic_element:
-    proto 4 1
-    frame_dig -2
-    int 2
-    *
-    frame_dig -4
-    swap
-    extract_uint16
-    frame_dig -2
-    int 1
-    +
-    int 2
-    *
     dup
-    cover 2
-    frame_dig -4
-    swap
-    extract_uint16
-    frame_dig -4
-    len
-    frame_dig -1
-    frame_dig -2
+    frame_dig 8
     -
-    int 1
+    intc_2 // 1
     -
-    dig 1
-    uncover 3
+    dig 4
+    uncover 4
     uncover 2
     select
     dup
-    dig 3
+    dig 5
     -
-    cover 3
-    frame_dig -3
+    frame_bury 5
+    dig 2
     len
-    cover 3
-    frame_dig -4
-    int 0
+    frame_bury 4
+    dig 5
+    intc_0 // 0
+    uncover 6
+    substring3
+    uncover 3
+    concat
+    uncover 4
+    uncover 2
     uncover 4
     substring3
-    frame_dig -3
     concat
-    frame_dig -4
-    uncover 2
-    uncover 3
-    substring3
-    concat
-    frame_dig -1
-    int 2
+    frame_bury 0
+    intc_1 // 2
     *
+    frame_bury 6
 
-static_array_replace_dynamic_element_for_header@1:
-    frame_dig 0
-    frame_dig 4
+complete_todo_for_header@8:
+    frame_dig 2
+    frame_dig 6
     <
-    bz static_array_replace_dynamic_element_after_for@4
-    frame_dig 3
-    dup
+    bz complete_todo_after_for@10
     frame_dig 0
+    dup
+    frame_dig 2
     dup
     cover 3
     extract_uint16
-    frame_dig 2
+    frame_dig 4
     +
-    frame_dig 1
+    frame_dig 5
     -
     itob
     extract 6 2
     dig 2
     swap
     replace3
-    frame_bury 3
-    int 2
-    +
     frame_bury 0
-    b static_array_replace_dynamic_element_for_header@1
+    intc_1 // 2
+    +
+    frame_bury 2
+    b complete_todo_for_header@8
 
-static_array_replace_dynamic_element_after_for@4:
+complete_todo_after_for@10:
+    frame_dig 1
+    frame_dig 0
+    concat
+    // smart_contracts/arc4_types/contract.py:252
+    // self.todos[index].completed = arc4.Bool(True)  # noqa: FBT003
+    bytec_0 // "todos"
+    swap
+    app_global_put
+
+complete_todo_after_for@6:
+    retsub
+
+complete_todo_after_if_else@4:
+    frame_bury 8
+    b complete_todo_for_header@1
+
+
+// smart_contracts.arc4_types.contract.Arc4Struct.return_todo(task: bytes) -> bytes:
+return_todo:
+    // smart_contracts/arc4_types/contract.py:255-256
+    // @abimethod()
+    // def return_todo(self, task: arc4.String) -> Todo:
+    proto 1 1
+    bytec_1 // ""
+    dup
+    intc_0 // 0
+    // smart_contracts/arc4_types/contract.py:259-260
+    // exist = False
+    // for index in urange(self.todos.length):
+    dupn 2
+    // smart_contracts/arc4_types/contract.py:260
+    // for index in urange(self.todos.length):
+    bytec_0 // "todos"
+    app_global_get_ex
+    assert // check self.todos exists
+    intc_0 // 0
+    extract_uint16
+    intc_0 // 0
+
+return_todo_for_header@1:
+    // smart_contracts/arc4_types/contract.py:260
+    // for index in urange(self.todos.length):
+    frame_dig 5
+    frame_dig 4
+    <
+    bz return_todo_after_for@6
+    // smart_contracts/arc4_types/contract.py:262
+    // if self.todos[index].task == task:
+    intc_0 // 0
+    bytec_0 // "todos"
+    app_global_get_ex
+    assert // check self.todos exists
+    dup
+    extract 2 0
+    frame_dig 5
+    dup
+    cover 3
+    intc_1 // 2
+    *
+    dup
+    frame_bury 0
+    dig 1
+    swap
+    extract_uint16
+    uncover 2
+    intc_0 // 0
+    extract_uint16
+    uncover 3
+    intc_2 // 1
+    +
+    dup
+    frame_bury 5
+    swap
+    dig 1
+    - // on error: Index access is out of bounds
+    dig 3
+    len
+    uncover 2
+    intc_1 // 2
+    *
+    dup
+    frame_bury 1
+    dig 4
+    swap
+    extract_uint16
+    uncover 2
+    select
+    substring3
+    dup
+    intc_0 // 0
+    extract_uint16
+    dig 1
+    len
+    substring3
+    frame_dig -1
+    ==
+    bz return_todo_for_header@1
+    // smart_contracts/arc4_types/contract.py:263
+    // todo_to_return = self.todos[index].copy()
+    intc_0 // 0
+    bytec_0 // "todos"
+    app_global_get_ex
+    assert // check self.todos exists
+    dup
+    extract 2 0
+    dup
+    frame_dig 0
+    extract_uint16
+    uncover 2
+    intc_0 // 0
+    extract_uint16
+    frame_dig 5
+    - // on error: Index access is out of bounds
+    dig 2
+    len
+    dig 3
+    frame_dig 1
+    extract_uint16
+    uncover 2
+    select
+    substring3
+    frame_bury 2
+    // smart_contracts/arc4_types/contract.py:264
+    // exist = True
+    intc_2 // 1
+    frame_bury 3
+    b return_todo_for_header@1
+
+return_todo_after_for@6:
+    // smart_contracts/arc4_types/contract.py:266
+    // assert exist
     frame_dig 3
+    assert
+    // smart_contracts/arc4_types/contract.py:268
+    // return todo_to_return
+    frame_dig 2
     frame_bury 0
     retsub
