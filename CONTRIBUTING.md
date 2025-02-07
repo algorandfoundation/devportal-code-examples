@@ -70,6 +70,6 @@ I will be extracted! 👍
 ```
 
 ## Repository structure
-Code examples are divided into sub-projects in the `projects` directory depending on their type. For example, if the code example concerns an Algorand Python smart contract, it should go into the `python-contract-examples` sub-project directory.
+Code examples are divided into sub-projects in the `projects` directory depending on their type. For example, if the code example concerns an Algorand Python smart contract, it should go into the `python-examples` sub-project directory.
 
 Refer to `CONTRIBUTING.md` files in respective sub-projects in the `projects` directory for sub-project specific instructions.
