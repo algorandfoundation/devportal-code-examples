@@ -35,21 +35,6 @@ from smart_contracts.artifacts.arc4_types.arc4_types_client import (
 
 
 @pytest.fixture(scope="session")
-def alice(algorand: AlgorandClient, dispenser: SigningAccount) -> SigningAccount:
-    """Get an account to use as Alice who will participate in the auction"""
-    acct = algorand.account.random()
-
-    # Make sure the account has some ALGO
-    algorand.send.payment(
-        PaymentParams(
-            sender=dispenser.address, receiver=acct.address, amount=AlgoAmount(algo=10)
-        )
-    )
-
-    return acct
-
-
-@pytest.fixture(scope="session")
 def arc4_statc_array_app_client(
     creator: SigningAccount, algorand: AlgorandClient
 ) -> Arc4StaticArrayClient:
