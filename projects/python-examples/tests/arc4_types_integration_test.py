@@ -1,60 +1,79 @@
 import pytest
-from algokit_utils.beta.account_manager import AddressAndSigner
-from algokit_utils.beta.algorand_client import (
-    AlgorandClient,
-    PayParams,
-)
+from algokit_utils import *
 from algokit_utils.config import config
-from algosdk.v2client.algod import AlgodClient
-
 from smart_contracts.artifacts.arc4_types.arc4_dynamic_array_client import (
     Arc4DynamicArrayClient,
-    SimulateOptions,
+    HelloArgs,
+    Arc4DynamicArrayFactory,
 )
 from smart_contracts.artifacts.arc4_types.arc4_static_array_client import (
     Arc4StaticArrayClient,
+    Arc4StaticArrayFactory,
 )
-from smart_contracts.artifacts.arc4_types.arc4_struct_client import Arc4StructClient
-from smart_contracts.artifacts.arc4_types.arc4_tuple_client import Arc4TupleClient
-from smart_contracts.artifacts.arc4_types.arc4_types_client import Arc4TypesClient
+from smart_contracts.artifacts.arc4_types.arc4_struct_client import (
+    AddTodoArgs,
+    Arc4StructClient,
+    Arc4StructFactory,
+    CompleteTodoArgs,
+    ReturnTodoArgs,
+)
+from smart_contracts.artifacts.arc4_types.arc4_tuple_client import (
+    AddContactInfoArgs,
+    Arc4TupleClient,
+    Arc4TupleFactory,
+)
+from smart_contracts.artifacts.arc4_types.arc4_types_client import (
+    AddArc4BiguintNArgs,
+    AddArc4Uint64Args,
+    AddArc4UintNArgs,
+    Arc4AddressPropertiesArgs,
+    Arc4AddressReturnArgs,
+    Arc4ByteArgs,
+    Arc4TypesClient,
+    Arc4TypesFactory,
+)
 
 
 @pytest.fixture(scope="session")
 def algorand() -> AlgorandClient:
     """Get an AlgorandClient to use throughout the tests"""
-    algorand = AlgorandClient.default_local_net()
+    algorand = AlgorandClient.default_localnet()
     algorand.set_default_validity_window(1000)
 
     return algorand
 
 
 @pytest.fixture(scope="session")
-def dispenser(algorand: AlgorandClient) -> AddressAndSigner:
+def dispenser(algorand: AlgorandClient) -> SigningAccount:
     """Get the dispenser to fund test addresses"""
-    return algorand.account.dispenser()
+    return algorand.account.localnet_dispenser()
 
 
 @pytest.fixture(scope="session")
-def creator(algorand: AlgorandClient, dispenser: AddressAndSigner) -> AddressAndSigner:
+def creator(algorand: AlgorandClient, dispenser: SigningAccount) -> SigningAccount:
     """Get an account to use as the creator of the contract"""
     acct = algorand.account.random()
 
     # Make sure the account has some ALGO
     algorand.send.payment(
-        PayParams(sender=dispenser.address, receiver=acct.address, amount=10_000_000)
+        PaymentParams(
+            sender=dispenser.address, receiver=acct.address, amount=AlgoAmount(algo=10)
+        )
     )
 
     return acct
 
 
 @pytest.fixture(scope="session")
-def alice(algorand: AlgorandClient, dispenser: AddressAndSigner) -> AddressAndSigner:
+def alice(algorand: AlgorandClient, dispenser: SigningAccount) -> SigningAccount:
     """Get an account to use as Alice who will participate in the auction"""
     acct = algorand.account.random()
 
     # Make sure the account has some ALGO
     algorand.send.payment(
-        PayParams(sender=dispenser.address, receiver=acct.address, amount=10_000_000)
+        PaymentParams(
+            sender=dispenser.address, receiver=acct.address, amount=AlgoAmount(algo=10)
+        )
     )
 
     return acct
@@ -62,7 +81,7 @@ def alice(algorand: AlgorandClient, dispenser: AddressAndSigner) -> AddressAndSi
 
 @pytest.fixture(scope="session")
 def arc4_statc_array_app_client(
-    algod_client: AlgodClient, creator: AddressAndSigner, algorand: AlgorandClient
+    creator: SigningAccount, algorand: AlgorandClient
 ) -> Arc4StaticArrayClient:
     """Deploy the arc4 static array App and create an app client the creator will use to interact with the contract"""
 
@@ -71,19 +90,22 @@ def arc4_statc_array_app_client(
         # trace_all=True,
     )
 
-    client = Arc4StaticArrayClient(
-        algod_client,
-        sender=creator.address,
-        signer=creator.signer,
+    factory = algorand.client.get_typed_app_factory(
+        Arc4StaticArrayFactory,
+        default_sender=creator.address,
+        default_signer=creator.signer,
     )
 
-    client.create_bare()
+    client, deploy_result = factory.deploy(
+        on_update=OnUpdate.ReplaceApp,
+        on_schema_break=OnSchemaBreak.Fail,
+    )
 
     algorand.send.payment(
-        PayParams(
+        PaymentParams(
             sender=creator.address,
             receiver=client.app_address,
-            amount=1000000,  # 1 Algo
+            amount=AlgoAmount(algo=1),  # 1 Algo
         )
     )
 
@@ -92,7 +114,7 @@ def arc4_statc_array_app_client(
 
 @pytest.fixture(scope="session")
 def arc4_dynamic_array_app_client(
-    algod_client: AlgodClient, creator: AddressAndSigner, algorand: AlgorandClient
+    creator: SigningAccount, algorand: AlgorandClient
 ) -> Arc4DynamicArrayClient:
     """Deploy the arc4 static array App and create an app client the creator will use to interact with the contract"""
 
@@ -101,19 +123,22 @@ def arc4_dynamic_array_app_client(
         # trace_all=True,
     )
 
-    client = Arc4DynamicArrayClient(
-        algod_client,
-        sender=creator.address,
-        signer=creator.signer,
+    factory = algorand.client.get_typed_app_factory(
+        Arc4DynamicArrayFactory,
+        default_sender=creator.address,
+        default_signer=creator.signer,
     )
 
-    client.create_bare()
+    client, deploy_result = factory.deploy(
+        on_update=OnUpdate.ReplaceApp,
+        on_schema_break=OnSchemaBreak.Fail,
+    )
 
     algorand.send.payment(
-        PayParams(
+        PaymentParams(
             sender=creator.address,
             receiver=client.app_address,
-            amount=1000000,  # 1 Algo
+            amount=AlgoAmount(algo=1),  # 1 Algo
         )
     )
 
@@ -122,7 +147,7 @@ def arc4_dynamic_array_app_client(
 
 @pytest.fixture(scope="session")
 def arc4_tuple_app_client(
-    algod_client: AlgodClient, creator: AddressAndSigner, algorand: AlgorandClient
+    creator: SigningAccount, algorand: AlgorandClient
 ) -> Arc4TupleClient:
     """Deploy the arc4 static array App and create an app client the creator will use to interact with the contract"""
 
@@ -131,19 +156,22 @@ def arc4_tuple_app_client(
         # trace_all=True,
     )
 
-    client = Arc4TupleClient(
-        algod_client,
-        sender=creator.address,
-        signer=creator.signer,
+    factory = algorand.client.get_typed_app_factory(
+        Arc4TupleFactory,
+        default_sender=creator.address,
+        default_signer=creator.signer,
     )
 
-    client.create_bare()
+    client, deploy_result = factory.deploy(
+        on_update=OnUpdate.ReplaceApp,
+        on_schema_break=OnSchemaBreak.Fail,
+    )
 
     algorand.send.payment(
-        PayParams(
+        PaymentParams(
             sender=creator.address,
             receiver=client.app_address,
-            amount=1000000,  # 1 Algo
+            amount=AlgoAmount(algo=1),  # 1 Algo
         )
     )
 
@@ -152,7 +180,7 @@ def arc4_tuple_app_client(
 
 @pytest.fixture(scope="session")
 def arc4_struct_app_client(
-    algod_client: AlgodClient, creator: AddressAndSigner, algorand: AlgorandClient
+    creator: SigningAccount, algorand: AlgorandClient
 ) -> Arc4StructClient:
     """Deploy the arc4 struct App and create an app client the creator will use to interact with the contract"""
 
@@ -161,19 +189,22 @@ def arc4_struct_app_client(
         # trace_all=True,
     )
 
-    client = Arc4StructClient(
-        algod_client,
-        sender=creator.address,
-        signer=creator.signer,
+    factory = algorand.client.get_typed_app_factory(
+        Arc4StructFactory,
+        default_sender=creator.address,
+        default_signer=creator.signer,
     )
 
-    client.create_bare()
+    client, deploy_result = factory.deploy(
+        on_update=OnUpdate.ReplaceApp,
+        on_schema_break=OnSchemaBreak.Fail,
+    )
 
     algorand.send.payment(
-        PayParams(
+        PaymentParams(
             sender=creator.address,
             receiver=client.app_address,
-            amount=1000000,  # 1 Algo
+            amount=AlgoAmount(algo=1),  # 1 Algo
         )
     )
 
@@ -182,7 +213,7 @@ def arc4_struct_app_client(
 
 @pytest.fixture(scope="session")
 def arc4_types_app_client(
-    algod_client: AlgodClient, creator: AddressAndSigner, algorand: AlgorandClient
+    creator: SigningAccount, algorand: AlgorandClient
 ) -> Arc4TypesClient:
     """Deploy the arc4 types App and create an app client the creator will use to interact with the contract"""
 
@@ -191,19 +222,22 @@ def arc4_types_app_client(
         # trace_all=True,
     )
 
-    client = Arc4TypesClient(
-        algod_client,
-        sender=creator.address,
-        signer=creator.signer,
+    factory = algorand.client.get_typed_app_factory(
+        Arc4TypesFactory,
+        default_sender=creator.address,
+        default_signer=creator.signer,
     )
 
-    client.create_bare()
+    client, deploy_result = factory.deploy(
+        on_update=OnUpdate.ReplaceApp,
+        on_schema_break=OnSchemaBreak.Fail,
+    )
 
     algorand.send.payment(
-        PayParams(
+        PaymentParams(
             sender=creator.address,
             receiver=client.app_address,
-            amount=1000000,  # 1 Algo
+            amount=AlgoAmount(algo=1),  # 1 Algo
         )
     )
 
@@ -216,10 +250,12 @@ def test_arc4_uint64(
     """Test the arc4_uint64 method"""
 
     # Call the arc4_uint64 method
-    result = arc4_types_app_client.add_arc4_uint64(a=1, b=2)
+    result = arc4_types_app_client.send.add_arc4_uint64(
+        args=AddArc4Uint64Args(a=1, b=2)
+    )
 
     # Check the result
-    assert result.return_value == 3
+    assert result.abi_return == 3
 
 
 def test_arc4_uint_n(
@@ -227,9 +263,11 @@ def test_arc4_uint_n(
 ) -> None:
     """Test the arc4_uint_n method"""
 
-    result = arc4_types_app_client.add_arc4_uint_n(a=100, b=1_000, c=100_000, d=100_000)
+    result = arc4_types_app_client.send.add_arc4_uint_n(
+        args=AddArc4UintNArgs(a=100, b=1_000, c=100_000, d=100_000)
+    )
 
-    assert result.return_value == 201_100
+    assert result.abi_return == 201_100
 
 
 def test_arc4_biguint_n(
@@ -237,9 +275,11 @@ def test_arc4_biguint_n(
 ) -> None:
     """Test the arc4_uint_n method"""
 
-    result = arc4_types_app_client.add_arc4_biguint_n(a=2**65, b=2**129, c=2**257)
+    result = arc4_types_app_client.send.add_arc4_biguint_n(
+        args=AddArc4BiguintNArgs(a=2**65, b=2**129, c=2**257)
+    )
 
-    assert result.return_value == 2**65 + 2**129 + 2**257
+    assert result.abi_return == 2**65 + 2**129 + 2**257
 
 
 def test_arc4_byte(
@@ -247,43 +287,49 @@ def test_arc4_byte(
 ) -> None:
     """Test the arc4_byte method"""
 
-    result = arc4_types_app_client.arc4_byte(a=5)
+    result = arc4_types_app_client.send.arc4_byte(Arc4ByteArgs(a=5))
 
-    assert result.return_value == 6
+    assert result.abi_return == 6
 
 
 def test_arc4_address_properties(
     arc4_types_app_client: Arc4TypesClient,
-    creator: AddressAndSigner,
+    creator: SigningAccount,
     algorand: AlgorandClient,
 ) -> None:
     """Test the arc4_address_properties method"""
 
     # Call the arc4_address method
-    result = arc4_types_app_client.arc4_address_properties(address=creator.address)
+    result = arc4_types_app_client.send.arc4_address_properties(
+        Arc4AddressPropertiesArgs(address=creator.address)
+    )
 
     creator_info = algorand.account.get_information(creator.address)
 
-    assert result.return_value == creator_info["amount"]
+    assert result.abi_return == creator_info.amount
 
 
 def test_arc4_address_return(
-    arc4_types_app_client: Arc4TypesClient, creator: AddressAndSigner
+    arc4_types_app_client: Arc4TypesClient, creator: SigningAccount
 ) -> None:
     """Test the arc4_address_return method"""
 
     # Call the arc4_address method
-    result = arc4_types_app_client.arc4_address_return(address=creator.address)
+    result = arc4_types_app_client.send.arc4_address_return(
+        Arc4AddressReturnArgs(address=creator.address)
+    )
 
     # Check the result
-    assert result.return_value == creator.address
+    assert result.abi_return == creator.address
 
 
 def test_arc4_static_array(arc4_statc_array_app_client: Arc4StaticArrayClient) -> None:
     """Test the arc4_static_array method"""
 
     # Call the arc4_static_array method
-    arc4_statc_array_app_client.arc4_static_array()
+    result = arc4_statc_array_app_client.send.arc4_static_array()
+
+    assert result.abi_return is None
 
 
 def test_arc4_dynamic_array(
@@ -293,12 +339,12 @@ def test_arc4_dynamic_array(
 
     # Call the arc4_static_array method with simulate to avoid opcode budget constraints.
     result = (
-        arc4_dynamic_array_app_client.compose()
-        .hello(name="John")
-        .simulate(SimulateOptions(extra_opcode_budget=700))
+        arc4_dynamic_array_app_client.new_group()
+        .hello(HelloArgs(name="John"))
+        .simulate(extra_opcode_budget=700)
     )
 
-    assert result.abi_results[0].return_value == "Hello John!"
+    assert result.returns[0].value == "Hello John!"
 
 
 def test_arc4_dynamic_bytes(
@@ -307,20 +353,20 @@ def test_arc4_dynamic_bytes(
     """Test the arc4_dynamic_bytes method"""
 
     # Call the arc4_static_array method.
-    result = arc4_dynamic_array_app_client.arc4_dynamic_bytes()
+    result = arc4_dynamic_array_app_client.send.arc4_dynamic_bytes()
 
-    assert result.return_value == [0, 255, 255, 170, 187, 255]
+    assert result.abi_return == [0, 255, 255, 170, 187, 255]
 
 
 def test_arc4_struct_add_todo(arc4_struct_app_client: Arc4StructClient) -> None:
     """Test the add_todo method"""
 
     # Call the add_todo method
-    result = arc4_struct_app_client.add_todo(task="wash the dishes")
+    result = arc4_struct_app_client.send.add_todo(AddTodoArgs(task="wash the dishes"))
 
-    assert result.return_value[0][0] == "wash the dishes"
-    assert result.return_value[0][1] is False
-    assert len(result.return_value) == 1
+    assert result.abi_return[0][0] == "wash the dishes"
+    assert result.abi_return[0][1] is False
+    assert len(result.abi_return) == 1
 
 
 def test_arc4_struct_complete_and_return_todo(
@@ -329,22 +375,20 @@ def test_arc4_struct_complete_and_return_todo(
     """Test the complete_todo method"""
 
     # Call the add_todo method
-    result = arc4_struct_app_client.add_todo(task="walk my dogs")
-
-    result = arc4_struct_app_client.return_todo(task="walk my dogs")
-
-    # Check the result
-    assert result.return_value.task == "walk my dogs"
-    assert result.return_value.completed is False
+    result = arc4_struct_app_client.send.add_todo(AddTodoArgs(task="walk my dogs"))
 
     # Call the complete_todo method
-    arc4_struct_app_client.complete_todo(task="walk my dogs")
+    result = arc4_struct_app_client.send.complete_todo(
+        CompleteTodoArgs(task="walk my dogs")
+    )
 
-    result = arc4_struct_app_client.return_todo(task="walk my dogs")
+    result = arc4_struct_app_client.send.return_todo(
+        ReturnTodoArgs(task="walk my dogs")
+    )
 
     # Check the result
-    assert result.return_value.task == "walk my dogs"
-    assert result.return_value.completed is True
+    assert result.abi_return.task == "walk my dogs"
+    assert result.abi_return.completed is True
 
 
 def test_tuple_add_contact_info(
@@ -352,11 +396,11 @@ def test_tuple_add_contact_info(
 ) -> None:
     """Test the add_contact_info method"""
 
-    result = arc4_tuple_app_client.add_contact_info(
-        contact=("Alice", "alice@something.com", 555_555_555)
+    result = arc4_tuple_app_client.send.add_contact_info(
+        AddContactInfoArgs(contact=("Alice", "alice@something.com", 555_555_555))
     )
 
-    assert result.return_value == 555_555_555
+    assert result.abi_return == 555_555_555
 
 
 def test_tuple_return_contact(
@@ -364,6 +408,6 @@ def test_tuple_return_contact(
 ) -> None:
     """Test the return_contact method"""
 
-    result = arc4_tuple_app_client.return_contact()
+    result = arc4_tuple_app_client.send.return_contact()
 
-    assert result.return_value == ["Alice", "alice@something.com", 555_555_555]
+    assert result.abi_return == ["Alice", "alice@something.com", 555_555_555]

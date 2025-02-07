@@ -1,11 +1,11 @@
 import pytest
 from algokit_utils import TransactionParameters
-from algokit_utils.beta.account_manager import AddressAndSigner
+from algokit_utils.beta.account_manager import SigningAccount
 from algokit_utils.beta.algorand_client import (
     AlgorandClient,
     AssetCreateParams,
     AssetOptInParams,
-    PayParams,
+    PaymentParams,
 )
 from algokit_utils.config import config
 from algosdk.v2client.algod import AlgodClient
@@ -26,32 +26,36 @@ def algorand() -> AlgorandClient:
 
 
 @pytest.fixture(scope="session")
-def dispenser(algorand: AlgorandClient) -> AddressAndSigner:
+def dispenser(algorand: AlgorandClient) -> SigningAccount:
     """Get the dispenser to fund test addresses"""
     return algorand.account.dispenser()
 
 
 @pytest.fixture(scope="session")
-def creator(algorand: AlgorandClient, dispenser: AddressAndSigner) -> AddressAndSigner:
+def creator(algorand: AlgorandClient, dispenser: SigningAccount) -> SigningAccount:
     """Get an account to use as the creator of the inner transaction contract"""
     acct = algorand.account.random()
 
     # Make sure the account has some ALGO
     algorand.send.payment(
-        PayParams(sender=dispenser.address, receiver=acct.address, amount=10_000_000)
+        PaymentParams(
+            sender=dispenser.address, receiver=acct.address, amount=10_000_000
+        )
     )
 
     return acct
 
 
 @pytest.fixture(scope="session")
-def alice(algorand: AlgorandClient, dispenser: AddressAndSigner) -> AddressAndSigner:
+def alice(algorand: AlgorandClient, dispenser: SigningAccount) -> SigningAccount:
     """Get an account to use as Alice who will participate in the auction"""
     acct = algorand.account.random()
 
     # Make sure the account has some ALGO
     algorand.send.payment(
-        PayParams(sender=dispenser.address, receiver=acct.address, amount=10_000_000)
+        PaymentParams(
+            sender=dispenser.address, receiver=acct.address, amount=10_000_000
+        )
     )
 
     return acct
@@ -59,7 +63,7 @@ def alice(algorand: AlgorandClient, dispenser: AddressAndSigner) -> AddressAndSi
 
 @pytest.fixture(scope="session")
 def creator_inner_txn_app_client(
-    algod_client: AlgodClient, creator: AddressAndSigner, algorand: AlgorandClient
+    algod_client: AlgodClient, creator: SigningAccount, algorand: AlgorandClient
 ) -> InnerTransactionsClient:
     """Deploy the inner txn App and create an app client the creator will use to interact with the contract"""
 
@@ -77,7 +81,7 @@ def creator_inner_txn_app_client(
     client.create_bare()
 
     algorand.send.payment(
-        PayParams(
+        PaymentParams(
             sender=creator.address,
             receiver=client.app_address,
             amount=1000000,  # 1 Algo
@@ -90,7 +94,7 @@ def creator_inner_txn_app_client(
 
 @pytest.fixture(scope="session")
 def hello_world_app_id(
-    algod_client: AlgodClient, creator: AddressAndSigner
+    algod_client: AlgodClient, creator: SigningAccount
 ) -> HelloWorldClient:
     """Deploy the inner txn App and create an app client the creator will use to interact with the contract"""
 
@@ -112,7 +116,7 @@ def hello_world_app_id(
 
 
 @pytest.fixture(scope="session")
-def optin_example_asset_id(creator: AddressAndSigner, algorand: AlgorandClient) -> int:
+def optin_example_asset_id(creator: SigningAccount, algorand: AlgorandClient) -> int:
     """Create an asset to be auctioned"""
     # Create an asset
     sent_txn = algorand.send.asset_create(
@@ -225,7 +229,7 @@ def test_asset_transfer(
     algorand: AlgorandClient,
     creator_inner_txn_app_client: InnerTransactionsClient,
     test_asset_create: int,
-    alice: AddressAndSigner,
+    alice: SigningAccount,
 ) -> None:
 
     algorand.send.asset_opt_in(
@@ -259,7 +263,7 @@ def test_asset_freeze(
     algorand: AlgorandClient,
     creator_inner_txn_app_client: InnerTransactionsClient,
     test_asset_create: int,
-    alice: AddressAndSigner,
+    alice: SigningAccount,
 ) -> None:
 
     sp = algod_client.suggested_params()
@@ -284,7 +288,7 @@ def test_asset_revoke(
     algorand: AlgorandClient,
     creator_inner_txn_app_client: InnerTransactionsClient,
     test_asset_create: int,
-    alice: AddressAndSigner,
+    alice: SigningAccount,
 ) -> None:
 
     sp = algod_client.suggested_params()
@@ -310,7 +314,7 @@ def test_asset_config(
     algorand: AlgorandClient,
     creator_inner_txn_app_client: InnerTransactionsClient,
     test_asset_create: int,
-    creator: AddressAndSigner,
+    creator: SigningAccount,
 ) -> None:
 
     sp = algod_client.suggested_params()

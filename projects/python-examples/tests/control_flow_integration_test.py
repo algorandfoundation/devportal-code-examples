@@ -1,8 +1,8 @@
 import pytest
-from algokit_utils.beta.account_manager import AddressAndSigner
+from algokit_utils.beta.account_manager import SigningAccount
 from algokit_utils.beta.algorand_client import (
     AlgorandClient,
-    PayParams,
+    PaymentParams,
 )
 from algokit_utils.config import config
 from algosdk.v2client.algod import AlgodClient
@@ -25,19 +25,21 @@ def algorand() -> AlgorandClient:
 
 
 @pytest.fixture(scope="session")
-def dispenser(algorand: AlgorandClient) -> AddressAndSigner:
+def dispenser(algorand: AlgorandClient) -> SigningAccount:
     """Get the dispenser to fund test addresses"""
     return algorand.account.dispenser()
 
 
 @pytest.fixture(scope="session")
-def creator(algorand: AlgorandClient, dispenser: AddressAndSigner) -> AddressAndSigner:
+def creator(algorand: AlgorandClient, dispenser: SigningAccount) -> SigningAccount:
     """Get an account to use as the creator of the inner transaction contract"""
     acct = algorand.account.random()
 
     # Make sure the account has some ALGO
     algorand.send.payment(
-        PayParams(sender=dispenser.address, receiver=acct.address, amount=10_000_000)
+        PaymentParams(
+            sender=dispenser.address, receiver=acct.address, amount=10_000_000
+        )
     )
 
     return acct
@@ -45,7 +47,7 @@ def creator(algorand: AlgorandClient, dispenser: AddressAndSigner) -> AddressAnd
 
 @pytest.fixture(scope="session")
 def if_else_app_client(
-    algod_client: AlgodClient, creator: AddressAndSigner, algorand: AlgorandClient
+    algod_client: AlgodClient, creator: SigningAccount, algorand: AlgorandClient
 ) -> if_else_example_client.IfElseExampleClient:
     """Deploy the inner txn App and create an app client the creator will use to interact with the contract"""
 
@@ -63,7 +65,7 @@ def if_else_app_client(
     client.create_bare()
 
     algorand.send.payment(
-        PayParams(
+        PaymentParams(
             sender=creator.address,
             receiver=client.app_address,
             amount=1000000,  # 1 Algo
@@ -76,7 +78,7 @@ def if_else_app_client(
 
 @pytest.fixture(scope="session")
 def for_loop_app_client(
-    algod_client: AlgodClient, creator: AddressAndSigner, algorand: AlgorandClient
+    algod_client: AlgodClient, creator: SigningAccount, algorand: AlgorandClient
 ) -> for_loops_example_client.ForLoopsExampleClient:
     """Deploy the inner txn App and create an app client the creator will use to interact with the contract"""
 
@@ -94,7 +96,7 @@ def for_loop_app_client(
     client.create_bare()
 
     algorand.send.payment(
-        PayParams(
+        PaymentParams(
             sender=creator.address,
             receiver=client.app_address,
             amount=1000000,  # 1 Algo
@@ -107,7 +109,7 @@ def for_loop_app_client(
 
 @pytest.fixture(scope="session")
 def match_statements_app_client(
-    algod_client: AlgodClient, creator: AddressAndSigner, algorand: AlgorandClient
+    algod_client: AlgodClient, creator: SigningAccount, algorand: AlgorandClient
 ) -> match_statements_client.MatchStatementsClient:
     """Deploy the inner txn App and create an app client the creator will use to interact with the contract"""
 
@@ -125,7 +127,7 @@ def match_statements_app_client(
     client.create_bare()
 
     algorand.send.payment(
-        PayParams(
+        PaymentParams(
             sender=creator.address,
             receiver=client.app_address,
             amount=1000000,  # 1 Algo
@@ -138,7 +140,7 @@ def match_statements_app_client(
 
 @pytest.fixture(scope="session")
 def while_loop_app_client(
-    algod_client: AlgodClient, creator: AddressAndSigner, algorand: AlgorandClient
+    algod_client: AlgodClient, creator: SigningAccount, algorand: AlgorandClient
 ) -> while_loop_example_client.WhileLoopExampleClient:
     """Deploy the inner txn App and create an app client the creator will use to interact with the contract"""
 
@@ -156,7 +158,7 @@ def while_loop_app_client(
     client.create_bare()
 
     algorand.send.payment(
-        PayParams(
+        PaymentParams(
             sender=creator.address,
             receiver=client.app_address,
             amount=1000000,  # 1 Algo
