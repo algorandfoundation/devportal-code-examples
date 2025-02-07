@@ -33,7 +33,7 @@ def hello_world_client(
 def test_says_hello(hello_world_client: HelloWorldClient) -> None:
     result = hello_world_client.hello(name="World")
 
-    assert result.return_value == "Hello, World"
+    assert result.abi_return == "Hello, World"
 
 
 def test_simulate_says_hello_with_correct_budget_consumed(
@@ -43,6 +43,6 @@ def test_simulate_says_hello_with_correct_budget_consumed(
         hello_world_client.compose().hello(name="World").hello(name="Jane").simulate()
     )
 
-    assert result.abi_results[0].return_value == "Hello, World"
-    assert result.abi_results[1].return_value == "Hello, Jane"
+    assert result.abi_results[0].abi_return == "Hello, World"
+    assert result.abi_results[1].abi_return == "Hello, Jane"
     assert result.simulate_response["txn-groups"][0]["app-budget-consumed"] < 100

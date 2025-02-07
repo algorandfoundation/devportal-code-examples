@@ -147,7 +147,7 @@ def test_asset_create(
     txn_result = creator_inner_txn_app_client.non_fungible_asset_create(
         transaction_parameters=TransactionParameters(suggested_params=sp)
     )
-    print(f"Created Non Fungible Asset ID: {txn_result.return_value}")
+    print(f"Created Non Fungible Asset ID: {txn_result.abi_return}")
 
     app_acct_info = algorand.account.get_information(
         creator_inner_txn_app_client.app_address
@@ -156,10 +156,10 @@ def test_asset_create(
     print("non fungible asset info", asset_info)
     assert len(asset_info) > 0
     for asset in asset_info:
-        if asset["asset-id"] == txn_result.return_value:
-            assert asset["asset-id"] == txn_result.return_value
+        if asset["asset-id"] == txn_result.abi_return:
+            assert asset["asset-id"] == txn_result.abi_return
 
-    return txn_result.return_value
+    return txn_result.abi_return
 
 
 def test_fungible_asset_create(
@@ -174,7 +174,7 @@ def test_fungible_asset_create(
     txn_result = creator_inner_txn_app_client.fungible_asset_create(
         transaction_parameters=TransactionParameters(suggested_params=sp)
     )
-    print(f"Created Fungible Asset ID: {txn_result.return_value}")
+    print(f"Created Fungible Asset ID: {txn_result.abi_return}")
 
     app_acct_info = algorand.account.get_information(
         creator_inner_txn_app_client.app_address
@@ -182,7 +182,7 @@ def test_fungible_asset_create(
     asset_info: list = app_acct_info["assets"]
     print("asset info", asset_info)
     assert len(asset_info) > 0
-    assert any(asset["asset-id"] == txn_result.return_value for asset in asset_info)
+    assert any(asset["asset-id"] == txn_result.abi_return for asset in asset_info)
 
 
 def test_payment(
@@ -197,9 +197,9 @@ def test_payment(
     txn_result = creator_inner_txn_app_client.payment(
         transaction_parameters=TransactionParameters(suggested_params=sp)
     )
-    print(f"Payment amount: {txn_result.return_value}")
+    print(f"Payment amount: {txn_result.abi_return}")
 
-    assert txn_result.return_value == 5000
+    assert txn_result.abi_return == 5000
 
 
 def test_asset_opt_in(
@@ -371,10 +371,10 @@ def test_multi_inner_txns(
         app_id=hello_world_app_id,
         transaction_parameters=TransactionParameters(suggested_params=sp),
     )
-    print(f"multi_inner_txns result: {txn_result.return_value}")
+    print(f"multi_inner_txns result: {txn_result.abi_return}")
 
-    assert txn_result.return_value[0] == 5000
-    assert txn_result.return_value[1] == "Hello, World"
+    assert txn_result.abi_return[0] == 5000
+    assert txn_result.abi_return[1] == "Hello, World"
 
 
 def test_deploy_app(
@@ -389,7 +389,7 @@ def test_deploy_app(
     txn_result = creator_inner_txn_app_client.deploy_app(
         transaction_parameters=TransactionParameters(suggested_params=sp)
     )
-    print(f"Deployed App ID: {txn_result.return_value}")
+    print(f"Deployed App ID: {txn_result.abi_return}")
 
 
 def test_no_op_app_calls(
@@ -406,7 +406,7 @@ def test_no_op_app_calls(
         app_id=hello_world_app_id,
         transaction_parameters=TransactionParameters(suggested_params=sp),
     )
-    print(f"multi_inner_txns result: {txn_result.return_value}")
+    print(f"multi_inner_txns result: {txn_result.abi_return}")
 
-    assert txn_result.return_value[0] == "Hello, World"
-    assert txn_result.return_value[1] == "Hello, again"
+    assert txn_result.abi_return[0] == "Hello, World"
+    assert txn_result.abi_return[1] == "Hello, again"
