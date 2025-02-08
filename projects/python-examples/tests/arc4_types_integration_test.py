@@ -332,22 +332,25 @@ def test_arc4_struct_complete_and_return_todo(
     # Call the add_todo method
     result = arc4_struct_app_client.send.add_todo(AddTodoArgs(task="walk my dogs"))
 
-    # TODO: Fix after confirming txn already in ledger error is fixed
-    # result = arc4_struct_app_client.send.return_todo(
-    #     ReturnTodoArgs(task="walk my dogs")
-    # )
+    result = arc4_struct_app_client.send.return_todo(
+        ReturnTodoArgs(task="walk my dogs")
+    )
 
-    # # Check the result
-    # assert result.abi_return.task == "walk my dogs"
-    # assert result.abi_return.completed is False
+    # Check the result
+    assert result.abi_return.task == "walk my dogs"
+    assert result.abi_return.completed is False
 
     # Call the complete_todo method
     result = arc4_struct_app_client.send.complete_todo(
         CompleteTodoArgs(task="walk my dogs")
     )
+    print("todo_result", result)
 
     result = arc4_struct_app_client.send.return_todo(
-        ReturnTodoArgs(task="walk my dogs")
+        ReturnTodoArgs(task="walk my dogs"),
+        params=CommonAppCallParams(
+            first_valid_round=result.confirmation["confirmed-round"] + 1
+        ),
     )
 
     # Check the result
