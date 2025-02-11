@@ -17,6 +17,7 @@ from algosdk.transaction import (
 from algosdk.v2client.algod import AlgodClient
 
 
+# TODO: update to utils v3
 @pytest.fixture(scope="session")
 def lsig_template() -> str:
     with open("./smart_contracts/artifacts/self_payment/self_payment.teal") as f:

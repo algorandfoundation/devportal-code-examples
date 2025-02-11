@@ -1,4 +1,4 @@
-from algokit_utils import AlgoAmount, AlgorandClient, PaymentParams
+from algokit_utils import AlgoAmount, AlgorandClient, PaymentParams, SendParams
 
 
 def rekeying_accounts() -> None:
@@ -32,7 +32,7 @@ def rekeying_accounts() -> None:
     """
     algorand_client.account.rekey_account(account=account1, rekey_to=account2)
 
-    txn1 = algorand_client.send.payment(
+    payment_txn_result = algorand_client.send.payment(
         PaymentParams(
             sender=account1.address,
             receiver=account2.address,
@@ -40,19 +40,20 @@ def rekeying_accounts() -> None:
         )
     )
 
-    payment_txn = algorand_client.create_transaction.payment(
+    unsigned_payment_txn = algorand_client.create_transaction.payment(
         PaymentParams(
             sender=account1.address,
             receiver=account2.address,
-            amount=AlgoAmount(algo=2),
+            amount=AlgoAmount(algo=1),
         )
     )
-    print(f"payment_txn: {payment_txn.get_txid()}")
+
     """
     The unsigned transaction can be signed by the signer when sending with the `add_transaction` method.
     """
+    # TODO: Fix this. how can I pass in params?
     algorand_client.new_group().add_transaction(
-        transaction=payment_txn, signer=account2.signer
+        transaction=unsigned_payment_txn, signer=account2.signer
     ).send()
 
     # example: REKEYING_ACCOUNT
