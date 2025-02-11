@@ -6,14 +6,8 @@ from algokit_utils.models.account import LogicSigAccount
 from algokit_utils.applications import AppManager
 import pytest
 
-# from algosdk.transaction import (
-#     LogicSig,
-#     LogicSigTransaction,
-#     PaymentTxn,
-#     wait_for_confirmation,
-# )
 
-
+# TODO: wait for rekey operation updates to utils py
 @pytest.fixture(scope="session")
 def lsig_template() -> str:
     with open("./smart_contracts/artifacts/self_payment/self_payment.teal") as f:

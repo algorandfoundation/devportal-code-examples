@@ -13,7 +13,7 @@ from smart_contracts.artifacts.hello_world.hello_world_client import (
 )
 
 
-# TODO: update to utils v3
+# TODO: wait for rekey operation updates to utils py
 @pytest.fixture(scope="session")
 def lsig_template() -> str:
     with open(
