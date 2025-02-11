@@ -30,7 +30,7 @@ def rekeying_accounts() -> None:
     Rekey an account to use a different address for signing.
     This allows account 1 to be controlled by account 2's private key.
     """
-    algorand_client.account.rekey_account(account=account1, rekey_to=account2)
+    algorand_client.account.rekey_account(account=account1.address, rekey_to=account2)
 
     payment_txn_result = algorand_client.send.payment(
         PaymentParams(
@@ -45,16 +45,21 @@ def rekeying_accounts() -> None:
             sender=account1.address,
             receiver=account2.address,
             amount=AlgoAmount(algo=1),
+            signer=account2.signer,
+            first_valid_round=algorand_client.get_suggested_params().first + 1,
         )
     )
 
     """
     The unsigned transaction can be signed by the signer when sending with the `add_transaction` method.
     """
-    # TODO: Fix this. how can I pass in params?
-    algorand_client.new_group().add_transaction(
-        transaction=unsigned_payment_txn, signer=account2.signer
-    ).send()
+    result = (
+        algorand_client.new_group()
+        .add_transaction(transaction=unsigned_payment_txn, signer=account2.signer)
+        .send()
+    )
+
+    print(result)
 
     # example: REKEYING_ACCOUNT
 
