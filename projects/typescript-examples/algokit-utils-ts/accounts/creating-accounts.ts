@@ -14,14 +14,6 @@ async function creatingAccounts() {
   const randomAccount3 = algorand.account.random();
   // example: RANDOM_ACCOUNTS
 
-  // example: KMD_ACCOUNT
-  /**
-   * Get or create an account from LocalNet's KMD (Key Management Daemon)
-   * by name. If the account doesn't exist, it will be created.
-   */
-  const kmdAccount = algorand.account.fromKmd("ACCOUNT_NAME");
-  // example: KMD_ACCOUNT
-
   // example: ENV_ACCOUNT
   /**
    * Get or create an account from environment variables.
@@ -38,4 +30,24 @@ async function creatingAccounts() {
    */
   const mnemonicAccount = algorand.account.fromMnemonic("mnemonic words...");
   // example: MNEMONIC_ACCOUNT
+
+  // example: KMD_ACCOUNT
+  /**
+   * Get or create an account from LocalNet's KMD (Key Management Daemon)
+   * by name. If the account doesn't exist, it will be created.
+   */
+  const kmdAccount = algorand.account.fromKmd("ACCOUNT_NAME");
+  // example: KMD_ACCOUNT
+
+  // example: KMD_WALLET_OPERATIONS
+  /**
+   * Create a wallet with the KMD client.
+   */
+  await algorand.client.kmd.createWallet("ACCOUNT_NAME", "password");
+
+  /**
+   * Rename a wallet with the KMD client.
+   */
+  await algorand.client.kmd.renameWallet("ACCOUNT_NAME", "password", "NEW_ACCOUNT_NAME");
+  // example: KMD_WALLET_OPERATIONS
 }
