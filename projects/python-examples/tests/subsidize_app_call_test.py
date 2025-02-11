@@ -1,11 +1,8 @@
 import base64
 
-import algokit_utils.applications
-import algokit_utils.applications.app_manager
 import algokit_utils
 from algokit_utils.models.account import LogicSigAccount
-
-import algosdk
+from algokit_utils.applications import AppManager
 
 import pytest
 
@@ -53,7 +50,7 @@ def contract_account(
 ) -> LogicSigAccount:
 
     sp = algorand.get_suggested_params()
-    rendered = algokit_utils.applications.AppManager.replace_template_variables(
+    rendered = AppManager.replace_template_variables(
         lsig_template,
         {
             "EXPIRATION_ROUND": sp.last + 10,
@@ -61,11 +58,9 @@ def contract_account(
             "KNOWN_APP": hello_world_client.app_id,
         },
     )
-    lsig_account = LogicSigAccount(
-        algosdk.transaction.LogicSigAccount(
-            base64.b64decode(algorand.client.algod.compile(rendered)["result"])
-        )
-    )
+    compiled_lsig_program = algorand.app.compile_teal(rendered).compiled_base64_to_bytes
+    lsig_account = algorand.account.logicsig(compiled_lsig_program)
+
     algorand.account.ensure_funded(
         account_to_fund=lsig_account,
         dispenser_account=dispenser,

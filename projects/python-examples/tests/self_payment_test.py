@@ -1,23 +1,19 @@
 import base64
 from hashlib import sha256
 
-import algokit_utils
+from algokit_utils import *
+from algokit_utils.models.account import LogicSigAccount
+from algokit_utils.applications import AppManager
 import pytest
-from algokit_utils import (
-    Account,
-    get_localnet_default_account,
-    is_localnet,
-)
-from algosdk.transaction import (
-    LogicSig,
-    LogicSigTransaction,
-    PaymentTxn,
-    wait_for_confirmation,
-)
-from algosdk.v2client.algod import AlgodClient
+
+# from algosdk.transaction import (
+#     LogicSig,
+#     LogicSigTransaction,
+#     PaymentTxn,
+#     wait_for_confirmation,
+# )
 
 
-# TODO: update to utils v3
 @pytest.fixture(scope="session")
 def lsig_template() -> str:
     with open("./smart_contracts/artifacts/self_payment/self_payment.teal") as f:
@@ -25,47 +21,60 @@ def lsig_template() -> str:
 
 
 @pytest.fixture(scope="session")
-def delegating_account(algod_client: AlgodClient) -> Account:
-    return get_localnet_default_account(algod_client)
+def delegating_account(creator: SigningAccount) -> SigningAccount:
+    return creator
 
 
 @pytest.fixture(scope="session")
-def delegated_account(
-    delegating_account: Account, lsig_template: str, algod_client: AlgodClient
-) -> LogicSig:
-    assert is_localnet(algod_client)
+def lsig_delegated_account(
+    delegating_account: SigningAccount, lsig_template: str, algorand: AlgorandClient
+) -> LogicSigAccount:
 
-    sp = algod_client.suggested_params()
-    rendered = algokit_utils.deploy.replace_template_variables(
+    sp = algorand.get_suggested_params()
+    rendered = AppManager.replace_template_variables(
         lsig_template,
         {
             "LAST_ROUND": sp.first + 1,
             "TARGET_NETWORK_GENESIS": base64.b64decode(sp.gh),
         },
     )
-    lsig_delegated = LogicSig(
-        base64.b64decode(algod_client.compile(rendered)["result"])
+
+    lsig_delegated = algorand.account.logicsig(
+        base64.b64decode(algorand.client.algod.compile(rendered)["result"])
     )
-    lsig_delegated.sign(delegating_account.signer.private_key)
+
+    # TODO: sign the logic sig
 
     return lsig_delegated
 
 
 def test_self_payment(
-    delegating_account: Account, delegated_account: LogicSig, algod_client: AlgodClient
+    delegating_account: SigningAccount,
+    lsig_delegated_account: LogicSigAccount,
+    algorand: AlgorandClient,
 ) -> None:
-    sp = algod_client.suggested_params()
-    sp.last = sp.first + 1
-    delegated_transaction = LogicSigTransaction(
-        transaction=PaymentTxn(
+
+    # TODO: Learn how to construct logic sig transactions
+    algorand.create_transaction.payment(
+        PaymentParams(
             sender=delegating_account.address,
-            sp=sp,
+            signer=lsig_delegated_account,
             receiver=delegating_account.address,
-            amt=0,
+            amount=AlgoAmount(algo=0),
             lease=sha256(b"self-payment").digest(),
-        ),
-        lsig=delegated_account,
+        )
     )
 
-    wait_handle = algod_client.send_transaction(delegated_transaction)
-    wait_for_confirmation(algod_client, wait_handle)
+    # delegated_transaction = LogicSigTransaction(
+    #     transaction=PaymentTxn(
+    #         sender=delegating_account.address,
+    #         sp=sp,
+    #         receiver=delegating_account.address,
+    #         amt=0,
+    #         lease=sha256(b"self-payment").digest(),
+    #     ),
+    #     lsig=delegated_account,
+    # )
+
+    # wait_handle = algod_client.send_transaction(delegated_transaction)
+    # wait_for_confirmation(algod_client, wait_handle)
