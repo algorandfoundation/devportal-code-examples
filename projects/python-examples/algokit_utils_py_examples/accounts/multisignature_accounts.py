@@ -2,6 +2,7 @@ from algokit_utils import AlgoAmount, AlgorandClient, MultisigMetadata, PaymentP
 from algokit_utils_py_examples.helpers import setup_localnet_environment
 
 
+# temp
 def multisignature_accounts() -> None:
     # example: MULTISIGNATURE_ACCOUNTS
 

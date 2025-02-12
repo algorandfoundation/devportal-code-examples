@@ -1,6 +1,7 @@
 from algokit_utils import AlgoAmount, AlgorandClient
 
 
+# temp
 def account_code_example() -> None:
     # example: CREATING_ACCOUNT
 

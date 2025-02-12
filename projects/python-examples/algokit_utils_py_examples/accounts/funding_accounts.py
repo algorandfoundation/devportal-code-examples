@@ -6,6 +6,7 @@ from algokit_utils import (
 )
 
 
+# temp
 def funding_accounts() -> None:
     # example: FUNDING_ACCOUNT
 
