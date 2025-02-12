@@ -1,5 +1,5 @@
 import { algo } from "@algorandfoundation/algokit-utils";
-import { setupLocalnetEnvironment } from "@/setup-localnet-environment";
+import { setupLocalnetEnvironment } from "@/algokit-utils-ts/setup-localnet-environment";
 
 async function multisignatureAccounts() {
   // Initialize an Algorand client instance and get funded accounts
@@ -10,7 +10,7 @@ async function multisignatureAccounts() {
   // only 2 signatures from the 3 possible signers to authorize transactions
   const multisigAccountA = algorand.account.multisig(
     { version: 1, threshold: 2, addrs: [randomAccountA, randomAccountB, randomAccountC] },
-    [randomAccountA.account, randomAccountB.account, randomAccountC.account]
+    [randomAccountA.account, randomAccountB.account, randomAccountC.account],
   );
 
   // Fund the multisig account

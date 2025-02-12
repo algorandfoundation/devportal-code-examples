@@ -1,0 +1,688 @@
+{
+  "success": false,
+  "error": null,
+  "result": [
+    {
+      "type": "ExecutionPaths",
+      "count": 2,
+      "description": "\nCheck: \"unprotected-deletable\", Impact: High, Confidence: High\nDescription: Unprotected Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-deletable-application\n",
+      "check": "unprotected-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 5 -> 9 -> 6",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "8: txn NumAppArgs",
+              "9: bz main_bare_routing@7"
+            ],
+            [
+              "10: pushbytess 0x3aad6d86 0x3d25ae31",
+              "11: txna ApplicationArgs 0",
+              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+            ],
+            [
+              "33: main_sayHello_route@3:",
+              "36: txn OnCompletion",
+              "37: !",
+              "38: assert",
+              "39: txn ApplicationID",
+              "40: assert",
+              "43: txna ApplicationArgs 1",
+              "44: extract 2 0",
+              "45: txna ApplicationArgs 2",
+              "46: extract 2 0",
+              "49: callsub sayHello"
+            ],
+            [
+              "76: sayHello:",
+              "79: proto 2 1",
+              "82: pushbytes \"Hello \"",
+              "83: frame_dig -2",
+              "84: concat",
+              "85: pushbytes \" \"",
+              "86: concat",
+              "87: frame_dig -1",
+              "88: concat",
+              "91: retsub"
+            ],
+            [
+              "50: dup",
+              "51: len",
+              "52: itob",
+              "53: extract 6 2",
+              "54: swap",
+              "55: concat",
+              "56: pushbytes 0x151f7c75",
+              "57: swap",
+              "58: concat",
+              "59: log",
+              "60: pushint 1",
+              "61: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "8: txn NumAppArgs",
+              "9: bz main_bare_routing@7"
+            ],
+            [
+              "10: pushbytess 0x3aad6d86 0x3d25ae31",
+              "11: txna ApplicationArgs 0",
+              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+            ],
+            [
+              "20: main_sayBananas_route@4:",
+              "23: txn OnCompletion",
+              "24: !",
+              "25: assert",
+              "26: txn ApplicationID",
+              "27: assert",
+              "28: pushbytes 0x151f7c75000742616e616e6173",
+              "29: log",
+              "30: pushint 1",
+              "31: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 2,
+      "description": "\nCheck: \"unprotected-updatable\", Impact: High, Confidence: High\nDescription: Unprotected Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-updatable-application\n",
+      "check": "unprotected-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 5 -> 9 -> 6",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "8: txn NumAppArgs",
+              "9: bz main_bare_routing@7"
+            ],
+            [
+              "10: pushbytess 0x3aad6d86 0x3d25ae31",
+              "11: txna ApplicationArgs 0",
+              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+            ],
+            [
+              "33: main_sayHello_route@3:",
+              "36: txn OnCompletion",
+              "37: !",
+              "38: assert",
+              "39: txn ApplicationID",
+              "40: assert",
+              "43: txna ApplicationArgs 1",
+              "44: extract 2 0",
+              "45: txna ApplicationArgs 2",
+              "46: extract 2 0",
+              "49: callsub sayHello"
+            ],
+            [
+              "76: sayHello:",
+              "79: proto 2 1",
+              "82: pushbytes \"Hello \"",
+              "83: frame_dig -2",
+              "84: concat",
+              "85: pushbytes \" \"",
+              "86: concat",
+              "87: frame_dig -1",
+              "88: concat",
+              "91: retsub"
+            ],
+            [
+              "50: dup",
+              "51: len",
+              "52: itob",
+              "53: extract 6 2",
+              "54: swap",
+              "55: concat",
+              "56: pushbytes 0x151f7c75",
+              "57: swap",
+              "58: concat",
+              "59: log",
+              "60: pushint 1",
+              "61: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "8: txn NumAppArgs",
+              "9: bz main_bare_routing@7"
+            ],
+            [
+              "10: pushbytess 0x3aad6d86 0x3d25ae31",
+              "11: txna ApplicationArgs 0",
+              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+            ],
+            [
+              "20: main_sayBananas_route@4:",
+              "23: txn OnCompletion",
+              "24: !",
+              "25: assert",
+              "26: txn ApplicationID",
+              "27: assert",
+              "28: pushbytes 0x151f7c75000742616e616e6173",
+              "29: log",
+              "30: pushint 1",
+              "31: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"can-close-account\", Impact: High, Confidence: High\nDescription: Missing CloseRemainderTo field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-closeremainderto-field-validation\n",
+      "check": "can-close-account",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `CloseRemainderTo` field in the LogicSig.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"can-close-asset\", Impact: High, Confidence: High\nDescription: Missing AssetCloseTo Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-assetcloseto-field-validation\n",
+      "check": "can-close-asset",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `AssetCloseTo` field in the LogicSig.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 2,
+      "description": "\nCheck: \"is-deletable\", Impact: High, Confidence: High\nDescription: Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#deletable-application\n",
+      "check": "is-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `DeleteApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 5 -> 9 -> 6",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "8: txn NumAppArgs",
+              "9: bz main_bare_routing@7"
+            ],
+            [
+              "10: pushbytess 0x3aad6d86 0x3d25ae31",
+              "11: txna ApplicationArgs 0",
+              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+            ],
+            [
+              "33: main_sayHello_route@3:",
+              "36: txn OnCompletion",
+              "37: !",
+              "38: assert",
+              "39: txn ApplicationID",
+              "40: assert",
+              "43: txna ApplicationArgs 1",
+              "44: extract 2 0",
+              "45: txna ApplicationArgs 2",
+              "46: extract 2 0",
+              "49: callsub sayHello"
+            ],
+            [
+              "76: sayHello:",
+              "79: proto 2 1",
+              "82: pushbytes \"Hello \"",
+              "83: frame_dig -2",
+              "84: concat",
+              "85: pushbytes \" \"",
+              "86: concat",
+              "87: frame_dig -1",
+              "88: concat",
+              "91: retsub"
+            ],
+            [
+              "50: dup",
+              "51: len",
+              "52: itob",
+              "53: extract 6 2",
+              "54: swap",
+              "55: concat",
+              "56: pushbytes 0x151f7c75",
+              "57: swap",
+              "58: concat",
+              "59: log",
+              "60: pushint 1",
+              "61: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "8: txn NumAppArgs",
+              "9: bz main_bare_routing@7"
+            ],
+            [
+              "10: pushbytess 0x3aad6d86 0x3d25ae31",
+              "11: txna ApplicationArgs 0",
+              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+            ],
+            [
+              "20: main_sayBananas_route@4:",
+              "23: txn OnCompletion",
+              "24: !",
+              "25: assert",
+              "26: txn ApplicationID",
+              "27: assert",
+              "28: pushbytes 0x151f7c75000742616e616e6173",
+              "29: log",
+              "30: pushint 1",
+              "31: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 2,
+      "description": "\nCheck: \"is-updatable\", Impact: High, Confidence: High\nDescription: Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#upgradable-application\n",
+      "check": "is-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `UpdateApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 5 -> 9 -> 6",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "8: txn NumAppArgs",
+              "9: bz main_bare_routing@7"
+            ],
+            [
+              "10: pushbytess 0x3aad6d86 0x3d25ae31",
+              "11: txna ApplicationArgs 0",
+              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+            ],
+            [
+              "33: main_sayHello_route@3:",
+              "36: txn OnCompletion",
+              "37: !",
+              "38: assert",
+              "39: txn ApplicationID",
+              "40: assert",
+              "43: txna ApplicationArgs 1",
+              "44: extract 2 0",
+              "45: txna ApplicationArgs 2",
+              "46: extract 2 0",
+              "49: callsub sayHello"
+            ],
+            [
+              "76: sayHello:",
+              "79: proto 2 1",
+              "82: pushbytes \"Hello \"",
+              "83: frame_dig -2",
+              "84: concat",
+              "85: pushbytes \" \"",
+              "86: concat",
+              "87: frame_dig -1",
+              "88: concat",
+              "91: retsub"
+            ],
+            [
+              "50: dup",
+              "51: len",
+              "52: itob",
+              "53: extract 6 2",
+              "54: swap",
+              "55: concat",
+              "56: pushbytes 0x151f7c75",
+              "57: swap",
+              "58: concat",
+              "59: log",
+              "60: pushint 1",
+              "61: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "8: txn NumAppArgs",
+              "9: bz main_bare_routing@7"
+            ],
+            [
+              "10: pushbytess 0x3aad6d86 0x3d25ae31",
+              "11: txna ApplicationArgs 0",
+              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+            ],
+            [
+              "20: main_sayBananas_route@4:",
+              "23: txn OnCompletion",
+              "24: !",
+              "25: assert",
+              "26: txn ApplicationID",
+              "27: assert",
+              "28: pushbytes 0x151f7c75000742616e616e6173",
+              "29: log",
+              "30: pushint 1",
+              "31: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 3,
+      "description": "\nCheck: \"missing-fee-check\", Impact: High, Confidence: High\nDescription: Missing Fee Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-fee-field-validation\n",
+      "check": "missing-fee-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `Fee` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 5 -> 9 -> 6",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "8: txn NumAppArgs",
+              "9: bz main_bare_routing@7"
+            ],
+            [
+              "10: pushbytess 0x3aad6d86 0x3d25ae31",
+              "11: txna ApplicationArgs 0",
+              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+            ],
+            [
+              "33: main_sayHello_route@3:",
+              "36: txn OnCompletion",
+              "37: !",
+              "38: assert",
+              "39: txn ApplicationID",
+              "40: assert",
+              "43: txna ApplicationArgs 1",
+              "44: extract 2 0",
+              "45: txna ApplicationArgs 2",
+              "46: extract 2 0",
+              "49: callsub sayHello"
+            ],
+            [
+              "76: sayHello:",
+              "79: proto 2 1",
+              "82: pushbytes \"Hello \"",
+              "83: frame_dig -2",
+              "84: concat",
+              "85: pushbytes \" \"",
+              "86: concat",
+              "87: frame_dig -1",
+              "88: concat",
+              "91: retsub"
+            ],
+            [
+              "50: dup",
+              "51: len",
+              "52: itob",
+              "53: extract 6 2",
+              "54: swap",
+              "55: concat",
+              "56: pushbytes 0x151f7c75",
+              "57: swap",
+              "58: concat",
+              "59: log",
+              "60: pushint 1",
+              "61: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "8: txn NumAppArgs",
+              "9: bz main_bare_routing@7"
+            ],
+            [
+              "10: pushbytess 0x3aad6d86 0x3d25ae31",
+              "11: txna ApplicationArgs 0",
+              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+            ],
+            [
+              "20: main_sayBananas_route@4:",
+              "23: txn OnCompletion",
+              "24: !",
+              "25: assert",
+              "26: txn ApplicationID",
+              "27: assert",
+              "28: pushbytes 0x151f7c75000742616e616e6173",
+              "29: log",
+              "30: pushint 1",
+              "31: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 7 -> 8",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "8: txn NumAppArgs",
+              "9: bz main_bare_routing@7"
+            ],
+            [
+              "63: main_bare_routing@7:",
+              "66: txn OnCompletion",
+              "67: bnz main_after_if_else@11"
+            ],
+            [
+              "68: txn ApplicationID",
+              "69: !",
+              "70: assert",
+              "71: pushint 1",
+              "72: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"group-size-check\", Impact: High, Confidence: High\nDescription: Usage of absolute indexes without validating GroupSize\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-groupsize-validation\n",
+      "check": "group-size-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid using absolute indexes. Validate GroupSize if used.\n- Favor using ARC-4 ABI and relative indexes for group transactions.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 3,
+      "description": "\nCheck: \"rekey-to\", Impact: High, Confidence: High\nDescription: Rekeyable Logic Signatures\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#rekeyable-logicsig\n",
+      "check": "rekey-to",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `RekeyTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 5 -> 9 -> 6",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "8: txn NumAppArgs",
+              "9: bz main_bare_routing@7"
+            ],
+            [
+              "10: pushbytess 0x3aad6d86 0x3d25ae31",
+              "11: txna ApplicationArgs 0",
+              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+            ],
+            [
+              "33: main_sayHello_route@3:",
+              "36: txn OnCompletion",
+              "37: !",
+              "38: assert",
+              "39: txn ApplicationID",
+              "40: assert",
+              "43: txna ApplicationArgs 1",
+              "44: extract 2 0",
+              "45: txna ApplicationArgs 2",
+              "46: extract 2 0",
+              "49: callsub sayHello"
+            ],
+            [
+              "76: sayHello:",
+              "79: proto 2 1",
+              "82: pushbytes \"Hello \"",
+              "83: frame_dig -2",
+              "84: concat",
+              "85: pushbytes \" \"",
+              "86: concat",
+              "87: frame_dig -1",
+              "88: concat",
+              "91: retsub"
+            ],
+            [
+              "50: dup",
+              "51: len",
+              "52: itob",
+              "53: extract 6 2",
+              "54: swap",
+              "55: concat",
+              "56: pushbytes 0x151f7c75",
+              "57: swap",
+              "58: concat",
+              "59: log",
+              "60: pushint 1",
+              "61: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "8: txn NumAppArgs",
+              "9: bz main_bare_routing@7"
+            ],
+            [
+              "10: pushbytess 0x3aad6d86 0x3d25ae31",
+              "11: txna ApplicationArgs 0",
+              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+            ],
+            [
+              "20: main_sayBananas_route@4:",
+              "23: txn OnCompletion",
+              "24: !",
+              "25: assert",
+              "26: txn ApplicationID",
+              "27: assert",
+              "28: pushbytes 0x151f7c75000742616e616e6173",
+              "29: log",
+              "30: pushint 1",
+              "31: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 7 -> 8",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "8: txn NumAppArgs",
+              "9: bz main_bare_routing@7"
+            ],
+            [
+              "63: main_bare_routing@7:",
+              "66: txn OnCompletion",
+              "67: bnz main_after_if_else@11"
+            ],
+            [
+              "68: txn ApplicationID",
+              "69: !",
+              "70: assert",
+              "71: pushint 1",
+              "72: return"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}
