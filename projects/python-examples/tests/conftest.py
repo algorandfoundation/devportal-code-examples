@@ -1,5 +1,5 @@
 import pytest
-from algokit_utils import AlgorandClient, SigningAccount, PaymentParams, AlgoAmount
+from algokit_utils import AlgoAmount, AlgorandClient, PaymentParams, SigningAccount
 
 
 @pytest.fixture(scope="session")
@@ -25,7 +25,7 @@ def creator(algorand: AlgorandClient, dispenser: SigningAccount) -> SigningAccou
     # Make sure the account has some ALGO
     algorand.send.payment(
         PaymentParams(
-            sender=dispenser.address, receiver=acct.address, amount=AlgoAmount(algo=10)
+            sender=dispenser.address, receiver=acct.address, amount=AlgoAmount(algo=100)
         )
     )
 
@@ -40,7 +40,7 @@ def alice(algorand: AlgorandClient, dispenser: SigningAccount) -> SigningAccount
     # Make sure the account has some ALGO
     algorand.send.payment(
         PaymentParams(
-            sender=dispenser.address, receiver=acct.address, amount=AlgoAmount(algo=10)
+            sender=dispenser.address, receiver=acct.address, amount=AlgoAmount(algo=100)
         )
     )
 

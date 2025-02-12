@@ -1,6 +1,15 @@
 import pytest
-import json
-from algokit_utils import *
+from algokit_utils import (
+    AlgoAmount,
+    AlgorandClient,
+    AssetCreateParams,
+    AssetOptInParams,
+    CommonAppCallParams,
+    OnSchemaBreak,
+    OnUpdate,
+    PaymentParams,
+    SigningAccount,
+)
 from algokit_utils.config import config
 
 from smart_contracts.artifacts.hello_world.hello_world_client import (
@@ -293,8 +302,6 @@ def test_deploy_app(
     txn_result = creator_inner_txn_app_client.send.deploy_app(
         params=CommonAppCallParams(extra_fee=AlgoAmount(micro_algo=1000)),
     )
-
-    return txn_result.abi_return
 
 
 def test_no_op_app_calls(
