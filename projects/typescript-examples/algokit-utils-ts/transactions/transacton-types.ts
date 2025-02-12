@@ -6,7 +6,7 @@ async function transactionTypes() {
 
   // example: PAYMENT_TRANSACTION
   // Transfer Algos between accounts
-  await algorand.send.payment({
+  await algorand.createTransaction.payment({
     sender: randomAccountA,
     receiver: randomAccountB,
     amount: algo(1), // Amount in Algos (will be converted to microAlgos)
@@ -15,7 +15,7 @@ async function transactionTypes() {
 
   // example: ASSET_CREATE_TRANSACTION
   // Create a new Algorand Standard Asset (ASA)
-  await algorand.send.assetCreate({
+  await algorand.createTransaction.assetCreate({
     sender: randomAccountA, // Creator and manager of the asset
     total: 1000n, // Total units of the asset
     decimals: 0, // Number of decimals for display purposes (0 = no decimals)
@@ -25,7 +25,7 @@ async function transactionTypes() {
 
   // example: ASSET_CONFIG_TRANSACTION
   // Configure an existing Algorand Standard Asset
-  await algorand.send.assetConfig({
+  await algorand.createTransaction.assetConfig({
     sender: randomAccountA,
     assetId: 123n, // The unique ID of the asset to configure
     manager: randomAccountA, // Account authorized to change asset configuration
@@ -34,7 +34,7 @@ async function transactionTypes() {
 
   // example: ASSET_TRANSFER_TRANSACTION
   // Transfer ASAs between accounts
-  await algorand.send.assetTransfer({
+  await algorand.createTransaction.assetTransfer({
     sender: randomAccountA,
     receiver: randomAccountB,
     assetId: 123n, // The ID of the asset to transfer
@@ -44,7 +44,7 @@ async function transactionTypes() {
 
   // example: ASSET_FREEZE_TRANSACTION
   // Freeze or unfreeze an ASA for an account
-  await algorand.send.assetFreeze({
+  await algorand.createTransaction.assetFreeze({
     sender: randomAccountA, // Must be the freeze address
     assetId: 123n,
     account: randomAccountB, // Account to freeze/unfreeze
@@ -54,7 +54,7 @@ async function transactionTypes() {
 
   // example: ASSET_DELETE_TRANSACTION
   // Delete/destroy an Algorand Standard Asset
-  await algorand.send.assetDestroy({
+  await algorand.createTransaction.assetDestroy({
     sender: randomAccountA, // Must be the asset manager
     assetId: 123n, // Asset will be permanently destroyed
   });
@@ -62,7 +62,7 @@ async function transactionTypes() {
 
   // example: ASSET_OPTIN_TRANSACTION
   // Opt an account into an ASA
-  await algorand.send.assetOptIn({
+  await algorand.createTransaction.assetOptIn({
     sender: randomAccountA, // Account that wants to receive the asset
     assetId: 123n, // Asset to opt into
   });
@@ -70,16 +70,16 @@ async function transactionTypes() {
 
   // example: ASSET_OPTOUT_TRANSACTION
   // Opt an account out of an ASA
-  await algorand.send.assetOptOut({
+  await algorand.createTransaction.assetOptOut({
+    creator: randomAccountA,
     sender: randomAccountA,
     assetId: 123n,
-    ensureZeroBalance: true, // Prevents opt-out if account still holds units
   });
   // example: ASSET_OPTOUT_TRANSACTION
 
   // example: APP_CREATE_TRANSACTION
   // Create a new smart contract application
-  await algorand.send.appCreate({
+  await algorand.createTransaction.appCreate({
     sender: randomAccountA, // Creator of the application
     approvalProgram: new Uint8Array(), // Logic that processes all application calls
     clearStateProgram: new Uint8Array(), // Logic that processes clear state calls
@@ -88,7 +88,7 @@ async function transactionTypes() {
 
   // example: APP_UPDATE_TRANSACTION
   // Update an existing smart contract application
-  await algorand.send.appUpdate({
+  await algorand.createTransaction.appUpdate({
     sender: randomAccountA, // Must be the application creator
     appId: 123n,
     approvalProgram: new Uint8Array(), // New program logic
@@ -98,7 +98,7 @@ async function transactionTypes() {
 
   // example: APP_CALL_TRANSACTION
   // Call a smart contract application
-  await algorand.send.appCall({
+  await algorand.createTransaction.appCall({
     sender: randomAccountA, // Account making the call
     appId: 123n, // Application being called
   });
@@ -106,7 +106,7 @@ async function transactionTypes() {
 
   // example: APP_DELETE_TRANSACTION
   // Delete a smart contract application
-  await algorand.send.appDelete({
+  await algorand.createTransaction.appDelete({
     sender: randomAccountA, // Must be the creator
     appId: 123n, // Application will be permanently deleted
   });
@@ -114,7 +114,7 @@ async function transactionTypes() {
 
   // example: KEY_REG_ONLINE_TRANSACTION
   // Register online participation keys
-  await algorand.send.onlineKeyRegistration({
+  await algorand.createTransaction.onlineKeyRegistration({
     sender: randomAccountA,
     voteKey: new Uint8Array(), // Key used for voting
     selectionKey: new Uint8Array(), // Key used for committee selection
@@ -126,7 +126,7 @@ async function transactionTypes() {
 
   // example: KEY_REG_OFFLINE_TRANSACTION
   // Register offline participation keys
-  await algorand.send.offlineKeyRegistration({
+  await algorand.createTransaction.offlineKeyRegistration({
     sender: randomAccountA, // Account will go offline
   });
   // example: KEY_REG_OFFLINE_TRANSACTION
