@@ -1,14 +1,11 @@
-from collections import namedtuple
 from algokit_utils import *
 
-# Define a NamedTuple for the localnet environment.
-LocalnetEnvironment = namedtuple(
-    "LocalnetEnvironment",
-    ["algorand_client", "dispenser", "account1", "account2", "account3"],
-)
 
-
-def setup_localnet_environment() -> LocalnetEnvironment:
+def setup_localnet_environment() -> (
+    tuple[
+        AlgorandClient, SigningAccount, SigningAccount, SigningAccount, SigningAccount
+    ]
+):
     """
     Sets up an Algorand client configured for LocalNet,
     creates a dispenser account and several random test accounts,
@@ -39,10 +36,15 @@ def setup_localnet_environment() -> LocalnetEnvironment:
         algorand_client.send.payment(
             PaymentParams(
                 sender=dispenser.address,
-                recipient=account.address,
+                receiver=account.address,
                 amount=AlgoAmount(algo=10),
             )
         )
 
-    # Return the values as a NamedTuple.
-    return LocalnetEnvironment(algorand_client, dispenser, account1, account2, account3)
+    return (
+        algorand_client,
+        dispenser,
+        account1,
+        account2,
+        account3,
+    )

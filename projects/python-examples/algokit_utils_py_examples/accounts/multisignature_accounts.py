@@ -1,30 +1,12 @@
 from algokit_utils import AlgoAmount, AlgorandClient, MultisigMetadata, PaymentParams
+from algokit_utils_py_examples.helpers import setup_localnet_environment
 
 
 def multisignature_accounts() -> None:
     # example: MULTISIGNATURE_ACCOUNTS
 
-    """
-    Initialize an Algorand client instance configured for LocalNet
-    """
-    algorand_client = AlgorandClient.default_localnet()
-
-    """
-    Create 2 random accounts
-    """
-    random_account1 = algorand_client.account.random()
-    random_account2 = algorand_client.account.random()
-    random_account3 = algorand_client.account.random()
-    dispenser = algorand_client.account.localnet_dispenser()
-
-    algorand_client.account.ensure_funded(
-        random_account1, dispenser, AlgoAmount(algo=10)
-    )
-    algorand_client.account.ensure_funded(
-        random_account2, dispenser, AlgoAmount(algo=10)
-    )
-    algorand_client.account.ensure_funded(
-        random_account3, dispenser, AlgoAmount(algo=10)
+    algorand_client, dispenser, random_account1, random_account2, random_account3 = (
+        setup_localnet_environment()
     )
 
     """

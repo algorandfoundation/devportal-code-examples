@@ -1,30 +1,11 @@
-from algokit_utils import AlgoAmount, AlgorandClient, PaymentParams, SendParams
+from algokit_utils import AlgoAmount, PaymentParams
+from algokit_utils_py_examples.helpers import setup_localnet_environment
 
 
 def rekeying_accounts() -> None:
     # example: REKEYING_ACCOUNT
 
-    """
-    Initialize an Algorand client instance configured for LocalNet
-    """
-    algorand_client = AlgorandClient.default_localnet()
-
-    """
-    Create random accounts that can be used for testing or development.
-    Each account will have a newly generated private/public key pair.
-    """
-    account1 = algorand_client.account.random()
-    account2 = algorand_client.account.random()
-
-    """
-    Returns the default LocalNet dispenser account.
-    This account can be used to fund test accounts on LocalNet.
-    """
-    localnet_dispenser = algorand_client.account.localnet_dispenser()
-
-    algorand_client.account.ensure_funded(
-        account1, localnet_dispenser, AlgoAmount(algo=10)
-    )
+    algorand_client, dispenser, account1, account2, _ = setup_localnet_environment()
 
     """
     Rekey an account to use a different address for signing.
@@ -58,8 +39,6 @@ def rekeying_accounts() -> None:
         .add_transaction(transaction=unsigned_payment_txn, signer=account2.signer)
         .send()
     )
-
-    print(result)
 
     # example: REKEYING_ACCOUNT
 

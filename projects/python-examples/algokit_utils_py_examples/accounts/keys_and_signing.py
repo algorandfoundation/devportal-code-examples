@@ -1,28 +1,12 @@
-from algokit_utils import AlgoAmount, AlgorandClient, PaymentParams
+from algokit_utils import AlgoAmount, PaymentParams
+from algokit_utils_py_examples.helpers import setup_localnet_environment
 
 
 def keys_and_signing() -> None:
     # example: KEYS_AND_SIGNING
 
-    """
-    Initialize an Algorand client instance configured for LocalNet
-    """
-    algorand_client = AlgorandClient.default_localnet()
+    algorand_client, random_account1, random_account2, _ = setup_localnet_environment()
     algorand_client._default_validity_window = 1000
-
-    """
-    Create 3 random accounts
-    """
-    random_account1 = algorand_client.account.random()
-    random_account2 = algorand_client.account.random()
-    dispenser = algorand_client.account.localnet_dispenser()
-
-    algorand_client.account.ensure_funded(
-        random_account1, dispenser, AlgoAmount(algo=10)
-    )
-    algorand_client.account.ensure_funded(
-        random_account2, dispenser, AlgoAmount(algo=10)
-    )
 
     """
     Sets the default signer to use if no other signer is specified.
