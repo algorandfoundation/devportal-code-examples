@@ -3,8 +3,8 @@
 
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
 main:
-    // HelloWorld/contract.algo.ts:20
-    // export default class HelloWorldContract extends Intermediate {
+    // contracts/HelloWorld/contract.algo.ts:20
+    // export default class HelloWorld extends Intermediate {
     txn NumAppArgs
     bz main_bare_routing@7
     pushbytess 0x3aad6d86 0x3d25ae31 // method "sayHello(string,string)string", method "sayBananas()string"
@@ -12,13 +12,13 @@ main:
     match main_sayHello_route@3 main_sayBananas_route@4
 
 main_after_if_else@11:
-    // HelloWorld/contract.algo.ts:20
-    // export default class HelloWorldContract extends Intermediate {
+    // contracts/HelloWorld/contract.algo.ts:20
+    // export default class HelloWorld extends Intermediate {
     pushint 0 // 0
     return
 
 main_sayBananas_route@4:
-    // HelloWorld/contract.algo.ts:11
+    // contracts/HelloWorld/contract.algo.ts:11
     // @arc4.abimethod({ allowActions: ["NoOp"], readonly: true })
     txn OnCompletion
     !
@@ -31,20 +31,20 @@ main_sayBananas_route@4:
     return
 
 main_sayHello_route@3:
-    // HelloWorld/contract.algo.ts:27
+    // contracts/HelloWorld/contract.algo.ts:27
     // public sayHello(firstName: string, lastName: string): string {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // HelloWorld/contract.algo.ts:20
-    // export default class HelloWorldContract extends Intermediate {
+    // contracts/HelloWorld/contract.algo.ts:20
+    // export default class HelloWorld extends Intermediate {
     txna ApplicationArgs 1
     extract 2 0
     txna ApplicationArgs 2
     extract 2 0
-    // HelloWorld/contract.algo.ts:27
+    // contracts/HelloWorld/contract.algo.ts:27
     // public sayHello(firstName: string, lastName: string): string {
     callsub sayHello
     dup
@@ -61,8 +61,8 @@ main_sayHello_route@3:
     return
 
 main_bare_routing@7:
-    // HelloWorld/contract.algo.ts:20
-    // export default class HelloWorldContract extends Intermediate {
+    // contracts/HelloWorld/contract.algo.ts:20
+    // export default class HelloWorld extends Intermediate {
     txn OnCompletion
     bnz main_after_if_else@11
     txn ApplicationID
@@ -72,12 +72,12 @@ main_bare_routing@7:
     return
 
 
-// HelloWorld/contract.algo.ts::HelloWorldContract.sayHello(firstName: bytes, lastName: bytes) -> bytes:
+// contracts/HelloWorld/contract.algo.ts::HelloWorld.sayHello(firstName: bytes, lastName: bytes) -> bytes:
 sayHello:
-    // HelloWorld/contract.algo.ts:27
+    // contracts/HelloWorld/contract.algo.ts:27
     // public sayHello(firstName: string, lastName: string): string {
     proto 2 1
-    // HelloWorld/contract.algo.ts:28
+    // contracts/HelloWorld/contract.algo.ts:28
     // const result = `Hello ${firstName} ${lastName}`;
     pushbytes "Hello "
     frame_dig -2
@@ -86,6 +86,6 @@ sayHello:
     concat
     frame_dig -1
     concat
-    // HelloWorld/contract.algo.ts:29
+    // contracts/HelloWorld/contract.algo.ts:29
     // return result;
     retsub

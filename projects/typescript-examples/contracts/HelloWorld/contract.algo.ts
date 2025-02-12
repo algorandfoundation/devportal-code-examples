@@ -17,7 +17,7 @@ abstract class Intermediate extends arc4.Contract {
 /**
  * A simple hello world example contract
  */
-export default class HelloWorldContract extends Intermediate {
+export default class HelloWorld extends Intermediate {
   /**
    * sayHello method
    * @param firstName The first name of the person to greet

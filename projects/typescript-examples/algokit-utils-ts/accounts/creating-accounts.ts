@@ -1,4 +1,4 @@
-import { setupLocalnetEnvironment } from "@/setup-localnet-environment";
+import { setupLocalnetEnvironment } from "@/algokit-utils-ts/setup-localnet-environment";
 
 async function creatingAccounts() {
   const { algorand } = await setupLocalnetEnvironment();

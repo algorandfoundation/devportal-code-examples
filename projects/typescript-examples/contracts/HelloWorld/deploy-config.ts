@@ -1,5 +1,5 @@
 import { AlgorandClient } from "@algorandfoundation/algokit-utils";
-import { HelloWorldContractFactory } from "../clients/HelloWorldContract/HelloWorldContractClient";
+import { HelloWorldFactory } from "@/contracts/artifacts/clients/HelloWorld/HelloWorldClient";
 
 // Below is a showcase of various deployment options you can use in TypeScript Client
 export async function deploy() {
@@ -8,7 +8,7 @@ export async function deploy() {
   const algorand = AlgorandClient.fromEnvironment();
   const deployer = await algorand.account.fromEnvironment("DEPLOYER");
 
-  const factory = algorand.client.getTypedAppFactory(HelloWorldContractFactory, {
+  const factory = algorand.client.getTypedAppFactory(HelloWorldFactory, {
     defaultSender: deployer.addr,
   });
 
