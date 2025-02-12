@@ -1,0 +1,156 @@
+#pragma version 10
+#pragma typetrack false
+
+// smart_contracts.arc4_types.contract.Arc4Tuple.__algopy_entrypoint_with_init() -> uint64:
+main:
+    intcblock 0 1
+    bytecblock "contact_info" 0x151f7c75
+    txn ApplicationID
+    bnz main_after_if_else@2
+    // smart_contracts/arc4_types/contract.py:282
+    // self.contact_info = GlobalState(
+    bytec_0 // "contact_info"
+    // smart_contracts/arc4_types/contract.py:283
+    // contact_info_tuple((arc4.String(""), arc4.String(""), arc4.UInt64(0)))
+    pushbytes 0x000c000e000000000000000000000000
+    // smart_contracts/arc4_types/contract.py:282-284
+    // self.contact_info = GlobalState(
+    //     contact_info_tuple((arc4.String(""), arc4.String(""), arc4.UInt64(0)))
+    // )
+    app_global_put
+
+main_after_if_else@2:
+    // smart_contracts/arc4_types/contract.py:279
+    // class Arc4Tuple(ARC4Contract):
+    txn NumAppArgs
+    bz main_bare_routing@7
+    pushbytess 0x7f68c13f 0x288dc75f // method "add_contact_info((string,string,uint64))uint64", method "return_contact()(string,string,uint64)"
+    txna ApplicationArgs 0
+    match main_add_contact_info_route@5 main_return_contact_route@6
+
+main_after_if_else@9:
+    // smart_contracts/arc4_types/contract.py:279
+    // class Arc4Tuple(ARC4Contract):
+    intc_0 // 0
+    return
+
+main_return_contact_route@6:
+    // smart_contracts/arc4_types/contract.py:299
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub return_contact
+    bytec_1 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_add_contact_info_route@5:
+    // smart_contracts/arc4_types/contract.py:286
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/arc4_types/contract.py:279
+    // class Arc4Tuple(ARC4Contract):
+    txna ApplicationArgs 1
+    // smart_contracts/arc4_types/contract.py:286
+    // @abimethod()
+    callsub add_contact_info
+    itob
+    bytec_1 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_bare_routing@7:
+    // smart_contracts/arc4_types/contract.py:279
+    // class Arc4Tuple(ARC4Contract):
+    txn OnCompletion
+    bnz main_after_if_else@9
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    intc_1 // 1
+    return
+
+
+// smart_contracts.arc4_types.contract.Arc4Tuple.add_contact_info(contact: bytes) -> uint64:
+add_contact_info:
+    // smart_contracts/arc4_types/contract.py:286-287
+    // @abimethod()
+    // def add_contact_info(self, contact: contact_info_tuple) -> UInt64:
+    proto 1 1
+    // smart_contracts/arc4_types/contract.py:289
+    // name, email, phone = contact.native
+    frame_dig -1
+    intc_0 // 0
+    extract_uint16
+    frame_dig -1
+    pushint 2 // 2
+    extract_uint16
+    frame_dig -1
+    uncover 2
+    dig 2
+    substring3
+    frame_dig -1
+    len
+    frame_dig -1
+    uncover 3
+    uncover 2
+    substring3
+    frame_dig -1
+    extract 4 8 // on error: Index access is out of bounds
+    // smart_contracts/arc4_types/contract.py:291
+    // assert name.native == "Alice"
+    uncover 2
+    extract 2 0
+    pushbytes "Alice"
+    ==
+    assert
+    // smart_contracts/arc4_types/contract.py:292
+    // assert email.native == "alice@something.com"
+    swap
+    extract 2 0
+    pushbytes "alice@something.com"
+    ==
+    assert
+    // smart_contracts/arc4_types/contract.py:293
+    // assert phone == arc4.UInt64(555_555_555)
+    dup
+    pushbytes 0x00000000211d1ae3
+    b==
+    assert
+    // smart_contracts/arc4_types/contract.py:295
+    // self.contact_info.value = contact
+    bytec_0 // "contact_info"
+    frame_dig -1
+    app_global_put
+    // smart_contracts/arc4_types/contract.py:297
+    // return phone.native
+    btoi
+    retsub
+
+
+// smart_contracts.arc4_types.contract.Arc4Tuple.return_contact() -> bytes:
+return_contact:
+    // smart_contracts/arc4_types/contract.py:299-300
+    // @abimethod()
+    // def return_contact(self) -> arc4.Tuple[arc4.String, arc4.String, arc4.UInt64]:
+    proto 0 1
+    // smart_contracts/arc4_types/contract.py:303
+    // return self.contact_info.value
+    intc_0 // 0
+    bytec_0 // "contact_info"
+    app_global_get_ex
+    assert // check self.contact_info exists
+    retsub

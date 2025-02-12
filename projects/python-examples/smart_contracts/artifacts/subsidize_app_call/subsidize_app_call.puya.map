@@ -1,0 +1,204 @@
+{
+  "version": 3,
+  "sources": [
+    "../../subsidize_app_call/contract.py"
+  ],
+  "mappings": "AAqBQ;;AAAiB;AAAjB;AAAA;;;AACI;;AAAgB;;AAAhB;AADJ;;;AAEI;;AAFJ;;;AAGI;;AAAgB;;AAAhB;AAHJ;;;AAII;;AAA0B;;AAA1B;AAJJ;;;AAKI;;AAAW;;AAAI;;AAAJ;AAAX;AALJ;;;AAMI;;AAAkB;AAAlB;AANJ;;;AAOI;;AAAuB;AAAvB;AAPJ;;;AASmB;;AAAkB;AAAlB;AAAf;;AAAuC;;AAAvC;AATJ;;;AAUwB;;AAAkB;AAAlB;AAApB;;AACD;AADC;AAVJ;;;AAYa;;AAAkB;AAAlB;AAAT;;AAZJ;;;;AAFJ;;;AAAA",
+  "op_pc_offset": 2,
+  "pc_events": {
+    "0": {
+      "op": "txn TypeEnum",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "2": {
+      "op": "intc_0 // pay",
+      "defined_out": [
+        "pay",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "pay"
+      ]
+    },
+    "3": {
+      "op": "==",
+      "defined_out": [
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "4": {
+      "op": "bz main_bool_false@12",
+      "stack_out": []
+    },
+    "7": {
+      "op": "txn Receiver"
+    },
+    "9": {
+      "op": "txn Sender"
+    },
+    "11": {
+      "op": "=="
+    },
+    "12": {
+      "op": "bz main_bool_false@12"
+    },
+    "15": {
+      "op": "txn Amount"
+    },
+    "17": {
+      "op": "bnz main_bool_false@12"
+    },
+    "20": {
+      "op": "txn RekeyTo"
+    },
+    "22": {
+      "op": "global ZeroAddress"
+    },
+    "24": {
+      "op": "=="
+    },
+    "25": {
+      "op": "bz main_bool_false@12"
+    },
+    "28": {
+      "op": "txn CloseRemainderTo"
+    },
+    "30": {
+      "op": "global ZeroAddress"
+    },
+    "32": {
+      "op": "=="
+    },
+    "33": {
+      "op": "bz main_bool_false@12"
+    },
+    "36": {
+      "op": "txn Fee"
+    },
+    "38": {
+      "op": "pushint 2 // 2"
+    },
+    "40": {
+      "op": "global MinTxnFee"
+    },
+    "42": {
+      "op": "*"
+    },
+    "43": {
+      "op": "=="
+    },
+    "44": {
+      "op": "bz main_bool_false@12"
+    },
+    "47": {
+      "op": "txn LastValid"
+    },
+    "49": {
+      "op": "intc_1 // TMPL_EXPIRATION_ROUND"
+    },
+    "50": {
+      "op": "<="
+    },
+    "51": {
+      "op": "bz main_bool_false@12"
+    },
+    "54": {
+      "op": "global GenesisHash"
+    },
+    "56": {
+      "op": "bytec_0 // TMPL_TARGET_NETWORK_GENESIS"
+    },
+    "57": {
+      "op": "=="
+    },
+    "58": {
+      "op": "bz main_bool_false@12"
+    },
+    "61": {
+      "op": "txn GroupIndex"
+    },
+    "63": {
+      "op": "intc_0 // 1"
+    },
+    "64": {
+      "op": "-"
+    },
+    "65": {
+      "op": "gtxns TypeEnum"
+    },
+    "67": {
+      "op": "pushint 6 // appl"
+    },
+    "69": {
+      "op": "=="
+    },
+    "70": {
+      "op": "bz main_bool_false@12"
+    },
+    "73": {
+      "op": "txn GroupIndex"
+    },
+    "75": {
+      "op": "intc_0 // 1"
+    },
+    "76": {
+      "op": "-"
+    },
+    "77": {
+      "op": "gtxns ApplicationID"
+    },
+    "79": {
+      "op": "intc_2 // TMPL_KNOWN_APP"
+    },
+    "80": {
+      "op": "=="
+    },
+    "81": {
+      "op": "bz main_bool_false@12"
+    },
+    "84": {
+      "op": "txn GroupIndex"
+    },
+    "86": {
+      "op": "intc_0 // 1"
+    },
+    "87": {
+      "op": "-"
+    },
+    "88": {
+      "op": "gtxns Fee"
+    },
+    "90": {
+      "op": "bnz main_bool_false@12"
+    },
+    "93": {
+      "op": "intc_0 // 1"
+    },
+    "94": {
+      "op": "return"
+    },
+    "95": {
+      "block": "main_bool_false@12",
+      "stack_in": [],
+      "op": "pushint 0 // 0",
+      "defined_out": [
+        "and_result%0#0"
+      ],
+      "stack_out": [
+        "and_result%0#0"
+      ]
+    },
+    "97": {
+      "op": "return"
+    }
+  }
+}
