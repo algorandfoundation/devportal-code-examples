@@ -1,8 +1,7 @@
-import { AlgorandClient, algo } from "@algorandfoundation/algokit-utils";
+import { setupLocalnetEnvironment } from "@/setup-localnet-environment";
 
 async function creatingAccounts() {
-  /** Initialize an Algorand client instance configured for LocalNet */
-  const algorand = AlgorandClient.defaultLocalNet();
+  const { algorand } = await setupLocalnetEnvironment();
 
   // example: RANDOM_ACCOUNTS
   /**
@@ -51,3 +50,5 @@ async function creatingAccounts() {
   await algorand.client.kmd.renameWallet("ACCOUNT_NAME", "password", "NEW_ACCOUNT_NAME");
   // example: KMD_WALLET_OPERATIONS
 }
+
+creatingAccounts();

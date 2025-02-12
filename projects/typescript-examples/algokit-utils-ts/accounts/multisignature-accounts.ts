@@ -1,18 +1,30 @@
-import { AlgorandClient, algo } from "@algorandfoundation/algokit-utils";
+import { algo } from "@algorandfoundation/algokit-utils";
+import { setupLocalnetEnvironment } from "@/setup-localnet-environment";
 
 async function multisignatureAccounts() {
-  /** Initialize an Algorand client instance configured for LocalNet */
-  const algorand = AlgorandClient.defaultLocalNet();
+  // Initialize an Algorand client instance and get funded accounts
+  const { algorand, dispenser, randomAccountA, randomAccountB, randomAccountC } = await setupLocalnetEnvironment();
 
   // example: MULTISIG_ACCOUNT
-  /**
-   * Create a 1-of-2 multisig account that requires
-   * only 1 signature from the 2 possible signers to authorize transactions
-   */
-  const randomAccount = algorand.account.random();
+  // Create a 2-of-3 multisig account that requires
+  // only 2 signatures from the 3 possible signers to authorize transactions
+  const multisigAccountA = algorand.account.multisig(
+    { version: 1, threshold: 2, addrs: [randomAccountA, randomAccountB, randomAccountC] },
+    [randomAccountA.account, randomAccountB.account, randomAccountC.account]
+  );
 
-  const multisigAccount = algorand.account.multisig({ version: 1, threshold: 1, addrs: [randomAccount.addr, "ADDRESS2..."] }, [
-    randomAccount.account,
-  ]);
-  // example: MULTISIG_ACCOUNT
+  // Fund the multisig account
+  await algorand.account.ensureFunded(multisigAccountA, dispenser, (10).algo());
+
+  // Send a payment transaction from the multisig account
+  // which will automatically collect the required number of signatures
+  // from the signing accounts provided when creating the multisig account
+  await algorand.send.payment({
+    sender: multisigAccountA,
+    receiver: randomAccountA,
+    amount: algo(1),
+  });
+  // example: MULTISIG_ACCOUNT;
 }
+
+multisignatureAccounts();
