@@ -196,7 +196,8 @@ def test_for_loops(
     txn_result = for_loop_app_client.send.for_loop()
     print(f"for_loop result: {txn_result.abi_return}")
 
-    assert txn_result.abi_return == [3, 2, 1, 0]
+    assert txn_result.abi_return is not None, "Expected ABI return from for_loop"
+    assert txn_result.abi_return == [3, 2, 1, 0]  # type: ignore[comparison-overlap]
 
 
 def test_match_statements(

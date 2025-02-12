@@ -70,7 +70,7 @@ def contract_account(
     lsig_account = algorand.account.logicsig(compiled_lsig_program)
 
     algorand.account.ensure_funded(
-        account_to_fund=lsig_account,
+        account_to_fund=lsig_account.address,
         dispenser_account=dispenser,
         min_spending_balance=AlgoAmount(algo=2),
     )

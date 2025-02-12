@@ -13,7 +13,6 @@ from algokit_utils import (
 from algokit_utils.config import config
 
 from smart_contracts.artifacts.hello_world.hello_world_client import (
-    HelloWorldClient,
     HelloWorldFactory,
 )
 from smart_contracts.artifacts.inner_transactions.inner_transactions_client import (
@@ -64,9 +63,7 @@ def creator_inner_txn_app_client(
 
 
 @pytest.fixture(scope="session")
-def hello_world_app_id(
-    creator: SigningAccount, algorand: AlgorandClient
-) -> HelloWorldClient:
+def hello_world_app_id(creator: SigningAccount, algorand: AlgorandClient) -> int:
     """Deploy the inner txn App and create an app client the creator will use to interact with the contract"""
 
     config.configure(
@@ -119,7 +116,7 @@ def optin_example_asset_id(creator: SigningAccount, algorand: AlgorandClient) ->
 def test_asset_create(
     algorand: AlgorandClient,
     creator_inner_txn_app_client: InnerTransactionsClient,
-) -> None:
+) -> int:
 
     txn_result = creator_inner_txn_app_client.send.non_fungible_asset_create(
         params=CommonAppCallParams(extra_fee=AlgoAmount(micro_algo=1000))
@@ -128,11 +125,13 @@ def test_asset_create(
     app_acct_info = algorand.account.get_information(
         creator_inner_txn_app_client.app_address
     )
-    asset_info: list = app_acct_info.assets
+    asset_info = app_acct_info.assets
+    assert asset_info is not None, "Expected asset list from account information"
     assert len(asset_info) > 0
     for asset in asset_info:
         if asset["asset-id"] == txn_result.abi_return:
             assert asset["asset-id"] == txn_result.abi_return
+    assert txn_result.abi_return is not None
 
     return txn_result.abi_return
 
@@ -149,7 +148,8 @@ def test_fungible_asset_create(
     app_acct_info = algorand.account.get_information(
         creator_inner_txn_app_client.app_address
     )
-    asset_info: list = app_acct_info.assets
+    asset_info = app_acct_info.assets
+    assert asset_info is not None, "Expected asset list from account information"
     assert len(asset_info) > 0
     assert any(asset["asset-id"] == txn_result.abi_return for asset in asset_info)
 
@@ -176,10 +176,11 @@ def test_asset_opt_in(
         AssetOptInArgs(asset=optin_example_asset_id),
         params=CommonAppCallParams(extra_fee=AlgoAmount(micro_algo=1000)),
     )
-    app_acct_info = algorand.account.get_information(
+    assets = algorand.account.get_information(
         creator_inner_txn_app_client.app_address
     ).assets
-    assert app_acct_info[1]["amount"] == 0
+    assert assets is not None, "Expected assets list"
+    assert assets[1]["amount"] == 0
 
 
 def test_asset_transfer(
@@ -202,6 +203,7 @@ def test_asset_transfer(
     )
 
     alice_asset_info = algorand.account.get_information(alice.address).assets
+    assert alice_asset_info is not None, "Expected alice asset info"
     assert alice_asset_info[0]["asset-id"] == test_asset_create
     assert alice_asset_info[0]["amount"] == 1
 
@@ -219,7 +221,7 @@ def test_asset_freeze(
     )
 
     alice_asset_info = algorand.account.get_information(alice.address).assets
-
+    assert alice_asset_info is not None, "Expected alice asset info"
     assert alice_asset_info[0]["is-frozen"]
 
 
@@ -238,7 +240,7 @@ def test_asset_revoke(
     )
 
     alice_asset_info = algorand.account.get_information(alice.address).assets
-
+    assert alice_asset_info is not None, "Expected alice asset info"
     assert alice_asset_info[0]["amount"] == 0
 
 
@@ -257,7 +259,7 @@ def test_asset_config(
     app_asset_info = algorand.account.get_information(
         creator_inner_txn_app_client.app_address
     ).created_assets
-
+    assert app_asset_info is not None, "Expected created assets list"
     assert app_asset_info[1]["params"]["freeze"] == creator.address
     assert app_asset_info[1]["params"]["clawback"] == creator.address
 
@@ -276,7 +278,8 @@ def test_asset_delete(
     app_acct_info = algorand.account.get_information(
         creator_inner_txn_app_client.app_address
     )
-    asset_info: list = app_acct_info.assets
+    asset_info = app_acct_info.assets
+    assert asset_info is not None, "Expected assets list from account information"
     assert not any(asset["asset-id"] == test_asset_create for asset in asset_info)
 
 
@@ -290,6 +293,7 @@ def test_multi_inner_txns(
         params=CommonAppCallParams(extra_fee=AlgoAmount(micro_algo=2000)),
     )
 
+    assert txn_result.abi_return is not None, "Expected abi_return tuple"
     assert txn_result.abi_return[0] == 5000
     assert txn_result.abi_return[1] == "Hello, World"
 
@@ -315,5 +319,6 @@ def test_no_op_app_calls(
         params=CommonAppCallParams(extra_fee=AlgoAmount(micro_algo=2000)),
     )
 
+    assert txn_result.abi_return is not None, "Expected abi_return tuple"
     assert txn_result.abi_return[0] == "Hello, World"
     assert txn_result.abi_return[1] == "Hello, again"

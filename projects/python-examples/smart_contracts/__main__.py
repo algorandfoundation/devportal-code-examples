@@ -50,7 +50,7 @@ def import_deploy_if_exists(folder: Path) -> Callable[[], None] | None:
     try:
         module_name = f"{folder.parent.name}.{folder.name}.deploy_config"
         deploy_module = importlib.import_module(module_name)
-        return deploy_module.deploy  # type: ignore[no-any-return, misc]
+        return deploy_module.deploy
     except ImportError:
         return None
 

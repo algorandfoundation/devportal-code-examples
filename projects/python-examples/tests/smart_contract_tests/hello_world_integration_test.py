@@ -65,4 +65,5 @@ def test_simulate_says_hello_with_correct_budget_consumed(
 
     assert result.returns[0].value == "Hello, World"
     assert result.returns[1].value == "Hello, Jane"
+    assert result.simulate_response is not None
     assert result.simulate_response["txn-groups"][0]["app-budget-consumed"] < 100
