@@ -1,5 +1,5 @@
 import { algo } from "@algorandfoundation/algokit-utils";
-import { setupLocalnetEnvironment } from "@/setup-localnet-environment";
+import { setupLocalnetEnvironment } from "@/algokit-utils-ts/setup-localnet-environment";
 
 async function signingTransactions() {
   const { algorand, randomAccountA, randomAccountB } = await setupLocalnetEnvironment();
