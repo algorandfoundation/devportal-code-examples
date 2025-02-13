@@ -1,0 +1,292 @@
+#pragma version 10
+#pragma typetrack false
+
+// smart_contracts.subsidize_app_call.contract.subsidize_app_call() -> uint64:
+main:
+    intcblock 1 TMPL_EXPIRATION_ROUND TMPL_KNOWN_APP
+    bytecblock TMPL_TARGET_NETWORK_GENESIS
+    // smart_contracts/subsidize_app_call/contract.py:21-22
+    // # is it safe to pay for the fees of the previous transaction?
+    // Txn.type_enum == TransactionType.Payment
+    txn TypeEnum
+    intc_0 // pay
+    ==
+    // smart_contracts/subsidize_app_call/contract.py:21-34
+    // # is it safe to pay for the fees of the previous transaction?
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == 2 * Global.min_txn_fee
+    // and Txn.last_valid <= TemplateVar[UInt64]("EXPIRATION_ROUND")
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # is the previous transaction in the group an application call to a known app?
+    // and GTxn.type_enum(Txn.group_index - 1) == TransactionType.ApplicationCall
+    // and GTxn.application_id(Txn.group_index - 1)
+    // == TemplateVar[Application]("KNOWN_APP")
+    // and GTxn.fee(Txn.group_index - 1) == 0
+    bz main_bool_false@12
+    // smart_contracts/subsidize_app_call/contract.py:23
+    // and Txn.receiver == Txn.sender
+    txn Receiver
+    txn Sender
+    ==
+    // smart_contracts/subsidize_app_call/contract.py:21-34
+    // # is it safe to pay for the fees of the previous transaction?
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == 2 * Global.min_txn_fee
+    // and Txn.last_valid <= TemplateVar[UInt64]("EXPIRATION_ROUND")
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # is the previous transaction in the group an application call to a known app?
+    // and GTxn.type_enum(Txn.group_index - 1) == TransactionType.ApplicationCall
+    // and GTxn.application_id(Txn.group_index - 1)
+    // == TemplateVar[Application]("KNOWN_APP")
+    // and GTxn.fee(Txn.group_index - 1) == 0
+    bz main_bool_false@12
+    // smart_contracts/subsidize_app_call/contract.py:24
+    // and Txn.amount == 0
+    txn Amount
+    // smart_contracts/subsidize_app_call/contract.py:21-34
+    // # is it safe to pay for the fees of the previous transaction?
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == 2 * Global.min_txn_fee
+    // and Txn.last_valid <= TemplateVar[UInt64]("EXPIRATION_ROUND")
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # is the previous transaction in the group an application call to a known app?
+    // and GTxn.type_enum(Txn.group_index - 1) == TransactionType.ApplicationCall
+    // and GTxn.application_id(Txn.group_index - 1)
+    // == TemplateVar[Application]("KNOWN_APP")
+    // and GTxn.fee(Txn.group_index - 1) == 0
+    bnz main_bool_false@12
+    // smart_contracts/subsidize_app_call/contract.py:25
+    // and Txn.rekey_to == Global.zero_address
+    txn RekeyTo
+    global ZeroAddress
+    ==
+    // smart_contracts/subsidize_app_call/contract.py:21-34
+    // # is it safe to pay for the fees of the previous transaction?
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == 2 * Global.min_txn_fee
+    // and Txn.last_valid <= TemplateVar[UInt64]("EXPIRATION_ROUND")
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # is the previous transaction in the group an application call to a known app?
+    // and GTxn.type_enum(Txn.group_index - 1) == TransactionType.ApplicationCall
+    // and GTxn.application_id(Txn.group_index - 1)
+    // == TemplateVar[Application]("KNOWN_APP")
+    // and GTxn.fee(Txn.group_index - 1) == 0
+    bz main_bool_false@12
+    // smart_contracts/subsidize_app_call/contract.py:26
+    // and Txn.close_remainder_to == Global.zero_address
+    txn CloseRemainderTo
+    global ZeroAddress
+    ==
+    // smart_contracts/subsidize_app_call/contract.py:21-34
+    // # is it safe to pay for the fees of the previous transaction?
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == 2 * Global.min_txn_fee
+    // and Txn.last_valid <= TemplateVar[UInt64]("EXPIRATION_ROUND")
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # is the previous transaction in the group an application call to a known app?
+    // and GTxn.type_enum(Txn.group_index - 1) == TransactionType.ApplicationCall
+    // and GTxn.application_id(Txn.group_index - 1)
+    // == TemplateVar[Application]("KNOWN_APP")
+    // and GTxn.fee(Txn.group_index - 1) == 0
+    bz main_bool_false@12
+    // smart_contracts/subsidize_app_call/contract.py:27
+    // and Txn.fee == 2 * Global.min_txn_fee
+    txn Fee
+    pushint 2 // 2
+    global MinTxnFee
+    *
+    ==
+    // smart_contracts/subsidize_app_call/contract.py:21-34
+    // # is it safe to pay for the fees of the previous transaction?
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == 2 * Global.min_txn_fee
+    // and Txn.last_valid <= TemplateVar[UInt64]("EXPIRATION_ROUND")
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # is the previous transaction in the group an application call to a known app?
+    // and GTxn.type_enum(Txn.group_index - 1) == TransactionType.ApplicationCall
+    // and GTxn.application_id(Txn.group_index - 1)
+    // == TemplateVar[Application]("KNOWN_APP")
+    // and GTxn.fee(Txn.group_index - 1) == 0
+    bz main_bool_false@12
+    // smart_contracts/subsidize_app_call/contract.py:28
+    // and Txn.last_valid <= TemplateVar[UInt64]("EXPIRATION_ROUND")
+    txn LastValid
+    intc_1 // TMPL_EXPIRATION_ROUND
+    <=
+    // smart_contracts/subsidize_app_call/contract.py:21-34
+    // # is it safe to pay for the fees of the previous transaction?
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == 2 * Global.min_txn_fee
+    // and Txn.last_valid <= TemplateVar[UInt64]("EXPIRATION_ROUND")
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # is the previous transaction in the group an application call to a known app?
+    // and GTxn.type_enum(Txn.group_index - 1) == TransactionType.ApplicationCall
+    // and GTxn.application_id(Txn.group_index - 1)
+    // == TemplateVar[Application]("KNOWN_APP")
+    // and GTxn.fee(Txn.group_index - 1) == 0
+    bz main_bool_false@12
+    // smart_contracts/subsidize_app_call/contract.py:29
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    global GenesisHash
+    bytec_0 // TMPL_TARGET_NETWORK_GENESIS
+    ==
+    // smart_contracts/subsidize_app_call/contract.py:21-34
+    // # is it safe to pay for the fees of the previous transaction?
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == 2 * Global.min_txn_fee
+    // and Txn.last_valid <= TemplateVar[UInt64]("EXPIRATION_ROUND")
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # is the previous transaction in the group an application call to a known app?
+    // and GTxn.type_enum(Txn.group_index - 1) == TransactionType.ApplicationCall
+    // and GTxn.application_id(Txn.group_index - 1)
+    // == TemplateVar[Application]("KNOWN_APP")
+    // and GTxn.fee(Txn.group_index - 1) == 0
+    bz main_bool_false@12
+    // smart_contracts/subsidize_app_call/contract.py:30-31
+    // # is the previous transaction in the group an application call to a known app?
+    // and GTxn.type_enum(Txn.group_index - 1) == TransactionType.ApplicationCall
+    txn GroupIndex
+    intc_0 // 1
+    -
+    gtxns TypeEnum
+    pushint 6 // appl
+    ==
+    // smart_contracts/subsidize_app_call/contract.py:21-34
+    // # is it safe to pay for the fees of the previous transaction?
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == 2 * Global.min_txn_fee
+    // and Txn.last_valid <= TemplateVar[UInt64]("EXPIRATION_ROUND")
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # is the previous transaction in the group an application call to a known app?
+    // and GTxn.type_enum(Txn.group_index - 1) == TransactionType.ApplicationCall
+    // and GTxn.application_id(Txn.group_index - 1)
+    // == TemplateVar[Application]("KNOWN_APP")
+    // and GTxn.fee(Txn.group_index - 1) == 0
+    bz main_bool_false@12
+    // smart_contracts/subsidize_app_call/contract.py:32
+    // and GTxn.application_id(Txn.group_index - 1)
+    txn GroupIndex
+    intc_0 // 1
+    -
+    gtxns ApplicationID
+    // smart_contracts/subsidize_app_call/contract.py:33
+    // == TemplateVar[Application]("KNOWN_APP")
+    intc_2 // TMPL_KNOWN_APP
+    // smart_contracts/subsidize_app_call/contract.py:32-33
+    // and GTxn.application_id(Txn.group_index - 1)
+    // == TemplateVar[Application]("KNOWN_APP")
+    ==
+    // smart_contracts/subsidize_app_call/contract.py:21-34
+    // # is it safe to pay for the fees of the previous transaction?
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == 2 * Global.min_txn_fee
+    // and Txn.last_valid <= TemplateVar[UInt64]("EXPIRATION_ROUND")
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # is the previous transaction in the group an application call to a known app?
+    // and GTxn.type_enum(Txn.group_index - 1) == TransactionType.ApplicationCall
+    // and GTxn.application_id(Txn.group_index - 1)
+    // == TemplateVar[Application]("KNOWN_APP")
+    // and GTxn.fee(Txn.group_index - 1) == 0
+    bz main_bool_false@12
+    // smart_contracts/subsidize_app_call/contract.py:34
+    // and GTxn.fee(Txn.group_index - 1) == 0
+    txn GroupIndex
+    intc_0 // 1
+    -
+    gtxns Fee
+    // smart_contracts/subsidize_app_call/contract.py:21-34
+    // # is it safe to pay for the fees of the previous transaction?
+    // Txn.type_enum == TransactionType.Payment
+    // and Txn.receiver == Txn.sender
+    // and Txn.amount == 0
+    // and Txn.rekey_to == Global.zero_address
+    // and Txn.close_remainder_to == Global.zero_address
+    // and Txn.fee == 2 * Global.min_txn_fee
+    // and Txn.last_valid <= TemplateVar[UInt64]("EXPIRATION_ROUND")
+    // and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    // # is the previous transaction in the group an application call to a known app?
+    // and GTxn.type_enum(Txn.group_index - 1) == TransactionType.ApplicationCall
+    // and GTxn.application_id(Txn.group_index - 1)
+    // == TemplateVar[Application]("KNOWN_APP")
+    // and GTxn.fee(Txn.group_index - 1) == 0
+    bnz main_bool_false@12
+    intc_0 // 1
+    // smart_contracts/subsidize_app_call/contract.py:20-35
+    // return (
+    //     # is it safe to pay for the fees of the previous transaction?
+    //     Txn.type_enum == TransactionType.Payment
+    //     and Txn.receiver == Txn.sender
+    //     and Txn.amount == 0
+    //     and Txn.rekey_to == Global.zero_address
+    //     and Txn.close_remainder_to == Global.zero_address
+    //     and Txn.fee == 2 * Global.min_txn_fee
+    //     and Txn.last_valid <= TemplateVar[UInt64]("EXPIRATION_ROUND")
+    //     and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    //     # is the previous transaction in the group an application call to a known app?
+    //     and GTxn.type_enum(Txn.group_index - 1) == TransactionType.ApplicationCall
+    //     and GTxn.application_id(Txn.group_index - 1)
+    //     == TemplateVar[Application]("KNOWN_APP")
+    //     and GTxn.fee(Txn.group_index - 1) == 0
+    // )
+    return
+
+main_bool_false@12:
+    pushint 0 // 0
+    // smart_contracts/subsidize_app_call/contract.py:20-35
+    // return (
+    //     # is it safe to pay for the fees of the previous transaction?
+    //     Txn.type_enum == TransactionType.Payment
+    //     and Txn.receiver == Txn.sender
+    //     and Txn.amount == 0
+    //     and Txn.rekey_to == Global.zero_address
+    //     and Txn.close_remainder_to == Global.zero_address
+    //     and Txn.fee == 2 * Global.min_txn_fee
+    //     and Txn.last_valid <= TemplateVar[UInt64]("EXPIRATION_ROUND")
+    //     and Global.genesis_hash == TemplateVar[Bytes]("TARGET_NETWORK_GENESIS")
+    //     # is the previous transaction in the group an application call to a known app?
+    //     and GTxn.type_enum(Txn.group_index - 1) == TransactionType.ApplicationCall
+    //     and GTxn.application_id(Txn.group_index - 1)
+    //     == TemplateVar[Application]("KNOWN_APP")
+    //     and GTxn.fee(Txn.group_index - 1) == 0
+    // )
+    return

@@ -1,0 +1,309 @@
+{
+  "version": 3,
+  "sources": [
+    "../../arc4_types/contract.py"
+  ],
+  "mappings": ";;;;;;AA4HA;;AAAA;;;AAAA;;;;;;AAAA;;;AAAA;;;;AAAA;;AAEK;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;;AAFL;;AAAA;;;;;;;;;AAEA;;;AASgB;;AAChB;;AAAA;AAAA;AAAA;;;AAAA;;AAAA;AAAA;AAAA;AAL8B;;;;;;;;;;;;;;;;;;AAKlB;AAAZ;AAAA;AACqB;AAAT;;AAAA;AAAA;;;;;;;;;AAEG;;AAAS;;;AAAT;AAAP;",
+  "op_pc_offset": 0,
+  "pc_events": {
+    "1": {
+      "subroutine": "algopy.arc4.ARC4Contract.approval_program",
+      "params": {},
+      "block": "main",
+      "stack_in": [],
+      "op": "intcblock 1 4 0"
+    },
+    "6": {
+      "op": "txn NumAppArgs",
+      "defined_out": [
+        "tmp%0#1"
+      ],
+      "stack_out": [
+        "tmp%0#1"
+      ]
+    },
+    "8": {
+      "op": "bz main_bare_routing@6",
+      "stack_out": []
+    },
+    "11": {
+      "op": "pushbytes 0x0a28e7b6 // method \"arc4_static_array()void\""
+    },
+    "17": {
+      "op": "txna ApplicationArgs 0"
+    },
+    "20": {
+      "op": "match main_arc4_static_array_route@3"
+    },
+    "24": {
+      "block": "main_after_if_else@10",
+      "stack_in": [],
+      "op": "intc_2 // 0",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "25": {
+      "op": "return"
+    },
+    "26": {
+      "block": "main_arc4_static_array_route@3",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "28": {
+      "op": "!",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "29": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "30": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%5#0"
+      ]
+    },
+    "32": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "33": {
+      "callsub": "smart_contracts.arc4_types.contract.Arc4StaticArray.arc4_static_array",
+      "op": "callsub arc4_static_array"
+    },
+    "36": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "37": {
+      "op": "return"
+    },
+    "38": {
+      "block": "main_bare_routing@6",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%7#0"
+      ]
+    },
+    "40": {
+      "op": "bnz main_after_if_else@10",
+      "stack_out": []
+    },
+    "43": {
+      "op": "txn ApplicationID"
+    },
+    "45": {
+      "op": "!"
+    },
+    "46": {
+      "error": "can only call when creating",
+      "op": "assert // can only call when creating"
+    },
+    "47": {
+      "op": "intc_0 // 1"
+    },
+    "48": {
+      "op": "return"
+    },
+    "49": {
+      "subroutine": "smart_contracts.arc4_types.contract.Arc4StaticArray.arc4_static_array",
+      "params": {},
+      "block": "arc4_static_array",
+      "stack_in": [],
+      "op": "proto 0 0"
+    },
+    "52": {
+      "op": "intc_2 // 0"
+    },
+    "53": {
+      "op": "dup",
+      "defined_out": [
+        "item_index_internal%0#0",
+        "total#0"
+      ],
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0"
+      ]
+    },
+    "54": {
+      "block": "arc4_static_array_for_header@1",
+      "stack_in": [
+        "total#0",
+        "item_index_internal%0#0"
+      ],
+      "op": "frame_dig 1",
+      "defined_out": [
+        "item_index_internal%0#0"
+      ],
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0",
+        "item_index_internal%0#0"
+      ]
+    },
+    "56": {
+      "op": "intc_1 // 4",
+      "defined_out": [
+        "4",
+        "item_index_internal%0#0"
+      ],
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0",
+        "item_index_internal%0#0",
+        "4"
+      ]
+    },
+    "57": {
+      "op": "<",
+      "defined_out": [
+        "continue_looping%0#0",
+        "item_index_internal%0#0"
+      ],
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0",
+        "continue_looping%0#0"
+      ]
+    },
+    "58": {
+      "op": "bz arc4_static_array_after_for@4",
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0"
+      ]
+    },
+    "61": {
+      "op": "frame_dig 1"
+    },
+    "63": {
+      "op": "dup"
+    },
+    "64": {
+      "op": "intc_1 // 4"
+    },
+    "65": {
+      "op": "*"
+    },
+    "66": {
+      "op": "pushbytes 0x000000010000000a000000ff00000080"
+    },
+    "84": {
+      "op": "swap"
+    },
+    "85": {
+      "op": "intc_1 // 4"
+    },
+    "86": {
+      "error": "Index access is out of bounds",
+      "op": "extract3 // on error: Index access is out of bounds"
+    },
+    "87": {
+      "op": "btoi"
+    },
+    "88": {
+      "op": "frame_dig 0"
+    },
+    "90": {
+      "op": "+"
+    },
+    "91": {
+      "op": "frame_bury 0"
+    },
+    "93": {
+      "op": "intc_0 // 1"
+    },
+    "94": {
+      "op": "+"
+    },
+    "95": {
+      "op": "frame_bury 1"
+    },
+    "97": {
+      "op": "b arc4_static_array_for_header@1"
+    },
+    "100": {
+      "block": "arc4_static_array_after_for@4",
+      "stack_in": [
+        "total#0",
+        "item_index_internal%0#0"
+      ],
+      "op": "frame_dig 0",
+      "defined_out": [
+        "total#0"
+      ],
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0",
+        "total#0"
+      ]
+    },
+    "102": {
+      "op": "pushint 394 // 394",
+      "defined_out": [
+        "394",
+        "total#0"
+      ],
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0",
+        "total#0",
+        "394"
+      ]
+    },
+    "105": {
+      "op": "==",
+      "defined_out": [
+        "tmp%1#0",
+        "total#0"
+      ],
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0",
+        "tmp%1#0"
+      ]
+    },
+    "106": {
+      "op": "assert",
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0"
+      ]
+    },
+    "107": {
+      "retsub": true,
+      "op": "retsub"
+    }
+  }
+}

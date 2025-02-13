@@ -1,0 +1,87 @@
+[tool.poetry]
+name = "python-examples"
+version = "0.1.0"
+description = "Algorand smart contracts"
+authors = ["Chris Kim (Hyunggun) <chris.kim@algorand.foundation>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+algokit-utils = "^3.0.0b5"
+algokit-client-generator = "^2.0.0b5"
+algorand-python = "^2.6.0"
+algorand-python-testing = "^0.4.1"
+python-dotenv = "^1.0.0"
+
+[tool.poetry.group.dev.dependencies]
+algokit-client-generator = "^2.0.0b5"
+black = { extras = ["d"], version = "*" }
+ruff = "^0.1.6"
+mypy = "*"
+pytest = "*"
+pytest-cov = "*"
+pip-audit = "*"
+pre-commit = "*"
+puyapy = "*"
+pytest-sugar = "^1.0.0"
+
+[tool.poetry.requires-plugins]
+poetry-plugin-export = ">=1.8"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+lint.select = [
+  "E",
+  "F",
+  "ANN",
+  "UP",
+  "N",
+  "C4",
+  "B",
+  "A",
+  "YTT",
+  "W",
+  "FBT",
+  "Q",
+  "RUF",
+  "I",
+]
+extend-exclude = [
+  "examples/*",       # Ignoring generated tests, ruff specific errors are to be caught by pytest
+  "template_content",
+  ".git",
+  ".mypy_cache",
+  ".ruff_cache",
+]
+lint.ignore = [
+  "RET505", # allow else after return
+  "SIM108", # allow if-else in place of ternary
+  "E111",   # indentation is not a multiple of four
+  "E117",   # over-indented
+  "ISC001", # single line implicit string concatenation
+  "ISC002", # multi line implicit string concatenation
+  "Q000",   # bad quotes inline string
+  "Q001",   # bad quotes multiline string
+  "Q002",   # bad quotes docstring
+  "Q003",   # avoidable escaped quotes
+  "W191",   # indentation contains tabs
+  "F841",   # local variable is assigned but never used
+  "E501",   # line too long
+  "ANN101", # Missing type annotation
+]
+lint.unfixable = ["B", "RUF"]
+
+[tool.pytest.ini_options]
+pythonpath = ["tests"]
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.12"
+check_untyped_defs = true
+warn_redundant_casts = true
+warn_unused_ignores = false
+strict_equality = true

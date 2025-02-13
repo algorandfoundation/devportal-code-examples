@@ -1,0 +1,341 @@
+#pragma version 10
+#pragma typetrack false
+
+// algopy.arc4.ARC4Contract.approval_program() -> uint64:
+main:
+    intcblock 1 64
+    bytecblock 0x151f7c75
+    // smart_contracts/arc4_types/contract.py:15
+    // class Arc4Types(ARC4Contract):
+    txn NumAppArgs
+    bz main_bare_routing@11
+    pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58 // method "add_arc4_uint64(uint64,uint64)uint64", method "add_arc4_uint_n(uint8,uint16,uint32,uint64)uint64", method "add_arc4_biguint_n(uint128,uint256,uint512)uint512", method "arc4_byte(byte)byte", method "arc4_address_properties(address)uint64", method "arc4_address_return(address)address"
+    txna ApplicationArgs 0
+    match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8
+
+main_after_if_else@15:
+    // smart_contracts/arc4_types/contract.py:15
+    // class Arc4Types(ARC4Contract):
+    pushint 0 // 0
+    return
+
+main_arc4_address_return_route@8:
+    // smart_contracts/arc4_types/contract.py:101
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    bytec_0 // 0x151f7c75
+    // smart_contracts/arc4_types/contract.py:15
+    // class Arc4Types(ARC4Contract):
+    txna ApplicationArgs 1
+    // smart_contracts/arc4_types/contract.py:101
+    // @abimethod()
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_arc4_address_properties_route@7:
+    // smart_contracts/arc4_types/contract.py:83-84
+    // # example: ARC4_ADDRESS
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/arc4_types/contract.py:15
+    // class Arc4Types(ARC4Contract):
+    txna ApplicationArgs 1
+    // smart_contracts/arc4_types/contract.py:83-84
+    // # example: ARC4_ADDRESS
+    // @abimethod()
+    callsub arc4_address_properties
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_arc4_byte_route@6:
+    // smart_contracts/arc4_types/contract.py:73-74
+    // # example: ARC4_BYTES
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/arc4_types/contract.py:15
+    // class Arc4Types(ARC4Contract):
+    txna ApplicationArgs 1
+    // smart_contracts/arc4_types/contract.py:73-74
+    // # example: ARC4_BYTES
+    // @abimethod()
+    callsub arc4_byte
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_add_arc4_biguint_n_route@5:
+    // smart_contracts/arc4_types/contract.py:54-55
+    // # example: ARC4_BIGUINT
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/arc4_types/contract.py:15
+    // class Arc4Types(ARC4Contract):
+    txna ApplicationArgs 1
+    txna ApplicationArgs 2
+    txna ApplicationArgs 3
+    // smart_contracts/arc4_types/contract.py:54-55
+    // # example: ARC4_BIGUINT
+    // @abimethod()
+    callsub add_arc4_biguint_n
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_add_arc4_uint_n_route@4:
+    // smart_contracts/arc4_types/contract.py:34-35
+    // # example: ARC4_UINTN
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/arc4_types/contract.py:15
+    // class Arc4Types(ARC4Contract):
+    txna ApplicationArgs 1
+    txna ApplicationArgs 2
+    txna ApplicationArgs 3
+    txna ApplicationArgs 4
+    // smart_contracts/arc4_types/contract.py:34-35
+    // # example: ARC4_UINTN
+    // @abimethod()
+    callsub add_arc4_uint_n
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_add_arc4_uint64_route@3:
+    // smart_contracts/arc4_types/contract.py:17-18
+    // # example: ARC4_UINT64
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/arc4_types/contract.py:15
+    // class Arc4Types(ARC4Contract):
+    txna ApplicationArgs 1
+    txna ApplicationArgs 2
+    // smart_contracts/arc4_types/contract.py:17-18
+    // # example: ARC4_UINT64
+    // @abimethod()
+    callsub add_arc4_uint64
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_bare_routing@11:
+    // smart_contracts/arc4_types/contract.py:15
+    // class Arc4Types(ARC4Contract):
+    txn OnCompletion
+    bnz main_after_if_else@15
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    intc_0 // 1
+    return
+
+
+// smart_contracts.arc4_types.contract.Arc4Types.add_arc4_uint64(a: bytes, b: bytes) -> bytes:
+add_arc4_uint64:
+    // smart_contracts/arc4_types/contract.py:17-19
+    // # example: ARC4_UINT64
+    // @abimethod()
+    // def add_arc4_uint64(self, a: arc4.UInt64, b: arc4.UInt64) -> arc4.UInt64:
+    proto 2 1
+    // smart_contracts/arc4_types/contract.py:26-27
+    // # Use the native integers to perform arithmetic
+    // c = a.native + b.native
+    frame_dig -2
+    btoi
+    frame_dig -1
+    btoi
+    +
+    // smart_contracts/arc4_types/contract.py:29-30
+    // # Convert back to arc4.UInt64 for ABI compatability before returning
+    // return arc4.UInt64(c)
+    itob
+    retsub
+
+
+// smart_contracts.arc4_types.contract.Arc4Types.add_arc4_uint_n(a: bytes, b: bytes, c: bytes, d: bytes) -> bytes:
+add_arc4_uint_n:
+    // smart_contracts/arc4_types/contract.py:34-38
+    // # example: ARC4_UINTN
+    // @abimethod()
+    // def add_arc4_uint_n(
+    //     self, a: arc4.UInt8, b: arc4.UInt16, c: arc4.UInt32, d: arc4.UInt64
+    // ) -> arc4.UInt64:
+    proto 4 1
+    // smart_contracts/arc4_types/contract.py:43
+    // assert a.bytes.length == 1  # UInt8 = 1 byte
+    frame_dig -4
+    len
+    intc_0 // 1
+    ==
+    assert
+    // smart_contracts/arc4_types/contract.py:44
+    // assert b.bytes.length == 2  # UInt16 = 2 bytes
+    frame_dig -3
+    len
+    pushint 2 // 2
+    ==
+    assert
+    // smart_contracts/arc4_types/contract.py:45
+    // assert c.bytes.length == 4  # UInt32 = 4 bytes
+    frame_dig -2
+    len
+    pushint 4 // 4
+    ==
+    assert
+    // smart_contracts/arc4_types/contract.py:46
+    // assert d.bytes.length == 8  # UInt64 = 8 bytes
+    frame_dig -1
+    len
+    pushint 8 // 8
+    ==
+    assert
+    // smart_contracts/arc4_types/contract.py:48
+    // total = a.native + b.native + c.native + d.native
+    frame_dig -4
+    btoi
+    frame_dig -3
+    btoi
+    +
+    frame_dig -2
+    btoi
+    +
+    frame_dig -1
+    btoi
+    +
+    // smart_contracts/arc4_types/contract.py:50
+    // return arc4.UInt64(total)
+    itob
+    retsub
+
+
+// smart_contracts.arc4_types.contract.Arc4Types.add_arc4_biguint_n(a: bytes, b: bytes, c: bytes) -> bytes:
+add_arc4_biguint_n:
+    // smart_contracts/arc4_types/contract.py:54-58
+    // # example: ARC4_BIGUINT
+    // @abimethod()
+    // def add_arc4_biguint_n(
+    //     self, a: arc4.UInt128, b: arc4.UInt256, c: arc4.UInt512
+    // ) -> arc4.UInt512:
+    proto 3 1
+    // smart_contracts/arc4_types/contract.py:63
+    // assert a.bytes.length == 16
+    frame_dig -3
+    len
+    pushint 16 // 16
+    ==
+    assert
+    // smart_contracts/arc4_types/contract.py:64
+    // assert b.bytes.length == 32
+    frame_dig -2
+    len
+    pushint 32 // 32
+    ==
+    assert
+    // smart_contracts/arc4_types/contract.py:65
+    // assert c.bytes.length == 64
+    frame_dig -1
+    len
+    intc_1 // 64
+    ==
+    assert
+    // smart_contracts/arc4_types/contract.py:67
+    // total = a.native + b.native + c.native
+    frame_dig -3
+    frame_dig -2
+    b+
+    frame_dig -1
+    b+
+    // smart_contracts/arc4_types/contract.py:69
+    // return arc4.UInt512(total)
+    dup
+    len
+    intc_1 // 64
+    <=
+    assert // overflow
+    intc_1 // 64
+    bzero
+    b|
+    retsub
+
+
+// smart_contracts.arc4_types.contract.Arc4Types.arc4_byte(a: bytes) -> bytes:
+arc4_byte:
+    // smart_contracts/arc4_types/contract.py:73-75
+    // # example: ARC4_BYTES
+    // @abimethod()
+    // def arc4_byte(self, a: arc4.Byte) -> arc4.Byte:
+    proto 1 1
+    // smart_contracts/arc4_types/contract.py:79
+    // return arc4.Byte(a.native + 1)
+    frame_dig -1
+    btoi
+    intc_0 // 1
+    +
+    itob
+    extract 7 1
+    retsub
+
+
+// smart_contracts.arc4_types.contract.Arc4Types.arc4_address_properties(address: bytes) -> uint64:
+arc4_address_properties:
+    // smart_contracts/arc4_types/contract.py:83-85
+    // # example: ARC4_ADDRESS
+    // @abimethod()
+    // def arc4_address_properties(self, address: arc4.Address) -> UInt64:
+    proto 1 1
+    // smart_contracts/arc4_types/contract.py:94
+    // bal = account.balance  # returns the balance of the account
+    frame_dig -1
+    acct_params_get AcctBalance
+    assert // account funded
+    // smart_contracts/arc4_types/contract.py:96
+    // account.total_assets
+    frame_dig -1
+    acct_params_get AcctTotalAssets
+    bury 1
+    assert // account funded
+    // smart_contracts/arc4_types/contract.py:99
+    // return bal
+    retsub
