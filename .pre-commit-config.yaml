@@ -1,0 +1,50 @@
+repos:
+  - repo: local
+    hooks:
+      # Python hooks
+      - id: black
+        name: black
+        description: "Black: The uncompromising Python code formatter"
+        entry: bash -c 'cd projects/python-examples && poetry run black'
+        language: system
+        types_or: [python, pyi]
+
+      - id: ruff
+        name: ruff
+        description: "Run 'ruff' for extremely fast Python linting"
+        entry: bash -c 'cd projects/python-examples && poetry run ruff check --fix'
+        language: system
+        types: [python]
+        files: "^projects/python-examples/(src|tests)/"
+
+      - id: mypy
+        name: mypy
+        description: "`mypy` will check Python types for correctness"
+        entry: bash -c 'cd projects/python-examples && poetry run mypy'
+        language: system
+        types_or: [python, pyi]
+        files: "^projects/python-examples/(src|tests)/"
+
+      # TypeScript hooks
+      - id: prettier
+        name: prettier
+        description: "Prettier: The opinionated TypeScript code formatter"
+        entry: bash -c 'cd projects/typescript-examples && npm run format'
+        language: system
+        types_or: [ts, tsx]
+
+      - id: eslint
+        name: eslint
+        description: "Run 'eslint' for TypeScript linting"
+        entry: bash -c 'cd projects/typescript-examples && npm run lint'
+        language: system
+        types: [ts, tsx]
+
+      # Common hooks
+      - id: tealer
+        name: tealer
+        description: "Run AlgoKit `Tealer` for TEAL static analysis"
+        entry: algokit
+        language: system
+        args: [project, run, "audit-teal"]
+        files: '^.*\.teal$'

@@ -9,6 +9,8 @@ export default tseslint.config(
         ...globals.node,
       },
     },
+    ignores: ["**/contracts/artifacts/**"],
+    files: ["**/src/**", "**/tests/**"],
   },
   eslint.configs.recommended,
   tseslint.configs.recommended,
