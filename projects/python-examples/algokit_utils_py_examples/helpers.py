@@ -1,6 +1,7 @@
 from algokit_utils import *
 
 
+# temp
 def setup_localnet_environment() -> (
     tuple[
         AlgorandClient, SigningAccount, SigningAccount, SigningAccount, SigningAccount
