@@ -1,0 +1,3576 @@
+{
+  "success": false,
+  "error": null,
+  "result": [
+    {
+      "type": "ExecutionPaths",
+      "count": 5,
+      "description": "\nCheck: \"unprotected-deletable\", Impact: High, Confidence: High\nDescription: Unprotected Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-deletable-application\n",
+      "check": "unprotected-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "16: main_after_if_else@12:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 7 -> 19 -> 8",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "63: main_goodbye_route@3:",
+              "66: txn OnCompletion",
+              "67: !",
+              "68: assert",
+              "69: txn ApplicationID",
+              "70: assert",
+              "73: txna ApplicationArgs 1",
+              "76: callsub goodbye"
+            ],
+            [
+              "236: goodbye:",
+              "240: proto 1 1",
+              "243: pushbytes 0x0004000f0009476f6f642062796520",
+              "244: frame_dig -1",
+              "245: concat",
+              "246: bytec_1",
+              "247: swap",
+              "248: concat",
+              "251: retsub"
+            ],
+            [
+              "77: bytec_0",
+              "78: swap",
+              "79: concat",
+              "80: log",
+              "81: intc_2",
+              "82: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 5 -> 20 -> 13 -> 15 -> 16 -> 18 -> 14 -> 21 -> 11 -> 15 -> 16 -> 18 -> 12 -> 22 -> 11 -> 15 -> 16 -> 18 -> 12 -> 23 -> 13 -> 15 -> 16 -> 18 -> 14 -> 24 -> 25 -> 27 -> 6",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "36: main_hello_route@4:",
+              "39: txn OnCompletion",
+              "40: !",
+              "41: assert",
+              "42: txn ApplicationID",
+              "43: assert",
+              "46: txna ApplicationArgs 1",
+              "49: callsub hello"
+            ],
+            [
+              "255: hello:",
+              "259: proto 1 1",
+              "262: frame_dig -1",
+              "263: len",
+              "264: pushint 4",
+              "265: +",
+              "266: itob",
+              "267: extract 6 2",
+              "268: pushbytes 0x0004",
+              "269: swap",
+              "270: concat",
+              "271: frame_dig -1",
+              "272: concat",
+              "273: pushbytes 0x000121",
+              "274: concat",
+              "275: bytec_1",
+              "276: swap",
+              "277: concat",
+              "280: dup",
+              "281: intc_1",
+              "282: extract_uint16",
+              "283: swap",
+              "284: extract 2 0",
+              "285: dig 1",
+              "286: intc_0",
+              "287: *",
+              "288: dig 1",
+              "289: len",
+              "290: substring3",
+              "293: pushbytes 0x00010002000648656c6c6f20",
+              "296: swap",
+              "297: uncover 2",
+              "298: callsub dynamic_array_concat_byte_length_head"
+            ],
+            [
+              "142: dynamic_array_concat_byte_length_head:",
+              "143: proto 3 1",
+              "144: frame_dig -3",
+              "145: intc_1",
+              "146: extract_uint16",
+              "147: dup",
+              "148: frame_dig -1",
+              "149: +",
+              "150: swap",
+              "151: intc_0",
+              "152: *",
+              "153: intc_0",
+              "154: +",
+              "155: dig 1",
+              "156: itob",
+              "157: extract 6 2",
+              "158: frame_dig -3",
+              "159: intc_0",
+              "160: dig 3",
+              "161: substring3",
+              "162: frame_dig -1",
+              "163: intc_0",
+              "164: *",
+              "165: bzero",
+              "166: concat",
+              "167: frame_dig -3",
+              "168: len",
+              "169: frame_dig -3",
+              "170: uncover 4",
+              "171: uncover 2",
+              "172: substring3",
+              "173: concat",
+              "174: frame_dig -2",
+              "175: concat",
+              "176: uncover 2",
+              "177: intc_1",
+              "178: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "179: concat",
+              "180: retsub"
+            ],
+            [
+              "299: dupn 2",
+              "302: callsub dynamic_array_pop_byte_length_head"
+            ],
+            [
+              "97: dynamic_array_pop_byte_length_head:",
+              "98: proto 1 2",
+              "99: frame_dig -1",
+              "100: intc_1",
+              "101: extract_uint16",
+              "102: intc_2",
+              "103: -",
+              "104: dup",
+              "105: intc_0",
+              "106: *",
+              "107: frame_dig -1",
+              "108: extract 2 0",
+              "109: dup",
+              "110: dig 2",
+              "111: extract_uint16",
+              "112: dig 1",
+              "113: len",
+              "114: dig 2",
+              "115: dig 2",
+              "116: uncover 2",
+              "117: substring3",
+              "118: dig 2",
+              "119: intc_1",
+              "120: dig 5",
+              "121: substring3",
+              "122: uncover 4",
+              "123: intc_0",
+              "124: +",
+              "125: uncover 4",
+              "126: swap",
+              "127: uncover 4",
+              "128: substring3",
+              "129: concat",
+              "130: dig 2",
+              "131: itob",
+              "132: extract 6 2",
+              "133: swap",
+              "134: uncover 3",
+              "135: intc_1",
+              "136: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "137: concat",
+              "138: retsub"
+            ],
+            [
+              "303: bury 1",
+              "306: callsub dynamic_array_pop_byte_length_head"
+            ],
+            [
+              "97: dynamic_array_pop_byte_length_head:",
+              "98: proto 1 2",
+              "99: frame_dig -1",
+              "100: intc_1",
+              "101: extract_uint16",
+              "102: intc_2",
+              "103: -",
+              "104: dup",
+              "105: intc_0",
+              "106: *",
+              "107: frame_dig -1",
+              "108: extract 2 0",
+              "109: dup",
+              "110: dig 2",
+              "111: extract_uint16",
+              "112: dig 1",
+              "113: len",
+              "114: dig 2",
+              "115: dig 2",
+              "116: uncover 2",
+              "117: substring3",
+              "118: dig 2",
+              "119: intc_1",
+              "120: dig 5",
+              "121: substring3",
+              "122: uncover 4",
+              "123: intc_0",
+              "124: +",
+              "125: uncover 4",
+              "126: swap",
+              "127: uncover 4",
+              "128: substring3",
+              "129: concat",
+              "130: dig 2",
+              "131: itob",
+              "132: extract 6 2",
+              "133: swap",
+              "134: uncover 3",
+              "135: intc_1",
+              "136: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "137: concat",
+              "138: retsub"
+            ],
+            [
+              "307: bury 1",
+              "310: pushbytes 0x0006776f726c6421",
+              "311: intc_2",
+              "312: callsub dynamic_array_concat_byte_length_head"
+            ],
+            [
+              "142: dynamic_array_concat_byte_length_head:",
+              "143: proto 3 1",
+              "144: frame_dig -3",
+              "145: intc_1",
+              "146: extract_uint16",
+              "147: dup",
+              "148: frame_dig -1",
+              "149: +",
+              "150: swap",
+              "151: intc_0",
+              "152: *",
+              "153: intc_0",
+              "154: +",
+              "155: dig 1",
+              "156: itob",
+              "157: extract 6 2",
+              "158: frame_dig -3",
+              "159: intc_0",
+              "160: dig 3",
+              "161: substring3",
+              "162: frame_dig -1",
+              "163: intc_0",
+              "164: *",
+              "165: bzero",
+              "166: concat",
+              "167: frame_dig -3",
+              "168: len",
+              "169: frame_dig -3",
+              "170: uncover 4",
+              "171: uncover 2",
+              "172: substring3",
+              "173: concat",
+              "174: frame_dig -2",
+              "175: concat",
+              "176: uncover 2",
+              "177: intc_1",
+              "178: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "179: concat",
+              "180: retsub"
+            ],
+            [
+              "313: pop",
+              "316: pushbytes \"\"",
+              "317: swap",
+              "320: intc_1",
+              "321: extract_uint16",
+              "322: intc_1"
+            ],
+            [
+              "324: hello_for_header@1:",
+              "327: frame_dig 3",
+              "328: frame_dig 2",
+              "329: <",
+              "330: bz hello_after_for@4"
+            ],
+            [
+              "358: hello_after_for@4:",
+              "361: frame_dig 1",
+              "362: frame_bury 0",
+              "363: retsub"
+            ],
+            [
+              "50: dup",
+              "51: len",
+              "52: itob",
+              "53: extract 6 2",
+              "54: swap",
+              "55: concat",
+              "56: bytec_0",
+              "57: swap",
+              "58: concat",
+              "59: log",
+              "60: intc_2",
+              "61: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "22: main_arc4_dynamic_bytes_route@5:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "31: pushbytes 0x151f7c75000600ffffaabbff",
+              "32: log",
+              "33: intc_2",
+              "34: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 9 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "84: main_bare_routing@8:",
+              "87: txn OnCompletion",
+              "88: bnz main_after_if_else@12"
+            ],
+            [
+              "16: main_after_if_else@12:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 5,
+      "description": "\nCheck: \"unprotected-updatable\", Impact: High, Confidence: High\nDescription: Unprotected Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-updatable-application\n",
+      "check": "unprotected-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "16: main_after_if_else@12:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 7 -> 19 -> 8",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "63: main_goodbye_route@3:",
+              "66: txn OnCompletion",
+              "67: !",
+              "68: assert",
+              "69: txn ApplicationID",
+              "70: assert",
+              "73: txna ApplicationArgs 1",
+              "76: callsub goodbye"
+            ],
+            [
+              "236: goodbye:",
+              "240: proto 1 1",
+              "243: pushbytes 0x0004000f0009476f6f642062796520",
+              "244: frame_dig -1",
+              "245: concat",
+              "246: bytec_1",
+              "247: swap",
+              "248: concat",
+              "251: retsub"
+            ],
+            [
+              "77: bytec_0",
+              "78: swap",
+              "79: concat",
+              "80: log",
+              "81: intc_2",
+              "82: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 5 -> 20 -> 13 -> 15 -> 16 -> 18 -> 14 -> 21 -> 11 -> 15 -> 16 -> 18 -> 12 -> 22 -> 11 -> 15 -> 16 -> 18 -> 12 -> 23 -> 13 -> 15 -> 16 -> 18 -> 14 -> 24 -> 25 -> 27 -> 6",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "36: main_hello_route@4:",
+              "39: txn OnCompletion",
+              "40: !",
+              "41: assert",
+              "42: txn ApplicationID",
+              "43: assert",
+              "46: txna ApplicationArgs 1",
+              "49: callsub hello"
+            ],
+            [
+              "255: hello:",
+              "259: proto 1 1",
+              "262: frame_dig -1",
+              "263: len",
+              "264: pushint 4",
+              "265: +",
+              "266: itob",
+              "267: extract 6 2",
+              "268: pushbytes 0x0004",
+              "269: swap",
+              "270: concat",
+              "271: frame_dig -1",
+              "272: concat",
+              "273: pushbytes 0x000121",
+              "274: concat",
+              "275: bytec_1",
+              "276: swap",
+              "277: concat",
+              "280: dup",
+              "281: intc_1",
+              "282: extract_uint16",
+              "283: swap",
+              "284: extract 2 0",
+              "285: dig 1",
+              "286: intc_0",
+              "287: *",
+              "288: dig 1",
+              "289: len",
+              "290: substring3",
+              "293: pushbytes 0x00010002000648656c6c6f20",
+              "296: swap",
+              "297: uncover 2",
+              "298: callsub dynamic_array_concat_byte_length_head"
+            ],
+            [
+              "142: dynamic_array_concat_byte_length_head:",
+              "143: proto 3 1",
+              "144: frame_dig -3",
+              "145: intc_1",
+              "146: extract_uint16",
+              "147: dup",
+              "148: frame_dig -1",
+              "149: +",
+              "150: swap",
+              "151: intc_0",
+              "152: *",
+              "153: intc_0",
+              "154: +",
+              "155: dig 1",
+              "156: itob",
+              "157: extract 6 2",
+              "158: frame_dig -3",
+              "159: intc_0",
+              "160: dig 3",
+              "161: substring3",
+              "162: frame_dig -1",
+              "163: intc_0",
+              "164: *",
+              "165: bzero",
+              "166: concat",
+              "167: frame_dig -3",
+              "168: len",
+              "169: frame_dig -3",
+              "170: uncover 4",
+              "171: uncover 2",
+              "172: substring3",
+              "173: concat",
+              "174: frame_dig -2",
+              "175: concat",
+              "176: uncover 2",
+              "177: intc_1",
+              "178: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "179: concat",
+              "180: retsub"
+            ],
+            [
+              "299: dupn 2",
+              "302: callsub dynamic_array_pop_byte_length_head"
+            ],
+            [
+              "97: dynamic_array_pop_byte_length_head:",
+              "98: proto 1 2",
+              "99: frame_dig -1",
+              "100: intc_1",
+              "101: extract_uint16",
+              "102: intc_2",
+              "103: -",
+              "104: dup",
+              "105: intc_0",
+              "106: *",
+              "107: frame_dig -1",
+              "108: extract 2 0",
+              "109: dup",
+              "110: dig 2",
+              "111: extract_uint16",
+              "112: dig 1",
+              "113: len",
+              "114: dig 2",
+              "115: dig 2",
+              "116: uncover 2",
+              "117: substring3",
+              "118: dig 2",
+              "119: intc_1",
+              "120: dig 5",
+              "121: substring3",
+              "122: uncover 4",
+              "123: intc_0",
+              "124: +",
+              "125: uncover 4",
+              "126: swap",
+              "127: uncover 4",
+              "128: substring3",
+              "129: concat",
+              "130: dig 2",
+              "131: itob",
+              "132: extract 6 2",
+              "133: swap",
+              "134: uncover 3",
+              "135: intc_1",
+              "136: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "137: concat",
+              "138: retsub"
+            ],
+            [
+              "303: bury 1",
+              "306: callsub dynamic_array_pop_byte_length_head"
+            ],
+            [
+              "97: dynamic_array_pop_byte_length_head:",
+              "98: proto 1 2",
+              "99: frame_dig -1",
+              "100: intc_1",
+              "101: extract_uint16",
+              "102: intc_2",
+              "103: -",
+              "104: dup",
+              "105: intc_0",
+              "106: *",
+              "107: frame_dig -1",
+              "108: extract 2 0",
+              "109: dup",
+              "110: dig 2",
+              "111: extract_uint16",
+              "112: dig 1",
+              "113: len",
+              "114: dig 2",
+              "115: dig 2",
+              "116: uncover 2",
+              "117: substring3",
+              "118: dig 2",
+              "119: intc_1",
+              "120: dig 5",
+              "121: substring3",
+              "122: uncover 4",
+              "123: intc_0",
+              "124: +",
+              "125: uncover 4",
+              "126: swap",
+              "127: uncover 4",
+              "128: substring3",
+              "129: concat",
+              "130: dig 2",
+              "131: itob",
+              "132: extract 6 2",
+              "133: swap",
+              "134: uncover 3",
+              "135: intc_1",
+              "136: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "137: concat",
+              "138: retsub"
+            ],
+            [
+              "307: bury 1",
+              "310: pushbytes 0x0006776f726c6421",
+              "311: intc_2",
+              "312: callsub dynamic_array_concat_byte_length_head"
+            ],
+            [
+              "142: dynamic_array_concat_byte_length_head:",
+              "143: proto 3 1",
+              "144: frame_dig -3",
+              "145: intc_1",
+              "146: extract_uint16",
+              "147: dup",
+              "148: frame_dig -1",
+              "149: +",
+              "150: swap",
+              "151: intc_0",
+              "152: *",
+              "153: intc_0",
+              "154: +",
+              "155: dig 1",
+              "156: itob",
+              "157: extract 6 2",
+              "158: frame_dig -3",
+              "159: intc_0",
+              "160: dig 3",
+              "161: substring3",
+              "162: frame_dig -1",
+              "163: intc_0",
+              "164: *",
+              "165: bzero",
+              "166: concat",
+              "167: frame_dig -3",
+              "168: len",
+              "169: frame_dig -3",
+              "170: uncover 4",
+              "171: uncover 2",
+              "172: substring3",
+              "173: concat",
+              "174: frame_dig -2",
+              "175: concat",
+              "176: uncover 2",
+              "177: intc_1",
+              "178: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "179: concat",
+              "180: retsub"
+            ],
+            [
+              "313: pop",
+              "316: pushbytes \"\"",
+              "317: swap",
+              "320: intc_1",
+              "321: extract_uint16",
+              "322: intc_1"
+            ],
+            [
+              "324: hello_for_header@1:",
+              "327: frame_dig 3",
+              "328: frame_dig 2",
+              "329: <",
+              "330: bz hello_after_for@4"
+            ],
+            [
+              "358: hello_after_for@4:",
+              "361: frame_dig 1",
+              "362: frame_bury 0",
+              "363: retsub"
+            ],
+            [
+              "50: dup",
+              "51: len",
+              "52: itob",
+              "53: extract 6 2",
+              "54: swap",
+              "55: concat",
+              "56: bytec_0",
+              "57: swap",
+              "58: concat",
+              "59: log",
+              "60: intc_2",
+              "61: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "22: main_arc4_dynamic_bytes_route@5:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "31: pushbytes 0x151f7c75000600ffffaabbff",
+              "32: log",
+              "33: intc_2",
+              "34: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 9 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "84: main_bare_routing@8:",
+              "87: txn OnCompletion",
+              "88: bnz main_after_if_else@12"
+            ],
+            [
+              "16: main_after_if_else@12:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 2,
+      "description": "\nCheck: \"can-close-account\", Impact: High, Confidence: High\nDescription: Missing CloseRemainderTo field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-closeremainderto-field-validation\n",
+      "check": "can-close-account",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `CloseRemainderTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "16: main_after_if_else@12:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 9 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "84: main_bare_routing@8:",
+              "87: txn OnCompletion",
+              "88: bnz main_after_if_else@12"
+            ],
+            [
+              "16: main_after_if_else@12:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 2,
+      "description": "\nCheck: \"can-close-asset\", Impact: High, Confidence: High\nDescription: Missing AssetCloseTo Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-assetcloseto-field-validation\n",
+      "check": "can-close-asset",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `AssetCloseTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "16: main_after_if_else@12:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 9 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "84: main_bare_routing@8:",
+              "87: txn OnCompletion",
+              "88: bnz main_after_if_else@12"
+            ],
+            [
+              "16: main_after_if_else@12:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 5,
+      "description": "\nCheck: \"is-deletable\", Impact: High, Confidence: High\nDescription: Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#deletable-application\n",
+      "check": "is-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `DeleteApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "16: main_after_if_else@12:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 7 -> 19 -> 8",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "63: main_goodbye_route@3:",
+              "66: txn OnCompletion",
+              "67: !",
+              "68: assert",
+              "69: txn ApplicationID",
+              "70: assert",
+              "73: txna ApplicationArgs 1",
+              "76: callsub goodbye"
+            ],
+            [
+              "236: goodbye:",
+              "240: proto 1 1",
+              "243: pushbytes 0x0004000f0009476f6f642062796520",
+              "244: frame_dig -1",
+              "245: concat",
+              "246: bytec_1",
+              "247: swap",
+              "248: concat",
+              "251: retsub"
+            ],
+            [
+              "77: bytec_0",
+              "78: swap",
+              "79: concat",
+              "80: log",
+              "81: intc_2",
+              "82: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 5 -> 20 -> 13 -> 15 -> 16 -> 18 -> 14 -> 21 -> 11 -> 15 -> 16 -> 18 -> 12 -> 22 -> 11 -> 15 -> 16 -> 18 -> 12 -> 23 -> 13 -> 15 -> 16 -> 18 -> 14 -> 24 -> 25 -> 27 -> 6",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "36: main_hello_route@4:",
+              "39: txn OnCompletion",
+              "40: !",
+              "41: assert",
+              "42: txn ApplicationID",
+              "43: assert",
+              "46: txna ApplicationArgs 1",
+              "49: callsub hello"
+            ],
+            [
+              "255: hello:",
+              "259: proto 1 1",
+              "262: frame_dig -1",
+              "263: len",
+              "264: pushint 4",
+              "265: +",
+              "266: itob",
+              "267: extract 6 2",
+              "268: pushbytes 0x0004",
+              "269: swap",
+              "270: concat",
+              "271: frame_dig -1",
+              "272: concat",
+              "273: pushbytes 0x000121",
+              "274: concat",
+              "275: bytec_1",
+              "276: swap",
+              "277: concat",
+              "280: dup",
+              "281: intc_1",
+              "282: extract_uint16",
+              "283: swap",
+              "284: extract 2 0",
+              "285: dig 1",
+              "286: intc_0",
+              "287: *",
+              "288: dig 1",
+              "289: len",
+              "290: substring3",
+              "293: pushbytes 0x00010002000648656c6c6f20",
+              "296: swap",
+              "297: uncover 2",
+              "298: callsub dynamic_array_concat_byte_length_head"
+            ],
+            [
+              "142: dynamic_array_concat_byte_length_head:",
+              "143: proto 3 1",
+              "144: frame_dig -3",
+              "145: intc_1",
+              "146: extract_uint16",
+              "147: dup",
+              "148: frame_dig -1",
+              "149: +",
+              "150: swap",
+              "151: intc_0",
+              "152: *",
+              "153: intc_0",
+              "154: +",
+              "155: dig 1",
+              "156: itob",
+              "157: extract 6 2",
+              "158: frame_dig -3",
+              "159: intc_0",
+              "160: dig 3",
+              "161: substring3",
+              "162: frame_dig -1",
+              "163: intc_0",
+              "164: *",
+              "165: bzero",
+              "166: concat",
+              "167: frame_dig -3",
+              "168: len",
+              "169: frame_dig -3",
+              "170: uncover 4",
+              "171: uncover 2",
+              "172: substring3",
+              "173: concat",
+              "174: frame_dig -2",
+              "175: concat",
+              "176: uncover 2",
+              "177: intc_1",
+              "178: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "179: concat",
+              "180: retsub"
+            ],
+            [
+              "299: dupn 2",
+              "302: callsub dynamic_array_pop_byte_length_head"
+            ],
+            [
+              "97: dynamic_array_pop_byte_length_head:",
+              "98: proto 1 2",
+              "99: frame_dig -1",
+              "100: intc_1",
+              "101: extract_uint16",
+              "102: intc_2",
+              "103: -",
+              "104: dup",
+              "105: intc_0",
+              "106: *",
+              "107: frame_dig -1",
+              "108: extract 2 0",
+              "109: dup",
+              "110: dig 2",
+              "111: extract_uint16",
+              "112: dig 1",
+              "113: len",
+              "114: dig 2",
+              "115: dig 2",
+              "116: uncover 2",
+              "117: substring3",
+              "118: dig 2",
+              "119: intc_1",
+              "120: dig 5",
+              "121: substring3",
+              "122: uncover 4",
+              "123: intc_0",
+              "124: +",
+              "125: uncover 4",
+              "126: swap",
+              "127: uncover 4",
+              "128: substring3",
+              "129: concat",
+              "130: dig 2",
+              "131: itob",
+              "132: extract 6 2",
+              "133: swap",
+              "134: uncover 3",
+              "135: intc_1",
+              "136: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "137: concat",
+              "138: retsub"
+            ],
+            [
+              "303: bury 1",
+              "306: callsub dynamic_array_pop_byte_length_head"
+            ],
+            [
+              "97: dynamic_array_pop_byte_length_head:",
+              "98: proto 1 2",
+              "99: frame_dig -1",
+              "100: intc_1",
+              "101: extract_uint16",
+              "102: intc_2",
+              "103: -",
+              "104: dup",
+              "105: intc_0",
+              "106: *",
+              "107: frame_dig -1",
+              "108: extract 2 0",
+              "109: dup",
+              "110: dig 2",
+              "111: extract_uint16",
+              "112: dig 1",
+              "113: len",
+              "114: dig 2",
+              "115: dig 2",
+              "116: uncover 2",
+              "117: substring3",
+              "118: dig 2",
+              "119: intc_1",
+              "120: dig 5",
+              "121: substring3",
+              "122: uncover 4",
+              "123: intc_0",
+              "124: +",
+              "125: uncover 4",
+              "126: swap",
+              "127: uncover 4",
+              "128: substring3",
+              "129: concat",
+              "130: dig 2",
+              "131: itob",
+              "132: extract 6 2",
+              "133: swap",
+              "134: uncover 3",
+              "135: intc_1",
+              "136: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "137: concat",
+              "138: retsub"
+            ],
+            [
+              "307: bury 1",
+              "310: pushbytes 0x0006776f726c6421",
+              "311: intc_2",
+              "312: callsub dynamic_array_concat_byte_length_head"
+            ],
+            [
+              "142: dynamic_array_concat_byte_length_head:",
+              "143: proto 3 1",
+              "144: frame_dig -3",
+              "145: intc_1",
+              "146: extract_uint16",
+              "147: dup",
+              "148: frame_dig -1",
+              "149: +",
+              "150: swap",
+              "151: intc_0",
+              "152: *",
+              "153: intc_0",
+              "154: +",
+              "155: dig 1",
+              "156: itob",
+              "157: extract 6 2",
+              "158: frame_dig -3",
+              "159: intc_0",
+              "160: dig 3",
+              "161: substring3",
+              "162: frame_dig -1",
+              "163: intc_0",
+              "164: *",
+              "165: bzero",
+              "166: concat",
+              "167: frame_dig -3",
+              "168: len",
+              "169: frame_dig -3",
+              "170: uncover 4",
+              "171: uncover 2",
+              "172: substring3",
+              "173: concat",
+              "174: frame_dig -2",
+              "175: concat",
+              "176: uncover 2",
+              "177: intc_1",
+              "178: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "179: concat",
+              "180: retsub"
+            ],
+            [
+              "313: pop",
+              "316: pushbytes \"\"",
+              "317: swap",
+              "320: intc_1",
+              "321: extract_uint16",
+              "322: intc_1"
+            ],
+            [
+              "324: hello_for_header@1:",
+              "327: frame_dig 3",
+              "328: frame_dig 2",
+              "329: <",
+              "330: bz hello_after_for@4"
+            ],
+            [
+              "358: hello_after_for@4:",
+              "361: frame_dig 1",
+              "362: frame_bury 0",
+              "363: retsub"
+            ],
+            [
+              "50: dup",
+              "51: len",
+              "52: itob",
+              "53: extract 6 2",
+              "54: swap",
+              "55: concat",
+              "56: bytec_0",
+              "57: swap",
+              "58: concat",
+              "59: log",
+              "60: intc_2",
+              "61: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "22: main_arc4_dynamic_bytes_route@5:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "31: pushbytes 0x151f7c75000600ffffaabbff",
+              "32: log",
+              "33: intc_2",
+              "34: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 9 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "84: main_bare_routing@8:",
+              "87: txn OnCompletion",
+              "88: bnz main_after_if_else@12"
+            ],
+            [
+              "16: main_after_if_else@12:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 5,
+      "description": "\nCheck: \"is-updatable\", Impact: High, Confidence: High\nDescription: Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#upgradable-application\n",
+      "check": "is-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `UpdateApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "16: main_after_if_else@12:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 7 -> 19 -> 8",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "63: main_goodbye_route@3:",
+              "66: txn OnCompletion",
+              "67: !",
+              "68: assert",
+              "69: txn ApplicationID",
+              "70: assert",
+              "73: txna ApplicationArgs 1",
+              "76: callsub goodbye"
+            ],
+            [
+              "236: goodbye:",
+              "240: proto 1 1",
+              "243: pushbytes 0x0004000f0009476f6f642062796520",
+              "244: frame_dig -1",
+              "245: concat",
+              "246: bytec_1",
+              "247: swap",
+              "248: concat",
+              "251: retsub"
+            ],
+            [
+              "77: bytec_0",
+              "78: swap",
+              "79: concat",
+              "80: log",
+              "81: intc_2",
+              "82: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 5 -> 20 -> 13 -> 15 -> 16 -> 18 -> 14 -> 21 -> 11 -> 15 -> 16 -> 18 -> 12 -> 22 -> 11 -> 15 -> 16 -> 18 -> 12 -> 23 -> 13 -> 15 -> 16 -> 18 -> 14 -> 24 -> 25 -> 27 -> 6",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "36: main_hello_route@4:",
+              "39: txn OnCompletion",
+              "40: !",
+              "41: assert",
+              "42: txn ApplicationID",
+              "43: assert",
+              "46: txna ApplicationArgs 1",
+              "49: callsub hello"
+            ],
+            [
+              "255: hello:",
+              "259: proto 1 1",
+              "262: frame_dig -1",
+              "263: len",
+              "264: pushint 4",
+              "265: +",
+              "266: itob",
+              "267: extract 6 2",
+              "268: pushbytes 0x0004",
+              "269: swap",
+              "270: concat",
+              "271: frame_dig -1",
+              "272: concat",
+              "273: pushbytes 0x000121",
+              "274: concat",
+              "275: bytec_1",
+              "276: swap",
+              "277: concat",
+              "280: dup",
+              "281: intc_1",
+              "282: extract_uint16",
+              "283: swap",
+              "284: extract 2 0",
+              "285: dig 1",
+              "286: intc_0",
+              "287: *",
+              "288: dig 1",
+              "289: len",
+              "290: substring3",
+              "293: pushbytes 0x00010002000648656c6c6f20",
+              "296: swap",
+              "297: uncover 2",
+              "298: callsub dynamic_array_concat_byte_length_head"
+            ],
+            [
+              "142: dynamic_array_concat_byte_length_head:",
+              "143: proto 3 1",
+              "144: frame_dig -3",
+              "145: intc_1",
+              "146: extract_uint16",
+              "147: dup",
+              "148: frame_dig -1",
+              "149: +",
+              "150: swap",
+              "151: intc_0",
+              "152: *",
+              "153: intc_0",
+              "154: +",
+              "155: dig 1",
+              "156: itob",
+              "157: extract 6 2",
+              "158: frame_dig -3",
+              "159: intc_0",
+              "160: dig 3",
+              "161: substring3",
+              "162: frame_dig -1",
+              "163: intc_0",
+              "164: *",
+              "165: bzero",
+              "166: concat",
+              "167: frame_dig -3",
+              "168: len",
+              "169: frame_dig -3",
+              "170: uncover 4",
+              "171: uncover 2",
+              "172: substring3",
+              "173: concat",
+              "174: frame_dig -2",
+              "175: concat",
+              "176: uncover 2",
+              "177: intc_1",
+              "178: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "179: concat",
+              "180: retsub"
+            ],
+            [
+              "299: dupn 2",
+              "302: callsub dynamic_array_pop_byte_length_head"
+            ],
+            [
+              "97: dynamic_array_pop_byte_length_head:",
+              "98: proto 1 2",
+              "99: frame_dig -1",
+              "100: intc_1",
+              "101: extract_uint16",
+              "102: intc_2",
+              "103: -",
+              "104: dup",
+              "105: intc_0",
+              "106: *",
+              "107: frame_dig -1",
+              "108: extract 2 0",
+              "109: dup",
+              "110: dig 2",
+              "111: extract_uint16",
+              "112: dig 1",
+              "113: len",
+              "114: dig 2",
+              "115: dig 2",
+              "116: uncover 2",
+              "117: substring3",
+              "118: dig 2",
+              "119: intc_1",
+              "120: dig 5",
+              "121: substring3",
+              "122: uncover 4",
+              "123: intc_0",
+              "124: +",
+              "125: uncover 4",
+              "126: swap",
+              "127: uncover 4",
+              "128: substring3",
+              "129: concat",
+              "130: dig 2",
+              "131: itob",
+              "132: extract 6 2",
+              "133: swap",
+              "134: uncover 3",
+              "135: intc_1",
+              "136: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "137: concat",
+              "138: retsub"
+            ],
+            [
+              "303: bury 1",
+              "306: callsub dynamic_array_pop_byte_length_head"
+            ],
+            [
+              "97: dynamic_array_pop_byte_length_head:",
+              "98: proto 1 2",
+              "99: frame_dig -1",
+              "100: intc_1",
+              "101: extract_uint16",
+              "102: intc_2",
+              "103: -",
+              "104: dup",
+              "105: intc_0",
+              "106: *",
+              "107: frame_dig -1",
+              "108: extract 2 0",
+              "109: dup",
+              "110: dig 2",
+              "111: extract_uint16",
+              "112: dig 1",
+              "113: len",
+              "114: dig 2",
+              "115: dig 2",
+              "116: uncover 2",
+              "117: substring3",
+              "118: dig 2",
+              "119: intc_1",
+              "120: dig 5",
+              "121: substring3",
+              "122: uncover 4",
+              "123: intc_0",
+              "124: +",
+              "125: uncover 4",
+              "126: swap",
+              "127: uncover 4",
+              "128: substring3",
+              "129: concat",
+              "130: dig 2",
+              "131: itob",
+              "132: extract 6 2",
+              "133: swap",
+              "134: uncover 3",
+              "135: intc_1",
+              "136: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "137: concat",
+              "138: retsub"
+            ],
+            [
+              "307: bury 1",
+              "310: pushbytes 0x0006776f726c6421",
+              "311: intc_2",
+              "312: callsub dynamic_array_concat_byte_length_head"
+            ],
+            [
+              "142: dynamic_array_concat_byte_length_head:",
+              "143: proto 3 1",
+              "144: frame_dig -3",
+              "145: intc_1",
+              "146: extract_uint16",
+              "147: dup",
+              "148: frame_dig -1",
+              "149: +",
+              "150: swap",
+              "151: intc_0",
+              "152: *",
+              "153: intc_0",
+              "154: +",
+              "155: dig 1",
+              "156: itob",
+              "157: extract 6 2",
+              "158: frame_dig -3",
+              "159: intc_0",
+              "160: dig 3",
+              "161: substring3",
+              "162: frame_dig -1",
+              "163: intc_0",
+              "164: *",
+              "165: bzero",
+              "166: concat",
+              "167: frame_dig -3",
+              "168: len",
+              "169: frame_dig -3",
+              "170: uncover 4",
+              "171: uncover 2",
+              "172: substring3",
+              "173: concat",
+              "174: frame_dig -2",
+              "175: concat",
+              "176: uncover 2",
+              "177: intc_1",
+              "178: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "179: concat",
+              "180: retsub"
+            ],
+            [
+              "313: pop",
+              "316: pushbytes \"\"",
+              "317: swap",
+              "320: intc_1",
+              "321: extract_uint16",
+              "322: intc_1"
+            ],
+            [
+              "324: hello_for_header@1:",
+              "327: frame_dig 3",
+              "328: frame_dig 2",
+              "329: <",
+              "330: bz hello_after_for@4"
+            ],
+            [
+              "358: hello_after_for@4:",
+              "361: frame_dig 1",
+              "362: frame_bury 0",
+              "363: retsub"
+            ],
+            [
+              "50: dup",
+              "51: len",
+              "52: itob",
+              "53: extract 6 2",
+              "54: swap",
+              "55: concat",
+              "56: bytec_0",
+              "57: swap",
+              "58: concat",
+              "59: log",
+              "60: intc_2",
+              "61: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "22: main_arc4_dynamic_bytes_route@5:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "31: pushbytes 0x151f7c75000600ffffaabbff",
+              "32: log",
+              "33: intc_2",
+              "34: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 9 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "84: main_bare_routing@8:",
+              "87: txn OnCompletion",
+              "88: bnz main_after_if_else@12"
+            ],
+            [
+              "16: main_after_if_else@12:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 6,
+      "description": "\nCheck: \"missing-fee-check\", Impact: High, Confidence: High\nDescription: Missing Fee Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-fee-field-validation\n",
+      "check": "missing-fee-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `Fee` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "16: main_after_if_else@12:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 7 -> 19 -> 8",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "63: main_goodbye_route@3:",
+              "66: txn OnCompletion",
+              "67: !",
+              "68: assert",
+              "69: txn ApplicationID",
+              "70: assert",
+              "73: txna ApplicationArgs 1",
+              "76: callsub goodbye"
+            ],
+            [
+              "236: goodbye:",
+              "240: proto 1 1",
+              "243: pushbytes 0x0004000f0009476f6f642062796520",
+              "244: frame_dig -1",
+              "245: concat",
+              "246: bytec_1",
+              "247: swap",
+              "248: concat",
+              "251: retsub"
+            ],
+            [
+              "77: bytec_0",
+              "78: swap",
+              "79: concat",
+              "80: log",
+              "81: intc_2",
+              "82: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 5 -> 20 -> 13 -> 15 -> 16 -> 18 -> 14 -> 21 -> 11 -> 15 -> 16 -> 18 -> 12 -> 22 -> 11 -> 15 -> 16 -> 18 -> 12 -> 23 -> 13 -> 15 -> 16 -> 18 -> 14 -> 24 -> 25 -> 27 -> 6",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "36: main_hello_route@4:",
+              "39: txn OnCompletion",
+              "40: !",
+              "41: assert",
+              "42: txn ApplicationID",
+              "43: assert",
+              "46: txna ApplicationArgs 1",
+              "49: callsub hello"
+            ],
+            [
+              "255: hello:",
+              "259: proto 1 1",
+              "262: frame_dig -1",
+              "263: len",
+              "264: pushint 4",
+              "265: +",
+              "266: itob",
+              "267: extract 6 2",
+              "268: pushbytes 0x0004",
+              "269: swap",
+              "270: concat",
+              "271: frame_dig -1",
+              "272: concat",
+              "273: pushbytes 0x000121",
+              "274: concat",
+              "275: bytec_1",
+              "276: swap",
+              "277: concat",
+              "280: dup",
+              "281: intc_1",
+              "282: extract_uint16",
+              "283: swap",
+              "284: extract 2 0",
+              "285: dig 1",
+              "286: intc_0",
+              "287: *",
+              "288: dig 1",
+              "289: len",
+              "290: substring3",
+              "293: pushbytes 0x00010002000648656c6c6f20",
+              "296: swap",
+              "297: uncover 2",
+              "298: callsub dynamic_array_concat_byte_length_head"
+            ],
+            [
+              "142: dynamic_array_concat_byte_length_head:",
+              "143: proto 3 1",
+              "144: frame_dig -3",
+              "145: intc_1",
+              "146: extract_uint16",
+              "147: dup",
+              "148: frame_dig -1",
+              "149: +",
+              "150: swap",
+              "151: intc_0",
+              "152: *",
+              "153: intc_0",
+              "154: +",
+              "155: dig 1",
+              "156: itob",
+              "157: extract 6 2",
+              "158: frame_dig -3",
+              "159: intc_0",
+              "160: dig 3",
+              "161: substring3",
+              "162: frame_dig -1",
+              "163: intc_0",
+              "164: *",
+              "165: bzero",
+              "166: concat",
+              "167: frame_dig -3",
+              "168: len",
+              "169: frame_dig -3",
+              "170: uncover 4",
+              "171: uncover 2",
+              "172: substring3",
+              "173: concat",
+              "174: frame_dig -2",
+              "175: concat",
+              "176: uncover 2",
+              "177: intc_1",
+              "178: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "179: concat",
+              "180: retsub"
+            ],
+            [
+              "299: dupn 2",
+              "302: callsub dynamic_array_pop_byte_length_head"
+            ],
+            [
+              "97: dynamic_array_pop_byte_length_head:",
+              "98: proto 1 2",
+              "99: frame_dig -1",
+              "100: intc_1",
+              "101: extract_uint16",
+              "102: intc_2",
+              "103: -",
+              "104: dup",
+              "105: intc_0",
+              "106: *",
+              "107: frame_dig -1",
+              "108: extract 2 0",
+              "109: dup",
+              "110: dig 2",
+              "111: extract_uint16",
+              "112: dig 1",
+              "113: len",
+              "114: dig 2",
+              "115: dig 2",
+              "116: uncover 2",
+              "117: substring3",
+              "118: dig 2",
+              "119: intc_1",
+              "120: dig 5",
+              "121: substring3",
+              "122: uncover 4",
+              "123: intc_0",
+              "124: +",
+              "125: uncover 4",
+              "126: swap",
+              "127: uncover 4",
+              "128: substring3",
+              "129: concat",
+              "130: dig 2",
+              "131: itob",
+              "132: extract 6 2",
+              "133: swap",
+              "134: uncover 3",
+              "135: intc_1",
+              "136: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "137: concat",
+              "138: retsub"
+            ],
+            [
+              "303: bury 1",
+              "306: callsub dynamic_array_pop_byte_length_head"
+            ],
+            [
+              "97: dynamic_array_pop_byte_length_head:",
+              "98: proto 1 2",
+              "99: frame_dig -1",
+              "100: intc_1",
+              "101: extract_uint16",
+              "102: intc_2",
+              "103: -",
+              "104: dup",
+              "105: intc_0",
+              "106: *",
+              "107: frame_dig -1",
+              "108: extract 2 0",
+              "109: dup",
+              "110: dig 2",
+              "111: extract_uint16",
+              "112: dig 1",
+              "113: len",
+              "114: dig 2",
+              "115: dig 2",
+              "116: uncover 2",
+              "117: substring3",
+              "118: dig 2",
+              "119: intc_1",
+              "120: dig 5",
+              "121: substring3",
+              "122: uncover 4",
+              "123: intc_0",
+              "124: +",
+              "125: uncover 4",
+              "126: swap",
+              "127: uncover 4",
+              "128: substring3",
+              "129: concat",
+              "130: dig 2",
+              "131: itob",
+              "132: extract 6 2",
+              "133: swap",
+              "134: uncover 3",
+              "135: intc_1",
+              "136: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "137: concat",
+              "138: retsub"
+            ],
+            [
+              "307: bury 1",
+              "310: pushbytes 0x0006776f726c6421",
+              "311: intc_2",
+              "312: callsub dynamic_array_concat_byte_length_head"
+            ],
+            [
+              "142: dynamic_array_concat_byte_length_head:",
+              "143: proto 3 1",
+              "144: frame_dig -3",
+              "145: intc_1",
+              "146: extract_uint16",
+              "147: dup",
+              "148: frame_dig -1",
+              "149: +",
+              "150: swap",
+              "151: intc_0",
+              "152: *",
+              "153: intc_0",
+              "154: +",
+              "155: dig 1",
+              "156: itob",
+              "157: extract 6 2",
+              "158: frame_dig -3",
+              "159: intc_0",
+              "160: dig 3",
+              "161: substring3",
+              "162: frame_dig -1",
+              "163: intc_0",
+              "164: *",
+              "165: bzero",
+              "166: concat",
+              "167: frame_dig -3",
+              "168: len",
+              "169: frame_dig -3",
+              "170: uncover 4",
+              "171: uncover 2",
+              "172: substring3",
+              "173: concat",
+              "174: frame_dig -2",
+              "175: concat",
+              "176: uncover 2",
+              "177: intc_1",
+              "178: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "179: concat",
+              "180: retsub"
+            ],
+            [
+              "313: pop",
+              "316: pushbytes \"\"",
+              "317: swap",
+              "320: intc_1",
+              "321: extract_uint16",
+              "322: intc_1"
+            ],
+            [
+              "324: hello_for_header@1:",
+              "327: frame_dig 3",
+              "328: frame_dig 2",
+              "329: <",
+              "330: bz hello_after_for@4"
+            ],
+            [
+              "358: hello_after_for@4:",
+              "361: frame_dig 1",
+              "362: frame_bury 0",
+              "363: retsub"
+            ],
+            [
+              "50: dup",
+              "51: len",
+              "52: itob",
+              "53: extract 6 2",
+              "54: swap",
+              "55: concat",
+              "56: bytec_0",
+              "57: swap",
+              "58: concat",
+              "59: log",
+              "60: intc_2",
+              "61: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "22: main_arc4_dynamic_bytes_route@5:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "31: pushbytes 0x151f7c75000600ffffaabbff",
+              "32: log",
+              "33: intc_2",
+              "34: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 9 -> 10",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "84: main_bare_routing@8:",
+              "87: txn OnCompletion",
+              "88: bnz main_after_if_else@12"
+            ],
+            [
+              "89: txn ApplicationID",
+              "90: !",
+              "91: assert",
+              "92: intc_2",
+              "93: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 9 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "84: main_bare_routing@8:",
+              "87: txn OnCompletion",
+              "88: bnz main_after_if_else@12"
+            ],
+            [
+              "16: main_after_if_else@12:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"group-size-check\", Impact: High, Confidence: High\nDescription: Usage of absolute indexes without validating GroupSize\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-groupsize-validation\n",
+      "check": "group-size-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid using absolute indexes. Validate GroupSize if used.\n- Favor using ARC-4 ABI and relative indexes for group transactions.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 6,
+      "description": "\nCheck: \"rekey-to\", Impact: High, Confidence: High\nDescription: Rekeyable Logic Signatures\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#rekeyable-logicsig\n",
+      "check": "rekey-to",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `RekeyTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "16: main_after_if_else@12:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 7 -> 19 -> 8",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "63: main_goodbye_route@3:",
+              "66: txn OnCompletion",
+              "67: !",
+              "68: assert",
+              "69: txn ApplicationID",
+              "70: assert",
+              "73: txna ApplicationArgs 1",
+              "76: callsub goodbye"
+            ],
+            [
+              "236: goodbye:",
+              "240: proto 1 1",
+              "243: pushbytes 0x0004000f0009476f6f642062796520",
+              "244: frame_dig -1",
+              "245: concat",
+              "246: bytec_1",
+              "247: swap",
+              "248: concat",
+              "251: retsub"
+            ],
+            [
+              "77: bytec_0",
+              "78: swap",
+              "79: concat",
+              "80: log",
+              "81: intc_2",
+              "82: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 5 -> 20 -> 13 -> 15 -> 16 -> 18 -> 14 -> 21 -> 11 -> 15 -> 16 -> 18 -> 12 -> 22 -> 11 -> 15 -> 16 -> 18 -> 12 -> 23 -> 13 -> 15 -> 16 -> 18 -> 14 -> 24 -> 25 -> 27 -> 6",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "36: main_hello_route@4:",
+              "39: txn OnCompletion",
+              "40: !",
+              "41: assert",
+              "42: txn ApplicationID",
+              "43: assert",
+              "46: txna ApplicationArgs 1",
+              "49: callsub hello"
+            ],
+            [
+              "255: hello:",
+              "259: proto 1 1",
+              "262: frame_dig -1",
+              "263: len",
+              "264: pushint 4",
+              "265: +",
+              "266: itob",
+              "267: extract 6 2",
+              "268: pushbytes 0x0004",
+              "269: swap",
+              "270: concat",
+              "271: frame_dig -1",
+              "272: concat",
+              "273: pushbytes 0x000121",
+              "274: concat",
+              "275: bytec_1",
+              "276: swap",
+              "277: concat",
+              "280: dup",
+              "281: intc_1",
+              "282: extract_uint16",
+              "283: swap",
+              "284: extract 2 0",
+              "285: dig 1",
+              "286: intc_0",
+              "287: *",
+              "288: dig 1",
+              "289: len",
+              "290: substring3",
+              "293: pushbytes 0x00010002000648656c6c6f20",
+              "296: swap",
+              "297: uncover 2",
+              "298: callsub dynamic_array_concat_byte_length_head"
+            ],
+            [
+              "142: dynamic_array_concat_byte_length_head:",
+              "143: proto 3 1",
+              "144: frame_dig -3",
+              "145: intc_1",
+              "146: extract_uint16",
+              "147: dup",
+              "148: frame_dig -1",
+              "149: +",
+              "150: swap",
+              "151: intc_0",
+              "152: *",
+              "153: intc_0",
+              "154: +",
+              "155: dig 1",
+              "156: itob",
+              "157: extract 6 2",
+              "158: frame_dig -3",
+              "159: intc_0",
+              "160: dig 3",
+              "161: substring3",
+              "162: frame_dig -1",
+              "163: intc_0",
+              "164: *",
+              "165: bzero",
+              "166: concat",
+              "167: frame_dig -3",
+              "168: len",
+              "169: frame_dig -3",
+              "170: uncover 4",
+              "171: uncover 2",
+              "172: substring3",
+              "173: concat",
+              "174: frame_dig -2",
+              "175: concat",
+              "176: uncover 2",
+              "177: intc_1",
+              "178: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "179: concat",
+              "180: retsub"
+            ],
+            [
+              "299: dupn 2",
+              "302: callsub dynamic_array_pop_byte_length_head"
+            ],
+            [
+              "97: dynamic_array_pop_byte_length_head:",
+              "98: proto 1 2",
+              "99: frame_dig -1",
+              "100: intc_1",
+              "101: extract_uint16",
+              "102: intc_2",
+              "103: -",
+              "104: dup",
+              "105: intc_0",
+              "106: *",
+              "107: frame_dig -1",
+              "108: extract 2 0",
+              "109: dup",
+              "110: dig 2",
+              "111: extract_uint16",
+              "112: dig 1",
+              "113: len",
+              "114: dig 2",
+              "115: dig 2",
+              "116: uncover 2",
+              "117: substring3",
+              "118: dig 2",
+              "119: intc_1",
+              "120: dig 5",
+              "121: substring3",
+              "122: uncover 4",
+              "123: intc_0",
+              "124: +",
+              "125: uncover 4",
+              "126: swap",
+              "127: uncover 4",
+              "128: substring3",
+              "129: concat",
+              "130: dig 2",
+              "131: itob",
+              "132: extract 6 2",
+              "133: swap",
+              "134: uncover 3",
+              "135: intc_1",
+              "136: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "137: concat",
+              "138: retsub"
+            ],
+            [
+              "303: bury 1",
+              "306: callsub dynamic_array_pop_byte_length_head"
+            ],
+            [
+              "97: dynamic_array_pop_byte_length_head:",
+              "98: proto 1 2",
+              "99: frame_dig -1",
+              "100: intc_1",
+              "101: extract_uint16",
+              "102: intc_2",
+              "103: -",
+              "104: dup",
+              "105: intc_0",
+              "106: *",
+              "107: frame_dig -1",
+              "108: extract 2 0",
+              "109: dup",
+              "110: dig 2",
+              "111: extract_uint16",
+              "112: dig 1",
+              "113: len",
+              "114: dig 2",
+              "115: dig 2",
+              "116: uncover 2",
+              "117: substring3",
+              "118: dig 2",
+              "119: intc_1",
+              "120: dig 5",
+              "121: substring3",
+              "122: uncover 4",
+              "123: intc_0",
+              "124: +",
+              "125: uncover 4",
+              "126: swap",
+              "127: uncover 4",
+              "128: substring3",
+              "129: concat",
+              "130: dig 2",
+              "131: itob",
+              "132: extract 6 2",
+              "133: swap",
+              "134: uncover 3",
+              "135: intc_1",
+              "136: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "137: concat",
+              "138: retsub"
+            ],
+            [
+              "307: bury 1",
+              "310: pushbytes 0x0006776f726c6421",
+              "311: intc_2",
+              "312: callsub dynamic_array_concat_byte_length_head"
+            ],
+            [
+              "142: dynamic_array_concat_byte_length_head:",
+              "143: proto 3 1",
+              "144: frame_dig -3",
+              "145: intc_1",
+              "146: extract_uint16",
+              "147: dup",
+              "148: frame_dig -1",
+              "149: +",
+              "150: swap",
+              "151: intc_0",
+              "152: *",
+              "153: intc_0",
+              "154: +",
+              "155: dig 1",
+              "156: itob",
+              "157: extract 6 2",
+              "158: frame_dig -3",
+              "159: intc_0",
+              "160: dig 3",
+              "161: substring3",
+              "162: frame_dig -1",
+              "163: intc_0",
+              "164: *",
+              "165: bzero",
+              "166: concat",
+              "167: frame_dig -3",
+              "168: len",
+              "169: frame_dig -3",
+              "170: uncover 4",
+              "171: uncover 2",
+              "172: substring3",
+              "173: concat",
+              "174: frame_dig -2",
+              "175: concat",
+              "176: uncover 2",
+              "177: intc_1",
+              "178: callsub recalculate_head_for_elements_with_byte_length_head"
+            ],
+            [
+              "184: recalculate_head_for_elements_with_byte_length_head:",
+              "185: proto 3 1",
+              "186: frame_dig -2",
+              "187: intc_0",
+              "188: *",
+              "189: dup",
+              "190: frame_dig -1",
+              "191: intc_0",
+              "192: *",
+              "193: dup",
+              "194: cover 2",
+              "195: frame_dig -3",
+              "196: swap",
+              "197: extract_uint16",
+              "198: frame_dig -1",
+              "199: select"
+            ],
+            [
+              "201: recalculate_head_for_elements_with_byte_length_head_for_header@1:",
+              "202: frame_dig 1",
+              "203: frame_dig 0",
+              "204: <",
+              "205: bz recalculate_head_for_elements_with_byte_length_head_after_for@4"
+            ],
+            [
+              "229: recalculate_head_for_elements_with_byte_length_head_after_for@4:",
+              "230: frame_dig -3",
+              "231: frame_bury 0",
+              "232: retsub"
+            ],
+            [
+              "179: concat",
+              "180: retsub"
+            ],
+            [
+              "313: pop",
+              "316: pushbytes \"\"",
+              "317: swap",
+              "320: intc_1",
+              "321: extract_uint16",
+              "322: intc_1"
+            ],
+            [
+              "324: hello_for_header@1:",
+              "327: frame_dig 3",
+              "328: frame_dig 2",
+              "329: <",
+              "330: bz hello_after_for@4"
+            ],
+            [
+              "358: hello_after_for@4:",
+              "361: frame_dig 1",
+              "362: frame_bury 0",
+              "363: retsub"
+            ],
+            [
+              "50: dup",
+              "51: len",
+              "52: itob",
+              "53: extract 6 2",
+              "54: swap",
+              "55: concat",
+              "56: bytec_0",
+              "57: swap",
+              "58: concat",
+              "59: log",
+              "60: intc_2",
+              "61: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "12: pushbytess 0x8ad12a2b 0x02bece11 0x95d64116",
+              "13: txna ApplicationArgs 0",
+              "14: match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5"
+            ],
+            [
+              "22: main_arc4_dynamic_bytes_route@5:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "31: pushbytes 0x151f7c75000600ffffaabbff",
+              "32: log",
+              "33: intc_2",
+              "34: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 9 -> 10",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "84: main_bare_routing@8:",
+              "87: txn OnCompletion",
+              "88: bnz main_after_if_else@12"
+            ],
+            [
+              "89: txn ApplicationID",
+              "90: !",
+              "91: assert",
+              "92: intc_2",
+              "93: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 9 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 2 0 1",
+              "7: bytecblock 0x151f7c75 0x0002",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@8"
+            ],
+            [
+              "84: main_bare_routing@8:",
+              "87: txn OnCompletion",
+              "88: bnz main_after_if_else@12"
+            ],
+            [
+              "16: main_after_if_else@12:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

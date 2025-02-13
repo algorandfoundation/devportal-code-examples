@@ -1,0 +1,5338 @@
+{
+  "success": false,
+  "error": null,
+  "result": [
+    {
+      "type": "ExecutionPaths",
+      "count": 7,
+      "description": "\nCheck: \"unprotected-deletable\", Impact: High, Confidence: High\nDescription: Unprotected Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-deletable-application\n",
+      "check": "unprotected-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "25: main_after_if_else@10:",
+              "28: intc_0",
+              "29: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 10 -> 14 -> 15 -> 16 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "69: main_add_todo_route@5:",
+              "72: txn OnCompletion",
+              "73: !",
+              "74: assert",
+              "75: txn ApplicationID",
+              "76: assert",
+              "79: txna ApplicationArgs 1",
+              "82: callsub add_todo"
+            ],
+            [
+              "103: add_todo:",
+              "107: proto 1 1",
+              "108: intc_0",
+              "109: dupn 2",
+              "110: bytec_1",
+              "111: dupn 3",
+              "114: pushbytes 0x000300",
+              "115: frame_dig -1",
+              "116: concat",
+              "119: intc_0",
+              "120: bytec_0",
+              "121: app_global_get_ex",
+              "122: assert",
+              "123: bytec_2",
+              "124: ==",
+              "125: bz add_todo_else_body@2"
+            ],
+            [
+              "128: bytec 4",
+              "129: swap",
+              "130: concat",
+              "131: pushbytes 0x0001",
+              "132: swap",
+              "133: concat",
+              "134: bytec_0",
+              "135: swap",
+              "136: app_global_put"
+            ],
+            [
+              "138: add_todo_after_if_else@3:",
+              "141: intc_0",
+              "142: bytec_0",
+              "143: app_global_get_ex",
+              "144: assert",
+              "145: frame_bury 0",
+              "146: retsub"
+            ],
+            [
+              "83: bytec_3",
+              "84: swap",
+              "85: concat",
+              "86: log",
+              "87: intc_2",
+              "88: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 10 -> 14 -> 17 -> 18 -> 20 -> 21 -> 23 -> 16 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "69: main_add_todo_route@5:",
+              "72: txn OnCompletion",
+              "73: !",
+              "74: assert",
+              "75: txn ApplicationID",
+              "76: assert",
+              "79: txna ApplicationArgs 1",
+              "82: callsub add_todo"
+            ],
+            [
+              "103: add_todo:",
+              "107: proto 1 1",
+              "108: intc_0",
+              "109: dupn 2",
+              "110: bytec_1",
+              "111: dupn 3",
+              "114: pushbytes 0x000300",
+              "115: frame_dig -1",
+              "116: concat",
+              "119: intc_0",
+              "120: bytec_0",
+              "121: app_global_get_ex",
+              "122: assert",
+              "123: bytec_2",
+              "124: ==",
+              "125: bz add_todo_else_body@2"
+            ],
+            [
+              "148: add_todo_else_body@2:",
+              "151: intc_0",
+              "152: bytec_0",
+              "153: app_global_get_ex",
+              "154: assert",
+              "155: bytec 4",
+              "156: uncover 2",
+              "157: concat",
+              "158: frame_bury 2",
+              "159: dup",
+              "160: intc_0",
+              "161: extract_uint16",
+              "162: dup",
+              "163: cover 2",
+              "164: frame_bury 3",
+              "165: extract 2 0",
+              "166: frame_bury 0",
+              "167: bytec_1",
+              "168: frame_bury 1",
+              "169: intc_1",
+              "170: *",
+              "171: frame_bury 6",
+              "172: intc_0",
+              "173: frame_bury 4"
+            ],
+            [
+              "175: add_todo_for_header@5:",
+              "176: frame_dig 4",
+              "177: frame_dig 6",
+              "178: <",
+              "179: bz add_todo_after_for@7"
+            ],
+            [
+              "198: add_todo_after_for@7:",
+              "199: frame_dig 0",
+              "200: len",
+              "201: frame_bury 5",
+              "202: intc_0",
+              "203: frame_bury 4"
+            ],
+            [
+              "205: add_todo_for_header@8:",
+              "206: frame_dig 4",
+              "207: intc_1",
+              "208: <",
+              "209: bz add_todo_after_for@10"
+            ],
+            [
+              "228: add_todo_after_for@10:",
+              "229: frame_dig 3",
+              "232: intc_2",
+              "233: +",
+              "234: itob",
+              "235: extract 6 2",
+              "236: frame_dig 1",
+              "237: concat",
+              "238: frame_dig 0",
+              "239: frame_dig 6",
+              "240: frame_dig 5",
+              "241: substring3",
+              "242: concat",
+              "243: frame_dig 2",
+              "244: dup",
+              "245: len",
+              "246: intc_1",
+              "247: swap",
+              "248: substring3",
+              "249: concat",
+              "252: bytec_0",
+              "253: swap",
+              "254: app_global_put",
+              "255: b add_todo_after_if_else@3"
+            ],
+            [
+              "138: add_todo_after_if_else@3:",
+              "141: intc_0",
+              "142: bytec_0",
+              "143: app_global_get_ex",
+              "144: assert",
+              "145: frame_bury 0",
+              "146: retsub"
+            ],
+            [
+              "83: bytec_3",
+              "84: swap",
+              "85: concat",
+              "86: log",
+              "87: intc_2",
+              "88: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 24 -> 25 -> 26 -> 27 -> 28 -> 30 -> 31 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "52: main_complete_todo_route@6:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "62: txna ApplicationArgs 1",
+              "65: callsub complete_todo"
+            ],
+            [
+              "259: complete_todo:",
+              "263: proto 1 0",
+              "264: intc_0",
+              "265: dup",
+              "266: bytec_1",
+              "267: dupn 4",
+              "270: intc_0",
+              "271: bytec_0",
+              "272: app_global_get_ex",
+              "273: assert",
+              "274: intc_0",
+              "275: extract_uint16",
+              "276: intc_0"
+            ],
+            [
+              "278: complete_todo_for_header@1:",
+              "281: frame_dig 8",
+              "282: frame_dig 7",
+              "283: <",
+              "284: bz complete_todo_after_for@6"
+            ],
+            [
+              "287: intc_0",
+              "288: bytec_0",
+              "289: app_global_get_ex",
+              "290: assert",
+              "291: dup",
+              "292: extract 2 0",
+              "293: frame_dig 8",
+              "294: dup",
+              "295: cover 3",
+              "296: intc_1",
+              "297: *",
+              "298: dup",
+              "299: frame_bury 3",
+              "300: dig 1",
+              "301: swap",
+              "302: extract_uint16",
+              "303: uncover 2",
+              "304: intc_0",
+              "305: extract_uint16",
+              "306: uncover 3",
+              "307: intc_2",
+              "308: +",
+              "309: dup",
+              "310: cover 4",
+              "311: swap",
+              "312: dig 1",
+              "313: -",
+              "314: dig 3",
+              "315: len",
+              "316: uncover 2",
+              "317: intc_1",
+              "318: *",
+              "319: dup",
+              "320: frame_bury 2",
+              "321: dig 4",
+              "322: swap",
+              "323: extract_uint16",
+              "324: uncover 2",
+              "325: select",
+              "326: substring3",
+              "327: dup",
+              "328: intc_0",
+              "329: extract_uint16",
+              "330: dig 1",
+              "331: len",
+              "332: substring3",
+              "333: frame_dig -1",
+              "334: ==",
+              "335: bz complete_todo_after_if_else@4"
+            ],
+            [
+              "338: intc_0",
+              "339: bytec_0",
+              "340: app_global_get_ex",
+              "341: assert",
+              "342: dup",
+              "343: extract 2 0",
+              "344: dup",
+              "345: frame_dig 3",
+              "346: extract_uint16",
+              "347: dig 2",
+              "348: intc_0",
+              "349: extract_uint16",
+              "350: uncover 4",
+              "351: -",
+              "352: dig 2",
+              "353: len",
+              "354: dig 3",
+              "355: frame_dig 2",
+              "356: extract_uint16",
+              "357: dup2",
+              "358: uncover 4",
+              "359: select",
+              "360: dig 4",
+              "361: dig 4",
+              "362: uncover 2",
+              "363: substring3",
+              "364: pushint 16",
+              "365: intc_2",
+              "366: setbit",
+              "367: uncover 5",
+              "368: substring 0 2",
+              "369: dup",
+              "370: frame_bury 1",
+              "371: btoi",
+              "372: dup",
+              "373: frame_dig 8",
+              "374: -",
+              "375: intc_2",
+              "376: -",
+              "377: dig 4",
+              "378: uncover 4",
+              "379: uncover 2",
+              "380: select",
+              "381: dup",
+              "382: dig 5",
+              "383: -",
+              "384: frame_bury 5",
+              "385: dig 2",
+              "386: len",
+              "387: frame_bury 4",
+              "388: dig 5",
+              "389: intc_0",
+              "390: uncover 6",
+              "391: substring3",
+              "392: uncover 3",
+              "393: concat",
+              "394: uncover 4",
+              "395: uncover 2",
+              "396: uncover 4",
+              "397: substring3",
+              "398: concat",
+              "399: frame_bury 0",
+              "400: intc_1",
+              "401: *",
+              "402: frame_bury 6"
+            ],
+            [
+              "404: complete_todo_for_header@8:",
+              "405: frame_dig 2",
+              "406: frame_dig 6",
+              "407: <",
+              "408: bz complete_todo_after_for@10"
+            ],
+            [
+              "430: complete_todo_after_for@10:",
+              "431: frame_dig 1",
+              "432: frame_dig 0",
+              "433: concat",
+              "436: bytec_0",
+              "437: swap",
+              "438: app_global_put"
+            ],
+            [
+              "440: complete_todo_after_for@6:",
+              "441: retsub"
+            ],
+            [
+              "66: intc_2",
+              "67: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 24 -> 25 -> 31 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "52: main_complete_todo_route@6:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "62: txna ApplicationArgs 1",
+              "65: callsub complete_todo"
+            ],
+            [
+              "259: complete_todo:",
+              "263: proto 1 0",
+              "264: intc_0",
+              "265: dup",
+              "266: bytec_1",
+              "267: dupn 4",
+              "270: intc_0",
+              "271: bytec_0",
+              "272: app_global_get_ex",
+              "273: assert",
+              "274: intc_0",
+              "275: extract_uint16",
+              "276: intc_0"
+            ],
+            [
+              "278: complete_todo_for_header@1:",
+              "281: frame_dig 8",
+              "282: frame_dig 7",
+              "283: <",
+              "284: bz complete_todo_after_for@6"
+            ],
+            [
+              "440: complete_todo_after_for@6:",
+              "441: retsub"
+            ],
+            [
+              "66: intc_2",
+              "67: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 6 -> 33 -> 34 -> 37 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "31: main_return_todo_route@7:",
+              "34: txn OnCompletion",
+              "35: !",
+              "36: assert",
+              "37: txn ApplicationID",
+              "38: assert",
+              "41: txna ApplicationArgs 1",
+              "44: callsub return_todo"
+            ],
+            [
+              "449: return_todo:",
+              "453: proto 1 1",
+              "454: bytec_1",
+              "455: dup",
+              "456: intc_0",
+              "460: dupn 2",
+              "463: bytec_0",
+              "464: app_global_get_ex",
+              "465: assert",
+              "466: intc_0",
+              "467: extract_uint16",
+              "468: intc_0"
+            ],
+            [
+              "470: return_todo_for_header@1:",
+              "473: frame_dig 5",
+              "474: frame_dig 4",
+              "475: <",
+              "476: bz return_todo_after_for@6"
+            ],
+            [
+              "559: return_todo_after_for@6:",
+              "562: frame_dig 3",
+              "563: assert",
+              "566: frame_dig 2",
+              "567: frame_bury 0",
+              "568: retsub"
+            ],
+            [
+              "45: bytec_3",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: intc_2",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 12 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "90: main_bare_routing@8:",
+              "93: txn OnCompletion",
+              "94: bnz main_after_if_else@10"
+            ],
+            [
+              "25: main_after_if_else@10:",
+              "28: intc_0",
+              "29: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 7,
+      "description": "\nCheck: \"unprotected-updatable\", Impact: High, Confidence: High\nDescription: Unprotected Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-updatable-application\n",
+      "check": "unprotected-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "25: main_after_if_else@10:",
+              "28: intc_0",
+              "29: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 10 -> 14 -> 15 -> 16 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "69: main_add_todo_route@5:",
+              "72: txn OnCompletion",
+              "73: !",
+              "74: assert",
+              "75: txn ApplicationID",
+              "76: assert",
+              "79: txna ApplicationArgs 1",
+              "82: callsub add_todo"
+            ],
+            [
+              "103: add_todo:",
+              "107: proto 1 1",
+              "108: intc_0",
+              "109: dupn 2",
+              "110: bytec_1",
+              "111: dupn 3",
+              "114: pushbytes 0x000300",
+              "115: frame_dig -1",
+              "116: concat",
+              "119: intc_0",
+              "120: bytec_0",
+              "121: app_global_get_ex",
+              "122: assert",
+              "123: bytec_2",
+              "124: ==",
+              "125: bz add_todo_else_body@2"
+            ],
+            [
+              "128: bytec 4",
+              "129: swap",
+              "130: concat",
+              "131: pushbytes 0x0001",
+              "132: swap",
+              "133: concat",
+              "134: bytec_0",
+              "135: swap",
+              "136: app_global_put"
+            ],
+            [
+              "138: add_todo_after_if_else@3:",
+              "141: intc_0",
+              "142: bytec_0",
+              "143: app_global_get_ex",
+              "144: assert",
+              "145: frame_bury 0",
+              "146: retsub"
+            ],
+            [
+              "83: bytec_3",
+              "84: swap",
+              "85: concat",
+              "86: log",
+              "87: intc_2",
+              "88: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 10 -> 14 -> 17 -> 18 -> 20 -> 21 -> 23 -> 16 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "69: main_add_todo_route@5:",
+              "72: txn OnCompletion",
+              "73: !",
+              "74: assert",
+              "75: txn ApplicationID",
+              "76: assert",
+              "79: txna ApplicationArgs 1",
+              "82: callsub add_todo"
+            ],
+            [
+              "103: add_todo:",
+              "107: proto 1 1",
+              "108: intc_0",
+              "109: dupn 2",
+              "110: bytec_1",
+              "111: dupn 3",
+              "114: pushbytes 0x000300",
+              "115: frame_dig -1",
+              "116: concat",
+              "119: intc_0",
+              "120: bytec_0",
+              "121: app_global_get_ex",
+              "122: assert",
+              "123: bytec_2",
+              "124: ==",
+              "125: bz add_todo_else_body@2"
+            ],
+            [
+              "148: add_todo_else_body@2:",
+              "151: intc_0",
+              "152: bytec_0",
+              "153: app_global_get_ex",
+              "154: assert",
+              "155: bytec 4",
+              "156: uncover 2",
+              "157: concat",
+              "158: frame_bury 2",
+              "159: dup",
+              "160: intc_0",
+              "161: extract_uint16",
+              "162: dup",
+              "163: cover 2",
+              "164: frame_bury 3",
+              "165: extract 2 0",
+              "166: frame_bury 0",
+              "167: bytec_1",
+              "168: frame_bury 1",
+              "169: intc_1",
+              "170: *",
+              "171: frame_bury 6",
+              "172: intc_0",
+              "173: frame_bury 4"
+            ],
+            [
+              "175: add_todo_for_header@5:",
+              "176: frame_dig 4",
+              "177: frame_dig 6",
+              "178: <",
+              "179: bz add_todo_after_for@7"
+            ],
+            [
+              "198: add_todo_after_for@7:",
+              "199: frame_dig 0",
+              "200: len",
+              "201: frame_bury 5",
+              "202: intc_0",
+              "203: frame_bury 4"
+            ],
+            [
+              "205: add_todo_for_header@8:",
+              "206: frame_dig 4",
+              "207: intc_1",
+              "208: <",
+              "209: bz add_todo_after_for@10"
+            ],
+            [
+              "228: add_todo_after_for@10:",
+              "229: frame_dig 3",
+              "232: intc_2",
+              "233: +",
+              "234: itob",
+              "235: extract 6 2",
+              "236: frame_dig 1",
+              "237: concat",
+              "238: frame_dig 0",
+              "239: frame_dig 6",
+              "240: frame_dig 5",
+              "241: substring3",
+              "242: concat",
+              "243: frame_dig 2",
+              "244: dup",
+              "245: len",
+              "246: intc_1",
+              "247: swap",
+              "248: substring3",
+              "249: concat",
+              "252: bytec_0",
+              "253: swap",
+              "254: app_global_put",
+              "255: b add_todo_after_if_else@3"
+            ],
+            [
+              "138: add_todo_after_if_else@3:",
+              "141: intc_0",
+              "142: bytec_0",
+              "143: app_global_get_ex",
+              "144: assert",
+              "145: frame_bury 0",
+              "146: retsub"
+            ],
+            [
+              "83: bytec_3",
+              "84: swap",
+              "85: concat",
+              "86: log",
+              "87: intc_2",
+              "88: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 24 -> 25 -> 26 -> 27 -> 28 -> 30 -> 31 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "52: main_complete_todo_route@6:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "62: txna ApplicationArgs 1",
+              "65: callsub complete_todo"
+            ],
+            [
+              "259: complete_todo:",
+              "263: proto 1 0",
+              "264: intc_0",
+              "265: dup",
+              "266: bytec_1",
+              "267: dupn 4",
+              "270: intc_0",
+              "271: bytec_0",
+              "272: app_global_get_ex",
+              "273: assert",
+              "274: intc_0",
+              "275: extract_uint16",
+              "276: intc_0"
+            ],
+            [
+              "278: complete_todo_for_header@1:",
+              "281: frame_dig 8",
+              "282: frame_dig 7",
+              "283: <",
+              "284: bz complete_todo_after_for@6"
+            ],
+            [
+              "287: intc_0",
+              "288: bytec_0",
+              "289: app_global_get_ex",
+              "290: assert",
+              "291: dup",
+              "292: extract 2 0",
+              "293: frame_dig 8",
+              "294: dup",
+              "295: cover 3",
+              "296: intc_1",
+              "297: *",
+              "298: dup",
+              "299: frame_bury 3",
+              "300: dig 1",
+              "301: swap",
+              "302: extract_uint16",
+              "303: uncover 2",
+              "304: intc_0",
+              "305: extract_uint16",
+              "306: uncover 3",
+              "307: intc_2",
+              "308: +",
+              "309: dup",
+              "310: cover 4",
+              "311: swap",
+              "312: dig 1",
+              "313: -",
+              "314: dig 3",
+              "315: len",
+              "316: uncover 2",
+              "317: intc_1",
+              "318: *",
+              "319: dup",
+              "320: frame_bury 2",
+              "321: dig 4",
+              "322: swap",
+              "323: extract_uint16",
+              "324: uncover 2",
+              "325: select",
+              "326: substring3",
+              "327: dup",
+              "328: intc_0",
+              "329: extract_uint16",
+              "330: dig 1",
+              "331: len",
+              "332: substring3",
+              "333: frame_dig -1",
+              "334: ==",
+              "335: bz complete_todo_after_if_else@4"
+            ],
+            [
+              "338: intc_0",
+              "339: bytec_0",
+              "340: app_global_get_ex",
+              "341: assert",
+              "342: dup",
+              "343: extract 2 0",
+              "344: dup",
+              "345: frame_dig 3",
+              "346: extract_uint16",
+              "347: dig 2",
+              "348: intc_0",
+              "349: extract_uint16",
+              "350: uncover 4",
+              "351: -",
+              "352: dig 2",
+              "353: len",
+              "354: dig 3",
+              "355: frame_dig 2",
+              "356: extract_uint16",
+              "357: dup2",
+              "358: uncover 4",
+              "359: select",
+              "360: dig 4",
+              "361: dig 4",
+              "362: uncover 2",
+              "363: substring3",
+              "364: pushint 16",
+              "365: intc_2",
+              "366: setbit",
+              "367: uncover 5",
+              "368: substring 0 2",
+              "369: dup",
+              "370: frame_bury 1",
+              "371: btoi",
+              "372: dup",
+              "373: frame_dig 8",
+              "374: -",
+              "375: intc_2",
+              "376: -",
+              "377: dig 4",
+              "378: uncover 4",
+              "379: uncover 2",
+              "380: select",
+              "381: dup",
+              "382: dig 5",
+              "383: -",
+              "384: frame_bury 5",
+              "385: dig 2",
+              "386: len",
+              "387: frame_bury 4",
+              "388: dig 5",
+              "389: intc_0",
+              "390: uncover 6",
+              "391: substring3",
+              "392: uncover 3",
+              "393: concat",
+              "394: uncover 4",
+              "395: uncover 2",
+              "396: uncover 4",
+              "397: substring3",
+              "398: concat",
+              "399: frame_bury 0",
+              "400: intc_1",
+              "401: *",
+              "402: frame_bury 6"
+            ],
+            [
+              "404: complete_todo_for_header@8:",
+              "405: frame_dig 2",
+              "406: frame_dig 6",
+              "407: <",
+              "408: bz complete_todo_after_for@10"
+            ],
+            [
+              "430: complete_todo_after_for@10:",
+              "431: frame_dig 1",
+              "432: frame_dig 0",
+              "433: concat",
+              "436: bytec_0",
+              "437: swap",
+              "438: app_global_put"
+            ],
+            [
+              "440: complete_todo_after_for@6:",
+              "441: retsub"
+            ],
+            [
+              "66: intc_2",
+              "67: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 24 -> 25 -> 31 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "52: main_complete_todo_route@6:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "62: txna ApplicationArgs 1",
+              "65: callsub complete_todo"
+            ],
+            [
+              "259: complete_todo:",
+              "263: proto 1 0",
+              "264: intc_0",
+              "265: dup",
+              "266: bytec_1",
+              "267: dupn 4",
+              "270: intc_0",
+              "271: bytec_0",
+              "272: app_global_get_ex",
+              "273: assert",
+              "274: intc_0",
+              "275: extract_uint16",
+              "276: intc_0"
+            ],
+            [
+              "278: complete_todo_for_header@1:",
+              "281: frame_dig 8",
+              "282: frame_dig 7",
+              "283: <",
+              "284: bz complete_todo_after_for@6"
+            ],
+            [
+              "440: complete_todo_after_for@6:",
+              "441: retsub"
+            ],
+            [
+              "66: intc_2",
+              "67: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 6 -> 33 -> 34 -> 37 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "31: main_return_todo_route@7:",
+              "34: txn OnCompletion",
+              "35: !",
+              "36: assert",
+              "37: txn ApplicationID",
+              "38: assert",
+              "41: txna ApplicationArgs 1",
+              "44: callsub return_todo"
+            ],
+            [
+              "449: return_todo:",
+              "453: proto 1 1",
+              "454: bytec_1",
+              "455: dup",
+              "456: intc_0",
+              "460: dupn 2",
+              "463: bytec_0",
+              "464: app_global_get_ex",
+              "465: assert",
+              "466: intc_0",
+              "467: extract_uint16",
+              "468: intc_0"
+            ],
+            [
+              "470: return_todo_for_header@1:",
+              "473: frame_dig 5",
+              "474: frame_dig 4",
+              "475: <",
+              "476: bz return_todo_after_for@6"
+            ],
+            [
+              "559: return_todo_after_for@6:",
+              "562: frame_dig 3",
+              "563: assert",
+              "566: frame_dig 2",
+              "567: frame_bury 0",
+              "568: retsub"
+            ],
+            [
+              "45: bytec_3",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: intc_2",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 12 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "90: main_bare_routing@8:",
+              "93: txn OnCompletion",
+              "94: bnz main_after_if_else@10"
+            ],
+            [
+              "25: main_after_if_else@10:",
+              "28: intc_0",
+              "29: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"can-close-account\", Impact: High, Confidence: High\nDescription: Missing CloseRemainderTo field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-closeremainderto-field-validation\n",
+      "check": "can-close-account",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `CloseRemainderTo` field in the LogicSig.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"can-close-asset\", Impact: High, Confidence: High\nDescription: Missing AssetCloseTo Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-assetcloseto-field-validation\n",
+      "check": "can-close-asset",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `AssetCloseTo` field in the LogicSig.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 7,
+      "description": "\nCheck: \"is-deletable\", Impact: High, Confidence: High\nDescription: Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#deletable-application\n",
+      "check": "is-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `DeleteApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "25: main_after_if_else@10:",
+              "28: intc_0",
+              "29: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 10 -> 14 -> 15 -> 16 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "69: main_add_todo_route@5:",
+              "72: txn OnCompletion",
+              "73: !",
+              "74: assert",
+              "75: txn ApplicationID",
+              "76: assert",
+              "79: txna ApplicationArgs 1",
+              "82: callsub add_todo"
+            ],
+            [
+              "103: add_todo:",
+              "107: proto 1 1",
+              "108: intc_0",
+              "109: dupn 2",
+              "110: bytec_1",
+              "111: dupn 3",
+              "114: pushbytes 0x000300",
+              "115: frame_dig -1",
+              "116: concat",
+              "119: intc_0",
+              "120: bytec_0",
+              "121: app_global_get_ex",
+              "122: assert",
+              "123: bytec_2",
+              "124: ==",
+              "125: bz add_todo_else_body@2"
+            ],
+            [
+              "128: bytec 4",
+              "129: swap",
+              "130: concat",
+              "131: pushbytes 0x0001",
+              "132: swap",
+              "133: concat",
+              "134: bytec_0",
+              "135: swap",
+              "136: app_global_put"
+            ],
+            [
+              "138: add_todo_after_if_else@3:",
+              "141: intc_0",
+              "142: bytec_0",
+              "143: app_global_get_ex",
+              "144: assert",
+              "145: frame_bury 0",
+              "146: retsub"
+            ],
+            [
+              "83: bytec_3",
+              "84: swap",
+              "85: concat",
+              "86: log",
+              "87: intc_2",
+              "88: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 10 -> 14 -> 17 -> 18 -> 20 -> 21 -> 23 -> 16 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "69: main_add_todo_route@5:",
+              "72: txn OnCompletion",
+              "73: !",
+              "74: assert",
+              "75: txn ApplicationID",
+              "76: assert",
+              "79: txna ApplicationArgs 1",
+              "82: callsub add_todo"
+            ],
+            [
+              "103: add_todo:",
+              "107: proto 1 1",
+              "108: intc_0",
+              "109: dupn 2",
+              "110: bytec_1",
+              "111: dupn 3",
+              "114: pushbytes 0x000300",
+              "115: frame_dig -1",
+              "116: concat",
+              "119: intc_0",
+              "120: bytec_0",
+              "121: app_global_get_ex",
+              "122: assert",
+              "123: bytec_2",
+              "124: ==",
+              "125: bz add_todo_else_body@2"
+            ],
+            [
+              "148: add_todo_else_body@2:",
+              "151: intc_0",
+              "152: bytec_0",
+              "153: app_global_get_ex",
+              "154: assert",
+              "155: bytec 4",
+              "156: uncover 2",
+              "157: concat",
+              "158: frame_bury 2",
+              "159: dup",
+              "160: intc_0",
+              "161: extract_uint16",
+              "162: dup",
+              "163: cover 2",
+              "164: frame_bury 3",
+              "165: extract 2 0",
+              "166: frame_bury 0",
+              "167: bytec_1",
+              "168: frame_bury 1",
+              "169: intc_1",
+              "170: *",
+              "171: frame_bury 6",
+              "172: intc_0",
+              "173: frame_bury 4"
+            ],
+            [
+              "175: add_todo_for_header@5:",
+              "176: frame_dig 4",
+              "177: frame_dig 6",
+              "178: <",
+              "179: bz add_todo_after_for@7"
+            ],
+            [
+              "198: add_todo_after_for@7:",
+              "199: frame_dig 0",
+              "200: len",
+              "201: frame_bury 5",
+              "202: intc_0",
+              "203: frame_bury 4"
+            ],
+            [
+              "205: add_todo_for_header@8:",
+              "206: frame_dig 4",
+              "207: intc_1",
+              "208: <",
+              "209: bz add_todo_after_for@10"
+            ],
+            [
+              "228: add_todo_after_for@10:",
+              "229: frame_dig 3",
+              "232: intc_2",
+              "233: +",
+              "234: itob",
+              "235: extract 6 2",
+              "236: frame_dig 1",
+              "237: concat",
+              "238: frame_dig 0",
+              "239: frame_dig 6",
+              "240: frame_dig 5",
+              "241: substring3",
+              "242: concat",
+              "243: frame_dig 2",
+              "244: dup",
+              "245: len",
+              "246: intc_1",
+              "247: swap",
+              "248: substring3",
+              "249: concat",
+              "252: bytec_0",
+              "253: swap",
+              "254: app_global_put",
+              "255: b add_todo_after_if_else@3"
+            ],
+            [
+              "138: add_todo_after_if_else@3:",
+              "141: intc_0",
+              "142: bytec_0",
+              "143: app_global_get_ex",
+              "144: assert",
+              "145: frame_bury 0",
+              "146: retsub"
+            ],
+            [
+              "83: bytec_3",
+              "84: swap",
+              "85: concat",
+              "86: log",
+              "87: intc_2",
+              "88: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 24 -> 25 -> 26 -> 27 -> 28 -> 30 -> 31 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "52: main_complete_todo_route@6:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "62: txna ApplicationArgs 1",
+              "65: callsub complete_todo"
+            ],
+            [
+              "259: complete_todo:",
+              "263: proto 1 0",
+              "264: intc_0",
+              "265: dup",
+              "266: bytec_1",
+              "267: dupn 4",
+              "270: intc_0",
+              "271: bytec_0",
+              "272: app_global_get_ex",
+              "273: assert",
+              "274: intc_0",
+              "275: extract_uint16",
+              "276: intc_0"
+            ],
+            [
+              "278: complete_todo_for_header@1:",
+              "281: frame_dig 8",
+              "282: frame_dig 7",
+              "283: <",
+              "284: bz complete_todo_after_for@6"
+            ],
+            [
+              "287: intc_0",
+              "288: bytec_0",
+              "289: app_global_get_ex",
+              "290: assert",
+              "291: dup",
+              "292: extract 2 0",
+              "293: frame_dig 8",
+              "294: dup",
+              "295: cover 3",
+              "296: intc_1",
+              "297: *",
+              "298: dup",
+              "299: frame_bury 3",
+              "300: dig 1",
+              "301: swap",
+              "302: extract_uint16",
+              "303: uncover 2",
+              "304: intc_0",
+              "305: extract_uint16",
+              "306: uncover 3",
+              "307: intc_2",
+              "308: +",
+              "309: dup",
+              "310: cover 4",
+              "311: swap",
+              "312: dig 1",
+              "313: -",
+              "314: dig 3",
+              "315: len",
+              "316: uncover 2",
+              "317: intc_1",
+              "318: *",
+              "319: dup",
+              "320: frame_bury 2",
+              "321: dig 4",
+              "322: swap",
+              "323: extract_uint16",
+              "324: uncover 2",
+              "325: select",
+              "326: substring3",
+              "327: dup",
+              "328: intc_0",
+              "329: extract_uint16",
+              "330: dig 1",
+              "331: len",
+              "332: substring3",
+              "333: frame_dig -1",
+              "334: ==",
+              "335: bz complete_todo_after_if_else@4"
+            ],
+            [
+              "338: intc_0",
+              "339: bytec_0",
+              "340: app_global_get_ex",
+              "341: assert",
+              "342: dup",
+              "343: extract 2 0",
+              "344: dup",
+              "345: frame_dig 3",
+              "346: extract_uint16",
+              "347: dig 2",
+              "348: intc_0",
+              "349: extract_uint16",
+              "350: uncover 4",
+              "351: -",
+              "352: dig 2",
+              "353: len",
+              "354: dig 3",
+              "355: frame_dig 2",
+              "356: extract_uint16",
+              "357: dup2",
+              "358: uncover 4",
+              "359: select",
+              "360: dig 4",
+              "361: dig 4",
+              "362: uncover 2",
+              "363: substring3",
+              "364: pushint 16",
+              "365: intc_2",
+              "366: setbit",
+              "367: uncover 5",
+              "368: substring 0 2",
+              "369: dup",
+              "370: frame_bury 1",
+              "371: btoi",
+              "372: dup",
+              "373: frame_dig 8",
+              "374: -",
+              "375: intc_2",
+              "376: -",
+              "377: dig 4",
+              "378: uncover 4",
+              "379: uncover 2",
+              "380: select",
+              "381: dup",
+              "382: dig 5",
+              "383: -",
+              "384: frame_bury 5",
+              "385: dig 2",
+              "386: len",
+              "387: frame_bury 4",
+              "388: dig 5",
+              "389: intc_0",
+              "390: uncover 6",
+              "391: substring3",
+              "392: uncover 3",
+              "393: concat",
+              "394: uncover 4",
+              "395: uncover 2",
+              "396: uncover 4",
+              "397: substring3",
+              "398: concat",
+              "399: frame_bury 0",
+              "400: intc_1",
+              "401: *",
+              "402: frame_bury 6"
+            ],
+            [
+              "404: complete_todo_for_header@8:",
+              "405: frame_dig 2",
+              "406: frame_dig 6",
+              "407: <",
+              "408: bz complete_todo_after_for@10"
+            ],
+            [
+              "430: complete_todo_after_for@10:",
+              "431: frame_dig 1",
+              "432: frame_dig 0",
+              "433: concat",
+              "436: bytec_0",
+              "437: swap",
+              "438: app_global_put"
+            ],
+            [
+              "440: complete_todo_after_for@6:",
+              "441: retsub"
+            ],
+            [
+              "66: intc_2",
+              "67: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 24 -> 25 -> 31 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "52: main_complete_todo_route@6:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "62: txna ApplicationArgs 1",
+              "65: callsub complete_todo"
+            ],
+            [
+              "259: complete_todo:",
+              "263: proto 1 0",
+              "264: intc_0",
+              "265: dup",
+              "266: bytec_1",
+              "267: dupn 4",
+              "270: intc_0",
+              "271: bytec_0",
+              "272: app_global_get_ex",
+              "273: assert",
+              "274: intc_0",
+              "275: extract_uint16",
+              "276: intc_0"
+            ],
+            [
+              "278: complete_todo_for_header@1:",
+              "281: frame_dig 8",
+              "282: frame_dig 7",
+              "283: <",
+              "284: bz complete_todo_after_for@6"
+            ],
+            [
+              "440: complete_todo_after_for@6:",
+              "441: retsub"
+            ],
+            [
+              "66: intc_2",
+              "67: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 6 -> 33 -> 34 -> 37 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "31: main_return_todo_route@7:",
+              "34: txn OnCompletion",
+              "35: !",
+              "36: assert",
+              "37: txn ApplicationID",
+              "38: assert",
+              "41: txna ApplicationArgs 1",
+              "44: callsub return_todo"
+            ],
+            [
+              "449: return_todo:",
+              "453: proto 1 1",
+              "454: bytec_1",
+              "455: dup",
+              "456: intc_0",
+              "460: dupn 2",
+              "463: bytec_0",
+              "464: app_global_get_ex",
+              "465: assert",
+              "466: intc_0",
+              "467: extract_uint16",
+              "468: intc_0"
+            ],
+            [
+              "470: return_todo_for_header@1:",
+              "473: frame_dig 5",
+              "474: frame_dig 4",
+              "475: <",
+              "476: bz return_todo_after_for@6"
+            ],
+            [
+              "559: return_todo_after_for@6:",
+              "562: frame_dig 3",
+              "563: assert",
+              "566: frame_dig 2",
+              "567: frame_bury 0",
+              "568: retsub"
+            ],
+            [
+              "45: bytec_3",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: intc_2",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 12 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "90: main_bare_routing@8:",
+              "93: txn OnCompletion",
+              "94: bnz main_after_if_else@10"
+            ],
+            [
+              "25: main_after_if_else@10:",
+              "28: intc_0",
+              "29: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 7,
+      "description": "\nCheck: \"is-updatable\", Impact: High, Confidence: High\nDescription: Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#upgradable-application\n",
+      "check": "is-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `UpdateApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "25: main_after_if_else@10:",
+              "28: intc_0",
+              "29: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 10 -> 14 -> 15 -> 16 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "69: main_add_todo_route@5:",
+              "72: txn OnCompletion",
+              "73: !",
+              "74: assert",
+              "75: txn ApplicationID",
+              "76: assert",
+              "79: txna ApplicationArgs 1",
+              "82: callsub add_todo"
+            ],
+            [
+              "103: add_todo:",
+              "107: proto 1 1",
+              "108: intc_0",
+              "109: dupn 2",
+              "110: bytec_1",
+              "111: dupn 3",
+              "114: pushbytes 0x000300",
+              "115: frame_dig -1",
+              "116: concat",
+              "119: intc_0",
+              "120: bytec_0",
+              "121: app_global_get_ex",
+              "122: assert",
+              "123: bytec_2",
+              "124: ==",
+              "125: bz add_todo_else_body@2"
+            ],
+            [
+              "128: bytec 4",
+              "129: swap",
+              "130: concat",
+              "131: pushbytes 0x0001",
+              "132: swap",
+              "133: concat",
+              "134: bytec_0",
+              "135: swap",
+              "136: app_global_put"
+            ],
+            [
+              "138: add_todo_after_if_else@3:",
+              "141: intc_0",
+              "142: bytec_0",
+              "143: app_global_get_ex",
+              "144: assert",
+              "145: frame_bury 0",
+              "146: retsub"
+            ],
+            [
+              "83: bytec_3",
+              "84: swap",
+              "85: concat",
+              "86: log",
+              "87: intc_2",
+              "88: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 10 -> 14 -> 17 -> 18 -> 20 -> 21 -> 23 -> 16 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "69: main_add_todo_route@5:",
+              "72: txn OnCompletion",
+              "73: !",
+              "74: assert",
+              "75: txn ApplicationID",
+              "76: assert",
+              "79: txna ApplicationArgs 1",
+              "82: callsub add_todo"
+            ],
+            [
+              "103: add_todo:",
+              "107: proto 1 1",
+              "108: intc_0",
+              "109: dupn 2",
+              "110: bytec_1",
+              "111: dupn 3",
+              "114: pushbytes 0x000300",
+              "115: frame_dig -1",
+              "116: concat",
+              "119: intc_0",
+              "120: bytec_0",
+              "121: app_global_get_ex",
+              "122: assert",
+              "123: bytec_2",
+              "124: ==",
+              "125: bz add_todo_else_body@2"
+            ],
+            [
+              "148: add_todo_else_body@2:",
+              "151: intc_0",
+              "152: bytec_0",
+              "153: app_global_get_ex",
+              "154: assert",
+              "155: bytec 4",
+              "156: uncover 2",
+              "157: concat",
+              "158: frame_bury 2",
+              "159: dup",
+              "160: intc_0",
+              "161: extract_uint16",
+              "162: dup",
+              "163: cover 2",
+              "164: frame_bury 3",
+              "165: extract 2 0",
+              "166: frame_bury 0",
+              "167: bytec_1",
+              "168: frame_bury 1",
+              "169: intc_1",
+              "170: *",
+              "171: frame_bury 6",
+              "172: intc_0",
+              "173: frame_bury 4"
+            ],
+            [
+              "175: add_todo_for_header@5:",
+              "176: frame_dig 4",
+              "177: frame_dig 6",
+              "178: <",
+              "179: bz add_todo_after_for@7"
+            ],
+            [
+              "198: add_todo_after_for@7:",
+              "199: frame_dig 0",
+              "200: len",
+              "201: frame_bury 5",
+              "202: intc_0",
+              "203: frame_bury 4"
+            ],
+            [
+              "205: add_todo_for_header@8:",
+              "206: frame_dig 4",
+              "207: intc_1",
+              "208: <",
+              "209: bz add_todo_after_for@10"
+            ],
+            [
+              "228: add_todo_after_for@10:",
+              "229: frame_dig 3",
+              "232: intc_2",
+              "233: +",
+              "234: itob",
+              "235: extract 6 2",
+              "236: frame_dig 1",
+              "237: concat",
+              "238: frame_dig 0",
+              "239: frame_dig 6",
+              "240: frame_dig 5",
+              "241: substring3",
+              "242: concat",
+              "243: frame_dig 2",
+              "244: dup",
+              "245: len",
+              "246: intc_1",
+              "247: swap",
+              "248: substring3",
+              "249: concat",
+              "252: bytec_0",
+              "253: swap",
+              "254: app_global_put",
+              "255: b add_todo_after_if_else@3"
+            ],
+            [
+              "138: add_todo_after_if_else@3:",
+              "141: intc_0",
+              "142: bytec_0",
+              "143: app_global_get_ex",
+              "144: assert",
+              "145: frame_bury 0",
+              "146: retsub"
+            ],
+            [
+              "83: bytec_3",
+              "84: swap",
+              "85: concat",
+              "86: log",
+              "87: intc_2",
+              "88: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 24 -> 25 -> 26 -> 27 -> 28 -> 30 -> 31 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "52: main_complete_todo_route@6:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "62: txna ApplicationArgs 1",
+              "65: callsub complete_todo"
+            ],
+            [
+              "259: complete_todo:",
+              "263: proto 1 0",
+              "264: intc_0",
+              "265: dup",
+              "266: bytec_1",
+              "267: dupn 4",
+              "270: intc_0",
+              "271: bytec_0",
+              "272: app_global_get_ex",
+              "273: assert",
+              "274: intc_0",
+              "275: extract_uint16",
+              "276: intc_0"
+            ],
+            [
+              "278: complete_todo_for_header@1:",
+              "281: frame_dig 8",
+              "282: frame_dig 7",
+              "283: <",
+              "284: bz complete_todo_after_for@6"
+            ],
+            [
+              "287: intc_0",
+              "288: bytec_0",
+              "289: app_global_get_ex",
+              "290: assert",
+              "291: dup",
+              "292: extract 2 0",
+              "293: frame_dig 8",
+              "294: dup",
+              "295: cover 3",
+              "296: intc_1",
+              "297: *",
+              "298: dup",
+              "299: frame_bury 3",
+              "300: dig 1",
+              "301: swap",
+              "302: extract_uint16",
+              "303: uncover 2",
+              "304: intc_0",
+              "305: extract_uint16",
+              "306: uncover 3",
+              "307: intc_2",
+              "308: +",
+              "309: dup",
+              "310: cover 4",
+              "311: swap",
+              "312: dig 1",
+              "313: -",
+              "314: dig 3",
+              "315: len",
+              "316: uncover 2",
+              "317: intc_1",
+              "318: *",
+              "319: dup",
+              "320: frame_bury 2",
+              "321: dig 4",
+              "322: swap",
+              "323: extract_uint16",
+              "324: uncover 2",
+              "325: select",
+              "326: substring3",
+              "327: dup",
+              "328: intc_0",
+              "329: extract_uint16",
+              "330: dig 1",
+              "331: len",
+              "332: substring3",
+              "333: frame_dig -1",
+              "334: ==",
+              "335: bz complete_todo_after_if_else@4"
+            ],
+            [
+              "338: intc_0",
+              "339: bytec_0",
+              "340: app_global_get_ex",
+              "341: assert",
+              "342: dup",
+              "343: extract 2 0",
+              "344: dup",
+              "345: frame_dig 3",
+              "346: extract_uint16",
+              "347: dig 2",
+              "348: intc_0",
+              "349: extract_uint16",
+              "350: uncover 4",
+              "351: -",
+              "352: dig 2",
+              "353: len",
+              "354: dig 3",
+              "355: frame_dig 2",
+              "356: extract_uint16",
+              "357: dup2",
+              "358: uncover 4",
+              "359: select",
+              "360: dig 4",
+              "361: dig 4",
+              "362: uncover 2",
+              "363: substring3",
+              "364: pushint 16",
+              "365: intc_2",
+              "366: setbit",
+              "367: uncover 5",
+              "368: substring 0 2",
+              "369: dup",
+              "370: frame_bury 1",
+              "371: btoi",
+              "372: dup",
+              "373: frame_dig 8",
+              "374: -",
+              "375: intc_2",
+              "376: -",
+              "377: dig 4",
+              "378: uncover 4",
+              "379: uncover 2",
+              "380: select",
+              "381: dup",
+              "382: dig 5",
+              "383: -",
+              "384: frame_bury 5",
+              "385: dig 2",
+              "386: len",
+              "387: frame_bury 4",
+              "388: dig 5",
+              "389: intc_0",
+              "390: uncover 6",
+              "391: substring3",
+              "392: uncover 3",
+              "393: concat",
+              "394: uncover 4",
+              "395: uncover 2",
+              "396: uncover 4",
+              "397: substring3",
+              "398: concat",
+              "399: frame_bury 0",
+              "400: intc_1",
+              "401: *",
+              "402: frame_bury 6"
+            ],
+            [
+              "404: complete_todo_for_header@8:",
+              "405: frame_dig 2",
+              "406: frame_dig 6",
+              "407: <",
+              "408: bz complete_todo_after_for@10"
+            ],
+            [
+              "430: complete_todo_after_for@10:",
+              "431: frame_dig 1",
+              "432: frame_dig 0",
+              "433: concat",
+              "436: bytec_0",
+              "437: swap",
+              "438: app_global_put"
+            ],
+            [
+              "440: complete_todo_after_for@6:",
+              "441: retsub"
+            ],
+            [
+              "66: intc_2",
+              "67: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 24 -> 25 -> 31 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "52: main_complete_todo_route@6:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "62: txna ApplicationArgs 1",
+              "65: callsub complete_todo"
+            ],
+            [
+              "259: complete_todo:",
+              "263: proto 1 0",
+              "264: intc_0",
+              "265: dup",
+              "266: bytec_1",
+              "267: dupn 4",
+              "270: intc_0",
+              "271: bytec_0",
+              "272: app_global_get_ex",
+              "273: assert",
+              "274: intc_0",
+              "275: extract_uint16",
+              "276: intc_0"
+            ],
+            [
+              "278: complete_todo_for_header@1:",
+              "281: frame_dig 8",
+              "282: frame_dig 7",
+              "283: <",
+              "284: bz complete_todo_after_for@6"
+            ],
+            [
+              "440: complete_todo_after_for@6:",
+              "441: retsub"
+            ],
+            [
+              "66: intc_2",
+              "67: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 6 -> 33 -> 34 -> 37 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "31: main_return_todo_route@7:",
+              "34: txn OnCompletion",
+              "35: !",
+              "36: assert",
+              "37: txn ApplicationID",
+              "38: assert",
+              "41: txna ApplicationArgs 1",
+              "44: callsub return_todo"
+            ],
+            [
+              "449: return_todo:",
+              "453: proto 1 1",
+              "454: bytec_1",
+              "455: dup",
+              "456: intc_0",
+              "460: dupn 2",
+              "463: bytec_0",
+              "464: app_global_get_ex",
+              "465: assert",
+              "466: intc_0",
+              "467: extract_uint16",
+              "468: intc_0"
+            ],
+            [
+              "470: return_todo_for_header@1:",
+              "473: frame_dig 5",
+              "474: frame_dig 4",
+              "475: <",
+              "476: bz return_todo_after_for@6"
+            ],
+            [
+              "559: return_todo_after_for@6:",
+              "562: frame_dig 3",
+              "563: assert",
+              "566: frame_dig 2",
+              "567: frame_bury 0",
+              "568: retsub"
+            ],
+            [
+              "45: bytec_3",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: intc_2",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 12 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "90: main_bare_routing@8:",
+              "93: txn OnCompletion",
+              "94: bnz main_after_if_else@10"
+            ],
+            [
+              "25: main_after_if_else@10:",
+              "28: intc_0",
+              "29: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 16,
+      "description": "\nCheck: \"missing-fee-check\", Impact: High, Confidence: High\nDescription: Missing Fee Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-fee-field-validation\n",
+      "check": "missing-fee-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `Fee` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec_0",
+              "13: bytec_2",
+              "14: app_global_put"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "25: main_after_if_else@10:",
+              "28: intc_0",
+              "29: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 10 -> 14 -> 15 -> 16 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec_0",
+              "13: bytec_2",
+              "14: app_global_put"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "69: main_add_todo_route@5:",
+              "72: txn OnCompletion",
+              "73: !",
+              "74: assert",
+              "75: txn ApplicationID",
+              "76: assert",
+              "79: txna ApplicationArgs 1",
+              "82: callsub add_todo"
+            ],
+            [
+              "103: add_todo:",
+              "107: proto 1 1",
+              "108: intc_0",
+              "109: dupn 2",
+              "110: bytec_1",
+              "111: dupn 3",
+              "114: pushbytes 0x000300",
+              "115: frame_dig -1",
+              "116: concat",
+              "119: intc_0",
+              "120: bytec_0",
+              "121: app_global_get_ex",
+              "122: assert",
+              "123: bytec_2",
+              "124: ==",
+              "125: bz add_todo_else_body@2"
+            ],
+            [
+              "128: bytec 4",
+              "129: swap",
+              "130: concat",
+              "131: pushbytes 0x0001",
+              "132: swap",
+              "133: concat",
+              "134: bytec_0",
+              "135: swap",
+              "136: app_global_put"
+            ],
+            [
+              "138: add_todo_after_if_else@3:",
+              "141: intc_0",
+              "142: bytec_0",
+              "143: app_global_get_ex",
+              "144: assert",
+              "145: frame_bury 0",
+              "146: retsub"
+            ],
+            [
+              "83: bytec_3",
+              "84: swap",
+              "85: concat",
+              "86: log",
+              "87: intc_2",
+              "88: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 10 -> 14 -> 17 -> 18 -> 20 -> 21 -> 23 -> 16 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec_0",
+              "13: bytec_2",
+              "14: app_global_put"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "69: main_add_todo_route@5:",
+              "72: txn OnCompletion",
+              "73: !",
+              "74: assert",
+              "75: txn ApplicationID",
+              "76: assert",
+              "79: txna ApplicationArgs 1",
+              "82: callsub add_todo"
+            ],
+            [
+              "103: add_todo:",
+              "107: proto 1 1",
+              "108: intc_0",
+              "109: dupn 2",
+              "110: bytec_1",
+              "111: dupn 3",
+              "114: pushbytes 0x000300",
+              "115: frame_dig -1",
+              "116: concat",
+              "119: intc_0",
+              "120: bytec_0",
+              "121: app_global_get_ex",
+              "122: assert",
+              "123: bytec_2",
+              "124: ==",
+              "125: bz add_todo_else_body@2"
+            ],
+            [
+              "148: add_todo_else_body@2:",
+              "151: intc_0",
+              "152: bytec_0",
+              "153: app_global_get_ex",
+              "154: assert",
+              "155: bytec 4",
+              "156: uncover 2",
+              "157: concat",
+              "158: frame_bury 2",
+              "159: dup",
+              "160: intc_0",
+              "161: extract_uint16",
+              "162: dup",
+              "163: cover 2",
+              "164: frame_bury 3",
+              "165: extract 2 0",
+              "166: frame_bury 0",
+              "167: bytec_1",
+              "168: frame_bury 1",
+              "169: intc_1",
+              "170: *",
+              "171: frame_bury 6",
+              "172: intc_0",
+              "173: frame_bury 4"
+            ],
+            [
+              "175: add_todo_for_header@5:",
+              "176: frame_dig 4",
+              "177: frame_dig 6",
+              "178: <",
+              "179: bz add_todo_after_for@7"
+            ],
+            [
+              "198: add_todo_after_for@7:",
+              "199: frame_dig 0",
+              "200: len",
+              "201: frame_bury 5",
+              "202: intc_0",
+              "203: frame_bury 4"
+            ],
+            [
+              "205: add_todo_for_header@8:",
+              "206: frame_dig 4",
+              "207: intc_1",
+              "208: <",
+              "209: bz add_todo_after_for@10"
+            ],
+            [
+              "228: add_todo_after_for@10:",
+              "229: frame_dig 3",
+              "232: intc_2",
+              "233: +",
+              "234: itob",
+              "235: extract 6 2",
+              "236: frame_dig 1",
+              "237: concat",
+              "238: frame_dig 0",
+              "239: frame_dig 6",
+              "240: frame_dig 5",
+              "241: substring3",
+              "242: concat",
+              "243: frame_dig 2",
+              "244: dup",
+              "245: len",
+              "246: intc_1",
+              "247: swap",
+              "248: substring3",
+              "249: concat",
+              "252: bytec_0",
+              "253: swap",
+              "254: app_global_put",
+              "255: b add_todo_after_if_else@3"
+            ],
+            [
+              "138: add_todo_after_if_else@3:",
+              "141: intc_0",
+              "142: bytec_0",
+              "143: app_global_get_ex",
+              "144: assert",
+              "145: frame_bury 0",
+              "146: retsub"
+            ],
+            [
+              "83: bytec_3",
+              "84: swap",
+              "85: concat",
+              "86: log",
+              "87: intc_2",
+              "88: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 8 -> 24 -> 25 -> 26 -> 27 -> 28 -> 30 -> 31 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec_0",
+              "13: bytec_2",
+              "14: app_global_put"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "52: main_complete_todo_route@6:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "62: txna ApplicationArgs 1",
+              "65: callsub complete_todo"
+            ],
+            [
+              "259: complete_todo:",
+              "263: proto 1 0",
+              "264: intc_0",
+              "265: dup",
+              "266: bytec_1",
+              "267: dupn 4",
+              "270: intc_0",
+              "271: bytec_0",
+              "272: app_global_get_ex",
+              "273: assert",
+              "274: intc_0",
+              "275: extract_uint16",
+              "276: intc_0"
+            ],
+            [
+              "278: complete_todo_for_header@1:",
+              "281: frame_dig 8",
+              "282: frame_dig 7",
+              "283: <",
+              "284: bz complete_todo_after_for@6"
+            ],
+            [
+              "287: intc_0",
+              "288: bytec_0",
+              "289: app_global_get_ex",
+              "290: assert",
+              "291: dup",
+              "292: extract 2 0",
+              "293: frame_dig 8",
+              "294: dup",
+              "295: cover 3",
+              "296: intc_1",
+              "297: *",
+              "298: dup",
+              "299: frame_bury 3",
+              "300: dig 1",
+              "301: swap",
+              "302: extract_uint16",
+              "303: uncover 2",
+              "304: intc_0",
+              "305: extract_uint16",
+              "306: uncover 3",
+              "307: intc_2",
+              "308: +",
+              "309: dup",
+              "310: cover 4",
+              "311: swap",
+              "312: dig 1",
+              "313: -",
+              "314: dig 3",
+              "315: len",
+              "316: uncover 2",
+              "317: intc_1",
+              "318: *",
+              "319: dup",
+              "320: frame_bury 2",
+              "321: dig 4",
+              "322: swap",
+              "323: extract_uint16",
+              "324: uncover 2",
+              "325: select",
+              "326: substring3",
+              "327: dup",
+              "328: intc_0",
+              "329: extract_uint16",
+              "330: dig 1",
+              "331: len",
+              "332: substring3",
+              "333: frame_dig -1",
+              "334: ==",
+              "335: bz complete_todo_after_if_else@4"
+            ],
+            [
+              "338: intc_0",
+              "339: bytec_0",
+              "340: app_global_get_ex",
+              "341: assert",
+              "342: dup",
+              "343: extract 2 0",
+              "344: dup",
+              "345: frame_dig 3",
+              "346: extract_uint16",
+              "347: dig 2",
+              "348: intc_0",
+              "349: extract_uint16",
+              "350: uncover 4",
+              "351: -",
+              "352: dig 2",
+              "353: len",
+              "354: dig 3",
+              "355: frame_dig 2",
+              "356: extract_uint16",
+              "357: dup2",
+              "358: uncover 4",
+              "359: select",
+              "360: dig 4",
+              "361: dig 4",
+              "362: uncover 2",
+              "363: substring3",
+              "364: pushint 16",
+              "365: intc_2",
+              "366: setbit",
+              "367: uncover 5",
+              "368: substring 0 2",
+              "369: dup",
+              "370: frame_bury 1",
+              "371: btoi",
+              "372: dup",
+              "373: frame_dig 8",
+              "374: -",
+              "375: intc_2",
+              "376: -",
+              "377: dig 4",
+              "378: uncover 4",
+              "379: uncover 2",
+              "380: select",
+              "381: dup",
+              "382: dig 5",
+              "383: -",
+              "384: frame_bury 5",
+              "385: dig 2",
+              "386: len",
+              "387: frame_bury 4",
+              "388: dig 5",
+              "389: intc_0",
+              "390: uncover 6",
+              "391: substring3",
+              "392: uncover 3",
+              "393: concat",
+              "394: uncover 4",
+              "395: uncover 2",
+              "396: uncover 4",
+              "397: substring3",
+              "398: concat",
+              "399: frame_bury 0",
+              "400: intc_1",
+              "401: *",
+              "402: frame_bury 6"
+            ],
+            [
+              "404: complete_todo_for_header@8:",
+              "405: frame_dig 2",
+              "406: frame_dig 6",
+              "407: <",
+              "408: bz complete_todo_after_for@10"
+            ],
+            [
+              "430: complete_todo_after_for@10:",
+              "431: frame_dig 1",
+              "432: frame_dig 0",
+              "433: concat",
+              "436: bytec_0",
+              "437: swap",
+              "438: app_global_put"
+            ],
+            [
+              "440: complete_todo_after_for@6:",
+              "441: retsub"
+            ],
+            [
+              "66: intc_2",
+              "67: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 8 -> 24 -> 25 -> 31 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec_0",
+              "13: bytec_2",
+              "14: app_global_put"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "52: main_complete_todo_route@6:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "62: txna ApplicationArgs 1",
+              "65: callsub complete_todo"
+            ],
+            [
+              "259: complete_todo:",
+              "263: proto 1 0",
+              "264: intc_0",
+              "265: dup",
+              "266: bytec_1",
+              "267: dupn 4",
+              "270: intc_0",
+              "271: bytec_0",
+              "272: app_global_get_ex",
+              "273: assert",
+              "274: intc_0",
+              "275: extract_uint16",
+              "276: intc_0"
+            ],
+            [
+              "278: complete_todo_for_header@1:",
+              "281: frame_dig 8",
+              "282: frame_dig 7",
+              "283: <",
+              "284: bz complete_todo_after_for@6"
+            ],
+            [
+              "440: complete_todo_after_for@6:",
+              "441: retsub"
+            ],
+            [
+              "66: intc_2",
+              "67: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 6 -> 33 -> 34 -> 37 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec_0",
+              "13: bytec_2",
+              "14: app_global_put"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "31: main_return_todo_route@7:",
+              "34: txn OnCompletion",
+              "35: !",
+              "36: assert",
+              "37: txn ApplicationID",
+              "38: assert",
+              "41: txna ApplicationArgs 1",
+              "44: callsub return_todo"
+            ],
+            [
+              "449: return_todo:",
+              "453: proto 1 1",
+              "454: bytec_1",
+              "455: dup",
+              "456: intc_0",
+              "460: dupn 2",
+              "463: bytec_0",
+              "464: app_global_get_ex",
+              "465: assert",
+              "466: intc_0",
+              "467: extract_uint16",
+              "468: intc_0"
+            ],
+            [
+              "470: return_todo_for_header@1:",
+              "473: frame_dig 5",
+              "474: frame_dig 4",
+              "475: <",
+              "476: bz return_todo_after_for@6"
+            ],
+            [
+              "559: return_todo_after_for@6:",
+              "562: frame_dig 3",
+              "563: assert",
+              "566: frame_dig 2",
+              "567: frame_bury 0",
+              "568: retsub"
+            ],
+            [
+              "45: bytec_3",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: intc_2",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 12 -> 13",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec_0",
+              "13: bytec_2",
+              "14: app_global_put"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "90: main_bare_routing@8:",
+              "93: txn OnCompletion",
+              "94: bnz main_after_if_else@10"
+            ],
+            [
+              "95: txn ApplicationID",
+              "96: !",
+              "97: assert",
+              "98: intc_2",
+              "99: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 12 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec_0",
+              "13: bytec_2",
+              "14: app_global_put"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "90: main_bare_routing@8:",
+              "93: txn OnCompletion",
+              "94: bnz main_after_if_else@10"
+            ],
+            [
+              "25: main_after_if_else@10:",
+              "28: intc_0",
+              "29: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "25: main_after_if_else@10:",
+              "28: intc_0",
+              "29: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 10 -> 14 -> 15 -> 16 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "69: main_add_todo_route@5:",
+              "72: txn OnCompletion",
+              "73: !",
+              "74: assert",
+              "75: txn ApplicationID",
+              "76: assert",
+              "79: txna ApplicationArgs 1",
+              "82: callsub add_todo"
+            ],
+            [
+              "103: add_todo:",
+              "107: proto 1 1",
+              "108: intc_0",
+              "109: dupn 2",
+              "110: bytec_1",
+              "111: dupn 3",
+              "114: pushbytes 0x000300",
+              "115: frame_dig -1",
+              "116: concat",
+              "119: intc_0",
+              "120: bytec_0",
+              "121: app_global_get_ex",
+              "122: assert",
+              "123: bytec_2",
+              "124: ==",
+              "125: bz add_todo_else_body@2"
+            ],
+            [
+              "128: bytec 4",
+              "129: swap",
+              "130: concat",
+              "131: pushbytes 0x0001",
+              "132: swap",
+              "133: concat",
+              "134: bytec_0",
+              "135: swap",
+              "136: app_global_put"
+            ],
+            [
+              "138: add_todo_after_if_else@3:",
+              "141: intc_0",
+              "142: bytec_0",
+              "143: app_global_get_ex",
+              "144: assert",
+              "145: frame_bury 0",
+              "146: retsub"
+            ],
+            [
+              "83: bytec_3",
+              "84: swap",
+              "85: concat",
+              "86: log",
+              "87: intc_2",
+              "88: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 10 -> 14 -> 17 -> 18 -> 20 -> 21 -> 23 -> 16 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "69: main_add_todo_route@5:",
+              "72: txn OnCompletion",
+              "73: !",
+              "74: assert",
+              "75: txn ApplicationID",
+              "76: assert",
+              "79: txna ApplicationArgs 1",
+              "82: callsub add_todo"
+            ],
+            [
+              "103: add_todo:",
+              "107: proto 1 1",
+              "108: intc_0",
+              "109: dupn 2",
+              "110: bytec_1",
+              "111: dupn 3",
+              "114: pushbytes 0x000300",
+              "115: frame_dig -1",
+              "116: concat",
+              "119: intc_0",
+              "120: bytec_0",
+              "121: app_global_get_ex",
+              "122: assert",
+              "123: bytec_2",
+              "124: ==",
+              "125: bz add_todo_else_body@2"
+            ],
+            [
+              "148: add_todo_else_body@2:",
+              "151: intc_0",
+              "152: bytec_0",
+              "153: app_global_get_ex",
+              "154: assert",
+              "155: bytec 4",
+              "156: uncover 2",
+              "157: concat",
+              "158: frame_bury 2",
+              "159: dup",
+              "160: intc_0",
+              "161: extract_uint16",
+              "162: dup",
+              "163: cover 2",
+              "164: frame_bury 3",
+              "165: extract 2 0",
+              "166: frame_bury 0",
+              "167: bytec_1",
+              "168: frame_bury 1",
+              "169: intc_1",
+              "170: *",
+              "171: frame_bury 6",
+              "172: intc_0",
+              "173: frame_bury 4"
+            ],
+            [
+              "175: add_todo_for_header@5:",
+              "176: frame_dig 4",
+              "177: frame_dig 6",
+              "178: <",
+              "179: bz add_todo_after_for@7"
+            ],
+            [
+              "198: add_todo_after_for@7:",
+              "199: frame_dig 0",
+              "200: len",
+              "201: frame_bury 5",
+              "202: intc_0",
+              "203: frame_bury 4"
+            ],
+            [
+              "205: add_todo_for_header@8:",
+              "206: frame_dig 4",
+              "207: intc_1",
+              "208: <",
+              "209: bz add_todo_after_for@10"
+            ],
+            [
+              "228: add_todo_after_for@10:",
+              "229: frame_dig 3",
+              "232: intc_2",
+              "233: +",
+              "234: itob",
+              "235: extract 6 2",
+              "236: frame_dig 1",
+              "237: concat",
+              "238: frame_dig 0",
+              "239: frame_dig 6",
+              "240: frame_dig 5",
+              "241: substring3",
+              "242: concat",
+              "243: frame_dig 2",
+              "244: dup",
+              "245: len",
+              "246: intc_1",
+              "247: swap",
+              "248: substring3",
+              "249: concat",
+              "252: bytec_0",
+              "253: swap",
+              "254: app_global_put",
+              "255: b add_todo_after_if_else@3"
+            ],
+            [
+              "138: add_todo_after_if_else@3:",
+              "141: intc_0",
+              "142: bytec_0",
+              "143: app_global_get_ex",
+              "144: assert",
+              "145: frame_bury 0",
+              "146: retsub"
+            ],
+            [
+              "83: bytec_3",
+              "84: swap",
+              "85: concat",
+              "86: log",
+              "87: intc_2",
+              "88: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 24 -> 25 -> 26 -> 27 -> 28 -> 30 -> 31 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "52: main_complete_todo_route@6:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "62: txna ApplicationArgs 1",
+              "65: callsub complete_todo"
+            ],
+            [
+              "259: complete_todo:",
+              "263: proto 1 0",
+              "264: intc_0",
+              "265: dup",
+              "266: bytec_1",
+              "267: dupn 4",
+              "270: intc_0",
+              "271: bytec_0",
+              "272: app_global_get_ex",
+              "273: assert",
+              "274: intc_0",
+              "275: extract_uint16",
+              "276: intc_0"
+            ],
+            [
+              "278: complete_todo_for_header@1:",
+              "281: frame_dig 8",
+              "282: frame_dig 7",
+              "283: <",
+              "284: bz complete_todo_after_for@6"
+            ],
+            [
+              "287: intc_0",
+              "288: bytec_0",
+              "289: app_global_get_ex",
+              "290: assert",
+              "291: dup",
+              "292: extract 2 0",
+              "293: frame_dig 8",
+              "294: dup",
+              "295: cover 3",
+              "296: intc_1",
+              "297: *",
+              "298: dup",
+              "299: frame_bury 3",
+              "300: dig 1",
+              "301: swap",
+              "302: extract_uint16",
+              "303: uncover 2",
+              "304: intc_0",
+              "305: extract_uint16",
+              "306: uncover 3",
+              "307: intc_2",
+              "308: +",
+              "309: dup",
+              "310: cover 4",
+              "311: swap",
+              "312: dig 1",
+              "313: -",
+              "314: dig 3",
+              "315: len",
+              "316: uncover 2",
+              "317: intc_1",
+              "318: *",
+              "319: dup",
+              "320: frame_bury 2",
+              "321: dig 4",
+              "322: swap",
+              "323: extract_uint16",
+              "324: uncover 2",
+              "325: select",
+              "326: substring3",
+              "327: dup",
+              "328: intc_0",
+              "329: extract_uint16",
+              "330: dig 1",
+              "331: len",
+              "332: substring3",
+              "333: frame_dig -1",
+              "334: ==",
+              "335: bz complete_todo_after_if_else@4"
+            ],
+            [
+              "338: intc_0",
+              "339: bytec_0",
+              "340: app_global_get_ex",
+              "341: assert",
+              "342: dup",
+              "343: extract 2 0",
+              "344: dup",
+              "345: frame_dig 3",
+              "346: extract_uint16",
+              "347: dig 2",
+              "348: intc_0",
+              "349: extract_uint16",
+              "350: uncover 4",
+              "351: -",
+              "352: dig 2",
+              "353: len",
+              "354: dig 3",
+              "355: frame_dig 2",
+              "356: extract_uint16",
+              "357: dup2",
+              "358: uncover 4",
+              "359: select",
+              "360: dig 4",
+              "361: dig 4",
+              "362: uncover 2",
+              "363: substring3",
+              "364: pushint 16",
+              "365: intc_2",
+              "366: setbit",
+              "367: uncover 5",
+              "368: substring 0 2",
+              "369: dup",
+              "370: frame_bury 1",
+              "371: btoi",
+              "372: dup",
+              "373: frame_dig 8",
+              "374: -",
+              "375: intc_2",
+              "376: -",
+              "377: dig 4",
+              "378: uncover 4",
+              "379: uncover 2",
+              "380: select",
+              "381: dup",
+              "382: dig 5",
+              "383: -",
+              "384: frame_bury 5",
+              "385: dig 2",
+              "386: len",
+              "387: frame_bury 4",
+              "388: dig 5",
+              "389: intc_0",
+              "390: uncover 6",
+              "391: substring3",
+              "392: uncover 3",
+              "393: concat",
+              "394: uncover 4",
+              "395: uncover 2",
+              "396: uncover 4",
+              "397: substring3",
+              "398: concat",
+              "399: frame_bury 0",
+              "400: intc_1",
+              "401: *",
+              "402: frame_bury 6"
+            ],
+            [
+              "404: complete_todo_for_header@8:",
+              "405: frame_dig 2",
+              "406: frame_dig 6",
+              "407: <",
+              "408: bz complete_todo_after_for@10"
+            ],
+            [
+              "430: complete_todo_after_for@10:",
+              "431: frame_dig 1",
+              "432: frame_dig 0",
+              "433: concat",
+              "436: bytec_0",
+              "437: swap",
+              "438: app_global_put"
+            ],
+            [
+              "440: complete_todo_after_for@6:",
+              "441: retsub"
+            ],
+            [
+              "66: intc_2",
+              "67: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 24 -> 25 -> 31 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "52: main_complete_todo_route@6:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "62: txna ApplicationArgs 1",
+              "65: callsub complete_todo"
+            ],
+            [
+              "259: complete_todo:",
+              "263: proto 1 0",
+              "264: intc_0",
+              "265: dup",
+              "266: bytec_1",
+              "267: dupn 4",
+              "270: intc_0",
+              "271: bytec_0",
+              "272: app_global_get_ex",
+              "273: assert",
+              "274: intc_0",
+              "275: extract_uint16",
+              "276: intc_0"
+            ],
+            [
+              "278: complete_todo_for_header@1:",
+              "281: frame_dig 8",
+              "282: frame_dig 7",
+              "283: <",
+              "284: bz complete_todo_after_for@6"
+            ],
+            [
+              "440: complete_todo_after_for@6:",
+              "441: retsub"
+            ],
+            [
+              "66: intc_2",
+              "67: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 6 -> 33 -> 34 -> 37 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "31: main_return_todo_route@7:",
+              "34: txn OnCompletion",
+              "35: !",
+              "36: assert",
+              "37: txn ApplicationID",
+              "38: assert",
+              "41: txna ApplicationArgs 1",
+              "44: callsub return_todo"
+            ],
+            [
+              "449: return_todo:",
+              "453: proto 1 1",
+              "454: bytec_1",
+              "455: dup",
+              "456: intc_0",
+              "460: dupn 2",
+              "463: bytec_0",
+              "464: app_global_get_ex",
+              "465: assert",
+              "466: intc_0",
+              "467: extract_uint16",
+              "468: intc_0"
+            ],
+            [
+              "470: return_todo_for_header@1:",
+              "473: frame_dig 5",
+              "474: frame_dig 4",
+              "475: <",
+              "476: bz return_todo_after_for@6"
+            ],
+            [
+              "559: return_todo_after_for@6:",
+              "562: frame_dig 3",
+              "563: assert",
+              "566: frame_dig 2",
+              "567: frame_bury 0",
+              "568: retsub"
+            ],
+            [
+              "45: bytec_3",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: intc_2",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 12 -> 13",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "90: main_bare_routing@8:",
+              "93: txn OnCompletion",
+              "94: bnz main_after_if_else@10"
+            ],
+            [
+              "95: txn ApplicationID",
+              "96: !",
+              "97: assert",
+              "98: intc_2",
+              "99: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 12 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "90: main_bare_routing@8:",
+              "93: txn OnCompletion",
+              "94: bnz main_after_if_else@10"
+            ],
+            [
+              "25: main_after_if_else@10:",
+              "28: intc_0",
+              "29: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"group-size-check\", Impact: High, Confidence: High\nDescription: Usage of absolute indexes without validating GroupSize\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-groupsize-validation\n",
+      "check": "group-size-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid using absolute indexes. Validate GroupSize if used.\n- Favor using ARC-4 ABI and relative indexes for group transactions.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 16,
+      "description": "\nCheck: \"rekey-to\", Impact: High, Confidence: High\nDescription: Rekeyable Logic Signatures\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#rekeyable-logicsig\n",
+      "check": "rekey-to",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `RekeyTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec_0",
+              "13: bytec_2",
+              "14: app_global_put"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "25: main_after_if_else@10:",
+              "28: intc_0",
+              "29: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 10 -> 14 -> 15 -> 16 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec_0",
+              "13: bytec_2",
+              "14: app_global_put"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "69: main_add_todo_route@5:",
+              "72: txn OnCompletion",
+              "73: !",
+              "74: assert",
+              "75: txn ApplicationID",
+              "76: assert",
+              "79: txna ApplicationArgs 1",
+              "82: callsub add_todo"
+            ],
+            [
+              "103: add_todo:",
+              "107: proto 1 1",
+              "108: intc_0",
+              "109: dupn 2",
+              "110: bytec_1",
+              "111: dupn 3",
+              "114: pushbytes 0x000300",
+              "115: frame_dig -1",
+              "116: concat",
+              "119: intc_0",
+              "120: bytec_0",
+              "121: app_global_get_ex",
+              "122: assert",
+              "123: bytec_2",
+              "124: ==",
+              "125: bz add_todo_else_body@2"
+            ],
+            [
+              "128: bytec 4",
+              "129: swap",
+              "130: concat",
+              "131: pushbytes 0x0001",
+              "132: swap",
+              "133: concat",
+              "134: bytec_0",
+              "135: swap",
+              "136: app_global_put"
+            ],
+            [
+              "138: add_todo_after_if_else@3:",
+              "141: intc_0",
+              "142: bytec_0",
+              "143: app_global_get_ex",
+              "144: assert",
+              "145: frame_bury 0",
+              "146: retsub"
+            ],
+            [
+              "83: bytec_3",
+              "84: swap",
+              "85: concat",
+              "86: log",
+              "87: intc_2",
+              "88: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 10 -> 14 -> 17 -> 18 -> 20 -> 21 -> 23 -> 16 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec_0",
+              "13: bytec_2",
+              "14: app_global_put"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "69: main_add_todo_route@5:",
+              "72: txn OnCompletion",
+              "73: !",
+              "74: assert",
+              "75: txn ApplicationID",
+              "76: assert",
+              "79: txna ApplicationArgs 1",
+              "82: callsub add_todo"
+            ],
+            [
+              "103: add_todo:",
+              "107: proto 1 1",
+              "108: intc_0",
+              "109: dupn 2",
+              "110: bytec_1",
+              "111: dupn 3",
+              "114: pushbytes 0x000300",
+              "115: frame_dig -1",
+              "116: concat",
+              "119: intc_0",
+              "120: bytec_0",
+              "121: app_global_get_ex",
+              "122: assert",
+              "123: bytec_2",
+              "124: ==",
+              "125: bz add_todo_else_body@2"
+            ],
+            [
+              "148: add_todo_else_body@2:",
+              "151: intc_0",
+              "152: bytec_0",
+              "153: app_global_get_ex",
+              "154: assert",
+              "155: bytec 4",
+              "156: uncover 2",
+              "157: concat",
+              "158: frame_bury 2",
+              "159: dup",
+              "160: intc_0",
+              "161: extract_uint16",
+              "162: dup",
+              "163: cover 2",
+              "164: frame_bury 3",
+              "165: extract 2 0",
+              "166: frame_bury 0",
+              "167: bytec_1",
+              "168: frame_bury 1",
+              "169: intc_1",
+              "170: *",
+              "171: frame_bury 6",
+              "172: intc_0",
+              "173: frame_bury 4"
+            ],
+            [
+              "175: add_todo_for_header@5:",
+              "176: frame_dig 4",
+              "177: frame_dig 6",
+              "178: <",
+              "179: bz add_todo_after_for@7"
+            ],
+            [
+              "198: add_todo_after_for@7:",
+              "199: frame_dig 0",
+              "200: len",
+              "201: frame_bury 5",
+              "202: intc_0",
+              "203: frame_bury 4"
+            ],
+            [
+              "205: add_todo_for_header@8:",
+              "206: frame_dig 4",
+              "207: intc_1",
+              "208: <",
+              "209: bz add_todo_after_for@10"
+            ],
+            [
+              "228: add_todo_after_for@10:",
+              "229: frame_dig 3",
+              "232: intc_2",
+              "233: +",
+              "234: itob",
+              "235: extract 6 2",
+              "236: frame_dig 1",
+              "237: concat",
+              "238: frame_dig 0",
+              "239: frame_dig 6",
+              "240: frame_dig 5",
+              "241: substring3",
+              "242: concat",
+              "243: frame_dig 2",
+              "244: dup",
+              "245: len",
+              "246: intc_1",
+              "247: swap",
+              "248: substring3",
+              "249: concat",
+              "252: bytec_0",
+              "253: swap",
+              "254: app_global_put",
+              "255: b add_todo_after_if_else@3"
+            ],
+            [
+              "138: add_todo_after_if_else@3:",
+              "141: intc_0",
+              "142: bytec_0",
+              "143: app_global_get_ex",
+              "144: assert",
+              "145: frame_bury 0",
+              "146: retsub"
+            ],
+            [
+              "83: bytec_3",
+              "84: swap",
+              "85: concat",
+              "86: log",
+              "87: intc_2",
+              "88: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 8 -> 24 -> 25 -> 26 -> 27 -> 28 -> 30 -> 31 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec_0",
+              "13: bytec_2",
+              "14: app_global_put"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "52: main_complete_todo_route@6:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "62: txna ApplicationArgs 1",
+              "65: callsub complete_todo"
+            ],
+            [
+              "259: complete_todo:",
+              "263: proto 1 0",
+              "264: intc_0",
+              "265: dup",
+              "266: bytec_1",
+              "267: dupn 4",
+              "270: intc_0",
+              "271: bytec_0",
+              "272: app_global_get_ex",
+              "273: assert",
+              "274: intc_0",
+              "275: extract_uint16",
+              "276: intc_0"
+            ],
+            [
+              "278: complete_todo_for_header@1:",
+              "281: frame_dig 8",
+              "282: frame_dig 7",
+              "283: <",
+              "284: bz complete_todo_after_for@6"
+            ],
+            [
+              "287: intc_0",
+              "288: bytec_0",
+              "289: app_global_get_ex",
+              "290: assert",
+              "291: dup",
+              "292: extract 2 0",
+              "293: frame_dig 8",
+              "294: dup",
+              "295: cover 3",
+              "296: intc_1",
+              "297: *",
+              "298: dup",
+              "299: frame_bury 3",
+              "300: dig 1",
+              "301: swap",
+              "302: extract_uint16",
+              "303: uncover 2",
+              "304: intc_0",
+              "305: extract_uint16",
+              "306: uncover 3",
+              "307: intc_2",
+              "308: +",
+              "309: dup",
+              "310: cover 4",
+              "311: swap",
+              "312: dig 1",
+              "313: -",
+              "314: dig 3",
+              "315: len",
+              "316: uncover 2",
+              "317: intc_1",
+              "318: *",
+              "319: dup",
+              "320: frame_bury 2",
+              "321: dig 4",
+              "322: swap",
+              "323: extract_uint16",
+              "324: uncover 2",
+              "325: select",
+              "326: substring3",
+              "327: dup",
+              "328: intc_0",
+              "329: extract_uint16",
+              "330: dig 1",
+              "331: len",
+              "332: substring3",
+              "333: frame_dig -1",
+              "334: ==",
+              "335: bz complete_todo_after_if_else@4"
+            ],
+            [
+              "338: intc_0",
+              "339: bytec_0",
+              "340: app_global_get_ex",
+              "341: assert",
+              "342: dup",
+              "343: extract 2 0",
+              "344: dup",
+              "345: frame_dig 3",
+              "346: extract_uint16",
+              "347: dig 2",
+              "348: intc_0",
+              "349: extract_uint16",
+              "350: uncover 4",
+              "351: -",
+              "352: dig 2",
+              "353: len",
+              "354: dig 3",
+              "355: frame_dig 2",
+              "356: extract_uint16",
+              "357: dup2",
+              "358: uncover 4",
+              "359: select",
+              "360: dig 4",
+              "361: dig 4",
+              "362: uncover 2",
+              "363: substring3",
+              "364: pushint 16",
+              "365: intc_2",
+              "366: setbit",
+              "367: uncover 5",
+              "368: substring 0 2",
+              "369: dup",
+              "370: frame_bury 1",
+              "371: btoi",
+              "372: dup",
+              "373: frame_dig 8",
+              "374: -",
+              "375: intc_2",
+              "376: -",
+              "377: dig 4",
+              "378: uncover 4",
+              "379: uncover 2",
+              "380: select",
+              "381: dup",
+              "382: dig 5",
+              "383: -",
+              "384: frame_bury 5",
+              "385: dig 2",
+              "386: len",
+              "387: frame_bury 4",
+              "388: dig 5",
+              "389: intc_0",
+              "390: uncover 6",
+              "391: substring3",
+              "392: uncover 3",
+              "393: concat",
+              "394: uncover 4",
+              "395: uncover 2",
+              "396: uncover 4",
+              "397: substring3",
+              "398: concat",
+              "399: frame_bury 0",
+              "400: intc_1",
+              "401: *",
+              "402: frame_bury 6"
+            ],
+            [
+              "404: complete_todo_for_header@8:",
+              "405: frame_dig 2",
+              "406: frame_dig 6",
+              "407: <",
+              "408: bz complete_todo_after_for@10"
+            ],
+            [
+              "430: complete_todo_after_for@10:",
+              "431: frame_dig 1",
+              "432: frame_dig 0",
+              "433: concat",
+              "436: bytec_0",
+              "437: swap",
+              "438: app_global_put"
+            ],
+            [
+              "440: complete_todo_after_for@6:",
+              "441: retsub"
+            ],
+            [
+              "66: intc_2",
+              "67: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 8 -> 24 -> 25 -> 31 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec_0",
+              "13: bytec_2",
+              "14: app_global_put"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "52: main_complete_todo_route@6:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "62: txna ApplicationArgs 1",
+              "65: callsub complete_todo"
+            ],
+            [
+              "259: complete_todo:",
+              "263: proto 1 0",
+              "264: intc_0",
+              "265: dup",
+              "266: bytec_1",
+              "267: dupn 4",
+              "270: intc_0",
+              "271: bytec_0",
+              "272: app_global_get_ex",
+              "273: assert",
+              "274: intc_0",
+              "275: extract_uint16",
+              "276: intc_0"
+            ],
+            [
+              "278: complete_todo_for_header@1:",
+              "281: frame_dig 8",
+              "282: frame_dig 7",
+              "283: <",
+              "284: bz complete_todo_after_for@6"
+            ],
+            [
+              "440: complete_todo_after_for@6:",
+              "441: retsub"
+            ],
+            [
+              "66: intc_2",
+              "67: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 6 -> 33 -> 34 -> 37 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec_0",
+              "13: bytec_2",
+              "14: app_global_put"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "31: main_return_todo_route@7:",
+              "34: txn OnCompletion",
+              "35: !",
+              "36: assert",
+              "37: txn ApplicationID",
+              "38: assert",
+              "41: txna ApplicationArgs 1",
+              "44: callsub return_todo"
+            ],
+            [
+              "449: return_todo:",
+              "453: proto 1 1",
+              "454: bytec_1",
+              "455: dup",
+              "456: intc_0",
+              "460: dupn 2",
+              "463: bytec_0",
+              "464: app_global_get_ex",
+              "465: assert",
+              "466: intc_0",
+              "467: extract_uint16",
+              "468: intc_0"
+            ],
+            [
+              "470: return_todo_for_header@1:",
+              "473: frame_dig 5",
+              "474: frame_dig 4",
+              "475: <",
+              "476: bz return_todo_after_for@6"
+            ],
+            [
+              "559: return_todo_after_for@6:",
+              "562: frame_dig 3",
+              "563: assert",
+              "566: frame_dig 2",
+              "567: frame_bury 0",
+              "568: retsub"
+            ],
+            [
+              "45: bytec_3",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: intc_2",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 12 -> 13",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec_0",
+              "13: bytec_2",
+              "14: app_global_put"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "90: main_bare_routing@8:",
+              "93: txn OnCompletion",
+              "94: bnz main_after_if_else@10"
+            ],
+            [
+              "95: txn ApplicationID",
+              "96: !",
+              "97: assert",
+              "98: intc_2",
+              "99: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 12 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec_0",
+              "13: bytec_2",
+              "14: app_global_put"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "90: main_bare_routing@8:",
+              "93: txn OnCompletion",
+              "94: bnz main_after_if_else@10"
+            ],
+            [
+              "25: main_after_if_else@10:",
+              "28: intc_0",
+              "29: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "25: main_after_if_else@10:",
+              "28: intc_0",
+              "29: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 10 -> 14 -> 15 -> 16 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "69: main_add_todo_route@5:",
+              "72: txn OnCompletion",
+              "73: !",
+              "74: assert",
+              "75: txn ApplicationID",
+              "76: assert",
+              "79: txna ApplicationArgs 1",
+              "82: callsub add_todo"
+            ],
+            [
+              "103: add_todo:",
+              "107: proto 1 1",
+              "108: intc_0",
+              "109: dupn 2",
+              "110: bytec_1",
+              "111: dupn 3",
+              "114: pushbytes 0x000300",
+              "115: frame_dig -1",
+              "116: concat",
+              "119: intc_0",
+              "120: bytec_0",
+              "121: app_global_get_ex",
+              "122: assert",
+              "123: bytec_2",
+              "124: ==",
+              "125: bz add_todo_else_body@2"
+            ],
+            [
+              "128: bytec 4",
+              "129: swap",
+              "130: concat",
+              "131: pushbytes 0x0001",
+              "132: swap",
+              "133: concat",
+              "134: bytec_0",
+              "135: swap",
+              "136: app_global_put"
+            ],
+            [
+              "138: add_todo_after_if_else@3:",
+              "141: intc_0",
+              "142: bytec_0",
+              "143: app_global_get_ex",
+              "144: assert",
+              "145: frame_bury 0",
+              "146: retsub"
+            ],
+            [
+              "83: bytec_3",
+              "84: swap",
+              "85: concat",
+              "86: log",
+              "87: intc_2",
+              "88: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 10 -> 14 -> 17 -> 18 -> 20 -> 21 -> 23 -> 16 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "69: main_add_todo_route@5:",
+              "72: txn OnCompletion",
+              "73: !",
+              "74: assert",
+              "75: txn ApplicationID",
+              "76: assert",
+              "79: txna ApplicationArgs 1",
+              "82: callsub add_todo"
+            ],
+            [
+              "103: add_todo:",
+              "107: proto 1 1",
+              "108: intc_0",
+              "109: dupn 2",
+              "110: bytec_1",
+              "111: dupn 3",
+              "114: pushbytes 0x000300",
+              "115: frame_dig -1",
+              "116: concat",
+              "119: intc_0",
+              "120: bytec_0",
+              "121: app_global_get_ex",
+              "122: assert",
+              "123: bytec_2",
+              "124: ==",
+              "125: bz add_todo_else_body@2"
+            ],
+            [
+              "148: add_todo_else_body@2:",
+              "151: intc_0",
+              "152: bytec_0",
+              "153: app_global_get_ex",
+              "154: assert",
+              "155: bytec 4",
+              "156: uncover 2",
+              "157: concat",
+              "158: frame_bury 2",
+              "159: dup",
+              "160: intc_0",
+              "161: extract_uint16",
+              "162: dup",
+              "163: cover 2",
+              "164: frame_bury 3",
+              "165: extract 2 0",
+              "166: frame_bury 0",
+              "167: bytec_1",
+              "168: frame_bury 1",
+              "169: intc_1",
+              "170: *",
+              "171: frame_bury 6",
+              "172: intc_0",
+              "173: frame_bury 4"
+            ],
+            [
+              "175: add_todo_for_header@5:",
+              "176: frame_dig 4",
+              "177: frame_dig 6",
+              "178: <",
+              "179: bz add_todo_after_for@7"
+            ],
+            [
+              "198: add_todo_after_for@7:",
+              "199: frame_dig 0",
+              "200: len",
+              "201: frame_bury 5",
+              "202: intc_0",
+              "203: frame_bury 4"
+            ],
+            [
+              "205: add_todo_for_header@8:",
+              "206: frame_dig 4",
+              "207: intc_1",
+              "208: <",
+              "209: bz add_todo_after_for@10"
+            ],
+            [
+              "228: add_todo_after_for@10:",
+              "229: frame_dig 3",
+              "232: intc_2",
+              "233: +",
+              "234: itob",
+              "235: extract 6 2",
+              "236: frame_dig 1",
+              "237: concat",
+              "238: frame_dig 0",
+              "239: frame_dig 6",
+              "240: frame_dig 5",
+              "241: substring3",
+              "242: concat",
+              "243: frame_dig 2",
+              "244: dup",
+              "245: len",
+              "246: intc_1",
+              "247: swap",
+              "248: substring3",
+              "249: concat",
+              "252: bytec_0",
+              "253: swap",
+              "254: app_global_put",
+              "255: b add_todo_after_if_else@3"
+            ],
+            [
+              "138: add_todo_after_if_else@3:",
+              "141: intc_0",
+              "142: bytec_0",
+              "143: app_global_get_ex",
+              "144: assert",
+              "145: frame_bury 0",
+              "146: retsub"
+            ],
+            [
+              "83: bytec_3",
+              "84: swap",
+              "85: concat",
+              "86: log",
+              "87: intc_2",
+              "88: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 24 -> 25 -> 26 -> 27 -> 28 -> 30 -> 31 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "52: main_complete_todo_route@6:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "62: txna ApplicationArgs 1",
+              "65: callsub complete_todo"
+            ],
+            [
+              "259: complete_todo:",
+              "263: proto 1 0",
+              "264: intc_0",
+              "265: dup",
+              "266: bytec_1",
+              "267: dupn 4",
+              "270: intc_0",
+              "271: bytec_0",
+              "272: app_global_get_ex",
+              "273: assert",
+              "274: intc_0",
+              "275: extract_uint16",
+              "276: intc_0"
+            ],
+            [
+              "278: complete_todo_for_header@1:",
+              "281: frame_dig 8",
+              "282: frame_dig 7",
+              "283: <",
+              "284: bz complete_todo_after_for@6"
+            ],
+            [
+              "287: intc_0",
+              "288: bytec_0",
+              "289: app_global_get_ex",
+              "290: assert",
+              "291: dup",
+              "292: extract 2 0",
+              "293: frame_dig 8",
+              "294: dup",
+              "295: cover 3",
+              "296: intc_1",
+              "297: *",
+              "298: dup",
+              "299: frame_bury 3",
+              "300: dig 1",
+              "301: swap",
+              "302: extract_uint16",
+              "303: uncover 2",
+              "304: intc_0",
+              "305: extract_uint16",
+              "306: uncover 3",
+              "307: intc_2",
+              "308: +",
+              "309: dup",
+              "310: cover 4",
+              "311: swap",
+              "312: dig 1",
+              "313: -",
+              "314: dig 3",
+              "315: len",
+              "316: uncover 2",
+              "317: intc_1",
+              "318: *",
+              "319: dup",
+              "320: frame_bury 2",
+              "321: dig 4",
+              "322: swap",
+              "323: extract_uint16",
+              "324: uncover 2",
+              "325: select",
+              "326: substring3",
+              "327: dup",
+              "328: intc_0",
+              "329: extract_uint16",
+              "330: dig 1",
+              "331: len",
+              "332: substring3",
+              "333: frame_dig -1",
+              "334: ==",
+              "335: bz complete_todo_after_if_else@4"
+            ],
+            [
+              "338: intc_0",
+              "339: bytec_0",
+              "340: app_global_get_ex",
+              "341: assert",
+              "342: dup",
+              "343: extract 2 0",
+              "344: dup",
+              "345: frame_dig 3",
+              "346: extract_uint16",
+              "347: dig 2",
+              "348: intc_0",
+              "349: extract_uint16",
+              "350: uncover 4",
+              "351: -",
+              "352: dig 2",
+              "353: len",
+              "354: dig 3",
+              "355: frame_dig 2",
+              "356: extract_uint16",
+              "357: dup2",
+              "358: uncover 4",
+              "359: select",
+              "360: dig 4",
+              "361: dig 4",
+              "362: uncover 2",
+              "363: substring3",
+              "364: pushint 16",
+              "365: intc_2",
+              "366: setbit",
+              "367: uncover 5",
+              "368: substring 0 2",
+              "369: dup",
+              "370: frame_bury 1",
+              "371: btoi",
+              "372: dup",
+              "373: frame_dig 8",
+              "374: -",
+              "375: intc_2",
+              "376: -",
+              "377: dig 4",
+              "378: uncover 4",
+              "379: uncover 2",
+              "380: select",
+              "381: dup",
+              "382: dig 5",
+              "383: -",
+              "384: frame_bury 5",
+              "385: dig 2",
+              "386: len",
+              "387: frame_bury 4",
+              "388: dig 5",
+              "389: intc_0",
+              "390: uncover 6",
+              "391: substring3",
+              "392: uncover 3",
+              "393: concat",
+              "394: uncover 4",
+              "395: uncover 2",
+              "396: uncover 4",
+              "397: substring3",
+              "398: concat",
+              "399: frame_bury 0",
+              "400: intc_1",
+              "401: *",
+              "402: frame_bury 6"
+            ],
+            [
+              "404: complete_todo_for_header@8:",
+              "405: frame_dig 2",
+              "406: frame_dig 6",
+              "407: <",
+              "408: bz complete_todo_after_for@10"
+            ],
+            [
+              "430: complete_todo_after_for@10:",
+              "431: frame_dig 1",
+              "432: frame_dig 0",
+              "433: concat",
+              "436: bytec_0",
+              "437: swap",
+              "438: app_global_put"
+            ],
+            [
+              "440: complete_todo_after_for@6:",
+              "441: retsub"
+            ],
+            [
+              "66: intc_2",
+              "67: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 24 -> 25 -> 31 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "52: main_complete_todo_route@6:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "62: txna ApplicationArgs 1",
+              "65: callsub complete_todo"
+            ],
+            [
+              "259: complete_todo:",
+              "263: proto 1 0",
+              "264: intc_0",
+              "265: dup",
+              "266: bytec_1",
+              "267: dupn 4",
+              "270: intc_0",
+              "271: bytec_0",
+              "272: app_global_get_ex",
+              "273: assert",
+              "274: intc_0",
+              "275: extract_uint16",
+              "276: intc_0"
+            ],
+            [
+              "278: complete_todo_for_header@1:",
+              "281: frame_dig 8",
+              "282: frame_dig 7",
+              "283: <",
+              "284: bz complete_todo_after_for@6"
+            ],
+            [
+              "440: complete_todo_after_for@6:",
+              "441: retsub"
+            ],
+            [
+              "66: intc_2",
+              "67: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 6 -> 33 -> 34 -> 37 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "21: pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d",
+              "22: txna ApplicationArgs 0",
+              "23: match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7"
+            ],
+            [
+              "31: main_return_todo_route@7:",
+              "34: txn OnCompletion",
+              "35: !",
+              "36: assert",
+              "37: txn ApplicationID",
+              "38: assert",
+              "41: txna ApplicationArgs 1",
+              "44: callsub return_todo"
+            ],
+            [
+              "449: return_todo:",
+              "453: proto 1 1",
+              "454: bytec_1",
+              "455: dup",
+              "456: intc_0",
+              "460: dupn 2",
+              "463: bytec_0",
+              "464: app_global_get_ex",
+              "465: assert",
+              "466: intc_0",
+              "467: extract_uint16",
+              "468: intc_0"
+            ],
+            [
+              "470: return_todo_for_header@1:",
+              "473: frame_dig 5",
+              "474: frame_dig 4",
+              "475: <",
+              "476: bz return_todo_after_for@6"
+            ],
+            [
+              "559: return_todo_after_for@6:",
+              "562: frame_dig 3",
+              "563: assert",
+              "566: frame_dig 2",
+              "567: frame_bury 0",
+              "568: retsub"
+            ],
+            [
+              "45: bytec_3",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: intc_2",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 12 -> 13",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "90: main_bare_routing@8:",
+              "93: txn OnCompletion",
+              "94: bnz main_after_if_else@10"
+            ],
+            [
+              "95: txn ApplicationID",
+              "96: !",
+              "97: assert",
+              "98: intc_2",
+              "99: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 12 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 2 1",
+              "7: bytecblock \"todos\" 0x 0x0000 0x151f7c75 0x0002",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "16: main_after_if_else@2:",
+              "19: txn NumAppArgs",
+              "20: bz main_bare_routing@8"
+            ],
+            [
+              "90: main_bare_routing@8:",
+              "93: txn OnCompletion",
+              "94: bnz main_after_if_else@10"
+            ],
+            [
+              "25: main_after_if_else@10:",
+              "28: intc_0",
+              "29: return"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

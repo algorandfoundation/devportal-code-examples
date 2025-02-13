@@ -1,0 +1,1962 @@
+{
+  "success": false,
+  "error": null,
+  "result": [
+    {
+      "type": "ExecutionPaths",
+      "count": 5,
+      "description": "\nCheck: \"unprotected-deletable\", Impact: High, Confidence: High\nDescription: Unprotected Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-deletable-application\n",
+      "check": "unprotected-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 11 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "52: main_is_rich_route@3:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "63: txna ApplicationArgs 1",
+              "64: btoi",
+              "67: callsub is_rich"
+            ],
+            [
+              "95: is_rich:",
+              "99: proto 1 1",
+              "102: frame_dig -1",
+              "103: pushint 1000",
+              "104: >",
+              "105: bz is_rich_else_body@2"
+            ],
+            [
+              "108: pushbytes \"This account is rich!\"",
+              "109: retsub"
+            ],
+            [
+              "68: dup",
+              "69: len",
+              "70: itob",
+              "71: extract 6 2",
+              "72: swap",
+              "73: concat",
+              "74: bytec_0",
+              "75: swap",
+              "76: concat",
+              "77: log",
+              "78: pushint 1",
+              "79: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 13 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "52: main_is_rich_route@3:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "63: txna ApplicationArgs 1",
+              "64: btoi",
+              "67: callsub is_rich"
+            ],
+            [
+              "95: is_rich:",
+              "99: proto 1 1",
+              "102: frame_dig -1",
+              "103: pushint 1000",
+              "104: >",
+              "105: bz is_rich_else_body@2"
+            ],
+            [
+              "111: is_rich_else_body@2:",
+              "114: frame_dig -1",
+              "115: pushint 100",
+              "116: >",
+              "117: bz is_rich_else_body@4"
+            ],
+            [
+              "120: pushbytes \"This account is doing well.\"",
+              "121: retsub"
+            ],
+            [
+              "68: dup",
+              "69: len",
+              "70: itob",
+              "71: extract 6 2",
+              "72: swap",
+              "73: concat",
+              "74: bytec_0",
+              "75: swap",
+              "76: concat",
+              "77: log",
+              "78: pushint 1",
+              "79: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 14 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "52: main_is_rich_route@3:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "63: txna ApplicationArgs 1",
+              "64: btoi",
+              "67: callsub is_rich"
+            ],
+            [
+              "95: is_rich:",
+              "99: proto 1 1",
+              "102: frame_dig -1",
+              "103: pushint 1000",
+              "104: >",
+              "105: bz is_rich_else_body@2"
+            ],
+            [
+              "111: is_rich_else_body@2:",
+              "114: frame_dig -1",
+              "115: pushint 100",
+              "116: >",
+              "117: bz is_rich_else_body@4"
+            ],
+            [
+              "123: is_rich_else_body@4:",
+              "126: pushbytes \"This account is poor :(\"",
+              "127: retsub"
+            ],
+            [
+              "68: dup",
+              "69: len",
+              "70: itob",
+              "71: extract 6 2",
+              "72: swap",
+              "73: concat",
+              "74: bytec_0",
+              "75: swap",
+              "76: concat",
+              "77: log",
+              "78: pushint 1",
+              "79: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 16 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "23: main_is_even_route@4:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "34: txna ApplicationArgs 1",
+              "35: btoi",
+              "38: callsub is_even"
+            ],
+            [
+              "131: is_even:",
+              "135: proto 1 1",
+              "138: frame_dig -1",
+              "139: pushint 2",
+              "140: %",
+              "141: bnz is_even_ternary_false@2"
+            ],
+            [
+              "142: pushbytes \"Even\"",
+              "143: retsub"
+            ],
+            [
+              "39: dup",
+              "40: len",
+              "41: itob",
+              "42: extract 6 2",
+              "43: swap",
+              "44: concat",
+              "45: bytec_0",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: pushint 1",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 17 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "23: main_is_even_route@4:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "34: txna ApplicationArgs 1",
+              "35: btoi",
+              "38: callsub is_even"
+            ],
+            [
+              "131: is_even:",
+              "135: proto 1 1",
+              "138: frame_dig -1",
+              "139: pushint 2",
+              "140: %",
+              "141: bnz is_even_ternary_false@2"
+            ],
+            [
+              "145: is_even_ternary_false@2:",
+              "148: pushbytes \"Odd\"",
+              "149: retsub"
+            ],
+            [
+              "39: dup",
+              "40: len",
+              "41: itob",
+              "42: extract 6 2",
+              "43: swap",
+              "44: concat",
+              "45: bytec_0",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: pushint 1",
+              "50: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 5,
+      "description": "\nCheck: \"unprotected-updatable\", Impact: High, Confidence: High\nDescription: Unprotected Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-updatable-application\n",
+      "check": "unprotected-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 11 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "52: main_is_rich_route@3:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "63: txna ApplicationArgs 1",
+              "64: btoi",
+              "67: callsub is_rich"
+            ],
+            [
+              "95: is_rich:",
+              "99: proto 1 1",
+              "102: frame_dig -1",
+              "103: pushint 1000",
+              "104: >",
+              "105: bz is_rich_else_body@2"
+            ],
+            [
+              "108: pushbytes \"This account is rich!\"",
+              "109: retsub"
+            ],
+            [
+              "68: dup",
+              "69: len",
+              "70: itob",
+              "71: extract 6 2",
+              "72: swap",
+              "73: concat",
+              "74: bytec_0",
+              "75: swap",
+              "76: concat",
+              "77: log",
+              "78: pushint 1",
+              "79: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 13 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "52: main_is_rich_route@3:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "63: txna ApplicationArgs 1",
+              "64: btoi",
+              "67: callsub is_rich"
+            ],
+            [
+              "95: is_rich:",
+              "99: proto 1 1",
+              "102: frame_dig -1",
+              "103: pushint 1000",
+              "104: >",
+              "105: bz is_rich_else_body@2"
+            ],
+            [
+              "111: is_rich_else_body@2:",
+              "114: frame_dig -1",
+              "115: pushint 100",
+              "116: >",
+              "117: bz is_rich_else_body@4"
+            ],
+            [
+              "120: pushbytes \"This account is doing well.\"",
+              "121: retsub"
+            ],
+            [
+              "68: dup",
+              "69: len",
+              "70: itob",
+              "71: extract 6 2",
+              "72: swap",
+              "73: concat",
+              "74: bytec_0",
+              "75: swap",
+              "76: concat",
+              "77: log",
+              "78: pushint 1",
+              "79: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 14 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "52: main_is_rich_route@3:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "63: txna ApplicationArgs 1",
+              "64: btoi",
+              "67: callsub is_rich"
+            ],
+            [
+              "95: is_rich:",
+              "99: proto 1 1",
+              "102: frame_dig -1",
+              "103: pushint 1000",
+              "104: >",
+              "105: bz is_rich_else_body@2"
+            ],
+            [
+              "111: is_rich_else_body@2:",
+              "114: frame_dig -1",
+              "115: pushint 100",
+              "116: >",
+              "117: bz is_rich_else_body@4"
+            ],
+            [
+              "123: is_rich_else_body@4:",
+              "126: pushbytes \"This account is poor :(\"",
+              "127: retsub"
+            ],
+            [
+              "68: dup",
+              "69: len",
+              "70: itob",
+              "71: extract 6 2",
+              "72: swap",
+              "73: concat",
+              "74: bytec_0",
+              "75: swap",
+              "76: concat",
+              "77: log",
+              "78: pushint 1",
+              "79: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 16 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "23: main_is_even_route@4:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "34: txna ApplicationArgs 1",
+              "35: btoi",
+              "38: callsub is_even"
+            ],
+            [
+              "131: is_even:",
+              "135: proto 1 1",
+              "138: frame_dig -1",
+              "139: pushint 2",
+              "140: %",
+              "141: bnz is_even_ternary_false@2"
+            ],
+            [
+              "142: pushbytes \"Even\"",
+              "143: retsub"
+            ],
+            [
+              "39: dup",
+              "40: len",
+              "41: itob",
+              "42: extract 6 2",
+              "43: swap",
+              "44: concat",
+              "45: bytec_0",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: pushint 1",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 17 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "23: main_is_even_route@4:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "34: txna ApplicationArgs 1",
+              "35: btoi",
+              "38: callsub is_even"
+            ],
+            [
+              "131: is_even:",
+              "135: proto 1 1",
+              "138: frame_dig -1",
+              "139: pushint 2",
+              "140: %",
+              "141: bnz is_even_ternary_false@2"
+            ],
+            [
+              "145: is_even_ternary_false@2:",
+              "148: pushbytes \"Odd\"",
+              "149: retsub"
+            ],
+            [
+              "39: dup",
+              "40: len",
+              "41: itob",
+              "42: extract 6 2",
+              "43: swap",
+              "44: concat",
+              "45: bytec_0",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: pushint 1",
+              "50: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"can-close-account\", Impact: High, Confidence: High\nDescription: Missing CloseRemainderTo field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-closeremainderto-field-validation\n",
+      "check": "can-close-account",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `CloseRemainderTo` field in the LogicSig.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"can-close-asset\", Impact: High, Confidence: High\nDescription: Missing AssetCloseTo Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-assetcloseto-field-validation\n",
+      "check": "can-close-asset",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `AssetCloseTo` field in the LogicSig.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 5,
+      "description": "\nCheck: \"is-deletable\", Impact: High, Confidence: High\nDescription: Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#deletable-application\n",
+      "check": "is-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `DeleteApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 11 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "52: main_is_rich_route@3:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "63: txna ApplicationArgs 1",
+              "64: btoi",
+              "67: callsub is_rich"
+            ],
+            [
+              "95: is_rich:",
+              "99: proto 1 1",
+              "102: frame_dig -1",
+              "103: pushint 1000",
+              "104: >",
+              "105: bz is_rich_else_body@2"
+            ],
+            [
+              "108: pushbytes \"This account is rich!\"",
+              "109: retsub"
+            ],
+            [
+              "68: dup",
+              "69: len",
+              "70: itob",
+              "71: extract 6 2",
+              "72: swap",
+              "73: concat",
+              "74: bytec_0",
+              "75: swap",
+              "76: concat",
+              "77: log",
+              "78: pushint 1",
+              "79: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 13 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "52: main_is_rich_route@3:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "63: txna ApplicationArgs 1",
+              "64: btoi",
+              "67: callsub is_rich"
+            ],
+            [
+              "95: is_rich:",
+              "99: proto 1 1",
+              "102: frame_dig -1",
+              "103: pushint 1000",
+              "104: >",
+              "105: bz is_rich_else_body@2"
+            ],
+            [
+              "111: is_rich_else_body@2:",
+              "114: frame_dig -1",
+              "115: pushint 100",
+              "116: >",
+              "117: bz is_rich_else_body@4"
+            ],
+            [
+              "120: pushbytes \"This account is doing well.\"",
+              "121: retsub"
+            ],
+            [
+              "68: dup",
+              "69: len",
+              "70: itob",
+              "71: extract 6 2",
+              "72: swap",
+              "73: concat",
+              "74: bytec_0",
+              "75: swap",
+              "76: concat",
+              "77: log",
+              "78: pushint 1",
+              "79: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 14 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "52: main_is_rich_route@3:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "63: txna ApplicationArgs 1",
+              "64: btoi",
+              "67: callsub is_rich"
+            ],
+            [
+              "95: is_rich:",
+              "99: proto 1 1",
+              "102: frame_dig -1",
+              "103: pushint 1000",
+              "104: >",
+              "105: bz is_rich_else_body@2"
+            ],
+            [
+              "111: is_rich_else_body@2:",
+              "114: frame_dig -1",
+              "115: pushint 100",
+              "116: >",
+              "117: bz is_rich_else_body@4"
+            ],
+            [
+              "123: is_rich_else_body@4:",
+              "126: pushbytes \"This account is poor :(\"",
+              "127: retsub"
+            ],
+            [
+              "68: dup",
+              "69: len",
+              "70: itob",
+              "71: extract 6 2",
+              "72: swap",
+              "73: concat",
+              "74: bytec_0",
+              "75: swap",
+              "76: concat",
+              "77: log",
+              "78: pushint 1",
+              "79: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 16 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "23: main_is_even_route@4:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "34: txna ApplicationArgs 1",
+              "35: btoi",
+              "38: callsub is_even"
+            ],
+            [
+              "131: is_even:",
+              "135: proto 1 1",
+              "138: frame_dig -1",
+              "139: pushint 2",
+              "140: %",
+              "141: bnz is_even_ternary_false@2"
+            ],
+            [
+              "142: pushbytes \"Even\"",
+              "143: retsub"
+            ],
+            [
+              "39: dup",
+              "40: len",
+              "41: itob",
+              "42: extract 6 2",
+              "43: swap",
+              "44: concat",
+              "45: bytec_0",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: pushint 1",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 17 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "23: main_is_even_route@4:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "34: txna ApplicationArgs 1",
+              "35: btoi",
+              "38: callsub is_even"
+            ],
+            [
+              "131: is_even:",
+              "135: proto 1 1",
+              "138: frame_dig -1",
+              "139: pushint 2",
+              "140: %",
+              "141: bnz is_even_ternary_false@2"
+            ],
+            [
+              "145: is_even_ternary_false@2:",
+              "148: pushbytes \"Odd\"",
+              "149: retsub"
+            ],
+            [
+              "39: dup",
+              "40: len",
+              "41: itob",
+              "42: extract 6 2",
+              "43: swap",
+              "44: concat",
+              "45: bytec_0",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: pushint 1",
+              "50: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 5,
+      "description": "\nCheck: \"is-updatable\", Impact: High, Confidence: High\nDescription: Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#upgradable-application\n",
+      "check": "is-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `UpdateApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 11 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "52: main_is_rich_route@3:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "63: txna ApplicationArgs 1",
+              "64: btoi",
+              "67: callsub is_rich"
+            ],
+            [
+              "95: is_rich:",
+              "99: proto 1 1",
+              "102: frame_dig -1",
+              "103: pushint 1000",
+              "104: >",
+              "105: bz is_rich_else_body@2"
+            ],
+            [
+              "108: pushbytes \"This account is rich!\"",
+              "109: retsub"
+            ],
+            [
+              "68: dup",
+              "69: len",
+              "70: itob",
+              "71: extract 6 2",
+              "72: swap",
+              "73: concat",
+              "74: bytec_0",
+              "75: swap",
+              "76: concat",
+              "77: log",
+              "78: pushint 1",
+              "79: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 13 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "52: main_is_rich_route@3:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "63: txna ApplicationArgs 1",
+              "64: btoi",
+              "67: callsub is_rich"
+            ],
+            [
+              "95: is_rich:",
+              "99: proto 1 1",
+              "102: frame_dig -1",
+              "103: pushint 1000",
+              "104: >",
+              "105: bz is_rich_else_body@2"
+            ],
+            [
+              "111: is_rich_else_body@2:",
+              "114: frame_dig -1",
+              "115: pushint 100",
+              "116: >",
+              "117: bz is_rich_else_body@4"
+            ],
+            [
+              "120: pushbytes \"This account is doing well.\"",
+              "121: retsub"
+            ],
+            [
+              "68: dup",
+              "69: len",
+              "70: itob",
+              "71: extract 6 2",
+              "72: swap",
+              "73: concat",
+              "74: bytec_0",
+              "75: swap",
+              "76: concat",
+              "77: log",
+              "78: pushint 1",
+              "79: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 14 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "52: main_is_rich_route@3:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "63: txna ApplicationArgs 1",
+              "64: btoi",
+              "67: callsub is_rich"
+            ],
+            [
+              "95: is_rich:",
+              "99: proto 1 1",
+              "102: frame_dig -1",
+              "103: pushint 1000",
+              "104: >",
+              "105: bz is_rich_else_body@2"
+            ],
+            [
+              "111: is_rich_else_body@2:",
+              "114: frame_dig -1",
+              "115: pushint 100",
+              "116: >",
+              "117: bz is_rich_else_body@4"
+            ],
+            [
+              "123: is_rich_else_body@4:",
+              "126: pushbytes \"This account is poor :(\"",
+              "127: retsub"
+            ],
+            [
+              "68: dup",
+              "69: len",
+              "70: itob",
+              "71: extract 6 2",
+              "72: swap",
+              "73: concat",
+              "74: bytec_0",
+              "75: swap",
+              "76: concat",
+              "77: log",
+              "78: pushint 1",
+              "79: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 16 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "23: main_is_even_route@4:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "34: txna ApplicationArgs 1",
+              "35: btoi",
+              "38: callsub is_even"
+            ],
+            [
+              "131: is_even:",
+              "135: proto 1 1",
+              "138: frame_dig -1",
+              "139: pushint 2",
+              "140: %",
+              "141: bnz is_even_ternary_false@2"
+            ],
+            [
+              "142: pushbytes \"Even\"",
+              "143: retsub"
+            ],
+            [
+              "39: dup",
+              "40: len",
+              "41: itob",
+              "42: extract 6 2",
+              "43: swap",
+              "44: concat",
+              "45: bytec_0",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: pushint 1",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 17 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "23: main_is_even_route@4:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "34: txna ApplicationArgs 1",
+              "35: btoi",
+              "38: callsub is_even"
+            ],
+            [
+              "131: is_even:",
+              "135: proto 1 1",
+              "138: frame_dig -1",
+              "139: pushint 2",
+              "140: %",
+              "141: bnz is_even_ternary_false@2"
+            ],
+            [
+              "145: is_even_ternary_false@2:",
+              "148: pushbytes \"Odd\"",
+              "149: retsub"
+            ],
+            [
+              "39: dup",
+              "40: len",
+              "41: itob",
+              "42: extract 6 2",
+              "43: swap",
+              "44: concat",
+              "45: bytec_0",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: pushint 1",
+              "50: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 6,
+      "description": "\nCheck: \"missing-fee-check\", Impact: High, Confidence: High\nDescription: Missing Fee Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-fee-field-validation\n",
+      "check": "missing-fee-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `Fee` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 11 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "52: main_is_rich_route@3:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "63: txna ApplicationArgs 1",
+              "64: btoi",
+              "67: callsub is_rich"
+            ],
+            [
+              "95: is_rich:",
+              "99: proto 1 1",
+              "102: frame_dig -1",
+              "103: pushint 1000",
+              "104: >",
+              "105: bz is_rich_else_body@2"
+            ],
+            [
+              "108: pushbytes \"This account is rich!\"",
+              "109: retsub"
+            ],
+            [
+              "68: dup",
+              "69: len",
+              "70: itob",
+              "71: extract 6 2",
+              "72: swap",
+              "73: concat",
+              "74: bytec_0",
+              "75: swap",
+              "76: concat",
+              "77: log",
+              "78: pushint 1",
+              "79: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 13 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "52: main_is_rich_route@3:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "63: txna ApplicationArgs 1",
+              "64: btoi",
+              "67: callsub is_rich"
+            ],
+            [
+              "95: is_rich:",
+              "99: proto 1 1",
+              "102: frame_dig -1",
+              "103: pushint 1000",
+              "104: >",
+              "105: bz is_rich_else_body@2"
+            ],
+            [
+              "111: is_rich_else_body@2:",
+              "114: frame_dig -1",
+              "115: pushint 100",
+              "116: >",
+              "117: bz is_rich_else_body@4"
+            ],
+            [
+              "120: pushbytes \"This account is doing well.\"",
+              "121: retsub"
+            ],
+            [
+              "68: dup",
+              "69: len",
+              "70: itob",
+              "71: extract 6 2",
+              "72: swap",
+              "73: concat",
+              "74: bytec_0",
+              "75: swap",
+              "76: concat",
+              "77: log",
+              "78: pushint 1",
+              "79: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 14 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "52: main_is_rich_route@3:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "63: txna ApplicationArgs 1",
+              "64: btoi",
+              "67: callsub is_rich"
+            ],
+            [
+              "95: is_rich:",
+              "99: proto 1 1",
+              "102: frame_dig -1",
+              "103: pushint 1000",
+              "104: >",
+              "105: bz is_rich_else_body@2"
+            ],
+            [
+              "111: is_rich_else_body@2:",
+              "114: frame_dig -1",
+              "115: pushint 100",
+              "116: >",
+              "117: bz is_rich_else_body@4"
+            ],
+            [
+              "123: is_rich_else_body@4:",
+              "126: pushbytes \"This account is poor :(\"",
+              "127: retsub"
+            ],
+            [
+              "68: dup",
+              "69: len",
+              "70: itob",
+              "71: extract 6 2",
+              "72: swap",
+              "73: concat",
+              "74: bytec_0",
+              "75: swap",
+              "76: concat",
+              "77: log",
+              "78: pushint 1",
+              "79: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 16 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "23: main_is_even_route@4:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "34: txna ApplicationArgs 1",
+              "35: btoi",
+              "38: callsub is_even"
+            ],
+            [
+              "131: is_even:",
+              "135: proto 1 1",
+              "138: frame_dig -1",
+              "139: pushint 2",
+              "140: %",
+              "141: bnz is_even_ternary_false@2"
+            ],
+            [
+              "142: pushbytes \"Even\"",
+              "143: retsub"
+            ],
+            [
+              "39: dup",
+              "40: len",
+              "41: itob",
+              "42: extract 6 2",
+              "43: swap",
+              "44: concat",
+              "45: bytec_0",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: pushint 1",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 17 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "23: main_is_even_route@4:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "34: txna ApplicationArgs 1",
+              "35: btoi",
+              "38: callsub is_even"
+            ],
+            [
+              "131: is_even:",
+              "135: proto 1 1",
+              "138: frame_dig -1",
+              "139: pushint 2",
+              "140: %",
+              "141: bnz is_even_ternary_false@2"
+            ],
+            [
+              "145: is_even_ternary_false@2:",
+              "148: pushbytes \"Odd\"",
+              "149: retsub"
+            ],
+            [
+              "39: dup",
+              "40: len",
+              "41: itob",
+              "42: extract 6 2",
+              "43: swap",
+              "44: concat",
+              "45: bytec_0",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: pushint 1",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "81: main_bare_routing@7:",
+              "85: txn OnCompletion",
+              "86: bnz main_after_if_else@11"
+            ],
+            [
+              "87: txn ApplicationID",
+              "88: !",
+              "89: assert",
+              "90: pushint 1",
+              "91: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"group-size-check\", Impact: High, Confidence: High\nDescription: Usage of absolute indexes without validating GroupSize\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-groupsize-validation\n",
+      "check": "group-size-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid using absolute indexes. Validate GroupSize if used.\n- Favor using ARC-4 ABI and relative indexes for group transactions.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 6,
+      "description": "\nCheck: \"rekey-to\", Impact: High, Confidence: High\nDescription: Rekeyable Logic Signatures\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#rekeyable-logicsig\n",
+      "check": "rekey-to",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `RekeyTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 11 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "52: main_is_rich_route@3:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "63: txna ApplicationArgs 1",
+              "64: btoi",
+              "67: callsub is_rich"
+            ],
+            [
+              "95: is_rich:",
+              "99: proto 1 1",
+              "102: frame_dig -1",
+              "103: pushint 1000",
+              "104: >",
+              "105: bz is_rich_else_body@2"
+            ],
+            [
+              "108: pushbytes \"This account is rich!\"",
+              "109: retsub"
+            ],
+            [
+              "68: dup",
+              "69: len",
+              "70: itob",
+              "71: extract 6 2",
+              "72: swap",
+              "73: concat",
+              "74: bytec_0",
+              "75: swap",
+              "76: concat",
+              "77: log",
+              "78: pushint 1",
+              "79: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 13 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "52: main_is_rich_route@3:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "63: txna ApplicationArgs 1",
+              "64: btoi",
+              "67: callsub is_rich"
+            ],
+            [
+              "95: is_rich:",
+              "99: proto 1 1",
+              "102: frame_dig -1",
+              "103: pushint 1000",
+              "104: >",
+              "105: bz is_rich_else_body@2"
+            ],
+            [
+              "111: is_rich_else_body@2:",
+              "114: frame_dig -1",
+              "115: pushint 100",
+              "116: >",
+              "117: bz is_rich_else_body@4"
+            ],
+            [
+              "120: pushbytes \"This account is doing well.\"",
+              "121: retsub"
+            ],
+            [
+              "68: dup",
+              "69: len",
+              "70: itob",
+              "71: extract 6 2",
+              "72: swap",
+              "73: concat",
+              "74: bytec_0",
+              "75: swap",
+              "76: concat",
+              "77: log",
+              "78: pushint 1",
+              "79: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 14 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "52: main_is_rich_route@3:",
+              "55: txn OnCompletion",
+              "56: !",
+              "57: assert",
+              "58: txn ApplicationID",
+              "59: assert",
+              "63: txna ApplicationArgs 1",
+              "64: btoi",
+              "67: callsub is_rich"
+            ],
+            [
+              "95: is_rich:",
+              "99: proto 1 1",
+              "102: frame_dig -1",
+              "103: pushint 1000",
+              "104: >",
+              "105: bz is_rich_else_body@2"
+            ],
+            [
+              "111: is_rich_else_body@2:",
+              "114: frame_dig -1",
+              "115: pushint 100",
+              "116: >",
+              "117: bz is_rich_else_body@4"
+            ],
+            [
+              "123: is_rich_else_body@4:",
+              "126: pushbytes \"This account is poor :(\"",
+              "127: retsub"
+            ],
+            [
+              "68: dup",
+              "69: len",
+              "70: itob",
+              "71: extract 6 2",
+              "72: swap",
+              "73: concat",
+              "74: bytec_0",
+              "75: swap",
+              "76: concat",
+              "77: log",
+              "78: pushint 1",
+              "79: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 16 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "23: main_is_even_route@4:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "34: txna ApplicationArgs 1",
+              "35: btoi",
+              "38: callsub is_even"
+            ],
+            [
+              "131: is_even:",
+              "135: proto 1 1",
+              "138: frame_dig -1",
+              "139: pushint 2",
+              "140: %",
+              "141: bnz is_even_ternary_false@2"
+            ],
+            [
+              "142: pushbytes \"Even\"",
+              "143: retsub"
+            ],
+            [
+              "39: dup",
+              "40: len",
+              "41: itob",
+              "42: extract 6 2",
+              "43: swap",
+              "44: concat",
+              "45: bytec_0",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: pushint 1",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 17 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x37c01090 0x6632c2d6",
+              "13: txna ApplicationArgs 0",
+              "14: match main_is_rich_route@3 main_is_even_route@4"
+            ],
+            [
+              "23: main_is_even_route@4:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "34: txna ApplicationArgs 1",
+              "35: btoi",
+              "38: callsub is_even"
+            ],
+            [
+              "131: is_even:",
+              "135: proto 1 1",
+              "138: frame_dig -1",
+              "139: pushint 2",
+              "140: %",
+              "141: bnz is_even_ternary_false@2"
+            ],
+            [
+              "145: is_even_ternary_false@2:",
+              "148: pushbytes \"Odd\"",
+              "149: retsub"
+            ],
+            [
+              "39: dup",
+              "40: len",
+              "41: itob",
+              "42: extract 6 2",
+              "43: swap",
+              "44: concat",
+              "45: bytec_0",
+              "46: swap",
+              "47: concat",
+              "48: log",
+              "49: pushint 1",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "81: main_bare_routing@7:",
+              "85: txn OnCompletion",
+              "86: bnz main_after_if_else@11"
+            ],
+            [
+              "87: txn ApplicationID",
+              "88: !",
+              "89: assert",
+              "90: pushint 1",
+              "91: return"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}
