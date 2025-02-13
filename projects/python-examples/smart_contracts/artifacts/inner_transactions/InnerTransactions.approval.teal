@@ -1,0 +1,959 @@
+#pragma version 10
+#pragma typetrack false
+
+// algopy.arc4.ARC4Contract.approval_program() -> uint64:
+main:
+    intcblock 0 1 6 4
+    bytecblock 0x151f7c75 0x02bece11 0x0005576f726c64 base64(CoEBQw==) base64(CjEbQQA0gAQCvs4RNhoAjgEAA4EAQzEZFEQxGEQ2GgFXAgCIACBJFRZXBgJMUIAEFR98dUxQsIEBQzEZQP/UMRgURIEBQ4oBAYAHSGVsbG8sIIv/UIk=)
+    // smart_contracts/inner_transactions/contract.py:19
+    // class InnerTransactions(ARC4Contract):
+    txn NumAppArgs
+    bz main_bare_routing@18
+    pushbytess 0x23950027 0xea7689f3 0xfe264730 0xb6c2b148 0x4b19dfdd 0xa90e6a4f 0xc5046282 0x584400ff 0xa9e812a5 0x0e739814 0x3631745d 0x10a9b102 0x9d0c5de1 // method "payment()uint64", method "fungible_asset_create()uint64", method "non_fungible_asset_create()uint64", method "asset_opt_in(asset)void", method "asset_transfer(asset,account,uint64)void", method "asset_freeze(account,asset)void", method "asset_revoke(asset,account,uint64)void", method "asset_config(asset)void", method "asset_delete(asset)void", method "multi_inner_txns(application)(uint64,string)", method "deploy_app()uint64", method "arc4_deploy_app()uint64", method "noop_app_call(application)(string,string)"
+    txna ApplicationArgs 0
+    match main_payment_route@3 main_fungible_asset_create_route@4 main_non_fungible_asset_create_route@5 main_asset_opt_in_route@6 main_asset_transfer_route@7 main_asset_freeze_route@8 main_asset_revoke_route@9 main_asset_config_route@10 main_asset_delete_route@11 main_multi_inner_txns_route@12 main_deploy_app_route@13 main_arc4_deploy_app_route@14 main_noop_app_call_route@15
+
+main_after_if_else@22:
+    // smart_contracts/inner_transactions/contract.py:19
+    // class InnerTransactions(ARC4Contract):
+    intc_0 // 0
+    return
+
+main_noop_app_call_route@15:
+    // smart_contracts/inner_transactions/contract.py:229-230
+    // # example: NOOP_APP_CALL
+    // @abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/inner_transactions/contract.py:19
+    // class InnerTransactions(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txnas Applications
+    // smart_contracts/inner_transactions/contract.py:229-230
+    // # example: NOOP_APP_CALL
+    // @abimethod
+    callsub noop_app_call
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    dig 1
+    len
+    intc_3 // 4
+    +
+    itob
+    extract 6 2
+    pushbytes 0x0004
+    swap
+    concat
+    uncover 2
+    concat
+    swap
+    concat
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_arc4_deploy_app_route@14:
+    // smart_contracts/inner_transactions/contract.py:218
+    // @abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub arc4_deploy_app
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_deploy_app_route@13:
+    // smart_contracts/inner_transactions/contract.py:202
+    // @abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub deploy_app
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_multi_inner_txns_route@12:
+    // smart_contracts/inner_transactions/contract.py:176-177
+    // # example: GROUPED_INNER_TXNS
+    // @abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/inner_transactions/contract.py:19
+    // class InnerTransactions(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txnas Applications
+    // smart_contracts/inner_transactions/contract.py:176-177
+    // # example: GROUPED_INNER_TXNS
+    // @abimethod
+    callsub multi_inner_txns
+    swap
+    itob
+    pushbytes 0x000a
+    concat
+    swap
+    concat
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_asset_delete_route@11:
+    // smart_contracts/inner_transactions/contract.py:166-167
+    // # example: ASSET_DELETE
+    // @abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/inner_transactions/contract.py:19
+    // class InnerTransactions(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txnas Assets
+    // smart_contracts/inner_transactions/contract.py:166-167
+    // # example: ASSET_DELETE
+    // @abimethod
+    callsub asset_delete
+    intc_1 // 1
+    return
+
+main_asset_config_route@10:
+    // smart_contracts/inner_transactions/contract.py:145-146
+    // # example: ASSET_CONFIG
+    // @abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/inner_transactions/contract.py:19
+    // class InnerTransactions(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txnas Assets
+    // smart_contracts/inner_transactions/contract.py:145-146
+    // # example: ASSET_CONFIG
+    // @abimethod
+    callsub asset_config
+    intc_1 // 1
+    return
+
+main_asset_revoke_route@9:
+    // smart_contracts/inner_transactions/contract.py:124-125
+    // # example: ASSET_REVOKE
+    // @abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/inner_transactions/contract.py:19
+    // class InnerTransactions(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txnas Assets
+    txna ApplicationArgs 2
+    btoi
+    txnas Accounts
+    txna ApplicationArgs 3
+    btoi
+    // smart_contracts/inner_transactions/contract.py:124-125
+    // # example: ASSET_REVOKE
+    // @abimethod
+    callsub asset_revoke
+    intc_1 // 1
+    return
+
+main_asset_freeze_route@8:
+    // smart_contracts/inner_transactions/contract.py:108-109
+    // # example: ASSET_FREEZE
+    // @abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/inner_transactions/contract.py:19
+    // class InnerTransactions(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txnas Accounts
+    txna ApplicationArgs 2
+    btoi
+    txnas Assets
+    // smart_contracts/inner_transactions/contract.py:108-109
+    // # example: ASSET_FREEZE
+    // @abimethod
+    callsub asset_freeze
+    intc_1 // 1
+    return
+
+main_asset_transfer_route@7:
+    // smart_contracts/inner_transactions/contract.py:89-90
+    // # example: ASSET_TRANSFER
+    // @abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/inner_transactions/contract.py:19
+    // class InnerTransactions(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txnas Assets
+    txna ApplicationArgs 2
+    btoi
+    txnas Accounts
+    txna ApplicationArgs 3
+    btoi
+    // smart_contracts/inner_transactions/contract.py:89-90
+    // # example: ASSET_TRANSFER
+    // @abimethod
+    callsub asset_transfer
+    intc_1 // 1
+    return
+
+main_asset_opt_in_route@6:
+    // smart_contracts/inner_transactions/contract.py:70-71
+    // # example: ASSET_OPT_IN
+    // @abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/inner_transactions/contract.py:19
+    // class InnerTransactions(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txnas Assets
+    // smart_contracts/inner_transactions/contract.py:70-71
+    // # example: ASSET_OPT_IN
+    // @abimethod
+    callsub asset_opt_in
+    intc_1 // 1
+    return
+
+main_non_fungible_asset_create_route@5:
+    // smart_contracts/inner_transactions/contract.py:47
+    // @abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub non_fungible_asset_create
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_fungible_asset_create_route@4:
+    // smart_contracts/inner_transactions/contract.py:35-36
+    // # example: ASSET_CREATE
+    // @abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub fungible_asset_create
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_payment_route@3:
+    // smart_contracts/inner_transactions/contract.py:20-21
+    // # example: PAYMENT
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub payment
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_bare_routing@18:
+    // smart_contracts/inner_transactions/contract.py:19
+    // class InnerTransactions(ARC4Contract):
+    txn OnCompletion
+    bnz main_after_if_else@22
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    intc_1 // 1
+    return
+
+
+// smart_contracts.inner_transactions.contract.InnerTransactions.payment() -> uint64:
+payment:
+    // smart_contracts/inner_transactions/contract.py:20-22
+    // # example: PAYMENT
+    // @abimethod()
+    // def payment(self) -> UInt64:
+    proto 0 1
+    // smart_contracts/inner_transactions/contract.py:23
+    // result = itxn.Payment(amount=5000, receiver=Txn.sender, fee=0).submit()
+    itxn_begin
+    txn Sender
+    itxn_field Receiver
+    pushint 5000 // 5000
+    itxn_field Amount
+    intc_1 // pay
+    itxn_field TypeEnum
+    intc_0 // 0
+    itxn_field Fee
+    itxn_submit
+    itxn Amount
+    // smart_contracts/inner_transactions/contract.py:24
+    // return result.amount
+    retsub
+
+
+// smart_contracts.inner_transactions.contract.InnerTransactions.fungible_asset_create() -> uint64:
+fungible_asset_create:
+    // smart_contracts/inner_transactions/contract.py:35-37
+    // # example: ASSET_CREATE
+    // @abimethod
+    // def fungible_asset_create(self) -> UInt64:
+    proto 0 1
+    // smart_contracts/inner_transactions/contract.py:38-43
+    // itxn_result = itxn.AssetConfig(
+    //     total=100_000_000_000,
+    //     decimals=2,
+    //     unit_name="RP",
+    //     asset_name="Royalty Points",
+    // ).submit()
+    itxn_begin
+    // smart_contracts/inner_transactions/contract.py:42
+    // asset_name="Royalty Points",
+    pushbytes "Royalty Points"
+    itxn_field ConfigAssetName
+    // smart_contracts/inner_transactions/contract.py:41
+    // unit_name="RP",
+    pushbytes "RP"
+    itxn_field ConfigAssetUnitName
+    // smart_contracts/inner_transactions/contract.py:40
+    // decimals=2,
+    pushint 2 // 2
+    itxn_field ConfigAssetDecimals
+    // smart_contracts/inner_transactions/contract.py:39
+    // total=100_000_000_000,
+    pushint 100000000000 // 100000000000
+    itxn_field ConfigAssetTotal
+    // smart_contracts/inner_transactions/contract.py:38
+    // itxn_result = itxn.AssetConfig(
+    pushint 3 // acfg
+    itxn_field TypeEnum
+    intc_0 // 0
+    itxn_field Fee
+    // smart_contracts/inner_transactions/contract.py:38-43
+    // itxn_result = itxn.AssetConfig(
+    //     total=100_000_000_000,
+    //     decimals=2,
+    //     unit_name="RP",
+    //     asset_name="Royalty Points",
+    // ).submit()
+    itxn_submit
+    itxn CreatedAssetID
+    // smart_contracts/inner_transactions/contract.py:45
+    // return itxn_result.created_asset.id
+    retsub
+
+
+// smart_contracts.inner_transactions.contract.InnerTransactions.non_fungible_asset_create() -> uint64:
+non_fungible_asset_create:
+    // smart_contracts/inner_transactions/contract.py:47-48
+    // @abimethod
+    // def non_fungible_asset_create(self) -> UInt64:
+    proto 0 1
+    // smart_contracts/inner_transactions/contract.py:54-64
+    // itxn_result = itxn.AssetConfig(
+    //     total=100,
+    //     decimals=2,
+    //     unit_name="ML",
+    //     asset_name="Mona Lisa",
+    //     url="https://link_to_ipfs/Mona_Lisa",
+    //     manager=Global.current_application_address,
+    //     reserve=Global.current_application_address,
+    //     freeze=Global.current_application_address,
+    //     clawback=Global.current_application_address,
+    // ).submit()
+    itxn_begin
+    // smart_contracts/inner_transactions/contract.py:60
+    // manager=Global.current_application_address,
+    global CurrentApplicationAddress
+    // smart_contracts/inner_transactions/contract.py:61-63
+    // reserve=Global.current_application_address,
+    // freeze=Global.current_application_address,
+    // clawback=Global.current_application_address,
+    dupn 3
+    itxn_field ConfigAssetClawback
+    itxn_field ConfigAssetFreeze
+    itxn_field ConfigAssetReserve
+    itxn_field ConfigAssetManager
+    // smart_contracts/inner_transactions/contract.py:59
+    // url="https://link_to_ipfs/Mona_Lisa",
+    pushbytes "https://link_to_ipfs/Mona_Lisa"
+    itxn_field ConfigAssetURL
+    // smart_contracts/inner_transactions/contract.py:58
+    // asset_name="Mona Lisa",
+    pushbytes "Mona Lisa"
+    itxn_field ConfigAssetName
+    // smart_contracts/inner_transactions/contract.py:57
+    // unit_name="ML",
+    pushbytes "ML"
+    itxn_field ConfigAssetUnitName
+    // smart_contracts/inner_transactions/contract.py:56
+    // decimals=2,
+    pushint 2 // 2
+    itxn_field ConfigAssetDecimals
+    // smart_contracts/inner_transactions/contract.py:55
+    // total=100,
+    pushint 100 // 100
+    itxn_field ConfigAssetTotal
+    // smart_contracts/inner_transactions/contract.py:54
+    // itxn_result = itxn.AssetConfig(
+    pushint 3 // acfg
+    itxn_field TypeEnum
+    intc_0 // 0
+    itxn_field Fee
+    // smart_contracts/inner_transactions/contract.py:54-64
+    // itxn_result = itxn.AssetConfig(
+    //     total=100,
+    //     decimals=2,
+    //     unit_name="ML",
+    //     asset_name="Mona Lisa",
+    //     url="https://link_to_ipfs/Mona_Lisa",
+    //     manager=Global.current_application_address,
+    //     reserve=Global.current_application_address,
+    //     freeze=Global.current_application_address,
+    //     clawback=Global.current_application_address,
+    // ).submit()
+    itxn_submit
+    itxn CreatedAssetID
+    // smart_contracts/inner_transactions/contract.py:66
+    // return itxn_result.created_asset.id
+    retsub
+
+
+// smart_contracts.inner_transactions.contract.InnerTransactions.asset_opt_in(asset: uint64) -> void:
+asset_opt_in:
+    // smart_contracts/inner_transactions/contract.py:70-72
+    // # example: ASSET_OPT_IN
+    // @abimethod
+    // def asset_opt_in(self, asset: Asset) -> None:
+    proto 1 0
+    // smart_contracts/inner_transactions/contract.py:73-78
+    // itxn.AssetTransfer(
+    //     asset_receiver=Global.current_application_address,
+    //     xfer_asset=asset,
+    //     asset_amount=0,
+    //     fee=0,
+    // ).submit()
+    itxn_begin
+    // smart_contracts/inner_transactions/contract.py:74
+    // asset_receiver=Global.current_application_address,
+    global CurrentApplicationAddress
+    // smart_contracts/inner_transactions/contract.py:76
+    // asset_amount=0,
+    intc_0 // 0
+    itxn_field AssetAmount
+    frame_dig -1
+    itxn_field XferAsset
+    itxn_field AssetReceiver
+    // smart_contracts/inner_transactions/contract.py:73
+    // itxn.AssetTransfer(
+    intc_3 // axfer
+    itxn_field TypeEnum
+    // smart_contracts/inner_transactions/contract.py:77
+    // fee=0,
+    intc_0 // 0
+    itxn_field Fee
+    // smart_contracts/inner_transactions/contract.py:73-78
+    // itxn.AssetTransfer(
+    //     asset_receiver=Global.current_application_address,
+    //     xfer_asset=asset,
+    //     asset_amount=0,
+    //     fee=0,
+    // ).submit()
+    itxn_submit
+    retsub
+
+
+// smart_contracts.inner_transactions.contract.InnerTransactions.asset_transfer(asset: uint64, receiver: bytes, amount: uint64) -> void:
+asset_transfer:
+    // smart_contracts/inner_transactions/contract.py:89-91
+    // # example: ASSET_TRANSFER
+    // @abimethod
+    // def asset_transfer(self, asset: Asset, receiver: Account, amount: UInt64) -> None:
+    proto 3 0
+    // smart_contracts/inner_transactions/contract.py:92-97
+    // itxn.AssetTransfer(
+    //     asset_receiver=receiver,
+    //     xfer_asset=asset,
+    //     asset_amount=amount,
+    //     fee=0,
+    // ).submit()
+    itxn_begin
+    frame_dig -1
+    itxn_field AssetAmount
+    frame_dig -3
+    itxn_field XferAsset
+    frame_dig -2
+    itxn_field AssetReceiver
+    // smart_contracts/inner_transactions/contract.py:92
+    // itxn.AssetTransfer(
+    intc_3 // axfer
+    itxn_field TypeEnum
+    // smart_contracts/inner_transactions/contract.py:96
+    // fee=0,
+    intc_0 // 0
+    itxn_field Fee
+    // smart_contracts/inner_transactions/contract.py:92-97
+    // itxn.AssetTransfer(
+    //     asset_receiver=receiver,
+    //     xfer_asset=asset,
+    //     asset_amount=amount,
+    //     fee=0,
+    // ).submit()
+    itxn_submit
+    retsub
+
+
+// smart_contracts.inner_transactions.contract.InnerTransactions.asset_freeze(acct_to_be_frozen: bytes, asset: uint64) -> void:
+asset_freeze:
+    // smart_contracts/inner_transactions/contract.py:108-110
+    // # example: ASSET_FREEZE
+    // @abimethod
+    // def asset_freeze(self, acct_to_be_frozen: Account, asset: Asset) -> None:
+    proto 2 0
+    // smart_contracts/inner_transactions/contract.py:111-116
+    // itxn.AssetFreeze(
+    //     freeze_account=acct_to_be_frozen,  # account to be frozen
+    //     freeze_asset=asset,
+    //     frozen=True,
+    //     fee=0,
+    // ).submit()
+    itxn_begin
+    // smart_contracts/inner_transactions/contract.py:114
+    // frozen=True,
+    intc_1 // 1
+    itxn_field FreezeAssetFrozen
+    frame_dig -1
+    itxn_field FreezeAsset
+    frame_dig -2
+    itxn_field FreezeAssetAccount
+    // smart_contracts/inner_transactions/contract.py:111
+    // itxn.AssetFreeze(
+    pushint 5 // afrz
+    itxn_field TypeEnum
+    // smart_contracts/inner_transactions/contract.py:115
+    // fee=0,
+    intc_0 // 0
+    itxn_field Fee
+    // smart_contracts/inner_transactions/contract.py:111-116
+    // itxn.AssetFreeze(
+    //     freeze_account=acct_to_be_frozen,  # account to be frozen
+    //     freeze_asset=asset,
+    //     frozen=True,
+    //     fee=0,
+    // ).submit()
+    itxn_submit
+    retsub
+
+
+// smart_contracts.inner_transactions.contract.InnerTransactions.asset_revoke(asset: uint64, account_to_be_revoked: bytes, amount: uint64) -> void:
+asset_revoke:
+    // smart_contracts/inner_transactions/contract.py:124-128
+    // # example: ASSET_REVOKE
+    // @abimethod
+    // def asset_revoke(
+    //     self, asset: Asset, account_to_be_revoked: Account, amount: UInt64
+    // ) -> None:
+    proto 3 0
+    // smart_contracts/inner_transactions/contract.py:129-135
+    // itxn.AssetTransfer(
+    //     asset_receiver=Global.current_application_address,
+    //     xfer_asset=asset,
+    //     asset_sender=account_to_be_revoked,  # AssetSender is only used in the case of clawback
+    //     asset_amount=amount,
+    //     fee=0,
+    // ).submit()
+    itxn_begin
+    // smart_contracts/inner_transactions/contract.py:130
+    // asset_receiver=Global.current_application_address,
+    global CurrentApplicationAddress
+    frame_dig -1
+    itxn_field AssetAmount
+    frame_dig -2
+    itxn_field AssetSender
+    frame_dig -3
+    itxn_field XferAsset
+    itxn_field AssetReceiver
+    // smart_contracts/inner_transactions/contract.py:129
+    // itxn.AssetTransfer(
+    intc_3 // axfer
+    itxn_field TypeEnum
+    // smart_contracts/inner_transactions/contract.py:134
+    // fee=0,
+    intc_0 // 0
+    itxn_field Fee
+    // smart_contracts/inner_transactions/contract.py:129-135
+    // itxn.AssetTransfer(
+    //     asset_receiver=Global.current_application_address,
+    //     xfer_asset=asset,
+    //     asset_sender=account_to_be_revoked,  # AssetSender is only used in the case of clawback
+    //     asset_amount=amount,
+    //     fee=0,
+    // ).submit()
+    itxn_submit
+    retsub
+
+
+// smart_contracts.inner_transactions.contract.InnerTransactions.asset_config(asset: uint64) -> void:
+asset_config:
+    // smart_contracts/inner_transactions/contract.py:145-147
+    // # example: ASSET_CONFIG
+    // @abimethod
+    // def asset_config(self, asset: Asset) -> None:
+    proto 1 0
+    // smart_contracts/inner_transactions/contract.py:148-155
+    // itxn.AssetConfig(
+    //     config_asset=asset,
+    //     manager=Global.current_application_address,
+    //     reserve=Global.current_application_address,
+    //     freeze=Txn.sender,
+    //     clawback=Txn.sender,
+    //     fee=0,
+    // ).submit()
+    itxn_begin
+    // smart_contracts/inner_transactions/contract.py:150
+    // manager=Global.current_application_address,
+    global CurrentApplicationAddress
+    // smart_contracts/inner_transactions/contract.py:151
+    // reserve=Global.current_application_address,
+    dup
+    // smart_contracts/inner_transactions/contract.py:152
+    // freeze=Txn.sender,
+    txn Sender
+    // smart_contracts/inner_transactions/contract.py:153
+    // clawback=Txn.sender,
+    dup
+    itxn_field ConfigAssetClawback
+    itxn_field ConfigAssetFreeze
+    itxn_field ConfigAssetReserve
+    itxn_field ConfigAssetManager
+    frame_dig -1
+    itxn_field ConfigAsset
+    // smart_contracts/inner_transactions/contract.py:148
+    // itxn.AssetConfig(
+    pushint 3 // acfg
+    itxn_field TypeEnum
+    // smart_contracts/inner_transactions/contract.py:154
+    // fee=0,
+    intc_0 // 0
+    itxn_field Fee
+    // smart_contracts/inner_transactions/contract.py:148-155
+    // itxn.AssetConfig(
+    //     config_asset=asset,
+    //     manager=Global.current_application_address,
+    //     reserve=Global.current_application_address,
+    //     freeze=Txn.sender,
+    //     clawback=Txn.sender,
+    //     fee=0,
+    // ).submit()
+    itxn_submit
+    retsub
+
+
+// smart_contracts.inner_transactions.contract.InnerTransactions.asset_delete(asset: uint64) -> void:
+asset_delete:
+    // smart_contracts/inner_transactions/contract.py:166-168
+    // # example: ASSET_DELETE
+    // @abimethod
+    // def asset_delete(self, asset: Asset) -> None:
+    proto 1 0
+    // smart_contracts/inner_transactions/contract.py:169-172
+    // itxn.AssetConfig(
+    //     config_asset=asset,
+    //     fee=0,
+    // ).submit()
+    itxn_begin
+    frame_dig -1
+    itxn_field ConfigAsset
+    // smart_contracts/inner_transactions/contract.py:169
+    // itxn.AssetConfig(
+    pushint 3 // acfg
+    itxn_field TypeEnum
+    // smart_contracts/inner_transactions/contract.py:171
+    // fee=0,
+    intc_0 // 0
+    itxn_field Fee
+    // smart_contracts/inner_transactions/contract.py:169-172
+    // itxn.AssetConfig(
+    //     config_asset=asset,
+    //     fee=0,
+    // ).submit()
+    itxn_submit
+    retsub
+
+
+// smart_contracts.inner_transactions.contract.InnerTransactions.multi_inner_txns(app_id: uint64) -> uint64, bytes:
+multi_inner_txns:
+    // smart_contracts/inner_transactions/contract.py:176-178
+    // # example: GROUPED_INNER_TXNS
+    // @abimethod
+    // def multi_inner_txns(self, app_id: Application) -> tuple[UInt64, arc4.String]:
+    proto 1 2
+    // smart_contracts/inner_transactions/contract.py:179
+    // payment_params = itxn.Payment(amount=5000, receiver=Txn.sender, fee=0)
+    txn Sender
+    // smart_contracts/inner_transactions/contract.py:187
+    // pay_txn, app_call_txn = itxn.submit_txns(payment_params, app_call_params)
+    itxn_begin
+    itxn_field Receiver
+    // smart_contracts/inner_transactions/contract.py:179
+    // payment_params = itxn.Payment(amount=5000, receiver=Txn.sender, fee=0)
+    pushint 5000 // 5000
+    itxn_field Amount
+    intc_1 // pay
+    itxn_field TypeEnum
+    intc_0 // 0
+    itxn_field Fee
+    // smart_contracts/inner_transactions/contract.py:187
+    // pay_txn, app_call_txn = itxn.submit_txns(payment_params, app_call_params)
+    itxn_next
+    // smart_contracts/inner_transactions/contract.py:183
+    // app_args=(arc4.arc4_signature("hello(string)string"), arc4.String("World")),
+    bytec_1 // method "hello(string)string"
+    itxn_field ApplicationArgs
+    bytec_2 // 0x0005576f726c64
+    itxn_field ApplicationArgs
+    frame_dig -1
+    itxn_field ApplicationID
+    // smart_contracts/inner_transactions/contract.py:181
+    // app_call_params = itxn.ApplicationCall(
+    intc_2 // appl
+    itxn_field TypeEnum
+    // smart_contracts/inner_transactions/contract.py:184
+    // fee=0,
+    intc_0 // 0
+    itxn_field Fee
+    // smart_contracts/inner_transactions/contract.py:187
+    // pay_txn, app_call_txn = itxn.submit_txns(payment_params, app_call_params)
+    itxn_submit
+    gitxn 0 Amount
+    itxn LastLog
+    // smart_contracts/inner_transactions/contract.py:189
+    // hello_world_result = arc4.String.from_log(app_call_txn.last_log)
+    dup
+    extract 4 0
+    swap
+    extract 0 4
+    bytec_0 // 0x151f7c75
+    ==
+    assert // ARC4 prefix is valid
+    // smart_contracts/inner_transactions/contract.py:190
+    // return pay_txn.amount, hello_world_result
+    retsub
+
+
+// smart_contracts.inner_transactions.contract.InnerTransactions.deploy_app() -> uint64:
+deploy_app:
+    // smart_contracts/inner_transactions/contract.py:202-203
+    // @abimethod
+    // def deploy_app(self) -> UInt64:
+    proto 0 1
+    // smart_contracts/inner_transactions/contract.py:209-213
+    // app_txn = itxn.ApplicationCall(
+    //     approval_program=compiled_contract.approval_program,
+    //     clear_state_program=compiled_contract.clear_state_program,
+    //     fee=0,
+    // ).submit()
+    itxn_begin
+    // smart_contracts/inner_transactions/contract.py:207
+    // compiled_contract = compile_contract(HelloWorld)
+    bytec_3 // base64(CoEBQw==)
+    itxn_field ClearStateProgramPages
+    bytec 4 // base64(CjEbQQA0gAQCvs4RNhoAjgEAA4EAQzEZFEQxGEQ2GgFXAgCIACBJFRZXBgJMUIAEFR98dUxQsIEBQzEZQP/UMRgURIEBQ4oBAYAHSGVsbG8sIIv/UIk=)
+    itxn_field ApprovalProgramPages
+    // smart_contracts/inner_transactions/contract.py:209
+    // app_txn = itxn.ApplicationCall(
+    intc_2 // appl
+    itxn_field TypeEnum
+    // smart_contracts/inner_transactions/contract.py:212
+    // fee=0,
+    intc_0 // 0
+    itxn_field Fee
+    // smart_contracts/inner_transactions/contract.py:209-213
+    // app_txn = itxn.ApplicationCall(
+    //     approval_program=compiled_contract.approval_program,
+    //     clear_state_program=compiled_contract.clear_state_program,
+    //     fee=0,
+    // ).submit()
+    itxn_submit
+    itxn CreatedApplicationID
+    // smart_contracts/inner_transactions/contract.py:216
+    // return app.id
+    retsub
+
+
+// smart_contracts.inner_transactions.contract.InnerTransactions.arc4_deploy_app() -> uint64:
+arc4_deploy_app:
+    // smart_contracts/inner_transactions/contract.py:218-219
+    // @abimethod
+    // def arc4_deploy_app(self) -> UInt64:
+    proto 0 1
+    // smart_contracts/inner_transactions/contract.py:223
+    // app_txn = arc4.arc4_create(HelloWorld)
+    itxn_begin
+    bytec_3 // base64(CoEBQw==)
+    itxn_field ClearStateProgramPages
+    bytec 4 // base64(CjEbQQA0gAQCvs4RNhoAjgEAA4EAQzEZFEQxGEQ2GgFXAgCIACBJFRZXBgJMUIAEFR98dUxQsIEBQzEZQP/UMRgURIEBQ4oBAYAHSGVsbG8sIIv/UIk=)
+    itxn_field ApprovalProgramPages
+    intc_2 // appl
+    itxn_field TypeEnum
+    intc_0 // 0
+    itxn_field Fee
+    itxn_submit
+    itxn CreatedApplicationID
+    // smart_contracts/inner_transactions/contract.py:225
+    // return app_txn.created_app.id
+    retsub
+
+
+// smart_contracts.inner_transactions.contract.InnerTransactions.noop_app_call(app_id: uint64) -> bytes, bytes:
+noop_app_call:
+    // smart_contracts/inner_transactions/contract.py:229-231
+    // # example: NOOP_APP_CALL
+    // @abimethod
+    // def noop_app_call(self, app_id: Application) -> tuple[arc4.String, String]:
+    proto 1 2
+    // smart_contracts/inner_transactions/contract.py:232-236
+    // # invoke an ABI method
+    // call_txn = itxn.ApplicationCall(
+    //     app_id=app_id,
+    //     app_args=(arc4.arc4_signature("hello(string)string"), arc4.String("World")),
+    // ).submit()
+    itxn_begin
+    // smart_contracts/inner_transactions/contract.py:235
+    // app_args=(arc4.arc4_signature("hello(string)string"), arc4.String("World")),
+    bytec_1 // method "hello(string)string"
+    itxn_field ApplicationArgs
+    bytec_2 // 0x0005576f726c64
+    itxn_field ApplicationArgs
+    frame_dig -1
+    itxn_field ApplicationID
+    // smart_contracts/inner_transactions/contract.py:232-233
+    // # invoke an ABI method
+    // call_txn = itxn.ApplicationCall(
+    intc_2 // appl
+    itxn_field TypeEnum
+    intc_0 // 0
+    itxn_field Fee
+    // smart_contracts/inner_transactions/contract.py:232-236
+    // # invoke an ABI method
+    // call_txn = itxn.ApplicationCall(
+    //     app_id=app_id,
+    //     app_args=(arc4.arc4_signature("hello(string)string"), arc4.String("World")),
+    // ).submit()
+    itxn_submit
+    itxn LastLog
+    // smart_contracts/inner_transactions/contract.py:237-238
+    // # extract result
+    // first_hello_world_result = arc4.String.from_log(call_txn.last_log)
+    dup
+    extract 4 0
+    swap
+    extract 0 4
+    bytec_0 // 0x151f7c75
+    ==
+    assert // ARC4 prefix is valid
+    // smart_contracts/inner_transactions/contract.py:240-245
+    // # OR, call it automatic ARC4 encoding, type validation and result handling
+    // second_hello_world_result, call_txn = arc4.abi_call(  # declare return type
+    //     HelloWorld.hello,  # method signature to call
+    //     "again",  # abi method arguments
+    //     app_id=app_id,
+    // )
+    itxn_begin
+    frame_dig -1
+    itxn_field ApplicationID
+    bytec_1 // method "hello(string)string"
+    itxn_field ApplicationArgs
+    // smart_contracts/inner_transactions/contract.py:243
+    // "again",  # abi method arguments
+    pushbytes 0x0005616761696e
+    itxn_field ApplicationArgs
+    // smart_contracts/inner_transactions/contract.py:240-245
+    // # OR, call it automatic ARC4 encoding, type validation and result handling
+    // second_hello_world_result, call_txn = arc4.abi_call(  # declare return type
+    //     HelloWorld.hello,  # method signature to call
+    //     "again",  # abi method arguments
+    //     app_id=app_id,
+    // )
+    intc_2 // appl
+    itxn_field TypeEnum
+    intc_0 // 0
+    itxn_field Fee
+    itxn_submit
+    itxn LastLog
+    dup
+    extract 4 0
+    swap
+    extract 0 4
+    bytec_0 // 0x151f7c75
+    ==
+    assert // ARC4 prefix is valid
+    extract 2 0
+    // smart_contracts/inner_transactions/contract.py:247
+    // return first_hello_world_result, second_hello_world_result
+    retsub

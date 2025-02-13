@@ -1,0 +1,149 @@
+#pragma version 10
+#pragma typetrack false
+
+// algopy.arc4.ARC4Contract.approval_program() -> uint64:
+main:
+    bytecblock 0x151f7c75
+    // smart_contracts/control_flow/contract.py:6-7
+    // # example: IF_ELSE
+    // class IfElseExample(ARC4Contract):
+    txn NumAppArgs
+    bz main_bare_routing@7
+    pushbytess 0x37c01090 0x6632c2d6 // method "is_rich(uint64)string", method "is_even(uint64)string"
+    txna ApplicationArgs 0
+    match main_is_rich_route@3 main_is_even_route@4
+
+main_after_if_else@11:
+    // smart_contracts/control_flow/contract.py:6-7
+    // # example: IF_ELSE
+    // class IfElseExample(ARC4Contract):
+    pushint 0 // 0
+    return
+
+main_is_even_route@4:
+    // smart_contracts/control_flow/contract.py:18
+    // @arc4.abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/control_flow/contract.py:6-7
+    // # example: IF_ELSE
+    // class IfElseExample(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    // smart_contracts/control_flow/contract.py:18
+    // @arc4.abimethod
+    callsub is_even
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    pushint 1 // 1
+    return
+
+main_is_rich_route@3:
+    // smart_contracts/control_flow/contract.py:9
+    // @arc4.abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/control_flow/contract.py:6-7
+    // # example: IF_ELSE
+    // class IfElseExample(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    // smart_contracts/control_flow/contract.py:9
+    // @arc4.abimethod
+    callsub is_rich
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    pushint 1 // 1
+    return
+
+main_bare_routing@7:
+    // smart_contracts/control_flow/contract.py:6-7
+    // # example: IF_ELSE
+    // class IfElseExample(ARC4Contract):
+    txn OnCompletion
+    bnz main_after_if_else@11
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    pushint 1 // 1
+    return
+
+
+// smart_contracts.control_flow.contract.IfElseExample.is_rich(account_balance: uint64) -> bytes:
+is_rich:
+    // smart_contracts/control_flow/contract.py:9-10
+    // @arc4.abimethod
+    // def is_rich(self, account_balance: UInt64) -> String:
+    proto 1 1
+    // smart_contracts/control_flow/contract.py:11
+    // if account_balance > 1000:
+    frame_dig -1
+    pushint 1000 // 1000
+    >
+    bz is_rich_else_body@2
+    // smart_contracts/control_flow/contract.py:12
+    // return String("This account is rich!")
+    pushbytes "This account is rich!"
+    retsub
+
+is_rich_else_body@2:
+    // smart_contracts/control_flow/contract.py:13
+    // elif account_balance > 100:
+    frame_dig -1
+    pushint 100 // 100
+    >
+    bz is_rich_else_body@4
+    // smart_contracts/control_flow/contract.py:14
+    // return String("This account is doing well.")
+    pushbytes "This account is doing well."
+    retsub
+
+is_rich_else_body@4:
+    // smart_contracts/control_flow/contract.py:16
+    // return String("This account is poor :(")
+    pushbytes "This account is poor :("
+    retsub
+
+
+// smart_contracts.control_flow.contract.IfElseExample.is_even(number: uint64) -> bytes:
+is_even:
+    // smart_contracts/control_flow/contract.py:18-19
+    // @arc4.abimethod
+    // def is_even(self, number: UInt64) -> String:
+    proto 1 1
+    // smart_contracts/control_flow/contract.py:20
+    // return String("Even") if number % 2 == 0 else String("Odd")
+    frame_dig -1
+    pushint 2 // 2
+    %
+    bnz is_even_ternary_false@2
+    pushbytes "Even"
+    retsub
+
+is_even_ternary_false@2:
+    // smart_contracts/control_flow/contract.py:20
+    // return String("Even") if number % 2 == 0 else String("Odd")
+    pushbytes "Odd"
+    retsub

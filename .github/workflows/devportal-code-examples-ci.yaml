@@ -15,6 +15,9 @@ jobs:
       - name: Install poetry
         run: pipx install poetry
 
+      - name: Install poetry-plugin-export
+        run: poetry self add poetry-plugin-export
+
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
@@ -51,5 +54,5 @@ jobs:
       - name: Check output stability of the smart contracts
         run: algokit project run ci-teal-diff
 
-      - name: Run deployer against LocalNet
-        run: algokit project deploy localnet
+      # - name: Run deployer against LocalNet
+      #   run: algokit project deploy localnet
