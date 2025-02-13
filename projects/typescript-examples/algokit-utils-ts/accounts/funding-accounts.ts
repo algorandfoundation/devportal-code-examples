@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { AlgorandClient, algo } from "@algorandfoundation/algokit-utils";
 
 async function fundingAccounts() {

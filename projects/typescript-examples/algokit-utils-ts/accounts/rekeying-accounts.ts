@@ -2,7 +2,7 @@ import { algo } from "@algorandfoundation/algokit-utils";
 import { setupLocalnetEnvironment } from "@/algokit-utils-ts/setup-localnet-environment";
 
 async function rekeyingAccounts() {
-  const { algorand, dispenser, randomAccountA, randomAccountB, randomAccountC } = await setupLocalnetEnvironment();
+  const { algorand, randomAccountA, randomAccountB, randomAccountC } = await setupLocalnetEnvironment();
 
   // example: REKEY_ACCOUNT
   /**
