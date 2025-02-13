@@ -1,16 +1,16 @@
-import { AlgorandClient, algo } from "@algorandfoundation/algokit-utils";
-import type { TransactionSignerAccount, SigningAccount } from "@algorandfoundation/algokit-utils/types/account";
-import type { Account, Address } from "algosdk";
+import { AlgorandClient, algo } from '@algorandfoundation/algokit-utils'
+import type { TransactionSignerAccount, SigningAccount } from '@algorandfoundation/algokit-utils/types/account'
+import type { Account, Address } from 'algosdk'
 
 export type RandomAccount = Address &
   TransactionSignerAccount & {
-    account: Account;
-  };
+    account: Account
+  }
 
 export type DispenserAccount = Address &
   TransactionSignerAccount & {
-    account: SigningAccount;
-  };
+    account: SigningAccount
+  }
 
 /**
  * Sets up funded accounts for demonstration purposes.
@@ -18,25 +18,25 @@ export type DispenserAccount = Address &
  * each funded with 10 Algos from the localnet dispenser.
  */
 export async function setupLocalnetEnvironment(): Promise<{
-  algorand: AlgorandClient;
-  dispenser: DispenserAccount;
-  randomAccountA: RandomAccount;
-  randomAccountB: RandomAccount;
-  randomAccountC: RandomAccount;
-  randomAccountD: RandomAccount;
+  algorand: AlgorandClient
+  dispenser: DispenserAccount
+  randomAccountA: RandomAccount
+  randomAccountB: RandomAccount
+  randomAccountC: RandomAccount
+  randomAccountD: RandomAccount
 }> {
   // Initialize the Algorand client
-  const algorand = AlgorandClient.defaultLocalNet();
+  const algorand = AlgorandClient.defaultLocalNet()
   // Get the dispenser account
-  const dispenser = await algorand.account.localNetDispenser();
+  const dispenser = await algorand.account.localNetDispenser()
 
   // Create random accounts
-  const randomAccounts = Array.from({ length: 4 }, () => algorand.account.random());
+  const randomAccounts = Array.from({ length: 4 }, () => algorand.account.random())
 
   // Fund all test accounts with 10 Algos each
-  await Promise.all(randomAccounts.map((account) => algorand.account.ensureFunded(account, dispenser, algo(10))));
+  await Promise.all(randomAccounts.map((account) => algorand.account.ensureFunded(account, dispenser, algo(10))))
 
-  const [randomAccountA, randomAccountB, randomAccountC, randomAccountD] = randomAccounts;
+  const [randomAccountA, randomAccountB, randomAccountC, randomAccountD] = randomAccounts
 
   return {
     algorand,
@@ -45,5 +45,5 @@ export async function setupLocalnetEnvironment(): Promise<{
     randomAccountB,
     randomAccountC,
     randomAccountD,
-  };
+  }
 }
