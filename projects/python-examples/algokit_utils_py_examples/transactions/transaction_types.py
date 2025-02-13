@@ -1,272 +1,235 @@
 from algokit_utils import *
 from algokit_utils_py_examples.helpers import setup_localnet_environment
-from smart_contracts.artifacts.hello_world.hello_world_client import (
-    HelloWorldClient,
-    HelloWorldFactory,
-)
+
+import algosdk
 
 
-# temp
 def transaction_types() -> None:
     # example: TRANSACTION_TYPES
 
-    algorand_client, dispenser, account1, account2, account3 = (
-        setup_localnet_environment()
+    algorand_client, _, account1, account2, account3 = setup_localnet_environment()
+
+    # example: PAYMENT_TRANSACTION
+
+    """
+    Create a unsigned payment transaction sending 1 Algo from account1 to account2
+
+    Parameters for a payment transaction.
+    - sender: The address of the account that will send the ALGO
+    - receiver: The address of the account that will receive the ALGO
+    - amount: Amount to send
+    """
+    payment_txn = algorand_client.create_transaction.payment(
+        PaymentParams(
+            sender=account1.address,
+            receiver=account2.address,
+            amount=AlgoAmount(algo=1),
+        )
     )
 
-    # # example: PAYMENT_TRANSACTION
+    # example: PAYMENT_TRANSACTION
 
-    # """
-    # Create a unsigned payment transaction sending 1 Algo from account1 to account2
-    # """
-    # payment_txn = algorand_client.create_transaction.payment(
-    #     PaymentParams(
-    #         sender=account1.address,
-    #         receiver=account2.address,
-    #         amount=AlgoAmount(algo=1),
-    #     )
-    # )
+    # example: ASSET_TRANSFER_TRANSACTION
 
-    # """
-    # Directly send a payment transaction of 2 Algo from account1 to account2 using the AlgorandClient
-    # """
-    # algorand_client.send.payment(
-    #     PaymentParams(
-    #         sender=account1.address,
-    #         receiver=account2.address,
-    #         amount=AlgoAmount(algo=2),
-    #     )
-    # )
-    # # example: PAYMENT_TRANSACTION
+    """
+    Create an unsigned asset transfer transaction of 1 asset with asset id 1234 from account1 to account2
 
-    # # example: ASSET_TRANSFER_TRANSACTION
+    Parameters for an asset transfer transaction.
+    - sender: The address of the account that will send the asset
+    - asset_id: The asset id of the asset to transfer
+    - amount: Amount of the asset to transfer (smallest divisible unit)
+    - receiver: The address of the account to send the asset to
+    """
+    asset_transfer_txn = algorand_client.create_transaction.asset_transfer(
+        AssetTransferParams(
+            sender=account1.address,
+            asset_id=1234,
+            receiver=account2.address,
+            amount=1,
+        )
+    )
 
-    # """
-    # Create an unsigned asset transfer transaction of 1 asset with asset id 1234 from account1 to account2
-    # """
-    # asset_transfer_txn = algorand_client.create_transaction.asset_transfer(
-    #     AssetTransferParams(
-    #         sender=account1.address,
-    #         asset_id=1234,
-    #         receiver=account2.address,
-    #         amount=1,
-    #     )
-    # )
+    # example: ASSET_TRANSFER_TRANSACTION
 
-    # """
-    # Directly send a asset transfer transaction of 1 asset with asset id 2345 from account1 to account2 using the AlgorandClient
-    # """
-    # algorand_client.send.asset_transfer(
-    #     AssetTransferParams(
-    #         sender=account1.address,
-    #         asset_id=2345,
-    #         receiver=account2.address,
-    #         amount=1,
-    #     )
-    # )
-    # # example: ASSET_TRANSFER_TRANSACTION
+    # example: ASSET_OPT_IN_TRANSACTION
 
-    # # example: ASSET_OPT_IN_TRANSACTION
+    """
+    Create an unsigned asset opt in transaction for account1 opting in to asset with asset id 1234
 
-    # """
-    # Create an unsigned asset opt in transaction for account1 opting in to asset with asset id 1234
-    # """
-    # asset_opt_in_txn = algorand_client.create_transaction.asset_opt_in(
-    #     AssetOptInParams(
-    #         sender=account1.address,
-    #         asset_id=1234,
-    #     )
-    # )
+    Parameters for an asset opt in transaction.
+    - sender: The address of the account that will opt in to the asset
+    - asset_id: ID of the asset
+    """
+    asset_opt_in_txn = algorand_client.create_transaction.asset_opt_in(
+        AssetOptInParams(
+            sender=account1.address,
+            asset_id=1234,
+        )
+    )
 
-    # """
-    # Directly send a asset opt in transaction for account1 opting in to asset with asset id 2345 using the AlgorandClient
-    # """
-    # algorand_client.send.asset_opt_in(
-    #     AssetOptInParams(
-    #         sender=account1.address,
-    #         asset_id=2345,
-    #     )
-    # )
-    # # example: ASSET_OPT_IN_TRANSACTION
+    # example: ASSET_OPT_IN_TRANSACTION
 
-    # # example: ASSET_OPT_OUT_TRANSACTION
+    # example: ASSET_OPT_OUT_TRANSACTION
 
-    # """
-    # Create an unsigned asset opt out transaction for account1 opting out of asset with asset id 1234
-    # """
-    # asset_opt_out_txn = algorand_client.create_transaction.asset_opt_out(
-    #     AssetOptOutParams(
-    #         sender=account1.address,
-    #         asset_id=1234,
-    #         creator=account2.address,
-    #     )
-    # )
+    """
+    Create an unsigned asset opt out transaction for account1 opting out of asset with asset id 1234
 
-    # """
-    # Directly send a asset opt out transaction for account1 opting out of asset with asset id 2345 using the AlgorandClient
-    # """
-    # algorand_client.send.asset_opt_out(
-    #     AssetOptOutParams(
-    #         sender=account1.address,
-    #         asset_id=2345,
-    #         creator=account2.address,
-    #     )
-    # )
-    # # example: ASSET_OPT_OUT_TRANSACTION
+    Parameters for an asset opt out transaction.
+    - sender: The address of the account that will opt out of the asset
+    - asset_id: ID of the asset
+    - creator: The creator address of the asset
+    """
+    asset_opt_out_txn = algorand_client.create_transaction.asset_opt_out(
+        AssetOptOutParams(
+            sender=account1.address,
+            asset_id=1234,
+            creator=account2.address,
+        )
+    )
 
-    # # example: ASSET_CREATE_TRANSACTION
+    # example: ASSET_OPT_OUT_TRANSACTION
 
-    # """
-    # Create an unsigned asset create transaction creating a fungible ASA with 10 million units
-    # """
-    # asset_create_txn = algorand_client.create_transaction.asset_create(
-    #     AssetCreateParams(
-    #         sender=account1.address,
-    #         total=10_000_000,
-    #         asset_name="My Asset",
-    #         asset_unit="MYA",
-    #         asset_decimals=6,
-    #         asset_manager=account1.address,  # optional. Can be permanently disabled by setting to None
-    #         asset_reserve=account1.address,  # optional. Can be permanently disabled by setting to None
-    #         asset_freeze=account1.address,  # optional. Can be permanently disabled by setting to None
-    #         asset_clawback=account1.address,  # optional. Can be permanently disabled by setting to None
-    #         default_frozen=False,  # optional
-    #     )
-    # )
+    # example: ASSET_CREATE_TRANSACTION
 
-    # """
-    # Directly send a asset create transaction creating a 1 to 1 unique NFT using the AlgorandClient
-    # """
-    # algorand_client.send.asset_create(
-    #     AssetCreateParams(
-    #         sender=account1.address,
-    #         total=1,
-    #         asset_name="My NFT",
-    #         asset_unit="MNFT",
-    #         asset_decimals=0,
-    #         url="metadata URL",
-    #         metadata_hash=b"Hash of the metadata URL",
-    #     )
-    # )
-    # # example: ASSET_CREATE_TRANSACTION
+    """
+    Create an unsigned asset create transaction creating a fungible ASA with 10 million units
 
-    # # example: ASSET_CONFIG_TRANSACTION
+    Parameters for creating a new asset.
+    - sender: The address of the account that will send the transaction
+    - total: The total amount of the smallest divisible unit to create
+    - decimals: The amount of decimal places the asset should have, defaults to None
+    - default_frozen: Whether the asset is frozen by default in the creator address, defaults to None
+    - manager: The address that can change the manager, reserve, clawback, and freeze addresses, defaults to None
+    - reserve: The address that holds the uncirculated supply, defaults to None
+    - freeze: The address that can freeze the asset in any account, defaults to None
+    - clawback: The address that can clawback the asset from any account, defaults to None
+    - unit_name: The short ticker name for the asset, defaults to None
+    - asset_name: The full name of the asset, defaults to None
+    """
+    asset_create_txn = algorand_client.create_transaction.asset_create(
+        AssetCreateParams(
+            sender=account1.address,
+            total=10_000_000,
+            decimals=6,
+            default_frozen=False,  # optional
+            manager=account1.address,  # optional. Can be permanently disabled by setting to None
+            reserve=account1.address,  # optional. Can be permanently disabled by setting to None
+            freeze=account1.address,  # optional. Can be permanently disabled by setting to None
+            clawback=account1.address,  # optional. Can be permanently disabled by setting to None
+            unit_name="MYA",
+            asset_name="My Asset",
+        )
+    )
 
-    # """
-    # Create an unsigned asset config transaction updating four mutable fields of an asset:
-    # manager, reserve, freeze, clawback. This operation is only possible if the sender is
-    # the asset manager and the asset has all four mutable fields set.
-    # """
-    # asset_config_txn = algorand_client.create_transaction.asset_config(
-    #     AssetConfigParams(
-    #         sender=account1.address,
-    #         asset_id=1234,
-    #         manager=account3.address,
-    #         reserve=account3.address,
-    #         freeze=account3.address,
-    #         clawback=account3.address,
-    #     )
-    # )
+    """
+    Create an unsigned asset create transaction creating a 1 to 1 unique NFT
+    """
+    algorand_client.create_transaction.asset_create(
+        AssetCreateParams(
+            sender=account1.address,
+            total=1,
+            asset_name="My NFT",
+            unit_name="MNFT",
+            decimals=0,
+            url="metadata URL",
+            metadata_hash=b"Hash of the metadata URL",
+        )
+    )
+    # example: ASSET_CREATE_TRANSACTION
 
-    # """
-    # Directly send an asset config transaction updating the manager, reserve, freeze, clawback
-    # fields of asset with asset id 2345 using the AlgorandClient
-    # """
-    # algorand_client.send.asset_config(
-    #     AssetConfigParams(
-    #         sender=account1.address,
-    #         asset_id=2345,
-    #         manager=account3.address,
-    #         reserve=account3.address,
-    #         freeze=account3.address,
-    #         clawback=account3.address,
-    #     )
-    # )
-    # # example: ASSET_CONFIG_TRANSACTION
+    # example: ASSET_CONFIG_TRANSACTION
 
-    # # example: ASSET_FREEZE_TRANSACTION
+    """
+    Create an unsigned asset config transaction updating four mutable fields of an asset:
+    manager, reserve, freeze, clawback. This operation is only possible if the sender is
+    the asset manager and the asset has all four mutable fields set.
 
-    # """
-    # Create a unsigned asset freeze transaction freezing an asset with asset id 1234
-    # """
-    # asset_freeze_txn = algorand_client.create_transaction.asset_freeze(
-    #     AssetFreezeParams(
-    #         sender=account1.address,
-    #         asset_id=1234,
-    #         account=account2.address,  # The account to freeze or unfreeze
-    #         frozen=True,
-    #     )
-    # )
+    Parameters for configuring an existing asset.
+    - sender: The address of the account that will send the transaction
+    - asset_id: ID of the asset
+    - manager: The address that can change the manager, reserve, clawback, and freeze addresses, defaults to None
+    - reserve: The address that holds the uncirculated supply, defaults to None
+    - freeze: The address that can freeze the asset in any account, defaults to None
+    - clawback: The address that can clawback the asset from any account, defaults to None
+    """
+    asset_config_txn = algorand_client.create_transaction.asset_config(
+        AssetConfigParams(
+            sender=account1.address,
+            asset_id=1234,
+            manager=account3.address,
+            reserve=account3.address,
+            freeze=account3.address,
+            clawback=account3.address,
+        )
+    )
 
-    # """
-    # Directly send a asset freeze transaction unfreezing an asset with asset id 1234 using the AlgorandClient
-    # """
-    # algorand_client.send.asset_freeze(
-    #     AssetFreezeParams(
-    #         sender=account1.address,
-    #         asset_id=1234,
-    #         account=account2.address,  # The account to freeze or unfreeze
-    #         frozen=False,
-    #     )
-    # )
-    # # example: ASSET_FREEZE_TRANSACTION
+    # example: ASSET_CONFIG_TRANSACTION
 
-    # # example: ASSET_DESTROY_TRANSACTION
+    # example: ASSET_FREEZE_TRANSACTION
 
-    # """
-    # Create an unsigned asset destroy transaction destroying an asset with asset id 1234
-    # All of the assets must be owned by the creator of the asset before the asset can be deleted.
-    # """
-    # asset_destroy_txn = algorand_client.create_transaction.asset_destroy(
-    #     AssetDestroyParams(
-    #         sender=account1.address,
-    #         asset_id=1234,
-    #     )
-    # )
+    """
+    Create a unsigned asset freeze transaction freezing an asset with asset id 1234
 
-    # """
-    # Directly send a asset destroy transaction for account1 using the AlgorandClient
-    # """
-    # algorand_client.send.asset_destroy(
-    #     AssetDestroyParams(
-    #         sender=account1.address,
-    #         asset_id=2345,
-    #     )
-    # )
-    # # example: ASSET_DESTROY_TRANSACTION
+    Parameters for freezing an asset.
+    - sender: The address of the account that will send the transaction
+    - asset_id: The ID of the asset
+    - account: The account to freeze or unfreeze
+    - frozen: Whether the assets in the account should be frozen
+    """
+    asset_freeze_txn = algorand_client.create_transaction.asset_freeze(
+        AssetFreezeParams(
+            sender=account1.address,
+            asset_id=1234,
+            account=account2.address,  # The account to freeze or unfreeze
+            frozen=True,
+        )
+    )
+
+    # example: ASSET_FREEZE_TRANSACTION
+
+    # example: ASSET_DESTROY_TRANSACTION
+
+    """
+    Create an unsigned asset destroy transaction destroying an asset with asset id 1234
+    All of the assets must be owned by the creator of the asset before the asset can be deleted.
+
+    Parameters for destroying an asset.
+    - sender: The address of the account that will send the transaction
+    - asset_id: ID of the asset
+    """
+    asset_destroy_txn = algorand_client.create_transaction.asset_destroy(
+        AssetDestroyParams(
+            sender=account1.address,
+            asset_id=1234,
+        )
+    )
+
+    # example: ASSET_DESTROY_TRANSACTION
 
     # example: APPLICATION_CREATE_TRANSACTION
 
+    # Minimal TEAL program that just returns 1 (success)
+    minimalTEAL = """
+    #pragma version 10
+    int 1
+    return
     """
-    Create an app factory for the hello world contract and use the facotry to deploy the contract
-    """
-    factory = algorand_client.client.get_typed_app_factory(
-        HelloWorldFactory,
-        default_sender=account1.address,
-        default_signer=account1.signer,
-    )
 
     """
-    The `hello_world_client` is a typed application client that can be used to 
-    interact with the deployed hello world contract
+    Create a unsigned application call transaction calling the hello method on the hello world contract
+    
+    Parameters for creating an application.
+    - sender: The address of the account that will send the transaction
+    - approval_program: The program to execute for all OnCompletes other than ClearState as raw teal (string)
+        or compiled teal (bytes)
+    - clear_state_program: The program to execute for ClearState OnComplete as raw teal (string)
+        or compiled teal (bytes)
     """
-    hello_world_client, deploy_result = factory.deploy(
-        on_update=OnUpdate.ReplaceApp,
-        on_schema_break=OnSchemaBreak.Fail,
-    )
-
-    print(f"Deploy Result1: {deploy_result}")
-
-    hello_world_client, deploy_result = factory.send.create.bare()
-
-    print(f"Deploy Result2: {deploy_result}")
-
-    # TODO: This is not working. Need to figure out why.
-    result = algorand_client.send.app_create(
+    result1 = algorand_client.create_transaction.app_create(
         AppCreateParams(
             sender=account1.address,
-            approval_program=hello_world_client.app_spec.source.approval,
-            clear_state_program=hello_world_client.app_spec.source.clear,
+            approval_program=minimalTEAL,
+            clear_state_program=minimalTEAL,
         )
     )
 
@@ -274,86 +237,165 @@ def transaction_types() -> None:
 
     # example: APPLICATION_NO_OP_TRANSACTION
 
-    # """
-    # Create a unsigned application call transaction calling the hello method on the hello world contract
-    # """
-    # app_call_txn = algorand_client.create_transaction.a.app_call(
-    #     AppCallParams(
-    #         sender=account1.address,
-    #         app_id=1,
-    #         method="hello",
-    #         method_args=["Hello, World!"],
-    #     )
-    # )
+    """
+    Create a unsigned application call transaction with the NoOp OnComplete actions
 
-    # """
-    # Directly send a application call transaction for account1 using the AlgorandClient
-    # """
-    # algorand_client.send.app_call(
-    #     AppCallParams(
-    #         sender=account1.address,
-    #         app_id=1,
-    #         method="hello",
-    #         method_args=["Hello, World!"],
-    #     )
-    # )
+    Parameters for calling an application.
+    - sender: The address of the account that will send the transaction
+    - on_complete: The OnComplete action
+    - app_id: ID of the application, defaults to None
+    """
+    app_call_txn = algorand_client.create_transaction.app_call(
+        AppCallParams(
+            sender=account1.address,
+            app_id=1234,
+            on_complete=algosdk.transaction.OnComplete.NoOpOC,
+        )
+    )
+
     # example: APPLICATION_NO_OP_TRANSACTION
-    # # example: APPLICATION_UPDATE_TRANSACTION
-    # # example: APPLICATION_UPDATE_TRANSACTION
-    # # example: APPLICATION_DELETE_TRANSACTION
-    # # example: APPLICATION_DELETE_TRANSACTION
-    # # example: APPLICATION_OPT_IN_TRANSACTION
-    # # example: APPLICATION_OPT_IN_TRANSACTION
-    # # example: APPLICATION_CLOSE_OUT_TRANSACTION
-    # # example: APPLICATION_CLOSE_OUT_TRANSACTION
-    # # example: APPLICATION_CLEAR_STATE_TRANSACTION
-    # # example: APPLICATION_CLEAR_STATE_TRANSACTION
 
-    # # example: KEY_REGISTRATION_TRANSACTION
+    # example: APPLICATION_UPDATE_TRANSACTION
 
-    # """
-    # Create a unsigned key registration transaction for account1
-    # """
-    # key_registration_txn = algorand_client.create_transaction.key_registration(
-    #     KeyRegistrationParams(
-    #         sender=account1.address,
-    #         key=account1.signer,
-    #     )
-    # )
+    """
+    Create a unsigned application update transaction updating the approval program and clear state program of an application
 
-    # """
-    # Directly send a key registration transaction for account1 using the AlgorandClient
-    # """
-    # algorand_client.send.key_registration(
-    #     KeyRegistrationParams(
-    #         sender=account1.address,
-    #         key=account1.signer,
-    #     )
-    # )
-    # # example: KEY_REGISTRATION_TRANSACTION
+    Parameters for updating an application.
+    - sender: The address of the account that will send the transaction
+    - app_id: ID of the application
+    - approval_program: The program to execute for all OnCompletes other than ClearState as raw teal (string)
+        or compiled teal (bytes)
+    - clear_state_program: The program to execute for ClearState OnComplete as raw teal (string)
+        or compiled teal (bytes)
+    """
+    algorand_client.create_transaction.app_update(
+        AppUpdateParams(
+            sender=account1.address,
+            app_id=1234,
+            approval_program=minimalTEAL,
+            clear_state_program=minimalTEAL,
+        )
+    )
+    # example: APPLICATION_UPDATE_TRANSACTION
 
-    # # example: STATE_PROOF_TRANSACTION
+    # example: APPLICATION_DELETE_TRANSACTION
 
-    # """
-    # Create a unsigned state proof transaction for account1
-    # """
-    # state_proof_txn = algorand_client.create_transaction.state_proof(
-    #     StateProofParams(
-    #         sender=account1.address,
-    #         asset_id=1,
-    #     )
-    # )
+    """
+    Create an unsigned application delete transaction deleting an application with app id 1234
 
-    # """
-    # Directly send a state proof transaction for account1 using the AlgorandClient
-    # """
-    # algorand_client.send.state_proof(
-    #     StateProofParams(
-    #         sender=account1.address,
-    #         asset_id=1,
-    #     )
-    # )
-    # example: STATE_PROOF_TRANSACTION
+    Parameters for deleting an application.
+    - sender: The address of the account that will send the transaction
+    - app_id: ID of the application
+    - on_complete: The OnComplete action, defaults to DeleteApplicationOC
+    """
+    algorand_client.create_transaction.app_delete(
+        AppDeleteParams(
+            sender=account1.address,
+            app_id=1234,
+        )
+    )
+    # example: APPLICATION_DELETE_TRANSACTION
+
+    # example: APPLICATION_OPT_IN_TRANSACTION
+
+    """
+    Create a unsigned application call transaction with the OptIn OnComplete action
+
+    Parameters for calling an application.
+    - sender: The address of the account that will send the transaction
+    - on_complete: The OnComplete action
+    - app_id: ID of the application, defaults to None
+    """
+    algorand_client.create_transaction.app_call(
+        AppCallParams(
+            sender=account1.address,
+            app_id=1234,
+            on_complete=algosdk.transaction.OnComplete.OptInOC,
+        )
+    )
+    # example: APPLICATION_OPT_IN_TRANSACTION
+
+    # example: APPLICATION_CLOSE_OUT_TRANSACTION
+
+    """
+    Create a unsigned application call transaction with the CloseOut OnComplete action
+
+    Parameters for calling an application.
+    - sender: The address of the account that will send the transaction
+    - on_complete: The OnComplete action
+    - app_id: ID of the application, defaults to None
+    """
+    algorand_client.create_transaction.app_call(
+        AppCallParams(
+            sender=account1.address,
+            app_id=1234,
+            on_complete=algosdk.transaction.OnComplete.CloseOutOC,
+        )
+    )
+    # example: APPLICATION_CLOSE_OUT_TRANSACTION
+
+    # example: APPLICATION_CLEAR_STATE_TRANSACTION
+
+    """
+    Create a unsigned application call transaction with the ClearState OnComplete action
+
+    Parameters for calling an application.
+    - sender: The address of the account that will send the transaction
+    - on_complete: The OnComplete action
+    - app_id: ID of the application, defaults to None
+    """
+    algorand_client.create_transaction.app_call(
+        AppCallParams(
+            sender=account1.address,
+            app_id=1234,
+            on_complete=algosdk.transaction.OnComplete.ClearStateOC,
+        )
+    )
+    # example: APPLICATION_CLEAR_STATE_TRANSACTION
+
+    # example: KEY_REGISTRATION_TRANSACTION
+
+    """
+    Create an unsigned online key registration transaction
+
+    Parameters for online key registration.
+    - sender: The address of the account that will send the transaction
+    - vote_key: The root participation public key
+    - selection_key: The VRF public key
+    - vote_first: The first round that the participation key is valid
+    - vote_last: The last round that the participation key is valid
+    - vote_key_dilution: The dilution for the 2-level participation key
+    """
+    online_key_registration_txn = (
+        algorand_client.create_transaction.online_key_registration(
+            OnlineKeyRegistrationParams(
+                sender=account1.address,
+                vote_key="participation-public-key",
+                selection_key="vrf-public-key",
+                vote_first=1,
+                vote_last=100,
+                vote_key_dilution=1,
+            )
+        )
+    )
+
+    """
+    Create an unsigned offline key registration transaction
+
+    Parameters for offline key registration.
+    - sender: The address of the account that will send the transaction
+    - prevent_account_from_ever_participating_again: Whether to prevent the account from ever participating again
+    """
+    offline_key_registration_txn = (
+        algorand_client.create_transaction.offline_key_registration(
+            OfflineKeyRegistrationParams(
+                sender=account1.address,
+                prevent_account_from_ever_participating_again=False,
+            )
+        )
+    )
+
+    # example: KEY_REGISTRATION_TRANSACTION
 
 
 transaction_types()
