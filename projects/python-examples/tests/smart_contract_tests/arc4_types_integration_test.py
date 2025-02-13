@@ -1,10 +1,19 @@
 import pytest
-from algokit_utils import *
+from algokit_utils import (
+    AlgoAmount,
+    AlgorandClient,
+    CommonAppCallParams,
+    OnSchemaBreak,
+    OnUpdate,
+    PaymentParams,
+    SigningAccount,
+)
 from algokit_utils.config import config
+
 from smart_contracts.artifacts.arc4_types.arc4_dynamic_array_client import (
     Arc4DynamicArrayClient,
-    HelloArgs,
     Arc4DynamicArrayFactory,
+    HelloArgs,
 )
 from smart_contracts.artifacts.arc4_types.arc4_static_array_client import (
     Arc4StaticArrayClient,
@@ -310,7 +319,8 @@ def test_arc4_dynamic_bytes(
     # Call the arc4_static_array method.
     result = arc4_dynamic_array_app_client.send.arc4_dynamic_bytes()
 
-    assert result.abi_return == [0, 255, 255, 170, 187, 255]
+    assert result.abi_return is not None
+    assert result.abi_return == [0, 255, 255, 170, 187, 255]  # type: ignore[comparison-overlap]
 
 
 def test_arc4_struct_add_todo(arc4_struct_app_client: Arc4StructClient) -> None:
@@ -319,6 +329,7 @@ def test_arc4_struct_add_todo(arc4_struct_app_client: Arc4StructClient) -> None:
     # Call the add_todo method
     result = arc4_struct_app_client.send.add_todo(AddTodoArgs(task="wash the dishes"))
 
+    assert result.abi_return is not None, "Expected ABI return for add_todo"
     assert result.abi_return[0][0] == "wash the dishes"
     assert result.abi_return[0][1] is False
     assert len(result.abi_return) == 1
@@ -326,34 +337,35 @@ def test_arc4_struct_add_todo(arc4_struct_app_client: Arc4StructClient) -> None:
 
 def test_arc4_struct_complete_and_return_todo(
     arc4_struct_app_client: Arc4StructClient,
+    algorand: AlgorandClient,
 ) -> None:
     """Test the complete_todo method"""
 
     # Call the add_todo method
-    result = arc4_struct_app_client.send.add_todo(AddTodoArgs(task="walk my dogs"))
+    arc4_struct_app_client.send.add_todo(AddTodoArgs(task="walk my dogs"))
 
     result = arc4_struct_app_client.send.return_todo(
         ReturnTodoArgs(task="walk my dogs")
     )
 
-    # Check the result
+    # Check the result using tuple indexing (i.e. [0] for task and [1] for completion flag)
+    assert result.abi_return is not None, "Expected ABI return for return_todo"
     assert result.abi_return.task == "walk my dogs"
     assert result.abi_return.completed is False
 
     # Call the complete_todo method
-    result = arc4_struct_app_client.send.complete_todo(
-        CompleteTodoArgs(task="walk my dogs")
-    )
-    print("todo_result", result)
+    arc4_struct_app_client.send.complete_todo(CompleteTodoArgs(task="walk my dogs"))
+    # print("todo_result", result)
 
     result = arc4_struct_app_client.send.return_todo(
         ReturnTodoArgs(task="walk my dogs"),
         params=CommonAppCallParams(
-            first_valid_round=result.confirmation["confirmed-round"] + 1
+            first_valid_round=algorand.get_suggested_params().first + 1
         ),
     )
 
-    # Check the result
+    # Check the result for the completed todo using tuple indexing
+    assert result.abi_return is not None, "Expected ABI return for completed todo"
     assert result.abi_return.task == "walk my dogs"
     assert result.abi_return.completed is True
 
@@ -377,4 +389,5 @@ def test_tuple_return_contact(
 
     result = arc4_tuple_app_client.send.return_contact()
 
-    assert result.abi_return == ["Alice", "alice@something.com", 555_555_555]
+    assert result.abi_return is not None, "Expected ABI return for return_contact"
+    assert result.abi_return == ["Alice", "alice@something.com", 555_555_555]  # type: ignore[comparison-overlap]
