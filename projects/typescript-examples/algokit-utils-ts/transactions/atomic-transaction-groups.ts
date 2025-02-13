@@ -1,8 +1,8 @@
-import { algo } from "@algorandfoundation/algokit-utils";
-import { setupLocalnetEnvironment } from "@/algokit-utils-ts/setup-localnet-environment";
+import { algo } from '@algorandfoundation/algokit-utils'
+import { setupLocalnetEnvironment } from '@/algokit-utils-ts/setup-localnet-environment'
 
 async function atomicTransactionGroups() {
-  const { algorand, randomAccountA, randomAccountB, randomAccountC } = await setupLocalnetEnvironment();
+  const { algorand, randomAccountA, randomAccountB, randomAccountC } = await setupLocalnetEnvironment()
 
   // example: ATOMIC_GROUP
   // Create a transaction group that will execute atomically
@@ -14,17 +14,17 @@ async function atomicTransactionGroups() {
       sender: randomAccountA,
       receiver: randomAccountB,
       amount: algo(1),
-      note: "First payment in atomic group",
+      note: 'First payment in atomic group',
     })
     // Second transaction: Payment from B to C
     .addPayment({
       sender: randomAccountB,
       receiver: randomAccountC,
       amount: algo(0.5), // B sends half of what they received to C
-      note: "Second payment in atomic group",
+      note: 'Second payment in atomic group',
     })
     // Send the atomic group of transactions
-    .send();
+    .send()
   // example: ATOMIC_GROUP
 
   // example: ATOMIC_GROUP_SIMULATE
@@ -41,25 +41,25 @@ async function atomicTransactionGroups() {
       sender: randomAccountB,
       receiver: randomAccountC,
       amount: algo(0.5),
-    });
+    })
 
   // Simulate the transaction group to:
   // - Verify it will succeed
   // - Understand its effects
   // - Get execution costs
   // - Debug any issues
-  const simulateResult = await group.simulate();
-  const txnGroup = simulateResult.simulateResponse.txnGroups[0];
+  const simulateResult = await group.simulate()
+  const txnGroup = simulateResult.simulateResponse.txnGroups[0]
 
-  console.log("Simulation results:", {
+  console.log('Simulation results:', {
     round: simulateResult.simulateResponse.lastRound,
     success: !txnGroup.failureMessage,
-    error: txnGroup.failureMessage || "None",
-  });
+    error: txnGroup.failureMessage || 'None',
+  })
 
   // If simulation succeeds, send the actual transaction
-  await group.send();
+  await group.send()
   // example: ATOMIC_GROUP_SIMULATE
 }
 
-atomicTransactionGroups();
+atomicTransactionGroups()

@@ -1,16 +1,16 @@
-import { algo } from "@algorandfoundation/algokit-utils";
-import { setupLocalnetEnvironment } from "@/algokit-utils-ts/setup-localnet-environment";
+import { algo } from '@algorandfoundation/algokit-utils'
+import { setupLocalnetEnvironment } from '@/algokit-utils-ts/setup-localnet-environment'
 
 async function signingTransactions() {
-  const { algorand, randomAccountA, randomAccountB } = await setupLocalnetEnvironment();
+  const { algorand, randomAccountA, randomAccountB } = await setupLocalnetEnvironment()
 
   // example: SIGN_TRANSACTION
   // Set up a default signer for transactions
   // This will be used when no specific signer is provided
-  algorand.account.setDefaultSigner(randomAccountA);
+  algorand.account.setDefaultSigner(randomAccountA)
 
   // Register multiple transaction signers at once using the fluent interface
-  algorand.account.setSignerFromAccount(randomAccountA).setSignerFromAccount(randomAccountB);
+  algorand.account.setSignerFromAccount(randomAccountA).setSignerFromAccount(randomAccountB)
 
   // Create and send a transaction - it will be automatically signed
   // using the registered signer for randomAccountA
@@ -18,7 +18,7 @@ async function signingTransactions() {
     sender: randomAccountA,
     receiver: randomAccountB,
     amount: algo(1),
-  });
+  })
   // example: SIGN_TRANSACTION
 
   // example: SIGN_TRANSACTION_GROUP
@@ -36,8 +36,8 @@ async function signingTransactions() {
       receiver: randomAccountA,
       amount: algo(0.5),
     })
-    .send();
+    .send()
   // example: SIGN_TRANSACTION_GROUP
 }
 
-signingTransactions();
+signingTransactions()
