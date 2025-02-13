@@ -7,6 +7,8 @@ repos:
         description: "Black: The uncompromising Python code formatter"
         entry: bash -c 'cd projects/python-examples && poetry run black'
         language: system
+        minimum_pre_commit_version: 2.9.2
+        require_serial: true
         types_or: [python, pyi]
 
       - id: ruff
@@ -15,6 +17,9 @@ repos:
         entry: bash -c 'cd projects/python-examples && poetry run ruff check --fix'
         language: system
         types: [python]
+        require_serial: false
+        additional_dependencies: []
+        minimum_pre_commit_version: "0"
         files: "^projects/python-examples/(src|tests)/"
 
       - id: mypy
@@ -23,6 +28,9 @@ repos:
         entry: bash -c 'cd projects/python-examples && poetry run mypy'
         language: system
         types_or: [python, pyi]
+        require_serial: true
+        additional_dependencies: []
+        minimum_pre_commit_version: "2.9.2"
         files: "^projects/python-examples/(src|tests)/"
 
       # TypeScript hooks
