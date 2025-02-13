@@ -1,0 +1,2788 @@
+{
+  "success": false,
+  "error": null,
+  "result": [
+    {
+      "type": "ExecutionPaths",
+      "count": 8,
+      "description": "\nCheck: \"unprotected-deletable\", Impact: High, Confidence: High\nDescription: Unprotected Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-deletable-application\n",
+      "check": "unprotected-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "92: pushbytes \"Invalid day\"",
+              "93: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 16 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "131: get_day_switch_case_0@1:",
+              "134: pushbytes \"Monday\"",
+              "135: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 15 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "125: get_day_switch_case_1@2:",
+              "128: pushbytes \"Tuesday\"",
+              "129: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "119: get_day_switch_case_2@3:",
+              "122: pushbytes \"Wednesday\"",
+              "123: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 13 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "113: get_day_switch_case_3@4:",
+              "116: pushbytes \"Thursday\"",
+              "117: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 12 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "107: get_day_switch_case_4@5:",
+              "110: pushbytes \"Friday\"",
+              "111: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 11 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "101: get_day_switch_case_5@6:",
+              "104: pushbytes \"Saturday\"",
+              "105: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 10 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "95: get_day_switch_case_6@7:",
+              "98: pushbytes \"Sunday\"",
+              "99: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 8,
+      "description": "\nCheck: \"unprotected-updatable\", Impact: High, Confidence: High\nDescription: Unprotected Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-updatable-application\n",
+      "check": "unprotected-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "92: pushbytes \"Invalid day\"",
+              "93: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 16 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "131: get_day_switch_case_0@1:",
+              "134: pushbytes \"Monday\"",
+              "135: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 15 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "125: get_day_switch_case_1@2:",
+              "128: pushbytes \"Tuesday\"",
+              "129: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "119: get_day_switch_case_2@3:",
+              "122: pushbytes \"Wednesday\"",
+              "123: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 13 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "113: get_day_switch_case_3@4:",
+              "116: pushbytes \"Thursday\"",
+              "117: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 12 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "107: get_day_switch_case_4@5:",
+              "110: pushbytes \"Friday\"",
+              "111: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 11 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "101: get_day_switch_case_5@6:",
+              "104: pushbytes \"Saturday\"",
+              "105: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 10 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "95: get_day_switch_case_6@7:",
+              "98: pushbytes \"Sunday\"",
+              "99: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"can-close-account\", Impact: High, Confidence: High\nDescription: Missing CloseRemainderTo field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-closeremainderto-field-validation\n",
+      "check": "can-close-account",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `CloseRemainderTo` field in the LogicSig.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"can-close-asset\", Impact: High, Confidence: High\nDescription: Missing AssetCloseTo Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-assetcloseto-field-validation\n",
+      "check": "can-close-asset",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `AssetCloseTo` field in the LogicSig.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 8,
+      "description": "\nCheck: \"is-deletable\", Impact: High, Confidence: High\nDescription: Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#deletable-application\n",
+      "check": "is-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `DeleteApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "92: pushbytes \"Invalid day\"",
+              "93: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 16 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "131: get_day_switch_case_0@1:",
+              "134: pushbytes \"Monday\"",
+              "135: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 15 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "125: get_day_switch_case_1@2:",
+              "128: pushbytes \"Tuesday\"",
+              "129: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "119: get_day_switch_case_2@3:",
+              "122: pushbytes \"Wednesday\"",
+              "123: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 13 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "113: get_day_switch_case_3@4:",
+              "116: pushbytes \"Thursday\"",
+              "117: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 12 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "107: get_day_switch_case_4@5:",
+              "110: pushbytes \"Friday\"",
+              "111: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 11 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "101: get_day_switch_case_5@6:",
+              "104: pushbytes \"Saturday\"",
+              "105: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 10 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "95: get_day_switch_case_6@7:",
+              "98: pushbytes \"Sunday\"",
+              "99: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 8,
+      "description": "\nCheck: \"is-updatable\", Impact: High, Confidence: High\nDescription: Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#upgradable-application\n",
+      "check": "is-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `UpdateApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "92: pushbytes \"Invalid day\"",
+              "93: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 16 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "131: get_day_switch_case_0@1:",
+              "134: pushbytes \"Monday\"",
+              "135: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 15 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "125: get_day_switch_case_1@2:",
+              "128: pushbytes \"Tuesday\"",
+              "129: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "119: get_day_switch_case_2@3:",
+              "122: pushbytes \"Wednesday\"",
+              "123: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 13 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "113: get_day_switch_case_3@4:",
+              "116: pushbytes \"Thursday\"",
+              "117: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 12 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "107: get_day_switch_case_4@5:",
+              "110: pushbytes \"Friday\"",
+              "111: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 11 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "101: get_day_switch_case_5@6:",
+              "104: pushbytes \"Saturday\"",
+              "105: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 10 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "95: get_day_switch_case_6@7:",
+              "98: pushbytes \"Sunday\"",
+              "99: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 9,
+      "description": "\nCheck: \"missing-fee-check\", Impact: High, Confidence: High\nDescription: Missing Fee Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-fee-field-validation\n",
+      "check": "missing-fee-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `Fee` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "92: pushbytes \"Invalid day\"",
+              "93: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 16 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "131: get_day_switch_case_0@1:",
+              "134: pushbytes \"Monday\"",
+              "135: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 15 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "125: get_day_switch_case_1@2:",
+              "128: pushbytes \"Tuesday\"",
+              "129: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "119: get_day_switch_case_2@3:",
+              "122: pushbytes \"Wednesday\"",
+              "123: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 13 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "113: get_day_switch_case_3@4:",
+              "116: pushbytes \"Thursday\"",
+              "117: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 12 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "107: get_day_switch_case_4@5:",
+              "110: pushbytes \"Friday\"",
+              "111: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 11 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "101: get_day_switch_case_5@6:",
+              "104: pushbytes \"Saturday\"",
+              "105: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 10 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "95: get_day_switch_case_6@7:",
+              "98: pushbytes \"Sunday\"",
+              "99: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 6 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "51: main_bare_routing@6:",
+              "55: txn OnCompletion",
+              "56: bnz main_after_if_else@10"
+            ],
+            [
+              "57: txn ApplicationID",
+              "58: !",
+              "59: assert",
+              "60: pushint 1",
+              "61: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"group-size-check\", Impact: High, Confidence: High\nDescription: Usage of absolute indexes without validating GroupSize\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-groupsize-validation\n",
+      "check": "group-size-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid using absolute indexes. Validate GroupSize if used.\n- Favor using ARC-4 ABI and relative indexes for group transactions.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 9,
+      "description": "\nCheck: \"rekey-to\", Impact: High, Confidence: High\nDescription: Rekeyable Logic Signatures\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#rekeyable-logicsig\n",
+      "check": "rekey-to",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `RekeyTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "92: pushbytes \"Invalid day\"",
+              "93: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 16 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "131: get_day_switch_case_0@1:",
+              "134: pushbytes \"Monday\"",
+              "135: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 15 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "125: get_day_switch_case_1@2:",
+              "128: pushbytes \"Tuesday\"",
+              "129: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "119: get_day_switch_case_2@3:",
+              "122: pushbytes \"Wednesday\"",
+              "123: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 13 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "113: get_day_switch_case_3@4:",
+              "116: pushbytes \"Thursday\"",
+              "117: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 12 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "107: get_day_switch_case_4@5:",
+              "110: pushbytes \"Friday\"",
+              "111: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 11 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "101: get_day_switch_case_5@6:",
+              "104: pushbytes \"Saturday\"",
+              "105: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 10 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "11: pushbytes 0xe5a4ea52",
+              "12: txna ApplicationArgs 0",
+              "13: match main_get_day_route@3"
+            ],
+            [
+              "22: main_get_day_route@3:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "33: txna ApplicationArgs 1",
+              "34: btoi",
+              "37: callsub get_day"
+            ],
+            [
+              "65: get_day:",
+              "69: proto 1 1",
+              "88: frame_dig -1",
+              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+            ],
+            [
+              "95: get_day_switch_case_6@7:",
+              "98: pushbytes \"Sunday\"",
+              "99: retsub"
+            ],
+            [
+              "38: dup",
+              "39: len",
+              "40: itob",
+              "41: extract 6 2",
+              "42: swap",
+              "43: concat",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 6 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "9: txn NumAppArgs",
+              "10: bz main_bare_routing@6"
+            ],
+            [
+              "51: main_bare_routing@6:",
+              "55: txn OnCompletion",
+              "56: bnz main_after_if_else@10"
+            ],
+            [
+              "57: txn ApplicationID",
+              "58: !",
+              "59: assert",
+              "60: pushint 1",
+              "61: return"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

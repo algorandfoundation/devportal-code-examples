@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { setupLocalnetEnvironment } from "@/algokit-utils-ts/setup-localnet-environment";
 
-async function keysAndSigning() {
+export async function keysAndSigning() {
   const { algorand, randomAccountA, randomAccountB, randomAccountC } = await setupLocalnetEnvironment();
 
   // example: DEFAULT_SIGNER
@@ -27,3 +28,5 @@ async function keysAndSigning() {
   const signer = algorand.account.getSigner("ACCOUNT_ADDRESS");
   // example: GET_SIGNER
 }
+
+keysAndSigning();

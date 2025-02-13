@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { setupLocalnetEnvironment } from "@/algokit-utils-ts/setup-localnet-environment";
 
 async function creatingAccounts() {

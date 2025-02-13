@@ -1,0 +1,1380 @@
+{
+  "success": false,
+  "error": null,
+  "result": [
+    {
+      "type": "ExecutionPaths",
+      "count": 4,
+      "description": "\nCheck: \"unprotected-deletable\", Impact: High, Confidence: High\nDescription: Unprotected Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-deletable-application\n",
+      "check": "unprotected-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "16: main_after_if_else@10:",
+              "20: intc_1",
+              "21: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 10 -> 12 -> 13 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "23: main_loop_route@3:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "31: callsub loop"
+            ],
+            [
+              "54: loop:",
+              "58: proto 0 1",
+              "59: pushbytes \"\"",
+              "62: pushint 10",
+              "65: intc_1"
+            ],
+            [
+              "67: loop_while_top@1:",
+              "68: frame_dig 2",
+              "69: frame_bury 0",
+              "72: frame_dig 1",
+              "73: bz loop_after_while@7"
+            ],
+            [
+              "76: frame_dig 1",
+              "77: pushint 5",
+              "78: >",
+              "79: bz loop_after_if_else@4"
+            ],
+            [
+              "96: loop_after_if_else@4:",
+              "99: frame_dig 1",
+              "100: pushint 2",
+              "101: -",
+              "102: dup",
+              "103: frame_bury 1",
+              "106: frame_dig 2",
+              "107: intc_0",
+              "108: +",
+              "109: frame_bury 2",
+              "112: intc_0",
+              "113: ==",
+              "114: bz loop_while_top@1"
+            ],
+            [
+              "115: frame_dig 2",
+              "116: frame_bury 0"
+            ],
+            [
+              "118: loop_after_while@7:",
+              "121: retsub"
+            ],
+            [
+              "32: itob",
+              "33: pushbytes 0x151f7c75",
+              "34: swap",
+              "35: concat",
+              "36: log",
+              "37: intc_0",
+              "38: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "23: main_loop_route@3:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "31: callsub loop"
+            ],
+            [
+              "54: loop:",
+              "58: proto 0 1",
+              "59: pushbytes \"\"",
+              "62: pushint 10",
+              "65: intc_1"
+            ],
+            [
+              "67: loop_while_top@1:",
+              "68: frame_dig 2",
+              "69: frame_bury 0",
+              "72: frame_dig 1",
+              "73: bz loop_after_while@7"
+            ],
+            [
+              "118: loop_after_while@7:",
+              "121: retsub"
+            ],
+            [
+              "32: itob",
+              "33: pushbytes 0x151f7c75",
+              "34: swap",
+              "35: concat",
+              "36: log",
+              "37: intc_0",
+              "38: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 6 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "40: main_bare_routing@6:",
+              "44: txn OnCompletion",
+              "45: bnz main_after_if_else@10"
+            ],
+            [
+              "16: main_after_if_else@10:",
+              "20: intc_1",
+              "21: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 4,
+      "description": "\nCheck: \"unprotected-updatable\", Impact: High, Confidence: High\nDescription: Unprotected Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-updatable-application\n",
+      "check": "unprotected-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "16: main_after_if_else@10:",
+              "20: intc_1",
+              "21: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 10 -> 12 -> 13 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "23: main_loop_route@3:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "31: callsub loop"
+            ],
+            [
+              "54: loop:",
+              "58: proto 0 1",
+              "59: pushbytes \"\"",
+              "62: pushint 10",
+              "65: intc_1"
+            ],
+            [
+              "67: loop_while_top@1:",
+              "68: frame_dig 2",
+              "69: frame_bury 0",
+              "72: frame_dig 1",
+              "73: bz loop_after_while@7"
+            ],
+            [
+              "76: frame_dig 1",
+              "77: pushint 5",
+              "78: >",
+              "79: bz loop_after_if_else@4"
+            ],
+            [
+              "96: loop_after_if_else@4:",
+              "99: frame_dig 1",
+              "100: pushint 2",
+              "101: -",
+              "102: dup",
+              "103: frame_bury 1",
+              "106: frame_dig 2",
+              "107: intc_0",
+              "108: +",
+              "109: frame_bury 2",
+              "112: intc_0",
+              "113: ==",
+              "114: bz loop_while_top@1"
+            ],
+            [
+              "115: frame_dig 2",
+              "116: frame_bury 0"
+            ],
+            [
+              "118: loop_after_while@7:",
+              "121: retsub"
+            ],
+            [
+              "32: itob",
+              "33: pushbytes 0x151f7c75",
+              "34: swap",
+              "35: concat",
+              "36: log",
+              "37: intc_0",
+              "38: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "23: main_loop_route@3:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "31: callsub loop"
+            ],
+            [
+              "54: loop:",
+              "58: proto 0 1",
+              "59: pushbytes \"\"",
+              "62: pushint 10",
+              "65: intc_1"
+            ],
+            [
+              "67: loop_while_top@1:",
+              "68: frame_dig 2",
+              "69: frame_bury 0",
+              "72: frame_dig 1",
+              "73: bz loop_after_while@7"
+            ],
+            [
+              "118: loop_after_while@7:",
+              "121: retsub"
+            ],
+            [
+              "32: itob",
+              "33: pushbytes 0x151f7c75",
+              "34: swap",
+              "35: concat",
+              "36: log",
+              "37: intc_0",
+              "38: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 6 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "40: main_bare_routing@6:",
+              "44: txn OnCompletion",
+              "45: bnz main_after_if_else@10"
+            ],
+            [
+              "16: main_after_if_else@10:",
+              "20: intc_1",
+              "21: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 2,
+      "description": "\nCheck: \"can-close-account\", Impact: High, Confidence: High\nDescription: Missing CloseRemainderTo field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-closeremainderto-field-validation\n",
+      "check": "can-close-account",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `CloseRemainderTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "16: main_after_if_else@10:",
+              "20: intc_1",
+              "21: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 6 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "40: main_bare_routing@6:",
+              "44: txn OnCompletion",
+              "45: bnz main_after_if_else@10"
+            ],
+            [
+              "16: main_after_if_else@10:",
+              "20: intc_1",
+              "21: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 2,
+      "description": "\nCheck: \"can-close-asset\", Impact: High, Confidence: High\nDescription: Missing AssetCloseTo Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-assetcloseto-field-validation\n",
+      "check": "can-close-asset",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `AssetCloseTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "16: main_after_if_else@10:",
+              "20: intc_1",
+              "21: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 6 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "40: main_bare_routing@6:",
+              "44: txn OnCompletion",
+              "45: bnz main_after_if_else@10"
+            ],
+            [
+              "16: main_after_if_else@10:",
+              "20: intc_1",
+              "21: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 4,
+      "description": "\nCheck: \"is-deletable\", Impact: High, Confidence: High\nDescription: Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#deletable-application\n",
+      "check": "is-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `DeleteApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "16: main_after_if_else@10:",
+              "20: intc_1",
+              "21: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 10 -> 12 -> 13 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "23: main_loop_route@3:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "31: callsub loop"
+            ],
+            [
+              "54: loop:",
+              "58: proto 0 1",
+              "59: pushbytes \"\"",
+              "62: pushint 10",
+              "65: intc_1"
+            ],
+            [
+              "67: loop_while_top@1:",
+              "68: frame_dig 2",
+              "69: frame_bury 0",
+              "72: frame_dig 1",
+              "73: bz loop_after_while@7"
+            ],
+            [
+              "76: frame_dig 1",
+              "77: pushint 5",
+              "78: >",
+              "79: bz loop_after_if_else@4"
+            ],
+            [
+              "96: loop_after_if_else@4:",
+              "99: frame_dig 1",
+              "100: pushint 2",
+              "101: -",
+              "102: dup",
+              "103: frame_bury 1",
+              "106: frame_dig 2",
+              "107: intc_0",
+              "108: +",
+              "109: frame_bury 2",
+              "112: intc_0",
+              "113: ==",
+              "114: bz loop_while_top@1"
+            ],
+            [
+              "115: frame_dig 2",
+              "116: frame_bury 0"
+            ],
+            [
+              "118: loop_after_while@7:",
+              "121: retsub"
+            ],
+            [
+              "32: itob",
+              "33: pushbytes 0x151f7c75",
+              "34: swap",
+              "35: concat",
+              "36: log",
+              "37: intc_0",
+              "38: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "23: main_loop_route@3:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "31: callsub loop"
+            ],
+            [
+              "54: loop:",
+              "58: proto 0 1",
+              "59: pushbytes \"\"",
+              "62: pushint 10",
+              "65: intc_1"
+            ],
+            [
+              "67: loop_while_top@1:",
+              "68: frame_dig 2",
+              "69: frame_bury 0",
+              "72: frame_dig 1",
+              "73: bz loop_after_while@7"
+            ],
+            [
+              "118: loop_after_while@7:",
+              "121: retsub"
+            ],
+            [
+              "32: itob",
+              "33: pushbytes 0x151f7c75",
+              "34: swap",
+              "35: concat",
+              "36: log",
+              "37: intc_0",
+              "38: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 6 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "40: main_bare_routing@6:",
+              "44: txn OnCompletion",
+              "45: bnz main_after_if_else@10"
+            ],
+            [
+              "16: main_after_if_else@10:",
+              "20: intc_1",
+              "21: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 4,
+      "description": "\nCheck: \"is-updatable\", Impact: High, Confidence: High\nDescription: Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#upgradable-application\n",
+      "check": "is-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `UpdateApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "16: main_after_if_else@10:",
+              "20: intc_1",
+              "21: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 10 -> 12 -> 13 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "23: main_loop_route@3:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "31: callsub loop"
+            ],
+            [
+              "54: loop:",
+              "58: proto 0 1",
+              "59: pushbytes \"\"",
+              "62: pushint 10",
+              "65: intc_1"
+            ],
+            [
+              "67: loop_while_top@1:",
+              "68: frame_dig 2",
+              "69: frame_bury 0",
+              "72: frame_dig 1",
+              "73: bz loop_after_while@7"
+            ],
+            [
+              "76: frame_dig 1",
+              "77: pushint 5",
+              "78: >",
+              "79: bz loop_after_if_else@4"
+            ],
+            [
+              "96: loop_after_if_else@4:",
+              "99: frame_dig 1",
+              "100: pushint 2",
+              "101: -",
+              "102: dup",
+              "103: frame_bury 1",
+              "106: frame_dig 2",
+              "107: intc_0",
+              "108: +",
+              "109: frame_bury 2",
+              "112: intc_0",
+              "113: ==",
+              "114: bz loop_while_top@1"
+            ],
+            [
+              "115: frame_dig 2",
+              "116: frame_bury 0"
+            ],
+            [
+              "118: loop_after_while@7:",
+              "121: retsub"
+            ],
+            [
+              "32: itob",
+              "33: pushbytes 0x151f7c75",
+              "34: swap",
+              "35: concat",
+              "36: log",
+              "37: intc_0",
+              "38: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "23: main_loop_route@3:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "31: callsub loop"
+            ],
+            [
+              "54: loop:",
+              "58: proto 0 1",
+              "59: pushbytes \"\"",
+              "62: pushint 10",
+              "65: intc_1"
+            ],
+            [
+              "67: loop_while_top@1:",
+              "68: frame_dig 2",
+              "69: frame_bury 0",
+              "72: frame_dig 1",
+              "73: bz loop_after_while@7"
+            ],
+            [
+              "118: loop_after_while@7:",
+              "121: retsub"
+            ],
+            [
+              "32: itob",
+              "33: pushbytes 0x151f7c75",
+              "34: swap",
+              "35: concat",
+              "36: log",
+              "37: intc_0",
+              "38: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 6 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "40: main_bare_routing@6:",
+              "44: txn OnCompletion",
+              "45: bnz main_after_if_else@10"
+            ],
+            [
+              "16: main_after_if_else@10:",
+              "20: intc_1",
+              "21: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 5,
+      "description": "\nCheck: \"missing-fee-check\", Impact: High, Confidence: High\nDescription: Missing Fee Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-fee-field-validation\n",
+      "check": "missing-fee-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `Fee` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "16: main_after_if_else@10:",
+              "20: intc_1",
+              "21: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 10 -> 12 -> 13 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "23: main_loop_route@3:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "31: callsub loop"
+            ],
+            [
+              "54: loop:",
+              "58: proto 0 1",
+              "59: pushbytes \"\"",
+              "62: pushint 10",
+              "65: intc_1"
+            ],
+            [
+              "67: loop_while_top@1:",
+              "68: frame_dig 2",
+              "69: frame_bury 0",
+              "72: frame_dig 1",
+              "73: bz loop_after_while@7"
+            ],
+            [
+              "76: frame_dig 1",
+              "77: pushint 5",
+              "78: >",
+              "79: bz loop_after_if_else@4"
+            ],
+            [
+              "96: loop_after_if_else@4:",
+              "99: frame_dig 1",
+              "100: pushint 2",
+              "101: -",
+              "102: dup",
+              "103: frame_bury 1",
+              "106: frame_dig 2",
+              "107: intc_0",
+              "108: +",
+              "109: frame_bury 2",
+              "112: intc_0",
+              "113: ==",
+              "114: bz loop_while_top@1"
+            ],
+            [
+              "115: frame_dig 2",
+              "116: frame_bury 0"
+            ],
+            [
+              "118: loop_after_while@7:",
+              "121: retsub"
+            ],
+            [
+              "32: itob",
+              "33: pushbytes 0x151f7c75",
+              "34: swap",
+              "35: concat",
+              "36: log",
+              "37: intc_0",
+              "38: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "23: main_loop_route@3:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "31: callsub loop"
+            ],
+            [
+              "54: loop:",
+              "58: proto 0 1",
+              "59: pushbytes \"\"",
+              "62: pushint 10",
+              "65: intc_1"
+            ],
+            [
+              "67: loop_while_top@1:",
+              "68: frame_dig 2",
+              "69: frame_bury 0",
+              "72: frame_dig 1",
+              "73: bz loop_after_while@7"
+            ],
+            [
+              "118: loop_after_while@7:",
+              "121: retsub"
+            ],
+            [
+              "32: itob",
+              "33: pushbytes 0x151f7c75",
+              "34: swap",
+              "35: concat",
+              "36: log",
+              "37: intc_0",
+              "38: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 6 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "40: main_bare_routing@6:",
+              "44: txn OnCompletion",
+              "45: bnz main_after_if_else@10"
+            ],
+            [
+              "46: txn ApplicationID",
+              "47: !",
+              "48: assert",
+              "49: intc_0",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 6 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "40: main_bare_routing@6:",
+              "44: txn OnCompletion",
+              "45: bnz main_after_if_else@10"
+            ],
+            [
+              "16: main_after_if_else@10:",
+              "20: intc_1",
+              "21: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"group-size-check\", Impact: High, Confidence: High\nDescription: Usage of absolute indexes without validating GroupSize\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-groupsize-validation\n",
+      "check": "group-size-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid using absolute indexes. Validate GroupSize if used.\n- Favor using ARC-4 ABI and relative indexes for group transactions.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 5,
+      "description": "\nCheck: \"rekey-to\", Impact: High, Confidence: High\nDescription: Rekeyable Logic Signatures\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#rekeyable-logicsig\n",
+      "check": "rekey-to",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `RekeyTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "16: main_after_if_else@10:",
+              "20: intc_1",
+              "21: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 10 -> 12 -> 13 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "23: main_loop_route@3:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "31: callsub loop"
+            ],
+            [
+              "54: loop:",
+              "58: proto 0 1",
+              "59: pushbytes \"\"",
+              "62: pushint 10",
+              "65: intc_1"
+            ],
+            [
+              "67: loop_while_top@1:",
+              "68: frame_dig 2",
+              "69: frame_bury 0",
+              "72: frame_dig 1",
+              "73: bz loop_after_while@7"
+            ],
+            [
+              "76: frame_dig 1",
+              "77: pushint 5",
+              "78: >",
+              "79: bz loop_after_if_else@4"
+            ],
+            [
+              "96: loop_after_if_else@4:",
+              "99: frame_dig 1",
+              "100: pushint 2",
+              "101: -",
+              "102: dup",
+              "103: frame_bury 1",
+              "106: frame_dig 2",
+              "107: intc_0",
+              "108: +",
+              "109: frame_bury 2",
+              "112: intc_0",
+              "113: ==",
+              "114: bz loop_while_top@1"
+            ],
+            [
+              "115: frame_dig 2",
+              "116: frame_bury 0"
+            ],
+            [
+              "118: loop_after_while@7:",
+              "121: retsub"
+            ],
+            [
+              "32: itob",
+              "33: pushbytes 0x151f7c75",
+              "34: swap",
+              "35: concat",
+              "36: log",
+              "37: intc_0",
+              "38: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0xf82a2654",
+              "13: txna ApplicationArgs 0",
+              "14: match main_loop_route@3"
+            ],
+            [
+              "23: main_loop_route@3:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: assert",
+              "29: txn ApplicationID",
+              "30: assert",
+              "31: callsub loop"
+            ],
+            [
+              "54: loop:",
+              "58: proto 0 1",
+              "59: pushbytes \"\"",
+              "62: pushint 10",
+              "65: intc_1"
+            ],
+            [
+              "67: loop_while_top@1:",
+              "68: frame_dig 2",
+              "69: frame_bury 0",
+              "72: frame_dig 1",
+              "73: bz loop_after_while@7"
+            ],
+            [
+              "118: loop_after_while@7:",
+              "121: retsub"
+            ],
+            [
+              "32: itob",
+              "33: pushbytes 0x151f7c75",
+              "34: swap",
+              "35: concat",
+              "36: log",
+              "37: intc_0",
+              "38: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 6 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "40: main_bare_routing@6:",
+              "44: txn OnCompletion",
+              "45: bnz main_after_if_else@10"
+            ],
+            [
+              "46: txn ApplicationID",
+              "47: !",
+              "48: assert",
+              "49: intc_0",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 6 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "40: main_bare_routing@6:",
+              "44: txn OnCompletion",
+              "45: bnz main_after_if_else@10"
+            ],
+            [
+              "16: main_after_if_else@10:",
+              "20: intc_1",
+              "21: return"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

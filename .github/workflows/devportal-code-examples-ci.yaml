@@ -27,6 +27,9 @@ jobs:
       - name: Install algokit
         run: pipx install algokit
 
+      - name: Install Tealer
+        run: pipx install tealer
+
       - name: Start LocalNet
         run: algokit localnet start
 
@@ -51,7 +54,12 @@ jobs:
       - name: Scan TEAL files for issues
         run: algokit project run audit-teal
 
-      - name: Check output stability of the smart contracts
+      - name: Check output stability of the Python smart contracts
+        working-directory: projects/python-examples
+        run: algokit project run ci-teal-diff
+
+      - name: Check output stability of the TypeScript smart contracts
+        working-directory: projects/typescript-examples
         run: algokit project run ci-teal-diff
 
       # - name: Run deployer against LocalNet
