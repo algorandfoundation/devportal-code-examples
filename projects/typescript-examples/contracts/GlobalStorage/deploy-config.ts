@@ -28,3 +28,5 @@ export async function deploy() {
 
   console.log(`Deployed Oracle contract to app ID: ${appClient.appClient.appId}`)
 }
+
+deploy()

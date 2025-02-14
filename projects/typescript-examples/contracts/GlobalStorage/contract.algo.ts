@@ -1,12 +1,13 @@
-import { arc4, Uint64, Bytes, GlobalState, assert } from '@algorandfoundation/algorand-typescript'
+import { arc4, Uint64, Bytes, GlobalState, assert, contract } from '@algorandfoundation/algorand-typescript'
 import type { uint64, bytes, Asset, Application, Account } from '@algorandfoundation/algorand-typescript'
 
 /**
  * A contract demonstrating global storage functionality
  */
+@contract({ scratchSlots: [50] })
 export default class GlobalStorage extends arc4.Contract {
   // example: INIT_GLOBAL_STORAGE
-  globalInt = GlobalState({ initialValue: Uint64(50) }) // UInt64 with default value
+  globalInt = GlobalState<uint64>({ initialValue: Uint64(50) }) // UInt64 with default value
   globalIntNoDefault = GlobalState<uint64>() // UInt64 with no default value
   // example: INIT_GLOBAL_STORAGE
 
@@ -34,38 +35,17 @@ export default class GlobalStorage extends arc4.Contract {
 
   // example: READ_GLOBAL_STATE
   @arc4.abimethod({ readonly: true })
-  public getGlobalState(): uint64 {
-    return this.globalInt.value
+  public getGlobalState(): [uint64, bytes] {
+    return [this.globalInt.value, this.globalBytes.value]
   }
   // example: READ_GLOBAL_STATE
 
   @arc4.abimethod({ readonly: true })
   public hasGlobalState(): [uint64, boolean] {
-    const value = this.globalInt.value
     const hasValue = this.globalInt.hasValue
-
-    if (!hasValue) {
-      return [value, hasValue]
-    }
+    const value = this.globalInt.value
 
     return [value, hasValue]
-  }
-
-  @arc4.abimethod({ readonly: true })
-  public getGlobalStateExample(): {
-    globalInt: uint64
-    globalIntNoDefault: uint64
-    globalBytes: bytes
-  } {
-    assert(this.globalInt.value === Uint64(50))
-    assert(this.globalIntNoDefault.value === Uint64(0))
-    assert(this.globalBytes.value === Bytes('Hello'))
-
-    const globalInt = this.globalInt.value
-    const globalIntNoDefault = this.globalIntNoDefault.value
-    const globalBytes = this.globalBytes.value
-
-    return { globalInt, globalIntNoDefault, globalBytes }
   }
 
   // example: WRITE_GLOBAL_STATE
@@ -90,10 +70,10 @@ export default class GlobalStorage extends arc4.Contract {
   // example: WRITE_GLOBAL_STATE_EXAMPLES
 
   // example: DELETE_GLOBAL_STATE
-  @arc4.abimethod()
-  delGlobalState(): boolean {
-    // delete this.globalIntNoDefault.value
-    return true
-  }
+  // @arc4.abimethod()
+  // public deleteGlobalState(): boolean {
+  //   this.globalInt.delete() // @TODO: Not implemented
+  //   return true
+  // }
   // example: DELETE_GLOBAL_STATE
 }
