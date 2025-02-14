@@ -1,12 +1,6 @@
-from algokit_utils import (
-    AlgoAmount,
-    AlgorandClient,
-    PaymentParams,
-    SigningAccount,
-)
+from algokit_utils import AlgoAmount, AlgorandClient, PaymentParams, SigningAccount
 
 
-# temp
 def setup_localnet_environment() -> (
     tuple[
         AlgorandClient, SigningAccount, SigningAccount, SigningAccount, SigningAccount
