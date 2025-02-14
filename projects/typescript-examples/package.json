@@ -1,0 +1,43 @@
+{
+  "name": "algorand-typescript-smart-contract-examples",
+  "version": "1.0.0",
+  "description": "Smart Contract examples using Algorand Typescript",
+  "main": "smart_contracts/index.ts",
+  "scripts": {
+    "build": "puya-ts build . --output-source-map --out-dir ./contracts/artifacts && algokit generate client ./contracts/artifacts --output ./contracts/artifacts/clients/{contract_name}/{contract_name}Client.ts",
+    "deploy": "tsx --no-check --env-file=.env ./contracts/index.ts",
+    "deploy:ci": "tsx --no-check --env-file=.env ./contracts/index.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "audit": "better-npm-audit audit",
+    "format": "prettier --write .",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest watch",
+    "check-types": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20.0",
+    "npm": ">=9.0"
+  },
+  "devDependencies": {
+    "@algorandfoundation/algokit-client-generator": "^4.0.6",
+    "@algorandfoundation/algokit-utils": "^8.1.0",
+    "@algorandfoundation/algokit-utils-debug": "^1.0.3",
+    "@algorandfoundation/algorand-typescript": "^1.0.0-beta.13",
+    "@algorandfoundation/algorand-typescript-testing": "^1.0.0-beta.15",
+    "@algorandfoundation/puya-ts": "^1.0.0-beta.15",
+    "@eslint/js": "^9.18.0",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@tsconfig/node20": "^20.1.4",
+    "@vitest/coverage-v8": "^2.1.8",
+    "algosdk": "^3.1.0",
+    "better-npm-audit": "^3.11.0",
+    "dotenv": "^16.4.7",
+    "eslint": "^9.18.0",
+    "prettier": "^3.4.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.19.1",
+    "vitest": "^2.1.8"
+  }
+}
