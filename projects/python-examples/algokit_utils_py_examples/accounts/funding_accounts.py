@@ -6,7 +6,6 @@ from algokit_utils import (
 )
 
 
-# temp
 def funding_accounts() -> None:
     # example: FUNDING_ACCOUNT
 
@@ -39,7 +38,7 @@ def funding_accounts() -> None:
     algorand_client.send.payment(
         PaymentParams(
             sender=localnet_dispenser.address,
-            recipient=random_account.address,
+            receiver=random_account.address,
             amount=AlgoAmount(algo=10),
         )
     )
