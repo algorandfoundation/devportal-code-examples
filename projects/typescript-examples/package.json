@@ -4,7 +4,7 @@
   "description": "Smart Contract examples using Algorand Typescript",
   "main": "smart_contracts/index.ts",
   "scripts": {
-    "build": "puya-ts build . --output-source-map --out-dir ./contracts/artifacts && algokit generate client ./contracts/artifacts --output ./contracts/artifacts/clients/{contract_name}/{contract_name}Client.ts",
+    "build": "puya-ts build ./contracts --output-source-map --out-dir ./artifacts/contracts && algokit generate client ./contracts/artifacts --output ./contracts/artifacts/clients/{contract_name}/{contract_name}Client.ts",
     "deploy": "tsx --no-check --env-file=.env ./contracts/index.ts",
     "deploy:ci": "tsx --no-check --env-file=.env ./contracts/index.ts",
     "lint": "eslint .",
