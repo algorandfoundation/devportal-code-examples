@@ -1,4 +1,9 @@
-from algokit_utils import *
+from algokit_utils import (
+    AlgoAmount,
+    AlgorandClient,
+    PaymentParams,
+    SigningAccount,
+)
 
 
 # temp
@@ -22,6 +27,7 @@ def setup_localnet_environment() -> (
     """
     # Initialize an Algorand client instance configured for LocalNet.
     algorand_client = AlgorandClient.default_localnet()
+    algorand_client.set_suggested_params_timeout(0)
 
     # Retrieve the localnet dispenser account.
     dispenser = algorand_client.account.localnet_dispenser()

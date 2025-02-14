@@ -1,7 +1,23 @@
-from algokit_utils import *
-from algokit_utils_py_examples.helpers import setup_localnet_environment
-
 import algosdk
+from algokit_utils import (
+    AlgoAmount,
+    AppCallParams,
+    AppCreateParams,
+    AppDeleteParams,
+    AppUpdateParams,
+    AssetConfigParams,
+    AssetCreateParams,
+    AssetDestroyParams,
+    AssetFreezeParams,
+    AssetOptInParams,
+    AssetOptOutParams,
+    AssetTransferParams,
+    OfflineKeyRegistrationParams,
+    OnlineKeyRegistrationParams,
+    PaymentParams,
+)
+
+from algokit_utils_py_examples.helpers import setup_localnet_environment
 
 
 def transaction_types() -> None:
@@ -209,7 +225,7 @@ def transaction_types() -> None:
     # example: APPLICATION_CREATE_TRANSACTION
 
     # Minimal TEAL program that just returns 1 (success)
-    minimalTEAL = """
+    minimal_teal = """
     #pragma version 10
     int 1
     return
@@ -217,7 +233,7 @@ def transaction_types() -> None:
 
     """
     Create a unsigned application call transaction calling the hello method on the hello world contract
-    
+
     Parameters for creating an application.
     - sender: The address of the account that will send the transaction
     - approval_program: The program to execute for all OnCompletes other than ClearState as raw teal (string)
@@ -228,8 +244,8 @@ def transaction_types() -> None:
     result1 = algorand_client.create_transaction.app_create(
         AppCreateParams(
             sender=account1.address,
-            approval_program=minimalTEAL,
-            clear_state_program=minimalTEAL,
+            approval_program=minimal_teal,
+            clear_state_program=minimal_teal,
         )
     )
 
@@ -272,8 +288,8 @@ def transaction_types() -> None:
         AppUpdateParams(
             sender=account1.address,
             app_id=1234,
-            approval_program=minimalTEAL,
-            clear_state_program=minimalTEAL,
+            approval_program=minimal_teal,
+            clear_state_program=minimal_teal,
         )
     )
     # example: APPLICATION_UPDATE_TRANSACTION
