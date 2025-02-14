@@ -1,12 +1,12 @@
-from algokit_utils import AlgoAmount, AlgorandClient, MultisigMetadata, PaymentParams
+from algokit_utils import AlgoAmount, MultisigMetadata, PaymentParams
+
 from algokit_utils_py_examples.helpers import setup_localnet_environment
 
 
-# temp
 def multisignature_accounts() -> None:
-    # example: MULTISIGNATURE_ACCOUNTS
+    # example: MULTISIG_ACCOUNT
 
-    algorand_client, dispenser, random_account1, random_account2, random_account3 = (
+    algorand_client, dispenser, account1, account2, account3 = (
         setup_localnet_environment()
     )
 
@@ -19,35 +19,32 @@ def multisignature_accounts() -> None:
             version=1,
             threshold=2,
             addresses=[
-                random_account1.address,
-                random_account2.address,
-                random_account3.address,
+                account1.address,
+                account2.address,
+                account3.address,
             ],
         ),
-        signing_accounts=[random_account1, random_account2, random_account3],
+        signing_accounts=[account1, account2, account3],
     )
 
     algorand_client.account.ensure_funded(
-        multisig_account, dispenser, AlgoAmount(algo=10)
+        multisig_account.address, dispenser, AlgoAmount(algo=10)
     )
 
+    """
+    Send a payment transaction from the multisig account
+    which will automatically collect the required number of signatures
+    from the signing accounts provided when creating the multisig account
+    """
     algorand_client.send.payment(
         PaymentParams(
             sender=multisig_account.address,
-            receiver=random_account1.address,
+            receiver=account1.address,
             amount=AlgoAmount(algo=1),
         ),
     )
 
-    payment_txn = algorand_client.create_transaction.payment(
-        PaymentParams(
-            sender=multisig_account.address,
-            receiver=random_account1.address,
-            amount=AlgoAmount(algo=1),
-        ),
-    )
-
-    random_account1.signer.sign_transactions()
+    # example: MULTISIG_ACCOUNT
 
 
 multisignature_accounts()
