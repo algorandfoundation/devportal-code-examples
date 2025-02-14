@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { setupLocalnetEnvironment, algo } from '@/algokit-utils-ts/setup-localnet-environment'
+import { algo } from '@algorandfoundation/algokit-utils'
+import { setupLocalnetEnvironment } from '@/algokit-utils-ts/setup-localnet-environment'
 
 export async function keysAndSigning() {
   const { algorand, randomAccountA, randomAccountB, randomAccountC } = await setupLocalnetEnvironment()
