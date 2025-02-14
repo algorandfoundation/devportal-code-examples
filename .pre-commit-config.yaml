@@ -52,7 +52,6 @@ repos:
       - id: tealer
         name: tealer
         description: "Run AlgoKit `Tealer` for TEAL static analysis"
-        entry: algokit
+        entry: bash -c 'cd projects/typescript-examples && algokit project run audit-teal'
         language: system
-        args: [project, run, "audit-teal"]
         files: '^.*\.teal$'
