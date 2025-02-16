@@ -1,9 +1,19 @@
-import { arc4, Uint64, GlobalState, assert, Account, Txn, Bytes } from '@algorandfoundation/algorand-typescript'
+import {
+  arc4,
+  Uint64,
+  GlobalState,
+  assert,
+  Account,
+  Txn,
+  Bytes,
+  contract,
+} from '@algorandfoundation/algorand-typescript'
 import type { uint64, bytes } from '@algorandfoundation/algorand-typescript'
 
 /**
  * A contract demonstrating global storage functionality
  */
+@contract({ stateTotals: { globalBytes: 4, globalUints: 3 } })
 export default class GlobalStorage extends arc4.Contract {
   // example: INIT_GLOBAL_STORAGE
   public globalInt = GlobalState<uint64>({ initialValue: Uint64(50) }) // UInt64 with default value
@@ -81,6 +91,23 @@ export default class GlobalStorage extends arc4.Contract {
     assert(this.globalAccount.value === valueAccount)
   }
   // example: WRITE_GLOBAL_STATE
+
+  /**
+   * Writes a value to global state using a dynamic key and returns the stored value
+   * @param key The key to store the value under in global state
+   * @param value The string value to store in global state
+   * @returns The stored string value, confirming successful storage
+   */
+  @arc4.abimethod()
+  public writeDynamicGlobalState(key: string, value: string): string {
+    // Dynamic keys must be explicitly reserved in the contract's stateTotals configuration
+    const globalDynamicAccess = GlobalState<string>({ key })
+    globalDynamicAccess.value = value
+
+    assert(globalDynamicAccess.value === value)
+
+    return globalDynamicAccess.value
+  }
 
   // @TODO: Not yet implemented in puya-ts
   // example: DELETE_GLOBAL_STATE

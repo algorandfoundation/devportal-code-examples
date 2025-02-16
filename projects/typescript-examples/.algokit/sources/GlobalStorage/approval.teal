@@ -4,17 +4,17 @@
 
 main:
     intcblock 0 1
-    bytecblock "globalString" "globalBool" "globalIntNoDefault" "globalAccount" "globalInt" "globalBytes" 0x151f7c75
+    bytecblock "globalString" "globalBool" "globalIntNoDefault" "globalAccount" 0x151f7c75 "globalInt" "globalBytes"
     txn ApplicationID
     bnz main_after_if_else@2
 
 
-    bytec 4
+    bytec 5
     pushint 50
     app_global_put
 
 
-    bytec 5
+    bytec 6
     pushbytes "Silvio"
     app_global_put
 
@@ -45,16 +45,49 @@ main:
 main_after_if_else@2:
 
 
-    txn NumAppArgs
-    bz main_bare_routing@10
-    pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede
-    txna ApplicationArgs 0
-    match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7
 
-main_after_if_else@14:
+    txn NumAppArgs
+    bz main_bare_routing@11
+    pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6
+    txna ApplicationArgs 0
+    match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8
+
+main_after_if_else@15:
+
 
 
     intc_0
+    return
+
+main_writeDynamicGlobalState_route@8:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+
+    txna ApplicationArgs 1
+    extract 2 0
+    txna ApplicationArgs 2
+    extract 2 0
+
+
+    callsub writeDynamicGlobalState
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    bytec 4
+    swap
+    concat
+    log
+    intc_1
     return
 
 main_writeGlobalState_route@7:
@@ -65,6 +98,7 @@ main_writeGlobalState_route@7:
     assert
     txn ApplicationID
     assert
+
 
 
     txna ApplicationArgs 1
@@ -97,7 +131,7 @@ main_hasGlobalState_route@6:
     uncover 3
     setbit
     concat
-    bytec 6
+    bytec 4
     swap
     concat
     log
@@ -153,18 +187,19 @@ main_readGlobalState_route@5:
     concat
     swap
     concat
-    bytec 6
+    bytec 4
     swap
     concat
     log
     intc_1
     return
 
-main_bare_routing@10:
+main_bare_routing@11:
+
 
 
     txn OnCompletion
-    bnz main_after_if_else@14
+    bnz main_after_if_else@15
     txn ApplicationID
     !
     assert
@@ -193,7 +228,7 @@ readGlobalState:
     intc_0
 
 
-    bytec 4
+    bytec 5
 
 
     app_global_get_ex
@@ -213,7 +248,7 @@ readGlobalState:
     intc_0
 
 
-    bytec 5
+    bytec 6
 
 
     app_global_get_ex
@@ -352,5 +387,34 @@ writeGlobalState:
     assert
     frame_dig -1
     ==
+    assert
+    retsub
+
+
+
+writeDynamicGlobalState:
+
+
+
+    proto 2 1
+
+
+    frame_dig -2
+    frame_dig -1
+    app_global_put
+
+
+    intc_0
+    frame_dig -2
+    app_global_get_ex
+    assert
+    frame_dig -1
+    ==
+    assert
+
+
+    intc_0
+    frame_dig -2
+    app_global_get_ex
     assert
     retsub

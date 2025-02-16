@@ -55,8 +55,15 @@ repos:
         language: system
         types_or: [ts, tsx]
 
-      - id: tealer
-        name: tealer
+      - id: audit
+        name: audit
+        description: "Run AlgoKit `audit` for TEAL static analysis for TypeScript contracts"
+        entry: bash -c 'cd projects/typescript-examples && algokit project run audit'
+        language: system
+        files: '^.*\.json$'
+
+      - id: audit-teal
+        name: audit-teal
         description: "Run AlgoKit `Tealer` for TEAL static analysis for TypeScript contracts"
         entry: bash -c 'cd projects/typescript-examples && algokit project run audit-teal'
         language: system
