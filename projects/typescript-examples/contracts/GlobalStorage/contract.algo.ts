@@ -7,30 +7,30 @@ import type { uint64, bytes, Asset, Application, Account } from '@algorandfounda
 @contract({ scratchSlots: [50] })
 export default class GlobalStorage extends arc4.Contract {
   // example: INIT_GLOBAL_STORAGE
-  globalInt = GlobalState<uint64>({ initialValue: Uint64(50) }) // UInt64 with default value
-  globalIntNoDefault = GlobalState<uint64>() // UInt64 with no default value
+  public globalInt = GlobalState<uint64>({ initialValue: Uint64(50) }) // UInt64 with default value
+  public globalIntNoDefault = GlobalState<uint64>() // UInt64 with no default value
   // example: INIT_GLOBAL_STORAGE
 
   // example: INIT_BYTES
-  globalBytes = GlobalState({ initialValue: Bytes('Hello') }) // Bytes with default value
-  globalBytesNoDefault = GlobalState<bytes>() // Bytes with no default value
+  public globalBytes = GlobalState({ initialValue: Bytes('Hello') }) // Bytes with default value
+  public globalBytesNoDefault = GlobalState<bytes>() // Bytes with no default value
   // example: INIT_BYTES
 
   // example: INIT_BOOL
-  globalBool = GlobalState({ initialValue: true }) // Bool with default value
-  globalBoolNoDefault = GlobalState<boolean>() // Bool with no default value
+  public globalBool = GlobalState({ initialValue: true }) // Bool with default value
+  public globalBoolNoDefault = GlobalState<boolean>() // Bool with no default value
   // example: INIT_BOOL
 
   // example: INIT_ASSET
-  globalAsset = GlobalState<Asset>() // Asset
+  public globalAsset = GlobalState<Asset>() // Asset
   // example: INIT_ASSET
 
   // example: INIT_APPLICATION
-  globalApplication = GlobalState<Application>() // Application
+  public globalApplication = GlobalState<Application>() // Application
   // example: INIT_APPLICATION
 
   // example: INIT_ACCOUNT
-  globalAccount = GlobalState<Account>() // Account
+  public globalAccount = GlobalState<Account>() // Account
   // example: INIT_ACCOUNT
 
   // example: READ_GLOBAL_STATE
@@ -50,7 +50,7 @@ export default class GlobalStorage extends arc4.Contract {
 
   // example: WRITE_GLOBAL_STATE
   @arc4.abimethod()
-  setGlobalState(value: bytes): void {
+  public setGlobalState(value: bytes): void {
     this.globalBytes.value = value
   }
   // example: WRITE_GLOBAL_STATE
