@@ -30,7 +30,7 @@ async function leases() {
       lease: lease,
       suppressLog: true, // Prevent AlgoKit Utils from logging the expected error
     })
-  } catch (error) {
+  } catch (_error) {
     console.log('Transaction rejected due to active lease')
   }
   // example: LEASE
