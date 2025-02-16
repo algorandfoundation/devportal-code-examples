@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { algo } from '@algorandfoundation/algokit-utils'
 import { setupLocalnetEnvironment } from '@/algokit-utils-ts/setup-localnet-environment'
 
 export async function keysAndSigning() {
@@ -30,6 +31,26 @@ export async function keysAndSigning() {
    */
   const signer = algorand.account.getSigner('ACCOUNT_ADDRESS')
   // example: GET_SIGNER
+
+  // example: OVERRIDE_SIGNER
+  /**
+   * Create an unsigned payment transaction and manually sign it.
+   */
+
+  const accountASigner = algorand.account.getSigner('ACCOUNT_ADDRESS')
+
+  const paymentTxn = await algorand.createTransaction.payment({
+    sender: randomAccountA,
+    receiver: randomAccountB,
+    amount: algo(1),
+    note: 'Payment from A to B',
+  })
+
+  // The transaction signer can be overridden in the second argument to `addTransaction`
+  const txnGroup = algorand.newGroup().addTransaction(paymentTxn, accountASigner)
+  await txnGroup.send()
+
+  // example: OVERRIDE_SIGNER
 }
 
 keysAndSigning()
