@@ -21,7 +21,7 @@ describe('HelloWorld contract', () => {
       defaultSender: account,
     })
 
-    const { appClient } = await factory.deploy({ onUpdate: 'append', onSchemaBreak: 'append' })
+    const { appClient } = await factory.deploy({ onUpdate: 'append', onSchemaBreak: 'append', suppressLog: true })
     return { client: appClient }
   }
 
@@ -33,7 +33,7 @@ describe('HelloWorld contract', () => {
       .newGroup()
       .sayHello({ args: { firstName: 'Silvio', lastName: 'Micali' } })
       .sayBananas()
-      .send()
+      .simulate()
 
     expect(result.returns[0]).toBe('Hello Silvio Micali')
     expect(result.returns[1]).toBe('Bananas')
