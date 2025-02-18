@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for contracts/artifacts/clients/GlobalStorage/GlobalStorageClient.ts</title>
+    <title>Code coverage report for contracts/artifacts/clients/LocalStorage/LocalStorageClient.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">contracts/artifacts/clients/GlobalStorage</a> GlobalStorageClient.ts</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">contracts/artifacts/clients/LocalStorage</a> LocalStorageClient.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68.69% </span>
+                <span class="strong">63.85% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>169/246</span>
+                <span class='fraction'>189/296</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">79.54% </span>
+                <span class="strong">83.01% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>35/44</span>
+                <span class='fraction'>44/53</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">39.34% </span>
+                <span class="strong">42.42% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>24/61</span>
+                <span class='fraction'>28/66</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68.69% </span>
+                <span class="strong">63.85% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>169/246</span>
+                <span class='fraction'>189/296</span>
             </div>
         
             
@@ -1043,7 +1043,130 @@
 <a name='L978'></a><a href='#L978'>978</a>
 <a name='L979'></a><a href='#L979'>979</a>
 <a name='L980'></a><a href='#L980'>980</a>
-<a name='L981'></a><a href='#L981'>981</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L981'></a><a href='#L981'>981</a>
+<a name='L982'></a><a href='#L982'>982</a>
+<a name='L983'></a><a href='#L983'>983</a>
+<a name='L984'></a><a href='#L984'>984</a>
+<a name='L985'></a><a href='#L985'>985</a>
+<a name='L986'></a><a href='#L986'>986</a>
+<a name='L987'></a><a href='#L987'>987</a>
+<a name='L988'></a><a href='#L988'>988</a>
+<a name='L989'></a><a href='#L989'>989</a>
+<a name='L990'></a><a href='#L990'>990</a>
+<a name='L991'></a><a href='#L991'>991</a>
+<a name='L992'></a><a href='#L992'>992</a>
+<a name='L993'></a><a href='#L993'>993</a>
+<a name='L994'></a><a href='#L994'>994</a>
+<a name='L995'></a><a href='#L995'>995</a>
+<a name='L996'></a><a href='#L996'>996</a>
+<a name='L997'></a><a href='#L997'>997</a>
+<a name='L998'></a><a href='#L998'>998</a>
+<a name='L999'></a><a href='#L999'>999</a>
+<a name='L1000'></a><a href='#L1000'>1000</a>
+<a name='L1001'></a><a href='#L1001'>1001</a>
+<a name='L1002'></a><a href='#L1002'>1002</a>
+<a name='L1003'></a><a href='#L1003'>1003</a>
+<a name='L1004'></a><a href='#L1004'>1004</a>
+<a name='L1005'></a><a href='#L1005'>1005</a>
+<a name='L1006'></a><a href='#L1006'>1006</a>
+<a name='L1007'></a><a href='#L1007'>1007</a>
+<a name='L1008'></a><a href='#L1008'>1008</a>
+<a name='L1009'></a><a href='#L1009'>1009</a>
+<a name='L1010'></a><a href='#L1010'>1010</a>
+<a name='L1011'></a><a href='#L1011'>1011</a>
+<a name='L1012'></a><a href='#L1012'>1012</a>
+<a name='L1013'></a><a href='#L1013'>1013</a>
+<a name='L1014'></a><a href='#L1014'>1014</a>
+<a name='L1015'></a><a href='#L1015'>1015</a>
+<a name='L1016'></a><a href='#L1016'>1016</a>
+<a name='L1017'></a><a href='#L1017'>1017</a>
+<a name='L1018'></a><a href='#L1018'>1018</a>
+<a name='L1019'></a><a href='#L1019'>1019</a>
+<a name='L1020'></a><a href='#L1020'>1020</a>
+<a name='L1021'></a><a href='#L1021'>1021</a>
+<a name='L1022'></a><a href='#L1022'>1022</a>
+<a name='L1023'></a><a href='#L1023'>1023</a>
+<a name='L1024'></a><a href='#L1024'>1024</a>
+<a name='L1025'></a><a href='#L1025'>1025</a>
+<a name='L1026'></a><a href='#L1026'>1026</a>
+<a name='L1027'></a><a href='#L1027'>1027</a>
+<a name='L1028'></a><a href='#L1028'>1028</a>
+<a name='L1029'></a><a href='#L1029'>1029</a>
+<a name='L1030'></a><a href='#L1030'>1030</a>
+<a name='L1031'></a><a href='#L1031'>1031</a>
+<a name='L1032'></a><a href='#L1032'>1032</a>
+<a name='L1033'></a><a href='#L1033'>1033</a>
+<a name='L1034'></a><a href='#L1034'>1034</a>
+<a name='L1035'></a><a href='#L1035'>1035</a>
+<a name='L1036'></a><a href='#L1036'>1036</a>
+<a name='L1037'></a><a href='#L1037'>1037</a>
+<a name='L1038'></a><a href='#L1038'>1038</a>
+<a name='L1039'></a><a href='#L1039'>1039</a>
+<a name='L1040'></a><a href='#L1040'>1040</a>
+<a name='L1041'></a><a href='#L1041'>1041</a>
+<a name='L1042'></a><a href='#L1042'>1042</a>
+<a name='L1043'></a><a href='#L1043'>1043</a>
+<a name='L1044'></a><a href='#L1044'>1044</a>
+<a name='L1045'></a><a href='#L1045'>1045</a>
+<a name='L1046'></a><a href='#L1046'>1046</a>
+<a name='L1047'></a><a href='#L1047'>1047</a>
+<a name='L1048'></a><a href='#L1048'>1048</a>
+<a name='L1049'></a><a href='#L1049'>1049</a>
+<a name='L1050'></a><a href='#L1050'>1050</a>
+<a name='L1051'></a><a href='#L1051'>1051</a>
+<a name='L1052'></a><a href='#L1052'>1052</a>
+<a name='L1053'></a><a href='#L1053'>1053</a>
+<a name='L1054'></a><a href='#L1054'>1054</a>
+<a name='L1055'></a><a href='#L1055'>1055</a>
+<a name='L1056'></a><a href='#L1056'>1056</a>
+<a name='L1057'></a><a href='#L1057'>1057</a>
+<a name='L1058'></a><a href='#L1058'>1058</a>
+<a name='L1059'></a><a href='#L1059'>1059</a>
+<a name='L1060'></a><a href='#L1060'>1060</a>
+<a name='L1061'></a><a href='#L1061'>1061</a>
+<a name='L1062'></a><a href='#L1062'>1062</a>
+<a name='L1063'></a><a href='#L1063'>1063</a>
+<a name='L1064'></a><a href='#L1064'>1064</a>
+<a name='L1065'></a><a href='#L1065'>1065</a>
+<a name='L1066'></a><a href='#L1066'>1066</a>
+<a name='L1067'></a><a href='#L1067'>1067</a>
+<a name='L1068'></a><a href='#L1068'>1068</a>
+<a name='L1069'></a><a href='#L1069'>1069</a>
+<a name='L1070'></a><a href='#L1070'>1070</a>
+<a name='L1071'></a><a href='#L1071'>1071</a>
+<a name='L1072'></a><a href='#L1072'>1072</a>
+<a name='L1073'></a><a href='#L1073'>1073</a>
+<a name='L1074'></a><a href='#L1074'>1074</a>
+<a name='L1075'></a><a href='#L1075'>1075</a>
+<a name='L1076'></a><a href='#L1076'>1076</a>
+<a name='L1077'></a><a href='#L1077'>1077</a>
+<a name='L1078'></a><a href='#L1078'>1078</a>
+<a name='L1079'></a><a href='#L1079'>1079</a>
+<a name='L1080'></a><a href='#L1080'>1080</a>
+<a name='L1081'></a><a href='#L1081'>1081</a>
+<a name='L1082'></a><a href='#L1082'>1082</a>
+<a name='L1083'></a><a href='#L1083'>1083</a>
+<a name='L1084'></a><a href='#L1084'>1084</a>
+<a name='L1085'></a><a href='#L1085'>1085</a>
+<a name='L1086'></a><a href='#L1086'>1086</a>
+<a name='L1087'></a><a href='#L1087'>1087</a>
+<a name='L1088'></a><a href='#L1088'>1088</a>
+<a name='L1089'></a><a href='#L1089'>1089</a>
+<a name='L1090'></a><a href='#L1090'>1090</a>
+<a name='L1091'></a><a href='#L1091'>1091</a>
+<a name='L1092'></a><a href='#L1092'>1092</a>
+<a name='L1093'></a><a href='#L1093'>1093</a>
+<a name='L1094'></a><a href='#L1094'>1094</a>
+<a name='L1095'></a><a href='#L1095'>1095</a>
+<a name='L1096'></a><a href='#L1096'>1096</a>
+<a name='L1097'></a><a href='#L1097'>1097</a>
+<a name='L1098'></a><a href='#L1098'>1098</a>
+<a name='L1099'></a><a href='#L1099'>1099</a>
+<a name='L1100'></a><a href='#L1100'>1100</a>
+<a name='L1101'></a><a href='#L1101'>1101</a>
+<a name='L1102'></a><a href='#L1102'>1102</a>
+<a name='L1103'></a><a href='#L1103'>1103</a>
+<a name='L1104'></a><a href='#L1104'>1104</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1089,19 +1212,12 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1273,6 +1389,42 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1312,12 +1464,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1503,6 +1655,97 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1517,99 +1760,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1634,20 +1784,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1658,15 +1800,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1697,20 +1843,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -1725,29 +1857,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1762,10 +1872,41 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1799,6 +1940,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -1814,6 +1966,55 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1831,118 +2032,163 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2049,7 +2295,7 @@ import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerR
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 import SimulateResponse = modelsv2.SimulateResponse
 &nbsp;
-export const APP_SPEC: Arc56Contract = {"name":"GlobalStorage","structs":{},"methods":[{"name":"readGlobalState","args":[],"returns":{"type":"(uint64,uint64,byte[],string,bool,address)","desc":"A tuple containing [globalInt, globalIntNoDefault, globalBytes, globalString, globalBool, globalAccount]\nwhere each value corresponds to the current state of the respective global variable"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Reads and returns all global state values from the contract","events":[],"recommendations":{}},{"name":"hasGlobalState","args":[],"returns":{"type":"(uint64,bool)","desc":"A tuple containing [value, hasValue] where value is the current globalIntNoDefault value\nand hasValue indicates if the value has been initialized"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Checks if a global state value exists and returns it","events":[],"recommendations":{}},{"name":"writeGlobalState","args":[{"type":"string","name":"valueString"},{"type":"bool","name":"valueBool","desc":"New value for globalBool"},{"type":"account","name":"valueAccount","desc":"New value for globalAccount"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Updates multiple global state values","events":[],"recommendations":{}},{"name":"writeDynamicGlobalState","args":[{"type":"string","name":"key","desc":"The key to store the value under in global state"},{"type":"string","name":"value","desc":"The string value to store in global state"}],"returns":{"type":"string","desc":"The stored string value, confirming successful storage"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Writes a value to global state using a dynamic key and returns the stored value","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"A contract demonstrating global storage functionality","networks":{},"state":{"schema":{"global":{"ints":3,"bytes":4},"local":{"ints":0,"bytes":0}},"keys":{"global":{"globalInt":{"keyType":"AVMString","valueType":"AVMUint64","key":"Z2xvYmFsSW50"},"globalIntNoDefault":{"keyType":"AVMString","valueType":"AVMUint64","key":"Z2xvYmFsSW50Tm9EZWZhdWx0"},"globalBytes":{"keyType":"AVMString","valueType":"AVMBytes","key":"Z2xvYmFsQnl0ZXM="},"globalString":{"keyType":"AVMString","valueType":"AVMString","key":"Z2xvYmFsU3RyaW5n"},"globalBool":{"keyType":"AVMString","valueType":"AVMUint64","key":"Z2xvYmFsQm9vbA=="},"globalAccount":{"keyType":"AVMString","valueType":"AVMBytes","key":"Z2xvYmFsQWNjb3VudA=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[405],"errorMessage":"Global state not set."},{"pc":[177,214,243,270],"errorMessage":"OnCompletion is not NoOp"},{"pc":[356],"errorMessage":"can only call when creating"},{"pc":[180,217,246,273],"errorMessage":"can only call when not creating"},{"pc":[365,370,374,379,383,387,402,426,434,442,460,469],"errorMessage":"check GlobalState exists"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxCiAgICBieXRlY2Jsb2NrICJnbG9iYWxTdHJpbmciICJnbG9iYWxCb29sIiAiZ2xvYmFsSW50Tm9EZWZhdWx0IiAiZ2xvYmFsQWNjb3VudCIgMHgxNTFmN2M3NSAiZ2xvYmFsSW50IiAiZ2xvYmFsQnl0ZXMiCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjE5CiAgICAvLyBwdWJsaWMgZ2xvYmFsSW50ID0gR2xvYmFsU3RhdGU8dWludDY0Pih7IGluaXRpYWxWYWx1ZTogVWludDY0KDUwKSB9KSAvLyBVSW50NjQgd2l0aCBkZWZhdWx0IHZhbHVlCiAgICBieXRlYyA1IC8vICJnbG9iYWxJbnQiCiAgICBwdXNoaW50IDUwIC8vIDUwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoyMQogICAgLy8gcHVibGljIGdsb2JhbEJ5dGVzID0gR2xvYmFsU3RhdGU8Ynl0ZXM+KHsgaW5pdGlhbFZhbHVlOiBCeXRlcygnU2lsdmlvJykgfSkgLy8gQnl0ZXMgd2l0aCBkZWZhdWx0IHZhbHVlCiAgICBieXRlYyA2IC8vICJnbG9iYWxCeXRlcyIKICAgIHB1c2hieXRlcyAiU2lsdmlvIgogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjIKICAgIC8vIHB1YmxpYyBnbG9iYWxTdHJpbmcgPSBHbG9iYWxTdGF0ZTxzdHJpbmc+KHsgaW5pdGlhbFZhbHVlOiAnTWljYWxpJyB9KSAvLyBCeXRlcyB3aXRoIGRlZmF1bHQgdmFsdWUKICAgIGJ5dGVjXzAgLy8gImdsb2JhbFN0cmluZyIKICAgIHB1c2hieXRlcyAiTWljYWxpIgogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjMKICAgIC8vIHB1YmxpYyBnbG9iYWxCb29sID0gR2xvYmFsU3RhdGUoeyBpbml0aWFsVmFsdWU6IHRydWUgfSkgLy8gQm9vbCB3aXRoIGRlZmF1bHQgdmFsdWUKICAgIGJ5dGVjXzEgLy8gImdsb2JhbEJvb2wiCiAgICBpbnRjXzEgLy8gMQogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjAKICAgIC8vIHB1YmxpYyBnbG9iYWxJbnROb0RlZmF1bHQgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KCkgLy8gVUludDY0IHdpdGggbm8gZGVmYXVsdCB2YWx1ZQogICAgYnl0ZWNfMiAvLyAiZ2xvYmFsSW50Tm9EZWZhdWx0IgogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czozMgogICAgLy8gdGhpcy5nbG9iYWxJbnROb0RlZmF1bHQudmFsdWUgPSBVaW50NjQoMCkKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoyNAogICAgLy8gcHVibGljIGdsb2JhbEFjY291bnQgPSBHbG9iYWxTdGF0ZTxBY2NvdW50PigpIC8vIEFkZHJlc3Mgd2l0aCBubyBkZWZhdWx0IHZhbHVlCiAgICBieXRlY18zIC8vICJnbG9iYWxBY2NvdW50IgogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czozMwogICAgLy8gdGhpcy5nbG9iYWxBY2NvdW50LnZhbHVlID0gVHhuLnNlbmRlcgogICAgdHhuIFNlbmRlcgogICAgYXBwX2dsb2JhbF9wdXQKCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxNi0xNwogICAgLy8gQGNvbnRyYWN0KHsgc3RhdGVUb3RhbHM6IHsgZ2xvYmFsQnl0ZXM6IDQsIGdsb2JhbFVpbnRzOiAzIH0gfSkKICAgIC8vIGV4cG9ydCBkZWZhdWx0IGNsYXNzIEdsb2JhbFN0b3JhZ2UgZXh0ZW5kcyBhcmM0LkNvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX2JhcmVfcm91dGluZ0AxMQogICAgcHVzaGJ5dGVzcyAweGQzOGY2MDcyIDB4NDdiNDVjZDEgMHhmN2EwNGVkZSAweDRhNGM2YmY2IC8vIG1ldGhvZCAicmVhZEdsb2JhbFN0YXRlKCkodWludDY0LHVpbnQ2NCxieXRlW10sc3RyaW5nLGJvb2wsYWRkcmVzcykiLCBtZXRob2QgImhhc0dsb2JhbFN0YXRlKCkodWludDY0LGJvb2wpIiwgbWV0aG9kICJ3cml0ZUdsb2JhbFN0YXRlKHN0cmluZyxib29sLGFjY291bnQpdm9pZCIsIG1ldGhvZCAid3JpdGVEeW5hbWljR2xvYmFsU3RhdGUoc3RyaW5nLHN0cmluZylzdHJpbmciCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3JlYWRHbG9iYWxTdGF0ZV9yb3V0ZUA1IG1haW5faGFzR2xvYmFsU3RhdGVfcm91dGVANiBtYWluX3dyaXRlR2xvYmFsU3RhdGVfcm91dGVANyBtYWluX3dyaXRlRHluYW1pY0dsb2JhbFN0YXRlX3JvdXRlQDgKCm1haW5fYWZ0ZXJfaWZfZWxzZUAxNToKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MTYtMTcKICAgIC8vIEBjb250cmFjdCh7IHN0YXRlVG90YWxzOiB7IGdsb2JhbEJ5dGVzOiA0LCBnbG9iYWxVaW50czogMyB9IH0pCiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBHbG9iYWxTdG9yYWdlIGV4dGVuZHMgYXJjNC5Db250cmFjdCB7CiAgICBpbnRjXzAgLy8gMAogICAgcmV0dXJuCgptYWluX3dyaXRlRHluYW1pY0dsb2JhbFN0YXRlX3JvdXRlQDg6CiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjEwMQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxNi0xNwogICAgLy8gQGNvbnRyYWN0KHsgc3RhdGVUb3RhbHM6IHsgZ2xvYmFsQnl0ZXM6IDQsIGdsb2JhbFVpbnRzOiAzIH0gfSkKICAgIC8vIGV4cG9ydCBkZWZhdWx0IGNsYXNzIEdsb2JhbFN0b3JhZ2UgZXh0ZW5kcyBhcmM0LkNvbnRyYWN0IHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGV4dHJhY3QgMiAwCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBleHRyYWN0IDIgMAogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxMDEKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBjYWxsc3ViIHdyaXRlRHluYW1pY0dsb2JhbFN0YXRlCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZWMgNCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl93cml0ZUdsb2JhbFN0YXRlX3JvdXRlQDc6CiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjgzCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjE2LTE3CiAgICAvLyBAY29udHJhY3QoeyBzdGF0ZVRvdGFsczogeyBnbG9iYWxCeXRlczogNCwgZ2xvYmFsVWludHM6IDMgfSB9KQogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgR2xvYmFsU3RvcmFnZSBleHRlbmRzIGFyYzQuQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGludGNfMCAvLyAwCiAgICBnZXRiaXQKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGJ0b2kKICAgIHR4bmFzIEFjY291bnRzCiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjgzCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgY2FsbHN1YiB3cml0ZUdsb2JhbFN0YXRlCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2hhc0dsb2JhbFN0YXRlX3JvdXRlQDY6CiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjY1CiAgICAvLyBAYXJjNC5hYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIGhhc0dsb2JhbFN0YXRlCiAgICBzd2FwCiAgICBpdG9iCiAgICBwdXNoYnl0ZXMgMHgwMAogICAgaW50Y18wIC8vIDAKICAgIHVuY292ZXIgMwogICAgc2V0Yml0CiAgICBjb25jYXQKICAgIGJ5dGVjIDQgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fcmVhZEdsb2JhbFN0YXRlX3JvdXRlQDU6CiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjQzCiAgICAvLyBAYXJjNC5hYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIHJlYWRHbG9iYWxTdGF0ZQogICAgdW5jb3ZlciA1CiAgICBpdG9iCiAgICB1bmNvdmVyIDUKICAgIGl0b2IKICAgIGRpZyA1CiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICB1bmNvdmVyIDYKICAgIGNvbmNhdAogICAgZGlnIDUKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHVuY292ZXIgNgogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHgwMAogICAgaW50Y18wIC8vIDAKICAgIHVuY292ZXIgNwogICAgc2V0Yml0CiAgICB1bmNvdmVyIDQKICAgIHVuY292ZXIgNAogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHgwMDM1CiAgICBjb25jYXQKICAgIGRpZyAzCiAgICBsZW4KICAgIHB1c2hpbnQgNTMgLy8gNTMKICAgICsKICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgdW5jb3ZlciAzCiAgICBjb25jYXQKICAgIHVuY292ZXIgMgogICAgY29uY2F0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJ5dGVjIDQgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fYmFyZV9yb3V0aW5nQDExOgogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxNi0xNwogICAgLy8gQGNvbnRyYWN0KHsgc3RhdGVUb3RhbHM6IHsgZ2xvYmFsQnl0ZXM6IDQsIGdsb2JhbFVpbnRzOiAzIH0gfSkKICAgIC8vIGV4cG9ydCBkZWZhdWx0IGNsYXNzIEdsb2JhbFN0b3JhZ2UgZXh0ZW5kcyBhcmM0LkNvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMTUKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo6R2xvYmFsU3RvcmFnZS5yZWFkR2xvYmFsU3RhdGUoKSAtPiB1aW50NjQsIHVpbnQ2NCwgYnl0ZXMsIGJ5dGVzLCB1aW50NjQsIGJ5dGVzOgpyZWFkR2xvYmFsU3RhdGU6CiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjQzLTQ0CiAgICAvLyBAYXJjNC5hYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgLy8gcHVibGljIHJlYWRHbG9iYWxTdGF0ZSgpOiBbdWludDY0LCB1aW50NjQsIGJ5dGVzLCBzdHJpbmcsIGJvb2xlYW4sIGFyYzQuQWRkcmVzc10gewogICAgcHJvdG8gMCA2CiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjQ2CiAgICAvLyBjb25zdCBhY2NvdW50QWRkcmVzcyA9IG5ldyBhcmM0LkFkZHJlc3ModGhpcy5nbG9iYWxBY2NvdW50LnZhbHVlKQogICAgaW50Y18wIC8vIDAKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjQKICAgIC8vIHB1YmxpYyBnbG9iYWxBY2NvdW50ID0gR2xvYmFsU3RhdGU8QWNjb3VudD4oKSAvLyBBZGRyZXNzIHdpdGggbm8gZGVmYXVsdCB2YWx1ZQogICAgYnl0ZWNfMyAvLyAiZ2xvYmFsQWNjb3VudCIKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6NDYKICAgIC8vIGNvbnN0IGFjY291bnRBZGRyZXNzID0gbmV3IGFyYzQuQWRkcmVzcyh0aGlzLmdsb2JhbEFjY291bnQudmFsdWUpCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo0OQogICAgLy8gdGhpcy5nbG9iYWxJbnQudmFsdWUsCiAgICBpbnRjXzAgLy8gMAogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxOQogICAgLy8gcHVibGljIGdsb2JhbEludCA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBpbml0aWFsVmFsdWU6IFVpbnQ2NCg1MCkgfSkgLy8gVUludDY0IHdpdGggZGVmYXVsdCB2YWx1ZQogICAgYnl0ZWMgNSAvLyAiZ2xvYmFsSW50IgogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo0OQogICAgLy8gdGhpcy5nbG9iYWxJbnQudmFsdWUsCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo1MAogICAgLy8gdGhpcy5nbG9iYWxJbnROb0RlZmF1bHQudmFsdWUsCiAgICBpbnRjXzAgLy8gMAogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoyMAogICAgLy8gcHVibGljIGdsb2JhbEludE5vRGVmYXVsdCA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oKSAvLyBVSW50NjQgd2l0aCBubyBkZWZhdWx0IHZhbHVlCiAgICBieXRlY18yIC8vICJnbG9iYWxJbnROb0RlZmF1bHQiCiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjUwCiAgICAvLyB0aGlzLmdsb2JhbEludE5vRGVmYXVsdC52YWx1ZSwKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjUxCiAgICAvLyB0aGlzLmdsb2JhbEJ5dGVzLnZhbHVlLAogICAgaW50Y18wIC8vIDAKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjEKICAgIC8vIHB1YmxpYyBnbG9iYWxCeXRlcyA9IEdsb2JhbFN0YXRlPGJ5dGVzPih7IGluaXRpYWxWYWx1ZTogQnl0ZXMoJ1NpbHZpbycpIH0pIC8vIEJ5dGVzIHdpdGggZGVmYXVsdCB2YWx1ZQogICAgYnl0ZWMgNiAvLyAiZ2xvYmFsQnl0ZXMiCiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjUxCiAgICAvLyB0aGlzLmdsb2JhbEJ5dGVzLnZhbHVlLAogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6NTIKICAgIC8vIHRoaXMuZ2xvYmFsU3RyaW5nLnZhbHVlLAogICAgaW50Y18wIC8vIDAKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjIKICAgIC8vIHB1YmxpYyBnbG9iYWxTdHJpbmcgPSBHbG9iYWxTdGF0ZTxzdHJpbmc+KHsgaW5pdGlhbFZhbHVlOiAnTWljYWxpJyB9KSAvLyBCeXRlcyB3aXRoIGRlZmF1bHQgdmFsdWUKICAgIGJ5dGVjXzAgLy8gImdsb2JhbFN0cmluZyIKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6NTIKICAgIC8vIHRoaXMuZ2xvYmFsU3RyaW5nLnZhbHVlLAogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6NTMKICAgIC8vIHRoaXMuZ2xvYmFsQm9vbC52YWx1ZSwKICAgIGludGNfMCAvLyAwCiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjIzCiAgICAvLyBwdWJsaWMgZ2xvYmFsQm9vbCA9IEdsb2JhbFN0YXRlKHsgaW5pdGlhbFZhbHVlOiB0cnVlIH0pIC8vIEJvb2wgd2l0aCBkZWZhdWx0IHZhbHVlCiAgICBieXRlY18xIC8vICJnbG9iYWxCb29sIgogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo1MwogICAgLy8gdGhpcy5nbG9iYWxCb29sLnZhbHVlLAogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6NDgtNTUKICAgIC8vIHJldHVybiBbCiAgICAvLyAgIHRoaXMuZ2xvYmFsSW50LnZhbHVlLAogICAgLy8gICB0aGlzLmdsb2JhbEludE5vRGVmYXVsdC52YWx1ZSwKICAgIC8vICAgdGhpcy5nbG9iYWxCeXRlcy52YWx1ZSwKICAgIC8vICAgdGhpcy5nbG9iYWxTdHJpbmcudmFsdWUsCiAgICAvLyAgIHRoaXMuZ2xvYmFsQm9vbC52YWx1ZSwKICAgIC8vICAgYWNjb3VudEFkZHJlc3MsCiAgICAvLyBdCiAgICB1bmNvdmVyIDUKICAgIHJldHN1YgoKCi8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6Okdsb2JhbFN0b3JhZ2UuaGFzR2xvYmFsU3RhdGUoKSAtPiB1aW50NjQsIHVpbnQ2NDoKaGFzR2xvYmFsU3RhdGU6CiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjY1LTY2CiAgICAvLyBAYXJjNC5hYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgLy8gcHVibGljIGhhc0dsb2JhbFN0YXRlKCk6IFt1aW50NjQsIGJvb2xlYW5dIHsKICAgIHByb3RvIDAgMgogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo2NwogICAgLy8gY29uc3QgaGFzVmFsdWUgPSB0aGlzLmdsb2JhbEludE5vRGVmYXVsdC5oYXNWYWx1ZQogICAgaW50Y18wIC8vIDAKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjAKICAgIC8vIHB1YmxpYyBnbG9iYWxJbnROb0RlZmF1bHQgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KCkgLy8gVUludDY0IHdpdGggbm8gZGVmYXVsdCB2YWx1ZQogICAgYnl0ZWNfMiAvLyAiZ2xvYmFsSW50Tm9EZWZhdWx0IgogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo2NwogICAgLy8gY29uc3QgaGFzVmFsdWUgPSB0aGlzLmdsb2JhbEludE5vRGVmYXVsdC5oYXNWYWx1ZQogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGJ1cnkgMQogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo2OAogICAgLy8gY29uc3QgdmFsdWUgPSB0aGlzLmdsb2JhbEludE5vRGVmYXVsdC52YWx1ZQogICAgaW50Y18wIC8vIDAKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjAKICAgIC8vIHB1YmxpYyBnbG9iYWxJbnROb0RlZmF1bHQgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KCkgLy8gVUludDY0IHdpdGggbm8gZGVmYXVsdCB2YWx1ZQogICAgYnl0ZWNfMiAvLyAiZ2xvYmFsSW50Tm9EZWZhdWx0IgogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo2OAogICAgLy8gY29uc3QgdmFsdWUgPSB0aGlzLmdsb2JhbEludE5vRGVmYXVsdC52YWx1ZQogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6NzAKICAgIC8vIGFzc2VydChoYXNWYWx1ZSwgJ0dsb2JhbCBzdGF0ZSBub3Qgc2V0LicpCiAgICBkaWcgMQogICAgYXNzZXJ0IC8vIEdsb2JhbCBzdGF0ZSBub3Qgc2V0LgogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo3MgogICAgLy8gcmV0dXJuIFt2YWx1ZSwgaGFzVmFsdWVdCiAgICBzd2FwCiAgICByZXRzdWIKCgovLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjpHbG9iYWxTdG9yYWdlLndyaXRlR2xvYmFsU3RhdGUodmFsdWVTdHJpbmc6IGJ5dGVzLCB2YWx1ZUJvb2w6IHVpbnQ2NCwgdmFsdWVBY2NvdW50OiBieXRlcykgLT4gdm9pZDoKd3JpdGVHbG9iYWxTdGF0ZToKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6ODMtODQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICAvLyBwdWJsaWMgd3JpdGVHbG9iYWxTdGF0ZSh2YWx1ZVN0cmluZzogc3RyaW5nLCB2YWx1ZUJvb2w6IGJvb2xlYW4sIHZhbHVlQWNjb3VudDogQWNjb3VudCk6IHZvaWQgewogICAgcHJvdG8gMyAwCiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjIyCiAgICAvLyBwdWJsaWMgZ2xvYmFsU3RyaW5nID0gR2xvYmFsU3RhdGU8c3RyaW5nPih7IGluaXRpYWxWYWx1ZTogJ01pY2FsaScgfSkgLy8gQnl0ZXMgd2l0aCBkZWZhdWx0IHZhbHVlCiAgICBieXRlY18wIC8vICJnbG9iYWxTdHJpbmciCiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjg1CiAgICAvLyB0aGlzLmdsb2JhbFN0cmluZy52YWx1ZSA9IHZhbHVlU3RyaW5nCiAgICBmcmFtZV9kaWcgLTMKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjIzCiAgICAvLyBwdWJsaWMgZ2xvYmFsQm9vbCA9IEdsb2JhbFN0YXRlKHsgaW5pdGlhbFZhbHVlOiB0cnVlIH0pIC8vIEJvb2wgd2l0aCBkZWZhdWx0IHZhbHVlCiAgICBieXRlY18xIC8vICJnbG9iYWxCb29sIgogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo4NgogICAgLy8gdGhpcy5nbG9iYWxCb29sLnZhbHVlID0gdmFsdWVCb29sCiAgICBmcmFtZV9kaWcgLTIKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjI0CiAgICAvLyBwdWJsaWMgZ2xvYmFsQWNjb3VudCA9IEdsb2JhbFN0YXRlPEFjY291bnQ+KCkgLy8gQWRkcmVzcyB3aXRoIG5vIGRlZmF1bHQgdmFsdWUKICAgIGJ5dGVjXzMgLy8gImdsb2JhbEFjY291bnQiCiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjg3CiAgICAvLyB0aGlzLmdsb2JhbEFjY291bnQudmFsdWUgPSB2YWx1ZUFjY291bnQKICAgIGZyYW1lX2RpZyAtMQogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6ODkKICAgIC8vIGFzc2VydCh0aGlzLmdsb2JhbFN0cmluZy52YWx1ZSA9PT0gdmFsdWVTdHJpbmcpCiAgICBpbnRjXzAgLy8gMAogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoyMgogICAgLy8gcHVibGljIGdsb2JhbFN0cmluZyA9IEdsb2JhbFN0YXRlPHN0cmluZz4oeyBpbml0aWFsVmFsdWU6ICdNaWNhbGknIH0pIC8vIEJ5dGVzIHdpdGggZGVmYXVsdCB2YWx1ZQogICAgYnl0ZWNfMCAvLyAiZ2xvYmFsU3RyaW5nIgogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo4OQogICAgLy8gYXNzZXJ0KHRoaXMuZ2xvYmFsU3RyaW5nLnZhbHVlID09PSB2YWx1ZVN0cmluZykKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICBmcmFtZV9kaWcgLTMKICAgID09CiAgICBhc3NlcnQKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6OTAKICAgIC8vIGFzc2VydCh0aGlzLmdsb2JhbEJvb2wudmFsdWUgPT09IHZhbHVlQm9vbCkKICAgIGludGNfMCAvLyAwCiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjIzCiAgICAvLyBwdWJsaWMgZ2xvYmFsQm9vbCA9IEdsb2JhbFN0YXRlKHsgaW5pdGlhbFZhbHVlOiB0cnVlIH0pIC8vIEJvb2wgd2l0aCBkZWZhdWx0IHZhbHVlCiAgICBieXRlY18xIC8vICJnbG9iYWxCb29sIgogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo5MAogICAgLy8gYXNzZXJ0KHRoaXMuZ2xvYmFsQm9vbC52YWx1ZSA9PT0gdmFsdWVCb29sKQogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIGZyYW1lX2RpZyAtMgogICAgPT0KICAgIGFzc2VydAogICAgLy8gY29udHJhY3RzL0dsb2JhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo5MQogICAgLy8gYXNzZXJ0KHRoaXMuZ2xvYmFsQWNjb3VudC52YWx1ZSA9PT0gdmFsdWVBY2NvdW50KQogICAgaW50Y18wIC8vIDAKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjQKICAgIC8vIHB1YmxpYyBnbG9iYWxBY2NvdW50ID0gR2xvYmFsU3RhdGU8QWNjb3VudD4oKSAvLyBBZGRyZXNzIHdpdGggbm8gZGVmYXVsdCB2YWx1ZQogICAgYnl0ZWNfMyAvLyAiZ2xvYmFsQWNjb3VudCIKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6OTEKICAgIC8vIGFzc2VydCh0aGlzLmdsb2JhbEFjY291bnQudmFsdWUgPT09IHZhbHVlQWNjb3VudCkKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICBmcmFtZV9kaWcgLTEKICAgID09CiAgICBhc3NlcnQKICAgIHJldHN1YgoKCi8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6Okdsb2JhbFN0b3JhZ2Uud3JpdGVEeW5hbWljR2xvYmFsU3RhdGUoa2V5OiBieXRlcywgdmFsdWU6IGJ5dGVzKSAtPiBieXRlczoKd3JpdGVEeW5hbWljR2xvYmFsU3RhdGU6CiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjEwMS0xMDIKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICAvLyBwdWJsaWMgd3JpdGVEeW5hbWljR2xvYmFsU3RhdGUoa2V5OiBzdHJpbmcsIHZhbHVlOiBzdHJpbmcpOiBzdHJpbmcgewogICAgcHJvdG8gMiAxCiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjEwNQogICAgLy8gZ2xvYmFsRHluYW1pY0FjY2Vzcy52YWx1ZSA9IHZhbHVlCiAgICBmcmFtZV9kaWcgLTIKICAgIGZyYW1lX2RpZyAtMQogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNvbnRyYWN0cy9HbG9iYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MTA3CiAgICAvLyBhc3NlcnQoZ2xvYmFsRHluYW1pY0FjY2Vzcy52YWx1ZSA9PT0gdmFsdWUpCiAgICBpbnRjXzAgLy8gMAogICAgZnJhbWVfZGlnIC0yCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgZnJhbWVfZGlnIC0xCiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyBjb250cmFjdHMvR2xvYmFsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjEwOQogICAgLy8gcmV0dXJuIGdsb2JhbER5bmFtaWNBY2Nlc3MudmFsdWUKICAgIGludGNfMCAvLyAwCiAgICBmcmFtZV9kaWcgLTIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICByZXRzdWIK","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiACAAEmBwxnbG9iYWxTdHJpbmcKZ2xvYmFsQm9vbBJnbG9iYWxJbnROb0RlZmF1bHQNZ2xvYmFsQWNjb3VudAQVH3x1CWdsb2JhbEludAtnbG9iYWxCeXRlczEYQAAkJwWBMmcnBoAGU2lsdmlvZyiABk1pY2FsaWcpI2cqImcrMQBnMRtBANOCBATTj2ByBEe0XNEE96BO3gRKTGv2NhoAjgQAXwBEACcAAiJDMRkURDEYRDYaAVcCADYaAlcCAIgA/EkVFlcGAkxQJwRMULAjQzEZFEQxGEQ2GgFXAgA2GgIiUzYaAxfAHIgAqiNDMRkURDEYRIgAjUwWgAEAIk8DVFAnBExQsCNDMRkURDEYRIgAUk8FFk8FFksFFRZXBgJPBlBLBRUWVwYCTwZQgAEAIk8HVE8ETwRQgAIANVBLAxWBNQgWVwYCUExQTwNQTwJQTFAnBExQsCNDMRlA/0sxGBREI0OKAAYiK2VEIicFZUQiKmVEIicGZUQiKGVEIillRE8FiYoAAiIqZUUBIiplREsBREyJigMAKIv9ZymL/mcri/9nIihlRIv9EkQiKWVEi/4SRCIrZUSL/xJEiYoCAYv+i/9nIov+ZUSL/xJEIov+ZUSJ","clear":"CoEBQw=="},"compilerInfo":{"compiler":"puya","compilerVersion":{"major":4,"minor":3,"patch":3}},"events":[],"templateVariables":{}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"LocalStorage","structs":{},"methods":[{"name":"optInToApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["OptIn"]},"readonly":false,"events":[],"recommendations":{}},{"name":"readLocalState","args":[],"returns":{"type":"(uint64,uint64,byte[],string,bool,address)"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Reads and returns all local state values for the sender","events":[],"recommendations":{}},{"name":"writeLocalState","args":[{"type":"string","name":"valueString"},{"type":"bool","name":"valueBool"},{"type":"account","name":"valueAccount"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Updates multiple local state values for the sender","events":[],"recommendations":{}},{"name":"writeDynamicLocalState","args":[{"type":"string","name":"key"},{"type":"string","name":"value"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Writes a value to local state using a dynamic key","events":[],"recommendations":{}},{"name":"readDynamicLocalState","args":[{"type":"string","name":"key"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Reads a value from local state using a dynamic key","events":[],"recommendations":{}},{"name":"clearLocalState","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Clears all local state for the sender","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"A contract demonstrating local storage functionality","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":3,"bytes":4}},"keys":{"global":{},"local":{"localInt":{"keyType":"AVMString","valueType":"AVMUint64","key":"aW50"},"localIntNoDefault":{"keyType":"AVMString","valueType":"AVMUint64","key":"bG9jYWxJbnROb0RlZmF1bHQ="},"localBytes":{"keyType":"AVMString","valueType":"AVMBytes","key":"bG9jYWxCeXRlcw=="},"localString":{"keyType":"AVMString","valueType":"AVMString","key":"bG9jYWxTdHJpbmc="},"localBool":{"keyType":"AVMString","valueType":"AVMUint64","key":"bG9jYWxCb29s"},"localAccount":{"keyType":"AVMString","valueType":"AVMBytes","key":"bG9jYWxBY2NvdW50"}},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[457,509,541,565],"errorMessage":"Account must opt in to contract first"},{"pc":[549],"errorMessage":"Key not found"},{"pc":[139,151,181,217,246],"errorMessage":"OnCompletion is not NoOp"},{"pc":[327],"errorMessage":"OnCompletion is not OptIn"},{"pc":[344],"errorMessage":"can only call when creating"},{"pc":[142,154,184,220,249,330],"errorMessage":"can only call when not creating"},{"pc":[411,418,425,432,438,444,477,486,494,521,530,554],"errorMessage":"check LocalState exists"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxCiAgICBieXRlY2Jsb2NrICJsb2NhbFN0cmluZyIgImxvY2FsQm9vbCIgImxvY2FsQWNjb3VudCIgMHgxNTFmN2M3NSAiaW50IiAibG9jYWxJbnROb0RlZmF1bHQiICJsb2NhbEJ5dGVzIgogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjE2LTE3CiAgICAvLyBAY29udHJhY3QoeyBzdGF0ZVRvdGFsczogeyBsb2NhbEJ5dGVzOiA0LCBsb2NhbFVpbnRzOiAzIH0gfSkKICAgIC8vIGV4cG9ydCBkZWZhdWx0IGNsYXNzIExvY2FsU3RvcmFnZSBleHRlbmRzIGFyYzQuQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fYmFyZV9yb3V0aW5nQDExCiAgICBwdXNoYnl0ZXNzIDB4MDFhM2EzZmYgMHhkMDAxM2ZjNSAweDAyODE4YjRjIDB4Mjc5M2MyNDkgMHgyMTM2MzFmNSAweDVlNTgwNTFhIC8vIG1ldGhvZCAib3B0SW5Ub0FwcGxpY2F0aW9uKCl2b2lkIiwgbWV0aG9kICJyZWFkTG9jYWxTdGF0ZSgpKHVpbnQ2NCx1aW50NjQsYnl0ZVtdLHN0cmluZyxib29sLGFkZHJlc3MpIiwgbWV0aG9kICJ3cml0ZUxvY2FsU3RhdGUoc3RyaW5nLGJvb2wsYWNjb3VudCl2b2lkIiwgbWV0aG9kICJ3cml0ZUR5bmFtaWNMb2NhbFN0YXRlKHN0cmluZyxzdHJpbmcpc3RyaW5nIiwgbWV0aG9kICJyZWFkRHluYW1pY0xvY2FsU3RhdGUoc3RyaW5nKXN0cmluZyIsIG1ldGhvZCAiY2xlYXJMb2NhbFN0YXRlKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9vcHRJblRvQXBwbGljYXRpb25fcm91dGVAMyBtYWluX3JlYWRMb2NhbFN0YXRlX3JvdXRlQDQgbWFpbl93cml0ZUxvY2FsU3RhdGVfcm91dGVANSBtYWluX3dyaXRlRHluYW1pY0xvY2FsU3RhdGVfcm91dGVANiBtYWluX3JlYWREeW5hbWljTG9jYWxTdGF0ZV9yb3V0ZUA3IG1haW5fY2xlYXJMb2NhbFN0YXRlX3JvdXRlQDgKCm1haW5fYWZ0ZXJfaWZfZWxzZUAxNToKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxNi0xNwogICAgLy8gQGNvbnRyYWN0KHsgc3RhdGVUb3RhbHM6IHsgbG9jYWxCeXRlczogNCwgbG9jYWxVaW50czogMyB9IH0pCiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBMb2NhbFN0b3JhZ2UgZXh0ZW5kcyBhcmM0LkNvbnRyYWN0IHsKICAgIGludGNfMCAvLyAwCiAgICByZXR1cm4KCm1haW5fY2xlYXJMb2NhbFN0YXRlX3JvdXRlQDg6CiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MTIzCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIGNsZWFyTG9jYWxTdGF0ZQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9yZWFkRHluYW1pY0xvY2FsU3RhdGVfcm91dGVANzoKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxMDUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxNi0xNwogICAgLy8gQGNvbnRyYWN0KHsgc3RhdGVUb3RhbHM6IHsgbG9jYWxCeXRlczogNCwgbG9jYWxVaW50czogMyB9IH0pCiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBMb2NhbFN0b3JhZ2UgZXh0ZW5kcyBhcmM0LkNvbnRyYWN0IHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGV4dHJhY3QgMiAwCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MTA1CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgY2FsbHN1YiByZWFkRHluYW1pY0xvY2FsU3RhdGUKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX3dyaXRlRHluYW1pY0xvY2FsU3RhdGVfcm91dGVANjoKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo4NQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjE2LTE3CiAgICAvLyBAY29udHJhY3QoeyBzdGF0ZVRvdGFsczogeyBsb2NhbEJ5dGVzOiA0LCBsb2NhbFVpbnRzOiAzIH0gfSkKICAgIC8vIGV4cG9ydCBkZWZhdWx0IGNsYXNzIExvY2FsU3RvcmFnZSBleHRlbmRzIGFyYzQuQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGV4dHJhY3QgMiAwCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6ODUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBjYWxsc3ViIHdyaXRlRHluYW1pY0xvY2FsU3RhdGUKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX3dyaXRlTG9jYWxTdGF0ZV9yb3V0ZUA1OgogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjY0CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MTYtMTcKICAgIC8vIEBjb250cmFjdCh7IHN0YXRlVG90YWxzOiB7IGxvY2FsQnl0ZXM6IDQsIGxvY2FsVWludHM6IDMgfSB9KQogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgTG9jYWxTdG9yYWdlIGV4dGVuZHMgYXJjNC5Db250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgaW50Y18wIC8vIDAKICAgIGdldGJpdAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgYnRvaQogICAgdHhuYXMgQWNjb3VudHMKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo2NAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGNhbGxzdWIgd3JpdGVMb2NhbFN0YXRlCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX3JlYWRMb2NhbFN0YXRlX3JvdXRlQDQ6CiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6NDMKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGNhbGxzdWIgcmVhZExvY2FsU3RhdGUKICAgIHVuY292ZXIgNQogICAgaXRvYgogICAgdW5jb3ZlciA1CiAgICBpdG9iCiAgICBkaWcgNQogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgdW5jb3ZlciA2CiAgICBjb25jYXQKICAgIGRpZyA1CiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICB1bmNvdmVyIDYKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MDAKICAgIGludGNfMCAvLyAwCiAgICB1bmNvdmVyIDcKICAgIHNldGJpdAogICAgdW5jb3ZlciA0CiAgICB1bmNvdmVyIDQKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MDAzNQogICAgY29uY2F0CiAgICBkaWcgMwogICAgbGVuCiAgICBwdXNoaW50IDUzIC8vIDUzCiAgICArCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgY29uY2F0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIHVuY292ZXIgMwogICAgY29uY2F0CiAgICB1bmNvdmVyIDIKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX29wdEluVG9BcHBsaWNhdGlvbl9yb3V0ZUAzOgogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjI4CiAgICAvLyBAYXJjNC5hYmltZXRob2QoeyBhbGxvd0FjdGlvbnM6ICdPcHRJbicgfSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGludGNfMSAvLyBPcHRJbgogICAgPT0KICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE9wdEluCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGNhbGxzdWIgb3B0SW5Ub0FwcGxpY2F0aW9uCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2JhcmVfcm91dGluZ0AxMToKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxNi0xNwogICAgLy8gQGNvbnRyYWN0KHsgc3RhdGVUb3RhbHM6IHsgbG9jYWxCeXRlczogNCwgbG9jYWxVaW50czogMyB9IH0pCiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBMb2NhbFN0b3JhZ2UgZXh0ZW5kcyBhcmM0LkNvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMTUKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjpMb2NhbFN0b3JhZ2Uub3B0SW5Ub0FwcGxpY2F0aW9uKCkgLT4gdm9pZDoKb3B0SW5Ub0FwcGxpY2F0aW9uOgogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjI4LTI5CiAgICAvLyBAYXJjNC5hYmltZXRob2QoeyBhbGxvd0FjdGlvbnM6ICdPcHRJbicgfSkKICAgIC8vIHB1YmxpYyBvcHRJblRvQXBwbGljYXRpb24oKTogdm9pZCB7CiAgICBwcm90byAwIDAKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czozMAogICAgLy8gdGhpcy5sb2NhbEludChUeG4uc2VuZGVyKS52YWx1ZSA9IDEwMAogICAgdHhuIFNlbmRlcgogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjE5CiAgICAvLyBwdWJsaWMgbG9jYWxJbnQgPSBMb2NhbFN0YXRlPHVpbnQ2ND4oeyBrZXk6ICdpbnQnIH0pCiAgICBieXRlYyA0IC8vICJpbnQiCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MzAKICAgIC8vIHRoaXMubG9jYWxJbnQoVHhuLnNlbmRlcikudmFsdWUgPSAxMDAKICAgIHB1c2hpbnQgMTAwIC8vIDEwMAogICAgYXBwX2xvY2FsX3B1dAogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjMxCiAgICAvLyB0aGlzLmxvY2FsSW50Tm9EZWZhdWx0KFR4bi5zZW5kZXIpLnZhbHVlID0gMjAwCiAgICB0eG4gU2VuZGVyCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjAKICAgIC8vIHB1YmxpYyBsb2NhbEludE5vRGVmYXVsdCA9IExvY2FsU3RhdGU8dWludDY0PigpCiAgICBieXRlYyA1IC8vICJsb2NhbEludE5vRGVmYXVsdCIKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czozMQogICAgLy8gdGhpcy5sb2NhbEludE5vRGVmYXVsdChUeG4uc2VuZGVyKS52YWx1ZSA9IDIwMAogICAgcHVzaGludCAyMDAgLy8gMjAwCiAgICBhcHBfbG9jYWxfcHV0CiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MzIKICAgIC8vIHRoaXMubG9jYWxCeXRlcyhUeG4uc2VuZGVyKS52YWx1ZSA9IEJ5dGVzKCdTaWx2aW8nKQogICAgdHhuIFNlbmRlcgogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjIxCiAgICAvLyBwdWJsaWMgbG9jYWxCeXRlcyA9IExvY2FsU3RhdGU8Ynl0ZXM+KCkKICAgIGJ5dGVjIDYgLy8gImxvY2FsQnl0ZXMiCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MzIKICAgIC8vIHRoaXMubG9jYWxCeXRlcyhUeG4uc2VuZGVyKS52YWx1ZSA9IEJ5dGVzKCdTaWx2aW8nKQogICAgcHVzaGJ5dGVzICJTaWx2aW8iCiAgICBhcHBfbG9jYWxfcHV0CiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MzMKICAgIC8vIHRoaXMubG9jYWxTdHJpbmcoVHhuLnNlbmRlcikudmFsdWUgPSAnTWljYWxpJwogICAgdHhuIFNlbmRlcgogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjIyCiAgICAvLyBwdWJsaWMgbG9jYWxTdHJpbmcgPSBMb2NhbFN0YXRlPHN0cmluZz4oKQogICAgYnl0ZWNfMCAvLyAibG9jYWxTdHJpbmciCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MzMKICAgIC8vIHRoaXMubG9jYWxTdHJpbmcoVHhuLnNlbmRlcikudmFsdWUgPSAnTWljYWxpJwogICAgcHVzaGJ5dGVzICJNaWNhbGkiCiAgICBhcHBfbG9jYWxfcHV0CiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MzQKICAgIC8vIHRoaXMubG9jYWxCb29sKFR4bi5zZW5kZXIpLnZhbHVlID0gdHJ1ZQogICAgdHhuIFNlbmRlcgogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjIzCiAgICAvLyBwdWJsaWMgbG9jYWxCb29sID0gTG9jYWxTdGF0ZTxib29sZWFuPigpCiAgICBieXRlY18xIC8vICJsb2NhbEJvb2wiCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MzQKICAgIC8vIHRoaXMubG9jYWxCb29sKFR4bi5zZW5kZXIpLnZhbHVlID0gdHJ1ZQogICAgaW50Y18xIC8vIDEKICAgIGFwcF9sb2NhbF9wdXQKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czozNQogICAgLy8gdGhpcy5sb2NhbEFjY291bnQoVHhuLnNlbmRlcikudmFsdWUgPSBUeG4uc2VuZGVyCiAgICB0eG4gU2VuZGVyCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjQKICAgIC8vIHB1YmxpYyBsb2NhbEFjY291bnQgPSBMb2NhbFN0YXRlPEFjY291bnQ+KCkKICAgIGJ5dGVjXzIgLy8gImxvY2FsQWNjb3VudCIKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czozNQogICAgLy8gdGhpcy5sb2NhbEFjY291bnQoVHhuLnNlbmRlcikudmFsdWUgPSBUeG4uc2VuZGVyCiAgICB0eG4gU2VuZGVyCiAgICBhcHBfbG9jYWxfcHV0CiAgICByZXRzdWIKCgovLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6OkxvY2FsU3RvcmFnZS5yZWFkTG9jYWxTdGF0ZSgpIC0+IHVpbnQ2NCwgdWludDY0LCBieXRlcywgYnl0ZXMsIHVpbnQ2NCwgYnl0ZXM6CnJlYWRMb2NhbFN0YXRlOgogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjQzLTQ0CiAgICAvLyBAYXJjNC5hYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgLy8gcHVibGljIHJlYWRMb2NhbFN0YXRlKCk6IFt1aW50NjQsIHVpbnQ2NCwgYnl0ZXMsIHN0cmluZywgYm9vbGVhbiwgYXJjNC5BZGRyZXNzXSB7CiAgICBwcm90byAwIDYKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo0NQogICAgLy8gY29uc3Qgc2VuZGVyID0gVHhuLnNlbmRlcgogICAgdHhuIFNlbmRlcgogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjQ3CiAgICAvLyBjb25zdCBhY2NvdW50QWRkcmVzcyA9IG5ldyBhcmM0LkFkZHJlc3ModGhpcy5sb2NhbEFjY291bnQoc2VuZGVyKS52YWx1ZSkKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoyNAogICAgLy8gcHVibGljIGxvY2FsQWNjb3VudCA9IExvY2FsU3RhdGU8QWNjb3VudD4oKQogICAgYnl0ZWNfMiAvLyAibG9jYWxBY2NvdW50IgogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjQ3CiAgICAvLyBjb25zdCBhY2NvdW50QWRkcmVzcyA9IG5ldyBhcmM0LkFkZHJlc3ModGhpcy5sb2NhbEFjY291bnQoc2VuZGVyKS52YWx1ZSkKICAgIGFwcF9sb2NhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBMb2NhbFN0YXRlIGV4aXN0cwogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjUwCiAgICAvLyB0aGlzLmxvY2FsSW50KHNlbmRlcikudmFsdWUsCiAgICBkaWcgMQogICAgaW50Y18wIC8vIDAKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxOQogICAgLy8gcHVibGljIGxvY2FsSW50ID0gTG9jYWxTdGF0ZTx1aW50NjQ+KHsga2V5OiAnaW50JyB9KQogICAgYnl0ZWMgNCAvLyAiaW50IgogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjUwCiAgICAvLyB0aGlzLmxvY2FsSW50KHNlbmRlcikudmFsdWUsCiAgICBhcHBfbG9jYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgTG9jYWxTdGF0ZSBleGlzdHMKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo1MQogICAgLy8gdGhpcy5sb2NhbEludE5vRGVmYXVsdChzZW5kZXIpLnZhbHVlLAogICAgZGlnIDIKICAgIGludGNfMCAvLyAwCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjAKICAgIC8vIHB1YmxpYyBsb2NhbEludE5vRGVmYXVsdCA9IExvY2FsU3RhdGU8dWludDY0PigpCiAgICBieXRlYyA1IC8vICJsb2NhbEludE5vRGVmYXVsdCIKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo1MQogICAgLy8gdGhpcy5sb2NhbEludE5vRGVmYXVsdChzZW5kZXIpLnZhbHVlLAogICAgYXBwX2xvY2FsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIExvY2FsU3RhdGUgZXhpc3RzCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6NTIKICAgIC8vIHRoaXMubG9jYWxCeXRlcyhzZW5kZXIpLnZhbHVlLAogICAgZGlnIDMKICAgIGludGNfMCAvLyAwCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjEKICAgIC8vIHB1YmxpYyBsb2NhbEJ5dGVzID0gTG9jYWxTdGF0ZTxieXRlcz4oKQogICAgYnl0ZWMgNiAvLyAibG9jYWxCeXRlcyIKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo1MgogICAgLy8gdGhpcy5sb2NhbEJ5dGVzKHNlbmRlcikudmFsdWUsCiAgICBhcHBfbG9jYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgTG9jYWxTdGF0ZSBleGlzdHMKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo1MwogICAgLy8gdGhpcy5sb2NhbFN0cmluZyhzZW5kZXIpLnZhbHVlLAogICAgZGlnIDQKICAgIGludGNfMCAvLyAwCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjIKICAgIC8vIHB1YmxpYyBsb2NhbFN0cmluZyA9IExvY2FsU3RhdGU8c3RyaW5nPigpCiAgICBieXRlY18wIC8vICJsb2NhbFN0cmluZyIKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo1MwogICAgLy8gdGhpcy5sb2NhbFN0cmluZyhzZW5kZXIpLnZhbHVlLAogICAgYXBwX2xvY2FsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIExvY2FsU3RhdGUgZXhpc3RzCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6NTQKICAgIC8vIHRoaXMubG9jYWxCb29sKHNlbmRlcikudmFsdWUsCiAgICB1bmNvdmVyIDUKICAgIGludGNfMCAvLyAwCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjMKICAgIC8vIHB1YmxpYyBsb2NhbEJvb2wgPSBMb2NhbFN0YXRlPGJvb2xlYW4+KCkKICAgIGJ5dGVjXzEgLy8gImxvY2FsQm9vbCIKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo1NAogICAgLy8gdGhpcy5sb2NhbEJvb2woc2VuZGVyKS52YWx1ZSwKICAgIGFwcF9sb2NhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBMb2NhbFN0YXRlIGV4aXN0cwogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjQ5LTU2CiAgICAvLyByZXR1cm4gWwogICAgLy8gICB0aGlzLmxvY2FsSW50KHNlbmRlcikudmFsdWUsCiAgICAvLyAgIHRoaXMubG9jYWxJbnROb0RlZmF1bHQoc2VuZGVyKS52YWx1ZSwKICAgIC8vICAgdGhpcy5sb2NhbEJ5dGVzKHNlbmRlcikudmFsdWUsCiAgICAvLyAgIHRoaXMubG9jYWxTdHJpbmcoc2VuZGVyKS52YWx1ZSwKICAgIC8vICAgdGhpcy5sb2NhbEJvb2woc2VuZGVyKS52YWx1ZSwKICAgIC8vICAgYWNjb3VudEFkZHJlc3MsCiAgICAvLyBdCiAgICB1bmNvdmVyIDUKICAgIHJldHN1YgoKCi8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo6TG9jYWxTdG9yYWdlLndyaXRlTG9jYWxTdGF0ZSh2YWx1ZVN0cmluZzogYnl0ZXMsIHZhbHVlQm9vbDogdWludDY0LCB2YWx1ZUFjY291bnQ6IGJ5dGVzKSAtPiB2b2lkOgp3cml0ZUxvY2FsU3RhdGU6CiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6NjQtNjUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICAvLyBwdWJsaWMgd3JpdGVMb2NhbFN0YXRlKHZhbHVlU3RyaW5nOiBzdHJpbmcsIHZhbHVlQm9vbDogYm9vbGVhbiwgdmFsdWVBY2NvdW50OiBBY2NvdW50KTogdm9pZCB7CiAgICBwcm90byAzIDAKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo2NwogICAgLy8gY29uc3Qgc2VuZGVyID0gVHhuLnNlbmRlcgogICAgdHhuIFNlbmRlcgogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjY5CiAgICAvLyBhc3NlcnQoc2VuZGVyLmlzT3B0ZWRJbihHbG9iYWwuY3VycmVudEFwcGxpY2F0aW9uSWQpLCAnQWNjb3VudCBtdXN0IG9wdCBpbiB0byBjb250cmFjdCBmaXJzdCcpCiAgICBkdXAKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25JRAogICAgYXBwX29wdGVkX2luCiAgICBhc3NlcnQgLy8gQWNjb3VudCBtdXN0IG9wdCBpbiB0byBjb250cmFjdCBmaXJzdAogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjcxCiAgICAvLyB0aGlzLmxvY2FsU3RyaW5nKHNlbmRlcikudmFsdWUgPSB2YWx1ZVN0cmluZwogICAgZHVwCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjIKICAgIC8vIHB1YmxpYyBsb2NhbFN0cmluZyA9IExvY2FsU3RhdGU8c3RyaW5nPigpCiAgICBieXRlY18wIC8vICJsb2NhbFN0cmluZyIKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo3MQogICAgLy8gdGhpcy5sb2NhbFN0cmluZyhzZW5kZXIpLnZhbHVlID0gdmFsdWVTdHJpbmcKICAgIGZyYW1lX2RpZyAtMwogICAgYXBwX2xvY2FsX3B1dAogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjcyCiAgICAvLyB0aGlzLmxvY2FsQm9vbChzZW5kZXIpLnZhbHVlID0gdmFsdWVCb29sCiAgICBkdXAKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoyMwogICAgLy8gcHVibGljIGxvY2FsQm9vbCA9IExvY2FsU3RhdGU8Ym9vbGVhbj4oKQogICAgYnl0ZWNfMSAvLyAibG9jYWxCb29sIgogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjcyCiAgICAvLyB0aGlzLmxvY2FsQm9vbChzZW5kZXIpLnZhbHVlID0gdmFsdWVCb29sCiAgICBmcmFtZV9kaWcgLTIKICAgIGFwcF9sb2NhbF9wdXQKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo3MwogICAgLy8gdGhpcy5sb2NhbEFjY291bnQoc2VuZGVyKS52YWx1ZSA9IHZhbHVlQWNjb3VudAogICAgZHVwCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjQKICAgIC8vIHB1YmxpYyBsb2NhbEFjY291bnQgPSBMb2NhbFN0YXRlPEFjY291bnQ+KCkKICAgIGJ5dGVjXzIgLy8gImxvY2FsQWNjb3VudCIKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo3MwogICAgLy8gdGhpcy5sb2NhbEFjY291bnQoc2VuZGVyKS52YWx1ZSA9IHZhbHVlQWNjb3VudAogICAgZnJhbWVfZGlnIC0xCiAgICBhcHBfbG9jYWxfcHV0CiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6NzUKICAgIC8vIGFzc2VydCh0aGlzLmxvY2FsU3RyaW5nKHNlbmRlcikudmFsdWUgPT09IHZhbHVlU3RyaW5nKQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjIyCiAgICAvLyBwdWJsaWMgbG9jYWxTdHJpbmcgPSBMb2NhbFN0YXRlPHN0cmluZz4oKQogICAgYnl0ZWNfMCAvLyAibG9jYWxTdHJpbmciCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6NzUKICAgIC8vIGFzc2VydCh0aGlzLmxvY2FsU3RyaW5nKHNlbmRlcikudmFsdWUgPT09IHZhbHVlU3RyaW5nKQogICAgYXBwX2xvY2FsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIExvY2FsU3RhdGUgZXhpc3RzCiAgICBmcmFtZV9kaWcgLTMKICAgID09CiAgICBhc3NlcnQKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo3NgogICAgLy8gYXNzZXJ0KHRoaXMubG9jYWxCb29sKHNlbmRlcikudmFsdWUgPT09IHZhbHVlQm9vbCkKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoyMwogICAgLy8gcHVibGljIGxvY2FsQm9vbCA9IExvY2FsU3RhdGU8Ym9vbGVhbj4oKQogICAgYnl0ZWNfMSAvLyAibG9jYWxCb29sIgogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjc2CiAgICAvLyBhc3NlcnQodGhpcy5sb2NhbEJvb2woc2VuZGVyKS52YWx1ZSA9PT0gdmFsdWVCb29sKQogICAgYXBwX2xvY2FsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIExvY2FsU3RhdGUgZXhpc3RzCiAgICBmcmFtZV9kaWcgLTIKICAgID09CiAgICBhc3NlcnQKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo3NwogICAgLy8gYXNzZXJ0KHRoaXMubG9jYWxBY2NvdW50KHNlbmRlcikudmFsdWUgPT09IHZhbHVlQWNjb3VudCkKICAgIGludGNfMCAvLyAwCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjQKICAgIC8vIHB1YmxpYyBsb2NhbEFjY291bnQgPSBMb2NhbFN0YXRlPEFjY291bnQ+KCkKICAgIGJ5dGVjXzIgLy8gImxvY2FsQWNjb3VudCIKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo3NwogICAgLy8gYXNzZXJ0KHRoaXMubG9jYWxBY2NvdW50KHNlbmRlcikudmFsdWUgPT09IHZhbHVlQWNjb3VudCkKICAgIGFwcF9sb2NhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBMb2NhbFN0YXRlIGV4aXN0cwogICAgZnJhbWVfZGlnIC0xCiAgICA9PQogICAgYXNzZXJ0CiAgICByZXRzdWIKCgovLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6OkxvY2FsU3RvcmFnZS53cml0ZUR5bmFtaWNMb2NhbFN0YXRlKGtleTogYnl0ZXMsIHZhbHVlOiBieXRlcykgLT4gYnl0ZXM6CndyaXRlRHluYW1pY0xvY2FsU3RhdGU6CiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6ODUtODYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICAvLyBwdWJsaWMgd3JpdGVEeW5hbWljTG9jYWxTdGF0ZShrZXk6IHN0cmluZywgdmFsdWU6IHN0cmluZyk6IHN0cmluZyB7CiAgICBwcm90byAyIDEKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo4NwogICAgLy8gY29uc3Qgc2VuZGVyID0gVHhuLnNlbmRlcgogICAgdHhuIFNlbmRlcgogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjg5CiAgICAvLyBhc3NlcnQoc2VuZGVyLmlzT3B0ZWRJbihHbG9iYWwuY3VycmVudEFwcGxpY2F0aW9uSWQpLCAnQWNjb3VudCBtdXN0IG9wdCBpbiB0byBjb250cmFjdCBmaXJzdCcpCiAgICBkdXAKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25JRAogICAgYXBwX29wdGVkX2luCiAgICBhc3NlcnQgLy8gQWNjb3VudCBtdXN0IG9wdCBpbiB0byBjb250cmFjdCBmaXJzdAogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjkzCiAgICAvLyBsb2NhbER5bmFtaWNBY2Nlc3Moc2VuZGVyKS52YWx1ZSA9IHZhbHVlCiAgICBkdXAKICAgIGZyYW1lX2RpZyAtMgogICAgZnJhbWVfZGlnIC0xCiAgICBhcHBfbG9jYWxfcHV0CiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6OTUKICAgIC8vIGFzc2VydChsb2NhbER5bmFtaWNBY2Nlc3Moc2VuZGVyKS52YWx1ZSA9PT0gdmFsdWUpCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBmcmFtZV9kaWcgLTIKICAgIGFwcF9sb2NhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBMb2NhbFN0YXRlIGV4aXN0cwogICAgZnJhbWVfZGlnIC0xCiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6OTcKICAgIC8vIHJldHVybiBsb2NhbER5bmFtaWNBY2Nlc3Moc2VuZGVyKS52YWx1ZQogICAgaW50Y18wIC8vIDAKICAgIGZyYW1lX2RpZyAtMgogICAgYXBwX2xvY2FsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIExvY2FsU3RhdGUgZXhpc3RzCiAgICByZXRzdWIKCgovLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6OkxvY2FsU3RvcmFnZS5yZWFkRHluYW1pY0xvY2FsU3RhdGUoa2V5OiBieXRlcykgLT4gYnl0ZXM6CnJlYWREeW5hbWljTG9jYWxTdGF0ZToKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxMDUtMTA2CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgLy8gcHVibGljIHJlYWREeW5hbWljTG9jYWxTdGF0ZShrZXk6IHN0cmluZyk6IHN0cmluZyB7CiAgICBwcm90byAxIDEKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxMDcKICAgIC8vIGNvbnN0IHNlbmRlciA9IFR4bi5zZW5kZXIKICAgIHR4biBTZW5kZXIKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxMDkKICAgIC8vIGFzc2VydChzZW5kZXIuaXNPcHRlZEluKEdsb2JhbC5jdXJyZW50QXBwbGljYXRpb25JZCksICdBY2NvdW50IG11c3Qgb3B0IGluIHRvIGNvbnRyYWN0IGZpcnN0JykKICAgIGR1cAogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbklECiAgICBhcHBfb3B0ZWRfaW4KICAgIGFzc2VydCAvLyBBY2NvdW50IG11c3Qgb3B0IGluIHRvIGNvbnRyYWN0IGZpcnN0CiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MTEzCiAgICAvLyBhc3NlcnQobG9jYWxEeW5hbWljQWNjZXNzKHNlbmRlcikuaGFzVmFsdWUsICdLZXkgbm90IGZvdW5kJykKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGZyYW1lX2RpZyAtMQogICAgYXBwX2xvY2FsX2dldF9leAogICAgYnVyeSAxCiAgICBhc3NlcnQgLy8gS2V5IG5vdCBmb3VuZAogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjExNQogICAgLy8gcmV0dXJuIGxvY2FsRHluYW1pY0FjY2VzcyhzZW5kZXIpLnZhbHVlCiAgICBpbnRjXzAgLy8gMAogICAgZnJhbWVfZGlnIC0xCiAgICBhcHBfbG9jYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgTG9jYWxTdGF0ZSBleGlzdHMKICAgIHJldHN1YgoKCi8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo6TG9jYWxTdG9yYWdlLmNsZWFyTG9jYWxTdGF0ZSgpIC0+IHZvaWQ6CmNsZWFyTG9jYWxTdGF0ZToKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxMjMtMTI0CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgLy8gcHVibGljIGNsZWFyTG9jYWxTdGF0ZSgpOiB2b2lkIHsKICAgIHByb3RvIDAgMAogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjEyNQogICAgLy8gY29uc3Qgc2VuZGVyID0gVHhuLnNlbmRlcgogICAgdHhuIFNlbmRlcgogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjEyNwogICAgLy8gYXNzZXJ0KHNlbmRlci5pc09wdGVkSW4oR2xvYmFsLmN1cnJlbnRBcHBsaWNhdGlvbklkKSwgJ0FjY291bnQgbXVzdCBvcHQgaW4gdG8gY29udHJhY3QgZmlyc3QnKQogICAgZHVwCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uSUQKICAgIGFwcF9vcHRlZF9pbgogICAgYXNzZXJ0IC8vIEFjY291bnQgbXVzdCBvcHQgaW4gdG8gY29udHJhY3QgZmlyc3QKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxMjkKICAgIC8vIHRoaXMubG9jYWxJbnQoc2VuZGVyKS5kZWxldGUoKQogICAgZHVwCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MTkKICAgIC8vIHB1YmxpYyBsb2NhbEludCA9IExvY2FsU3RhdGU8dWludDY0Pih7IGtleTogJ2ludCcgfSkKICAgIGJ5dGVjIDQgLy8gImludCIKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxMjkKICAgIC8vIHRoaXMubG9jYWxJbnQoc2VuZGVyKS5kZWxldGUoKQogICAgYXBwX2xvY2FsX2RlbAogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjEzMAogICAgLy8gdGhpcy5sb2NhbEludE5vRGVmYXVsdChzZW5kZXIpLmRlbGV0ZSgpCiAgICBkdXAKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoyMAogICAgLy8gcHVibGljIGxvY2FsSW50Tm9EZWZhdWx0ID0gTG9jYWxTdGF0ZTx1aW50NjQ+KCkKICAgIGJ5dGVjIDUgLy8gImxvY2FsSW50Tm9EZWZhdWx0IgogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjEzMAogICAgLy8gdGhpcy5sb2NhbEludE5vRGVmYXVsdChzZW5kZXIpLmRlbGV0ZSgpCiAgICBhcHBfbG9jYWxfZGVsCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MTMxCiAgICAvLyB0aGlzLmxvY2FsQnl0ZXMoc2VuZGVyKS5kZWxldGUoKQogICAgZHVwCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjEKICAgIC8vIHB1YmxpYyBsb2NhbEJ5dGVzID0gTG9jYWxTdGF0ZTxieXRlcz4oKQogICAgYnl0ZWMgNiAvLyAibG9jYWxCeXRlcyIKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxMzEKICAgIC8vIHRoaXMubG9jYWxCeXRlcyhzZW5kZXIpLmRlbGV0ZSgpCiAgICBhcHBfbG9jYWxfZGVsCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MTMyCiAgICAvLyB0aGlzLmxvY2FsU3RyaW5nKHNlbmRlcikuZGVsZXRlKCkKICAgIGR1cAogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjIyCiAgICAvLyBwdWJsaWMgbG9jYWxTdHJpbmcgPSBMb2NhbFN0YXRlPHN0cmluZz4oKQogICAgYnl0ZWNfMCAvLyAibG9jYWxTdHJpbmciCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MTMyCiAgICAvLyB0aGlzLmxvY2FsU3RyaW5nKHNlbmRlcikuZGVsZXRlKCkKICAgIGFwcF9sb2NhbF9kZWwKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxMzMKICAgIC8vIHRoaXMubG9jYWxCb29sKHNlbmRlcikuZGVsZXRlKCkKICAgIGR1cAogICAgLy8gY29udHJhY3RzL0xvY2FsU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjIzCiAgICAvLyBwdWJsaWMgbG9jYWxCb29sID0gTG9jYWxTdGF0ZTxib29sZWFuPigpCiAgICBieXRlY18xIC8vICJsb2NhbEJvb2wiCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MTMzCiAgICAvLyB0aGlzLmxvY2FsQm9vbChzZW5kZXIpLmRlbGV0ZSgpCiAgICBhcHBfbG9jYWxfZGVsCiAgICAvLyBjb250cmFjdHMvTG9jYWxTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjQKICAgIC8vIHB1YmxpYyBsb2NhbEFjY291bnQgPSBMb2NhbFN0YXRlPEFjY291bnQ+KCkKICAgIGJ5dGVjXzIgLy8gImxvY2FsQWNjb3VudCIKICAgIC8vIGNvbnRyYWN0cy9Mb2NhbFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxMzQKICAgIC8vIHRoaXMubG9jYWxBY2NvdW50KHNlbmRlcikuZGVsZXRlKCkKICAgIGFwcF9sb2NhbF9kZWwKICAgIHJldHN1Ygo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiACAAEmBwtsb2NhbFN0cmluZwlsb2NhbEJvb2wMbG9jYWxBY2NvdW50BBUffHUDaW50EWxvY2FsSW50Tm9EZWZhdWx0CmxvY2FsQnl0ZXMxG0EA+4IGBAGjo/8E0AE/xQQCgYtMBCeTwkkEITYx9QReWAUaNhoAjgYAvQBtAFAALAAOAAIiQzEZFEQxGESIAZojQzEZFEQxGEQ2GgFXAgCIAXBJFRZXBgJMUCtMULAjQzEZFEQxGEQ2GgFXAgA2GgJXAgCIASxJFRZXBgJMUCtMULAjQzEZFEQxGEQ2GgFXAgA2GgIiUzYaAxfAHIgAzyNDMRkURDEYRIgAlU8FFk8FFksFFRZXBgJPBlBLBRUWVwYCTwZQgAEAIk8HVE8ETwRQgAIANVBLAxWBNQgWVwYCUExQTwNQTwJQTFArTFCwI0MxGSMSRDEYRIgADSNDMRlA/zExGBREI0OKAAAxACcEgWRmMQAnBYHIAWYxACcGgAZTaWx2aW9mMQAogAZNaWNhbGlmMQApI2YxACoxAGaJigAGMQBJIipjREsBIicEY0RLAiInBWNESwMiJwZjREsEIihjRE8FIiljRE8FiYoDADEASTIIYURJKIv9Zkkpi/5mSSqL/2ZJIihjRIv9EkRJIiljRIv+EkQiKmNEi/8SRImKAgExAEkyCGFESYv+i/9mSSKL/mNEi/8SRCKL/mNEiYoBATEASTIIYURJIov/Y0UBRCKL/2NEiYoAADEASTIIYURJJwRoSScFaEknBmhJKGhJKWgqaIk=","clear":"CoEBQw=="},"compilerInfo":{"compiler":"puya","compilerVersion":{"major":4,"minor":3,"patch":3}},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 &nbsp;
 /**
  * A state record containing binary data
@@ -2066,15 +2312,15 @@ export interface BinaryState {
 }
 &nbsp;
 class BinaryStateValue implements BinaryState {
-  constructor(private value: Uint8Array | undefined) {}
+<span class="fstat-no" title="function not covered" >  constructor(private value: Uint8Array | undefined) {}</span>
 &nbsp;
-  asByteArray(): Uint8Array | undefined {
-    return this.value
-  }
+<span class="fstat-no" title="function not covered" >  asByteArray(): Uint8Array | undefined {</span>
+<span class="cstat-no" title="statement not covered" >    return this.value</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 &nbsp;
-  asString(): string | undefined {
-    return this.value !== undefined ? Buffer.from(this.value).toString('utf-8'<span class="branch-0 cbranch-no" title="branch not covered" >) : undefined</span>
-  }
+<span class="fstat-no" title="function not covered" >  asString(): string | undefined {</span>
+<span class="cstat-no" title="statement not covered" >    return this.value !== undefined ? Buffer.from(this.value).toString('utf-8') : undefined</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 }
 &nbsp;
 /**
@@ -2089,111 +2335,104 @@ export type Expand&lt;T&gt; = T extends (...args: infer A) =&gt; infer R
 &nbsp;
 &nbsp;
 /**
- * The argument types for the GlobalStorage contract
+ * The argument types for the LocalStorage contract
  */
-export type GlobalStorageArgs = {
+export type LocalStorageArgs = {
   /**
    * The object representation of the arguments for each method
    */
   obj: {
-    'readGlobalState()(uint64,uint64,byte[],string,bool,address)': Record&lt;string, never&gt;
-    'hasGlobalState()(uint64,bool)': Record&lt;string, never&gt;
-    'writeGlobalState(string,bool,account)void': {
+    'optInToApplication()void': Record&lt;string, never&gt;
+    'readLocalState()(uint64,uint64,byte[],string,bool,address)': Record&lt;string, never&gt;
+    'writeLocalState(string,bool,account)void': {
       valueString: string
-      /**
-       * New value for globalBool
-       */
       valueBool: boolean
-      /**
-       * New value for globalAccount
-       */
       valueAccount: Uint8Array | string
     }
-    'writeDynamicGlobalState(string,string)string': {
-      /**
-       * The key to store the value under in global state
-       */
+    'writeDynamicLocalState(string,string)string': {
       key: string
-      /**
-       * The string value to store in global state
-       */
       value: string
     }
+    'readDynamicLocalState(string)string': {
+      key: string
+    }
+    'clearLocalState()void': Record&lt;string, never&gt;
   }
   /**
    * The tuple representation of the arguments for each method
    */
   tuple: {
-    'readGlobalState()(uint64,uint64,byte[],string,bool,address)': []
-    'hasGlobalState()(uint64,bool)': []
-    'writeGlobalState(string,bool,account)void': [valueString: string, valueBool: boolean, valueAccount: Uint8Array | string]
-    'writeDynamicGlobalState(string,string)string': [key: string, value: string]
+    'optInToApplication()void': []
+    'readLocalState()(uint64,uint64,byte[],string,bool,address)': []
+    'writeLocalState(string,bool,account)void': [valueString: string, valueBool: boolean, valueAccount: Uint8Array | string]
+    'writeDynamicLocalState(string,string)string': [key: string, value: string]
+    'readDynamicLocalState(string)string': [key: string]
+    'clearLocalState()void': []
   }
 }
 &nbsp;
 /**
  * The return type for each method
  */
-export type GlobalStorageReturns = {
-  'readGlobalState()(uint64,uint64,byte[],string,bool,address)': [bigint, bigint, Uint8Array, string, boolean, string]
-  'hasGlobalState()(uint64,bool)': [bigint, boolean]
-  'writeGlobalState(string,bool,account)void': void
-  'writeDynamicGlobalState(string,string)string': string
+export type LocalStorageReturns = {
+  'optInToApplication()void': void
+  'readLocalState()(uint64,uint64,byte[],string,bool,address)': [bigint, bigint, Uint8Array, string, boolean, string]
+  'writeLocalState(string,bool,account)void': void
+  'writeDynamicLocalState(string,string)string': string
+  'readDynamicLocalState(string)string': string
+  'clearLocalState()void': void
 }
 &nbsp;
 /**
- * Defines the types of available calls and state of the GlobalStorage smart contract.
+ * Defines the types of available calls and state of the LocalStorage smart contract.
  */
-export type GlobalStorageTypes = {
+export type LocalStorageTypes = {
   /**
    * Maps method signatures / names to their argument and return types.
    */
   methods:
-    &amp; Record&lt;'readGlobalState()(uint64,uint64,byte[],string,bool,address)' | 'readGlobalState', {
-      argsObj: GlobalStorageArgs['obj']['readGlobalState()(uint64,uint64,byte[],string,bool,address)']
-      argsTuple: GlobalStorageArgs['tuple']['readGlobalState()(uint64,uint64,byte[],string,bool,address)']
-      /**
-      * A tuple containing [globalInt, globalIntNoDefault, globalBytes, globalString, globalBool, globalAccount]
-      where each value corresponds to the current state of the respective global variable
-&nbsp;
-       */
-      returns: GlobalStorageReturns['readGlobalState()(uint64,uint64,byte[],string,bool,address)']
+    &amp; Record&lt;'optInToApplication()void' | 'optInToApplication', {
+      argsObj: LocalStorageArgs['obj']['optInToApplication()void']
+      argsTuple: LocalStorageArgs['tuple']['optInToApplication()void']
+      returns: LocalStorageReturns['optInToApplication()void']
     }&gt;
-    &amp; Record&lt;'hasGlobalState()(uint64,bool)' | 'hasGlobalState', {
-      argsObj: GlobalStorageArgs['obj']['hasGlobalState()(uint64,bool)']
-      argsTuple: GlobalStorageArgs['tuple']['hasGlobalState()(uint64,bool)']
-      /**
-      * A tuple containing [value, hasValue] where value is the current globalIntNoDefault value
-      and hasValue indicates if the value has been initialized
-&nbsp;
-       */
-      returns: GlobalStorageReturns['hasGlobalState()(uint64,bool)']
+    &amp; Record&lt;'readLocalState()(uint64,uint64,byte[],string,bool,address)' | 'readLocalState', {
+      argsObj: LocalStorageArgs['obj']['readLocalState()(uint64,uint64,byte[],string,bool,address)']
+      argsTuple: LocalStorageArgs['tuple']['readLocalState()(uint64,uint64,byte[],string,bool,address)']
+      returns: LocalStorageReturns['readLocalState()(uint64,uint64,byte[],string,bool,address)']
     }&gt;
-    &amp; Record&lt;'writeGlobalState(string,bool,account)void' | 'writeGlobalState', {
-      argsObj: GlobalStorageArgs['obj']['writeGlobalState(string,bool,account)void']
-      argsTuple: GlobalStorageArgs['tuple']['writeGlobalState(string,bool,account)void']
-      returns: GlobalStorageReturns['writeGlobalState(string,bool,account)void']
+    &amp; Record&lt;'writeLocalState(string,bool,account)void' | 'writeLocalState', {
+      argsObj: LocalStorageArgs['obj']['writeLocalState(string,bool,account)void']
+      argsTuple: LocalStorageArgs['tuple']['writeLocalState(string,bool,account)void']
+      returns: LocalStorageReturns['writeLocalState(string,bool,account)void']
     }&gt;
-    &amp; Record&lt;'writeDynamicGlobalState(string,string)string' | 'writeDynamicGlobalState', {
-      argsObj: GlobalStorageArgs['obj']['writeDynamicGlobalState(string,string)string']
-      argsTuple: GlobalStorageArgs['tuple']['writeDynamicGlobalState(string,string)string']
-      /**
-       * The stored string value, confirming successful storage
-       */
-      returns: GlobalStorageReturns['writeDynamicGlobalState(string,string)string']
+    &amp; Record&lt;'writeDynamicLocalState(string,string)string' | 'writeDynamicLocalState', {
+      argsObj: LocalStorageArgs['obj']['writeDynamicLocalState(string,string)string']
+      argsTuple: LocalStorageArgs['tuple']['writeDynamicLocalState(string,string)string']
+      returns: LocalStorageReturns['writeDynamicLocalState(string,string)string']
+    }&gt;
+    &amp; Record&lt;'readDynamicLocalState(string)string' | 'readDynamicLocalState', {
+      argsObj: LocalStorageArgs['obj']['readDynamicLocalState(string)string']
+      argsTuple: LocalStorageArgs['tuple']['readDynamicLocalState(string)string']
+      returns: LocalStorageReturns['readDynamicLocalState(string)string']
+    }&gt;
+    &amp; Record&lt;'clearLocalState()void' | 'clearLocalState', {
+      argsObj: LocalStorageArgs['obj']['clearLocalState()void']
+      argsTuple: LocalStorageArgs['tuple']['clearLocalState()void']
+      returns: LocalStorageReturns['clearLocalState()void']
     }&gt;
   /**
    * Defines the shape of the state of the application.
    */
   state: {
-    global: {
+    local: {
       keys: {
-        globalInt: bigint
-        globalIntNoDefault: bigint
-        globalBytes: BinaryState
-        globalString: string
-        globalBool: bigint
-        globalAccount: BinaryState
+        localInt: bigint
+        localIntNoDefault: bigint
+        localBytes: BinaryState
+        localString: string
+        localBool: bigint
+        localAccount: BinaryState
       }
       maps: {}
     }
@@ -2203,11 +2442,11 @@ export type GlobalStorageTypes = {
 /**
  * Defines the possible abi call signatures.
  */
-export type GlobalStorageSignatures = keyof GlobalStorageTypes['methods']
+export type LocalStorageSignatures = keyof LocalStorageTypes['methods']
 /**
  * Defines the possible abi call signatures for methods that return a non-void value.
  */
-export type GlobalStorageNonVoidMethodSignatures = keyof GlobalStorageTypes['methods'] extends infer T ? T extends keyof GlobalStorageTypes['methods'] ? MethodReturn&lt;T&gt; extends void ? never : T  : never : never
+export type LocalStorageNonVoidMethodSignatures = keyof LocalStorageTypes['methods'] extends infer T ? T extends keyof LocalStorageTypes['methods'] ? MethodReturn&lt;T&gt; extends void ? never : T  : never : never
 /**
  * Defines an object containing all relevant parameters for a single call to the contract.
  */
@@ -2219,113 +2458,149 @@ export type CallParams&lt;TArgs&gt; = Expand&lt;
     }
 &gt;
 /**
- * Maps a method signature from the GlobalStorage smart contract to the method's arguments in either tuple or struct form
+ * Maps a method signature from the LocalStorage smart contract to the method's arguments in either tuple or struct form
  */
-export type MethodArgs&lt;TSignature extends GlobalStorageSignatures&gt; = GlobalStorageTypes['methods'][TSignature]['argsObj' | 'argsTuple']
+export type MethodArgs&lt;TSignature extends LocalStorageSignatures&gt; = LocalStorageTypes['methods'][TSignature]['argsObj' | 'argsTuple']
 /**
- * Maps a method signature from the GlobalStorage smart contract to the method's return type
+ * Maps a method signature from the LocalStorage smart contract to the method's return type
  */
-export type MethodReturn&lt;TSignature extends GlobalStorageSignatures&gt; = GlobalStorageTypes['methods'][TSignature]['returns']
+export type MethodReturn&lt;TSignature extends LocalStorageSignatures&gt; = LocalStorageTypes['methods'][TSignature]['returns']
 &nbsp;
 /**
- * Defines the shape of the keyed global state of the application.
+ * Defines the shape of the keyed local state of the application.
  */
-export type GlobalKeysState = GlobalStorageTypes['state']['global']['keys']
+export type LocalKeysState = LocalStorageTypes['state']['local']['keys']
 &nbsp;
 &nbsp;
 /**
  * Defines supported create method params for this smart contract
  */
-export type GlobalStorageCreateCallParams =
+export type LocalStorageCreateCallParams =
   | Expand&lt;AppClientBareCallParams &amp; {method?: never} &amp; {onComplete?: OnApplicationComplete.NoOpOC} &amp; CreateSchema&gt;
 /**
  * Defines arguments required for the deploy method.
  */
-export type GlobalStorageDeployParams = Expand&lt;Omit&lt;AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'&gt; &amp; {
+export type LocalStorageDeployParams = Expand&lt;Omit&lt;AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'&gt; &amp; {
   /**
    * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
    */
-  createParams?: GlobalStorageCreateCallParams
+  createParams?: LocalStorageCreateCallParams
 }&gt;
 &nbsp;
 &nbsp;
 /**
- * Exposes methods for constructing `AppClient` params objects for ABI calls to the GlobalStorage smart contract
+ * Exposes methods for constructing `AppClient` params objects for ABI calls to the LocalStorage smart contract
  */
-export abstract class GlobalStorageParamsFactory {
+export abstract class LocalStorageParamsFactory {
   /**
-   * Constructs a no op call for the readGlobalState()(uint64,uint64,byte[],string,bool,address) ABI method
+   * Gets available optIn ABI call param factories
+   */
+  static get optIn() {
+    return {
+      /**
+       * Constructs opt-in ABI call params for the LocalStorage smart contract using the optInToApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      optInToApplication(params: CallParams&lt;LocalStorageArgs['obj']['optInToApplication()void'] | LocalStorageArgs['tuple']['optInToApplication()void']&gt;): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'optInToApplication()void' as const,
+          args: Array.isArray(params.args) ? params.<span class="branch-0 cbranch-no" title="branch not covered" >args : [],</span>
+        }
+      },
+    }
+  }
+&nbsp;
+  /**
+   * Constructs a no op call for the readLocalState()(uint64,uint64,byte[],string,bool,address) ABI method
    *
-   * Reads and returns all global state values from the contract
+   * Reads and returns all local state values for the sender
    *
    * @param params Parameters for the call
    * @returns An `AppClientMethodCallParams` object for the call
    */
-  static readGlobalState(params: CallParams&lt;GlobalStorageArgs['obj']['readGlobalState()(uint64,uint64,byte[],string,bool,address)'] | GlobalStorageArgs['tuple']['readGlobalState()(uint64,uint64,byte[],string,bool,address)']&gt; &amp; CallOnComplete): AppClientMethodCallParams &amp; CallOnComplete {
+  static readLocalState(params: CallParams&lt;LocalStorageArgs['obj']['readLocalState()(uint64,uint64,byte[],string,bool,address)'] | LocalStorageArgs['tuple']['readLocalState()(uint64,uint64,byte[],string,bool,address)']&gt; &amp; CallOnComplete): AppClientMethodCallParams &amp; CallOnComplete {
     return {
       ...params,
-      method: 'readGlobalState()(uint64,uint64,byte[],string,bool,address)' as const,
+      method: 'readLocalState()(uint64,uint64,byte[],string,bool,address)' as const,
       args: Array.isArray(params.args) ? params.<span class="branch-0 cbranch-no" title="branch not covered" >args : [],</span>
     }
   }
   /**
-   * Constructs a no op call for the hasGlobalState()(uint64,bool) ABI method
+   * Constructs a no op call for the writeLocalState(string,bool,account)void ABI method
    *
-   * Checks if a global state value exists and returns it
-   *
-   * @param params Parameters for the call
-   * @returns An `AppClientMethodCallParams` object for the call
-   */
-  static hasGlobalState(params: CallParams&lt;GlobalStorageArgs['obj']['hasGlobalState()(uint64,bool)'] | GlobalStorageArgs['tuple']['hasGlobalState()(uint64,bool)']&gt; &amp; CallOnComplete): AppClientMethodCallParams &amp; CallOnComplete {
-    return {
-      ...params,
-      method: 'hasGlobalState()(uint64,bool)' as const,
-      args: Array.isArray(params.args) ? params.<span class="branch-0 cbranch-no" title="branch not covered" >args : [],</span>
-    }
-  }
-  /**
-   * Constructs a no op call for the writeGlobalState(string,bool,account)void ABI method
-   *
-   * Updates multiple global state values
+   * Updates multiple local state values for the sender
    *
    * @param params Parameters for the call
    * @returns An `AppClientMethodCallParams` object for the call
    */
-  static writeGlobalState(params: CallParams&lt;GlobalStorageArgs['obj']['writeGlobalState(string,bool,account)void'] | GlobalStorageArgs['tuple']['writeGlobalState(string,bool,account)void']&gt; &amp; CallOnComplete): AppClientMethodCallParams &amp; CallOnComplete {
+  static writeLocalState(params: CallParams&lt;LocalStorageArgs['obj']['writeLocalState(string,bool,account)void'] | LocalStorageArgs['tuple']['writeLocalState(string,bool,account)void']&gt; &amp; CallOnComplete): AppClientMethodCallParams &amp; CallOnComplete {
     return {
       ...params,
-      method: 'writeGlobalState(string,bool,account)void' as const,
+      method: 'writeLocalState(string,bool,account)void' as const,
       args: Array.isArray(params.args<span class="branch-0 cbranch-no" title="branch not covered" >) ? params.args : [</span>params.args.valueString, params.args.valueBool, params.args.valueAccount],
     }
   }
   /**
-   * Constructs a no op call for the writeDynamicGlobalState(string,string)string ABI method
+   * Constructs a no op call for the writeDynamicLocalState(string,string)string ABI method
    *
-   * Writes a value to global state using a dynamic key and returns the stored value
+   * Writes a value to local state using a dynamic key
    *
    * @param params Parameters for the call
    * @returns An `AppClientMethodCallParams` object for the call
    */
-  static writeDynamicGlobalState(params: CallParams&lt;GlobalStorageArgs['obj']['writeDynamicGlobalState(string,string)string'] | GlobalStorageArgs['tuple']['writeDynamicGlobalState(string,string)string']&gt; &amp; CallOnComplete): AppClientMethodCallParams &amp; CallOnComplete {
+  static writeDynamicLocalState(params: CallParams&lt;LocalStorageArgs['obj']['writeDynamicLocalState(string,string)string'] | LocalStorageArgs['tuple']['writeDynamicLocalState(string,string)string']&gt; &amp; CallOnComplete): AppClientMethodCallParams &amp; CallOnComplete {
     return {
       ...params,
-      method: 'writeDynamicGlobalState(string,string)string' as const,
+      method: 'writeDynamicLocalState(string,string)string' as const,
       args: Array.isArray(params.args<span class="branch-0 cbranch-no" title="branch not covered" >) ? params.args : [</span>params.args.key, params.args.value],
+    }
+  }
+  /**
+   * Constructs a no op call for the readDynamicLocalState(string)string ABI method
+   *
+   * Reads a value from local state using a dynamic key
+   *
+   * @param params Parameters for the call
+   * @returns An `AppClientMethodCallParams` object for the call
+   */
+  static readDynamicLocalState(params: CallParams&lt;LocalStorageArgs['obj']['readDynamicLocalState(string)string'] | LocalStorageArgs['tuple']['readDynamicLocalState(string)string']&gt; &amp; CallOnComplete): AppClientMethodCallParams &amp; CallOnComplete {
+    return {
+      ...params,
+      method: 'readDynamicLocalState(string)string' as const,
+      args: Array.isArray(params.args<span class="branch-0 cbranch-no" title="branch not covered" >) ? params.args : [</span>params.args.key],
+    }
+  }
+  /**
+   * Constructs a no op call for the clearLocalState()void ABI method
+   *
+   * Clears all local state for the sender
+   *
+   * @param params Parameters for the call
+   * @returns An `AppClientMethodCallParams` object for the call
+   */
+  static clearLocalState(params: CallParams&lt;LocalStorageArgs['obj']['clearLocalState()void'] | LocalStorageArgs['tuple']['clearLocalState()void']&gt; &amp; CallOnComplete): AppClientMethodCallParams &amp; CallOnComplete {
+    return {
+      ...params,
+      method: 'clearLocalState()void' as const,
+      args: Array.isArray(params.args) ? params.<span class="branch-0 cbranch-no" title="branch not covered" >args : [],</span>
     }
   }
 }
 &nbsp;
 /**
- * A factory to create and deploy one or more instance of the GlobalStorage smart contract and to create one or more app clients to interact with those (or other) app instances
+ * A factory to create and deploy one or more instance of the LocalStorage smart contract and to create one or more app clients to interact with those (or other) app instances
  */
-export class GlobalStorageFactory {
+export class LocalStorageFactory {
   /**
    * The underlying `AppFactory` for when you want to have more flexibility
    */
   public readonly appFactory: _AppFactory
 &nbsp;
   /**
-   * Creates a new instance of `GlobalStorageFactory`
+   * Creates a new instance of `LocalStorageFactory`
    *
    * @param params The parameters to initialise the app factory with
    */
@@ -2360,7 +2635,7 @@ export class GlobalStorageFactory {
    * @returns The `AppClient`
    */
   public <span class="fstat-no" title="function not covered" >getAppClientById(params: AppFactoryAppClientParams) {</span>
-<span class="cstat-no" title="statement not covered" >    return new GlobalStorageClient(this.appFactory.getAppClientById(params))</span>
+<span class="cstat-no" title="statement not covered" >    return new LocalStorageClient(this.appFactory.getAppClientById(params))</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
   
   /**
@@ -2375,20 +2650,20 @@ export class GlobalStorageFactory {
   public <span class="fstat-no" title="function not covered" >async getAppClientByCreatorAndName(</span>
 <span class="cstat-no" title="statement not covered" >    params: AppFactoryResolveAppClientByCreatorAndNameParams,</span>
   ) {
-<span class="cstat-no" title="statement not covered" >    return new GlobalStorageClient(await this.appFactory.getAppClientByCreatorAndName(params))</span>
+<span class="cstat-no" title="statement not covered" >    return new LocalStorageClient(await this.appFactory.getAppClientByCreatorAndName(params))</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 &nbsp;
   /**
-   * Idempotently deploys the GlobalStorage smart contract.
+   * Idempotently deploys the LocalStorage smart contract.
    *
    * @param params The arguments for the contract calls and any additional parameters for the call
    * @returns The deployment result
    */
-  public async deploy(params: GlobalStorageDeployParams = {}) {
+  public async deploy(params: LocalStorageDeployParams = {}) {
     const result = await this.appFactory.deploy({
       ...params,
     })
-    return { result: result.result, appClient: new GlobalStorageClient(result.appClient) }
+    return { result: result.result, appClient: new LocalStorageClient(result.appClient) }
   }
 &nbsp;
   /**
@@ -2400,7 +2675,7 @@ export class GlobalStorageFactory {
      */
     create: {
       /**
-       * Creates a new instance of the GlobalStorage smart contract using a bare call.
+       * Creates a new instance of the LocalStorage smart contract using a bare call.
        *
        * @param params The params for the bare (raw) call
        * @returns The params for a create call
@@ -2421,7 +2696,7 @@ export class GlobalStorageFactory {
      */
     create: {
       /**
-       * Creates a new instance of the GlobalStorage smart contract using a bare call.
+       * Creates a new instance of the LocalStorage smart contract using a bare call.
        *
        * @param params The params for the bare (raw) call
        * @returns The transaction for a create call
@@ -2442,14 +2717,14 @@ export class GlobalStorageFactory {
      */
     create: {
       /**
-       * Creates a new instance of the GlobalStorage smart contract using a bare call.
+       * Creates a new instance of the LocalStorage smart contract using a bare call.
        *
        * @param params The params for the bare (raw) call
        * @returns The create result
        */
       bare: <span class="fstat-no" title="function not covered" >async (params?: Expand&lt;AppClientBareCallParams &amp; AppClientCompilationParams &amp; CreateSchema &amp; SendParams &amp; {onComplete?: OnApplicationComplete.NoOpOC}&gt;) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        const result = await this.appFactory.send.bare.create(params)</span>
-<span class="cstat-no" title="statement not covered" >        return { result: result.result, appClient: new GlobalStorageClient(result.appClient) }</span>
+<span class="cstat-no" title="statement not covered" >        return { result: result.result, appClient: new LocalStorageClient(result.appClient) }</span>
 <span class="cstat-no" title="statement not covered" >      },</span>
     },
 &nbsp;
@@ -2457,22 +2732,22 @@ export class GlobalStorageFactory {
 &nbsp;
 }
 /**
- * A client to make calls to the GlobalStorage smart contract
+ * A client to make calls to the LocalStorage smart contract
  */
-export class GlobalStorageClient {
+export class LocalStorageClient {
   /**
    * The underlying `AppClient` for when you want to have more flexibility
    */
   public readonly appClient: _AppClient
 &nbsp;
   /**
-   * Creates a new instance of `GlobalStorageClient`
+   * Creates a new instance of `LocalStorageClient`
    *
-   * @param appClient An `AppClient` instance which has been created with the GlobalStorage app spec
+   * @param appClient An `AppClient` instance which has been created with the LocalStorage app spec
    */
   constructor(appClient: _AppClient)
   /**
-   * Creates a new instance of `GlobalStorageClient`
+   * Creates a new instance of `LocalStorageClient`
    *
    * @param params The parameters to initialise the app client with
    */
@@ -2488,21 +2763,21 @@ export class GlobalStorageClient {
    * Checks for decode errors on the given return value and maps the return value to the return type for the given method
    * @returns The typed return value or undefined if there was no value
    */
-  decodeReturnValue&lt;TSignature extends GlobalStorageNonVoidMethodSignatures&gt;(method: TSignature, returnValue: ABIReturn | undefined) {
+  decodeReturnValue&lt;TSignature extends LocalStorageNonVoidMethodSignatures&gt;(method: TSignature, returnValue: ABIReturn | undefined) {
     return returnValue !== undefined ? getArc56ReturnValue&lt;MethodReturn&lt;TSignature&gt;&gt;(returnValue, this.appClient.getABIMethod(method), APP_SPEC.structs<span class="branch-0 cbranch-no" title="branch not covered" >) : undefined</span>
   }
   
   /**
-   * Returns a new `GlobalStorageClient` client, resolving the app by creator address and name
+   * Returns a new `LocalStorageClient` client, resolving the app by creator address and name
    * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
    * @param params The parameters to create the app client
    */
-  public <span class="fstat-no" title="function not covered" >static async fromCreatorAndName(params: Omit&lt;ResolveAppClientByCreatorAndName, 'appSpec'&gt;): Promise&lt;GlobalStorageClient&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    return new GlobalStorageClient(await _AppClient.fromCreatorAndName({...params, appSpec: APP_SPEC}))</span>
+  public <span class="fstat-no" title="function not covered" >static async fromCreatorAndName(params: Omit&lt;ResolveAppClientByCreatorAndName, 'appSpec'&gt;): Promise&lt;LocalStorageClient&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return new LocalStorageClient(await _AppClient.fromCreatorAndName({...params, appSpec: APP_SPEC}))</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
   
   /**
-   * Returns an `GlobalStorageClient` instance for the current network based on
+   * Returns an `LocalStorageClient` instance for the current network based on
    * pre-determined network-specific app IDs specified in the ARC-56 app spec.
    *
    * If no IDs are in the app spec or the network isn't recognised, an error is thrown.
@@ -2510,8 +2785,8 @@ export class GlobalStorageClient {
    */
 <span class="fstat-no" title="function not covered" >  static async fromNetwork(</span>
 <span class="cstat-no" title="statement not covered" >    params: Omit&lt;ResolveAppClientByNetwork, 'appSpec'&gt;</span>
-  ): Promise&lt;GlobalStorageClient&gt; {
-<span class="cstat-no" title="statement not covered" >    return new GlobalStorageClient(await _AppClient.fromNetwork({...params, appSpec: APP_SPEC}))</span>
+  ): Promise&lt;LocalStorageClient&gt; {
+<span class="cstat-no" title="statement not covered" >    return new LocalStorageClient(await _AppClient.fromNetwork({...params, appSpec: APP_SPEC}))</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
   
   /** The ID of the app instance this client is linked to. */
@@ -2544,7 +2819,23 @@ export class GlobalStorageClient {
    */
   readonly params = {
     /**
-     * Makes a clear_state call to an existing instance of the GlobalStorage smart contract.
+     * Gets available optIn methods
+     */
+    optIn: {
+      /**
+       * Opts the user into an existing instance of the LocalStorage smart contract using the `optInToApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The optIn params
+       */
+      optInToApplication: (params: CallParams&lt;LocalStorageArgs['obj']['optInToApplication()void'] | LocalStorageArgs['tuple']['optInToApplication()void']&gt; = {args: []}) =&gt; {
+        return this.appClient.params.optIn(LocalStorageParamsFactory.optIn.optInToApplication(params))
+      },
+&nbsp;
+    },
+&nbsp;
+    /**
+     * Makes a clear_state call to an existing instance of the LocalStorage smart contract.
      *
      * @param params The params for the bare (raw) call
      * @returns The clearState result
@@ -2554,59 +2845,65 @@ export class GlobalStorageClient {
 <span class="cstat-no" title="statement not covered" >    },</span>
 &nbsp;
     /**
-     * Makes a call to the GlobalStorage smart contract using the `readGlobalState()(uint64,uint64,byte[],string,bool,address)` ABI method.
+     * Makes a call to the LocalStorage smart contract using the `readLocalState()(uint64,uint64,byte[],string,bool,address)` ABI method.
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
-     * Reads and returns all global state values from the contract
-     *
-     * @param params The params for the smart contract call
-    * @returns The call params: A tuple containing [globalInt, globalIntNoDefault, globalBytes, globalString, globalBool, globalAccount]
-    where each value corresponds to the current state of the respective global variable
-&nbsp;
-     */
-    readGlobalState: (params: CallParams&lt;GlobalStorageArgs['obj']['readGlobalState()(uint64,uint64,byte[],string,bool,address)'] | GlobalStorageArgs['tuple']['readGlobalState()(uint64,uint64,byte[],string,bool,address)']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) =&gt; {
-      return this.appClient.params.call(GlobalStorageParamsFactory.readGlobalState(params))
-    },
-&nbsp;
-    /**
-     * Makes a call to the GlobalStorage smart contract using the `hasGlobalState()(uint64,bool)` ABI method.
-     * 
-     * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
-     *
-     * Checks if a global state value exists and returns it
-     *
-     * @param params The params for the smart contract call
-    * @returns The call params: A tuple containing [value, hasValue] where value is the current globalIntNoDefault value
-    and hasValue indicates if the value has been initialized
-&nbsp;
-     */
-    hasGlobalState: (params: CallParams&lt;GlobalStorageArgs['obj']['hasGlobalState()(uint64,bool)'] | GlobalStorageArgs['tuple']['hasGlobalState()(uint64,bool)']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) =&gt; {
-      return this.appClient.params.call(GlobalStorageParamsFactory.hasGlobalState(params))
-    },
-&nbsp;
-    /**
-     * Makes a call to the GlobalStorage smart contract using the `writeGlobalState(string,bool,account)void` ABI method.
-     *
-     * Updates multiple global state values
+     * Reads and returns all local state values for the sender
      *
      * @param params The params for the smart contract call
      * @returns The call params
      */
-    writeGlobalState: (params: CallParams&lt;GlobalStorageArgs['obj']['writeGlobalState(string,bool,account)void'] | GlobalStorageArgs['tuple']['writeGlobalState(string,bool,account)void']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) =&gt; {
-      return this.appClient.params.call(GlobalStorageParamsFactory.writeGlobalState(params))
+    readLocalState: (params: CallParams&lt;LocalStorageArgs['obj']['readLocalState()(uint64,uint64,byte[],string,bool,address)'] | LocalStorageArgs['tuple']['readLocalState()(uint64,uint64,byte[],string,bool,address)']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) =&gt; {
+      return this.appClient.params.call(LocalStorageParamsFactory.readLocalState(params))
     },
 &nbsp;
     /**
-     * Makes a call to the GlobalStorage smart contract using the `writeDynamicGlobalState(string,string)string` ABI method.
+     * Makes a call to the LocalStorage smart contract using the `writeLocalState(string,bool,account)void` ABI method.
      *
-     * Writes a value to global state using a dynamic key and returns the stored value
+     * Updates multiple local state values for the sender
      *
      * @param params The params for the smart contract call
-     * @returns The call params: The stored string value, confirming successful storage
+     * @returns The call params
      */
-    writeDynamicGlobalState: (params: CallParams&lt;GlobalStorageArgs['obj']['writeDynamicGlobalState(string,string)string'] | GlobalStorageArgs['tuple']['writeDynamicGlobalState(string,string)string']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) =&gt; {
-      return this.appClient.params.call(GlobalStorageParamsFactory.writeDynamicGlobalState(params))
+    writeLocalState: (params: CallParams&lt;LocalStorageArgs['obj']['writeLocalState(string,bool,account)void'] | LocalStorageArgs['tuple']['writeLocalState(string,bool,account)void']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) =&gt; {
+      return this.appClient.params.call(LocalStorageParamsFactory.writeLocalState(params))
+    },
+&nbsp;
+    /**
+     * Makes a call to the LocalStorage smart contract using the `writeDynamicLocalState(string,string)string` ABI method.
+     *
+     * Writes a value to local state using a dynamic key
+     *
+     * @param params The params for the smart contract call
+     * @returns The call params
+     */
+    writeDynamicLocalState: (params: CallParams&lt;LocalStorageArgs['obj']['writeDynamicLocalState(string,string)string'] | LocalStorageArgs['tuple']['writeDynamicLocalState(string,string)string']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) =&gt; {
+      return this.appClient.params.call(LocalStorageParamsFactory.writeDynamicLocalState(params))
+    },
+&nbsp;
+    /**
+     * Makes a call to the LocalStorage smart contract using the `readDynamicLocalState(string)string` ABI method.
+     *
+     * Reads a value from local state using a dynamic key
+     *
+     * @param params The params for the smart contract call
+     * @returns The call params
+     */
+    readDynamicLocalState: (params: CallParams&lt;LocalStorageArgs['obj']['readDynamicLocalState(string)string'] | LocalStorageArgs['tuple']['readDynamicLocalState(string)string']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) =&gt; {
+      return this.appClient.params.call(LocalStorageParamsFactory.readDynamicLocalState(params))
+    },
+&nbsp;
+    /**
+     * Makes a call to the LocalStorage smart contract using the `clearLocalState()void` ABI method.
+     *
+     * Clears all local state for the sender
+     *
+     * @param params The params for the smart contract call
+     * @returns The call params
+     */
+    clearLocalState: (params: CallParams&lt;LocalStorageArgs['obj']['clearLocalState()void'] | LocalStorageArgs['tuple']['clearLocalState()void']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) =&gt; {
+      return this.appClient.params.call(LocalStorageParamsFactory.clearLocalState(params))
     },
 &nbsp;
   }
@@ -2616,7 +2913,23 @@ export class GlobalStorageClient {
    */
   readonly createTransaction = {
     /**
-     * Makes a clear_state call to an existing instance of the GlobalStorage smart contract.
+     * Gets available optIn methods
+     */
+    optIn: {
+      /**
+       * Opts the user into an existing instance of the LocalStorage smart contract using the `optInToApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The optIn transaction
+       */
+      optInToApplication: <span class="fstat-no" title="function not covered" >(params: CallParams&lt;LocalStorageArgs['obj']['optInToApplication()void'] | LocalStorageArgs['tuple']['optInToApplication()void']&gt; = {args: []}) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        return this.appClient.createTransaction.optIn(LocalStorageParamsFactory.optIn.optInToApplication(params))</span>
+<span class="cstat-no" title="statement not covered" >      },</span>
+&nbsp;
+    },
+&nbsp;
+    /**
+     * Makes a clear_state call to an existing instance of the LocalStorage smart contract.
      *
      * @param params The params for the bare (raw) call
      * @returns The clearState result
@@ -2626,59 +2939,65 @@ export class GlobalStorageClient {
 <span class="cstat-no" title="statement not covered" >    },</span>
 &nbsp;
     /**
-     * Makes a call to the GlobalStorage smart contract using the `readGlobalState()(uint64,uint64,byte[],string,bool,address)` ABI method.
+     * Makes a call to the LocalStorage smart contract using the `readLocalState()(uint64,uint64,byte[],string,bool,address)` ABI method.
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
-     * Reads and returns all global state values from the contract
-     *
-     * @param params The params for the smart contract call
-    * @returns The call transaction: A tuple containing [globalInt, globalIntNoDefault, globalBytes, globalString, globalBool, globalAccount]
-    where each value corresponds to the current state of the respective global variable
-&nbsp;
-     */
-    readGlobalState: <span class="fstat-no" title="function not covered" >(params: CallParams&lt;GlobalStorageArgs['obj']['readGlobalState()(uint64,uint64,byte[],string,bool,address)'] | GlobalStorageArgs['tuple']['readGlobalState()(uint64,uint64,byte[],string,bool,address)']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      return this.appClient.createTransaction.call(GlobalStorageParamsFactory.readGlobalState(params))</span>
-<span class="cstat-no" title="statement not covered" >    },</span>
-&nbsp;
-    /**
-     * Makes a call to the GlobalStorage smart contract using the `hasGlobalState()(uint64,bool)` ABI method.
-     * 
-     * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
-     *
-     * Checks if a global state value exists and returns it
-     *
-     * @param params The params for the smart contract call
-    * @returns The call transaction: A tuple containing [value, hasValue] where value is the current globalIntNoDefault value
-    and hasValue indicates if the value has been initialized
-&nbsp;
-     */
-    hasGlobalState: <span class="fstat-no" title="function not covered" >(params: CallParams&lt;GlobalStorageArgs['obj']['hasGlobalState()(uint64,bool)'] | GlobalStorageArgs['tuple']['hasGlobalState()(uint64,bool)']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      return this.appClient.createTransaction.call(GlobalStorageParamsFactory.hasGlobalState(params))</span>
-<span class="cstat-no" title="statement not covered" >    },</span>
-&nbsp;
-    /**
-     * Makes a call to the GlobalStorage smart contract using the `writeGlobalState(string,bool,account)void` ABI method.
-     *
-     * Updates multiple global state values
+     * Reads and returns all local state values for the sender
      *
      * @param params The params for the smart contract call
      * @returns The call transaction
      */
-    writeGlobalState: <span class="fstat-no" title="function not covered" >(params: CallParams&lt;GlobalStorageArgs['obj']['writeGlobalState(string,bool,account)void'] | GlobalStorageArgs['tuple']['writeGlobalState(string,bool,account)void']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      return this.appClient.createTransaction.call(GlobalStorageParamsFactory.writeGlobalState(params))</span>
+    readLocalState: <span class="fstat-no" title="function not covered" >(params: CallParams&lt;LocalStorageArgs['obj']['readLocalState()(uint64,uint64,byte[],string,bool,address)'] | LocalStorageArgs['tuple']['readLocalState()(uint64,uint64,byte[],string,bool,address)']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      return this.appClient.createTransaction.call(LocalStorageParamsFactory.readLocalState(params))</span>
 <span class="cstat-no" title="statement not covered" >    },</span>
 &nbsp;
     /**
-     * Makes a call to the GlobalStorage smart contract using the `writeDynamicGlobalState(string,string)string` ABI method.
+     * Makes a call to the LocalStorage smart contract using the `writeLocalState(string,bool,account)void` ABI method.
      *
-     * Writes a value to global state using a dynamic key and returns the stored value
+     * Updates multiple local state values for the sender
      *
      * @param params The params for the smart contract call
-     * @returns The call transaction: The stored string value, confirming successful storage
+     * @returns The call transaction
      */
-    writeDynamicGlobalState: <span class="fstat-no" title="function not covered" >(params: CallParams&lt;GlobalStorageArgs['obj']['writeDynamicGlobalState(string,string)string'] | GlobalStorageArgs['tuple']['writeDynamicGlobalState(string,string)string']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      return this.appClient.createTransaction.call(GlobalStorageParamsFactory.writeDynamicGlobalState(params))</span>
+    writeLocalState: <span class="fstat-no" title="function not covered" >(params: CallParams&lt;LocalStorageArgs['obj']['writeLocalState(string,bool,account)void'] | LocalStorageArgs['tuple']['writeLocalState(string,bool,account)void']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      return this.appClient.createTransaction.call(LocalStorageParamsFactory.writeLocalState(params))</span>
+<span class="cstat-no" title="statement not covered" >    },</span>
+&nbsp;
+    /**
+     * Makes a call to the LocalStorage smart contract using the `writeDynamicLocalState(string,string)string` ABI method.
+     *
+     * Writes a value to local state using a dynamic key
+     *
+     * @param params The params for the smart contract call
+     * @returns The call transaction
+     */
+    writeDynamicLocalState: <span class="fstat-no" title="function not covered" >(params: CallParams&lt;LocalStorageArgs['obj']['writeDynamicLocalState(string,string)string'] | LocalStorageArgs['tuple']['writeDynamicLocalState(string,string)string']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      return this.appClient.createTransaction.call(LocalStorageParamsFactory.writeDynamicLocalState(params))</span>
+<span class="cstat-no" title="statement not covered" >    },</span>
+&nbsp;
+    /**
+     * Makes a call to the LocalStorage smart contract using the `readDynamicLocalState(string)string` ABI method.
+     *
+     * Reads a value from local state using a dynamic key
+     *
+     * @param params The params for the smart contract call
+     * @returns The call transaction
+     */
+    readDynamicLocalState: <span class="fstat-no" title="function not covered" >(params: CallParams&lt;LocalStorageArgs['obj']['readDynamicLocalState(string)string'] | LocalStorageArgs['tuple']['readDynamicLocalState(string)string']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      return this.appClient.createTransaction.call(LocalStorageParamsFactory.readDynamicLocalState(params))</span>
+<span class="cstat-no" title="statement not covered" >    },</span>
+&nbsp;
+    /**
+     * Makes a call to the LocalStorage smart contract using the `clearLocalState()void` ABI method.
+     *
+     * Clears all local state for the sender
+     *
+     * @param params The params for the smart contract call
+     * @returns The call transaction
+     */
+    clearLocalState: <span class="fstat-no" title="function not covered" >(params: CallParams&lt;LocalStorageArgs['obj']['clearLocalState()void'] | LocalStorageArgs['tuple']['clearLocalState()void']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      return this.appClient.createTransaction.call(LocalStorageParamsFactory.clearLocalState(params))</span>
 <span class="cstat-no" title="statement not covered" >    },</span>
 &nbsp;
   }
@@ -2688,7 +3007,24 @@ export class GlobalStorageClient {
    */
   readonly send = {
     /**
-     * Makes a clear_state call to an existing instance of the GlobalStorage smart contract.
+     * Gets available optIn methods
+     */
+    optIn: {
+      /**
+       * Opts the user into an existing instance of the LocalStorage smart contract using the `optInToApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The optIn result
+       */
+      optInToApplication: <span class="fstat-no" title="function not covered" >async (params: CallParams&lt;LocalStorageArgs['obj']['optInToApplication()void'] | LocalStorageArgs['tuple']['optInToApplication()void']&gt; &amp; SendParams = {args: []}) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        const result = await this.appClient.send.optIn(LocalStorageParamsFactory.optIn.optInToApplication(params))</span>
+<span class="cstat-no" title="statement not covered" >        return {...result, return: result.return as unknown as (undefined | LocalStorageReturns['optInToApplication()void'])}</span>
+<span class="cstat-no" title="statement not covered" >      },</span>
+&nbsp;
+    },
+&nbsp;
+    /**
+     * Makes a clear_state call to an existing instance of the LocalStorage smart contract.
      *
      * @param params The params for the bare (raw) call
      * @returns The clearState result
@@ -2698,63 +3034,70 @@ export class GlobalStorageClient {
 <span class="cstat-no" title="statement not covered" >    },</span>
 &nbsp;
     /**
-     * Makes a call to the GlobalStorage smart contract using the `readGlobalState()(uint64,uint64,byte[],string,bool,address)` ABI method.
+     * Makes a call to the LocalStorage smart contract using the `readLocalState()(uint64,uint64,byte[],string,bool,address)` ABI method.
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
-     * Reads and returns all global state values from the contract
-     *
-     * @param params The params for the smart contract call
-    * @returns The call result: A tuple containing [globalInt, globalIntNoDefault, globalBytes, globalString, globalBool, globalAccount]
-    where each value corresponds to the current state of the respective global variable
-&nbsp;
-     */
-    readGlobalState: <span class="fstat-no" title="function not covered" >async (params: CallParams&lt;GlobalStorageArgs['obj']['readGlobalState()(uint64,uint64,byte[],string,bool,address)'] | GlobalStorageArgs['tuple']['readGlobalState()(uint64,uint64,byte[],string,bool,address)']&gt; &amp; SendParams &amp; {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      const result = await this.appClient.send.call(GlobalStorageParamsFactory.readGlobalState(params))</span>
-<span class="cstat-no" title="statement not covered" >      return {...result, return: result.return as unknown as (undefined | GlobalStorageReturns['readGlobalState()(uint64,uint64,byte[],string,bool,address)'])}</span>
-<span class="cstat-no" title="statement not covered" >    },</span>
-&nbsp;
-    /**
-     * Makes a call to the GlobalStorage smart contract using the `hasGlobalState()(uint64,bool)` ABI method.
-     * 
-     * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
-     *
-     * Checks if a global state value exists and returns it
-     *
-     * @param params The params for the smart contract call
-    * @returns The call result: A tuple containing [value, hasValue] where value is the current globalIntNoDefault value
-    and hasValue indicates if the value has been initialized
-&nbsp;
-     */
-    hasGlobalState: <span class="fstat-no" title="function not covered" >async (params: CallParams&lt;GlobalStorageArgs['obj']['hasGlobalState()(uint64,bool)'] | GlobalStorageArgs['tuple']['hasGlobalState()(uint64,bool)']&gt; &amp; SendParams &amp; {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      const result = await this.appClient.send.call(GlobalStorageParamsFactory.hasGlobalState(params))</span>
-<span class="cstat-no" title="statement not covered" >      return {...result, return: result.return as unknown as (undefined | GlobalStorageReturns['hasGlobalState()(uint64,bool)'])}</span>
-<span class="cstat-no" title="statement not covered" >    },</span>
-&nbsp;
-    /**
-     * Makes a call to the GlobalStorage smart contract using the `writeGlobalState(string,bool,account)void` ABI method.
-     *
-     * Updates multiple global state values
+     * Reads and returns all local state values for the sender
      *
      * @param params The params for the smart contract call
      * @returns The call result
      */
-    writeGlobalState: <span class="fstat-no" title="function not covered" >async (params: CallParams&lt;GlobalStorageArgs['obj']['writeGlobalState(string,bool,account)void'] | GlobalStorageArgs['tuple']['writeGlobalState(string,bool,account)void']&gt; &amp; SendParams &amp; {onComplete?: OnApplicationComplete.NoOpOC}) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      const result = await this.appClient.send.call(GlobalStorageParamsFactory.writeGlobalState(params))</span>
-<span class="cstat-no" title="statement not covered" >      return {...result, return: result.return as unknown as (undefined | GlobalStorageReturns['writeGlobalState(string,bool,account)void'])}</span>
+    readLocalState: <span class="fstat-no" title="function not covered" >async (params: CallParams&lt;LocalStorageArgs['obj']['readLocalState()(uint64,uint64,byte[],string,bool,address)'] | LocalStorageArgs['tuple']['readLocalState()(uint64,uint64,byte[],string,bool,address)']&gt; &amp; SendParams &amp; {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      const result = await this.appClient.send.call(LocalStorageParamsFactory.readLocalState(params))</span>
+<span class="cstat-no" title="statement not covered" >      return {...result, return: result.return as unknown as (undefined | LocalStorageReturns['readLocalState()(uint64,uint64,byte[],string,bool,address)'])}</span>
 <span class="cstat-no" title="statement not covered" >    },</span>
 &nbsp;
     /**
-     * Makes a call to the GlobalStorage smart contract using the `writeDynamicGlobalState(string,string)string` ABI method.
+     * Makes a call to the LocalStorage smart contract using the `writeLocalState(string,bool,account)void` ABI method.
      *
-     * Writes a value to global state using a dynamic key and returns the stored value
+     * Updates multiple local state values for the sender
      *
      * @param params The params for the smart contract call
-     * @returns The call result: The stored string value, confirming successful storage
+     * @returns The call result
      */
-    writeDynamicGlobalState: <span class="fstat-no" title="function not covered" >async (params: CallParams&lt;GlobalStorageArgs['obj']['writeDynamicGlobalState(string,string)string'] | GlobalStorageArgs['tuple']['writeDynamicGlobalState(string,string)string']&gt; &amp; SendParams &amp; {onComplete?: OnApplicationComplete.NoOpOC}) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      const result = await this.appClient.send.call(GlobalStorageParamsFactory.writeDynamicGlobalState(params))</span>
-<span class="cstat-no" title="statement not covered" >      return {...result, return: result.return as unknown as (undefined | GlobalStorageReturns['writeDynamicGlobalState(string,string)string'])}</span>
+    writeLocalState: <span class="fstat-no" title="function not covered" >async (params: CallParams&lt;LocalStorageArgs['obj']['writeLocalState(string,bool,account)void'] | LocalStorageArgs['tuple']['writeLocalState(string,bool,account)void']&gt; &amp; SendParams &amp; {onComplete?: OnApplicationComplete.NoOpOC}) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      const result = await this.appClient.send.call(LocalStorageParamsFactory.writeLocalState(params))</span>
+<span class="cstat-no" title="statement not covered" >      return {...result, return: result.return as unknown as (undefined | LocalStorageReturns['writeLocalState(string,bool,account)void'])}</span>
+<span class="cstat-no" title="statement not covered" >    },</span>
+&nbsp;
+    /**
+     * Makes a call to the LocalStorage smart contract using the `writeDynamicLocalState(string,string)string` ABI method.
+     *
+     * Writes a value to local state using a dynamic key
+     *
+     * @param params The params for the smart contract call
+     * @returns The call result
+     */
+    writeDynamicLocalState: <span class="fstat-no" title="function not covered" >async (params: CallParams&lt;LocalStorageArgs['obj']['writeDynamicLocalState(string,string)string'] | LocalStorageArgs['tuple']['writeDynamicLocalState(string,string)string']&gt; &amp; SendParams &amp; {onComplete?: OnApplicationComplete.NoOpOC}) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      const result = await this.appClient.send.call(LocalStorageParamsFactory.writeDynamicLocalState(params))</span>
+<span class="cstat-no" title="statement not covered" >      return {...result, return: result.return as unknown as (undefined | LocalStorageReturns['writeDynamicLocalState(string,string)string'])}</span>
+<span class="cstat-no" title="statement not covered" >    },</span>
+&nbsp;
+    /**
+     * Makes a call to the LocalStorage smart contract using the `readDynamicLocalState(string)string` ABI method.
+     *
+     * Reads a value from local state using a dynamic key
+     *
+     * @param params The params for the smart contract call
+     * @returns The call result
+     */
+    readDynamicLocalState: <span class="fstat-no" title="function not covered" >async (params: CallParams&lt;LocalStorageArgs['obj']['readDynamicLocalState(string)string'] | LocalStorageArgs['tuple']['readDynamicLocalState(string)string']&gt; &amp; SendParams &amp; {onComplete?: OnApplicationComplete.NoOpOC}) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      const result = await this.appClient.send.call(LocalStorageParamsFactory.readDynamicLocalState(params))</span>
+<span class="cstat-no" title="statement not covered" >      return {...result, return: result.return as unknown as (undefined | LocalStorageReturns['readDynamicLocalState(string)string'])}</span>
+<span class="cstat-no" title="statement not covered" >    },</span>
+&nbsp;
+    /**
+     * Makes a call to the LocalStorage smart contract using the `clearLocalState()void` ABI method.
+     *
+     * Clears all local state for the sender
+     *
+     * @param params The params for the smart contract call
+     * @returns The call result
+     */
+    clearLocalState: <span class="fstat-no" title="function not covered" >async (params: CallParams&lt;LocalStorageArgs['obj']['clearLocalState()void'] | LocalStorageArgs['tuple']['clearLocalState()void']&gt; &amp; SendParams &amp; {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      const result = await this.appClient.send.call(LocalStorageParamsFactory.clearLocalState(params))</span>
+<span class="cstat-no" title="statement not covered" >      return {...result, return: result.return as unknown as (undefined | LocalStorageReturns['clearLocalState()void'])}</span>
 <span class="cstat-no" title="statement not covered" >    },</span>
 &nbsp;
   }
@@ -2766,132 +3109,133 @@ export class GlobalStorageClient {
    * @returns A new app client with the altered params
    */
   public <span class="fstat-no" title="function not covered" >clone(params: CloneAppClientParams) {</span>
-<span class="cstat-no" title="statement not covered" >    return new GlobalStorageClient(this.appClient.clone(params))</span>
+<span class="cstat-no" title="statement not covered" >    return new LocalStorageClient(this.appClient.clone(params))</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 &nbsp;
   /**
-   * Makes a readonly (simulated) call to the GlobalStorage smart contract using the `readGlobalState()(uint64,uint64,byte[],string,bool,address)` ABI method.
+   * Makes a readonly (simulated) call to the LocalStorage smart contract using the `readLocalState()(uint64,uint64,byte[],string,bool,address)` ABI method.
    * 
    * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
    *
-   * Reads and returns all global state values from the contract
+   * Reads and returns all local state values for the sender
    *
    * @param params The params for the smart contract call
-  * @returns The call result: A tuple containing [globalInt, globalIntNoDefault, globalBytes, globalString, globalBool, globalAccount]
-  where each value corresponds to the current state of the respective global variable
-&nbsp;
+   * @returns The call result
    */
-<span class="fstat-no" title="function not covered" >  async readGlobalState(params: CallParams&lt;GlobalStorageArgs['obj']['readGlobalState()(uint64,uint64,byte[],string,bool,address)'] | GlobalStorageArgs['tuple']['readGlobalState()(uint64,uint64,byte[],string,bool,address)']&gt; = {args: []}) {</span>
-<span class="cstat-no" title="statement not covered" >    const result = await this.appClient.send.call(GlobalStorageParamsFactory.readGlobalState(params))</span>
-<span class="cstat-no" title="statement not covered" >    return result.return as unknown as GlobalStorageReturns['readGlobalState()(uint64,uint64,byte[],string,bool,address)']</span>
+<span class="fstat-no" title="function not covered" >  async readLocalState(params: CallParams&lt;LocalStorageArgs['obj']['readLocalState()(uint64,uint64,byte[],string,bool,address)'] | LocalStorageArgs['tuple']['readLocalState()(uint64,uint64,byte[],string,bool,address)']&gt; = {args: []}) {</span>
+<span class="cstat-no" title="statement not covered" >    const result = await this.appClient.send.call(LocalStorageParamsFactory.readLocalState(params))</span>
+<span class="cstat-no" title="statement not covered" >    return result.return as unknown as LocalStorageReturns['readLocalState()(uint64,uint64,byte[],string,bool,address)']</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 &nbsp;
   /**
-   * Makes a readonly (simulated) call to the GlobalStorage smart contract using the `hasGlobalState()(uint64,bool)` ABI method.
-   * 
-   * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
-   *
-   * Checks if a global state value exists and returns it
-   *
-   * @param params The params for the smart contract call
-  * @returns The call result: A tuple containing [value, hasValue] where value is the current globalIntNoDefault value
-  and hasValue indicates if the value has been initialized
-&nbsp;
-   */
-<span class="fstat-no" title="function not covered" >  async hasGlobalState(params: CallParams&lt;GlobalStorageArgs['obj']['hasGlobalState()(uint64,bool)'] | GlobalStorageArgs['tuple']['hasGlobalState()(uint64,bool)']&gt; = {args: []}) {</span>
-<span class="cstat-no" title="statement not covered" >    const result = await this.appClient.send.call(GlobalStorageParamsFactory.hasGlobalState(params))</span>
-<span class="cstat-no" title="statement not covered" >    return result.return as unknown as GlobalStorageReturns['hasGlobalState()(uint64,bool)']</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-&nbsp;
-  /**
-   * Methods to access state for the current GlobalStorage app
+   * Methods to access state for the current LocalStorage app
    */
   state = {
     /**
-     * Methods to access global state for the current GlobalStorage app
+     * Methods to access local state for the current LocalStorage app
      */
-    global: {
-      /**
-       * Get all current keyed values from global state
-       */
-      getAll: async (): Promise&lt;Partial&lt;Expand&lt;GlobalKeysState&gt;&gt;&gt; =&gt; {
-        const result = await this.appClient.state.global.getAll()
-        return {
-          globalInt: result.globalInt,
-          globalIntNoDefault: result.globalIntNoDefault,
-          globalBytes: new BinaryStateValue(result.globalBytes),
-          globalString: result.globalString,
-          globalBool: result.globalBool,
-          globalAccount: new BinaryStateValue(result.globalAccount),
-        }
-      },
-      /**
-       * Get the current value of the globalInt key in global state
-       */
-      globalInt: <span class="fstat-no" title="function not covered" >async (): Promise&lt;bigint | undefined&gt; =&gt; { return (await this.appClient.state.global.getValue("globalInt")) as bigint | undefined },</span>
-      /**
-       * Get the current value of the globalIntNoDefault key in global state
-       */
-      globalIntNoDefault: <span class="fstat-no" title="function not covered" >async (): Promise&lt;bigint | undefined&gt; =&gt; { return (await this.appClient.state.global.getValue("globalIntNoDefault")) as bigint | undefined },</span>
-      /**
-       * Get the current value of the globalBytes key in global state
-       */
-      globalBytes: <span class="fstat-no" title="function not covered" >async (): Promise&lt;BinaryState&gt; =&gt; { return new BinaryStateValue((await this.appClient.state.global.getValue("globalBytes")) as Uint8Array | undefined) },</span>
-      /**
-       * Get the current value of the globalString key in global state
-       */
-      globalString: <span class="fstat-no" title="function not covered" >async (): Promise&lt;string | undefined&gt; =&gt; { return (await this.appClient.state.global.getValue("globalString")) as string | undefined },</span>
-      /**
-       * Get the current value of the globalBool key in global state
-       */
-      globalBool: <span class="fstat-no" title="function not covered" >async (): Promise&lt;bigint | undefined&gt; =&gt; { return (await this.appClient.state.global.getValue("globalBool")) as bigint | undefined },</span>
-      /**
-       * Get the current value of the globalAccount key in global state
-       */
-      globalAccount: <span class="fstat-no" title="function not covered" >async (): Promise&lt;BinaryState&gt; =&gt; { return new BinaryStateValue((await this.appClient.state.global.getValue("globalAccount")) as Uint8Array | undefined) },</span>
-    },
+    local: <span class="fstat-no" title="function not covered" >(address: string | Address) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      const encodedAddress = typeof address === 'string' ? address : encodeAddress(address.publicKey)</span>
+<span class="cstat-no" title="statement not covered" >      return {</span>
+        /**
+         * Get all current keyed values from local state
+         */
+<span class="cstat-no" title="statement not covered" >        getAll: async (): Promise&lt;Partial&lt;Expand&lt;LocalKeysState&gt;&gt;&gt; =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          const result = await this.appClient.state.local(encodedAddress).getAll()</span>
+<span class="cstat-no" title="statement not covered" >          return {</span>
+<span class="cstat-no" title="statement not covered" >            localInt: result.localInt,</span>
+<span class="cstat-no" title="statement not covered" >            localIntNoDefault: result.localIntNoDefault,</span>
+<span class="cstat-no" title="statement not covered" >            localBytes: new BinaryStateValue(result.localBytes),</span>
+<span class="cstat-no" title="statement not covered" >            localString: result.localString,</span>
+<span class="cstat-no" title="statement not covered" >            localBool: result.localBool,</span>
+<span class="cstat-no" title="statement not covered" >            localAccount: new BinaryStateValue(result.localAccount),</span>
+          }
+<span class="cstat-no" title="statement not covered" >        },</span>
+        /**
+         * Get the current value of the localInt key in local state
+         */
+<span class="cstat-no" title="statement not covered" >        localInt: async (): Promise&lt;bigint | undefined&gt; =&gt; { return (await this.appClient.state.local(encodedAddress).getValue("localInt")) as bigint | undefined },</span>
+        /**
+         * Get the current value of the localIntNoDefault key in local state
+         */
+<span class="cstat-no" title="statement not covered" >        localIntNoDefault: async (): Promise&lt;bigint | undefined&gt; =&gt; { return (await this.appClient.state.local(encodedAddress).getValue("localIntNoDefault")) as bigint | undefined },</span>
+        /**
+         * Get the current value of the localBytes key in local state
+         */
+<span class="cstat-no" title="statement not covered" >        localBytes: async (): Promise&lt;BinaryState&gt; =&gt; { return new BinaryStateValue((await this.appClient.state.local(encodedAddress).getValue("localBytes")) as Uint8Array | undefined) },</span>
+        /**
+         * Get the current value of the localString key in local state
+         */
+<span class="cstat-no" title="statement not covered" >        localString: async (): Promise&lt;string | undefined&gt; =&gt; { return (await this.appClient.state.local(encodedAddress).getValue("localString")) as string | undefined },</span>
+        /**
+         * Get the current value of the localBool key in local state
+         */
+<span class="cstat-no" title="statement not covered" >        localBool: async (): Promise&lt;bigint | undefined&gt; =&gt; { return (await this.appClient.state.local(encodedAddress).getValue("localBool")) as bigint | undefined },</span>
+        /**
+         * Get the current value of the localAccount key in local state
+         */
+<span class="cstat-no" title="statement not covered" >        localAccount: async (): Promise&lt;BinaryState&gt; =&gt; { return new BinaryStateValue((await this.appClient.state.local(encodedAddress).getValue("localAccount")) as Uint8Array | undefined) },</span>
+      }
+<span class="cstat-no" title="statement not covered" >    },</span>
   }
 &nbsp;
-  public newGroup(): GlobalStorageComposer {
+  public newGroup(): LocalStorageComposer {
     const client = this
     const composer = this.algorand.newGroup()
     let promiseChain:Promise&lt;unknown&gt; = Promise.resolve()
     const resultMappers: Array&lt;undefined | ((x: ABIReturn | undefined) =&gt; any)&gt; = []
     return {
       /**
-       * Add a readGlobalState()(uint64,uint64,byte[],string,bool,address) method call against the GlobalStorage contract
+       * Add a readLocalState()(uint64,uint64,byte[],string,bool,address) method call against the LocalStorage contract
        */
-      readGlobalState(params: CallParams&lt;GlobalStorageArgs['obj']['readGlobalState()(uint64,uint64,byte[],string,bool,address)'] | GlobalStorageArgs['tuple']['readGlobalState()(uint64,uint64,byte[],string,bool,address)']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) {
-        promiseChain = promiseChain.then(async () =&gt; composer.addAppCallMethodCall(await client.params.readGlobalState(params)))
-        resultMappers.push((v) =&gt; client.decodeReturnValue('readGlobalState()(uint64,uint64,byte[],string,bool,address)', v))
+      readLocalState(params: CallParams&lt;LocalStorageArgs['obj']['readLocalState()(uint64,uint64,byte[],string,bool,address)'] | LocalStorageArgs['tuple']['readLocalState()(uint64,uint64,byte[],string,bool,address)']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) {
+        promiseChain = promiseChain.then(async () =&gt; composer.addAppCallMethodCall(await client.params.readLocalState(params)))
+        resultMappers.push((v) =&gt; client.decodeReturnValue('readLocalState()(uint64,uint64,byte[],string,bool,address)', v))
         return this
       },
       /**
-       * Add a hasGlobalState()(uint64,bool) method call against the GlobalStorage contract
+       * Add a writeLocalState(string,bool,account)void method call against the LocalStorage contract
        */
-      hasGlobalState(params: CallParams&lt;GlobalStorageArgs['obj']['hasGlobalState()(uint64,bool)'] | GlobalStorageArgs['tuple']['hasGlobalState()(uint64,bool)']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) {
-        promiseChain = promiseChain.then(async () =&gt; composer.addAppCallMethodCall(await client.params.hasGlobalState(params)))
-        resultMappers.push((v) =&gt; client.decodeReturnValue('hasGlobalState()(uint64,bool)', v))
-        return this
-      },
-      /**
-       * Add a writeGlobalState(string,bool,account)void method call against the GlobalStorage contract
-       */
-      writeGlobalState(params: CallParams&lt;GlobalStorageArgs['obj']['writeGlobalState(string,bool,account)void'] | GlobalStorageArgs['tuple']['writeGlobalState(string,bool,account)void']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) {
-        promiseChain = promiseChain.then(async () =&gt; composer.addAppCallMethodCall(await client.params.writeGlobalState(params)))
+      writeLocalState(params: CallParams&lt;LocalStorageArgs['obj']['writeLocalState(string,bool,account)void'] | LocalStorageArgs['tuple']['writeLocalState(string,bool,account)void']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) {
+        promiseChain = promiseChain.then(async () =&gt; composer.addAppCallMethodCall(await client.params.writeLocalState(params)))
         resultMappers.push(undefined)
         return this
       },
       /**
-       * Add a writeDynamicGlobalState(string,string)string method call against the GlobalStorage contract
+       * Add a writeDynamicLocalState(string,string)string method call against the LocalStorage contract
        */
-      writeDynamicGlobalState(params: CallParams&lt;GlobalStorageArgs['obj']['writeDynamicGlobalState(string,string)string'] | GlobalStorageArgs['tuple']['writeDynamicGlobalState(string,string)string']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) {
-        promiseChain = promiseChain.then(async () =&gt; composer.addAppCallMethodCall(await client.params.writeDynamicGlobalState(params)))
-        resultMappers.push((v) =&gt; client.decodeReturnValue('writeDynamicGlobalState(string,string)string', v))
+      writeDynamicLocalState(params: CallParams&lt;LocalStorageArgs['obj']['writeDynamicLocalState(string,string)string'] | LocalStorageArgs['tuple']['writeDynamicLocalState(string,string)string']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) {
+        promiseChain = promiseChain.then(async () =&gt; composer.addAppCallMethodCall(await client.params.writeDynamicLocalState(params)))
+        resultMappers.push((v) =&gt; client.decodeReturnValue('writeDynamicLocalState(string,string)string', v))
         return this
       },
       /**
-       * Add a clear state call to the GlobalStorage contract
+       * Add a readDynamicLocalState(string)string method call against the LocalStorage contract
+       */
+      readDynamicLocalState(params: CallParams&lt;LocalStorageArgs['obj']['readDynamicLocalState(string)string'] | LocalStorageArgs['tuple']['readDynamicLocalState(string)string']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) {
+        promiseChain = promiseChain.then(async () =&gt; composer.addAppCallMethodCall(await client.params.readDynamicLocalState(params)))
+        resultMappers.push((v) =&gt; client.decodeReturnValue('readDynamicLocalState(string)string', v))
+        return this
+      },
+      /**
+       * Add a clearLocalState()void method call against the LocalStorage contract
+       */
+      clearLocalState(params: CallParams&lt;LocalStorageArgs['obj']['clearLocalState()void'] | LocalStorageArgs['tuple']['clearLocalState()void']&gt; &amp; {onComplete?: OnApplicationComplete.NoOpOC}) {
+        promiseChain = promiseChain.then(async () =&gt; composer.addAppCallMethodCall(await client.params.clearLocalState(params)))
+        resultMappers.push(undefined)
+        return this
+      },
+      get optIn() {
+        return {
+          optInToApplication: (params: CallParams&lt;LocalStorageArgs['obj']['optInToApplication()void'] | LocalStorageArgs['tuple']['optInToApplication()void']&gt;) =&gt; {
+            promiseChain = promiseChain.then(async () =&gt; composer.addAppCallMethodCall(await client.params.optIn.optInToApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
+      /**
+       * Add a clear state call to the LocalStorage contract
        */
 <span class="fstat-no" title="function not covered" >      clearState(params: AppClientBareCallParams) {</span>
 <span class="cstat-no" title="statement not covered" >        promiseChain = promiseChain.then(() =&gt; composer.addAppCall(client.params.clearState(params)))</span>
@@ -2918,64 +3262,89 @@ export class GlobalStorageClient {
         const result = await composer.send(params)
         return {
           ...result,
-          returns: result.returns?.map((val, i) =&gt; resultMappers[i] !== <span class="branch-0 cbranch-no" title="branch not covered" >undefined ? resultMappers[i]!(val) : v</span>al.returnValue)
+          returns: result.returns?.map((val, i) =&gt; resultMappers[i] !== undefined ? resultMappers[i]!(val) : val.returnValue)
         }
       }
-    } as unknown as GlobalStorageComposer
+    } as unknown as LocalStorageComposer
   }
 }
-export type GlobalStorageComposer&lt;TReturns extends [...any[]] = []&gt; = {
+export type LocalStorageComposer&lt;TReturns extends [...any[]] = []&gt; = {
   /**
-   * Calls the readGlobalState()(uint64,uint64,byte[],string,bool,address) ABI method.
+   * Calls the readLocalState()(uint64,uint64,byte[],string,bool,address) ABI method.
    *
-   * Reads and returns all global state values from the contract
+   * Reads and returns all local state values for the sender
    *
    * @param args The arguments for the contract call
    * @param params Any additional parameters for the call
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
-  readGlobalState(params?: CallParams&lt;GlobalStorageArgs['obj']['readGlobalState()(uint64,uint64,byte[],string,bool,address)'] | GlobalStorageArgs['tuple']['readGlobalState()(uint64,uint64,byte[],string,bool,address)']&gt;): GlobalStorageComposer&lt;[...TReturns, GlobalStorageReturns['readGlobalState()(uint64,uint64,byte[],string,bool,address)'] | undefined]&gt;
+  readLocalState(params?: CallParams&lt;LocalStorageArgs['obj']['readLocalState()(uint64,uint64,byte[],string,bool,address)'] | LocalStorageArgs['tuple']['readLocalState()(uint64,uint64,byte[],string,bool,address)']&gt;): LocalStorageComposer&lt;[...TReturns, LocalStorageReturns['readLocalState()(uint64,uint64,byte[],string,bool,address)'] | undefined]&gt;
 &nbsp;
   /**
-   * Calls the hasGlobalState()(uint64,bool) ABI method.
+   * Calls the writeLocalState(string,bool,account)void ABI method.
    *
-   * Checks if a global state value exists and returns it
+   * Updates multiple local state values for the sender
    *
    * @param args The arguments for the contract call
    * @param params Any additional parameters for the call
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
-  hasGlobalState(params?: CallParams&lt;GlobalStorageArgs['obj']['hasGlobalState()(uint64,bool)'] | GlobalStorageArgs['tuple']['hasGlobalState()(uint64,bool)']&gt;): GlobalStorageComposer&lt;[...TReturns, GlobalStorageReturns['hasGlobalState()(uint64,bool)'] | undefined]&gt;
+  writeLocalState(params?: CallParams&lt;LocalStorageArgs['obj']['writeLocalState(string,bool,account)void'] | LocalStorageArgs['tuple']['writeLocalState(string,bool,account)void']&gt;): LocalStorageComposer&lt;[...TReturns, LocalStorageReturns['writeLocalState(string,bool,account)void'] | undefined]&gt;
 &nbsp;
   /**
-   * Calls the writeGlobalState(string,bool,account)void ABI method.
+   * Calls the writeDynamicLocalState(string,string)string ABI method.
    *
-   * Updates multiple global state values
+   * Writes a value to local state using a dynamic key
    *
    * @param args The arguments for the contract call
    * @param params Any additional parameters for the call
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
-  writeGlobalState(params?: CallParams&lt;GlobalStorageArgs['obj']['writeGlobalState(string,bool,account)void'] | GlobalStorageArgs['tuple']['writeGlobalState(string,bool,account)void']&gt;): GlobalStorageComposer&lt;[...TReturns, GlobalStorageReturns['writeGlobalState(string,bool,account)void'] | undefined]&gt;
+  writeDynamicLocalState(params?: CallParams&lt;LocalStorageArgs['obj']['writeDynamicLocalState(string,string)string'] | LocalStorageArgs['tuple']['writeDynamicLocalState(string,string)string']&gt;): LocalStorageComposer&lt;[...TReturns, LocalStorageReturns['writeDynamicLocalState(string,string)string'] | undefined]&gt;
 &nbsp;
   /**
-   * Calls the writeDynamicGlobalState(string,string)string ABI method.
+   * Calls the readDynamicLocalState(string)string ABI method.
    *
-   * Writes a value to global state using a dynamic key and returns the stored value
+   * Reads a value from local state using a dynamic key
    *
    * @param args The arguments for the contract call
    * @param params Any additional parameters for the call
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
-  writeDynamicGlobalState(params?: CallParams&lt;GlobalStorageArgs['obj']['writeDynamicGlobalState(string,string)string'] | GlobalStorageArgs['tuple']['writeDynamicGlobalState(string,string)string']&gt;): GlobalStorageComposer&lt;[...TReturns, GlobalStorageReturns['writeDynamicGlobalState(string,string)string'] | undefined]&gt;
+  readDynamicLocalState(params?: CallParams&lt;LocalStorageArgs['obj']['readDynamicLocalState(string)string'] | LocalStorageArgs['tuple']['readDynamicLocalState(string)string']&gt;): LocalStorageComposer&lt;[...TReturns, LocalStorageReturns['readDynamicLocalState(string)string'] | undefined]&gt;
 &nbsp;
   /**
-   * Makes a clear_state call to an existing instance of the GlobalStorage smart contract.
+   * Calls the clearLocalState()void ABI method.
+   *
+   * Clears all local state for the sender
+   *
+   * @param args The arguments for the contract call
+   * @param params Any additional parameters for the call
+   * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+   */
+  clearLocalState(params?: CallParams&lt;LocalStorageArgs['obj']['clearLocalState()void'] | LocalStorageArgs['tuple']['clearLocalState()void']&gt;): LocalStorageComposer&lt;[...TReturns, LocalStorageReturns['clearLocalState()void'] | undefined]&gt;
+&nbsp;
+  /**
+   * Gets available optIn methods
+   */
+  readonly optIn: {
+    /**
+     * Opts the user into an existing instance of the LocalStorage smart contract using the optInToApplication()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    optInToApplication(params?: CallParams&lt;LocalStorageArgs['obj']['optInToApplication()void'] | LocalStorageArgs['tuple']['optInToApplication()void']&gt;): LocalStorageComposer&lt;[...TReturns, LocalStorageReturns['optInToApplication()void'] | undefined]&gt;
+  }
+&nbsp;
+  /**
+   * Makes a clear_state call to an existing instance of the LocalStorage smart contract.
    *
    * @param args The arguments for the bare call
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
-  clearState(params?: AppClientBareCallParams): GlobalStorageComposer&lt;[...TReturns, undefined]&gt;
+  clearState(params?: AppClientBareCallParams): LocalStorageComposer&lt;[...TReturns, undefined]&gt;
 &nbsp;
   /**
    * Adds a transaction to the composer
@@ -2983,7 +3352,7 @@ export type GlobalStorageComposer&lt;TReturns extends [...any[]] = []&gt; = {
    * @param txn A transaction to add to the transaction group
    * @param signer The optional signer to use when signing this transaction.
    */
-  addTransaction(txn: Transaction, signer?: TransactionSigner): GlobalStorageComposer&lt;TReturns&gt;
+  addTransaction(txn: Transaction, signer?: TransactionSigner): LocalStorageComposer&lt;TReturns&gt;
   /**
    * Returns the underlying AtomicTransactionComposer instance
    */
@@ -2991,15 +3360,15 @@ export type GlobalStorageComposer&lt;TReturns extends [...any[]] = []&gt; = {
   /**
    * Simulates the transaction group and returns the result
    */
-  simulate(): Promise&lt;GlobalStorageComposerResults&lt;TReturns&gt; &amp; { simulateResponse: SimulateResponse }&gt;
-  simulate(options: SkipSignaturesSimulateOptions): Promise&lt;GlobalStorageComposerResults&lt;TReturns&gt; &amp; { simulateResponse: SimulateResponse }&gt;
-  simulate(options: RawSimulateOptions): Promise&lt;GlobalStorageComposerResults&lt;TReturns&gt; &amp; { simulateResponse: SimulateResponse }&gt;
+  simulate(): Promise&lt;LocalStorageComposerResults&lt;TReturns&gt; &amp; { simulateResponse: SimulateResponse }&gt;
+  simulate(options: SkipSignaturesSimulateOptions): Promise&lt;LocalStorageComposerResults&lt;TReturns&gt; &amp; { simulateResponse: SimulateResponse }&gt;
+  simulate(options: RawSimulateOptions): Promise&lt;LocalStorageComposerResults&lt;TReturns&gt; &amp; { simulateResponse: SimulateResponse }&gt;
   /**
    * Sends the transaction group to the network and returns the results
    */
-  send(params?: SendParams): Promise&lt;GlobalStorageComposerResults&lt;TReturns&gt;&gt;
+  send(params?: SendParams): Promise&lt;LocalStorageComposerResults&lt;TReturns&gt;&gt;
 }
-export type GlobalStorageComposerResults&lt;TReturns extends [...any[]]&gt; = Expand&lt;SendAtomicTransactionComposerResults &amp; {
+export type LocalStorageComposerResults&lt;TReturns extends [...any[]]&gt; = Expand&lt;SendAtomicTransactionComposerResults &amp; {
   returns: TReturns
 }&gt;
 &nbsp;
