@@ -25,11 +25,16 @@ def atomic_transaction_groups() -> None:
         PaymentParams(
             sender=account_b.address,
             receiver=account_c.address,
-            amount=AlgoAmount(algo=2),  # B sends half of what they received to C
+            amount=AlgoAmount(
+                micro_algo=500_000
+            ),  # B sends half of what they received to C
             note=b"Second payment in atomic group",
         )
     ).send()  # Send the atomic group of transactions
 
+    # example: ATOMIC_TRANSACTION_GROUP
+
+    # example: ATOMIC_GROUP_SIMULATE
     """
     Create a transaction group to simulate
     Simulation allows you to test the transaction without committing it to the chain
@@ -47,7 +52,7 @@ def atomic_transaction_groups() -> None:
             PaymentParams(
                 sender=account_b.address,
                 receiver=account_c.address,
-                amount=AlgoAmount(algo=1),
+                amount=AlgoAmount(micro_algo=500_000),
             )
         )
     )

@@ -70,5 +70,7 @@ def leases() -> None:
         )
     )
 
+    # example: LEASES
+
 
 leases()
