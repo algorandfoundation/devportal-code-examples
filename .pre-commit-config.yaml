@@ -1,0 +1,70 @@
+repos:
+  - repo: local
+    hooks:
+      # Python hooks
+      - id: black
+        name: black
+        description: "Black: The uncompromising Python code formatter"
+        entry: bash -c 'cd projects/python-examples && poetry run black'
+        language: system
+        minimum_pre_commit_version: 2.9.2
+        require_serial: true
+        types_or: [python, pyi]
+
+      - id: ruff
+        name: ruff
+        description: "Run 'ruff' for extremely fast Python linting"
+        entry: bash -c 'cd projects/python-examples && poetry run ruff check --fix'
+        language: system
+        types: [python]
+        require_serial: false
+        additional_dependencies: []
+        minimum_pre_commit_version: "0"
+        files: "^projects/python-examples/(src|tests)/"
+
+      - id: mypy
+        name: mypy
+        description: "`mypy` will check Python types for correctness"
+        entry: bash -c 'cd projects/python-examples && poetry run mypy'
+        language: system
+        types_or: [python, pyi]
+        require_serial: true
+        additional_dependencies: []
+        minimum_pre_commit_version: "2.9.2"
+        files: "^projects/python-examples/(src|tests)/"
+
+      - id: tealer
+        name: tealer
+        description: "Run AlgoKit `Tealer` for TEAL static analysis for Python contracts"
+        entry: bash -c 'cd projects/python-examples && algokit project run audit-teal'
+        language: system
+        files: '^projects/python-examples/.*\.teal$'
+
+      # TypeScript hooks
+      - id: prettier
+        name: prettier
+        description: "Prettier: The opinionated TypeScript code formatter"
+        entry: bash -c 'cd projects/typescript-examples && npm run format'
+        language: system
+        types_or: [ts, tsx]
+
+      - id: eslint
+        name: eslint
+        description: "Run 'eslint' for TypeScript linting"
+        entry: bash -c 'cd projects/typescript-examples && npm run lint'
+        language: system
+        types_or: [ts, tsx]
+
+      # - id: audit
+      #   name: audit
+      #   description: "Run AlgoKit `audit` for static analysis of TypeScript code"
+      #   entry: bash -c 'cd projects/typescript-examples && algokit project run audit'
+      #   language: system
+      #   files: '^.*\.ts$'
+
+      - id: audit-teal
+        name: audit-teal
+        description: "Run AlgoKit `audit-teal` for static analysis of TEAL contracts"
+        entry: bash -c 'cd projects/typescript-examples && algokit project run audit-teal'
+        language: system
+        files: '^projects/typescript-examples/.*\.teal$'
