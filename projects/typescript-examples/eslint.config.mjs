@@ -20,5 +20,6 @@ export default tseslint.config(eslint.configs.recommended, tseslint.configs.reco
         caughtErrorsIgnorePattern: '^_',
       },
     ],
+    '@typescript-eslint/explicit-member-accessibility': 'warn',
   },
 })

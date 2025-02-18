@@ -19,7 +19,7 @@ main_after_if_else@11:
 
 main_sayBananas_route@4:
     // contracts/HelloWorld/contract.algo.ts:11
-    // @arc4.abimethod({ allowActions: ["NoOp"], readonly: true })
+    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: true })
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -78,7 +78,7 @@ sayHello:
     // public sayHello(firstName: string, lastName: string): string {
     proto 2 1
     // contracts/HelloWorld/contract.algo.ts:28
-    // const result = `Hello ${firstName} ${lastName}`;
+    // const result = `Hello ${firstName} ${lastName}`
     pushbytes "Hello "
     frame_dig -2
     concat
@@ -87,5 +87,5 @@ sayHello:
     frame_dig -1
     concat
     // contracts/HelloWorld/contract.algo.ts:29
-    // return result;
+    // return result
     retsub

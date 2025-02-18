@@ -10,7 +10,7 @@ import * as path from 'node:path'
 Config.configure({
   logger: consoleLogger,
   debug: true,
-  //  traceAll: true,
+  traceAll: true,
 })
 registerDebugEventHandlers()
 
@@ -48,7 +48,7 @@ async function getDeployers() {
 }
 
 // execute all the deployers
-;(async () => {
+async function main() {
   const contractName = process.argv.length > 2 ? process.argv[2] : undefined
   const contractDeployers = await getDeployers()
 
@@ -68,4 +68,9 @@ async function getDeployers() {
       console.error(`Error deploying ${deployer.name}:`, e)
     }
   }
-})()
+}
+
+// Only run if this file is being run directly
+if (require.main === module) {
+  main().catch(console.error)
+}

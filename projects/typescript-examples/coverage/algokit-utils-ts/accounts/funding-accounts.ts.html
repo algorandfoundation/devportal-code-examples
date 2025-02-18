@@ -178,24 +178,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >/* eslint-disable @typescript-eslint/no-unused-vars */<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span>
-<span class="cstat-no" title="statement not covered" >import { AlgorandClient, algo } from "@algorandfoundation/algokit-utils";</span>
+<span class="cstat-no" title="statement not covered" >import { AlgorandClient, algo } from '@algorandfoundation/algokit-utils'</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >async function fundingAccounts() {</span>
   /** Initialize an Algorand client instance configured for LocalNet */
-<span class="cstat-no" title="statement not covered" >  const algorand = AlgorandClient.defaultLocalNet();</span>
+<span class="cstat-no" title="statement not covered" >  const algorand = AlgorandClient.defaultLocalNet()</span>
 &nbsp;
   // example: LOCALNET_DISPENSER
   /**
    * Get the default LocalNet dispenser account that can be used to fund other accounts
    */
-<span class="cstat-no" title="statement not covered" >  const localNetDispenser = await algorand.account.localNetDispenser();</span>
+<span class="cstat-no" title="statement not covered" >  const localNetDispenser = await algorand.account.localNetDispenser()</span>
   // example: LOCALNET_DISPENSER
 &nbsp;
   // example: DISPENSER_ACCOUNT
   /**
    * Get a dispenser account from environment variables.
    */
-<span class="cstat-no" title="statement not covered" >  const environmentDispenser = await algorand.account.dispenserFromEnvironment();</span>
+<span class="cstat-no" title="statement not covered" >  const environmentDispenser = await algorand.account.dispenserFromEnvironment()</span>
   // example: DISPENSER_ACCOUNT
 &nbsp;
   // example: ENSURE_FUNDED
@@ -203,7 +203,7 @@
    * Ensure an account has sufficient funds by transferring
    * Algos from a dispenser account if needed
    */
-<span class="cstat-no" title="statement not covered" >  await algorand.account.ensureFunded("ACCOUNTADDRESS", localNetDispenser, algo(1));</span>
+<span class="cstat-no" title="statement not covered" >  await algorand.account.ensureFunded('ACCOUNTADDRESS', localNetDispenser, algo(1))</span>
   // example: ENSURE_FUNDED
 &nbsp;
   // example: ENSURE_FUNDED_FROM_ENV
@@ -211,7 +211,7 @@
    * Ensure an account has sufficient funds using a dispenser account
    * loaded from environment variables
    */
-<span class="cstat-no" title="statement not covered" >  await algorand.account.ensureFundedFromEnvironment("ACCOUNTADDRESS", algo(1));</span>
+<span class="cstat-no" title="statement not covered" >  await algorand.account.ensureFundedFromEnvironment('ACCOUNTADDRESS', algo(1))</span>
   // example: ENSURE_FUNDED_FROM_ENV
 &nbsp;
   // example: ENSURE_FUNDED_TESTNET
@@ -220,20 +220,20 @@
    * The dispenser client uses the `ALGOKIT_DISPENSER_ACCESS_TOKEN` environment variable
    * to authenticate with the dispenser API.
    */
-<span class="cstat-no" title="statement not covered" >  const dispenserClient = algorand.client.getTestNetDispenserFromEnvironment();</span>
-<span class="cstat-no" title="statement not covered" >  await algorand.account.ensureFundedFromTestNetDispenserApi("ACCOUNTADDRESS", dispenserClient, algo(1));</span>
+<span class="cstat-no" title="statement not covered" >  const dispenserClient = algorand.client.getTestNetDispenserFromEnvironment()</span>
+<span class="cstat-no" title="statement not covered" >  await algorand.account.ensureFundedFromTestNetDispenserApi('ACCOUNTADDRESS', dispenserClient, algo(1))</span>
   // example: ENSURE_FUNDED_TESTNET
 &nbsp;
   // example: TESTNET_DISPENSER_FUND
   /**
    * Directly fund an account using the TestNet Dispenser API
    */
-<span class="cstat-no" title="statement not covered" >  const testnetDispenser = algorand.client.getTestNetDispenserFromEnvironment();</span>
-<span class="cstat-no" title="statement not covered" >  await testnetDispenser.fund("ACCOUNTADDRESS", 1_000_000);</span>
+<span class="cstat-no" title="statement not covered" >  const testnetDispenser = algorand.client.getTestNetDispenserFromEnvironment()</span>
+<span class="cstat-no" title="statement not covered" >  await testnetDispenser.fund('ACCOUNTADDRESS', 1_000_000)</span>
   // example: TESTNET_DISPENSER_FUND
 <span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >fundingAccounts();</span>
+<span class="cstat-no" title="statement not covered" >fundingAccounts()</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -241,7 +241,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-13T01:25:52.413Z
+                at 2025-02-18T00:19:01.529Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

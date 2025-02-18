@@ -1,0 +1,3674 @@
+{
+  "success": false,
+  "error": null,
+  "result": [
+    {
+      "type": "ExecutionPaths",
+      "count": 6,
+      "description": "\nCheck: \"unprotected-deletable\", Impact: High, Confidence: High\nDescription: Unprotected Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-deletable-application\n",
+      "check": "unprotected-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "55: main_after_if_else@15:",
+              "59: intc_0",
+              "60: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 12 -> 16 -> 13",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "141: main_readGlobalState_route@5:",
+              "144: txn OnCompletion",
+              "145: !",
+              "146: assert",
+              "147: txn ApplicationID",
+              "148: assert",
+              "149: callsub readGlobalState"
+            ],
+            [
+              "211: readGlobalState:",
+              "215: proto 0 6",
+              "218: intc_0",
+              "221: bytec_3",
+              "224: app_global_get_ex",
+              "225: assert",
+              "228: intc_0",
+              "231: bytec 5",
+              "234: app_global_get_ex",
+              "235: assert",
+              "238: intc_0",
+              "241: bytec_2",
+              "244: app_global_get_ex",
+              "245: assert",
+              "248: intc_0",
+              "251: bytec 6",
+              "254: app_global_get_ex",
+              "255: assert",
+              "258: intc_0",
+              "261: bytec_0",
+              "264: app_global_get_ex",
+              "265: assert",
+              "268: intc_0",
+              "271: bytec_1",
+              "274: app_global_get_ex",
+              "275: assert",
+              "285: uncover 5",
+              "286: retsub"
+            ],
+            [
+              "150: uncover 5",
+              "151: itob",
+              "152: uncover 5",
+              "153: itob",
+              "154: dig 5",
+              "155: len",
+              "156: itob",
+              "157: extract 6 2",
+              "158: uncover 6",
+              "159: concat",
+              "160: dig 5",
+              "161: len",
+              "162: itob",
+              "163: extract 6 2",
+              "164: uncover 6",
+              "165: concat",
+              "166: pushbytes 0x00",
+              "167: intc_0",
+              "168: uncover 7",
+              "169: setbit",
+              "170: uncover 4",
+              "171: uncover 4",
+              "172: concat",
+              "173: pushbytes 0x0035",
+              "174: concat",
+              "175: dig 3",
+              "176: len",
+              "177: pushint 53",
+              "178: +",
+              "179: itob",
+              "180: extract 6 2",
+              "181: concat",
+              "182: swap",
+              "183: concat",
+              "184: uncover 3",
+              "185: concat",
+              "186: uncover 2",
+              "187: concat",
+              "188: swap",
+              "189: concat",
+              "190: bytec 4",
+              "191: swap",
+              "192: concat",
+              "193: log",
+              "194: intc_1",
+              "195: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 10 -> 17 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "118: main_hasGlobalState_route@6:",
+              "121: txn OnCompletion",
+              "122: !",
+              "123: assert",
+              "124: txn ApplicationID",
+              "125: assert",
+              "126: callsub hasGlobalState"
+            ],
+            [
+              "290: hasGlobalState:",
+              "294: proto 0 2",
+              "297: intc_0",
+              "300: bytec_2",
+              "303: app_global_get_ex",
+              "304: bury 1",
+              "307: intc_0",
+              "310: bytec_2",
+              "313: app_global_get_ex",
+              "314: assert",
+              "317: dig 1",
+              "318: assert",
+              "321: swap",
+              "322: retsub"
+            ],
+            [
+              "127: swap",
+              "128: itob",
+              "129: pushbytes 0x00",
+              "130: intc_0",
+              "131: uncover 3",
+              "132: setbit",
+              "133: concat",
+              "134: bytec 4",
+              "135: swap",
+              "136: concat",
+              "137: log",
+              "138: intc_1",
+              "139: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 18 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "93: main_writeGlobalState_route@7:",
+              "96: txn OnCompletion",
+              "97: !",
+              "98: assert",
+              "99: txn ApplicationID",
+              "100: assert",
+              "104: txna ApplicationArgs 1",
+              "105: extract 2 0",
+              "106: txna ApplicationArgs 2",
+              "107: intc_0",
+              "108: getbit",
+              "109: txna ApplicationArgs 3",
+              "110: btoi",
+              "111: txnas Accounts",
+              "114: callsub writeGlobalState"
+            ],
+            [
+              "326: writeGlobalState:",
+              "330: proto 3 0",
+              "333: bytec_0",
+              "336: frame_dig -3",
+              "337: app_global_put",
+              "340: bytec_1",
+              "343: frame_dig -2",
+              "344: app_global_put",
+              "347: bytec_3",
+              "350: frame_dig -1",
+              "351: app_global_put",
+              "354: intc_0",
+              "357: bytec_0",
+              "360: app_global_get_ex",
+              "361: assert",
+              "362: frame_dig -3",
+              "363: ==",
+              "364: assert",
+              "367: intc_0",
+              "370: bytec_1",
+              "373: app_global_get_ex",
+              "374: assert",
+              "375: frame_dig -2",
+              "376: ==",
+              "377: assert",
+              "380: intc_0",
+              "383: bytec_3",
+              "386: app_global_get_ex",
+              "387: assert",
+              "388: frame_dig -1",
+              "389: ==",
+              "390: assert",
+              "391: retsub"
+            ],
+            [
+              "115: intc_1",
+              "116: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 6 -> 19 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "62: main_writeDynamicGlobalState_route@8:",
+              "65: txn OnCompletion",
+              "66: !",
+              "67: assert",
+              "68: txn ApplicationID",
+              "69: assert",
+              "73: txna ApplicationArgs 1",
+              "74: extract 2 0",
+              "75: txna ApplicationArgs 2",
+              "76: extract 2 0",
+              "79: callsub writeDynamicGlobalState"
+            ],
+            [
+              "395: writeDynamicGlobalState:",
+              "399: proto 2 1",
+              "402: frame_dig -2",
+              "403: frame_dig -1",
+              "404: app_global_put",
+              "407: intc_0",
+              "408: frame_dig -2",
+              "409: app_global_get_ex",
+              "410: assert",
+              "411: frame_dig -1",
+              "412: ==",
+              "413: assert",
+              "416: intc_0",
+              "417: frame_dig -2",
+              "418: app_global_get_ex",
+              "419: assert",
+              "420: retsub"
+            ],
+            [
+              "80: dup",
+              "81: len",
+              "82: itob",
+              "83: extract 6 2",
+              "84: swap",
+              "85: concat",
+              "86: bytec 4",
+              "87: swap",
+              "88: concat",
+              "89: log",
+              "90: intc_1",
+              "91: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "197: main_bare_routing@11:",
+              "201: txn OnCompletion",
+              "202: bnz main_after_if_else@15"
+            ],
+            [
+              "55: main_after_if_else@15:",
+              "59: intc_0",
+              "60: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 6,
+      "description": "\nCheck: \"unprotected-updatable\", Impact: High, Confidence: High\nDescription: Unprotected Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-updatable-application\n",
+      "check": "unprotected-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "55: main_after_if_else@15:",
+              "59: intc_0",
+              "60: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 12 -> 16 -> 13",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "141: main_readGlobalState_route@5:",
+              "144: txn OnCompletion",
+              "145: !",
+              "146: assert",
+              "147: txn ApplicationID",
+              "148: assert",
+              "149: callsub readGlobalState"
+            ],
+            [
+              "211: readGlobalState:",
+              "215: proto 0 6",
+              "218: intc_0",
+              "221: bytec_3",
+              "224: app_global_get_ex",
+              "225: assert",
+              "228: intc_0",
+              "231: bytec 5",
+              "234: app_global_get_ex",
+              "235: assert",
+              "238: intc_0",
+              "241: bytec_2",
+              "244: app_global_get_ex",
+              "245: assert",
+              "248: intc_0",
+              "251: bytec 6",
+              "254: app_global_get_ex",
+              "255: assert",
+              "258: intc_0",
+              "261: bytec_0",
+              "264: app_global_get_ex",
+              "265: assert",
+              "268: intc_0",
+              "271: bytec_1",
+              "274: app_global_get_ex",
+              "275: assert",
+              "285: uncover 5",
+              "286: retsub"
+            ],
+            [
+              "150: uncover 5",
+              "151: itob",
+              "152: uncover 5",
+              "153: itob",
+              "154: dig 5",
+              "155: len",
+              "156: itob",
+              "157: extract 6 2",
+              "158: uncover 6",
+              "159: concat",
+              "160: dig 5",
+              "161: len",
+              "162: itob",
+              "163: extract 6 2",
+              "164: uncover 6",
+              "165: concat",
+              "166: pushbytes 0x00",
+              "167: intc_0",
+              "168: uncover 7",
+              "169: setbit",
+              "170: uncover 4",
+              "171: uncover 4",
+              "172: concat",
+              "173: pushbytes 0x0035",
+              "174: concat",
+              "175: dig 3",
+              "176: len",
+              "177: pushint 53",
+              "178: +",
+              "179: itob",
+              "180: extract 6 2",
+              "181: concat",
+              "182: swap",
+              "183: concat",
+              "184: uncover 3",
+              "185: concat",
+              "186: uncover 2",
+              "187: concat",
+              "188: swap",
+              "189: concat",
+              "190: bytec 4",
+              "191: swap",
+              "192: concat",
+              "193: log",
+              "194: intc_1",
+              "195: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 10 -> 17 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "118: main_hasGlobalState_route@6:",
+              "121: txn OnCompletion",
+              "122: !",
+              "123: assert",
+              "124: txn ApplicationID",
+              "125: assert",
+              "126: callsub hasGlobalState"
+            ],
+            [
+              "290: hasGlobalState:",
+              "294: proto 0 2",
+              "297: intc_0",
+              "300: bytec_2",
+              "303: app_global_get_ex",
+              "304: bury 1",
+              "307: intc_0",
+              "310: bytec_2",
+              "313: app_global_get_ex",
+              "314: assert",
+              "317: dig 1",
+              "318: assert",
+              "321: swap",
+              "322: retsub"
+            ],
+            [
+              "127: swap",
+              "128: itob",
+              "129: pushbytes 0x00",
+              "130: intc_0",
+              "131: uncover 3",
+              "132: setbit",
+              "133: concat",
+              "134: bytec 4",
+              "135: swap",
+              "136: concat",
+              "137: log",
+              "138: intc_1",
+              "139: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 18 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "93: main_writeGlobalState_route@7:",
+              "96: txn OnCompletion",
+              "97: !",
+              "98: assert",
+              "99: txn ApplicationID",
+              "100: assert",
+              "104: txna ApplicationArgs 1",
+              "105: extract 2 0",
+              "106: txna ApplicationArgs 2",
+              "107: intc_0",
+              "108: getbit",
+              "109: txna ApplicationArgs 3",
+              "110: btoi",
+              "111: txnas Accounts",
+              "114: callsub writeGlobalState"
+            ],
+            [
+              "326: writeGlobalState:",
+              "330: proto 3 0",
+              "333: bytec_0",
+              "336: frame_dig -3",
+              "337: app_global_put",
+              "340: bytec_1",
+              "343: frame_dig -2",
+              "344: app_global_put",
+              "347: bytec_3",
+              "350: frame_dig -1",
+              "351: app_global_put",
+              "354: intc_0",
+              "357: bytec_0",
+              "360: app_global_get_ex",
+              "361: assert",
+              "362: frame_dig -3",
+              "363: ==",
+              "364: assert",
+              "367: intc_0",
+              "370: bytec_1",
+              "373: app_global_get_ex",
+              "374: assert",
+              "375: frame_dig -2",
+              "376: ==",
+              "377: assert",
+              "380: intc_0",
+              "383: bytec_3",
+              "386: app_global_get_ex",
+              "387: assert",
+              "388: frame_dig -1",
+              "389: ==",
+              "390: assert",
+              "391: retsub"
+            ],
+            [
+              "115: intc_1",
+              "116: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 6 -> 19 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "62: main_writeDynamicGlobalState_route@8:",
+              "65: txn OnCompletion",
+              "66: !",
+              "67: assert",
+              "68: txn ApplicationID",
+              "69: assert",
+              "73: txna ApplicationArgs 1",
+              "74: extract 2 0",
+              "75: txna ApplicationArgs 2",
+              "76: extract 2 0",
+              "79: callsub writeDynamicGlobalState"
+            ],
+            [
+              "395: writeDynamicGlobalState:",
+              "399: proto 2 1",
+              "402: frame_dig -2",
+              "403: frame_dig -1",
+              "404: app_global_put",
+              "407: intc_0",
+              "408: frame_dig -2",
+              "409: app_global_get_ex",
+              "410: assert",
+              "411: frame_dig -1",
+              "412: ==",
+              "413: assert",
+              "416: intc_0",
+              "417: frame_dig -2",
+              "418: app_global_get_ex",
+              "419: assert",
+              "420: retsub"
+            ],
+            [
+              "80: dup",
+              "81: len",
+              "82: itob",
+              "83: extract 6 2",
+              "84: swap",
+              "85: concat",
+              "86: bytec 4",
+              "87: swap",
+              "88: concat",
+              "89: log",
+              "90: intc_1",
+              "91: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "197: main_bare_routing@11:",
+              "201: txn OnCompletion",
+              "202: bnz main_after_if_else@15"
+            ],
+            [
+              "55: main_after_if_else@15:",
+              "59: intc_0",
+              "60: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"can-close-account\", Impact: High, Confidence: High\nDescription: Missing CloseRemainderTo field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-closeremainderto-field-validation\n",
+      "check": "can-close-account",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `CloseRemainderTo` field in the LogicSig.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"can-close-asset\", Impact: High, Confidence: High\nDescription: Missing AssetCloseTo Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-assetcloseto-field-validation\n",
+      "check": "can-close-asset",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `AssetCloseTo` field in the LogicSig.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 6,
+      "description": "\nCheck: \"is-deletable\", Impact: High, Confidence: High\nDescription: Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#deletable-application\n",
+      "check": "is-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `DeleteApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "55: main_after_if_else@15:",
+              "59: intc_0",
+              "60: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 12 -> 16 -> 13",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "141: main_readGlobalState_route@5:",
+              "144: txn OnCompletion",
+              "145: !",
+              "146: assert",
+              "147: txn ApplicationID",
+              "148: assert",
+              "149: callsub readGlobalState"
+            ],
+            [
+              "211: readGlobalState:",
+              "215: proto 0 6",
+              "218: intc_0",
+              "221: bytec_3",
+              "224: app_global_get_ex",
+              "225: assert",
+              "228: intc_0",
+              "231: bytec 5",
+              "234: app_global_get_ex",
+              "235: assert",
+              "238: intc_0",
+              "241: bytec_2",
+              "244: app_global_get_ex",
+              "245: assert",
+              "248: intc_0",
+              "251: bytec 6",
+              "254: app_global_get_ex",
+              "255: assert",
+              "258: intc_0",
+              "261: bytec_0",
+              "264: app_global_get_ex",
+              "265: assert",
+              "268: intc_0",
+              "271: bytec_1",
+              "274: app_global_get_ex",
+              "275: assert",
+              "285: uncover 5",
+              "286: retsub"
+            ],
+            [
+              "150: uncover 5",
+              "151: itob",
+              "152: uncover 5",
+              "153: itob",
+              "154: dig 5",
+              "155: len",
+              "156: itob",
+              "157: extract 6 2",
+              "158: uncover 6",
+              "159: concat",
+              "160: dig 5",
+              "161: len",
+              "162: itob",
+              "163: extract 6 2",
+              "164: uncover 6",
+              "165: concat",
+              "166: pushbytes 0x00",
+              "167: intc_0",
+              "168: uncover 7",
+              "169: setbit",
+              "170: uncover 4",
+              "171: uncover 4",
+              "172: concat",
+              "173: pushbytes 0x0035",
+              "174: concat",
+              "175: dig 3",
+              "176: len",
+              "177: pushint 53",
+              "178: +",
+              "179: itob",
+              "180: extract 6 2",
+              "181: concat",
+              "182: swap",
+              "183: concat",
+              "184: uncover 3",
+              "185: concat",
+              "186: uncover 2",
+              "187: concat",
+              "188: swap",
+              "189: concat",
+              "190: bytec 4",
+              "191: swap",
+              "192: concat",
+              "193: log",
+              "194: intc_1",
+              "195: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 10 -> 17 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "118: main_hasGlobalState_route@6:",
+              "121: txn OnCompletion",
+              "122: !",
+              "123: assert",
+              "124: txn ApplicationID",
+              "125: assert",
+              "126: callsub hasGlobalState"
+            ],
+            [
+              "290: hasGlobalState:",
+              "294: proto 0 2",
+              "297: intc_0",
+              "300: bytec_2",
+              "303: app_global_get_ex",
+              "304: bury 1",
+              "307: intc_0",
+              "310: bytec_2",
+              "313: app_global_get_ex",
+              "314: assert",
+              "317: dig 1",
+              "318: assert",
+              "321: swap",
+              "322: retsub"
+            ],
+            [
+              "127: swap",
+              "128: itob",
+              "129: pushbytes 0x00",
+              "130: intc_0",
+              "131: uncover 3",
+              "132: setbit",
+              "133: concat",
+              "134: bytec 4",
+              "135: swap",
+              "136: concat",
+              "137: log",
+              "138: intc_1",
+              "139: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 18 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "93: main_writeGlobalState_route@7:",
+              "96: txn OnCompletion",
+              "97: !",
+              "98: assert",
+              "99: txn ApplicationID",
+              "100: assert",
+              "104: txna ApplicationArgs 1",
+              "105: extract 2 0",
+              "106: txna ApplicationArgs 2",
+              "107: intc_0",
+              "108: getbit",
+              "109: txna ApplicationArgs 3",
+              "110: btoi",
+              "111: txnas Accounts",
+              "114: callsub writeGlobalState"
+            ],
+            [
+              "326: writeGlobalState:",
+              "330: proto 3 0",
+              "333: bytec_0",
+              "336: frame_dig -3",
+              "337: app_global_put",
+              "340: bytec_1",
+              "343: frame_dig -2",
+              "344: app_global_put",
+              "347: bytec_3",
+              "350: frame_dig -1",
+              "351: app_global_put",
+              "354: intc_0",
+              "357: bytec_0",
+              "360: app_global_get_ex",
+              "361: assert",
+              "362: frame_dig -3",
+              "363: ==",
+              "364: assert",
+              "367: intc_0",
+              "370: bytec_1",
+              "373: app_global_get_ex",
+              "374: assert",
+              "375: frame_dig -2",
+              "376: ==",
+              "377: assert",
+              "380: intc_0",
+              "383: bytec_3",
+              "386: app_global_get_ex",
+              "387: assert",
+              "388: frame_dig -1",
+              "389: ==",
+              "390: assert",
+              "391: retsub"
+            ],
+            [
+              "115: intc_1",
+              "116: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 6 -> 19 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "62: main_writeDynamicGlobalState_route@8:",
+              "65: txn OnCompletion",
+              "66: !",
+              "67: assert",
+              "68: txn ApplicationID",
+              "69: assert",
+              "73: txna ApplicationArgs 1",
+              "74: extract 2 0",
+              "75: txna ApplicationArgs 2",
+              "76: extract 2 0",
+              "79: callsub writeDynamicGlobalState"
+            ],
+            [
+              "395: writeDynamicGlobalState:",
+              "399: proto 2 1",
+              "402: frame_dig -2",
+              "403: frame_dig -1",
+              "404: app_global_put",
+              "407: intc_0",
+              "408: frame_dig -2",
+              "409: app_global_get_ex",
+              "410: assert",
+              "411: frame_dig -1",
+              "412: ==",
+              "413: assert",
+              "416: intc_0",
+              "417: frame_dig -2",
+              "418: app_global_get_ex",
+              "419: assert",
+              "420: retsub"
+            ],
+            [
+              "80: dup",
+              "81: len",
+              "82: itob",
+              "83: extract 6 2",
+              "84: swap",
+              "85: concat",
+              "86: bytec 4",
+              "87: swap",
+              "88: concat",
+              "89: log",
+              "90: intc_1",
+              "91: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "197: main_bare_routing@11:",
+              "201: txn OnCompletion",
+              "202: bnz main_after_if_else@15"
+            ],
+            [
+              "55: main_after_if_else@15:",
+              "59: intc_0",
+              "60: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 6,
+      "description": "\nCheck: \"is-updatable\", Impact: High, Confidence: High\nDescription: Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#upgradable-application\n",
+      "check": "is-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `UpdateApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "55: main_after_if_else@15:",
+              "59: intc_0",
+              "60: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 12 -> 16 -> 13",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "141: main_readGlobalState_route@5:",
+              "144: txn OnCompletion",
+              "145: !",
+              "146: assert",
+              "147: txn ApplicationID",
+              "148: assert",
+              "149: callsub readGlobalState"
+            ],
+            [
+              "211: readGlobalState:",
+              "215: proto 0 6",
+              "218: intc_0",
+              "221: bytec_3",
+              "224: app_global_get_ex",
+              "225: assert",
+              "228: intc_0",
+              "231: bytec 5",
+              "234: app_global_get_ex",
+              "235: assert",
+              "238: intc_0",
+              "241: bytec_2",
+              "244: app_global_get_ex",
+              "245: assert",
+              "248: intc_0",
+              "251: bytec 6",
+              "254: app_global_get_ex",
+              "255: assert",
+              "258: intc_0",
+              "261: bytec_0",
+              "264: app_global_get_ex",
+              "265: assert",
+              "268: intc_0",
+              "271: bytec_1",
+              "274: app_global_get_ex",
+              "275: assert",
+              "285: uncover 5",
+              "286: retsub"
+            ],
+            [
+              "150: uncover 5",
+              "151: itob",
+              "152: uncover 5",
+              "153: itob",
+              "154: dig 5",
+              "155: len",
+              "156: itob",
+              "157: extract 6 2",
+              "158: uncover 6",
+              "159: concat",
+              "160: dig 5",
+              "161: len",
+              "162: itob",
+              "163: extract 6 2",
+              "164: uncover 6",
+              "165: concat",
+              "166: pushbytes 0x00",
+              "167: intc_0",
+              "168: uncover 7",
+              "169: setbit",
+              "170: uncover 4",
+              "171: uncover 4",
+              "172: concat",
+              "173: pushbytes 0x0035",
+              "174: concat",
+              "175: dig 3",
+              "176: len",
+              "177: pushint 53",
+              "178: +",
+              "179: itob",
+              "180: extract 6 2",
+              "181: concat",
+              "182: swap",
+              "183: concat",
+              "184: uncover 3",
+              "185: concat",
+              "186: uncover 2",
+              "187: concat",
+              "188: swap",
+              "189: concat",
+              "190: bytec 4",
+              "191: swap",
+              "192: concat",
+              "193: log",
+              "194: intc_1",
+              "195: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 10 -> 17 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "118: main_hasGlobalState_route@6:",
+              "121: txn OnCompletion",
+              "122: !",
+              "123: assert",
+              "124: txn ApplicationID",
+              "125: assert",
+              "126: callsub hasGlobalState"
+            ],
+            [
+              "290: hasGlobalState:",
+              "294: proto 0 2",
+              "297: intc_0",
+              "300: bytec_2",
+              "303: app_global_get_ex",
+              "304: bury 1",
+              "307: intc_0",
+              "310: bytec_2",
+              "313: app_global_get_ex",
+              "314: assert",
+              "317: dig 1",
+              "318: assert",
+              "321: swap",
+              "322: retsub"
+            ],
+            [
+              "127: swap",
+              "128: itob",
+              "129: pushbytes 0x00",
+              "130: intc_0",
+              "131: uncover 3",
+              "132: setbit",
+              "133: concat",
+              "134: bytec 4",
+              "135: swap",
+              "136: concat",
+              "137: log",
+              "138: intc_1",
+              "139: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 18 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "93: main_writeGlobalState_route@7:",
+              "96: txn OnCompletion",
+              "97: !",
+              "98: assert",
+              "99: txn ApplicationID",
+              "100: assert",
+              "104: txna ApplicationArgs 1",
+              "105: extract 2 0",
+              "106: txna ApplicationArgs 2",
+              "107: intc_0",
+              "108: getbit",
+              "109: txna ApplicationArgs 3",
+              "110: btoi",
+              "111: txnas Accounts",
+              "114: callsub writeGlobalState"
+            ],
+            [
+              "326: writeGlobalState:",
+              "330: proto 3 0",
+              "333: bytec_0",
+              "336: frame_dig -3",
+              "337: app_global_put",
+              "340: bytec_1",
+              "343: frame_dig -2",
+              "344: app_global_put",
+              "347: bytec_3",
+              "350: frame_dig -1",
+              "351: app_global_put",
+              "354: intc_0",
+              "357: bytec_0",
+              "360: app_global_get_ex",
+              "361: assert",
+              "362: frame_dig -3",
+              "363: ==",
+              "364: assert",
+              "367: intc_0",
+              "370: bytec_1",
+              "373: app_global_get_ex",
+              "374: assert",
+              "375: frame_dig -2",
+              "376: ==",
+              "377: assert",
+              "380: intc_0",
+              "383: bytec_3",
+              "386: app_global_get_ex",
+              "387: assert",
+              "388: frame_dig -1",
+              "389: ==",
+              "390: assert",
+              "391: retsub"
+            ],
+            [
+              "115: intc_1",
+              "116: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 6 -> 19 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "62: main_writeDynamicGlobalState_route@8:",
+              "65: txn OnCompletion",
+              "66: !",
+              "67: assert",
+              "68: txn ApplicationID",
+              "69: assert",
+              "73: txna ApplicationArgs 1",
+              "74: extract 2 0",
+              "75: txna ApplicationArgs 2",
+              "76: extract 2 0",
+              "79: callsub writeDynamicGlobalState"
+            ],
+            [
+              "395: writeDynamicGlobalState:",
+              "399: proto 2 1",
+              "402: frame_dig -2",
+              "403: frame_dig -1",
+              "404: app_global_put",
+              "407: intc_0",
+              "408: frame_dig -2",
+              "409: app_global_get_ex",
+              "410: assert",
+              "411: frame_dig -1",
+              "412: ==",
+              "413: assert",
+              "416: intc_0",
+              "417: frame_dig -2",
+              "418: app_global_get_ex",
+              "419: assert",
+              "420: retsub"
+            ],
+            [
+              "80: dup",
+              "81: len",
+              "82: itob",
+              "83: extract 6 2",
+              "84: swap",
+              "85: concat",
+              "86: bytec 4",
+              "87: swap",
+              "88: concat",
+              "89: log",
+              "90: intc_1",
+              "91: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "197: main_bare_routing@11:",
+              "201: txn OnCompletion",
+              "202: bnz main_after_if_else@15"
+            ],
+            [
+              "55: main_after_if_else@15:",
+              "59: intc_0",
+              "60: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 14,
+      "description": "\nCheck: \"missing-fee-check\", Impact: High, Confidence: High\nDescription: Missing Fee Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-fee-field-validation\n",
+      "check": "missing-fee-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `Fee` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec 5",
+              "13: pushint 50",
+              "14: app_global_put",
+              "17: bytec 6",
+              "18: pushbytes \"Silvio\"",
+              "19: app_global_put",
+              "22: bytec_0",
+              "23: pushbytes \"Micali\"",
+              "24: app_global_put",
+              "27: bytec_1",
+              "28: intc_1",
+              "29: app_global_put",
+              "32: bytec_2",
+              "35: intc_0",
+              "36: app_global_put",
+              "39: bytec_3",
+              "42: txn Sender",
+              "43: app_global_put"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "55: main_after_if_else@15:",
+              "59: intc_0",
+              "60: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 12 -> 16 -> 13",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec 5",
+              "13: pushint 50",
+              "14: app_global_put",
+              "17: bytec 6",
+              "18: pushbytes \"Silvio\"",
+              "19: app_global_put",
+              "22: bytec_0",
+              "23: pushbytes \"Micali\"",
+              "24: app_global_put",
+              "27: bytec_1",
+              "28: intc_1",
+              "29: app_global_put",
+              "32: bytec_2",
+              "35: intc_0",
+              "36: app_global_put",
+              "39: bytec_3",
+              "42: txn Sender",
+              "43: app_global_put"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "141: main_readGlobalState_route@5:",
+              "144: txn OnCompletion",
+              "145: !",
+              "146: assert",
+              "147: txn ApplicationID",
+              "148: assert",
+              "149: callsub readGlobalState"
+            ],
+            [
+              "211: readGlobalState:",
+              "215: proto 0 6",
+              "218: intc_0",
+              "221: bytec_3",
+              "224: app_global_get_ex",
+              "225: assert",
+              "228: intc_0",
+              "231: bytec 5",
+              "234: app_global_get_ex",
+              "235: assert",
+              "238: intc_0",
+              "241: bytec_2",
+              "244: app_global_get_ex",
+              "245: assert",
+              "248: intc_0",
+              "251: bytec 6",
+              "254: app_global_get_ex",
+              "255: assert",
+              "258: intc_0",
+              "261: bytec_0",
+              "264: app_global_get_ex",
+              "265: assert",
+              "268: intc_0",
+              "271: bytec_1",
+              "274: app_global_get_ex",
+              "275: assert",
+              "285: uncover 5",
+              "286: retsub"
+            ],
+            [
+              "150: uncover 5",
+              "151: itob",
+              "152: uncover 5",
+              "153: itob",
+              "154: dig 5",
+              "155: len",
+              "156: itob",
+              "157: extract 6 2",
+              "158: uncover 6",
+              "159: concat",
+              "160: dig 5",
+              "161: len",
+              "162: itob",
+              "163: extract 6 2",
+              "164: uncover 6",
+              "165: concat",
+              "166: pushbytes 0x00",
+              "167: intc_0",
+              "168: uncover 7",
+              "169: setbit",
+              "170: uncover 4",
+              "171: uncover 4",
+              "172: concat",
+              "173: pushbytes 0x0035",
+              "174: concat",
+              "175: dig 3",
+              "176: len",
+              "177: pushint 53",
+              "178: +",
+              "179: itob",
+              "180: extract 6 2",
+              "181: concat",
+              "182: swap",
+              "183: concat",
+              "184: uncover 3",
+              "185: concat",
+              "186: uncover 2",
+              "187: concat",
+              "188: swap",
+              "189: concat",
+              "190: bytec 4",
+              "191: swap",
+              "192: concat",
+              "193: log",
+              "194: intc_1",
+              "195: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 10 -> 17 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec 5",
+              "13: pushint 50",
+              "14: app_global_put",
+              "17: bytec 6",
+              "18: pushbytes \"Silvio\"",
+              "19: app_global_put",
+              "22: bytec_0",
+              "23: pushbytes \"Micali\"",
+              "24: app_global_put",
+              "27: bytec_1",
+              "28: intc_1",
+              "29: app_global_put",
+              "32: bytec_2",
+              "35: intc_0",
+              "36: app_global_put",
+              "39: bytec_3",
+              "42: txn Sender",
+              "43: app_global_put"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "118: main_hasGlobalState_route@6:",
+              "121: txn OnCompletion",
+              "122: !",
+              "123: assert",
+              "124: txn ApplicationID",
+              "125: assert",
+              "126: callsub hasGlobalState"
+            ],
+            [
+              "290: hasGlobalState:",
+              "294: proto 0 2",
+              "297: intc_0",
+              "300: bytec_2",
+              "303: app_global_get_ex",
+              "304: bury 1",
+              "307: intc_0",
+              "310: bytec_2",
+              "313: app_global_get_ex",
+              "314: assert",
+              "317: dig 1",
+              "318: assert",
+              "321: swap",
+              "322: retsub"
+            ],
+            [
+              "127: swap",
+              "128: itob",
+              "129: pushbytes 0x00",
+              "130: intc_0",
+              "131: uncover 3",
+              "132: setbit",
+              "133: concat",
+              "134: bytec 4",
+              "135: swap",
+              "136: concat",
+              "137: log",
+              "138: intc_1",
+              "139: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 8 -> 18 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec 5",
+              "13: pushint 50",
+              "14: app_global_put",
+              "17: bytec 6",
+              "18: pushbytes \"Silvio\"",
+              "19: app_global_put",
+              "22: bytec_0",
+              "23: pushbytes \"Micali\"",
+              "24: app_global_put",
+              "27: bytec_1",
+              "28: intc_1",
+              "29: app_global_put",
+              "32: bytec_2",
+              "35: intc_0",
+              "36: app_global_put",
+              "39: bytec_3",
+              "42: txn Sender",
+              "43: app_global_put"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "93: main_writeGlobalState_route@7:",
+              "96: txn OnCompletion",
+              "97: !",
+              "98: assert",
+              "99: txn ApplicationID",
+              "100: assert",
+              "104: txna ApplicationArgs 1",
+              "105: extract 2 0",
+              "106: txna ApplicationArgs 2",
+              "107: intc_0",
+              "108: getbit",
+              "109: txna ApplicationArgs 3",
+              "110: btoi",
+              "111: txnas Accounts",
+              "114: callsub writeGlobalState"
+            ],
+            [
+              "326: writeGlobalState:",
+              "330: proto 3 0",
+              "333: bytec_0",
+              "336: frame_dig -3",
+              "337: app_global_put",
+              "340: bytec_1",
+              "343: frame_dig -2",
+              "344: app_global_put",
+              "347: bytec_3",
+              "350: frame_dig -1",
+              "351: app_global_put",
+              "354: intc_0",
+              "357: bytec_0",
+              "360: app_global_get_ex",
+              "361: assert",
+              "362: frame_dig -3",
+              "363: ==",
+              "364: assert",
+              "367: intc_0",
+              "370: bytec_1",
+              "373: app_global_get_ex",
+              "374: assert",
+              "375: frame_dig -2",
+              "376: ==",
+              "377: assert",
+              "380: intc_0",
+              "383: bytec_3",
+              "386: app_global_get_ex",
+              "387: assert",
+              "388: frame_dig -1",
+              "389: ==",
+              "390: assert",
+              "391: retsub"
+            ],
+            [
+              "115: intc_1",
+              "116: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 6 -> 19 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec 5",
+              "13: pushint 50",
+              "14: app_global_put",
+              "17: bytec 6",
+              "18: pushbytes \"Silvio\"",
+              "19: app_global_put",
+              "22: bytec_0",
+              "23: pushbytes \"Micali\"",
+              "24: app_global_put",
+              "27: bytec_1",
+              "28: intc_1",
+              "29: app_global_put",
+              "32: bytec_2",
+              "35: intc_0",
+              "36: app_global_put",
+              "39: bytec_3",
+              "42: txn Sender",
+              "43: app_global_put"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "62: main_writeDynamicGlobalState_route@8:",
+              "65: txn OnCompletion",
+              "66: !",
+              "67: assert",
+              "68: txn ApplicationID",
+              "69: assert",
+              "73: txna ApplicationArgs 1",
+              "74: extract 2 0",
+              "75: txna ApplicationArgs 2",
+              "76: extract 2 0",
+              "79: callsub writeDynamicGlobalState"
+            ],
+            [
+              "395: writeDynamicGlobalState:",
+              "399: proto 2 1",
+              "402: frame_dig -2",
+              "403: frame_dig -1",
+              "404: app_global_put",
+              "407: intc_0",
+              "408: frame_dig -2",
+              "409: app_global_get_ex",
+              "410: assert",
+              "411: frame_dig -1",
+              "412: ==",
+              "413: assert",
+              "416: intc_0",
+              "417: frame_dig -2",
+              "418: app_global_get_ex",
+              "419: assert",
+              "420: retsub"
+            ],
+            [
+              "80: dup",
+              "81: len",
+              "82: itob",
+              "83: extract 6 2",
+              "84: swap",
+              "85: concat",
+              "86: bytec 4",
+              "87: swap",
+              "88: concat",
+              "89: log",
+              "90: intc_1",
+              "91: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 14 -> 15",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec 5",
+              "13: pushint 50",
+              "14: app_global_put",
+              "17: bytec 6",
+              "18: pushbytes \"Silvio\"",
+              "19: app_global_put",
+              "22: bytec_0",
+              "23: pushbytes \"Micali\"",
+              "24: app_global_put",
+              "27: bytec_1",
+              "28: intc_1",
+              "29: app_global_put",
+              "32: bytec_2",
+              "35: intc_0",
+              "36: app_global_put",
+              "39: bytec_3",
+              "42: txn Sender",
+              "43: app_global_put"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "197: main_bare_routing@11:",
+              "201: txn OnCompletion",
+              "202: bnz main_after_if_else@15"
+            ],
+            [
+              "203: txn ApplicationID",
+              "204: !",
+              "205: assert",
+              "206: intc_1",
+              "207: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec 5",
+              "13: pushint 50",
+              "14: app_global_put",
+              "17: bytec 6",
+              "18: pushbytes \"Silvio\"",
+              "19: app_global_put",
+              "22: bytec_0",
+              "23: pushbytes \"Micali\"",
+              "24: app_global_put",
+              "27: bytec_1",
+              "28: intc_1",
+              "29: app_global_put",
+              "32: bytec_2",
+              "35: intc_0",
+              "36: app_global_put",
+              "39: bytec_3",
+              "42: txn Sender",
+              "43: app_global_put"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "197: main_bare_routing@11:",
+              "201: txn OnCompletion",
+              "202: bnz main_after_if_else@15"
+            ],
+            [
+              "55: main_after_if_else@15:",
+              "59: intc_0",
+              "60: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "55: main_after_if_else@15:",
+              "59: intc_0",
+              "60: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 12 -> 16 -> 13",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "141: main_readGlobalState_route@5:",
+              "144: txn OnCompletion",
+              "145: !",
+              "146: assert",
+              "147: txn ApplicationID",
+              "148: assert",
+              "149: callsub readGlobalState"
+            ],
+            [
+              "211: readGlobalState:",
+              "215: proto 0 6",
+              "218: intc_0",
+              "221: bytec_3",
+              "224: app_global_get_ex",
+              "225: assert",
+              "228: intc_0",
+              "231: bytec 5",
+              "234: app_global_get_ex",
+              "235: assert",
+              "238: intc_0",
+              "241: bytec_2",
+              "244: app_global_get_ex",
+              "245: assert",
+              "248: intc_0",
+              "251: bytec 6",
+              "254: app_global_get_ex",
+              "255: assert",
+              "258: intc_0",
+              "261: bytec_0",
+              "264: app_global_get_ex",
+              "265: assert",
+              "268: intc_0",
+              "271: bytec_1",
+              "274: app_global_get_ex",
+              "275: assert",
+              "285: uncover 5",
+              "286: retsub"
+            ],
+            [
+              "150: uncover 5",
+              "151: itob",
+              "152: uncover 5",
+              "153: itob",
+              "154: dig 5",
+              "155: len",
+              "156: itob",
+              "157: extract 6 2",
+              "158: uncover 6",
+              "159: concat",
+              "160: dig 5",
+              "161: len",
+              "162: itob",
+              "163: extract 6 2",
+              "164: uncover 6",
+              "165: concat",
+              "166: pushbytes 0x00",
+              "167: intc_0",
+              "168: uncover 7",
+              "169: setbit",
+              "170: uncover 4",
+              "171: uncover 4",
+              "172: concat",
+              "173: pushbytes 0x0035",
+              "174: concat",
+              "175: dig 3",
+              "176: len",
+              "177: pushint 53",
+              "178: +",
+              "179: itob",
+              "180: extract 6 2",
+              "181: concat",
+              "182: swap",
+              "183: concat",
+              "184: uncover 3",
+              "185: concat",
+              "186: uncover 2",
+              "187: concat",
+              "188: swap",
+              "189: concat",
+              "190: bytec 4",
+              "191: swap",
+              "192: concat",
+              "193: log",
+              "194: intc_1",
+              "195: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 10 -> 17 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "118: main_hasGlobalState_route@6:",
+              "121: txn OnCompletion",
+              "122: !",
+              "123: assert",
+              "124: txn ApplicationID",
+              "125: assert",
+              "126: callsub hasGlobalState"
+            ],
+            [
+              "290: hasGlobalState:",
+              "294: proto 0 2",
+              "297: intc_0",
+              "300: bytec_2",
+              "303: app_global_get_ex",
+              "304: bury 1",
+              "307: intc_0",
+              "310: bytec_2",
+              "313: app_global_get_ex",
+              "314: assert",
+              "317: dig 1",
+              "318: assert",
+              "321: swap",
+              "322: retsub"
+            ],
+            [
+              "127: swap",
+              "128: itob",
+              "129: pushbytes 0x00",
+              "130: intc_0",
+              "131: uncover 3",
+              "132: setbit",
+              "133: concat",
+              "134: bytec 4",
+              "135: swap",
+              "136: concat",
+              "137: log",
+              "138: intc_1",
+              "139: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 18 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "93: main_writeGlobalState_route@7:",
+              "96: txn OnCompletion",
+              "97: !",
+              "98: assert",
+              "99: txn ApplicationID",
+              "100: assert",
+              "104: txna ApplicationArgs 1",
+              "105: extract 2 0",
+              "106: txna ApplicationArgs 2",
+              "107: intc_0",
+              "108: getbit",
+              "109: txna ApplicationArgs 3",
+              "110: btoi",
+              "111: txnas Accounts",
+              "114: callsub writeGlobalState"
+            ],
+            [
+              "326: writeGlobalState:",
+              "330: proto 3 0",
+              "333: bytec_0",
+              "336: frame_dig -3",
+              "337: app_global_put",
+              "340: bytec_1",
+              "343: frame_dig -2",
+              "344: app_global_put",
+              "347: bytec_3",
+              "350: frame_dig -1",
+              "351: app_global_put",
+              "354: intc_0",
+              "357: bytec_0",
+              "360: app_global_get_ex",
+              "361: assert",
+              "362: frame_dig -3",
+              "363: ==",
+              "364: assert",
+              "367: intc_0",
+              "370: bytec_1",
+              "373: app_global_get_ex",
+              "374: assert",
+              "375: frame_dig -2",
+              "376: ==",
+              "377: assert",
+              "380: intc_0",
+              "383: bytec_3",
+              "386: app_global_get_ex",
+              "387: assert",
+              "388: frame_dig -1",
+              "389: ==",
+              "390: assert",
+              "391: retsub"
+            ],
+            [
+              "115: intc_1",
+              "116: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 6 -> 19 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "62: main_writeDynamicGlobalState_route@8:",
+              "65: txn OnCompletion",
+              "66: !",
+              "67: assert",
+              "68: txn ApplicationID",
+              "69: assert",
+              "73: txna ApplicationArgs 1",
+              "74: extract 2 0",
+              "75: txna ApplicationArgs 2",
+              "76: extract 2 0",
+              "79: callsub writeDynamicGlobalState"
+            ],
+            [
+              "395: writeDynamicGlobalState:",
+              "399: proto 2 1",
+              "402: frame_dig -2",
+              "403: frame_dig -1",
+              "404: app_global_put",
+              "407: intc_0",
+              "408: frame_dig -2",
+              "409: app_global_get_ex",
+              "410: assert",
+              "411: frame_dig -1",
+              "412: ==",
+              "413: assert",
+              "416: intc_0",
+              "417: frame_dig -2",
+              "418: app_global_get_ex",
+              "419: assert",
+              "420: retsub"
+            ],
+            [
+              "80: dup",
+              "81: len",
+              "82: itob",
+              "83: extract 6 2",
+              "84: swap",
+              "85: concat",
+              "86: bytec 4",
+              "87: swap",
+              "88: concat",
+              "89: log",
+              "90: intc_1",
+              "91: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 14 -> 15",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "197: main_bare_routing@11:",
+              "201: txn OnCompletion",
+              "202: bnz main_after_if_else@15"
+            ],
+            [
+              "203: txn ApplicationID",
+              "204: !",
+              "205: assert",
+              "206: intc_1",
+              "207: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "197: main_bare_routing@11:",
+              "201: txn OnCompletion",
+              "202: bnz main_after_if_else@15"
+            ],
+            [
+              "55: main_after_if_else@15:",
+              "59: intc_0",
+              "60: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"group-size-check\", Impact: High, Confidence: High\nDescription: Usage of absolute indexes without validating GroupSize\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-groupsize-validation\n",
+      "check": "group-size-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid using absolute indexes. Validate GroupSize if used.\n- Favor using ARC-4 ABI and relative indexes for group transactions.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 14,
+      "description": "\nCheck: \"rekey-to\", Impact: High, Confidence: High\nDescription: Rekeyable Logic Signatures\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#rekeyable-logicsig\n",
+      "check": "rekey-to",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `RekeyTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec 5",
+              "13: pushint 50",
+              "14: app_global_put",
+              "17: bytec 6",
+              "18: pushbytes \"Silvio\"",
+              "19: app_global_put",
+              "22: bytec_0",
+              "23: pushbytes \"Micali\"",
+              "24: app_global_put",
+              "27: bytec_1",
+              "28: intc_1",
+              "29: app_global_put",
+              "32: bytec_2",
+              "35: intc_0",
+              "36: app_global_put",
+              "39: bytec_3",
+              "42: txn Sender",
+              "43: app_global_put"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "55: main_after_if_else@15:",
+              "59: intc_0",
+              "60: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 12 -> 16 -> 13",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec 5",
+              "13: pushint 50",
+              "14: app_global_put",
+              "17: bytec 6",
+              "18: pushbytes \"Silvio\"",
+              "19: app_global_put",
+              "22: bytec_0",
+              "23: pushbytes \"Micali\"",
+              "24: app_global_put",
+              "27: bytec_1",
+              "28: intc_1",
+              "29: app_global_put",
+              "32: bytec_2",
+              "35: intc_0",
+              "36: app_global_put",
+              "39: bytec_3",
+              "42: txn Sender",
+              "43: app_global_put"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "141: main_readGlobalState_route@5:",
+              "144: txn OnCompletion",
+              "145: !",
+              "146: assert",
+              "147: txn ApplicationID",
+              "148: assert",
+              "149: callsub readGlobalState"
+            ],
+            [
+              "211: readGlobalState:",
+              "215: proto 0 6",
+              "218: intc_0",
+              "221: bytec_3",
+              "224: app_global_get_ex",
+              "225: assert",
+              "228: intc_0",
+              "231: bytec 5",
+              "234: app_global_get_ex",
+              "235: assert",
+              "238: intc_0",
+              "241: bytec_2",
+              "244: app_global_get_ex",
+              "245: assert",
+              "248: intc_0",
+              "251: bytec 6",
+              "254: app_global_get_ex",
+              "255: assert",
+              "258: intc_0",
+              "261: bytec_0",
+              "264: app_global_get_ex",
+              "265: assert",
+              "268: intc_0",
+              "271: bytec_1",
+              "274: app_global_get_ex",
+              "275: assert",
+              "285: uncover 5",
+              "286: retsub"
+            ],
+            [
+              "150: uncover 5",
+              "151: itob",
+              "152: uncover 5",
+              "153: itob",
+              "154: dig 5",
+              "155: len",
+              "156: itob",
+              "157: extract 6 2",
+              "158: uncover 6",
+              "159: concat",
+              "160: dig 5",
+              "161: len",
+              "162: itob",
+              "163: extract 6 2",
+              "164: uncover 6",
+              "165: concat",
+              "166: pushbytes 0x00",
+              "167: intc_0",
+              "168: uncover 7",
+              "169: setbit",
+              "170: uncover 4",
+              "171: uncover 4",
+              "172: concat",
+              "173: pushbytes 0x0035",
+              "174: concat",
+              "175: dig 3",
+              "176: len",
+              "177: pushint 53",
+              "178: +",
+              "179: itob",
+              "180: extract 6 2",
+              "181: concat",
+              "182: swap",
+              "183: concat",
+              "184: uncover 3",
+              "185: concat",
+              "186: uncover 2",
+              "187: concat",
+              "188: swap",
+              "189: concat",
+              "190: bytec 4",
+              "191: swap",
+              "192: concat",
+              "193: log",
+              "194: intc_1",
+              "195: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 10 -> 17 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec 5",
+              "13: pushint 50",
+              "14: app_global_put",
+              "17: bytec 6",
+              "18: pushbytes \"Silvio\"",
+              "19: app_global_put",
+              "22: bytec_0",
+              "23: pushbytes \"Micali\"",
+              "24: app_global_put",
+              "27: bytec_1",
+              "28: intc_1",
+              "29: app_global_put",
+              "32: bytec_2",
+              "35: intc_0",
+              "36: app_global_put",
+              "39: bytec_3",
+              "42: txn Sender",
+              "43: app_global_put"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "118: main_hasGlobalState_route@6:",
+              "121: txn OnCompletion",
+              "122: !",
+              "123: assert",
+              "124: txn ApplicationID",
+              "125: assert",
+              "126: callsub hasGlobalState"
+            ],
+            [
+              "290: hasGlobalState:",
+              "294: proto 0 2",
+              "297: intc_0",
+              "300: bytec_2",
+              "303: app_global_get_ex",
+              "304: bury 1",
+              "307: intc_0",
+              "310: bytec_2",
+              "313: app_global_get_ex",
+              "314: assert",
+              "317: dig 1",
+              "318: assert",
+              "321: swap",
+              "322: retsub"
+            ],
+            [
+              "127: swap",
+              "128: itob",
+              "129: pushbytes 0x00",
+              "130: intc_0",
+              "131: uncover 3",
+              "132: setbit",
+              "133: concat",
+              "134: bytec 4",
+              "135: swap",
+              "136: concat",
+              "137: log",
+              "138: intc_1",
+              "139: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 8 -> 18 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec 5",
+              "13: pushint 50",
+              "14: app_global_put",
+              "17: bytec 6",
+              "18: pushbytes \"Silvio\"",
+              "19: app_global_put",
+              "22: bytec_0",
+              "23: pushbytes \"Micali\"",
+              "24: app_global_put",
+              "27: bytec_1",
+              "28: intc_1",
+              "29: app_global_put",
+              "32: bytec_2",
+              "35: intc_0",
+              "36: app_global_put",
+              "39: bytec_3",
+              "42: txn Sender",
+              "43: app_global_put"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "93: main_writeGlobalState_route@7:",
+              "96: txn OnCompletion",
+              "97: !",
+              "98: assert",
+              "99: txn ApplicationID",
+              "100: assert",
+              "104: txna ApplicationArgs 1",
+              "105: extract 2 0",
+              "106: txna ApplicationArgs 2",
+              "107: intc_0",
+              "108: getbit",
+              "109: txna ApplicationArgs 3",
+              "110: btoi",
+              "111: txnas Accounts",
+              "114: callsub writeGlobalState"
+            ],
+            [
+              "326: writeGlobalState:",
+              "330: proto 3 0",
+              "333: bytec_0",
+              "336: frame_dig -3",
+              "337: app_global_put",
+              "340: bytec_1",
+              "343: frame_dig -2",
+              "344: app_global_put",
+              "347: bytec_3",
+              "350: frame_dig -1",
+              "351: app_global_put",
+              "354: intc_0",
+              "357: bytec_0",
+              "360: app_global_get_ex",
+              "361: assert",
+              "362: frame_dig -3",
+              "363: ==",
+              "364: assert",
+              "367: intc_0",
+              "370: bytec_1",
+              "373: app_global_get_ex",
+              "374: assert",
+              "375: frame_dig -2",
+              "376: ==",
+              "377: assert",
+              "380: intc_0",
+              "383: bytec_3",
+              "386: app_global_get_ex",
+              "387: assert",
+              "388: frame_dig -1",
+              "389: ==",
+              "390: assert",
+              "391: retsub"
+            ],
+            [
+              "115: intc_1",
+              "116: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 6 -> 19 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec 5",
+              "13: pushint 50",
+              "14: app_global_put",
+              "17: bytec 6",
+              "18: pushbytes \"Silvio\"",
+              "19: app_global_put",
+              "22: bytec_0",
+              "23: pushbytes \"Micali\"",
+              "24: app_global_put",
+              "27: bytec_1",
+              "28: intc_1",
+              "29: app_global_put",
+              "32: bytec_2",
+              "35: intc_0",
+              "36: app_global_put",
+              "39: bytec_3",
+              "42: txn Sender",
+              "43: app_global_put"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "62: main_writeDynamicGlobalState_route@8:",
+              "65: txn OnCompletion",
+              "66: !",
+              "67: assert",
+              "68: txn ApplicationID",
+              "69: assert",
+              "73: txna ApplicationArgs 1",
+              "74: extract 2 0",
+              "75: txna ApplicationArgs 2",
+              "76: extract 2 0",
+              "79: callsub writeDynamicGlobalState"
+            ],
+            [
+              "395: writeDynamicGlobalState:",
+              "399: proto 2 1",
+              "402: frame_dig -2",
+              "403: frame_dig -1",
+              "404: app_global_put",
+              "407: intc_0",
+              "408: frame_dig -2",
+              "409: app_global_get_ex",
+              "410: assert",
+              "411: frame_dig -1",
+              "412: ==",
+              "413: assert",
+              "416: intc_0",
+              "417: frame_dig -2",
+              "418: app_global_get_ex",
+              "419: assert",
+              "420: retsub"
+            ],
+            [
+              "80: dup",
+              "81: len",
+              "82: itob",
+              "83: extract 6 2",
+              "84: swap",
+              "85: concat",
+              "86: bytec 4",
+              "87: swap",
+              "88: concat",
+              "89: log",
+              "90: intc_1",
+              "91: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 14 -> 15",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec 5",
+              "13: pushint 50",
+              "14: app_global_put",
+              "17: bytec 6",
+              "18: pushbytes \"Silvio\"",
+              "19: app_global_put",
+              "22: bytec_0",
+              "23: pushbytes \"Micali\"",
+              "24: app_global_put",
+              "27: bytec_1",
+              "28: intc_1",
+              "29: app_global_put",
+              "32: bytec_2",
+              "35: intc_0",
+              "36: app_global_put",
+              "39: bytec_3",
+              "42: txn Sender",
+              "43: app_global_put"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "197: main_bare_routing@11:",
+              "201: txn OnCompletion",
+              "202: bnz main_after_if_else@15"
+            ],
+            [
+              "203: txn ApplicationID",
+              "204: !",
+              "205: assert",
+              "206: intc_1",
+              "207: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "12: bytec 5",
+              "13: pushint 50",
+              "14: app_global_put",
+              "17: bytec 6",
+              "18: pushbytes \"Silvio\"",
+              "19: app_global_put",
+              "22: bytec_0",
+              "23: pushbytes \"Micali\"",
+              "24: app_global_put",
+              "27: bytec_1",
+              "28: intc_1",
+              "29: app_global_put",
+              "32: bytec_2",
+              "35: intc_0",
+              "36: app_global_put",
+              "39: bytec_3",
+              "42: txn Sender",
+              "43: app_global_put"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "197: main_bare_routing@11:",
+              "201: txn OnCompletion",
+              "202: bnz main_after_if_else@15"
+            ],
+            [
+              "55: main_after_if_else@15:",
+              "59: intc_0",
+              "60: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "55: main_after_if_else@15:",
+              "59: intc_0",
+              "60: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 12 -> 16 -> 13",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "141: main_readGlobalState_route@5:",
+              "144: txn OnCompletion",
+              "145: !",
+              "146: assert",
+              "147: txn ApplicationID",
+              "148: assert",
+              "149: callsub readGlobalState"
+            ],
+            [
+              "211: readGlobalState:",
+              "215: proto 0 6",
+              "218: intc_0",
+              "221: bytec_3",
+              "224: app_global_get_ex",
+              "225: assert",
+              "228: intc_0",
+              "231: bytec 5",
+              "234: app_global_get_ex",
+              "235: assert",
+              "238: intc_0",
+              "241: bytec_2",
+              "244: app_global_get_ex",
+              "245: assert",
+              "248: intc_0",
+              "251: bytec 6",
+              "254: app_global_get_ex",
+              "255: assert",
+              "258: intc_0",
+              "261: bytec_0",
+              "264: app_global_get_ex",
+              "265: assert",
+              "268: intc_0",
+              "271: bytec_1",
+              "274: app_global_get_ex",
+              "275: assert",
+              "285: uncover 5",
+              "286: retsub"
+            ],
+            [
+              "150: uncover 5",
+              "151: itob",
+              "152: uncover 5",
+              "153: itob",
+              "154: dig 5",
+              "155: len",
+              "156: itob",
+              "157: extract 6 2",
+              "158: uncover 6",
+              "159: concat",
+              "160: dig 5",
+              "161: len",
+              "162: itob",
+              "163: extract 6 2",
+              "164: uncover 6",
+              "165: concat",
+              "166: pushbytes 0x00",
+              "167: intc_0",
+              "168: uncover 7",
+              "169: setbit",
+              "170: uncover 4",
+              "171: uncover 4",
+              "172: concat",
+              "173: pushbytes 0x0035",
+              "174: concat",
+              "175: dig 3",
+              "176: len",
+              "177: pushint 53",
+              "178: +",
+              "179: itob",
+              "180: extract 6 2",
+              "181: concat",
+              "182: swap",
+              "183: concat",
+              "184: uncover 3",
+              "185: concat",
+              "186: uncover 2",
+              "187: concat",
+              "188: swap",
+              "189: concat",
+              "190: bytec 4",
+              "191: swap",
+              "192: concat",
+              "193: log",
+              "194: intc_1",
+              "195: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 10 -> 17 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "118: main_hasGlobalState_route@6:",
+              "121: txn OnCompletion",
+              "122: !",
+              "123: assert",
+              "124: txn ApplicationID",
+              "125: assert",
+              "126: callsub hasGlobalState"
+            ],
+            [
+              "290: hasGlobalState:",
+              "294: proto 0 2",
+              "297: intc_0",
+              "300: bytec_2",
+              "303: app_global_get_ex",
+              "304: bury 1",
+              "307: intc_0",
+              "310: bytec_2",
+              "313: app_global_get_ex",
+              "314: assert",
+              "317: dig 1",
+              "318: assert",
+              "321: swap",
+              "322: retsub"
+            ],
+            [
+              "127: swap",
+              "128: itob",
+              "129: pushbytes 0x00",
+              "130: intc_0",
+              "131: uncover 3",
+              "132: setbit",
+              "133: concat",
+              "134: bytec 4",
+              "135: swap",
+              "136: concat",
+              "137: log",
+              "138: intc_1",
+              "139: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 18 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "93: main_writeGlobalState_route@7:",
+              "96: txn OnCompletion",
+              "97: !",
+              "98: assert",
+              "99: txn ApplicationID",
+              "100: assert",
+              "104: txna ApplicationArgs 1",
+              "105: extract 2 0",
+              "106: txna ApplicationArgs 2",
+              "107: intc_0",
+              "108: getbit",
+              "109: txna ApplicationArgs 3",
+              "110: btoi",
+              "111: txnas Accounts",
+              "114: callsub writeGlobalState"
+            ],
+            [
+              "326: writeGlobalState:",
+              "330: proto 3 0",
+              "333: bytec_0",
+              "336: frame_dig -3",
+              "337: app_global_put",
+              "340: bytec_1",
+              "343: frame_dig -2",
+              "344: app_global_put",
+              "347: bytec_3",
+              "350: frame_dig -1",
+              "351: app_global_put",
+              "354: intc_0",
+              "357: bytec_0",
+              "360: app_global_get_ex",
+              "361: assert",
+              "362: frame_dig -3",
+              "363: ==",
+              "364: assert",
+              "367: intc_0",
+              "370: bytec_1",
+              "373: app_global_get_ex",
+              "374: assert",
+              "375: frame_dig -2",
+              "376: ==",
+              "377: assert",
+              "380: intc_0",
+              "383: bytec_3",
+              "386: app_global_get_ex",
+              "387: assert",
+              "388: frame_dig -1",
+              "389: ==",
+              "390: assert",
+              "391: retsub"
+            ],
+            [
+              "115: intc_1",
+              "116: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 4 -> 6 -> 19 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "51: pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6",
+              "52: txna ApplicationArgs 0",
+              "53: match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8"
+            ],
+            [
+              "62: main_writeDynamicGlobalState_route@8:",
+              "65: txn OnCompletion",
+              "66: !",
+              "67: assert",
+              "68: txn ApplicationID",
+              "69: assert",
+              "73: txna ApplicationArgs 1",
+              "74: extract 2 0",
+              "75: txna ApplicationArgs 2",
+              "76: extract 2 0",
+              "79: callsub writeDynamicGlobalState"
+            ],
+            [
+              "395: writeDynamicGlobalState:",
+              "399: proto 2 1",
+              "402: frame_dig -2",
+              "403: frame_dig -1",
+              "404: app_global_put",
+              "407: intc_0",
+              "408: frame_dig -2",
+              "409: app_global_get_ex",
+              "410: assert",
+              "411: frame_dig -1",
+              "412: ==",
+              "413: assert",
+              "416: intc_0",
+              "417: frame_dig -2",
+              "418: app_global_get_ex",
+              "419: assert",
+              "420: retsub"
+            ],
+            [
+              "80: dup",
+              "81: len",
+              "82: itob",
+              "83: extract 6 2",
+              "84: swap",
+              "85: concat",
+              "86: bytec 4",
+              "87: swap",
+              "88: concat",
+              "89: log",
+              "90: intc_1",
+              "91: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 14 -> 15",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "197: main_bare_routing@11:",
+              "201: txn OnCompletion",
+              "202: bnz main_after_if_else@15"
+            ],
+            [
+              "203: txn ApplicationID",
+              "204: !",
+              "205: assert",
+              "206: intc_1",
+              "207: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 3 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"globalString\" \"globalBool\" \"globalIntNoDefault\" \"globalAccount\" 0x151f7c75 \"globalInt\" \"globalBytes\"",
+              "8: txn ApplicationID",
+              "9: bnz main_after_if_else@2"
+            ],
+            [
+              "45: main_after_if_else@2:",
+              "49: txn NumAppArgs",
+              "50: bz main_bare_routing@11"
+            ],
+            [
+              "197: main_bare_routing@11:",
+              "201: txn OnCompletion",
+              "202: bnz main_after_if_else@15"
+            ],
+            [
+              "55: main_after_if_else@15:",
+              "59: intc_0",
+              "60: return"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}
