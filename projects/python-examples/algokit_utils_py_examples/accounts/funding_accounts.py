@@ -66,10 +66,14 @@ def funding_accounts() -> None:
     Ensure an account is funded from a dispenser account retrieved from the testnet dispenser API.
     Uses a dispenser account retrieved from the testnet dispenser API, per the ensure_funded_from_testnet_dispenser_api method, as a funding source such that the given account has a certain amount of Algo free to spend (accounting for Algo locked in minimum balance requirement).
     """
+    testnet_dispenser = algorand_client.client.get_testnet_dispenser()
+
     algorand_client.account.ensure_funded_from_testnet_dispenser_api(
         account_to_fund=random_account.address,
-        dispenser_client=TestNetDispenserApiClient(),
+        dispenser_client=testnet_dispenser,
         min_spending_balance=AlgoAmount(algo=10),
     )
+
+    testnet_dispenser.fund(address=random_account.address, amount=10, asset_id=0)
 
     # example: FUNDING_ACCOUNT
