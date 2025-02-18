@@ -33,6 +33,13 @@ repos:
         minimum_pre_commit_version: "2.9.2"
         files: "^projects/python-examples/(src|tests)/"
 
+      - id: tealer
+        name: tealer
+        description: "Run AlgoKit `Tealer` for TEAL static analysis for Python contracts"
+        entry: bash -c 'cd projects/python-examples && algokit project run audit-teal'
+        language: system
+        files: '^.*\.teal$'
+
       # TypeScript hooks
       - id: prettier
         name: prettier
@@ -48,11 +55,16 @@ repos:
         language: system
         types_or: [ts, tsx]
 
-      # Common hooks
-      - id: tealer
-        name: tealer
-        description: "Run AlgoKit `Tealer` for TEAL static analysis"
-        entry: algokit
+      - id: audit
+        name: audit
+        description: "Run AlgoKit `audit` for static analysis of TypeScript code"
+        entry: bash -c 'cd projects/typescript-examples && algokit project run audit'
         language: system
-        args: [project, run, "audit-teal"]
+        files: '^.*\.ts$'
+
+      - id: audit-teal
+        name: audit-teal
+        description: "Run AlgoKit `audit-teal` for static analysis of TEAL contracts"
+        entry: bash -c 'cd projects/typescript-examples && algokit project run audit-teal'
+        language: system
         files: '^.*\.teal$'

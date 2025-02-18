@@ -1,4 +1,4 @@
-import { puyaTsTransformer } from '@algorandfoundation/algorand-typescript-testing/test-transformer'
+import { puyaTsTransformer } from '@algorandfoundation/algorand-typescript-testing/vitest-transformer'
 import typescript from '@rollup/plugin-typescript'
 import { defineConfig } from 'vitest/config'
 
