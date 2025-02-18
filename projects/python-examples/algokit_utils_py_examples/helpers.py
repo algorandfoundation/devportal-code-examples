@@ -15,21 +15,22 @@ def setup_localnet_environment() -> (
         LocalnetEnvironment: A named tuple containing:
             - algorand_client: The client instance for LocalNet.
             - dispenser: The localnet dispenser account.
-            - account1: The first test account.
-            - account2: The second test account.
-            - account3: The third test account.
+            - account_a: The first test account.
+            - account_b: The second test account.
+            - account_c: The third test account.
     """
     # Initialize an Algorand client instance configured for LocalNet.
     algorand_client = AlgorandClient.default_localnet()
+    algorand_client.set_suggested_params_timeout(0)
 
     # Retrieve the localnet dispenser account.
     dispenser = algorand_client.account.localnet_dispenser()
 
     # Create random accounts for testing or development.
-    account1 = algorand_client.account.random()
-    account2 = algorand_client.account.random()
-    account3 = algorand_client.account.random()
-    accounts = [account1, account2, account3]
+    account_a = algorand_client.account.random()
+    account_b = algorand_client.account.random()
+    account_c = algorand_client.account.random()
+    accounts = [account_a, account_b, account_c]
 
     # Fund each test account with a small payment.
     for account in accounts:
@@ -44,7 +45,7 @@ def setup_localnet_environment() -> (
     return (
         algorand_client,
         dispenser,
-        account1,
-        account2,
-        account3,
+        account_a,
+        account_b,
+        account_c,
     )
