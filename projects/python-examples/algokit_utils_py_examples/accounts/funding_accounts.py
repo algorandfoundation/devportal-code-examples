@@ -2,7 +2,6 @@ from algokit_utils import (
     AlgoAmount,
     AlgorandClient,
     PaymentParams,
-    TestNetDispenserApiClient,
 )
 
 
