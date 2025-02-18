@@ -6,7 +6,7 @@ from algokit_utils_py_examples.helpers import setup_localnet_environment
 def multisignature_accounts() -> None:
     # example: MULTISIG_ACCOUNT
 
-    algorand_client, dispenser, account1, account2, account3 = (
+    algorand_client, dispenser, account_a, account_b, account_c = (
         setup_localnet_environment()
     )
 
@@ -19,12 +19,12 @@ def multisignature_accounts() -> None:
             version=1,
             threshold=2,
             addresses=[
-                account1.address,
-                account2.address,
-                account3.address,
+                account_a.address,
+                account_b.address,
+                account_c.address,
             ],
         ),
-        signing_accounts=[account1, account2, account3],
+        signing_accounts=[account_a, account_b, account_c],
     )
 
     algorand_client.account.ensure_funded(
@@ -39,7 +39,7 @@ def multisignature_accounts() -> None:
     algorand_client.send.payment(
         PaymentParams(
             sender=multisig_account.address,
-            receiver=account1.address,
+            receiver=account_a.address,
             amount=AlgoAmount(algo=1),
         ),
     )

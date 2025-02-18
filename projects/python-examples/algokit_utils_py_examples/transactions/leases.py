@@ -6,7 +6,7 @@ from algokit_utils_py_examples.helpers import setup_localnet_environment
 def leases() -> None:
     # example: LEASES
 
-    algorand_client, _, account1, _, _ = setup_localnet_environment()
+    algorand_client, _, account_a, _, _ = setup_localnet_environment()
 
     # Create a lease value - this could be any unique string or Uint8Array
     lease: bytes = b"unique-lease-value"
@@ -18,8 +18,8 @@ def leases() -> None:
     """
     result = algorand_client.send.payment(
         PaymentParams(
-            sender=account1.address,
-            receiver=account1.address,
+            sender=account_a.address,
+            receiver=account_a.address,
             amount=AlgoAmount(algo=1),
             lease=lease,
             # Optional: Set a custom validity window for the lease
@@ -34,8 +34,8 @@ def leases() -> None:
     try:
         algorand_client.send.payment(
             PaymentParams(
-                sender=account1.address,  # Same sender as first transaction
-                receiver=account1.address,
+                sender=account_a.address,  # Same sender as first transaction
+                receiver=account_a.address,
                 amount=AlgoAmount(algo=1),
                 lease=lease,
             ),
@@ -51,8 +51,8 @@ def leases() -> None:
     """
     algorand_client.send.payment(
         PaymentParams(
-            sender=account1.address,
-            receiver=account1.address,
+            sender=account_a.address,
+            receiver=account_a.address,
             amount=AlgoAmount(algo=0),
         )
     )
@@ -63,8 +63,8 @@ def leases() -> None:
     """
     pay_txn = algorand_client.send.payment(
         PaymentParams(
-            sender=account1.address,  # Same sender as first transaction
-            receiver=account1.address,
+            sender=account_a.address,  # Same sender as first transaction
+            receiver=account_a.address,
             amount=AlgoAmount(algo=1),
             lease=lease,
         )

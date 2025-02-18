@@ -6,7 +6,7 @@ from algokit_utils_py_examples.helpers import setup_localnet_environment
 def atomic_transaction_groups() -> None:
     # example: ATOMIC_TRANSACTION_GROUP
 
-    algorand_client, dispenser, account1, account2, account3 = (
+    algorand_client, dispenser, account_a, account_b, account_c = (
         setup_localnet_environment()
     )
 
@@ -16,15 +16,15 @@ def atomic_transaction_groups() -> None:
     """
     algorand_client.new_group().add_payment(  # First transaction: Payment from A to B
         PaymentParams(
-            sender=account1.address,
-            receiver=account2.address,
+            sender=account_a.address,
+            receiver=account_b.address,
             amount=AlgoAmount(algo=1),
             note=b"First payment in atomic group",
         )
     ).add_payment(  # Second transaction: Payment from B to C
         PaymentParams(
-            sender=account2.address,
-            receiver=account3.address,
+            sender=account_b.address,
+            receiver=account_c.address,
             amount=AlgoAmount(algo=2),  # B sends half of what they received to C
             note=b"Second payment in atomic group",
         )
@@ -38,15 +38,15 @@ def atomic_transaction_groups() -> None:
         algorand_client.new_group()
         .add_payment(
             PaymentParams(
-                sender=account1.address,
-                receiver=account2.address,
+                sender=account_a.address,
+                receiver=account_b.address,
                 amount=AlgoAmount(algo=1),
             )
         )
         .add_payment(
             PaymentParams(
-                sender=account2.address,
-                receiver=account3.address,
+                sender=account_b.address,
+                receiver=account_c.address,
                 amount=AlgoAmount(algo=1),
             )
         )

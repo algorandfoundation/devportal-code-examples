@@ -23,12 +23,12 @@ from algokit_utils_py_examples.helpers import setup_localnet_environment
 def transaction_types() -> None:
     # example: TRANSACTION_TYPES
 
-    algorand_client, _, account1, account2, account3 = setup_localnet_environment()
+    algorand_client, _, account_a, account_b, account_c = setup_localnet_environment()
 
     # example: PAYMENT_TRANSACTION
 
     """
-    Create a unsigned payment transaction sending 1 Algo from account1 to account2
+    Create a unsigned payment transaction sending 1 Algo from account_a to account_b
 
     Parameters for a payment transaction.
     - sender: The address of the account that will send the ALGO
@@ -37,8 +37,8 @@ def transaction_types() -> None:
     """
     payment_txn = algorand_client.create_transaction.payment(
         PaymentParams(
-            sender=account1.address,
-            receiver=account2.address,
+            sender=account_a.address,
+            receiver=account_b.address,
             amount=AlgoAmount(algo=1),
         )
     )
@@ -48,7 +48,7 @@ def transaction_types() -> None:
     # example: ASSET_TRANSFER_TRANSACTION
 
     """
-    Create an unsigned asset transfer transaction of 1 asset with asset id 1234 from account1 to account2
+    Create an unsigned asset transfer transaction of 1 asset with asset id 1234 from account_a to account_b
 
     Parameters for an asset transfer transaction.
     - sender: The address of the account that will send the asset
@@ -58,9 +58,9 @@ def transaction_types() -> None:
     """
     asset_transfer_txn = algorand_client.create_transaction.asset_transfer(
         AssetTransferParams(
-            sender=account1.address,
+            sender=account_a.address,
             asset_id=1234,
-            receiver=account2.address,
+            receiver=account_b.address,
             amount=1,
         )
     )
@@ -70,7 +70,7 @@ def transaction_types() -> None:
     # example: ASSET_OPT_IN_TRANSACTION
 
     """
-    Create an unsigned asset opt in transaction for account1 opting in to asset with asset id 1234
+    Create an unsigned asset opt in transaction for account_a opting in to asset with asset id 1234
 
     Parameters for an asset opt in transaction.
     - sender: The address of the account that will opt in to the asset
@@ -78,7 +78,7 @@ def transaction_types() -> None:
     """
     asset_opt_in_txn = algorand_client.create_transaction.asset_opt_in(
         AssetOptInParams(
-            sender=account1.address,
+            sender=account_a.address,
             asset_id=1234,
         )
     )
@@ -88,7 +88,7 @@ def transaction_types() -> None:
     # example: ASSET_OPT_OUT_TRANSACTION
 
     """
-    Create an unsigned asset opt out transaction for account1 opting out of asset with asset id 1234
+    Create an unsigned asset opt out transaction for account_a opting out of asset with asset id 1234
 
     Parameters for an asset opt out transaction.
     - sender: The address of the account that will opt out of the asset
@@ -97,9 +97,9 @@ def transaction_types() -> None:
     """
     asset_opt_out_txn = algorand_client.create_transaction.asset_opt_out(
         AssetOptOutParams(
-            sender=account1.address,
+            sender=account_a.address,
             asset_id=1234,
-            creator=account2.address,
+            creator=account_b.address,
         )
     )
 
@@ -124,14 +124,14 @@ def transaction_types() -> None:
     """
     asset_create_txn = algorand_client.create_transaction.asset_create(
         AssetCreateParams(
-            sender=account1.address,
+            sender=account_a.address,
             total=10_000_000,
             decimals=6,
             default_frozen=False,  # optional
-            manager=account1.address,  # optional. Can be permanently disabled by setting to None
-            reserve=account1.address,  # optional. Can be permanently disabled by setting to None
-            freeze=account1.address,  # optional. Can be permanently disabled by setting to None
-            clawback=account1.address,  # optional. Can be permanently disabled by setting to None
+            manager=account_a.address,  # optional. Can be permanently disabled by setting to None
+            reserve=account_a.address,  # optional. Can be permanently disabled by setting to None
+            freeze=account_a.address,  # optional. Can be permanently disabled by setting to None
+            clawback=account_a.address,  # optional. Can be permanently disabled by setting to None
             unit_name="MYA",
             asset_name="My Asset",
         )
@@ -142,7 +142,7 @@ def transaction_types() -> None:
     """
     algorand_client.create_transaction.asset_create(
         AssetCreateParams(
-            sender=account1.address,
+            sender=account_a.address,
             total=1,
             asset_name="My NFT",
             unit_name="MNFT",
@@ -170,12 +170,12 @@ def transaction_types() -> None:
     """
     asset_config_txn = algorand_client.create_transaction.asset_config(
         AssetConfigParams(
-            sender=account1.address,
+            sender=account_a.address,
             asset_id=1234,
-            manager=account3.address,
-            reserve=account3.address,
-            freeze=account3.address,
-            clawback=account3.address,
+            manager=account_c.address,
+            reserve=account_c.address,
+            freeze=account_c.address,
+            clawback=account_c.address,
         )
     )
 
@@ -194,9 +194,9 @@ def transaction_types() -> None:
     """
     asset_freeze_txn = algorand_client.create_transaction.asset_freeze(
         AssetFreezeParams(
-            sender=account1.address,
+            sender=account_a.address,
             asset_id=1234,
-            account=account2.address,  # The account to freeze or unfreeze
+            account=account_b.address,  # The account to freeze or unfreeze
             frozen=True,
         )
     )
@@ -215,7 +215,7 @@ def transaction_types() -> None:
     """
     asset_destroy_txn = algorand_client.create_transaction.asset_destroy(
         AssetDestroyParams(
-            sender=account1.address,
+            sender=account_a.address,
             asset_id=1234,
         )
     )
@@ -243,7 +243,7 @@ def transaction_types() -> None:
     """
     result1 = algorand_client.create_transaction.app_create(
         AppCreateParams(
-            sender=account1.address,
+            sender=account_a.address,
             approval_program=minimal_teal,
             clear_state_program=minimal_teal,
         )
@@ -263,7 +263,7 @@ def transaction_types() -> None:
     """
     app_call_txn = algorand_client.create_transaction.app_call(
         AppCallParams(
-            sender=account1.address,
+            sender=account_a.address,
             app_id=1234,
             on_complete=algosdk.transaction.OnComplete.NoOpOC,
         )
@@ -286,7 +286,7 @@ def transaction_types() -> None:
     """
     algorand_client.create_transaction.app_update(
         AppUpdateParams(
-            sender=account1.address,
+            sender=account_a.address,
             app_id=1234,
             approval_program=minimal_teal,
             clear_state_program=minimal_teal,
@@ -306,7 +306,7 @@ def transaction_types() -> None:
     """
     algorand_client.create_transaction.app_delete(
         AppDeleteParams(
-            sender=account1.address,
+            sender=account_a.address,
             app_id=1234,
         )
     )
@@ -324,7 +324,7 @@ def transaction_types() -> None:
     """
     algorand_client.create_transaction.app_call(
         AppCallParams(
-            sender=account1.address,
+            sender=account_a.address,
             app_id=1234,
             on_complete=algosdk.transaction.OnComplete.OptInOC,
         )
@@ -343,7 +343,7 @@ def transaction_types() -> None:
     """
     algorand_client.create_transaction.app_call(
         AppCallParams(
-            sender=account1.address,
+            sender=account_a.address,
             app_id=1234,
             on_complete=algosdk.transaction.OnComplete.CloseOutOC,
         )
@@ -362,7 +362,7 @@ def transaction_types() -> None:
     """
     algorand_client.create_transaction.app_call(
         AppCallParams(
-            sender=account1.address,
+            sender=account_a.address,
             app_id=1234,
             on_complete=algosdk.transaction.OnComplete.ClearStateOC,
         )
@@ -385,7 +385,7 @@ def transaction_types() -> None:
     online_key_registration_txn = (
         algorand_client.create_transaction.online_key_registration(
             OnlineKeyRegistrationParams(
-                sender=account1.address,
+                sender=account_a.address,
                 vote_key="participation-public-key",
                 selection_key="vrf-public-key",
                 vote_first=1,
@@ -405,7 +405,7 @@ def transaction_types() -> None:
     offline_key_registration_txn = (
         algorand_client.create_transaction.offline_key_registration(
             OfflineKeyRegistrationParams(
-                sender=account1.address,
+                sender=account_a.address,
                 prevent_account_from_ever_participating_again=False,
             )
         )
