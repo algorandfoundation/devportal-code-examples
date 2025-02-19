@@ -1,0 +1,132 @@
+#pragma version 10
+#pragma typetrack false
+
+// @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
+main:
+    intcblock 1 0
+    bytecblock 0x00 0x151f7c75 "boxBytes"
+    // contracts/BoxStorage/contract.algo.ts:6
+    // export default class BoxStorage extends arc4.Contract {
+    txn NumAppArgs
+    bz main_bare_routing@7
+    pushbytess 0xf1e681cb 0x82111678 // method "setBoxBytes(string)bool", method "setBoxInt(uint64)bool"
+    txna ApplicationArgs 0
+    match main_setBoxBytes_route@3 main_setBoxInt_route@4
+
+main_after_if_else@11:
+    // contracts/BoxStorage/contract.algo.ts:6
+    // export default class BoxStorage extends arc4.Contract {
+    intc_1 // 0
+    return
+
+main_setBoxInt_route@4:
+    // contracts/BoxStorage/contract.algo.ts:25
+    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // contracts/BoxStorage/contract.algo.ts:6
+    // export default class BoxStorage extends arc4.Contract {
+    txna ApplicationArgs 1
+    btoi
+    // contracts/BoxStorage/contract.algo.ts:25
+    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    callsub setBoxInt
+    bytec_0 // 0x00
+    intc_1 // 0
+    uncover 2
+    setbit
+    bytec_1 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_setBoxBytes_route@3:
+    // contracts/BoxStorage/contract.algo.ts:14
+    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // contracts/BoxStorage/contract.algo.ts:6
+    // export default class BoxStorage extends arc4.Contract {
+    txna ApplicationArgs 1
+    extract 2 0
+    // contracts/BoxStorage/contract.algo.ts:14
+    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    callsub setBoxBytes
+    bytec_0 // 0x00
+    intc_1 // 0
+    uncover 2
+    setbit
+    bytec_1 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_bare_routing@7:
+    // contracts/BoxStorage/contract.algo.ts:6
+    // export default class BoxStorage extends arc4.Contract {
+    txn OnCompletion
+    bnz main_after_if_else@11
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    intc_0 // 1
+    return
+
+
+// contracts/BoxStorage/contract.algo.ts::BoxStorage.setBoxBytes(value: bytes) -> uint64:
+setBoxBytes:
+    // contracts/BoxStorage/contract.algo.ts:14-15
+    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // public setBoxBytes(value: string): boolean {
+    proto 1 1
+    // contracts/BoxStorage/contract.algo.ts:8
+    // public boxBytes = Box<bytes>({ key: 'boxBytes' })
+    bytec_2 // "boxBytes"
+    // contracts/BoxStorage/contract.algo.ts:16
+    // this.boxBytes.value = Bytes(value)
+    box_del
+    pop
+    // contracts/BoxStorage/contract.algo.ts:8
+    // public boxBytes = Box<bytes>({ key: 'boxBytes' })
+    bytec_2 // "boxBytes"
+    // contracts/BoxStorage/contract.algo.ts:16
+    // this.boxBytes.value = Bytes(value)
+    frame_dig -1
+    box_put
+    // contracts/BoxStorage/contract.algo.ts:18
+    // return true
+    intc_0 // 1
+    retsub
+
+
+// contracts/BoxStorage/contract.algo.ts::BoxStorage.setBoxInt(value: uint64) -> uint64:
+setBoxInt:
+    // contracts/BoxStorage/contract.algo.ts:25-26
+    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // public setBoxInt(value: uint64): boolean {
+    proto 1 1
+    // contracts/BoxStorage/contract.algo.ts:27
+    // this.boxInt.value = Uint64(value)
+    frame_dig -1
+    itob
+    // contracts/BoxStorage/contract.algo.ts:7
+    // public boxInt = Box<uint64>({ key: 'boxInt' })
+    pushbytes "boxInt"
+    // contracts/BoxStorage/contract.algo.ts:27
+    // this.boxInt.value = Uint64(value)
+    swap
+    box_put
+    // contracts/BoxStorage/contract.algo.ts:29
+    // return true
+    intc_0 // 1
+    retsub

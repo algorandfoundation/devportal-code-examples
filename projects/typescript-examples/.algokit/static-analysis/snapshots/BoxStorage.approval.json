@@ -1,0 +1,1242 @@
+{
+  "success": false,
+  "error": null,
+  "result": [
+    {
+      "type": "ExecutionPaths",
+      "count": 4,
+      "description": "\nCheck: \"unprotected-deletable\", Impact: High, Confidence: High\nDescription: Unprotected Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-deletable-application\n",
+      "check": "unprotected-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "48: main_setBoxBytes_route@3:",
+              "51: txn OnCompletion",
+              "52: !",
+              "53: assert",
+              "54: txn ApplicationID",
+              "55: assert",
+              "58: txna ApplicationArgs 1",
+              "59: extract 2 0",
+              "62: callsub setBoxBytes"
+            ],
+            [
+              "87: setBoxBytes:",
+              "91: proto 1 1",
+              "94: bytec_2",
+              "97: box_del",
+              "98: pop",
+              "101: bytec_2",
+              "104: frame_dig -1",
+              "105: box_put",
+              "108: intc_0",
+              "109: retsub"
+            ],
+            [
+              "63: bytec_0",
+              "64: intc_1",
+              "65: uncover 2",
+              "66: setbit",
+              "67: bytec_1",
+              "68: swap",
+              "69: concat",
+              "70: log",
+              "71: intc_0",
+              "72: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "22: main_setBoxInt_route@4:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "36: callsub setBoxInt"
+            ],
+            [
+              "113: setBoxInt:",
+              "117: proto 1 1",
+              "120: frame_dig -1",
+              "121: itob",
+              "124: pushbytes \"boxInt\"",
+              "127: swap",
+              "128: box_put",
+              "131: intc_0",
+              "132: retsub"
+            ],
+            [
+              "37: bytec_0",
+              "38: intc_1",
+              "39: uncover 2",
+              "40: setbit",
+              "41: bytec_1",
+              "42: swap",
+              "43: concat",
+              "44: log",
+              "45: intc_0",
+              "46: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "74: main_bare_routing@7:",
+              "77: txn OnCompletion",
+              "78: bnz main_after_if_else@11"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 4,
+      "description": "\nCheck: \"unprotected-updatable\", Impact: High, Confidence: High\nDescription: Unprotected Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-updatable-application\n",
+      "check": "unprotected-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "48: main_setBoxBytes_route@3:",
+              "51: txn OnCompletion",
+              "52: !",
+              "53: assert",
+              "54: txn ApplicationID",
+              "55: assert",
+              "58: txna ApplicationArgs 1",
+              "59: extract 2 0",
+              "62: callsub setBoxBytes"
+            ],
+            [
+              "87: setBoxBytes:",
+              "91: proto 1 1",
+              "94: bytec_2",
+              "97: box_del",
+              "98: pop",
+              "101: bytec_2",
+              "104: frame_dig -1",
+              "105: box_put",
+              "108: intc_0",
+              "109: retsub"
+            ],
+            [
+              "63: bytec_0",
+              "64: intc_1",
+              "65: uncover 2",
+              "66: setbit",
+              "67: bytec_1",
+              "68: swap",
+              "69: concat",
+              "70: log",
+              "71: intc_0",
+              "72: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "22: main_setBoxInt_route@4:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "36: callsub setBoxInt"
+            ],
+            [
+              "113: setBoxInt:",
+              "117: proto 1 1",
+              "120: frame_dig -1",
+              "121: itob",
+              "124: pushbytes \"boxInt\"",
+              "127: swap",
+              "128: box_put",
+              "131: intc_0",
+              "132: retsub"
+            ],
+            [
+              "37: bytec_0",
+              "38: intc_1",
+              "39: uncover 2",
+              "40: setbit",
+              "41: bytec_1",
+              "42: swap",
+              "43: concat",
+              "44: log",
+              "45: intc_0",
+              "46: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "74: main_bare_routing@7:",
+              "77: txn OnCompletion",
+              "78: bnz main_after_if_else@11"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 2,
+      "description": "\nCheck: \"can-close-account\", Impact: High, Confidence: High\nDescription: Missing CloseRemainderTo field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-closeremainderto-field-validation\n",
+      "check": "can-close-account",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `CloseRemainderTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "74: main_bare_routing@7:",
+              "77: txn OnCompletion",
+              "78: bnz main_after_if_else@11"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 2,
+      "description": "\nCheck: \"can-close-asset\", Impact: High, Confidence: High\nDescription: Missing AssetCloseTo Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-assetcloseto-field-validation\n",
+      "check": "can-close-asset",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `AssetCloseTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "74: main_bare_routing@7:",
+              "77: txn OnCompletion",
+              "78: bnz main_after_if_else@11"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 4,
+      "description": "\nCheck: \"is-deletable\", Impact: High, Confidence: High\nDescription: Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#deletable-application\n",
+      "check": "is-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `DeleteApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "48: main_setBoxBytes_route@3:",
+              "51: txn OnCompletion",
+              "52: !",
+              "53: assert",
+              "54: txn ApplicationID",
+              "55: assert",
+              "58: txna ApplicationArgs 1",
+              "59: extract 2 0",
+              "62: callsub setBoxBytes"
+            ],
+            [
+              "87: setBoxBytes:",
+              "91: proto 1 1",
+              "94: bytec_2",
+              "97: box_del",
+              "98: pop",
+              "101: bytec_2",
+              "104: frame_dig -1",
+              "105: box_put",
+              "108: intc_0",
+              "109: retsub"
+            ],
+            [
+              "63: bytec_0",
+              "64: intc_1",
+              "65: uncover 2",
+              "66: setbit",
+              "67: bytec_1",
+              "68: swap",
+              "69: concat",
+              "70: log",
+              "71: intc_0",
+              "72: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "22: main_setBoxInt_route@4:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "36: callsub setBoxInt"
+            ],
+            [
+              "113: setBoxInt:",
+              "117: proto 1 1",
+              "120: frame_dig -1",
+              "121: itob",
+              "124: pushbytes \"boxInt\"",
+              "127: swap",
+              "128: box_put",
+              "131: intc_0",
+              "132: retsub"
+            ],
+            [
+              "37: bytec_0",
+              "38: intc_1",
+              "39: uncover 2",
+              "40: setbit",
+              "41: bytec_1",
+              "42: swap",
+              "43: concat",
+              "44: log",
+              "45: intc_0",
+              "46: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "74: main_bare_routing@7:",
+              "77: txn OnCompletion",
+              "78: bnz main_after_if_else@11"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 4,
+      "description": "\nCheck: \"is-updatable\", Impact: High, Confidence: High\nDescription: Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#upgradable-application\n",
+      "check": "is-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `UpdateApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "48: main_setBoxBytes_route@3:",
+              "51: txn OnCompletion",
+              "52: !",
+              "53: assert",
+              "54: txn ApplicationID",
+              "55: assert",
+              "58: txna ApplicationArgs 1",
+              "59: extract 2 0",
+              "62: callsub setBoxBytes"
+            ],
+            [
+              "87: setBoxBytes:",
+              "91: proto 1 1",
+              "94: bytec_2",
+              "97: box_del",
+              "98: pop",
+              "101: bytec_2",
+              "104: frame_dig -1",
+              "105: box_put",
+              "108: intc_0",
+              "109: retsub"
+            ],
+            [
+              "63: bytec_0",
+              "64: intc_1",
+              "65: uncover 2",
+              "66: setbit",
+              "67: bytec_1",
+              "68: swap",
+              "69: concat",
+              "70: log",
+              "71: intc_0",
+              "72: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "22: main_setBoxInt_route@4:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "36: callsub setBoxInt"
+            ],
+            [
+              "113: setBoxInt:",
+              "117: proto 1 1",
+              "120: frame_dig -1",
+              "121: itob",
+              "124: pushbytes \"boxInt\"",
+              "127: swap",
+              "128: box_put",
+              "131: intc_0",
+              "132: retsub"
+            ],
+            [
+              "37: bytec_0",
+              "38: intc_1",
+              "39: uncover 2",
+              "40: setbit",
+              "41: bytec_1",
+              "42: swap",
+              "43: concat",
+              "44: log",
+              "45: intc_0",
+              "46: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "74: main_bare_routing@7:",
+              "77: txn OnCompletion",
+              "78: bnz main_after_if_else@11"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 5,
+      "description": "\nCheck: \"missing-fee-check\", Impact: High, Confidence: High\nDescription: Missing Fee Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-fee-field-validation\n",
+      "check": "missing-fee-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `Fee` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "48: main_setBoxBytes_route@3:",
+              "51: txn OnCompletion",
+              "52: !",
+              "53: assert",
+              "54: txn ApplicationID",
+              "55: assert",
+              "58: txna ApplicationArgs 1",
+              "59: extract 2 0",
+              "62: callsub setBoxBytes"
+            ],
+            [
+              "87: setBoxBytes:",
+              "91: proto 1 1",
+              "94: bytec_2",
+              "97: box_del",
+              "98: pop",
+              "101: bytec_2",
+              "104: frame_dig -1",
+              "105: box_put",
+              "108: intc_0",
+              "109: retsub"
+            ],
+            [
+              "63: bytec_0",
+              "64: intc_1",
+              "65: uncover 2",
+              "66: setbit",
+              "67: bytec_1",
+              "68: swap",
+              "69: concat",
+              "70: log",
+              "71: intc_0",
+              "72: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "22: main_setBoxInt_route@4:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "36: callsub setBoxInt"
+            ],
+            [
+              "113: setBoxInt:",
+              "117: proto 1 1",
+              "120: frame_dig -1",
+              "121: itob",
+              "124: pushbytes \"boxInt\"",
+              "127: swap",
+              "128: box_put",
+              "131: intc_0",
+              "132: retsub"
+            ],
+            [
+              "37: bytec_0",
+              "38: intc_1",
+              "39: uncover 2",
+              "40: setbit",
+              "41: bytec_1",
+              "42: swap",
+              "43: concat",
+              "44: log",
+              "45: intc_0",
+              "46: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "74: main_bare_routing@7:",
+              "77: txn OnCompletion",
+              "78: bnz main_after_if_else@11"
+            ],
+            [
+              "79: txn ApplicationID",
+              "80: !",
+              "81: assert",
+              "82: intc_0",
+              "83: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "74: main_bare_routing@7:",
+              "77: txn OnCompletion",
+              "78: bnz main_after_if_else@11"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"group-size-check\", Impact: High, Confidence: High\nDescription: Usage of absolute indexes without validating GroupSize\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-groupsize-validation\n",
+      "check": "group-size-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid using absolute indexes. Validate GroupSize if used.\n- Favor using ARC-4 ABI and relative indexes for group transactions.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 5,
+      "description": "\nCheck: \"rekey-to\", Impact: High, Confidence: High\nDescription: Rekeyable Logic Signatures\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#rekeyable-logicsig\n",
+      "check": "rekey-to",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `RekeyTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "48: main_setBoxBytes_route@3:",
+              "51: txn OnCompletion",
+              "52: !",
+              "53: assert",
+              "54: txn ApplicationID",
+              "55: assert",
+              "58: txna ApplicationArgs 1",
+              "59: extract 2 0",
+              "62: callsub setBoxBytes"
+            ],
+            [
+              "87: setBoxBytes:",
+              "91: proto 1 1",
+              "94: bytec_2",
+              "97: box_del",
+              "98: pop",
+              "101: bytec_2",
+              "104: frame_dig -1",
+              "105: box_put",
+              "108: intc_0",
+              "109: retsub"
+            ],
+            [
+              "63: bytec_0",
+              "64: intc_1",
+              "65: uncover 2",
+              "66: setbit",
+              "67: bytec_1",
+              "68: swap",
+              "69: concat",
+              "70: log",
+              "71: intc_0",
+              "72: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0xf1e681cb 0x82111678",
+              "13: txna ApplicationArgs 0",
+              "14: match main_setBoxBytes_route@3 main_setBoxInt_route@4"
+            ],
+            [
+              "22: main_setBoxInt_route@4:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "36: callsub setBoxInt"
+            ],
+            [
+              "113: setBoxInt:",
+              "117: proto 1 1",
+              "120: frame_dig -1",
+              "121: itob",
+              "124: pushbytes \"boxInt\"",
+              "127: swap",
+              "128: box_put",
+              "131: intc_0",
+              "132: retsub"
+            ],
+            [
+              "37: bytec_0",
+              "38: intc_1",
+              "39: uncover 2",
+              "40: setbit",
+              "41: bytec_1",
+              "42: swap",
+              "43: concat",
+              "44: log",
+              "45: intc_0",
+              "46: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "74: main_bare_routing@7:",
+              "77: txn OnCompletion",
+              "78: bnz main_after_if_else@11"
+            ],
+            [
+              "79: txn ApplicationID",
+              "80: !",
+              "81: assert",
+              "82: intc_0",
+              "83: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock 0x00 0x151f7c75 \"boxBytes\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "74: main_bare_routing@7:",
+              "77: txn OnCompletion",
+              "78: bnz main_after_if_else@11"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

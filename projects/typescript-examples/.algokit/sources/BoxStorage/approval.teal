@@ -1,0 +1,132 @@
+#pragma version 10
+#pragma typetrack false
+
+
+main:
+    intcblock 1 0
+    bytecblock 0x00 0x151f7c75 "boxBytes"
+
+
+    txn NumAppArgs
+    bz main_bare_routing@7
+    pushbytess 0xf1e681cb 0x82111678
+    txna ApplicationArgs 0
+    match main_setBoxBytes_route@3 main_setBoxInt_route@4
+
+main_after_if_else@11:
+
+
+    intc_1
+    return
+
+main_setBoxInt_route@4:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+
+
+    callsub setBoxInt
+    bytec_0
+    intc_1
+    uncover 2
+    setbit
+    bytec_1
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_setBoxBytes_route@3:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    extract 2 0
+
+
+    callsub setBoxBytes
+    bytec_0
+    intc_1
+    uncover 2
+    setbit
+    bytec_1
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_bare_routing@7:
+
+
+    txn OnCompletion
+    bnz main_after_if_else@11
+    txn ApplicationID
+    !
+    assert
+    intc_0
+    return
+
+
+
+setBoxBytes:
+
+
+
+    proto 1 1
+
+
+    bytec_2
+
+
+    box_del
+    pop
+
+
+    bytec_2
+
+
+    frame_dig -1
+    box_put
+
+
+    intc_0
+    retsub
+
+
+
+setBoxInt:
+
+
+
+    proto 1 1
+
+
+    frame_dig -1
+    itob
+
+
+    pushbytes "boxInt"
+
+
+    swap
+    box_put
+
+
+    intc_0
+    retsub
