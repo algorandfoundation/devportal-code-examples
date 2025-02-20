@@ -2,10 +2,10 @@ import { algo } from '@algorandfoundation/algokit-utils'
 import { setupLocalnetEnvironment } from '@/algokit-utils-ts/setup-localnet-environment'
 
 async function multisignatureAccounts() {
+  // example: MULTISIG_ACCOUNT
   // Initialize an Algorand client instance and get funded accounts
   const { algorand, dispenser, randomAccountA, randomAccountB, randomAccountC } = await setupLocalnetEnvironment()
 
-  // example: MULTISIG_ACCOUNT
   // Create a 2-of-3 multisig account that requires
   // only 2 signatures from the 3 possible signers to authorize transactions
   const multisigAccountA = algorand.account.multisig(
@@ -24,7 +24,7 @@ async function multisignatureAccounts() {
     receiver: randomAccountA,
     amount: algo(1),
   })
-  // example: MULTISIG_ACCOUNT;
+  // example: MULTISIG_ACCOUNT
 }
 
 multisignatureAccounts()
