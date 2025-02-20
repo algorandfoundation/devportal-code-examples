@@ -1,8 +1,9 @@
 import { Config } from '@algorandfoundation/algokit-utils'
 import { registerDebugEventHandlers } from '@algorandfoundation/algokit-utils-debug'
 import { consoleLogger } from '@algorandfoundation/algokit-utils/types/logging'
-import * as fs from 'node:fs'
-import * as path from 'node:path'
+import * as fs from 'fs'
+import * as path from 'path'
+import type { Dirent } from 'fs'
 
 // Uncomment the traceAll option to enable auto generation of AVM Debugger compliant sourceMap and simulation trace file for all AVM calls.
 // Learn more about using AlgoKit AVM Debugger to debug your TEAL source codes and inspect various kinds of Algorand transactions in atomic groups -> https://github.com/algorandfoundation/algokit-avm-vscode-Debugger
@@ -33,9 +34,11 @@ async function getDeployers() {
   function getDirectoriesRecursive(dir: string): string[] {
     const entries = fs.readdirSync(dir, { withFileTypes: true })
 
-    const dirs = entries.filter((entry) => entry.isDirectory()).map((entry) => path.resolve(dir, entry.name))
+    const dirs = entries
+      .filter((entry: Dirent) => entry.isDirectory())
+      .map((entry: Dirent) => path.resolve(dir, entry.name))
 
-    const subdirs = dirs.flatMap((d) => getDirectoriesRecursive(d))
+    const subdirs = dirs.flatMap((d: string) => getDirectoriesRecursive(d))
     return [...dirs, ...subdirs]
   }
 
@@ -48,6 +51,7 @@ async function getDeployers() {
 }
 
 // execute all the deployers
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function main() {
   const contractName = process.argv.length > 2 ? process.argv[2] : undefined
   const contractDeployers = await getDeployers()
@@ -70,7 +74,9 @@ async function main() {
   }
 }
 
-// Only run if this file is being run directly
 if (require.main === module) {
-  main().catch(console.error)
+  main().catch((e) => {
+    console.error(e)
+    process.exit(1)
+  })
 }
