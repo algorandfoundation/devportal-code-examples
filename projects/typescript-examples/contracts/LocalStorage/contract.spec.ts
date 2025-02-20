@@ -21,57 +21,85 @@ describe('LocalStorage contract', () => {
     expect(localAddress.bytes.toString()).toBe(ctx.defaultSender.bytes.toString())
   })
 
-  // it('should write and verify multiple local state values', () => {
-  //   const contract = ctx.contract.create(LocalStorage)
+  it('should write and verify multiple local state values', () => {
+    const contract = ctx.contract.create(LocalStorage)
+    const account = ctx.any.account({ optedApplications: [ctx.ledger.getApplicationForContract(contract)] })
 
-  //   contract.optInToApplication()
-  //   contract.writeLocalState('New String', false, ctx.defaultSender)
+    ctx.txn
+      .createScope([ctx.any.txn.applicationCall({ appId: contract, sender: account, onCompletion: 'OptIn' })])
+      .execute(() => {
+        contract.optInToApplication()
+      })
 
-  //   const [, , , localString, localBool, localAccount] = contract.readLocalState()
+    ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract, sender: account })]).execute(() => {
+      contract.writeLocalState('New String', false, account)
 
-  //   expect(localString).toBe('New String')
-  //   expect(localBool).toBe(false)
-  //   expect(localAccount.bytes.toString()).toBe(ctx.defaultSender.bytes.toString())
-  // })
+      const [, , , localString, localBool, localAccount] = contract.readLocalState()
 
-  // it('should write and read dynamic local state values', () => {
-  //   const contract = ctx.contract.create(LocalStorage)
+      expect(localString).toBe('New String')
+      expect(localBool).toBe(false)
+      expect(localAccount.bytes).toEqual(account.bytes)
+    })
+  })
 
-  //   contract.optInToApplication()
+  it('should write and read dynamic local state values', () => {
+    const contract = ctx.contract.create(LocalStorage)
+    const account = ctx.any.account({ optedApplications: [ctx.ledger.getApplicationForContract(contract)] })
 
-  //   const testKey = 'testKey'
-  //   const testValue = 'testValue'
+    ctx.txn
+      .createScope([ctx.any.txn.applicationCall({ appId: contract, sender: account, onCompletion: 'OptIn' })])
+      .execute(() => {
+        contract.optInToApplication()
+      })
 
-  //   const writtenValue = contract.writeDynamicLocalState(testKey, testValue)
-  //   expect(writtenValue).toBe(testValue)
+    ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract, sender: account })]).execute(() => {
+      const testKey = 'testKey'
+      const testValue = 'testValue'
 
-  //   const readValue = contract.readDynamicLocalState(testKey)
-  //   expect(readValue).toBe(testValue)
-  // })
+      const writtenValue = contract.writeDynamicLocalState(testKey, testValue)
+      expect(writtenValue).toBe(testValue)
 
-  // it('should clear all local state values', () => {
-  //   const contract = ctx.contract.create(LocalStorage)
+      const readValue = contract.readDynamicLocalState(testKey)
+      expect(readValue).toBe(testValue)
+    })
+  })
 
-  //   contract.optInToApplication()
-  //   contract.clearLocalState()
+  it('should clear all local state values', () => {
+    const contract = ctx.contract.create(LocalStorage)
+    const account = ctx.any.account({ optedApplications: [ctx.ledger.getApplicationForContract(contract)] })
+    ctx.txn
+      .createScope([ctx.any.txn.applicationCall({ appId: contract, sender: account, onCompletion: 'OptIn' })])
+      .execute(() => {
+        contract.optInToApplication()
+      })
 
-  //   expect(() => contract.readLocalState()).toThrow()
-  // })
+    ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract, sender: account })]).execute(() => {
+      contract.clearLocalState()
 
-  // it('should fail to write local state if not opted in', () => {
-  //   const contract = ctx.contract.create(LocalStorage)
-  //   const newAccount = ctx.defaultSender
+      expect(() => contract.readLocalState()).toThrow()
+    })
+  })
 
-  //   expect(() => contract.writeLocalState('New String', false, newAccount)).toThrow(
-  //     'Account must opt in to contract first',
-  //   )
-  // })
+  it('should fail to write local state if not opted in', () => {
+    const contract = ctx.contract.create(LocalStorage)
+    const newAccount = ctx.defaultSender
 
-  // it('should fail to read dynamic local state for non-existent key', () => {
-  //   const contract = ctx.contract.create(LocalStorage)
+    expect(() => contract.writeLocalState('New String', false, newAccount)).toThrow(
+      'Account must opt in to contract first',
+    )
+  })
 
-  //   contract.optInToApplication()
+  it('should fail to read dynamic local state for non-existent key', () => {
+    const contract = ctx.contract.create(LocalStorage)
+    const account = ctx.any.account({ optedApplications: [ctx.ledger.getApplicationForContract(contract)] })
+    ctx.txn
+      .createScope([ctx.any.txn.applicationCall({ appId: contract, sender: account, onCompletion: 'OptIn' })])
+      .execute(() => {
+        contract.optInToApplication()
+      })
 
-  //   expect(() => contract.readDynamicLocalState('nonexistentKey')).toThrow('Key not found')
-  // })
+    ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract, sender: account })]).execute(() => {
+      expect(() => contract.readDynamicLocalState('nonexistentKey')).toThrow('Key not found')
+    })
+  })
 })
