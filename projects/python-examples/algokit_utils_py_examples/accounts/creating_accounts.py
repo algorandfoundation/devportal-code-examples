@@ -2,7 +2,6 @@ from algokit_utils import AlgoAmount, AlgorandClient
 
 
 def account_code_example() -> None:
-
     """
     Initialize an Algorand client instance configured for LocalNet
     """
@@ -15,7 +14,7 @@ def account_code_example() -> None:
     """
     random_account = algorand_client.account.random()
     # example: RANDOM_ACCOUNTS
-    
+
     # example: KMD_ACCOUNT
     """
     Get or create an account from LocalNet's KMD (Key Management Daemon)
@@ -42,7 +41,7 @@ def account_code_example() -> None:
     """
     mnemonic_account = algorand_client.account.from_mnemonic(mnemonic="MNEMONIC_PHRASE")
     # example: MNEMONIC_ACCOUNT
-    
+
     # example: KMD_WALLET_OPERATIONS
     """
     Create a wallet with the KMD client.
