@@ -5,11 +5,12 @@ repos:
       - id: black
         name: black
         description: "Black: The uncompromising Python code formatter"
-        entry: bash -c 'cd projects/python-examples && poetry run black'
+        entry: bash -c 'cd projects/python-examples && poetry run black .'
         language: system
         minimum_pre_commit_version: 2.9.2
         require_serial: true
         types_or: [python, pyi]
+        files: '^projects/python-examples/.*\.py$'
 
       - id: ruff
         name: ruff
@@ -25,7 +26,7 @@ repos:
       - id: mypy
         name: mypy
         description: "`mypy` will check Python types for correctness"
-        entry: bash -c 'cd projects/python-examples && poetry run mypy'
+        entry: bash -c 'cd projects/python-examples && poetry run mypy .'
         language: system
         types_or: [python, pyi]
         require_serial: true
@@ -38,7 +39,7 @@ repos:
         description: "Run AlgoKit `Tealer` for TEAL static analysis for Python contracts"
         entry: bash -c 'cd projects/python-examples && algokit project run audit-teal'
         language: system
-        files: '^projects/python-examples/.*\.teal$'
+        files: '^projects/python-examples/smart_contracts/artifacts/.*\.teal$'
 
       # TypeScript hooks
       - id: prettier
