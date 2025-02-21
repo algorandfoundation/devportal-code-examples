@@ -4,7 +4,7 @@ from algokit_utils_py_examples.helpers import setup_localnet_environment
 
 
 def rekeying_accounts() -> None:
-    # example: REKEYING_ACCOUNT
+    # example: REKEY_ACCOUNT
 
     algorand_client, dispenser, account_a, account_b, _ = setup_localnet_environment()
 
@@ -41,7 +41,7 @@ def rekeying_accounts() -> None:
         .send()
     )
 
-    # example: REKEYING_ACCOUNT
+    # example: REKEY_ACCOUNT
 
 
 rekeying_accounts()
