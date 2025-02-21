@@ -12,7 +12,7 @@ def asset_clawback() -> None:
     # example: ASSET_CLAWBACK_TRANSACTION
 
     """
-    An asset clawback transaction is an asset transfer transaction with the 
+    An asset clawback transaction is an asset transfer transaction with the
     `clawback_target` set to the account that is being clawed back from.
 
     Parameters for an asset transfer transaction.
