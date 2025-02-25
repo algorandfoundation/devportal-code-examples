@@ -66,7 +66,7 @@ def funding_accounts() -> None:
         min_spending_balance=AlgoAmount(algo=10),
     )
     # example: ENSURE_FUNDED_FROM_ENV
-    
+
     # example: ENSURE_FUNDED_TESTNET
     """
     Ensure an account is funded from a dispenser account retrieved from the testnet dispenser API.
