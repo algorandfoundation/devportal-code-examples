@@ -3,23 +3,23 @@
 
 
 main:
-    intcblock 1 0
-    bytecblock 0x00 0x151f7c75 "boxBytes"
+    intcblock 1 0 32 42
+    bytecblock 0x151f7c75 0x00 "boxInt" "static_ints" "blog" "boxMap" 0x626c6f62 0x75736572730000000000000000 "users" "42" 0x0003 0x626f784d61700000000000000001 "boxDynamicBytes" "boxString" 0x626f784d61700000000000000000
 
 
     txn NumAppArgs
-    bz main_bare_routing@7
-    pushbytess 0xf1e681cb 0x82111678
+    bz main_bare_routing@25
+    pushbytess 0xb7491344 0xbe42351f 0xa2364d0b 0x6ab3e9bc 0xfb1c74f6 0x8a00d372 0x53c28820 0xfa1562f7 0x9e11fd7a 0xd5dd922c 0x9101a7de 0xa4552eb5 0x5a1eefbe 0x69af4d6a 0x4b6b8d3c 0x8e078676 0x49cf4105 0xa74adc74 0xd829d2a3 0xf183207a
     txna ApplicationArgs 0
-    match main_setBoxBytes_route@3 main_setBoxInt_route@4
+    match main_getBox_route@3 main_getItemBoxMap_route@4 main_getBoxMap_route@5 main_maybeBox_route@6 main_maybeBoxMap_route@7 main_maybeBoxRef_route@8 main_getBoxMapStruct_route@9 main_setBox_route@10 main_setBoxMap_route@11 main_setBoxMapStruct_route@12 main_deleteBox_route@13 main_deleteBoxMap_route@14 main_boxMapLength_route@15 main_lengthBoxRef_route@16 main_boxMapStructLength_route@17 main_extractBoxRef_route@18 main_valueBox_route@19 main_arc4Box_route@20 main_boxMapExists_route@21 main_boxMapStructExists_route@22
 
-main_after_if_else@11:
+main_after_if_else@29:
 
 
     intc_1
     return
 
-main_setBoxInt_route@4:
+main_boxMapStructExists_route@22:
 
 
     txn OnCompletion
@@ -33,19 +33,19 @@ main_setBoxInt_route@4:
     btoi
 
 
-    callsub setBoxInt
-    bytec_0
+    callsub boxMapStructExists
+    bytec_1
     intc_1
     uncover 2
     setbit
-    bytec_1
+    bytec_0
     swap
     concat
     log
     intc_0
     return
 
-main_setBoxBytes_route@3:
+main_boxMapExists_route@21:
 
 
     txn OnCompletion
@@ -56,26 +56,394 @@ main_setBoxBytes_route@3:
 
 
     txna ApplicationArgs 1
-    extract 2 0
+    btoi
 
 
-    callsub setBoxBytes
-    bytec_0
+    callsub boxMapExists
+    bytec_1
     intc_1
     uncover 2
     setbit
-    bytec_1
+    bytec_0
     swap
     concat
     log
     intc_0
     return
 
-main_bare_routing@7:
+main_arc4Box_route@20:
 
 
     txn OnCompletion
-    bnz main_after_if_else@11
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub arc4Box
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_valueBox_route@19:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub valueBox
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_extractBoxRef_route@18:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub extractBoxRef
+    intc_0
+    return
+
+main_boxMapStructLength_route@17:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub boxMapStructLength
+    bytec_1
+    intc_1
+    uncover 2
+    setbit
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_lengthBoxRef_route@16:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub lengthBoxRef
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_boxMapLength_route@15:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub boxMapLength
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_deleteBoxMap_route@14:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+
+
+    callsub deleteBoxMap
+    intc_0
+    return
+
+main_deleteBox_route@13:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub deleteBox
+    intc_0
+    return
+
+main_setBoxMapStruct_route@12:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+    txna ApplicationArgs 2
+
+
+    callsub setBoxMapStruct
+    bytec_1
+    intc_1
+    uncover 2
+    setbit
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_setBoxMap_route@11:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+    txna ApplicationArgs 2
+    extract 2 0
+
+
+    callsub setBoxMap
+    intc_0
+    return
+
+main_setBox_route@10:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+
+
+    callsub setBox
+    intc_0
+    return
+
+main_getBoxMapStruct_route@9:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+
+
+    callsub getBoxMapStruct
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_maybeBoxRef_route@8:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub maybeBoxRef
+    dig 1
+    len
+    itob
+    extract 6 2
+    uncover 2
+    concat
+    bytec_1
+    intc_1
+    uncover 3
+    setbit
+    bytec 10
+    swap
+    concat
+    swap
+    concat
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_maybeBoxMap_route@7:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub maybeBoxMap
+    dig 1
+    len
+    itob
+    extract 6 2
+    uncover 2
+    concat
+    bytec_1
+    intc_1
+    uncover 3
+    setbit
+    bytec 10
+    swap
+    concat
+    swap
+    concat
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_maybeBox_route@6:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub maybeBox
+    swap
+    itob
+    bytec_1
+    intc_1
+    uncover 3
+    setbit
+    concat
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_getBoxMap_route@5:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub getBoxMap
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_getItemBoxMap_route@4:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+
+
+    callsub getItemBoxMap
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_getBox_route@3:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub getBox
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_bare_routing@25:
+
+
+    txn OnCompletion
+    bnz main_after_if_else@29
     txn ApplicationID
     !
     assert
@@ -84,33 +452,26 @@ main_bare_routing@7:
 
 
 
-setBoxBytes:
+getBox:
 
 
 
-    proto 1 1
-
-
-    bytec_2
-
-
-    box_del
-    pop
+    proto 0 1
 
 
     bytec_2
 
 
-    frame_dig -1
-    box_put
-
-
-    intc_0
+    box_get
+    swap
+    btoi
+    swap
+    assert
     retsub
 
 
 
-setBoxInt:
+getItemBoxMap:
 
 
 
@@ -121,12 +482,729 @@ setBoxInt:
     itob
 
 
-    pushbytes "boxInt"
+    bytec 5
+
+
+    swap
+    concat
+    box_get
+    assert
+    retsub
+
+
+
+getBoxMap:
+
+
+
+    proto 0 1
+
+
+    bytec 11
+    box_get
+    pushbytes "default"
+    cover 2
+    select
+    retsub
+
+
+
+maybeBox:
+
+
+
+    proto 0 2
+
+
+    bytec_2
+
+
+    box_get
+    swap
+    btoi
+
+
+    swap
+    retsub
+
+
+
+maybeBoxMap:
+
+
+
+    proto 0 2
+
+
+    bytec 11
+    box_get
+    dup
+    uncover 2
+    swap
+
+
+    bz maybeBoxMap_ternary_false@2
+    frame_dig 1
+
+maybeBoxMap_ternary_merge@3:
+
+
+    frame_dig 0
+    uncover 3
+    uncover 3
+    retsub
+
+maybeBoxMap_ternary_false@2:
+
+
+    pushbytes ""
+    b maybeBoxMap_ternary_merge@3
+
+
+
+maybeBoxRef:
+
+
+
+    proto 0 2
+
+
+    bytec 6
+
+
+    intc_2
+    box_create
+    assert
+
+
+    bytec 6
+
+
+    box_get
+
+
+    pushbytes ""
+    uncover 2
+    dig 2
+    select
+    swap
+    retsub
+
+
+
+getBoxMapStruct:
+
+
+
+    proto 1 1
+
+
+    frame_dig -1
+    itob
+
+
+    bytec 8
+
+
+    swap
+    concat
+    box_get
+    assert
+    retsub
+
+
+
+setBox:
+
+
+
+    proto 1 0
+
+
+    frame_dig -1
+    itob
+
+
+    bytec_2
 
 
     swap
     box_put
+    retsub
+
+
+
+setBoxMap:
+
+
+
+    proto 2 0
+
+
+    frame_dig -2
+    itob
+
+
+    bytec 5
+
+
+    swap
+    concat
+    dup
+    box_del
+    pop
+    frame_dig -1
+    box_put
+    retsub
+
+
+
+setBoxMapStruct:
+
+
+
+    proto 2 1
+
+
+    frame_dig -2
+    itob
+
+
+    bytec 8
+
+
+    swap
+    concat
+    dupn 2
+    box_del
+    pop
+    dup
+    frame_dig -1
+    box_put
+
+
+    box_get
+    assert
+
+
+
+
+
+
+
+
+
+
+    dup
+    intc_1
+    extract_uint16
+    dig 1
+    len
+    substring3
+
+
+    frame_dig -1
+    intc_1
+    extract_uint16
+    frame_dig -1
+    len
+    frame_dig -1
+    cover 2
+    substring3
+
+
+
+
+
+
+
+
+
+
+    ==
+    bz setBoxMapStruct_bool_false@4
+
+
+    frame_dig 0
+    box_get
+    assert
+
+
+
+
+
+
+
+
+
+
+    extract 2 8
+
+
+    frame_dig -1
+    extract 2 8
+
+
+
+
+
+
+
+
+
+
+    ==
+    bz setBoxMapStruct_bool_false@4
+
+
+    frame_dig 0
+    box_get
+    assert
+
+
+
+
+
+
+
+
+
+
+    extract 10 8
+
+
+    frame_dig -1
+    extract 10 8
+
+
+
+
+
+
+
+
+
+
+    ==
+    bz setBoxMapStruct_bool_false@4
+    intc_0
+
+setBoxMapStruct_bool_merge@5:
+
+
+
+
+
+
+
+
+
+
+    assert
 
 
     intc_0
+    swap
+    retsub
+
+setBoxMapStruct_bool_false@4:
+    intc_1
+    b setBoxMapStruct_bool_merge@5
+
+
+
+deleteBox:
+
+
+
+    proto 0 0
+
+
+    bytec_2
+
+
+    box_del
+    pop
+
+
+    bytec 12
+
+
+    box_del
+    pop
+
+
+    bytec 13
+
+
+    box_del
+    pop
+
+
+    bytec_2
+
+
+    box_get
+    swap
+    btoi
+    intc_3
+    swap
+    uncover 2
+    select
+    intc_3
+    ==
+    assert
+
+
+    bytec 12
+
+
+    box_get
+    pushbytes 0x00023432
+    cover 2
+    select
+    extract 2 0
+    bytec 9
+    ==
+    assert
+
+
+    bytec 13
+
+
+    box_get
+    bytec 9
+    cover 2
+    select
+    bytec 9
+    ==
+    assert
+    retsub
+
+
+
+deleteBoxMap:
+
+
+
+    proto 1 0
+
+
+    frame_dig -1
+    itob
+
+
+    bytec 5
+
+
+    swap
+    concat
+    box_del
+    pop
+    retsub
+
+
+
+boxMapLength:
+
+
+
+    proto 0 1
+
+
+    bytec 14
+    box_len
+    bury 1
+    bnz boxMapLength_after_if_else@2
+
+
+    intc_1
+    retsub
+
+boxMapLength_after_if_else@2:
+
+
+    bytec 14
+    box_len
+    assert
+    retsub
+
+
+
+lengthBoxRef:
+
+
+
+    proto 0 1
+
+
+    bytec 6
+
+
+    intc_2
+    box_create
+    assert
+
+
+    bytec 6
+
+
+    box_len
+    assert
+    retsub
+
+
+
+boxMapStructLength:
+
+
+
+    proto 0 1
+
+
+    bytec 7
+    box_del
+    pop
+    bytec 7
+
+
+
+
+
+
+    pushbytes 0x0012000000000000004600000000000004d20008746573744e616d65
+
+
+    box_put
+
+
+    bytec 7
+    box_get
+    assert
+    len
+    pushint 28
+    ==
+    assert
+
+
+    bytec 7
+    box_len
+    assert
+    pushint 28
+    ==
+    assert
+
+
+    intc_0
+    retsub
+
+
+
+extractBoxRef:
+
+
+
+    proto 0 0
+
+
+    txn Sender
+
+
+    global CurrentApplicationAddress
+
+
+    dup
+    len
+    dig 2
+    len
+    +
+
+
+    bytec 4
+
+
+    swap
+    box_create
+    assert
+
+
+    bytec 4
+
+
+    intc_1
+    dig 3
+    box_replace
+
+
+    bytec 4
+
+
+    intc_1
+    dup
+    dig 3
+    box_splice
+
+
+    bytec 4
+
+
+    intc_1
+    intc_2
+    box_extract
+
+
+    bytec 4
+
+
+    intc_2
+    dup
+    box_extract
+
+
+    swap
+    uncover 2
+    ==
+    assert
+
+
+    ==
+    assert
+    retsub
+
+
+
+valueBox:
+
+
+
+    proto 0 1
+
+
+    bytec_2
+
+
+    box_get
+    swap
+    btoi
+    swap
+    assert
+    retsub
+
+
+
+arc4Box:
+
+
+
+    proto 0 1
+
+
+    bytec_3
+
+
+
+
+
+
+
+    pushbytes 0x00010203
+    box_put
+
+
+    bytec_3
+
+
+    box_get
+    assert
+    extract 0 1
+    btoi
+    !
+    assert
+
+
+    bytec_3
+
+
+    box_get
+    assert
+    extract 1 1
+    btoi
+    intc_0
+    ==
+    assert
+
+
+    bytec_3
+
+
+    box_get
+    assert
+    extract 2 1
+    btoi
+    pushint 2
+    ==
+    assert
+
+
+    bytec_3
+
+
+    box_get
+    assert
+    extract 3 1
+    btoi
+    pushint 3
+    ==
+    assert
+
+
+    bytec_3
+
+
+    box_get
+    assert
+    retsub
+
+
+
+boxMapExists:
+
+
+
+    proto 1 1
+
+
+    frame_dig -1
+    itob
+
+
+    bytec 5
+
+
+    swap
+    concat
+    box_len
+    bury 1
+    retsub
+
+
+
+boxMapStructExists:
+
+
+
+    proto 1 1
+
+
+    frame_dig -1
+    itob
+
+
+    bytec 8
+
+
+    swap
+    concat
+    box_len
+    bury 1
     retsub
