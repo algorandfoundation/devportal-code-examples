@@ -65,6 +65,7 @@ def funding_accounts() -> None:
         account_to_fund=random_account.address,
         min_spending_balance=AlgoAmount(algo=10),
     )
+    # example: ENSURE_FUNDED_FROM_ENV
 
     # example: ENSURE_FUNDED_TESTNET
     """
