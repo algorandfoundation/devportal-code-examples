@@ -5,40 +5,41 @@ repos:
       - id: black
         name: black
         description: "Black: The uncompromising Python code formatter"
-        entry: bash -c 'cd projects/python-examples && poetry run black'
+        entry: bash -c 'cd projects/python-examples && poetry run black .'
         language: system
         minimum_pre_commit_version: 2.9.2
         require_serial: true
         types_or: [python, pyi]
+        files: '^projects/python-examples/.*\.py$'
 
       - id: ruff
         name: ruff
-        description: "Run 'ruff' for extremely fast Python linting"
+        description: "Run ruff for extremely fast Python linting"
         entry: bash -c 'cd projects/python-examples && poetry run ruff check --fix'
         language: system
         types: [python]
         require_serial: false
         additional_dependencies: []
         minimum_pre_commit_version: "0"
-        files: "^projects/python-examples/(src|tests)/"
+        files: '^projects/python-examples/.*\.py$'
 
       - id: mypy
         name: mypy
-        description: "`mypy` will check Python types for correctness"
-        entry: bash -c 'cd projects/python-examples && poetry run mypy'
+        description: "mypy will check Python types for correctness"
+        entry: bash -c 'cd projects/python-examples && poetry run mypy .'
         language: system
         types_or: [python, pyi]
         require_serial: true
         additional_dependencies: []
         minimum_pre_commit_version: "2.9.2"
-        files: "^projects/python-examples/(src|tests)/"
+        files: '^projects/python-examples/.*\.py$'
 
       - id: tealer
         name: tealer
-        description: "Run AlgoKit `Tealer` for TEAL static analysis for Python contracts"
+        description: "Run AlgoKit Tealer for TEAL static analysis for Python contracts"
         entry: bash -c 'cd projects/python-examples && algokit project run audit-teal'
         language: system
-        files: '^projects/python-examples/.*\.teal$'
+        files: '^projects/python-examples/smart_contracts/artifacts/.*\.teal$'
 
       # TypeScript hooks
       - id: prettier
@@ -50,21 +51,21 @@ repos:
 
       - id: eslint
         name: eslint
-        description: "Run 'eslint' for TypeScript linting"
+        description: "Run eslint for TypeScript linting"
         entry: bash -c 'cd projects/typescript-examples && npm run lint'
         language: system
         types_or: [ts, tsx]
 
       # - id: audit
       #   name: audit
-      #   description: "Run AlgoKit `audit` for static analysis of TypeScript code"
+      #   description: 'Run AlgoKit audit for static analysis of TypeScript code'
       #   entry: bash -c 'cd projects/typescript-examples && algokit project run audit'
       #   language: system
       #   files: '^.*\.ts$'
 
       - id: audit-teal
         name: audit-teal
-        description: "Run AlgoKit `audit-teal` for static analysis of TEAL contracts"
+        description: "Run AlgoKit audit-teal for static analysis of TEAL contracts"
         entry: bash -c 'cd projects/typescript-examples && algokit project run audit-teal'
         language: system
         files: '^projects/typescript-examples/.*\.teal$'
