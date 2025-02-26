@@ -1,7 +1,7 @@
 import { Config } from '@algorandfoundation/algokit-utils'
 import { registerDebugEventHandlers } from '@algorandfoundation/algokit-utils-debug'
 import { algorandFixture } from '@algorandfoundation/algokit-utils/testing'
-import { Address } from 'algosdk'
+import { Address, ABIUintType } from 'algosdk'
 import { beforeAll, beforeEach, describe, expect, test } from 'vitest'
 import { BoxStorageFactory } from '../artifacts/clients/BoxStorage/BoxStorageClient'
 
@@ -32,6 +32,17 @@ describe('BoxStorage contract', () => {
     })
   }
 
+  function createBoxReference(appId: bigint, prefix: string, key: bigint) {
+    const uint64Type = new ABIUintType(64)
+    const encodedKey = uint64Type.encode(key)
+    const boxName = new Uint8Array([...new TextEncoder().encode(prefix), ...encodedKey])
+
+    return {
+      appId,
+      name: boxName,
+    }
+  }
+
   test('set and read box bytes value', async () => {
     const { testAccount } = localnet.context
     const { client } = await deploy(testAccount)
@@ -40,13 +51,28 @@ describe('BoxStorage contract', () => {
 
     const testString = 'Hello Box Storage'
 
+    console.log(
+      'UTF-8 decoded:',
+      new TextDecoder().decode(new Uint8Array([...new TextEncoder().encode('boxMap'), 0, 0, 0, 0, 0, 0, 0, 1])),
+    )
+
+    console.log(
+      'Hex:',
+      Array.from(new Uint8Array([...new TextEncoder().encode('boxMap'), 0, 0, 0, 0, 0, 0, 0, 1]))
+        .map((b) => b.toString(16).padStart(2, '0'))
+        .join(''),
+    )
+
     await client
       .newGroup()
-      .setBoxBytes({ args: { value: testString }, boxReferences: ['boxBytes'] })
+      .setBoxMap({
+        args: { key: 1n, value: testString },
+        boxReferences: [createBoxReference(client.appId, 'boxMap', 1n)],
+      })
       .send()
 
-    const boxValue = await client.state.box.boxBytes()
-    expect(boxValue?.asString()).toBe(testString)
+    const boxValue = await client.getItemBoxMap({ args: { key: 1n } })
+    expect(boxValue).toBe(testString)
   })
 
   test('set and read box int value', async () => {
@@ -60,7 +86,7 @@ describe('BoxStorage contract', () => {
 
     await client
       .newGroup()
-      .setBoxInt({ args: { value: testValue }, boxReferences: ['boxInt'] })
+      .setBox({ args: { valueInt: testValue }, boxReferences: ['boxInt'] })
       .send()
 
     const boxValue = await client.state.box.boxInt()
@@ -75,8 +101,11 @@ describe('BoxStorage contract', () => {
 
     const result = await client
       .newGroup()
-      .setBoxBytes({ args: { value: 'Test String' }, boxReferences: ['boxBytes'] })
-      .setBoxInt({ args: { value: 123n }, boxReferences: ['boxInt'] })
+      .setBoxMap({
+        args: { key: 1n, value: 'Test String' },
+        boxReferences: [createBoxReference(client.appId, 'boxMap', 1n)],
+      })
+      .setBox({ args: { valueInt: 123n }, boxReferences: ['boxInt'] })
       .simulate()
 
     expect(result.simulateResponse.txnGroups[0].appBudgetConsumed).toBeLessThan(700)
