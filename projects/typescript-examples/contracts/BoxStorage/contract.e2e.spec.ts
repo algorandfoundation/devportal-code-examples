@@ -51,18 +51,6 @@ describe('BoxStorage contract', () => {
 
     const testString = 'Hello Box Storage'
 
-    console.log(
-      'UTF-8 decoded:',
-      new TextDecoder().decode(new Uint8Array([...new TextEncoder().encode('boxMap'), 0, 0, 0, 0, 0, 0, 0, 1])),
-    )
-
-    console.log(
-      'Hex:',
-      Array.from(new Uint8Array([...new TextEncoder().encode('boxMap'), 0, 0, 0, 0, 0, 0, 0, 1]))
-        .map((b) => b.toString(16).padStart(2, '0'))
-        .join(''),
-    )
-
     await client
       .newGroup()
       .setBoxMap({
