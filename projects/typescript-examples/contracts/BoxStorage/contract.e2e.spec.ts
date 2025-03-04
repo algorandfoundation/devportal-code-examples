@@ -111,12 +111,10 @@ describe('BoxStorage contract', () => {
 
     await fundContract(testAccount, client.appAddress)
 
-    // First check when box doesn't exist
     const [emptyValue, exists] = await client.maybeBox()
     expect(exists).toBe(false)
-    expect(emptyValue).toBe(0n) // Default value for uint64
+    expect(emptyValue).toBe(0n)
 
-    // Set a value and check again
     const testValue = 42n
     await client
       .newGroup()
@@ -135,22 +133,22 @@ describe('BoxStorage contract', () => {
 
     await fundContract(testAccount, client.appAddress)
 
-    // First check when value doesn't exist
-    const [emptyValue, exists] = await client.maybeBoxMap()
-    expect(exists).toBe(false)
-    expect(emptyValue).toBe('') // Empty string is the default when doesn't exist
+    const testKey = 1n
 
-    // Set a value and check again
+    const [emptyValue, exists] = await client.maybeBoxMap({ args: { key: testKey } })
+    expect(exists).toBe(false)
+    expect(emptyValue).toBe('')
+
     const testString = 'Hello Box Map'
     await client
       .newGroup()
       .setBoxMap({
-        args: { key: 1n, value: testString },
-        boxReferences: [createBoxReference(client.appId, 'boxMap', 1n)],
+        args: { key: testKey, value: testString },
+        boxReferences: [createBoxReference(client.appId, 'boxMap', testKey)],
       })
       .send()
 
-    const [value, existsAfterSet] = await client.maybeBoxMap()
+    const [value, existsAfterSet] = await client.maybeBoxMap({ args: { key: testKey } })
 
     expect(existsAfterSet).toBe(true)
     expect(value).toBe(testString)
@@ -191,7 +189,7 @@ describe('BoxStorage contract', () => {
 
     expect(existsAfterCreate).toBe(true)
     expect(valueAfterCreate).toBeDefined()
-    expect(valueAfterCreate.length).toBe(32) // Should be 32 bytes (size of an address)
+    expect(valueAfterCreate.length).toBe(32)
   })
 
   test('set and read box map struct value', async () => {
@@ -257,7 +255,6 @@ describe('BoxStorage contract', () => {
       })
       .send()
 
-    // Verify boxes are deleted by checking they throw when accessed
     await Promise.all([
       expect(async () => {
         await client.state.box.boxInt()
@@ -323,5 +320,224 @@ describe('BoxStorage contract', () => {
       .simulate()
 
     expect(result.simulateResponse.txnGroups[0].appBudgetConsumed).toBeLessThan(700)
+  })
+
+  test('delete box map and verify deletion', async () => {
+    const { testAccount } = localnet.context
+    const { client } = await deploy(testAccount)
+
+    await fundContract(testAccount, client.appAddress)
+
+    const testString = 'Test String'
+    await client
+      .newGroup()
+      .setBoxMap({
+        args: { key: 1n, value: testString },
+        boxReferences: [createBoxReference(client.appId, 'boxMap', 1n)],
+      })
+      .send()
+
+    const boxValue = await client.getBoxMap({ args: { key: 1n } })
+    expect(boxValue).toBe(testString)
+
+    await client
+      .newGroup()
+      .deleteBoxMap({
+        args: { key: 1n },
+        boxReferences: [createBoxReference(client.appId, 'boxMap', 1n)],
+      })
+      .send()
+
+    const defaultValue = await client.getBoxMapWithDefault({ args: { key: 1n } })
+    expect(defaultValue).toBe('default')
+  })
+
+  test('box map length returns correct value', async () => {
+    const { testAccount } = localnet.context
+    const { client } = await deploy(testAccount)
+
+    await fundContract(testAccount, client.appAddress)
+
+    const initialLength = await client.boxMapLength({ args: { key: 0n } })
+    expect(initialLength).toBe(0n)
+
+    await client
+      .newGroup()
+      .setBoxMap({
+        args: { key: 0n, value: 'Test String' },
+        boxReferences: [createBoxReference(client.appId, 'boxMap', 0n)],
+      })
+      .send()
+
+    const lengthAfterSet = await client.boxMapLength({ args: { key: 0n } })
+    expect(lengthAfterSet).toBe(BigInt('Test String'.length))
+  })
+
+  test('length box ref returns correct value', async () => {
+    const { testAccount } = localnet.context
+    const { client } = await deploy(testAccount)
+
+    await fundContract(testAccount, client.appAddress)
+
+    const { returns } = await client.send.lengthBoxRef({
+      args: { key: 'blob' },
+      boxReferences: [(client.appId, 'blob')],
+    })
+
+    const length = returns?.[0]?.returnValue as bigint
+    expect(length).toBe(32n)
+  })
+
+  test('box map exists returns correct value', async () => {
+    const { testAccount } = localnet.context
+    const { client } = await deploy(testAccount)
+
+    await fundContract(testAccount, client.appAddress)
+
+    const { returns: initialExists } = await client.send.boxMapExists({
+      args: { key: 1n },
+      boxReferences: [createBoxReference(client.appId, 'boxMap', 1n)],
+    })
+
+    expect(initialExists?.[0]?.returnValue).toBe(false)
+
+    await client
+      .newGroup()
+      .setBoxMap({
+        args: { key: 1n, value: 'Test String' },
+        boxReferences: [createBoxReference(client.appId, 'boxMap', 1n)],
+      })
+      .send()
+
+    const { returns: existsAfterSet } = await client.send.boxMapExists({
+      args: { key: 1n },
+      boxReferences: [createBoxReference(client.appId, 'boxMap', 1n)],
+    })
+
+    expect(existsAfterSet?.[0]?.returnValue).toBe(true)
+  })
+
+  test('box map struct exists returns correct value', async () => {
+    const { testAccount } = localnet.context
+    const { client } = await deploy(testAccount)
+
+    await fundContract(testAccount, client.appAddress)
+
+    const { returns: initialExists } = await client.send.boxMapStructExists({
+      args: { key: 1n },
+      boxReferences: [createBoxReference(client.appId, 'users', 1n)],
+    })
+
+    expect(initialExists?.[0]?.returnValue).toBe(false)
+
+    const testStruct = {
+      name: 'TestUser',
+      id: 123n,
+      asset: 456n,
+    }
+
+    await client
+      .newGroup()
+      .setBoxMapStruct({
+        args: {
+          key: 1n,
+          value: testStruct,
+        },
+        boxReferences: [createBoxReference(client.appId, 'users', 1n)],
+      })
+      .send()
+
+    const { returns: existsAfterSet } = await client.send.boxMapStructExists({
+      args: { key: 1n },
+      boxReferences: [createBoxReference(client.appId, 'users', 1n)],
+    })
+
+    expect(existsAfterSet?.[0]?.returnValue).toBe(true)
+  })
+
+  test('key prefix box map returns correct value', async () => {
+    const { testAccount } = localnet.context
+    const { client } = await deploy(testAccount)
+
+    await fundContract(testAccount, client.appAddress)
+
+    const keyPrefix = await client.keyPrefixBoxMap()
+    expect(keyPrefix).toStrictEqual([...new TextEncoder().encode('boxMap')])
+  })
+
+  test('box map struct length returns correct value', async () => {
+    const { testAccount } = localnet.context
+    const { client } = await deploy(testAccount)
+
+    await fundContract(testAccount, client.appAddress)
+
+    const { returns: result } = await client.send.boxMapStructLength({
+      args: { key: 1n },
+      boxReferences: [createBoxReference(client.appId, 'users', 1n)],
+    })
+
+    expect(result?.[0]?.returnValue).toBe(true)
+
+    const storedStruct = await client.getBoxMapStruct({
+      args: { key: 1n },
+      boxReferences: [createBoxReference(client.appId, 'users', 1n)],
+    })
+
+    expect(storedStruct).toBeDefined()
+    expect(storedStruct.name).toBe('testName')
+    expect(storedStruct.id).toBe(70n)
+    expect(storedStruct.asset).toBe(1234n)
+  })
+
+  test('arc4 box handles static array correctly', async () => {
+    const { testAccount } = localnet.context
+    const { client } = await deploy(testAccount)
+
+    await fundContract(testAccount, client.appAddress)
+
+    const { returns } = await client.send.arc4Box({
+      args: { key: 'staticArray' },
+      boxReferences: [(client.appId, 'staticArray')],
+    })
+
+    const result = returns?.[0]?.returnValue as number[]
+
+    expect(result[0]).toBe(0)
+    expect(result[1]).toBe(1)
+    expect(result[2]).toBe(2)
+    expect(result[3]).toBe(3)
+  })
+
+  test('extract box ref handles data correctly', async () => {
+    const { testAccount } = localnet.context
+    const { client } = await deploy(testAccount)
+
+    await fundContract(testAccount, client.appAddress)
+
+    await client.send.extractBoxRef({
+      args: { key: 'extractTest' },
+      boxReferences: [(client.appId, 'extractTest')],
+    })
+
+    // The verification is done inside the contract itself
+    // If the assertions fail, the transaction will fail
+    // So if we get here, the test passed
+    expect(true).toBe(true)
+  })
+
+  test('value box returns correct value', async () => {
+    const { testAccount } = localnet.context
+    const { client } = await deploy(testAccount)
+
+    await fundContract(testAccount, client.appAddress)
+
+    const testValue = 42n
+    await client
+      .newGroup()
+      .setBox({ args: { valueInt: testValue }, boxReferences: ['boxInt'] })
+      .send()
+
+    const value = await client.valueBox()
+    expect(value).toBe(testValue)
   })
 })
