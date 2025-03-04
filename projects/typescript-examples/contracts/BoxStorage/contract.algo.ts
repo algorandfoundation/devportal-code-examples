@@ -103,6 +103,18 @@ export default class BoxStorage extends arc4.Contract {
   }
   // example: GET_BOX_STORAGE_REF
 
+  // example: GET_BOX_STORAGE_MAP_STRUCT
+  /**
+   * Retrieves the value stored in the boxMapStruct box
+   * @param key The key to retrieve the value from
+   * @returns The value stored in the boxMapStruct box
+   */
+  @arc4.abimethod({ readonly: true })
+  public getBoxMapStruct(key: uint64): UserStruct {
+    return this.boxMapStruct.get(key)
+  }
+  // example: GET_BOX_STORAGE_MAP_STRUCT
+
   // example: GET_BOX_STORAGE_MAYBE_BOX
   /**
    * Retrieves the value stored in the boxInt box and checks if it exists
@@ -138,33 +150,16 @@ export default class BoxStorage extends arc4.Contract {
    * @returns A tuple containing the value and a boolean indicating if the box exists
    */
   @arc4.abimethod({ readonly: false })
-  public maybeBoxRef(): [bytes, boolean] {
-    // Create a BoxRef instance with key 'blob'
-    // The native property returns the string as a bytes array
-    // But you can also use the string directly as the key
-    const boxRef = BoxRef({ key: new arc4.Str('blob').native })
-    // Create the boxRef with a size of 32 bytes
-    // The assert ensures the creation was successful
-    assert(boxRef.create({ size: 32 }))
+  public maybeBoxRef(key: string): [bytes, boolean] {
+    // Create a BoxRef instance with the provided key
+    const boxRef = BoxRef({ key })
     // Retrieve the value from the boxRef
     // The maybe method returns a tuple containing the value and a boolean indicating if the box exists
     const [value, exists] = boxRef.maybe()
     // Return a tuple containing the value and a boolean indicating if the box exists
-    return [exists ? value : Bytes(''), exists]
+    return [value, exists]
   }
   // example: GET_BOX_STORAGE_MAYBE_BOX_REF
-
-  // example: GET_BOX_STORAGE_MAP_STRUCT
-  /**
-   * Retrieves the value stored in the boxMapStruct box
-   * @param key The key to retrieve the value from
-   * @returns The value stored in the boxMapStruct box
-   */
-  @arc4.abimethod({ readonly: true })
-  public getBoxMapStruct(key: uint64): UserStruct {
-    return this.boxMapStruct.get(key)
-  }
-  // example: GET_BOX_STORAGE_MAP_STRUCT
 
   // example: SET_BOX_STORAGE
   /**
@@ -249,17 +244,14 @@ export default class BoxStorage extends arc4.Contract {
   // example: DELETE_BOX_REF
   /**
    * Deletes the value of the boxRef box
+   * @param key The key to delete the value from
    */
   @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
-  public deleteBoxRef(): void {
-    // Create a BoxRef instance with key 'blog'
-    const boxRef = BoxRef({ key: 'blog' })
-    // Create the boxRef with a size of 32 bytes
-    this.boxRef.create({ size: Uint64(32) })
-    // Assert that the boxRef has data
-    assert(this.boxRef.value, 'has data')
+  public deleteBoxRef(key: string): void {
+    // Create a BoxRef instance with key 'blob'
+    const boxRef = BoxRef({ key })
     // Delete the value of the boxRef box
-    this.boxRef.delete()
+    boxRef.delete()
     // Assert that the value of the boxRef box is the default value
     assertMatch(boxRef.maybe(), [Bytes(''), false])
   }
@@ -338,7 +330,7 @@ export default class BoxStorage extends arc4.Contract {
     // Calculate size needed for our two 32-byte values
     const totalSize = Uint64(appAddress.length + senderBytes.length)
 
-    const boxRef = BoxRef({ key: 'blog' })
+    const boxRef = BoxRef({ key: 'blob' })
     // Create the boxRef with the calculated size
     assert(boxRef.create({ size: totalSize }), 'boxRef creation failed')
 
@@ -432,4 +424,44 @@ export default class BoxStorage extends arc4.Contract {
     return this.boxMap.keyPrefix
   }
   // example: KEY_PREFIX_BOX_MAP
+
+  // example: SET_BOX_STORAGE_DYNAMIC_BYTES
+  /**
+   * Sets the value of the boxDynamicBytes box
+   * @param value The dynamic bytes value to set in the boxDynamicBytes box
+   */
+  @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+  public setBoxDynamicBytes(value: arc4.DynamicBytes): void {
+    this.boxDynamicBytes.value = value
+  }
+  // example: SET_BOX_STORAGE_DYNAMIC_BYTES
+
+  // example: SET_BOX_STORAGE_STRING
+  /**
+   * Sets the value of the boxString box
+   * @param value The string value to set in the boxString box
+   */
+  @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+  public setBoxString(value: string): void {
+    this.boxString.value = value
+  }
+  // example: SET_BOX_STORAGE_STRING
+
+  // example: SET_BOX_STORAGE_REF
+  /**
+   * Creates a box ref with the given key and sets its value to the sender's address
+   * @param key The key to use for the box ref
+   */
+  @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+  public setBoxRef(key: string): void {
+    // Create a BoxRef instance with the given key
+    const boxRef = BoxRef({ key })
+    // Create the boxRef with a size of 32 bytes (the size of an Algorand address)
+    boxRef.create({ size: 32 })
+    // Get the sender's bytes
+    const senderBytes = Txn.sender.bytes
+    // Put the sender's bytes into the boxRef
+    boxRef.put(senderBytes)
+  }
+  // example: SET_BOX_STORAGE_REF
 }
