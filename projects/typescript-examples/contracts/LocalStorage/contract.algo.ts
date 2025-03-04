@@ -42,7 +42,7 @@ export default class LocalStorage extends arc4.Contract {
    * - localBool: true
    * - localAccount: sender's address
    */
-  @arc4.abimethod({ allowActions: 'OptIn' })
+  @arc4.abimethod()
   public optInToApplication(): void {
     this.localInt(Txn.sender).value = 100
     this.localIntNoDefault(Txn.sender).value = 200
@@ -64,7 +64,7 @@ export default class LocalStorage extends arc4.Contract {
    * - [4] boolean: The value of localBool
    * - [5] Address: The value of localAccount converted to Address type
    */
-  @arc4.abimethod({ readonly: true })
+  @arc4.abimethod()
   public readLocalState(): [uint64, uint64, bytes, string, boolean, arc4.Address] {
     const sender = Txn.sender
     // Convert Account reference type to native Address type for return value

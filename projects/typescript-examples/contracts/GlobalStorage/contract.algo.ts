@@ -40,7 +40,7 @@ export default class GlobalStorage extends arc4.Contract {
    * @returns A tuple containing [globalInt, globalIntNoDefault, globalBytes, globalString, globalBool, globalAccount]
    * where each value corresponds to the current state of the respective global variable
    */
-  @arc4.abimethod({ readonly: true })
+  @arc4.abimethod()
   public readGlobalState(): [uint64, uint64, bytes, string, boolean, arc4.Address] {
     // Convert Account reference type to native Address type for return value
     const accountAddress = new arc4.Address(this.globalAccount.value)
@@ -62,7 +62,7 @@ export default class GlobalStorage extends arc4.Contract {
    * @returns A tuple containing [value, hasValue] where value is the current globalIntNoDefault value
    * and hasValue indicates if the value has been initialized
    */
-  @arc4.abimethod({ readonly: true })
+  @arc4.abimethod()
   public hasGlobalState(): [uint64, boolean] {
     const hasValue = this.globalIntNoDefault.hasValue
     const value = this.globalIntNoDefault.value
