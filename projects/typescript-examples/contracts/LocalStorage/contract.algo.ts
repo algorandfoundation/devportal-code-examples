@@ -42,7 +42,7 @@ export default class LocalStorage extends arc4.Contract {
    * - localBool: true
    * - localAccount: sender's address
    */
-  @arc4.abimethod()
+  @arc4.abimethod({ allowActions: 'OptIn' })
   public optInToApplication(): void {
     this.localInt(Txn.sender).value = 100
     this.localIntNoDefault(Txn.sender).value = 200

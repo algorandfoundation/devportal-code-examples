@@ -51,7 +51,7 @@ export default class BoxStorage extends arc4.Contract {
    * Retrieves the value stored in the boxInt box
    * @returns The uint64 value stored in boxInt
    */
-  @arc4.abimethod()
+  @arc4.abimethod({ readonly: true })
   public getBox(): uint64 {
     return this.boxInt.value
   }
@@ -61,7 +61,7 @@ export default class BoxStorage extends arc4.Contract {
   /**
    * Retrieves the value of the boxInt box
    */
-  @arc4.abimethod()
+  @arc4.abimethod({ readonly: true })
   public valueBox(): uint64 {
     return this.boxInt.value
   }
@@ -121,7 +121,7 @@ export default class BoxStorage extends arc4.Contract {
    * Retrieves the value stored in the boxInt box and checks if it exists
    * @returns A tuple containing the value and a boolean indicating if the box exists
    */
-  @arc4.abimethod()
+  @arc4.abimethod({ readonly: true })
   public maybeBox(): [uint64, boolean] {
     const [boxIntValue, boxIntExists] = this.boxInt.maybe()
     return [boxIntValue, boxIntExists]
@@ -135,7 +135,7 @@ export default class BoxStorage extends arc4.Contract {
    * @param key The key of the boxMap to retrieve the value from
    * @returns The value stored in the boxMap box
    */
-  @arc4.abimethod()
+  @arc4.abimethod({ readonly: true })
   public getBoxMap(key: uint64): string {
     return this.boxMap.get(key)
   }
@@ -147,7 +147,7 @@ export default class BoxStorage extends arc4.Contract {
    * @param key The key of the boxMap to retrieve the value from
    * @returns The value stored in the boxMap box
    */
-  @arc4.abimethod()
+  @arc4.abimethod({ readonly: true })
   public getBoxMapWithDefault(key: uint64): string {
     return this.boxMap.get(key, { default: 'default' })
   }
@@ -182,7 +182,7 @@ export default class BoxStorage extends arc4.Contract {
    * @param key The key to check in the boxMap
    * @returns A tuple containing the value and a boolean indicating if the box exists
    */
-  @arc4.abimethod()
+  @arc4.abimethod({ readonly: true })
   public maybeBoxMap(key: uint64): [string, boolean] {
     const [value, exists] = this.boxMap.maybe(key)
     return [exists ? value : '', exists]
@@ -195,7 +195,7 @@ export default class BoxStorage extends arc4.Contract {
    * @param key The key to get the length for
    * @returns The length of the boxMap box
    */
-  @arc4.abimethod()
+  @arc4.abimethod({ readonly: true })
   public boxMapLength(key: uint64): uint64 {
     if (!this.boxMap.has(key)) {
       return Uint64(0)
@@ -211,7 +211,7 @@ export default class BoxStorage extends arc4.Contract {
    * @param key The key to check for
    * @returns true if the box exists, false otherwise
    */
-  @arc4.abimethod()
+  @arc4.abimethod({ readonly: true })
   public boxMapExists(key: uint64): boolean {
     return this.boxMap.has(key)
   }
@@ -222,7 +222,7 @@ export default class BoxStorage extends arc4.Contract {
    * Retrieves the key prefix of the boxMap box
    * @returns The key prefix of the boxMap box
    */
-  @arc4.abimethod()
+  @arc4.abimethod({ readonly: true })
   public keyPrefixBoxMap(): bytes {
     return this.boxMap.keyPrefix
   }
@@ -235,7 +235,7 @@ export default class BoxStorage extends arc4.Contract {
    * @param key The key to retrieve the value from
    * @returns The value stored in the boxMapStruct box
    */
-  @arc4.abimethod()
+  @arc4.abimethod({ readonly: true })
   public getBoxMapStruct(key: uint64): UserStruct {
     return this.boxMapStruct.get(key)
   }
@@ -292,7 +292,7 @@ export default class BoxStorage extends arc4.Contract {
    * @param key The key to check for
    * @returns true if the box exists, false otherwise
    */
-  @arc4.abimethod()
+  @arc4.abimethod({ readonly: true })
   public boxMapStructExists(key: uint64): boolean {
     return this.boxMapStruct.has(key)
   }
@@ -347,7 +347,7 @@ export default class BoxStorage extends arc4.Contract {
    * Retrieves the value stored in the boxRef box and checks if it exists
    * @returns A tuple containing the value and a boolean indicating if the box exists
    */
-  @arc4.abimethod()
+  @arc4.abimethod({ readonly: true })
   public maybeBoxRef(key: string): [bytes, boolean] {
     const boxRef = BoxRef({ key })
     const [value, exists] = boxRef.maybe()

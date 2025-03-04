@@ -21,7 +21,7 @@ main_after_if_else@35:
 
 main_arc4Box_route@28:
     // contracts/BoxStorage/contract.algo.ts:405
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -32,7 +32,7 @@ main_arc4Box_route@28:
     txna ApplicationArgs 1
     extract 2 0
     // contracts/BoxStorage/contract.algo.ts:405
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     callsub arc4Box
     bytec_0 // 0x151f7c75
     swap
@@ -43,7 +43,7 @@ main_arc4Box_route@28:
 
 main_extractBoxRef_route@27:
     // contracts/BoxStorage/contract.algo.ts:377
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -54,14 +54,14 @@ main_extractBoxRef_route@27:
     txna ApplicationArgs 1
     extract 2 0
     // contracts/BoxStorage/contract.algo.ts:377
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     callsub extractBoxRef
     intc_0 // 1
     return
 
 main_lengthBoxRef_route@26:
     // contracts/BoxStorage/contract.algo.ts:364
-    // @arc4.abimethod({ readonly: false })
+    // @arc4.abimethod()
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -72,7 +72,7 @@ main_lengthBoxRef_route@26:
     txna ApplicationArgs 1
     extract 2 0
     // contracts/BoxStorage/contract.algo.ts:364
-    // @arc4.abimethod({ readonly: false })
+    // @arc4.abimethod()
     callsub lengthBoxRef
     itob
     bytec_0 // 0x151f7c75
@@ -84,7 +84,7 @@ main_lengthBoxRef_route@26:
 
 main_maybeBoxRef_route@25:
     // contracts/BoxStorage/contract.algo.ts:350
-    // @arc4.abimethod({ readonly: false })
+    // @arc4.abimethod({ readonly: true })
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -95,7 +95,7 @@ main_maybeBoxRef_route@25:
     txna ApplicationArgs 1
     extract 2 0
     // contracts/BoxStorage/contract.algo.ts:350
-    // @arc4.abimethod({ readonly: false })
+    // @arc4.abimethod({ readonly: true })
     callsub maybeBoxRef
     dig 1
     len
@@ -121,7 +121,7 @@ main_maybeBoxRef_route@25:
 
 main_deleteBoxRef_route@24:
     // contracts/BoxStorage/contract.algo.ts:337
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -132,14 +132,14 @@ main_deleteBoxRef_route@24:
     txna ApplicationArgs 1
     extract 2 0
     // contracts/BoxStorage/contract.algo.ts:337
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     callsub deleteBoxRef
     intc_0 // 1
     return
 
 main_setBoxRef_route@23:
     // contracts/BoxStorage/contract.algo.ts:323
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -150,14 +150,14 @@ main_setBoxRef_route@23:
     txna ApplicationArgs 1
     extract 2 0
     // contracts/BoxStorage/contract.algo.ts:323
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     callsub setBoxRef
     intc_0 // 1
     return
 
 main_getBoxRef_route@22:
     // contracts/BoxStorage/contract.algo.ts:307
-    // @arc4.abimethod({ readonly: false })
+    // @arc4.abimethod()
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -173,7 +173,7 @@ main_getBoxRef_route@22:
 
 main_boxMapStructExists_route@21:
     // contracts/BoxStorage/contract.algo.ts:295
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod({ readonly: true })
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -184,7 +184,7 @@ main_boxMapStructExists_route@21:
     txna ApplicationArgs 1
     btoi
     // contracts/BoxStorage/contract.algo.ts:295
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod({ readonly: true })
     callsub boxMapStructExists
     bytec_1 // 0x00
     intc_1 // 0
@@ -199,7 +199,7 @@ main_boxMapStructExists_route@21:
 
 main_boxMapStructLength_route@20:
     // contracts/BoxStorage/contract.algo.ts:272
-    // @arc4.abimethod({ readonly: false })
+    // @arc4.abimethod()
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -210,7 +210,7 @@ main_boxMapStructLength_route@20:
     txna ApplicationArgs 1
     btoi
     // contracts/BoxStorage/contract.algo.ts:272
-    // @arc4.abimethod({ readonly: false })
+    // @arc4.abimethod()
     callsub boxMapStructLength
     bytec_1 // 0x00
     intc_1 // 0
@@ -225,7 +225,7 @@ main_boxMapStructLength_route@20:
 
 main_setBoxMapStruct_route@19:
     // contracts/BoxStorage/contract.algo.ts:250
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -237,7 +237,7 @@ main_setBoxMapStruct_route@19:
     btoi
     txna ApplicationArgs 2
     // contracts/BoxStorage/contract.algo.ts:250
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     callsub setBoxMapStruct
     bytec_1 // 0x00
     intc_1 // 0
@@ -287,7 +287,7 @@ main_keyPrefixBoxMap_route@17:
 
 main_boxMapExists_route@16:
     // contracts/BoxStorage/contract.algo.ts:214
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod({ readonly: true })
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -298,7 +298,7 @@ main_boxMapExists_route@16:
     txna ApplicationArgs 1
     btoi
     // contracts/BoxStorage/contract.algo.ts:214
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod({ readonly: true })
     callsub boxMapExists
     bytec_1 // 0x00
     intc_1 // 0
@@ -373,7 +373,7 @@ main_maybeBoxMap_route@14:
 
 main_deleteBoxMap_route@13:
     // contracts/BoxStorage/contract.algo.ts:173
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -384,14 +384,14 @@ main_deleteBoxMap_route@13:
     txna ApplicationArgs 1
     btoi
     // contracts/BoxStorage/contract.algo.ts:173
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     callsub deleteBoxMap
     intc_0 // 1
     return
 
 main_setBoxMap_route@12:
     // contracts/BoxStorage/contract.algo.ts:162
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -404,7 +404,7 @@ main_setBoxMap_route@12:
     txna ApplicationArgs 2
     extract 2 0
     // contracts/BoxStorage/contract.algo.ts:162
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     callsub setBoxMap
     intc_0 // 1
     return
@@ -490,7 +490,7 @@ main_maybeBox_route@9:
 
 main_deleteBox_route@8:
     // contracts/BoxStorage/contract.algo.ts:107
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -502,7 +502,7 @@ main_deleteBox_route@8:
 
 main_setBoxDynamicBytes_route@7:
     // contracts/BoxStorage/contract.algo.ts:97
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -512,14 +512,14 @@ main_setBoxDynamicBytes_route@7:
     // export default class BoxStorage extends arc4.Contract {
     txna ApplicationArgs 1
     // contracts/BoxStorage/contract.algo.ts:97
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     callsub setBoxDynamicBytes
     intc_0 // 1
     return
 
 main_setBoxString_route@6:
     // contracts/BoxStorage/contract.algo.ts:86
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -530,14 +530,14 @@ main_setBoxString_route@6:
     txna ApplicationArgs 1
     extract 2 0
     // contracts/BoxStorage/contract.algo.ts:86
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     callsub setBoxString
     intc_0 // 1
     return
 
 main_setBox_route@5:
     // contracts/BoxStorage/contract.algo.ts:75
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -548,7 +548,7 @@ main_setBox_route@5:
     txna ApplicationArgs 1
     btoi
     // contracts/BoxStorage/contract.algo.ts:75
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     callsub setBox
     intc_0 // 1
     return
@@ -640,7 +640,7 @@ valueBox:
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.setBox(valueInt: uint64) -> void:
 setBox:
     // contracts/BoxStorage/contract.algo.ts:75-76
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     // public setBox(valueInt: uint64): void {
     proto 1 0
     // contracts/BoxStorage/contract.algo.ts:77
@@ -660,7 +660,7 @@ setBox:
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.setBoxString(value: bytes) -> void:
 setBoxString:
     // contracts/BoxStorage/contract.algo.ts:86-87
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     // public setBoxString(value: string): void {
     proto 1 0
     // contracts/BoxStorage/contract.algo.ts:39
@@ -683,7 +683,7 @@ setBoxString:
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.setBoxDynamicBytes(value: bytes) -> void:
 setBoxDynamicBytes:
     // contracts/BoxStorage/contract.algo.ts:97-98
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     // public setBoxDynamicBytes(value: arc4.DynamicBytes): void {
     proto 1 0
     // contracts/BoxStorage/contract.algo.ts:42
@@ -706,7 +706,7 @@ setBoxDynamicBytes:
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.deleteBox() -> void:
 deleteBox:
     // contracts/BoxStorage/contract.algo.ts:107-108
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     // public deleteBox(): void {
     proto 0 0
     // contracts/BoxStorage/contract.algo.ts:40
@@ -842,7 +842,7 @@ getBoxMapWithDefault:
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.setBoxMap(key: uint64, value: bytes) -> void:
 setBoxMap:
     // contracts/BoxStorage/contract.algo.ts:162-163
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     // public setBoxMap(key: uint64, value: string): void {
     proto 2 0
     // contracts/BoxStorage/contract.algo.ts:164
@@ -867,7 +867,7 @@ setBoxMap:
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.deleteBoxMap(key: uint64) -> void:
 deleteBoxMap:
     // contracts/BoxStorage/contract.algo.ts:173-174
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     // public deleteBoxMap(key: uint64): void {
     proto 1 0
     // contracts/BoxStorage/contract.algo.ts:175
@@ -967,7 +967,7 @@ boxMapLength_after_if_else@2:
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.boxMapExists(key: uint64) -> uint64:
 boxMapExists:
     // contracts/BoxStorage/contract.algo.ts:214-215
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod({ readonly: true })
     // public boxMapExists(key: uint64): boolean {
     proto 1 1
     // contracts/BoxStorage/contract.algo.ts:216
@@ -1011,7 +1011,7 @@ getBoxMapStruct:
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.setBoxMapStruct(key: uint64, value: bytes) -> uint64:
 setBoxMapStruct:
     // contracts/BoxStorage/contract.algo.ts:250-251
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     // public setBoxMapStruct(key: uint64, value: UserStruct): boolean {
     proto 2 1
     // contracts/BoxStorage/contract.algo.ts:252
@@ -1165,7 +1165,7 @@ setBoxMapStruct_bool_false@4:
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.boxMapStructLength(key: uint64) -> uint64:
 boxMapStructLength:
     // contracts/BoxStorage/contract.algo.ts:272-273
-    // @arc4.abimethod({ readonly: false })
+    // @arc4.abimethod()
     // public boxMapStructLength(key: uint64): boolean {
     proto 1 1
     // contracts/BoxStorage/contract.algo.ts:280
@@ -1218,7 +1218,7 @@ boxMapStructLength:
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.boxMapStructExists(key: uint64) -> uint64:
 boxMapStructExists:
     // contracts/BoxStorage/contract.algo.ts:295-296
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod({ readonly: true })
     // public boxMapStructExists(key: uint64): boolean {
     proto 1 1
     // contracts/BoxStorage/contract.algo.ts:297
@@ -1240,7 +1240,7 @@ boxMapStructExists:
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.getBoxRef() -> bytes:
 getBoxRef:
     // contracts/BoxStorage/contract.algo.ts:307-308
-    // @arc4.abimethod({ readonly: false })
+    // @arc4.abimethod()
     // public getBoxRef(): arc4.Address {
     proto 0 1
     // contracts/BoxStorage/contract.algo.ts:43
@@ -1284,7 +1284,7 @@ getBoxRef:
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.setBoxRef(key: bytes) -> void:
 setBoxRef:
     // contracts/BoxStorage/contract.algo.ts:323-324
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     // public setBoxRef(key: string): void {
     proto 1 0
     // contracts/BoxStorage/contract.algo.ts:326
@@ -1308,7 +1308,7 @@ setBoxRef:
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.deleteBoxRef(key: bytes) -> void:
 deleteBoxRef:
     // contracts/BoxStorage/contract.algo.ts:337-338
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     // public deleteBoxRef(key: string): void {
     proto 1 0
     // contracts/BoxStorage/contract.algo.ts:340
@@ -1344,7 +1344,7 @@ deleteBoxRef_bool_false@4:
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.maybeBoxRef(key: bytes) -> bytes, uint64:
 maybeBoxRef:
     // contracts/BoxStorage/contract.algo.ts:350-351
-    // @arc4.abimethod({ readonly: false })
+    // @arc4.abimethod({ readonly: true })
     // public maybeBoxRef(key: string): [bytes, boolean] {
     proto 1 2
     // contracts/BoxStorage/contract.algo.ts:353
@@ -1359,7 +1359,7 @@ maybeBoxRef:
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.lengthBoxRef(key: bytes) -> uint64:
 lengthBoxRef:
     // contracts/BoxStorage/contract.algo.ts:364-365
-    // @arc4.abimethod({ readonly: false })
+    // @arc4.abimethod()
     // public lengthBoxRef(key: string): uint64 {
     proto 1 1
     // contracts/BoxStorage/contract.algo.ts:367
@@ -1379,7 +1379,7 @@ lengthBoxRef:
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.extractBoxRef(key: bytes) -> void:
 extractBoxRef:
     // contracts/BoxStorage/contract.algo.ts:377-378
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     // public extractBoxRef(key: string): void {
     proto 1 0
     // contracts/BoxStorage/contract.algo.ts:379
@@ -1442,7 +1442,7 @@ extractBoxRef:
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.arc4Box(key: bytes) -> bytes:
 arc4Box:
     // contracts/BoxStorage/contract.algo.ts:405-406
-    // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+    // @arc4.abimethod()
     // public arc4Box(key: string): StaticInts {
     proto 1 1
     // contracts/BoxStorage/contract.algo.ts:409-414
