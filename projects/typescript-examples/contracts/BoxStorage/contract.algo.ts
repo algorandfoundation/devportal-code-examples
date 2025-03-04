@@ -59,49 +59,48 @@ export default class BoxStorage extends arc4.Contract {
   // example: GET_BOX_STORAGE_MAP
   /**
    * Retrieves the value stored in the boxMap box
-   * @param key The key to retrieve the value from
+   * @param key The key of the boxMap to retrieve the value from
    * @returns The value stored in the boxMap box
    */
   @arc4.abimethod({ readonly: true })
-  public getItemBoxMap(key: uint64): string {
+  public getBoxMap(key: uint64): string {
     return this.boxMap.get(key)
   }
   // example: GET_BOX_STORAGE_MAP
 
   // example: GET_BOX_STORAGE_MAP_DEFAULT
   /**
-   * Retrieves the value stored in the boxMap box with a default value
+   * Retrieves the value stored in the boxMap box with a default value if the key does not exist
+   * @param key The key of the boxMap to retrieve the value from
    * @returns The value stored in the boxMap box
    */
   @arc4.abimethod({ readonly: true })
-  public getBoxMap(): string {
-    const key1 = Uint64(1)
-    return this.boxMap.get(key1, { default: 'default' })
+  public getBoxMapWithDefault(key: uint64): string {
+    return this.boxMap.get(key, { default: 'default' })
   }
   // example: GET_BOX_STORAGE_MAP_DEFAULT
 
   // example: GET_BOX_STORAGE_REF
   /**
-   * @TODO Not `delete`, `key`, and `get` members implemented yet
    * Retrieves the value stored in the boxRef box
    * @returns The value stored in the boxRef box
    */
-  // @arc4.abimethod({ readonly: false })
-  // public getBoxRef(): void {
-  //   // Create the boxRef with a size of 32 bytes (the size of an Algorand address)
-  //   // The assert ensures the creation was successful
-  //   assert(this.boxRef.create({ size: 32 }), 'boxRef creation failed')
-  //   // Get the sender's bytes
-  //   const senderBytes = Txn.sender.bytes
-  //   // Put the sender's bytes into the boxRef
-  //   this.boxRef.put(senderBytes)
-  //   // Get the value from the boxRef
-  //   const value = this.boxRef.get({ default: senderBytes })
-  //   // Assert the value is the sender's bytes
-  //   assert(value === senderBytes, 'boxRef value mismatch')
-  //   // Delete the boxRef
-  //   assert(this.boxRef.delete(), 'boxRef deletion failed')
-  // }
+  @arc4.abimethod({ readonly: false })
+  public getBoxRef(): arc4.Address {
+    // Create the boxRef with a size of 32 bytes (the size of an Algorand address)
+    // The assert ensures the creation was successful
+    this.boxRef.create({ size: 32 })
+    // Get the sender's bytes
+    const senderBytes = Txn.sender.bytes
+    // Put the sender's bytes into the boxRef
+    this.boxRef.put(senderBytes)
+    // Get the value from the boxRef
+    const value = this.boxRef.get({ default: senderBytes })
+    // Assert the value is the sender's bytes
+    assert(value === senderBytes, 'boxRef value mismatch')
+    // Return the value
+    return new arc4.Address(value)
+  }
   // example: GET_BOX_STORAGE_REF
 
   // example: GET_BOX_STORAGE_MAYBE_BOX
@@ -249,22 +248,21 @@ export default class BoxStorage extends arc4.Contract {
 
   // example: DELETE_BOX_REF
   /**
-   * @TODO Not `delete`, `key`, and `get` members implemented yet
    * Deletes the value of the boxRef box
    */
-  // @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
-  // public deleteBoxRef(): void {
-  //   // Create a BoxRef instance with key 'blog'
-  //   const boxRef = BoxRef({ key: 'blog' })
-  //   // Create the boxRef with a size of 32 bytes
-  //   this.boxRef.create({ size: Uint64(32) })
-  //   // Assert that the boxRef has data
-  //   assert(this.boxRef.value, 'has data')
-  //   // Delete the value of the boxRef box
-  //   this.boxRef.delete()
-  //   // Assert that the value of the boxRef box is the default value
-  //   assertMatch(boxRef.maybe(), [Bytes(''), false])
-  // }
+  @arc4.abimethod({ allowActions: ['NoOp'], readonly: false })
+  public deleteBoxRef(): void {
+    // Create a BoxRef instance with key 'blog'
+    const boxRef = BoxRef({ key: 'blog' })
+    // Create the boxRef with a size of 32 bytes
+    this.boxRef.create({ size: Uint64(32) })
+    // Assert that the boxRef has data
+    assert(this.boxRef.value, 'has data')
+    // Delete the value of the boxRef box
+    this.boxRef.delete()
+    // Assert that the value of the boxRef box is the default value
+    assertMatch(boxRef.maybe(), [Bytes(''), false])
+  }
   // example: DELETE_BOX_REF
 
   // example: LENGTH_BOX_STORAGE
@@ -426,13 +424,12 @@ export default class BoxStorage extends arc4.Contract {
 
   // example: KEY_PREFIX_BOX_MAP
   /**
-   * @TODO `keyPrefix` not implemented yet
    * Retrieves the key prefix of the boxMap box
    * @returns The key prefix of the boxMap box
    */
-  // @arc4.abimethod({ readonly: true })
-  // public keyPrefixBoxMap(): bytes {
-  //   return this.boxMap.keyPrefix
-  // }
+  @arc4.abimethod({ readonly: true })
+  public keyPrefixBoxMap(): bytes {
+    return this.boxMap.keyPrefix
+  }
   // example: KEY_PREFIX_BOX_MAP
 }

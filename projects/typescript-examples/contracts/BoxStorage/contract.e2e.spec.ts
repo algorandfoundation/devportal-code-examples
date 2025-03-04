@@ -43,26 +43,6 @@ describe('BoxStorage contract', () => {
     }
   }
 
-  test('set and read box bytes value', async () => {
-    const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount)
-
-    await fundContract(testAccount, client.appAddress)
-
-    const testString = 'Hello Box Storage'
-
-    await client
-      .newGroup()
-      .setBoxMap({
-        args: { key: 1n, value: testString },
-        boxReferences: [createBoxReference(client.appId, 'boxMap', 1n)],
-      })
-      .send()
-
-    const boxValue = await client.getItemBoxMap({ args: { key: 1n } })
-    expect(boxValue).toBe(testString)
-  })
-
   test('set and read box int value', async () => {
     const { testAccount } = localnet.context
 
@@ -79,6 +59,74 @@ describe('BoxStorage contract', () => {
 
     const boxValue = await client.state.box.boxInt()
     expect(boxValue).toBe(testValue)
+  })
+
+  test('set and read box map value', async () => {
+    const { testAccount } = localnet.context
+    const { client } = await deploy(testAccount)
+
+    await fundContract(testAccount, client.appAddress)
+
+    const testString = 'Hello Box Storage'
+
+    await client
+      .newGroup()
+      .setBoxMap({
+        args: { key: 1n, value: testString },
+        boxReferences: [createBoxReference(client.appId, 'boxMap', 1n)],
+      })
+      .send()
+
+    const boxValue = await client.getBoxMap({ args: { key: 1n } })
+    expect(boxValue).toBe(testString)
+  })
+
+  test('set and read box map with default value', async () => {
+    const { testAccount } = localnet.context
+    const { client } = await deploy(testAccount)
+
+    await fundContract(testAccount, client.appAddress)
+
+    const boxValue = await client.getBoxMapWithDefault({ args: { key: 1n } })
+    expect(boxValue).toBe('default')
+  })
+
+  test('set and read box ref value', async () => {
+    const { testAccount } = localnet.context
+    const { client } = await deploy(testAccount)
+
+    await fundContract(testAccount, client.appAddress)
+
+    const { returns } = await client.send.getBoxRef({
+      args: {},
+      boxReferences: [(client.appId, 'boxRef')],
+    })
+
+    expect(returns?.[0]?.returnValue).toBe(testAccount.addr.toString())
+  })
+
+  test('maybe box returns correct value and existence', async () => {
+    const { testAccount } = localnet.context
+    const { client } = await deploy(testAccount)
+
+    await fundContract(testAccount, client.appAddress)
+
+    // First check when box doesn't exist
+    const [emptyValue, exists] = await client.maybeBox()
+    expect(exists).toBe(false)
+    expect(emptyValue).toBe(0n) // Default value for uint64
+
+    // Set a value and check again
+    const testValue = 42n
+    await client
+      .newGroup()
+      .setBox({ args: { valueInt: testValue }, boxReferences: ['boxInt'] })
+      .send()
+
+    const [value, existsAfterSet] = await client.maybeBox()
+
+    expect(existsAfterSet).toBe(true)
+    expect(value).toBe(testValue)
   })
 
   test('verify app budget consumption is reasonable', async () => {
