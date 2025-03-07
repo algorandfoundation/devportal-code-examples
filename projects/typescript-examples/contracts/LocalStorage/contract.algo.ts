@@ -7,6 +7,7 @@ import {
   contract,
   Bytes,
   Global,
+  Contract,
 } from '@algorandfoundation/algorand-typescript'
 import type { uint64, bytes } from '@algorandfoundation/algorand-typescript'
 
@@ -20,7 +21,7 @@ import type { uint64, bytes } from '@algorandfoundation/algorand-typescript'
  * @stateTotals.localUints - 3 uints allocated for local integer storage
  */
 @contract({ stateTotals: { localBytes: 4, localUints: 3 } })
-export default class LocalStorage extends arc4.Contract {
+export default class LocalStorage extends Contract {
   // example: INIT_LOCAL_STATE
   public localInt = LocalState<uint64>({ key: 'int' })
   public localIntNoDefault = LocalState<uint64>()
@@ -64,7 +65,6 @@ export default class LocalStorage extends arc4.Contract {
    * - [4] boolean: The value of localBool
    * - [5] Address: The value of localAccount converted to Address type
    */
-  @arc4.abimethod({ readonly: true })
   public readLocalState(): [uint64, uint64, bytes, string, boolean, arc4.Address] {
     const sender = Txn.sender
     // Convert Account reference type to native Address type for return value
@@ -89,7 +89,6 @@ export default class LocalStorage extends arc4.Contract {
    * @param valueBool - New boolean value to store
    * @param valueAccount - New account address to store
    */
-  @arc4.abimethod()
   public writeLocalState(valueString: string, valueBool: boolean, valueAccount: Account): void {
     // Dynamic keys must be explicitly reserved in the contract's stateTotals configuration
     const sender = Txn.sender
@@ -114,7 +113,6 @@ export default class LocalStorage extends arc4.Contract {
    * @param value - The string value to store
    * @returns The stored string value
    */
-  @arc4.abimethod()
   public writeDynamicLocalState(key: string, value: string): string {
     const sender = Txn.sender
 
@@ -136,7 +134,6 @@ export default class LocalStorage extends arc4.Contract {
    * @param key - The dynamic key to read the value from
    * @returns The stored string value for the given key
    */
-  @arc4.abimethod()
   public readDynamicLocalState(key: string): string {
     const sender = Txn.sender
 
@@ -155,7 +152,6 @@ export default class LocalStorage extends arc4.Contract {
    * Clears all local state values for the transaction sender.
    * After calling this method, all local state values will be deleted.
    */
-  @arc4.abimethod()
   public clearLocalState(): void {
     const sender = Txn.sender
 

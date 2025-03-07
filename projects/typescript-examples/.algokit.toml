@@ -15,11 +15,15 @@ name = 'typescript-examples'
 projects_root_path = 'contracts'
 artifacts = 'artifacts'
 
+[project.deploy]
+command = "npm run deploy"
+environment_secrets = ["DEPLOYER_MNEMONIC", "DISPENSER_MNEMONIC"]
+
+[project.deploy.localnet]
+environment_secrets = []
+
 [project.run]
-
 build = { commands = ['npm run build'], description = 'Build the project' }
-
-deploy = { commands = ['npm run deploy'], description = 'Deploy the project' }
 
 format = { commands = [
   'npm run format',

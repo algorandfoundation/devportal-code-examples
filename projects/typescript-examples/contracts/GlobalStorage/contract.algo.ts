@@ -6,6 +6,7 @@ import {
   Account,
   Txn,
   Bytes,
+  Contract,
   contract,
 } from '@algorandfoundation/algorand-typescript'
 import type { uint64, bytes } from '@algorandfoundation/algorand-typescript'
@@ -14,7 +15,7 @@ import type { uint64, bytes } from '@algorandfoundation/algorand-typescript'
  * A contract demonstrating global storage functionality
  */
 @contract({ stateTotals: { globalBytes: 4, globalUints: 3 } })
-export default class GlobalStorage extends arc4.Contract {
+export default class GlobalStorage extends Contract {
   // example: INIT_GLOBAL_STORAGE
   public globalInt = GlobalState<uint64>({ initialValue: Uint64(50) }) // UInt64 with default value
   public globalIntNoDefault = GlobalState<uint64>() // UInt64 with no default value
@@ -40,7 +41,6 @@ export default class GlobalStorage extends arc4.Contract {
    * @returns A tuple containing [globalInt, globalIntNoDefault, globalBytes, globalString, globalBool, globalAccount]
    * where each value corresponds to the current state of the respective global variable
    */
-  @arc4.abimethod({ readonly: true })
   public readGlobalState(): [uint64, uint64, bytes, string, boolean, arc4.Address] {
     // Convert Account reference type to native Address type for return value
     const accountAddress = new arc4.Address(this.globalAccount.value)
@@ -62,7 +62,6 @@ export default class GlobalStorage extends arc4.Contract {
    * @returns A tuple containing [value, hasValue] where value is the current globalIntNoDefault value
    * and hasValue indicates if the value has been initialized
    */
-  @arc4.abimethod({ readonly: true })
   public hasGlobalState(): [uint64, boolean] {
     const hasValue = this.globalIntNoDefault.hasValue
     const value = this.globalIntNoDefault.value
@@ -80,7 +79,6 @@ export default class GlobalStorage extends arc4.Contract {
    * @param valueBool New value for globalBool
    * @param valueAccount New value for globalAccount
    */
-  @arc4.abimethod()
   public writeGlobalState(valueString: string, valueBool: boolean, valueAccount: Account): void {
     this.globalString.value = valueString
     this.globalBool.value = valueBool
@@ -98,7 +96,6 @@ export default class GlobalStorage extends arc4.Contract {
    * @param value The string value to store in global state
    * @returns The stored string value, confirming successful storage
    */
-  @arc4.abimethod()
   public writeDynamicGlobalState(key: string, value: string): string {
     // Dynamic keys must be explicitly reserved in the contract's stateTotals configuration
     const globalDynamicAccess = GlobalState<string>({ key })

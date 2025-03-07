@@ -1,14 +1,13 @@
-import { arc4 } from '@algorandfoundation/algorand-typescript'
+import { Contract } from '@algorandfoundation/algorand-typescript'
 
 /**
  * An abstract base class for a simple example contract
  */
-abstract class Intermediate extends arc4.Contract {
+abstract class Intermediate extends Contract {
   /**
    * sayBananas method
    * @returns The string "Bananas"
    */
-  @arc4.abimethod({ allowActions: ['NoOp'], readonly: true })
   public sayBananas(): string {
     return `Bananas`
   }
