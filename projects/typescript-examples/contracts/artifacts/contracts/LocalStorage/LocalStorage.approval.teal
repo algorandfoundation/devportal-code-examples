@@ -5,9 +5,9 @@
 main:
     intcblock 0 1
     bytecblock "localString" "localBool" "localAccount" 0x151f7c75 "int" "localIntNoDefault" "localBytes"
-    // contracts/LocalStorage/contract.algo.ts:22-23
+    // contracts/LocalStorage/contract.algo.ts:23-24
     // @contract({ stateTotals: { localBytes: 4, localUints: 3 } })
-    // export default class LocalStorage extends arc4.Contract {
+    // export default class LocalStorage extends Contract {
     txn NumAppArgs
     bz main_bare_routing@11
     pushbytess 0x01a3a3ff 0xd0013fc5 0x02818b4c 0x2793c249 0x213631f5 0x5e58051a // method "optInToApplication()void", method "readLocalState()(uint64,uint64,byte[],string,bool,address)", method "writeLocalState(string,bool,account)void", method "writeDynamicLocalState(string,string)string", method "readDynamicLocalState(string)string", method "clearLocalState()void"
@@ -15,15 +15,15 @@ main:
     match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8
 
 main_after_if_else@15:
-    // contracts/LocalStorage/contract.algo.ts:22-23
+    // contracts/LocalStorage/contract.algo.ts:23-24
     // @contract({ stateTotals: { localBytes: 4, localUints: 3 } })
-    // export default class LocalStorage extends arc4.Contract {
+    // export default class LocalStorage extends Contract {
     intc_0 // 0
     return
 
 main_clearLocalState_route@8:
-    // contracts/LocalStorage/contract.algo.ts:158
-    // @arc4.abimethod()
+    // contracts/LocalStorage/contract.algo.ts:155
+    // public clearLocalState(): void {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -34,20 +34,20 @@ main_clearLocalState_route@8:
     return
 
 main_readDynamicLocalState_route@7:
-    // contracts/LocalStorage/contract.algo.ts:139
-    // @arc4.abimethod()
+    // contracts/LocalStorage/contract.algo.ts:137
+    // public readDynamicLocalState(key: string): string {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // contracts/LocalStorage/contract.algo.ts:22-23
+    // contracts/LocalStorage/contract.algo.ts:23-24
     // @contract({ stateTotals: { localBytes: 4, localUints: 3 } })
-    // export default class LocalStorage extends arc4.Contract {
+    // export default class LocalStorage extends Contract {
     txna ApplicationArgs 1
     extract 2 0
-    // contracts/LocalStorage/contract.algo.ts:139
-    // @arc4.abimethod()
+    // contracts/LocalStorage/contract.algo.ts:137
+    // public readDynamicLocalState(key: string): string {
     callsub readDynamicLocalState
     dup
     len
@@ -63,22 +63,22 @@ main_readDynamicLocalState_route@7:
     return
 
 main_writeDynamicLocalState_route@6:
-    // contracts/LocalStorage/contract.algo.ts:117
-    // @arc4.abimethod()
+    // contracts/LocalStorage/contract.algo.ts:116
+    // public writeDynamicLocalState(key: string, value: string): string {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // contracts/LocalStorage/contract.algo.ts:22-23
+    // contracts/LocalStorage/contract.algo.ts:23-24
     // @contract({ stateTotals: { localBytes: 4, localUints: 3 } })
-    // export default class LocalStorage extends arc4.Contract {
+    // export default class LocalStorage extends Contract {
     txna ApplicationArgs 1
     extract 2 0
     txna ApplicationArgs 2
     extract 2 0
-    // contracts/LocalStorage/contract.algo.ts:117
-    // @arc4.abimethod()
+    // contracts/LocalStorage/contract.algo.ts:116
+    // public writeDynamicLocalState(key: string, value: string): string {
     callsub writeDynamicLocalState
     dup
     len
@@ -95,15 +95,15 @@ main_writeDynamicLocalState_route@6:
 
 main_writeLocalState_route@5:
     // contracts/LocalStorage/contract.algo.ts:92
-    // @arc4.abimethod()
+    // public writeLocalState(valueString: string, valueBool: boolean, valueAccount: Account): void {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // contracts/LocalStorage/contract.algo.ts:22-23
+    // contracts/LocalStorage/contract.algo.ts:23-24
     // @contract({ stateTotals: { localBytes: 4, localUints: 3 } })
-    // export default class LocalStorage extends arc4.Contract {
+    // export default class LocalStorage extends Contract {
     txna ApplicationArgs 1
     extract 2 0
     txna ApplicationArgs 2
@@ -113,14 +113,14 @@ main_writeLocalState_route@5:
     btoi
     txnas Accounts
     // contracts/LocalStorage/contract.algo.ts:92
-    // @arc4.abimethod()
+    // public writeLocalState(valueString: string, valueBool: boolean, valueAccount: Account): void {
     callsub writeLocalState
     intc_1 // 1
     return
 
 main_readLocalState_route@4:
-    // contracts/LocalStorage/contract.algo.ts:67
-    // @arc4.abimethod()
+    // contracts/LocalStorage/contract.algo.ts:68
+    // public readLocalState(): [uint64, uint64, bytes, string, boolean, arc4.Address] {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
@@ -175,7 +175,7 @@ main_readLocalState_route@4:
     return
 
 main_optInToApplication_route@3:
-    // contracts/LocalStorage/contract.algo.ts:45
+    // contracts/LocalStorage/contract.algo.ts:46
     // @arc4.abimethod({ allowActions: 'OptIn' })
     txn OnCompletion
     intc_1 // OptIn
@@ -188,9 +188,9 @@ main_optInToApplication_route@3:
     return
 
 main_bare_routing@11:
-    // contracts/LocalStorage/contract.algo.ts:22-23
+    // contracts/LocalStorage/contract.algo.ts:23-24
     // @contract({ stateTotals: { localBytes: 4, localUints: 3 } })
-    // export default class LocalStorage extends arc4.Contract {
+    // export default class LocalStorage extends Contract {
     txn OnCompletion
     bnz main_after_if_else@15
     txn ApplicationID
@@ -202,67 +202,67 @@ main_bare_routing@11:
 
 // contracts/LocalStorage/contract.algo.ts::LocalStorage.optInToApplication() -> void:
 optInToApplication:
-    // contracts/LocalStorage/contract.algo.ts:45-46
+    // contracts/LocalStorage/contract.algo.ts:46-47
     // @arc4.abimethod({ allowActions: 'OptIn' })
     // public optInToApplication(): void {
     proto 0 0
-    // contracts/LocalStorage/contract.algo.ts:47
+    // contracts/LocalStorage/contract.algo.ts:48
     // this.localInt(Txn.sender).value = 100
     txn Sender
-    // contracts/LocalStorage/contract.algo.ts:25
+    // contracts/LocalStorage/contract.algo.ts:26
     // public localInt = LocalState<uint64>({ key: 'int' })
     bytec 4 // "int"
-    // contracts/LocalStorage/contract.algo.ts:47
+    // contracts/LocalStorage/contract.algo.ts:48
     // this.localInt(Txn.sender).value = 100
     pushint 100 // 100
     app_local_put
-    // contracts/LocalStorage/contract.algo.ts:48
+    // contracts/LocalStorage/contract.algo.ts:49
     // this.localIntNoDefault(Txn.sender).value = 200
     txn Sender
-    // contracts/LocalStorage/contract.algo.ts:26
+    // contracts/LocalStorage/contract.algo.ts:27
     // public localIntNoDefault = LocalState<uint64>()
     bytec 5 // "localIntNoDefault"
-    // contracts/LocalStorage/contract.algo.ts:48
+    // contracts/LocalStorage/contract.algo.ts:49
     // this.localIntNoDefault(Txn.sender).value = 200
     pushint 200 // 200
     app_local_put
-    // contracts/LocalStorage/contract.algo.ts:49
+    // contracts/LocalStorage/contract.algo.ts:50
     // this.localBytes(Txn.sender).value = Bytes('Silvio')
     txn Sender
-    // contracts/LocalStorage/contract.algo.ts:27
+    // contracts/LocalStorage/contract.algo.ts:28
     // public localBytes = LocalState<bytes>()
     bytec 6 // "localBytes"
-    // contracts/LocalStorage/contract.algo.ts:49
+    // contracts/LocalStorage/contract.algo.ts:50
     // this.localBytes(Txn.sender).value = Bytes('Silvio')
     pushbytes "Silvio"
     app_local_put
-    // contracts/LocalStorage/contract.algo.ts:50
+    // contracts/LocalStorage/contract.algo.ts:51
     // this.localString(Txn.sender).value = 'Micali'
     txn Sender
-    // contracts/LocalStorage/contract.algo.ts:28
+    // contracts/LocalStorage/contract.algo.ts:29
     // public localString = LocalState<string>()
     bytec_0 // "localString"
-    // contracts/LocalStorage/contract.algo.ts:50
+    // contracts/LocalStorage/contract.algo.ts:51
     // this.localString(Txn.sender).value = 'Micali'
     pushbytes "Micali"
     app_local_put
-    // contracts/LocalStorage/contract.algo.ts:51
+    // contracts/LocalStorage/contract.algo.ts:52
     // this.localBool(Txn.sender).value = true
     txn Sender
-    // contracts/LocalStorage/contract.algo.ts:29
+    // contracts/LocalStorage/contract.algo.ts:30
     // public localBool = LocalState<boolean>()
     bytec_1 // "localBool"
-    // contracts/LocalStorage/contract.algo.ts:51
+    // contracts/LocalStorage/contract.algo.ts:52
     // this.localBool(Txn.sender).value = true
     intc_1 // 1
     app_local_put
-    // contracts/LocalStorage/contract.algo.ts:52
+    // contracts/LocalStorage/contract.algo.ts:53
     // this.localAccount(Txn.sender).value = Txn.sender
     txn Sender
-    // contracts/LocalStorage/contract.algo.ts:30
+    // contracts/LocalStorage/contract.algo.ts:31
     // public localAccount = LocalState<Account>()
     bytec_2 // "localAccount"
-    // contracts/LocalStorage/contract.algo.ts:52
+    // contracts/LocalStorage/contract.algo.ts:53
     // this.localAccount(Txn.sender).value = Txn.sender
     txn Sender
     app_local_put
@@ -271,8 +271,7 @@ optInToApplication:
 
 // contracts/LocalStorage/contract.algo.ts::LocalStorage.readLocalState() -> uint64, uint64, bytes, bytes, uint64, bytes:
 readLocalState:
-    // contracts/LocalStorage/contract.algo.ts:67-68
-    // @arc4.abimethod()
+    // contracts/LocalStorage/contract.algo.ts:68
     // public readLocalState(): [uint64, uint64, bytes, string, boolean, arc4.Address] {
     proto 0 6
     // contracts/LocalStorage/contract.algo.ts:69
@@ -282,7 +281,7 @@ readLocalState:
     // const accountAddress = new arc4.Address(this.localAccount(sender).value)
     dup
     intc_0 // 0
-    // contracts/LocalStorage/contract.algo.ts:30
+    // contracts/LocalStorage/contract.algo.ts:31
     // public localAccount = LocalState<Account>()
     bytec_2 // "localAccount"
     // contracts/LocalStorage/contract.algo.ts:71
@@ -293,7 +292,7 @@ readLocalState:
     // this.localInt(sender).value,
     dig 1
     intc_0 // 0
-    // contracts/LocalStorage/contract.algo.ts:25
+    // contracts/LocalStorage/contract.algo.ts:26
     // public localInt = LocalState<uint64>({ key: 'int' })
     bytec 4 // "int"
     // contracts/LocalStorage/contract.algo.ts:74
@@ -304,7 +303,7 @@ readLocalState:
     // this.localIntNoDefault(sender).value,
     dig 2
     intc_0 // 0
-    // contracts/LocalStorage/contract.algo.ts:26
+    // contracts/LocalStorage/contract.algo.ts:27
     // public localIntNoDefault = LocalState<uint64>()
     bytec 5 // "localIntNoDefault"
     // contracts/LocalStorage/contract.algo.ts:75
@@ -315,7 +314,7 @@ readLocalState:
     // this.localBytes(sender).value,
     dig 3
     intc_0 // 0
-    // contracts/LocalStorage/contract.algo.ts:27
+    // contracts/LocalStorage/contract.algo.ts:28
     // public localBytes = LocalState<bytes>()
     bytec 6 // "localBytes"
     // contracts/LocalStorage/contract.algo.ts:76
@@ -326,7 +325,7 @@ readLocalState:
     // this.localString(sender).value,
     dig 4
     intc_0 // 0
-    // contracts/LocalStorage/contract.algo.ts:28
+    // contracts/LocalStorage/contract.algo.ts:29
     // public localString = LocalState<string>()
     bytec_0 // "localString"
     // contracts/LocalStorage/contract.algo.ts:77
@@ -337,7 +336,7 @@ readLocalState:
     // this.localBool(sender).value,
     uncover 5
     intc_0 // 0
-    // contracts/LocalStorage/contract.algo.ts:29
+    // contracts/LocalStorage/contract.algo.ts:30
     // public localBool = LocalState<boolean>()
     bytec_1 // "localBool"
     // contracts/LocalStorage/contract.algo.ts:78
@@ -359,84 +358,83 @@ readLocalState:
 
 // contracts/LocalStorage/contract.algo.ts::LocalStorage.writeLocalState(valueString: bytes, valueBool: uint64, valueAccount: bytes) -> void:
 writeLocalState:
-    // contracts/LocalStorage/contract.algo.ts:92-93
-    // @arc4.abimethod()
+    // contracts/LocalStorage/contract.algo.ts:92
     // public writeLocalState(valueString: string, valueBool: boolean, valueAccount: Account): void {
     proto 3 0
-    // contracts/LocalStorage/contract.algo.ts:95
+    // contracts/LocalStorage/contract.algo.ts:94
     // const sender = Txn.sender
     txn Sender
-    // contracts/LocalStorage/contract.algo.ts:97
+    // contracts/LocalStorage/contract.algo.ts:96
     // assert(sender.isOptedIn(Global.currentApplicationId), 'Account must opt in to contract first')
     dup
     global CurrentApplicationID
     app_opted_in
     assert // Account must opt in to contract first
-    // contracts/LocalStorage/contract.algo.ts:99
+    // contracts/LocalStorage/contract.algo.ts:98
     // this.localString(sender).value = valueString
     dup
-    // contracts/LocalStorage/contract.algo.ts:28
+    // contracts/LocalStorage/contract.algo.ts:29
     // public localString = LocalState<string>()
     bytec_0 // "localString"
-    // contracts/LocalStorage/contract.algo.ts:99
+    // contracts/LocalStorage/contract.algo.ts:98
     // this.localString(sender).value = valueString
     frame_dig -3
     app_local_put
-    // contracts/LocalStorage/contract.algo.ts:100
+    // contracts/LocalStorage/contract.algo.ts:99
     // this.localBool(sender).value = valueBool
     dup
-    // contracts/LocalStorage/contract.algo.ts:29
+    // contracts/LocalStorage/contract.algo.ts:30
     // public localBool = LocalState<boolean>()
     bytec_1 // "localBool"
-    // contracts/LocalStorage/contract.algo.ts:100
+    // contracts/LocalStorage/contract.algo.ts:99
     // this.localBool(sender).value = valueBool
     frame_dig -2
     app_local_put
-    // contracts/LocalStorage/contract.algo.ts:101
+    // contracts/LocalStorage/contract.algo.ts:100
     // this.localAccount(sender).value = valueAccount
     dup
-    // contracts/LocalStorage/contract.algo.ts:30
+    // contracts/LocalStorage/contract.algo.ts:31
     // public localAccount = LocalState<Account>()
     bytec_2 // "localAccount"
-    // contracts/LocalStorage/contract.algo.ts:101
+    // contracts/LocalStorage/contract.algo.ts:100
     // this.localAccount(sender).value = valueAccount
     frame_dig -1
     app_local_put
-    // contracts/LocalStorage/contract.algo.ts:103
+    // contracts/LocalStorage/contract.algo.ts:102
     // assert(this.localString(sender).value === valueString)
     dup
     intc_0 // 0
-    // contracts/LocalStorage/contract.algo.ts:28
+    // contracts/LocalStorage/contract.algo.ts:29
     // public localString = LocalState<string>()
     bytec_0 // "localString"
-    // contracts/LocalStorage/contract.algo.ts:103
+    // contracts/LocalStorage/contract.algo.ts:102
     // assert(this.localString(sender).value === valueString)
     app_local_get_ex
     assert // check LocalState exists
     frame_dig -3
     ==
     assert
-    // contracts/LocalStorage/contract.algo.ts:104
+    // contracts/LocalStorage/contract.algo.ts:103
     // assert(this.localBool(sender).value === valueBool)
     dup
     intc_0 // 0
-    // contracts/LocalStorage/contract.algo.ts:29
+    // contracts/LocalStorage/contract.algo.ts:30
     // public localBool = LocalState<boolean>()
     bytec_1 // "localBool"
-    // contracts/LocalStorage/contract.algo.ts:104
+    // contracts/LocalStorage/contract.algo.ts:103
     // assert(this.localBool(sender).value === valueBool)
     app_local_get_ex
     assert // check LocalState exists
     frame_dig -2
     ==
     assert
-    // contracts/LocalStorage/contract.algo.ts:105
+    // contracts/LocalStorage/contract.algo.ts:104
     // assert(this.localAccount(sender).value === valueAccount)
     intc_0 // 0
-    // contracts/LocalStorage/contract.algo.ts:30
+    // contracts/LocalStorage/contract.algo.ts:31
     // public localAccount = LocalState<Account>()
     bytec_2 // "localAccount"
-    // contracts/LocalStorage/contract.algo.ts:105
+    // contracts/LocalStorage/contract.algo.ts:104
     // assert(this.localAccount(sender).value === valueAccount)
     app_local_get_ex
     assert // check LocalState exists
@@ -448,26 +446,25 @@ writeLocalState:
 
 // contracts/LocalStorage/contract.algo.ts::LocalStorage.writeDynamicLocalState(key: bytes, value: bytes) -> bytes:
 writeDynamicLocalState:
-    // contracts/LocalStorage/contract.algo.ts:117-118
-    // @arc4.abimethod()
+    // contracts/LocalStorage/contract.algo.ts:116
     // public writeDynamicLocalState(key: string, value: string): string {
     proto 2 1
-    // contracts/LocalStorage/contract.algo.ts:119
+    // contracts/LocalStorage/contract.algo.ts:117
     // const sender = Txn.sender
     txn Sender
-    // contracts/LocalStorage/contract.algo.ts:121
+    // contracts/LocalStorage/contract.algo.ts:119
     // assert(sender.isOptedIn(Global.currentApplicationId), 'Account must opt in to contract first')
     dup
     global CurrentApplicationID
     app_opted_in
     assert // Account must opt in to contract first
-    // contracts/LocalStorage/contract.algo.ts:125
+    // contracts/LocalStorage/contract.algo.ts:123
     // localDynamicAccess(sender).value = value
     dup
     frame_dig -2
     frame_dig -1
     app_local_put
-    // contracts/LocalStorage/contract.algo.ts:127
+    // contracts/LocalStorage/contract.algo.ts:125
     // assert(localDynamicAccess(sender).value === value)
     dup
     intc_0 // 0
@@ -477,7 +474,7 @@ writeDynamicLocalState:
     frame_dig -1
     ==
     assert
-    // contracts/LocalStorage/contract.algo.ts:129
+    // contracts/LocalStorage/contract.algo.ts:127
     // return localDynamicAccess(sender).value
     intc_0 // 0
     frame_dig -2
@@ -488,20 +485,19 @@ writeDynamicLocalState:
 
 // contracts/LocalStorage/contract.algo.ts::LocalStorage.readDynamicLocalState(key: bytes) -> bytes:
 readDynamicLocalState:
-    // contracts/LocalStorage/contract.algo.ts:139-140
-    // @arc4.abimethod()
+    // contracts/LocalStorage/contract.algo.ts:137
     // public readDynamicLocalState(key: string): string {
     proto 1 1
-    // contracts/LocalStorage/contract.algo.ts:141
+    // contracts/LocalStorage/contract.algo.ts:138
     // const sender = Txn.sender
     txn Sender
-    // contracts/LocalStorage/contract.algo.ts:143
+    // contracts/LocalStorage/contract.algo.ts:140
     // assert(sender.isOptedIn(Global.currentApplicationId), 'Account must opt in to contract first')
     dup
     global CurrentApplicationID
     app_opted_in
     assert // Account must opt in to contract first
-    // contracts/LocalStorage/contract.algo.ts:147
+    // contracts/LocalStorage/contract.algo.ts:144
     // assert(localDynamicAccess(sender).hasValue, 'Key not found')
     dup
     intc_0 // 0
@@ -509,7 +505,7 @@ readDynamicLocalState:
     app_local_get_ex
     bury 1
     assert // Key not found
-    // contracts/LocalStorage/contract.algo.ts:149
+    // contracts/LocalStorage/contract.algo.ts:146
     // return localDynamicAccess(sender).value
     intc_0 // 0
     frame_dig -1
@@ -520,68 +516,67 @@ readDynamicLocalState:
 
 // contracts/LocalStorage/contract.algo.ts::LocalStorage.clearLocalState() -> void:
 clearLocalState:
-    // contracts/LocalStorage/contract.algo.ts:158-159
-    // @arc4.abimethod()
+    // contracts/LocalStorage/contract.algo.ts:155
     // public clearLocalState(): void {
     proto 0 0
-    // contracts/LocalStorage/contract.algo.ts:160
+    // contracts/LocalStorage/contract.algo.ts:156
     // const sender = Txn.sender
     txn Sender
-    // contracts/LocalStorage/contract.algo.ts:162
+    // contracts/LocalStorage/contract.algo.ts:158
     // assert(sender.isOptedIn(Global.currentApplicationId), 'Account must opt in to contract first')
     dup
     global CurrentApplicationID
     app_opted_in
     assert // Account must opt in to contract first
-    // contracts/LocalStorage/contract.algo.ts:164
+    // contracts/LocalStorage/contract.algo.ts:160
     // this.localInt(sender).delete()
-    dup
-    // contracts/LocalStorage/contract.algo.ts:25
-    // public localInt = LocalState<uint64>({ key: 'int' })
-    bytec 4 // "int"
-    // contracts/LocalStorage/contract.algo.ts:164
-    // this.localInt(sender).delete()
-    app_local_del
-    // contracts/LocalStorage/contract.algo.ts:165
-    // this.localIntNoDefault(sender).delete()
     dup
     // contracts/LocalStorage/contract.algo.ts:26
-    // public localIntNoDefault = LocalState<uint64>()
-    bytec 5 // "localIntNoDefault"
-    // contracts/LocalStorage/contract.algo.ts:165
-    // this.localIntNoDefault(sender).delete()
+    // public localInt = LocalState<uint64>({ key: 'int' })
+    bytec 4 // "int"
+    // contracts/LocalStorage/contract.algo.ts:160
+    // this.localInt(sender).delete()
     app_local_del
-    // contracts/LocalStorage/contract.algo.ts:166
-    // this.localBytes(sender).delete()
+    // contracts/LocalStorage/contract.algo.ts:161
+    // this.localIntNoDefault(sender).delete()
     dup
     // contracts/LocalStorage/contract.algo.ts:27
-    // public localBytes = LocalState<bytes>()
-    bytec 6 // "localBytes"
-    // contracts/LocalStorage/contract.algo.ts:166
-    // this.localBytes(sender).delete()
+    // public localIntNoDefault = LocalState<uint64>()
+    bytec 5 // "localIntNoDefault"
+    // contracts/LocalStorage/contract.algo.ts:161
+    // this.localIntNoDefault(sender).delete()
     app_local_del
-    // contracts/LocalStorage/contract.algo.ts:167
-    // this.localString(sender).delete()
+    // contracts/LocalStorage/contract.algo.ts:162
+    // this.localBytes(sender).delete()
     dup
     // contracts/LocalStorage/contract.algo.ts:28
-    // public localString = LocalState<string>()
-    bytec_0 // "localString"
-    // contracts/LocalStorage/contract.algo.ts:167
-    // this.localString(sender).delete()
+    // public localBytes = LocalState<bytes>()
+    bytec 6 // "localBytes"
+    // contracts/LocalStorage/contract.algo.ts:162
+    // this.localBytes(sender).delete()
     app_local_del
-    // contracts/LocalStorage/contract.algo.ts:168
-    // this.localBool(sender).delete()
+    // contracts/LocalStorage/contract.algo.ts:163
+    // this.localString(sender).delete()
     dup
     // contracts/LocalStorage/contract.algo.ts:29
+    // public localString = LocalState<string>()
+    bytec_0 // "localString"
+    // contracts/LocalStorage/contract.algo.ts:163
+    // this.localString(sender).delete()
+    app_local_del
+    // contracts/LocalStorage/contract.algo.ts:164
+    // this.localBool(sender).delete()
+    dup
+    // contracts/LocalStorage/contract.algo.ts:30
     // public localBool = LocalState<boolean>()
     bytec_1 // "localBool"
-    // contracts/LocalStorage/contract.algo.ts:168
+    // contracts/LocalStorage/contract.algo.ts:164
     // this.localBool(sender).delete()
     app_local_del
-    // contracts/LocalStorage/contract.algo.ts:30
+    // contracts/LocalStorage/contract.algo.ts:31
     // public localAccount = LocalState<Account>()
     bytec_2 // "localAccount"
-    // contracts/LocalStorage/contract.algo.ts:169
+    // contracts/LocalStorage/contract.algo.ts:165
     // this.localAccount(sender).delete()
     app_local_del
     retsub

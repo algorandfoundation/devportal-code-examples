@@ -51,7 +51,6 @@ async function getDeployers() {
 }
 
 // execute all the deployers
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function main() {
   const contractName = process.argv.length > 2 ? process.argv[2] : undefined
   const contractDeployers = await getDeployers()
