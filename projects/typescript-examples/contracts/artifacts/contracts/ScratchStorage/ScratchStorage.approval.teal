@@ -1,0 +1,199 @@
+#pragma version 10
+#pragma typetrack false
+
+// @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
+main:
+    intcblock 1 0 42 100
+    bytecblock 0x151f7c75 "Hello, Algorand!"
+    // contracts/ScratchStorage/contract.algo.ts:26-27
+    // @contract({ scratchSlots: [0, 1, 2, { from: 10, to: 20 }] }) // This reserves slots 0, 1, 2 and slots 10-20
+    // export default class ScratchStorage extends Contract {
+    txn NumAppArgs
+    bz main_bare_routing@8
+    pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66 // method "demonstrateScratchStorage()bool", method "readFromGroupTransaction(uint64,uint64)uint64", method "readBytesFromGroupTransaction(uint64,uint64)byte[]"
+    txna ApplicationArgs 0
+    match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5
+
+main_after_if_else@12:
+    // contracts/ScratchStorage/contract.algo.ts:26-27
+    // @contract({ scratchSlots: [0, 1, 2, { from: 10, to: 20 }] }) // This reserves slots 0, 1, 2 and slots 10-20
+    // export default class ScratchStorage extends Contract {
+    intc_1 // 0
+    return
+
+main_readBytesFromGroupTransaction_route@5:
+    // contracts/ScratchStorage/contract.algo.ts:93
+    // @abimethod({ readonly: true })
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // contracts/ScratchStorage/contract.algo.ts:26-27
+    // @contract({ scratchSlots: [0, 1, 2, { from: 10, to: 20 }] }) // This reserves slots 0, 1, 2 and slots 10-20
+    // export default class ScratchStorage extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    txna ApplicationArgs 2
+    btoi
+    // contracts/ScratchStorage/contract.algo.ts:93
+    // @abimethod({ readonly: true })
+    callsub readBytesFromGroupTransaction
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_readFromGroupTransaction_route@4:
+    // contracts/ScratchStorage/contract.algo.ts:80
+    // @abimethod({ readonly: true })
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // contracts/ScratchStorage/contract.algo.ts:26-27
+    // @contract({ scratchSlots: [0, 1, 2, { from: 10, to: 20 }] }) // This reserves slots 0, 1, 2 and slots 10-20
+    // export default class ScratchStorage extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    txna ApplicationArgs 2
+    btoi
+    // contracts/ScratchStorage/contract.algo.ts:80
+    // @abimethod({ readonly: true })
+    callsub readFromGroupTransaction
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_demonstrateScratchStorage_route@3:
+    // contracts/ScratchStorage/contract.algo.ts:65
+    // public demonstrateScratchStorage(): boolean {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub demonstrateScratchStorage
+    pushbytes 0x00
+    intc_1 // 0
+    uncover 2
+    setbit
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_bare_routing@8:
+    // contracts/ScratchStorage/contract.algo.ts:26-27
+    // @contract({ scratchSlots: [0, 1, 2, { from: 10, to: 20 }] }) // This reserves slots 0, 1, 2 and slots 10-20
+    // export default class ScratchStorage extends Contract {
+    txn OnCompletion
+    bnz main_after_if_else@12
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    intc_0 // 1
+    return
+
+
+// contracts/ScratchStorage/contract.algo.ts::ScratchStorage.demonstrateScratchStorage() -> uint64:
+demonstrateScratchStorage:
+    // contracts/ScratchStorage/contract.algo.ts:65
+    // public demonstrateScratchStorage(): boolean {
+    proto 0 1
+    // contracts/ScratchStorage/contract.algo.ts:34
+    // Scratch.store(0, Uint64(42))
+    intc_2 // 42
+    store 0
+    // contracts/ScratchStorage/contract.algo.ts:35
+    // Scratch.store(1, Bytes('Hello, Algorand!'))
+    bytec_1 // "Hello, Algorand!"
+    store 1
+    // contracts/ScratchStorage/contract.algo.ts:36
+    // Scratch.store(2, Uint64(100))
+    intc_3 // 100
+    store 2
+    // contracts/ScratchStorage/contract.algo.ts:37
+    // Scratch.store(15, Uint64(999))
+    pushint 999 // 999
+    store 15
+    // contracts/ScratchStorage/contract.algo.ts:49
+    // const value2 = Scratch.loadUint64(2)
+    load 2
+    // contracts/ScratchStorage/contract.algo.ts:50
+    // const value3 = Scratch.loadUint64(15)
+    load 15
+    // contracts/ScratchStorage/contract.algo.ts:51
+    // const bytesValue = Scratch.loadBytes(1)
+    load 1
+    // contracts/ScratchStorage/contract.algo.ts:48
+    // const value1 = Scratch.loadUint64(0)
+    load 0
+    // contracts/ScratchStorage/contract.algo.ts:53
+    // assert(value1 === 42, 'Value in slot 0 should be 42')
+    intc_2 // 42
+    ==
+    assert // Value in slot 0 should be 42
+    // contracts/ScratchStorage/contract.algo.ts:54
+    // assert(bytesValue === Bytes('Hello, Algorand!'), 'Value in slot 1 should be "Hello, Algorand!"')
+    bytec_1 // "Hello, Algorand!"
+    ==
+    assert // Value in slot 1 should be "Hello, Algorand!"
+    // contracts/ScratchStorage/contract.algo.ts:55
+    // assert(value2 === 100, 'Value in slot 2 should be 100')
+    swap
+    intc_3 // 100
+    ==
+    assert // Value in slot 2 should be 100
+    // contracts/ScratchStorage/contract.algo.ts:56
+    // assert(value3 === 999, 'Value in slot 15 should be 999')
+    pushint 999 // 999
+    ==
+    assert // Value in slot 15 should be 999
+    // contracts/ScratchStorage/contract.algo.ts:69
+    // return true
+    intc_0 // 1
+    retsub
+
+
+// contracts/ScratchStorage/contract.algo.ts::ScratchStorage.readFromGroupTransaction(groupIndex: uint64, scratchSlot: uint64) -> uint64:
+readFromGroupTransaction:
+    // contracts/ScratchStorage/contract.algo.ts:80-81
+    // @abimethod({ readonly: true })
+    // public readFromGroupTransaction(groupIndex: uint64, scratchSlot: uint64): uint64 {
+    proto 2 1
+    // contracts/ScratchStorage/contract.algo.ts:82
+    // return gloadUint64(groupIndex, scratchSlot)
+    frame_dig -2
+    frame_dig -1
+    gloadss
+    retsub
+
+
+// contracts/ScratchStorage/contract.algo.ts::ScratchStorage.readBytesFromGroupTransaction(groupIndex: uint64, scratchSlot: uint64) -> bytes:
+readBytesFromGroupTransaction:
+    // contracts/ScratchStorage/contract.algo.ts:93-94
+    // @abimethod({ readonly: true })
+    // public readBytesFromGroupTransaction(groupIndex: uint64, scratchSlot: uint64): bytes {
+    proto 2 1
+    // contracts/ScratchStorage/contract.algo.ts:95
+    // return gloadBytes(groupIndex, scratchSlot)
+    frame_dig -2
+    frame_dig -1
+    gloadss
+    retsub

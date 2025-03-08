@@ -1,0 +1,191 @@
+{
+    "name": "ScratchStorage",
+    "structs": {},
+    "methods": [
+        {
+            "name": "demonstrateScratchStorage",
+            "args": [],
+            "returns": {
+                "type": "bool",
+                "desc": "true if all operations succeed"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Demonstrates basic scratch storage operations",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "readFromGroupTransaction",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "groupIndex",
+                    "desc": "The index of the transaction in the group to read from"
+                },
+                {
+                    "type": "uint64",
+                    "name": "scratchSlot",
+                    "desc": "The scratch slot to read from"
+                }
+            ],
+            "returns": {
+                "type": "uint64",
+                "desc": "The uint64 value read from the specified transaction's scratch slot"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Demonstrates reading values from another transaction in the same group",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "readBytesFromGroupTransaction",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "groupIndex",
+                    "desc": "The index of the transaction in the group to read from"
+                },
+                {
+                    "type": "uint64",
+                    "name": "scratchSlot",
+                    "desc": "The scratch slot to read from"
+                }
+            ],
+            "returns": {
+                "type": "byte[]",
+                "desc": "The bytes value read from the specified transaction's scratch slot"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Demonstrates reading bytes values from another transaction in the same group",
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "ScratchStorage Contract\n\nThis contract demonstrates how to use scratch storage in Algorand smart contracts.\nScratch storage persists for the lifetime of a group transaction and can be used to pass\nvalues between multiple calls and/or applications in the same group.\n\nKey features demonstrated:\n- Reserving scratch slots using the contract decorator\n- Storing and loading values from scratch space\n- Using scratch space to pass values between transactions in a group\n- Different data types in scratch space (uint64 and bytes)",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        69,
+                        101,
+                        126
+                    ],
+                    "errorMessage": "OnCompletion is not NoOp"
+                },
+                {
+                    "pc": [
+                        184
+                    ],
+                    "errorMessage": "Value in slot 0 should be 42"
+                },
+                {
+                    "pc": [
+                        187
+                    ],
+                    "errorMessage": "Value in slot 1 should be \"Hello, Algorand!\""
+                },
+                {
+                    "pc": [
+                        196
+                    ],
+                    "errorMessage": "Value in slot 15 should be 999"
+                },
+                {
+                    "pc": [
+                        191
+                    ],
+                    "errorMessage": "Value in slot 2 should be 100"
+                },
+                {
+                    "pc": [
+                        154
+                    ],
+                    "errorMessage": "can only call when creating"
+                },
+                {
+                    "pc": [
+                        72,
+                        104,
+                        129
+                    ],
+                    "errorMessage": "can only call when not creating"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwIDQyIDEwMAogICAgYnl0ZWNibG9jayAweDE1MWY3Yzc1ICJIZWxsbywgQWxnb3JhbmQhIgogICAgLy8gY29udHJhY3RzL2FydGlmYWN0cy9jb250cmFjdHMvU2NyYXRjaFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoyNi0yNwogICAgLy8gQGNvbnRyYWN0KHsgc2NyYXRjaFNsb3RzOiBbMCwgMSwgMiwgeyBmcm9tOiAxMCwgdG86IDIwIH1dIH0pCiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBTY3JhdGNoU3RvcmFnZSBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX2JhcmVfcm91dGluZ0A4CiAgICBwdXNoYnl0ZXNzIDB4MDExNjhjNWMgMHgwZWVjMGJkOSAweDEwZmI0YTY2IC8vIG1ldGhvZCAiZGVtb25zdHJhdGVTY3JhdGNoU3RvcmFnZSgpYm9vbCIsIG1ldGhvZCAicmVhZEZyb21Hcm91cFRyYW5zYWN0aW9uKHVpbnQ2NCx1aW50NjQpdWludDY0IiwgbWV0aG9kICJyZWFkQnl0ZXNGcm9tR3JvdXBUcmFuc2FjdGlvbih1aW50NjQsdWludDY0KWJ5dGVbXSIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fZGVtb25zdHJhdGVTY3JhdGNoU3RvcmFnZV9yb3V0ZUAzIG1haW5fcmVhZEZyb21Hcm91cFRyYW5zYWN0aW9uX3JvdXRlQDQgbWFpbl9yZWFkQnl0ZXNGcm9tR3JvdXBUcmFuc2FjdGlvbl9yb3V0ZUA1CgptYWluX2FmdGVyX2lmX2Vsc2VAMTI6CiAgICAvLyBjb250cmFjdHMvYXJ0aWZhY3RzL2NvbnRyYWN0cy9TY3JhdGNoU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjI2LTI3CiAgICAvLyBAY29udHJhY3QoeyBzY3JhdGNoU2xvdHM6IFswLCAxLCAyLCB7IGZyb206IDEwLCB0bzogMjAgfV0gfSkKICAgIC8vIGV4cG9ydCBkZWZhdWx0IGNsYXNzIFNjcmF0Y2hTdG9yYWdlIGV4dGVuZHMgQ29udHJhY3QgewogICAgaW50Y18xIC8vIDAKICAgIHJldHVybgoKbWFpbl9yZWFkQnl0ZXNGcm9tR3JvdXBUcmFuc2FjdGlvbl9yb3V0ZUA1OgogICAgLy8gY29udHJhY3RzL2FydGlmYWN0cy9jb250cmFjdHMvU2NyYXRjaFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo5OQogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIGNvbnRyYWN0cy9hcnRpZmFjdHMvY29udHJhY3RzL1NjcmF0Y2hTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjYtMjcKICAgIC8vIEBjb250cmFjdCh7IHNjcmF0Y2hTbG90czogWzAsIDEsIDIsIHsgZnJvbTogMTAsIHRvOiAyMCB9XSB9KQogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgU2NyYXRjaFN0b3JhZ2UgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBidG9pCiAgICAvLyBjb250cmFjdHMvYXJ0aWZhY3RzL2NvbnRyYWN0cy9TY3JhdGNoU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjk5CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIGNhbGxzdWIgcmVhZEJ5dGVzRnJvbUdyb3VwVHJhbnNhY3Rpb24KICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX3JlYWRGcm9tR3JvdXBUcmFuc2FjdGlvbl9yb3V0ZUA0OgogICAgLy8gY29udHJhY3RzL2FydGlmYWN0cy9jb250cmFjdHMvU2NyYXRjaFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo4NwogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIGNvbnRyYWN0cy9hcnRpZmFjdHMvY29udHJhY3RzL1NjcmF0Y2hTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjYtMjcKICAgIC8vIEBjb250cmFjdCh7IHNjcmF0Y2hTbG90czogWzAsIDEsIDIsIHsgZnJvbTogMTAsIHRvOiAyMCB9XSB9KQogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgU2NyYXRjaFN0b3JhZ2UgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBidG9pCiAgICAvLyBjb250cmFjdHMvYXJ0aWZhY3RzL2NvbnRyYWN0cy9TY3JhdGNoU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjg3CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIGNhbGxzdWIgcmVhZEZyb21Hcm91cFRyYW5zYWN0aW9uCiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2RlbW9uc3RyYXRlU2NyYXRjaFN0b3JhZ2Vfcm91dGVAMzoKICAgIC8vIGNvbnRyYWN0cy9hcnRpZmFjdHMvY29udHJhY3RzL1NjcmF0Y2hTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6NzAKICAgIC8vIEBhYmltZXRob2Qoe30pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGNhbGxzdWIgZGVtb25zdHJhdGVTY3JhdGNoU3RvcmFnZQogICAgcHVzaGJ5dGVzIDB4MDAKICAgIGludGNfMSAvLyAwCiAgICB1bmNvdmVyIDIKICAgIHNldGJpdAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9iYXJlX3JvdXRpbmdAODoKICAgIC8vIGNvbnRyYWN0cy9hcnRpZmFjdHMvY29udHJhY3RzL1NjcmF0Y2hTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MjYtMjcKICAgIC8vIEBjb250cmFjdCh7IHNjcmF0Y2hTbG90czogWzAsIDEsIDIsIHsgZnJvbTogMTAsIHRvOiAyMCB9XSB9KQogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgU2NyYXRjaFN0b3JhZ2UgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDEyCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBjcmVhdGluZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIGNvbnRyYWN0cy9hcnRpZmFjdHMvY29udHJhY3RzL1NjcmF0Y2hTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6OlNjcmF0Y2hTdG9yYWdlLmRlbW9uc3RyYXRlU2NyYXRjaFN0b3JhZ2UoKSAtPiB1aW50NjQ6CmRlbW9uc3RyYXRlU2NyYXRjaFN0b3JhZ2U6CiAgICAvLyBjb250cmFjdHMvYXJ0aWZhY3RzL2NvbnRyYWN0cy9TY3JhdGNoU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjcwLTcxCiAgICAvLyBAYWJpbWV0aG9kKHt9KQogICAgLy8gcHVibGljIGRlbW9uc3RyYXRlU2NyYXRjaFN0b3JhZ2UoKTogYm9vbGVhbiB7CiAgICBwcm90byAwIDEKICAgIC8vIGNvbnRyYWN0cy9hcnRpZmFjdHMvY29udHJhY3RzL1NjcmF0Y2hTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6MzQKICAgIC8vIFNjcmF0Y2guc3RvcmUoMCwgVWludDY0KDQyKSkKICAgIGludGNfMiAvLyA0MgogICAgc3RvcmUgMAogICAgLy8gY29udHJhY3RzL2FydGlmYWN0cy9jb250cmFjdHMvU2NyYXRjaFN0b3JhZ2UvY29udHJhY3QuYWxnby50czozNwogICAgLy8gU2NyYXRjaC5zdG9yZSgxLCBCeXRlcygnSGVsbG8sIEFsZ29yYW5kIScpKQogICAgYnl0ZWNfMSAvLyAiSGVsbG8sIEFsZ29yYW5kISIKICAgIHN0b3JlIDEKICAgIC8vIGNvbnRyYWN0cy9hcnRpZmFjdHMvY29udHJhY3RzL1NjcmF0Y2hTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6NDAKICAgIC8vIFNjcmF0Y2guc3RvcmUoMiwgVWludDY0KDEwMCkpCiAgICBpbnRjXzMgLy8gMTAwCiAgICBzdG9yZSAyCiAgICAvLyBjb250cmFjdHMvYXJ0aWZhY3RzL2NvbnRyYWN0cy9TY3JhdGNoU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjQzCiAgICAvLyBTY3JhdGNoLnN0b3JlKDE1LCBVaW50NjQoOTk5KSkKICAgIHB1c2hpbnQgOTk5IC8vIDk5OQogICAgc3RvcmUgMTUKICAgIC8vIGNvbnRyYWN0cy9hcnRpZmFjdHMvY29udHJhY3RzL1NjcmF0Y2hTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6NTMKICAgIC8vIGNvbnN0IHZhbHVlMiA9IFNjcmF0Y2gubG9hZFVpbnQ2NCgyKQogICAgbG9hZCAyCiAgICAvLyBjb250cmFjdHMvYXJ0aWZhY3RzL2NvbnRyYWN0cy9TY3JhdGNoU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjU0CiAgICAvLyBjb25zdCB2YWx1ZTMgPSBTY3JhdGNoLmxvYWRVaW50NjQoMTUpCiAgICBsb2FkIDE1CiAgICAvLyBjb250cmFjdHMvYXJ0aWZhY3RzL2NvbnRyYWN0cy9TY3JhdGNoU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjU3CiAgICAvLyBjb25zdCBieXRlc1ZhbHVlID0gU2NyYXRjaC5sb2FkQnl0ZXMoMSkKICAgIGxvYWQgMQogICAgLy8gY29udHJhY3RzL2FydGlmYWN0cy9jb250cmFjdHMvU2NyYXRjaFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo1MgogICAgLy8gY29uc3QgdmFsdWUxID0gU2NyYXRjaC5sb2FkVWludDY0KDApCiAgICBsb2FkIDAKICAgIC8vIGNvbnRyYWN0cy9hcnRpZmFjdHMvY29udHJhY3RzL1NjcmF0Y2hTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6NjAKICAgIC8vIGFzc2VydCh2YWx1ZTEgPT09IDQyLCAnVmFsdWUgaW4gc2xvdCAwIHNob3VsZCBiZSA0MicpCiAgICBpbnRjXzIgLy8gNDIKICAgID09CiAgICBhc3NlcnQgLy8gVmFsdWUgaW4gc2xvdCAwIHNob3VsZCBiZSA0MgogICAgLy8gY29udHJhY3RzL2FydGlmYWN0cy9jb250cmFjdHMvU2NyYXRjaFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo2MQogICAgLy8gYXNzZXJ0KGJ5dGVzVmFsdWUgPT09IEJ5dGVzKCdIZWxsbywgQWxnb3JhbmQhJyksICdWYWx1ZSBpbiBzbG90IDEgc2hvdWxkIGJlICJIZWxsbywgQWxnb3JhbmQhIicpCiAgICBieXRlY18xIC8vICJIZWxsbywgQWxnb3JhbmQhIgogICAgPT0KICAgIGFzc2VydCAvLyBWYWx1ZSBpbiBzbG90IDEgc2hvdWxkIGJlICJIZWxsbywgQWxnb3JhbmQhIgogICAgLy8gY29udHJhY3RzL2FydGlmYWN0cy9jb250cmFjdHMvU2NyYXRjaFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo2MgogICAgLy8gYXNzZXJ0KHZhbHVlMiA9PT0gMTAwLCAnVmFsdWUgaW4gc2xvdCAyIHNob3VsZCBiZSAxMDAnKQogICAgc3dhcAogICAgaW50Y18zIC8vIDEwMAogICAgPT0KICAgIGFzc2VydCAvLyBWYWx1ZSBpbiBzbG90IDIgc2hvdWxkIGJlIDEwMAogICAgLy8gY29udHJhY3RzL2FydGlmYWN0cy9jb250cmFjdHMvU2NyYXRjaFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo2MwogICAgLy8gYXNzZXJ0KHZhbHVlMyA9PT0gOTk5LCAnVmFsdWUgaW4gc2xvdCAxNSBzaG91bGQgYmUgOTk5JykKICAgIHB1c2hpbnQgOTk5IC8vIDk5OQogICAgPT0KICAgIGFzc2VydCAvLyBWYWx1ZSBpbiBzbG90IDE1IHNob3VsZCBiZSA5OTkKICAgIC8vIGNvbnRyYWN0cy9hcnRpZmFjdHMvY29udHJhY3RzL1NjcmF0Y2hTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6NzgKICAgIC8vIHJldHVybiB0cnVlCiAgICBpbnRjXzAgLy8gMQogICAgcmV0c3ViCgoKLy8gY29udHJhY3RzL2FydGlmYWN0cy9jb250cmFjdHMvU2NyYXRjaFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo6U2NyYXRjaFN0b3JhZ2UucmVhZEZyb21Hcm91cFRyYW5zYWN0aW9uKGdyb3VwSW5kZXg6IHVpbnQ2NCwgc2NyYXRjaFNsb3Q6IHVpbnQ2NCkgLT4gdWludDY0OgpyZWFkRnJvbUdyb3VwVHJhbnNhY3Rpb246CiAgICAvLyBjb250cmFjdHMvYXJ0aWZhY3RzL2NvbnRyYWN0cy9TY3JhdGNoU3RvcmFnZS9jb250cmFjdC5hbGdvLnRzOjg3LTg4CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIC8vIHB1YmxpYyByZWFkRnJvbUdyb3VwVHJhbnNhY3Rpb24oZ3JvdXBJbmRleDogdWludDY0LCBzY3JhdGNoU2xvdDogdWludDY0KTogdWludDY0IHsKICAgIHByb3RvIDIgMQogICAgLy8gY29udHJhY3RzL2FydGlmYWN0cy9jb250cmFjdHMvU2NyYXRjaFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo5MAogICAgLy8gcmV0dXJuIGdsb2FkVWludDY0KGdyb3VwSW5kZXgsIHNjcmF0Y2hTbG90KQogICAgZnJhbWVfZGlnIC0yCiAgICBmcmFtZV9kaWcgLTEKICAgIGdsb2Fkc3MKICAgIHJldHN1YgoKCi8vIGNvbnRyYWN0cy9hcnRpZmFjdHMvY29udHJhY3RzL1NjcmF0Y2hTdG9yYWdlL2NvbnRyYWN0LmFsZ28udHM6OlNjcmF0Y2hTdG9yYWdlLnJlYWRCeXRlc0Zyb21Hcm91cFRyYW5zYWN0aW9uKGdyb3VwSW5kZXg6IHVpbnQ2NCwgc2NyYXRjaFNsb3Q6IHVpbnQ2NCkgLT4gYnl0ZXM6CnJlYWRCeXRlc0Zyb21Hcm91cFRyYW5zYWN0aW9uOgogICAgLy8gY29udHJhY3RzL2FydGlmYWN0cy9jb250cmFjdHMvU2NyYXRjaFN0b3JhZ2UvY29udHJhY3QuYWxnby50czo5OS0xMDAKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgLy8gcHVibGljIHJlYWRCeXRlc0Zyb21Hcm91cFRyYW5zYWN0aW9uKGdyb3VwSW5kZXg6IHVpbnQ2NCwgc2NyYXRjaFNsb3Q6IHVpbnQ2NCk6IGJ5dGVzIHsKICAgIHByb3RvIDIgMQogICAgLy8gY29udHJhY3RzL2FydGlmYWN0cy9jb250cmFjdHMvU2NyYXRjaFN0b3JhZ2UvY29udHJhY3QuYWxnby50czoxMDIKICAgIC8vIHJldHVybiBnbG9hZEJ5dGVzKGdyb3VwSW5kZXgsIHNjcmF0Y2hTbG90KQogICAgZnJhbWVfZGlnIC0yCiAgICBmcmFtZV9kaWcgLTEKICAgIGdsb2Fkc3MKICAgIHJldHN1Ygo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CiAEAQAqZCYCBBUffHUQSGVsbG8sIEFsZ29yYW5kITEbQQBuggMEARaMXAQO7AvZBBD7SmY2GgCOAwA7ACIAAiNDMRkURDEYRDYaARc2GgIXiAB8SRUWVwYCTFAoTFCwIkMxGRREMRhENhoBFzYaAheIAFMWKExQsCJDMRkURDEYRIgAGIABACNPAlQoTFCwIkMxGUD/qTEYFEQiQ4oAASQ1ACk1ASU1AoHnBzUPNAI0DzQBNAAkEkQpEkRMJRJEgecHEkQiiYoCAYv+i//EiYoCAYv+i//EiQ==",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 4,
+            "minor": 3,
+            "patch": 3
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}
