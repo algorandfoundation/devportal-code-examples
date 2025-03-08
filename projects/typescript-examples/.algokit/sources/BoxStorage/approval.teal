@@ -603,10 +603,6 @@ main_bare_routing@31:
 getBox:
 
 
-
-    proto 0 1
-
-
     bytec_3
 
 
@@ -620,10 +616,6 @@ getBox:
 
 
 valueBox:
-
-
-
-    proto 0 1
 
 
     bytec_3
@@ -704,9 +696,6 @@ setBoxDynamicBytes:
 deleteBox:
 
 
-    proto 0 0
-
-
     bytec_3
 
 
@@ -771,10 +760,6 @@ deleteBox:
 
 
 maybeBox:
-
-
-
-    proto 0 2
 
 
     bytec_3
@@ -1233,9 +1218,6 @@ boxMapStructExists:
 getBoxRef:
 
 
-    proto 0 1
-
-
     bytec 8
 
 
@@ -1446,8 +1428,8 @@ arc4Box:
     frame_dig -1
     box_get
     assert
-    extract 0 1
-    btoi
+    intc_1
+    getbyte
     !
     assert
 
@@ -1455,8 +1437,8 @@ arc4Box:
     frame_dig -1
     box_get
     assert
-    extract 1 1
-    btoi
+    intc_0
+    getbyte
     intc_0
     ==
     assert
@@ -1465,8 +1447,8 @@ arc4Box:
     frame_dig -1
     box_get
     assert
-    extract 2 1
-    btoi
+    pushint 2
+    getbyte
     pushint 2
     ==
     assert
@@ -1475,8 +1457,8 @@ arc4Box:
     frame_dig -1
     box_get
     assert
-    extract 3 1
-    btoi
+    pushint 3
+    getbyte
     pushint 3
     ==
     assert

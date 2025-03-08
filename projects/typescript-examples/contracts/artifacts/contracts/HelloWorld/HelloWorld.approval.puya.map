@@ -24,13 +24,32 @@
       "stack_out": []
     },
     "6": {
-      "op": "pushbytess 0x3aad6d86 0x3d25ae31 // method \"sayHello(string,string)string\", method \"sayBananas()string\""
+      "op": "pushbytess 0x3aad6d86 0x3d25ae31 // method \"sayHello(string,string)string\", method \"sayBananas()string\"",
+      "defined_out": [
+        "Method(sayBananas()string)",
+        "Method(sayHello(string,string)string)"
+      ],
+      "stack_out": [
+        "Method(sayHello(string,string)string)",
+        "Method(sayBananas()string)"
+      ]
     },
     "18": {
-      "op": "txna ApplicationArgs 0"
+      "op": "txna ApplicationArgs 0",
+      "defined_out": [
+        "Method(sayBananas()string)",
+        "Method(sayHello(string,string)string)",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "Method(sayHello(string,string)string)",
+        "Method(sayBananas()string)",
+        "tmp%2#0"
+      ]
     },
     "21": {
-      "op": "match main_sayHello_route@3 main_sayBananas_route@4"
+      "op": "match main_sayHello_route@3 main_sayBananas_route@4",
+      "stack_out": []
     },
     "27": {
       "block": "main_after_if_else@11",
@@ -44,7 +63,8 @@
       ]
     },
     "29": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "30": {
       "block": "main_sayBananas_route@4",
@@ -108,7 +128,8 @@
       ]
     },
     "55": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "56": {
       "block": "main_sayHello_route@3",
@@ -300,7 +321,8 @@
       ]
     },
     "97": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "98": {
       "block": "main_bare_routing@7",
@@ -318,20 +340,40 @@
       "stack_out": []
     },
     "103": {
-      "op": "txn ApplicationID"
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%18#0"
+      ],
+      "stack_out": [
+        "tmp%18#0"
+      ]
     },
     "105": {
-      "op": "!"
+      "op": "!",
+      "defined_out": [
+        "tmp%19#0"
+      ],
+      "stack_out": [
+        "tmp%19#0"
+      ]
     },
     "106": {
       "error": "can only call when creating",
-      "op": "assert // can only call when creating"
+      "op": "assert // can only call when creating",
+      "stack_out": []
     },
     "107": {
-      "op": "pushint 1 // 1"
+      "op": "pushint 1 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
     },
     "109": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "110": {
       "subroutine": "contracts/HelloWorld/contract.algo.ts::HelloWorld.sayHello",
