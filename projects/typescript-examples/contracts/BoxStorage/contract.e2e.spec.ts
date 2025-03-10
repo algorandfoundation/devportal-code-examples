@@ -1,7 +1,7 @@
 import { Config } from '@algorandfoundation/algokit-utils'
 import { registerDebugEventHandlers } from '@algorandfoundation/algokit-utils-debug'
 import { algorandFixture } from '@algorandfoundation/algokit-utils/testing'
-import { ABIUintType } from 'algosdk'
+import { Address, ABIUintType } from 'algosdk'
 import { beforeAll, beforeEach, describe, expect, test } from 'vitest'
 import { BoxStorageFactory } from '../artifacts/clients/BoxStorage/BoxStorageClient'
 
@@ -15,7 +15,7 @@ describe('BoxStorage contract', () => {
   })
   beforeEach(localnet.newScope)
 
-  const deploy = async (account: string) => {
+  const deploy = async (account: Address) => {
     const factory = localnet.algorand.client.getTypedAppFactory(BoxStorageFactory, {
       defaultSender: account,
     })
@@ -24,7 +24,7 @@ describe('BoxStorage contract', () => {
     return { client: appClient }
   }
 
-  const fundContract = async (sender: string, receiver: string) => {
+  const fundContract = async (sender: Address, receiver: Address) => {
     await localnet.algorand.send.payment({
       amount: (1).algo(),
       sender,
@@ -46,9 +46,9 @@ describe('BoxStorage contract', () => {
   test('set and read box int value', async () => {
     const { testAccount } = localnet.context
 
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     const testValue = 42n
 
@@ -63,9 +63,9 @@ describe('BoxStorage contract', () => {
 
   test('set and read box map value', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     const testString = 'Hello Box Storage'
 
@@ -83,9 +83,9 @@ describe('BoxStorage contract', () => {
 
   test('set and read box map with default value', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     const boxValue = await client.getBoxMapWithDefault({ args: { key: 1n } })
     expect(boxValue).toBe('default')
@@ -93,9 +93,9 @@ describe('BoxStorage contract', () => {
 
   test('set and read box ref value', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     const { returns } = await client.send.getBoxRef({
       args: {},
@@ -107,9 +107,9 @@ describe('BoxStorage contract', () => {
 
   test('maybe box returns correct value and existence', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     const [emptyValue, exists] = await client.maybeBox()
     expect(exists).toBe(false)
@@ -129,9 +129,9 @@ describe('BoxStorage contract', () => {
 
   test('maybe box map returns correct value and existence', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     const testKey = 1n
 
@@ -156,9 +156,9 @@ describe('BoxStorage contract', () => {
 
   test('maybe box ref returns correct value and existence', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     const { returns: beforeCreateReturns } = await client.send.maybeBoxRef({
       args: {
@@ -194,9 +194,9 @@ describe('BoxStorage contract', () => {
 
   test('set and read box map struct value', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     const testStruct = {
       name: 'TestUser',
@@ -227,9 +227,9 @@ describe('BoxStorage contract', () => {
 
   test('delete boxes and verify deletion', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     await client
       .newGroup()
@@ -270,9 +270,9 @@ describe('BoxStorage contract', () => {
 
   test('delete box ref and verify deletion', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     await client.send.setBoxRef({
       args: {
@@ -306,9 +306,9 @@ describe('BoxStorage contract', () => {
 
   test('verify app budget consumption is reasonable', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     const result = await client
       .newGroup()
@@ -324,9 +324,9 @@ describe('BoxStorage contract', () => {
 
   test('delete box map and verify deletion', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     const testString = 'Test String'
     await client
@@ -354,9 +354,9 @@ describe('BoxStorage contract', () => {
 
   test('box map length returns correct value', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     const initialLength = await client.boxMapLength({ args: { key: 0n } })
     expect(initialLength).toBe(0n)
@@ -375,9 +375,9 @@ describe('BoxStorage contract', () => {
 
   test('length box ref returns correct value', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     const { returns } = await client.send.lengthBoxRef({
       args: { key: 'blob' },
@@ -390,9 +390,9 @@ describe('BoxStorage contract', () => {
 
   test('box map exists returns correct value', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     const { returns: initialExists } = await client.send.boxMapExists({
       args: { key: 1n },
@@ -419,9 +419,9 @@ describe('BoxStorage contract', () => {
 
   test('box map struct exists returns correct value', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     const { returns: initialExists } = await client.send.boxMapStructExists({
       args: { key: 1n },
@@ -457,9 +457,9 @@ describe('BoxStorage contract', () => {
 
   test('key prefix box map returns correct value', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     const keyPrefix = await client.keyPrefixBoxMap()
     expect(keyPrefix).toStrictEqual([...new TextEncoder().encode('boxMap')])
@@ -467,9 +467,9 @@ describe('BoxStorage contract', () => {
 
   test('box map struct length returns correct value', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     const { returns: result } = await client.send.boxMapStructLength({
       args: { key: 1n },
@@ -491,9 +491,9 @@ describe('BoxStorage contract', () => {
 
   test('arc4 box handles static array correctly', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     const { returns } = await client.send.arc4Box({
       args: { key: 'staticArray' },
@@ -510,9 +510,9 @@ describe('BoxStorage contract', () => {
 
   test('extract box ref handles data correctly', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     await client.send.extractBoxRef({
       args: { key: 'extractTest' },
@@ -527,9 +527,9 @@ describe('BoxStorage contract', () => {
 
   test('value box returns correct value', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
-    await fundContract(testAccount.addr.toString(), client.appAddress.publicKey.toString())
+    await fundContract(testAccount, client.appAddress)
 
     const testValue = 42n
     await client

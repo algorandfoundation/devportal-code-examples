@@ -1,6 +1,7 @@
 import { Config } from '@algorandfoundation/algokit-utils'
 import { registerDebugEventHandlers } from '@algorandfoundation/algokit-utils-debug'
 import { algorandFixture } from '@algorandfoundation/algokit-utils/testing'
+import { Address } from 'algosdk'
 import { beforeAll, beforeEach, describe, expect, test } from 'vitest'
 import { LocalStorageFactory } from '../artifacts/clients/LocalStorage/LocalStorageClient'
 
@@ -14,9 +15,9 @@ describe('LocalStorage contract', () => {
   })
   beforeEach(localnet.newScope)
 
-  const deploy = async (address: string) => {
+  const deploy = async (account: Address) => {
     const factory = localnet.algorand.client.getTypedAppFactory(LocalStorageFactory, {
-      defaultSender: address,
+      defaultSender: account,
     })
 
     const { appClient } = await factory.deploy({ onUpdate: 'append', onSchemaBreak: 'append', suppressLog: true })
@@ -25,7 +26,7 @@ describe('LocalStorage contract', () => {
 
   test('opt in and read local state values', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
     await client.newGroup().optIn.optInToApplication().send()
 
@@ -46,7 +47,7 @@ describe('LocalStorage contract', () => {
 
   test('write and verify local state values', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
     await client.newGroup().optIn.optInToApplication().send()
     await client
@@ -70,7 +71,7 @@ describe('LocalStorage contract', () => {
 
   test('write and read dynamic local state', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
     await client.newGroup().optIn.optInToApplication().send()
 
@@ -96,7 +97,7 @@ describe('LocalStorage contract', () => {
 
   test('clear local state', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
     await client.newGroup().optIn.optInToApplication().send()
     await client.newGroup().clearLocalState().send()
@@ -106,7 +107,7 @@ describe('LocalStorage contract', () => {
 
   test('verify app budget consumption is reasonable', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount.addr.toString())
+    const { client } = await deploy(testAccount)
 
     const result = await client
       .newGroup()
