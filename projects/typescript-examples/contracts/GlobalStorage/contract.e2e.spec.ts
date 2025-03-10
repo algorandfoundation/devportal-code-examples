@@ -1,7 +1,6 @@
 import { Config } from '@algorandfoundation/algokit-utils'
 import { registerDebugEventHandlers } from '@algorandfoundation/algokit-utils-debug'
 import { algorandFixture } from '@algorandfoundation/algokit-utils/testing'
-import { Address } from 'algosdk'
 import { beforeAll, beforeEach, describe, expect, test } from 'vitest'
 import { GlobalStorageFactory } from '../artifacts/clients/GlobalStorage/GlobalStorageClient'
 
@@ -15,9 +14,9 @@ describe('GlobalStorage contract', () => {
   })
   beforeEach(localnet.newScope)
 
-  const deploy = async (account: Address) => {
+  const deploy = async (address: string) => {
     const factory = localnet.algorand.client.getTypedAppFactory(GlobalStorageFactory, {
-      defaultSender: account,
+      defaultSender: address,
     })
 
     const { appClient } = await factory.deploy({ onUpdate: 'append', onSchemaBreak: 'append', suppressLog: true })
@@ -26,7 +25,7 @@ describe('GlobalStorage contract', () => {
 
   test('read initial global state values', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount)
+    const { client } = await deploy(testAccount.addr.toString())
 
     const result = await client.newGroup().readGlobalState().simulate()
 
@@ -45,7 +44,7 @@ describe('GlobalStorage contract', () => {
 
   test('check global state existence', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount)
+    const { client } = await deploy(testAccount.addr.toString())
 
     const result = await client.newGroup().hasGlobalState().simulate()
 
@@ -57,7 +56,7 @@ describe('GlobalStorage contract', () => {
 
   test('write and verify global state values', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount)
+    const { client } = await deploy(testAccount.addr.toString())
 
     await client
       .newGroup()
@@ -82,7 +81,7 @@ describe('GlobalStorage contract', () => {
 
   test('write and read dynamic global state', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount)
+    const { client } = await deploy(testAccount.addr.toString())
 
     const result = await client
       .newGroup()
@@ -99,7 +98,7 @@ describe('GlobalStorage contract', () => {
 
   test('verify app budget consumption is reasonable', async () => {
     const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount)
+    const { client } = await deploy(testAccount.addr.toString())
 
     const result = await client
       .newGroup()
