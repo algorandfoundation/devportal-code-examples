@@ -12,11 +12,6 @@ def signing_transactions() -> None:
 
     # example: TRANSACTION_WITH_NO_SIGNER
 
-    """
-    Transaction Signer of an account are used to sign transactions.
-    """
-    account_a_signer = account_a.signer
-
     # Generate an account with no signer. The method returns a private key and address.
     account_no_signer_pk, account_no_signer_addr = algosdk.account.generate_account()
 
@@ -69,6 +64,7 @@ def signing_transactions() -> None:
     When working with `SigningAccount` account type, it includes a signer that can be used to sign transactions.
     There are two ways to sign transactions using the Algorand Client.
     """
+    account_a_signer = account_a.signer
 
     """
     Method 1: Create an unsigned transaction and sign it with the `signer` attribute of the `SigningAccount` object.
