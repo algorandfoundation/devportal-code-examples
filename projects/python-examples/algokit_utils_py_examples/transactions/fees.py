@@ -32,14 +32,6 @@ def fees() -> None:
 
     # example: FEES
 
-    # exampleL FEE_CONFIG
-
-    sp = algorand_client.get_suggested_params()
-
-    sp.fee = 2000  # override the suggested fee and set it to 2000 microAlgo
-
-    # example: FEE_CONFIG
-
     # Get all attributes
     sp_dict = {
         attr: getattr(sp, attr)
@@ -47,6 +39,27 @@ def fees() -> None:
         if not attr.startswith("_") and not callable(getattr(sp, attr))
     }
     print(json.dumps(sp_dict, indent=2))
+
+    # # exampleL FEE_CONFIG
+
+    # sp = algorand_client.get_suggested_params()
+
+    # sp.fee = 2000  # override the suggested fee and set it to 2000 microAlgo
+
+    # # example: FEE_CONFIG
+
+    # example: MAX_FEE
+    algorand_client.send.payment(
+        PaymentParams(
+            sender=account_a.address,
+            receiver=account_b.address,
+            amount=AlgoAmount(algo=1),
+            max_fee=AlgoAmount(
+                micro_algo=sp.min_fee * 3
+            ),  # set the max fee to 3 times the minimum fee
+        )
+    )
+    # example: MAX_FEE
 
     # example: FEE_POOLING
 
