@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "string", "name": "name"}], "name": "goodbye", "returns": {"type": "string[]"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "string", "name": "name"}], "name": "hello", "returns": {"type": "string"}, "desc": "Dynamic Arrays have variable size and capacity.\nThey are similar to native Python lists because they can also append, extend, and pop.", "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "arc4_dynamic_bytes", "returns": {"type": "byte[]"}, "desc": "arc4.DynamicBytes is essentially an arc4.DynamicArray[arc4.Byte] with additional convenience methods", "events": [], "readonly": false, "recommendations": {}}], "name": "Arc4DynamicArray", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CiADAgABJgIEFR98dQIAAjEbQQBkggMEitEqKwQCvs4RBJXWQRY2GgCOAwA1ABoAAiNDMRkURDEYRIAMFR98dQAGAP//qrv/sCRDMRkURDEYRDYaAYgBBEkVFlcGAkxQKExQsCRDMRkURDEYRDYaAYgAzihMULAkQzEZQP+zMRgURCRDigECi/8jWSQJSSILi/9XAgBJSwJZSwEVSwJLAk8CUksCI0sFUk8EIghPBExPBFJQSwIWVwYCTE8DI4gAOlCJigMBi/0jWUmL/whMIgsiCEsBFlcGAov9IksDUov/IguvUIv9FYv9TwRPAlJQi/5QTwIjiAACUImKAwGL/iILSYv/IgtJTgKL/UxZi/9NiwGLAAxBACOLAkkWVwYCi/2LAUlOBE8CXUmM/UsBWSIICIwCIgiMAUL/1Yv9jACJigEBgA8ABAAPAAlHb29kIGJ5ZSCL/1ApTFCJigEBi/8VgQQIFlcGAoACAARMUIv/UIADAAEhUClMUEkjWUxXAgBLASILSwEVUoAMAAEAAgAGSGVsbG8gTE8CiP8lRwKI/uFFAYj+3EUBgAgABndvcmxkISSI/wtIgABMI1kjiwOLAgxBACWLAFcCAIsDSU4CIgtLAUxZSlkiCFhXAgCLAUxQjAEkCIwDQv/TiwGMAIk=", "clear": "CoEBQw=="}, "compilerInfo": {"compiler": "puya", "compilerVersion": {"major": 4, "minor": 3, "patch": 3}}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAyIDAgMQogICAgYnl0ZWNibG9jayAweDE1MWY3Yzc1IDB4MDAwMgogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzRfdHlwZXMvY29udHJhY3QucHk6MTY4CiAgICAvLyBjbGFzcyBBcmM0RHluYW1pY0FycmF5KEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9iYXJlX3JvdXRpbmdAOAogICAgcHVzaGJ5dGVzcyAweDhhZDEyYTJiIDB4MDJiZWNlMTEgMHg5NWQ2NDExNiAvLyBtZXRob2QgImdvb2RieWUoc3RyaW5nKXN0cmluZ1tdIiwgbWV0aG9kICJoZWxsbyhzdHJpbmcpc3RyaW5nIiwgbWV0aG9kICJhcmM0X2R5bmFtaWNfYnl0ZXMoKWJ5dGVbXSIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fZ29vZGJ5ZV9yb3V0ZUAzIG1haW5faGVsbG9fcm91dGVANCBtYWluX2FyYzRfZHluYW1pY19ieXRlc19yb3V0ZUA1CgptYWluX2FmdGVyX2lmX2Vsc2VAMTI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNF90eXBlcy9jb250cmFjdC5weToxNjgKICAgIC8vIGNsYXNzIEFyYzREeW5hbWljQXJyYXkoQVJDNENvbnRyYWN0KToKICAgIGludGNfMSAvLyAwCiAgICByZXR1cm4KCm1haW5fYXJjNF9keW5hbWljX2J5dGVzX3JvdXRlQDU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNF90eXBlcy9jb250cmFjdC5weToyMDAtMjAxCiAgICAvLyAjIGV4YW1wbGU6IEFSQzRfRFlOQU1JQ19CWVRFUwogICAgLy8gQGFiaW1ldGhvZCgpCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwNjAwZmZmZmFhYmJmZgogICAgbG9nCiAgICBpbnRjXzIgLy8gMQogICAgcmV0dXJuCgptYWluX2hlbGxvX3JvdXRlQDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNF90eXBlcy9jb250cmFjdC5weToxNzYKICAgIC8vIEBhYmltZXRob2QoKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNF90eXBlcy9jb250cmFjdC5weToxNjgKICAgIC8vIGNsYXNzIEFyYzREeW5hbWljQXJyYXkoQVJDNENvbnRyYWN0KToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM0X3R5cGVzL2NvbnRyYWN0LnB5OjE3NgogICAgLy8gQGFiaW1ldGhvZCgpCiAgICBjYWxsc3ViIGhlbGxvCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18yIC8vIDEKICAgIHJldHVybgoKbWFpbl9nb29kYnllX3JvdXRlQDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNF90eXBlcy9jb250cmFjdC5weToxNzAKICAgIC8vIEBhYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzRfdHlwZXMvY29udHJhY3QucHk6MTY4CiAgICAvLyBjbGFzcyBBcmM0RHluYW1pY0FycmF5KEFSQzRDb250cmFjdCk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNF90eXBlcy9jb250cmFjdC5weToxNzAKICAgIC8vIEBhYmltZXRob2QKICAgIGNhbGxzdWIgZ29vZGJ5ZQogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18yIC8vIDEKICAgIHJldHVybgoKbWFpbl9iYXJlX3JvdXRpbmdAODoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM0X3R5cGVzL2NvbnRyYWN0LnB5OjE2OAogICAgLy8gY2xhc3MgQXJjNER5bmFtaWNBcnJheShBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAxMgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMiAvLyAxCiAgICByZXR1cm4KCgovLyBfcHV5YV9saWIuYXJjNC5keW5hbWljX2FycmF5X3BvcF9ieXRlX2xlbmd0aF9oZWFkKGFycmF5OiBieXRlcykgLT4gYnl0ZXMsIGJ5dGVzOgpkeW5hbWljX2FycmF5X3BvcF9ieXRlX2xlbmd0aF9oZWFkOgogICAgcHJvdG8gMSAyCiAgICBmcmFtZV9kaWcgLTEKICAgIGludGNfMSAvLyAwCiAgICBleHRyYWN0X3VpbnQxNgogICAgaW50Y18yIC8vIDEKICAgIC0KICAgIGR1cAogICAgaW50Y18wIC8vIDIKICAgICoKICAgIGZyYW1lX2RpZyAtMQogICAgZXh0cmFjdCAyIDAKICAgIGR1cAogICAgZGlnIDIKICAgIGV4dHJhY3RfdWludDE2CiAgICBkaWcgMQogICAgbGVuCiAgICBkaWcgMgogICAgZGlnIDIKICAgIHVuY292ZXIgMgogICAgc3Vic3RyaW5nMwogICAgZGlnIDIKICAgIGludGNfMSAvLyAwCiAgICBkaWcgNQogICAgc3Vic3RyaW5nMwogICAgdW5jb3ZlciA0CiAgICBpbnRjXzAgLy8gMgogICAgKwogICAgdW5jb3ZlciA0CiAgICBzd2FwCiAgICB1bmNvdmVyIDQKICAgIHN1YnN0cmluZzMKICAgIGNvbmNhdAogICAgZGlnIDIKICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBzd2FwCiAgICB1bmNvdmVyIDMKICAgIGludGNfMSAvLyAwCiAgICBjYWxsc3ViIHJlY2FsY3VsYXRlX2hlYWRfZm9yX2VsZW1lbnRzX3dpdGhfYnl0ZV9sZW5ndGhfaGVhZAogICAgY29uY2F0CiAgICByZXRzdWIKCgovLyBfcHV5YV9saWIuYXJjNC5keW5hbWljX2FycmF5X2NvbmNhdF9ieXRlX2xlbmd0aF9oZWFkKGFycmF5OiBieXRlcywgbmV3X2l0ZW1zX2J5dGVzOiBieXRlcywgbmV3X2l0ZW1zX2NvdW50OiB1aW50NjQpIC0+IGJ5dGVzOgpkeW5hbWljX2FycmF5X2NvbmNhdF9ieXRlX2xlbmd0aF9oZWFkOgogICAgcHJvdG8gMyAxCiAgICBmcmFtZV9kaWcgLTMKICAgIGludGNfMSAvLyAwCiAgICBleHRyYWN0X3VpbnQxNgogICAgZHVwCiAgICBmcmFtZV9kaWcgLTEKICAgICsKICAgIHN3YXAKICAgIGludGNfMCAvLyAyCiAgICAqCiAgICBpbnRjXzAgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBmcmFtZV9kaWcgLTMKICAgIGludGNfMCAvLyAyCiAgICBkaWcgMwogICAgc3Vic3RyaW5nMwogICAgZnJhbWVfZGlnIC0xCiAgICBpbnRjXzAgLy8gMgogICAgKgogICAgYnplcm8KICAgIGNvbmNhdAogICAgZnJhbWVfZGlnIC0zCiAgICBsZW4KICAgIGZyYW1lX2RpZyAtMwogICAgdW5jb3ZlciA0CiAgICB1bmNvdmVyIDIKICAgIHN1YnN0cmluZzMKICAgIGNvbmNhdAogICAgZnJhbWVfZGlnIC0yCiAgICBjb25jYXQKICAgIHVuY292ZXIgMgogICAgaW50Y18xIC8vIDAKICAgIGNhbGxzdWIgcmVjYWxjdWxhdGVfaGVhZF9mb3JfZWxlbWVudHNfd2l0aF9ieXRlX2xlbmd0aF9oZWFkCiAgICBjb25jYXQKICAgIHJldHN1YgoKCi8vIF9wdXlhX2xpYi5hcmM0LnJlY2FsY3VsYXRlX2hlYWRfZm9yX2VsZW1lbnRzX3dpdGhfYnl0ZV9sZW5ndGhfaGVhZChhcnJheV9oZWFkX2FuZF90YWlsOiBieXRlcywgbGVuZ3RoOiB1aW50NjQsIHN0YXJ0X2F0X2luZGV4OiB1aW50NjQpIC0+IGJ5dGVzOgpyZWNhbGN1bGF0ZV9oZWFkX2Zvcl9lbGVtZW50c193aXRoX2J5dGVfbGVuZ3RoX2hlYWQ6CiAgICBwcm90byAzIDEKICAgIGZyYW1lX2RpZyAtMgogICAgaW50Y18wIC8vIDIKICAgICoKICAgIGR1cAogICAgZnJhbWVfZGlnIC0xCiAgICBpbnRjXzAgLy8gMgogICAgKgogICAgZHVwCiAgICBjb3ZlciAyCiAgICBmcmFtZV9kaWcgLTMKICAgIHN3YXAKICAgIGV4dHJhY3RfdWludDE2CiAgICBmcmFtZV9kaWcgLTEKICAgIHNlbGVjdAoKcmVjYWxjdWxhdGVfaGVhZF9mb3JfZWxlbWVudHNfd2l0aF9ieXRlX2xlbmd0aF9oZWFkX2Zvcl9oZWFkZXJAMToKICAgIGZyYW1lX2RpZyAxCiAgICBmcmFtZV9kaWcgMAogICAgPAogICAgYnogcmVjYWxjdWxhdGVfaGVhZF9mb3JfZWxlbWVudHNfd2l0aF9ieXRlX2xlbmd0aF9oZWFkX2FmdGVyX2ZvckA0CiAgICBmcmFtZV9kaWcgMgogICAgZHVwCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgZnJhbWVfZGlnIC0zCiAgICBmcmFtZV9kaWcgMQogICAgZHVwCiAgICBjb3ZlciA0CiAgICB1bmNvdmVyIDIKICAgIHJlcGxhY2UzCiAgICBkdXAKICAgIGZyYW1lX2J1cnkgLTMKICAgIGRpZyAxCiAgICBleHRyYWN0X3VpbnQxNgogICAgaW50Y18wIC8vIDIKICAgICsKICAgICsKICAgIGZyYW1lX2J1cnkgMgogICAgaW50Y18wIC8vIDIKICAgICsKICAgIGZyYW1lX2J1cnkgMQogICAgYiByZWNhbGN1bGF0ZV9oZWFkX2Zvcl9lbGVtZW50c193aXRoX2J5dGVfbGVuZ3RoX2hlYWRfZm9yX2hlYWRlckAxCgpyZWNhbGN1bGF0ZV9oZWFkX2Zvcl9lbGVtZW50c193aXRoX2J5dGVfbGVuZ3RoX2hlYWRfYWZ0ZXJfZm9yQDQ6CiAgICBmcmFtZV9kaWcgLTMKICAgIGZyYW1lX2J1cnkgMAogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzLmFyYzRfdHlwZXMuY29udHJhY3QuQXJjNER5bmFtaWNBcnJheS5nb29kYnllKG5hbWU6IGJ5dGVzKSAtPiBieXRlczoKZ29vZGJ5ZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM0X3R5cGVzL2NvbnRyYWN0LnB5OjE3MC0xNzEKICAgIC8vIEBhYmltZXRob2QKICAgIC8vIGRlZiBnb29kYnllKHNlbGYsIG5hbWU6IGFyYzQuU3RyaW5nKSAtPiBnb29kYnllOgogICAgcHJvdG8gMSAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNF90eXBlcy9jb250cmFjdC5weToxNzIKICAgIC8vIGJ5ZSA9IGdvb2RieWUoYXJjNC5TdHJpbmcoIkdvb2QgYnllICIpLCBuYW1lKQogICAgcHVzaGJ5dGVzIDB4MDAwNDAwMGYwMDA5NDc2ZjZmNjQyMDYyNzk2NTIwCiAgICBmcmFtZV9kaWcgLTEKICAgIGNvbmNhdAogICAgYnl0ZWNfMSAvLyAweDAwMDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzRfdHlwZXMvY29udHJhY3QucHk6MTc0CiAgICAvLyByZXR1cm4gYnllCiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMuYXJjNF90eXBlcy5jb250cmFjdC5BcmM0RHluYW1pY0FycmF5LmhlbGxvKG5hbWU6IGJ5dGVzKSAtPiBieXRlczoKaGVsbG86CiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNF90eXBlcy9jb250cmFjdC5weToxNzYtMTc3CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIC8vIGRlZiBoZWxsbyhzZWxmLCBuYW1lOiBhcmM0LlN0cmluZykgLT4gU3RyaW5nOgogICAgcHJvdG8gMSAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNF90eXBlcy9jb250cmFjdC5weToxODQKICAgIC8vIGV4dGVuc2lvbiA9IGFyYzQuRHluYW1pY0FycmF5W2FyYzQuU3RyaW5nXShuYW1lLCBhcmM0LlN0cmluZygiISIpKQogICAgZnJhbWVfZGlnIC0xCiAgICBsZW4KICAgIHB1c2hpbnQgNCAvLyA0CiAgICArCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgcHVzaGJ5dGVzIDB4MDAwNAogICAgc3dhcAogICAgY29uY2F0CiAgICBmcmFtZV9kaWcgLTEKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MDAwMTIxCiAgICBjb25jYXQKICAgIGJ5dGVjXzEgLy8gMHgwMDAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM0X3R5cGVzL2NvbnRyYWN0LnB5OjE4NQogICAgLy8gZHluYW1pY19zdHJpbmdfYXJyYXkuZXh0ZW5kKGV4dGVuc2lvbikKICAgIGR1cAogICAgaW50Y18xIC8vIDAKICAgIGV4dHJhY3RfdWludDE2CiAgICBzd2FwCiAgICBleHRyYWN0IDIgMAogICAgZGlnIDEKICAgIGludGNfMCAvLyAyCiAgICAqCiAgICBkaWcgMQogICAgbGVuCiAgICBzdWJzdHJpbmczCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNF90eXBlcy9jb250cmFjdC5weToxODIKICAgIC8vIGR5bmFtaWNfc3RyaW5nX2FycmF5ID0gYXJjNC5EeW5hbWljQXJyYXlbYXJjNC5TdHJpbmddKGFyYzQuU3RyaW5nKCJIZWxsbyAiKSkKICAgIHB1c2hieXRlcyAweDAwMDEwMDAyMDAwNjQ4NjU2YzZjNmYyMAogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzRfdHlwZXMvY29udHJhY3QucHk6MTg1CiAgICAvLyBkeW5hbWljX3N0cmluZ19hcnJheS5leHRlbmQoZXh0ZW5zaW9uKQogICAgc3dhcAogICAgdW5jb3ZlciAyCiAgICBjYWxsc3ViIGR5bmFtaWNfYXJyYXlfY29uY2F0X2J5dGVfbGVuZ3RoX2hlYWQKICAgIGR1cG4gMgogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzRfdHlwZXMvY29udHJhY3QucHk6MTg4CiAgICAvLyBjb3BpZWRfZHluYW1pY19zdHJpbmdfYXJyYXkucG9wKCkKICAgIGNhbGxzdWIgZHluYW1pY19hcnJheV9wb3BfYnl0ZV9sZW5ndGhfaGVhZAogICAgYnVyeSAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNF90eXBlcy9jb250cmFjdC5weToxODkKICAgIC8vIGNvcGllZF9keW5hbWljX3N0cmluZ19hcnJheS5wb3AoKQogICAgY2FsbHN1YiBkeW5hbWljX2FycmF5X3BvcF9ieXRlX2xlbmd0aF9oZWFkCiAgICBidXJ5IDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM0X3R5cGVzL2NvbnRyYWN0LnB5OjE5MAogICAgLy8gY29waWVkX2R5bmFtaWNfc3RyaW5nX2FycmF5LmFwcGVuZChhcmM0LlN0cmluZygid29ybGQhIikpCiAgICBwdXNoYnl0ZXMgMHgwMDA2Nzc2ZjcyNmM2NDIxCiAgICBpbnRjXzIgLy8gMQogICAgY2FsbHN1YiBkeW5hbWljX2FycmF5X2NvbmNhdF9ieXRlX2xlbmd0aF9oZWFkCiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM0X3R5cGVzL2NvbnRyYWN0LnB5OjE5MgogICAgLy8gZ3JlZXRpbmcgPSBTdHJpbmcoKQogICAgcHVzaGJ5dGVzICIiCiAgICBzd2FwCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNF90eXBlcy9jb250cmFjdC5weToxOTMKICAgIC8vIGZvciB4IGluIGR5bmFtaWNfc3RyaW5nX2FycmF5OgogICAgaW50Y18xIC8vIDAKICAgIGV4dHJhY3RfdWludDE2CiAgICBpbnRjXzEgLy8gMAoKaGVsbG9fZm9yX2hlYWRlckAxOgogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzRfdHlwZXMvY29udHJhY3QucHk6MTkzCiAgICAvLyBmb3IgeCBpbiBkeW5hbWljX3N0cmluZ19hcnJheToKICAgIGZyYW1lX2RpZyAzCiAgICBmcmFtZV9kaWcgMgogICAgPAogICAgYnogaGVsbG9fYWZ0ZXJfZm9yQDQKICAgIGZyYW1lX2RpZyAwCiAgICBleHRyYWN0IDIgMAogICAgZnJhbWVfZGlnIDMKICAgIGR1cAogICAgY292ZXIgMgogICAgaW50Y18wIC8vIDIKICAgICoKICAgIGRpZyAxCiAgICBzd2FwCiAgICBleHRyYWN0X3VpbnQxNgogICAgZHVwMgogICAgZXh0cmFjdF91aW50MTYKICAgIGludGNfMCAvLyAyCiAgICArCiAgICBleHRyYWN0MwogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzRfdHlwZXMvY29udHJhY3QucHk6MTk0CiAgICAvLyBncmVldGluZyArPSB4Lm5hdGl2ZQogICAgZXh0cmFjdCAyIDAKICAgIGZyYW1lX2RpZyAxCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGZyYW1lX2J1cnkgMQogICAgaW50Y18yIC8vIDEKICAgICsKICAgIGZyYW1lX2J1cnkgMwogICAgYiBoZWxsb19mb3JfaGVhZGVyQDEKCmhlbGxvX2FmdGVyX2ZvckA0OgogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzRfdHlwZXMvY29udHJhY3QucHk6MTk2CiAgICAvLyByZXR1cm4gZ3JlZXRpbmcKICAgIGZyYW1lX2RpZyAxCiAgICBmcmFtZV9idXJ5IDAKICAgIHJldHN1Ygo=", "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [54, 78, 105], "errorMessage": "OnCompletion is not NoOp"}, {"pc": [129], "errorMessage": "can only call when creating"}, {"pc": [57, 81, 108], "errorMessage": "can only call when not creating"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": []}, "methods": [{"actions": {"call": [], "create": ["NoOp"]}, "args": [{"type": "uint64", "name": "age"}], "name": "custom_create", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "get_age", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}], "name": "CustomCreate", "state": {"keys": {"box": {}, "global": {"age": {"key": "YWdl", "keyType": "AVMString", "valueType": "AVMUint64"}}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 1}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CiACAAEmAQNhZ2UxG0EAFYICBEgzMe4EViezzTYaAI4CABgAAiJDMRkURDEYRIgAJRaABBUffHVMULAjQzEZFEQxGBRENhoBF4gAAiNDigEAKIv/Z4mKAAEiKGVEiQ==", "clear": "CoEBQw=="}, "compilerInfo": {"compiler": "puya", "compilerVersion": {"major": 4, "minor": 3, "patch": 3}}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBzbWFydF9jb250cmFjdHMuY3VzdG9tX2NyZWF0ZS5jb250cmFjdC5DdXN0b21DcmVhdGUuX19hbGdvcHlfZW50cnlwb2ludF93aXRoX2luaXQoKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxCiAgICBieXRlY2Jsb2NrICJhZ2UiCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3VzdG9tX2NyZWF0ZS9jb250cmFjdC5weTo2CiAgICAvLyBjbGFzcyBDdXN0b21DcmVhdGUoQVJDNENvbnRyYWN0KToKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX2FmdGVyX2lmX2Vsc2VANwogICAgcHVzaGJ5dGVzcyAweDQ4MzMzMWVlIDB4NTYyN2IzY2QgLy8gbWV0aG9kICJjdXN0b21fY3JlYXRlKHVpbnQ2NCl2b2lkIiwgbWV0aG9kICJnZXRfYWdlKCl1aW50NjQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX2N1c3RvbV9jcmVhdGVfcm91dGVANSBtYWluX2dldF9hZ2Vfcm91dGVANgoKbWFpbl9hZnRlcl9pZl9lbHNlQDc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY3VzdG9tX2NyZWF0ZS9jb250cmFjdC5weTo2CiAgICAvLyBjbGFzcyBDdXN0b21DcmVhdGUoQVJDNENvbnRyYWN0KToKICAgIGludGNfMCAvLyAwCiAgICByZXR1cm4KCm1haW5fZ2V0X2FnZV9yb3V0ZUA2OgogICAgLy8gc21hcnRfY29udHJhY3RzL2N1c3RvbV9jcmVhdGUvY29udHJhY3QucHk6MTQKICAgIC8vIEBhYmltZXRob2QoKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIGdldF9hZ2UKICAgIGl0b2IKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9jdXN0b21fY3JlYXRlX3JvdXRlQDU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY3VzdG9tX2NyZWF0ZS9jb250cmFjdC5weToxMAogICAgLy8gQGFiaW1ldGhvZChjcmVhdGU9InJlcXVpcmUiKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jdXN0b21fY3JlYXRlL2NvbnRyYWN0LnB5OjYKICAgIC8vIGNsYXNzIEN1c3RvbUNyZWF0ZShBUkM0Q29udHJhY3QpOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL2N1c3RvbV9jcmVhdGUvY29udHJhY3QucHk6MTAKICAgIC8vIEBhYmltZXRob2QoY3JlYXRlPSJyZXF1aXJlIikKICAgIGNhbGxzdWIgY3VzdG9tX2NyZWF0ZQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5jdXN0b21fY3JlYXRlLmNvbnRyYWN0LkN1c3RvbUNyZWF0ZS5jdXN0b21fY3JlYXRlKGFnZTogdWludDY0KSAtPiB2b2lkOgpjdXN0b21fY3JlYXRlOgogICAgLy8gc21hcnRfY29udHJhY3RzL2N1c3RvbV9jcmVhdGUvY29udHJhY3QucHk6MTAtMTEKICAgIC8vIEBhYmltZXRob2QoY3JlYXRlPSJyZXF1aXJlIikKICAgIC8vIGRlZiBjdXN0b21fY3JlYXRlKHNlbGYsIGFnZTogVUludDY0KSAtPiBOb25lOgogICAgcHJvdG8gMSAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3VzdG9tX2NyZWF0ZS9jb250cmFjdC5weToxMgogICAgLy8gc2VsZi5hZ2UudmFsdWUgPSBhZ2UKICAgIGJ5dGVjXzAgLy8gImFnZSIKICAgIGZyYW1lX2RpZyAtMQogICAgYXBwX2dsb2JhbF9wdXQKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5jdXN0b21fY3JlYXRlLmNvbnRyYWN0LkN1c3RvbUNyZWF0ZS5nZXRfYWdlKCkgLT4gdWludDY0OgpnZXRfYWdlOgogICAgLy8gc21hcnRfY29udHJhY3RzL2N1c3RvbV9jcmVhdGUvY29udHJhY3QucHk6MTQtMTUKICAgIC8vIEBhYmltZXRob2QoKQogICAgLy8gZGVmIGdldF9hZ2Uoc2VsZikgLT4gVUludDY0OgogICAgcHJvdG8gMCAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3VzdG9tX2NyZWF0ZS9jb250cmFjdC5weToxNgogICAgLy8gcmV0dXJuIHNlbGYuYWdlLnZhbHVlCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAiYWdlIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmFnZSBleGlzdHMKICAgIHJldHN1Ygo=", "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [42, 64], "errorMessage": "OnCompletion is not NoOp"}, {"pc": [68], "errorMessage": "can only call when creating"}, {"pc": [45], "errorMessage": "can only call when not creating"}, {"pc": [92], "errorMessage": "check self.age exists"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -65,55 +65,20 @@ def _init_dataclass(cls: type, data: dict) -> object:
     return cls(**field_values)
 
 @dataclasses.dataclass(frozen=True, kw_only=True)
-class GoodbyeArgs:
-    """Dataclass for goodbye arguments"""
-    name: str
+class CustomCreateArgs:
+    """Dataclass for custom_create arguments"""
+    age: int
 
     @property
     def abi_method_signature(self) -> str:
-        return "goodbye(string)string[]"
-
-@dataclasses.dataclass(frozen=True, kw_only=True)
-class HelloArgs:
-    """Dataclass for hello arguments"""
-    name: str
-
-    @property
-    def abi_method_signature(self) -> str:
-        return "hello(string)string"
+        return "custom_create(uint64)void"
 
 
-class Arc4DynamicArrayParams:
+class CustomCreateParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
 
-    def goodbye(
-        self,
-        args: tuple[str] | GoodbyeArgs,
-        params: algokit_utils.CommonAppCallParams | None = None
-    ) -> algokit_utils.AppCallMethodCallParams:
-        method_args = _parse_abi_args(args)
-        params = params or algokit_utils.CommonAppCallParams()
-        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
-            **dataclasses.asdict(params),
-            "method": "goodbye(string)string[]",
-            "args": method_args,
-        }))
-
-    def hello(
-        self,
-        args: tuple[str] | HelloArgs,
-        params: algokit_utils.CommonAppCallParams | None = None
-    ) -> algokit_utils.AppCallMethodCallParams:
-        method_args = _parse_abi_args(args)
-        params = params or algokit_utils.CommonAppCallParams()
-        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
-            **dataclasses.asdict(params),
-            "method": "hello(string)string",
-            "args": method_args,
-        }))
-
-    def arc4_dynamic_bytes(
+    def get_age(
         self,
         params: algokit_utils.CommonAppCallParams | None = None
     ) -> algokit_utils.AppCallMethodCallParams:
@@ -121,7 +86,20 @@ class Arc4DynamicArrayParams:
         params = params or algokit_utils.CommonAppCallParams()
         return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "arc4_dynamic_bytes()byte[]",
+            "method": "get_age()uint64",
+        }))
+
+    def custom_create(
+        self,
+        args: tuple[int] | CustomCreateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "custom_create(uint64)void",
+            "args": method_args,
         }))
 
     def clear_state(
@@ -135,37 +113,11 @@ class Arc4DynamicArrayParams:
         )
 
 
-class Arc4DynamicArrayCreateTransactionParams:
+class CustomCreateCreateTransactionParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
 
-    def goodbye(
-        self,
-        args: tuple[str] | GoodbyeArgs,
-        params: algokit_utils.CommonAppCallParams | None = None
-    ) -> algokit_utils.BuiltTransactions:
-        method_args = _parse_abi_args(args)
-        params = params or algokit_utils.CommonAppCallParams()
-        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
-            **dataclasses.asdict(params),
-            "method": "goodbye(string)string[]",
-            "args": method_args,
-        }))
-
-    def hello(
-        self,
-        args: tuple[str] | HelloArgs,
-        params: algokit_utils.CommonAppCallParams | None = None
-    ) -> algokit_utils.BuiltTransactions:
-        method_args = _parse_abi_args(args)
-        params = params or algokit_utils.CommonAppCallParams()
-        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
-            **dataclasses.asdict(params),
-            "method": "hello(string)string",
-            "args": method_args,
-        }))
-
-    def arc4_dynamic_bytes(
+    def get_age(
         self,
         params: algokit_utils.CommonAppCallParams | None = None
     ) -> algokit_utils.BuiltTransactions:
@@ -173,7 +125,20 @@ class Arc4DynamicArrayCreateTransactionParams:
         params = params or algokit_utils.CommonAppCallParams()
         return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "arc4_dynamic_bytes()byte[]",
+            "method": "get_age()uint64",
+        }))
+
+    def custom_create(
+        self,
+        args: tuple[int] | CustomCreateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "custom_create(uint64)void",
+            "args": method_args,
         }))
 
     def clear_state(
@@ -187,55 +152,39 @@ class Arc4DynamicArrayCreateTransactionParams:
         )
 
 
-class Arc4DynamicArraySend:
+class CustomCreateSend:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
 
-    def goodbye(
-        self,
-        args: tuple[str] | GoodbyeArgs,
-        params: algokit_utils.CommonAppCallParams | None = None,
-        send_params: algokit_utils.SendParams | None = None
-    ) -> algokit_utils.SendAppTransactionResult[list[str]]:
-        method_args = _parse_abi_args(args)
-        params = params or algokit_utils.CommonAppCallParams()
-        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
-            **dataclasses.asdict(params),
-            "method": "goodbye(string)string[]",
-            "args": method_args,
-        }), send_params=send_params)
-        parsed_response = response
-        return typing.cast(algokit_utils.SendAppTransactionResult[list[str]], parsed_response)
-
-    def hello(
-        self,
-        args: tuple[str] | HelloArgs,
-        params: algokit_utils.CommonAppCallParams | None = None,
-        send_params: algokit_utils.SendParams | None = None
-    ) -> algokit_utils.SendAppTransactionResult[str]:
-        method_args = _parse_abi_args(args)
-        params = params or algokit_utils.CommonAppCallParams()
-        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
-            **dataclasses.asdict(params),
-            "method": "hello(string)string",
-            "args": method_args,
-        }), send_params=send_params)
-        parsed_response = response
-        return typing.cast(algokit_utils.SendAppTransactionResult[str], parsed_response)
-
-    def arc4_dynamic_bytes(
+    def get_age(
         self,
         params: algokit_utils.CommonAppCallParams | None = None,
         send_params: algokit_utils.SendParams | None = None
-    ) -> algokit_utils.SendAppTransactionResult[bytes]:
+    ) -> algokit_utils.SendAppTransactionResult[int]:
     
         params = params or algokit_utils.CommonAppCallParams()
         response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "arc4_dynamic_bytes()byte[]",
+            "method": "get_age()uint64",
         }), send_params=send_params)
         parsed_response = response
-        return typing.cast(algokit_utils.SendAppTransactionResult[bytes], parsed_response)
+        return typing.cast(algokit_utils.SendAppTransactionResult[int], parsed_response)
+
+    def custom_create(
+        self,
+        args: tuple[int] | CustomCreateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "custom_create(uint64)void",
+            "args": method_args,
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
 
     def clear_state(
         self,
@@ -248,14 +197,56 @@ class Arc4DynamicArraySend:
         )
 
 
-class Arc4DynamicArrayState:
-    """Methods to access state for the current Arc4DynamicArray app"""
+class GlobalStateValue(typing.TypedDict):
+    """Shape of global_state state key values"""
+    age: int
+
+class CustomCreateState:
+    """Methods to access state for the current CustomCreate app"""
 
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
 
-class Arc4DynamicArrayClient:
-    """Client for interacting with Arc4DynamicArray smart contract"""
+    @property
+    def global_state(
+        self
+    ) -> "_GlobalState":
+            """Methods to access global_state for the current app"""
+            return _GlobalState(self.app_client)
+
+class _GlobalState:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+        
+        # Pre-generated mapping of value types to their struct classes
+        self._struct_classes: dict[str, typing.Type[typing.Any]] = {}
+
+    def get_all(self) -> GlobalStateValue:
+        """Get all current keyed values from global_state state"""
+        result = self.app_client.state.global_state.get_all()
+        if not result:
+            return typing.cast(GlobalStateValue, {})
+
+        converted = {}
+        for key, value in result.items():
+            key_info = self.app_client.app_spec.state.keys.global_state.get(key)
+            struct_class = self._struct_classes.get(key_info.value_type) if key_info else None
+            converted[key] = (
+                _init_dataclass(struct_class, value) if struct_class and isinstance(value, dict)
+                else value
+            )
+        return typing.cast(GlobalStateValue, converted)
+
+    @property
+    def age(self) -> int:
+        """Get the current value of the age key in global_state state"""
+        value = self.app_client.state.global_state.get_value("age")
+        if isinstance(value, dict) and "AVMUint64" in self._struct_classes:
+            return _init_dataclass(self._struct_classes["AVMUint64"], value)  # type: ignore
+        return typing.cast(int, value)
+
+class CustomCreateClient:
+    """Client for interacting with CustomCreate smart contract"""
 
     @typing.overload
     def __init__(self, app_client: algokit_utils.AppClient) -> None: ...
@@ -303,10 +294,10 @@ class Arc4DynamicArrayClient:
         else:
             raise ValueError("Either app_client or algorand and app_id must be provided")
     
-        self.params = Arc4DynamicArrayParams(self.app_client)
-        self.create_transaction = Arc4DynamicArrayCreateTransactionParams(self.app_client)
-        self.send = Arc4DynamicArraySend(self.app_client)
-        self.state = Arc4DynamicArrayState(self.app_client)
+        self.params = CustomCreateParams(self.app_client)
+        self.create_transaction = CustomCreateCreateTransactionParams(self.app_client)
+        self.send = CustomCreateSend(self.app_client)
+        self.state = CustomCreateState(self.app_client)
 
     @staticmethod
     def from_creator_and_name(
@@ -319,8 +310,8 @@ class Arc4DynamicArrayClient:
         clear_source_map: SourceMap | None = None,
         ignore_cache: bool | None = None,
         app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
-    ) -> "Arc4DynamicArrayClient":
-        return Arc4DynamicArrayClient(
+    ) -> "CustomCreateClient":
+        return CustomCreateClient(
             algokit_utils.AppClient.from_creator_and_name(
                 creator_address=creator_address,
                 app_name=app_name,
@@ -343,8 +334,8 @@ class Arc4DynamicArrayClient:
         default_signer: TransactionSigner | None = None,
         approval_source_map: SourceMap | None = None,
         clear_source_map: SourceMap | None = None,
-    ) -> "Arc4DynamicArrayClient":
-        return Arc4DynamicArrayClient(
+    ) -> "CustomCreateClient":
+        return CustomCreateClient(
             algokit_utils.AppClient.from_network(
                 app_spec=APP_SPEC,
                 algorand=algorand,
@@ -383,8 +374,8 @@ class Arc4DynamicArrayClient:
         default_signer: TransactionSigner | None = None,
         approval_source_map: SourceMap | None = None,
         clear_source_map: SourceMap | None = None,
-    ) -> "Arc4DynamicArrayClient":
-        return Arc4DynamicArrayClient(
+    ) -> "CustomCreateClient":
+        return CustomCreateClient(
             self.app_client.clone(
                 app_name=app_name,
                 default_sender=default_sender,
@@ -394,27 +385,21 @@ class Arc4DynamicArrayClient:
             )
         )
 
-    def new_group(self) -> "Arc4DynamicArrayComposer":
-        return Arc4DynamicArrayComposer(self)
+    def new_group(self) -> "CustomCreateComposer":
+        return CustomCreateComposer(self)
 
     @typing.overload
     def decode_return_value(
         self,
-        method: typing.Literal["goodbye(string)string[]"],
+        method: typing.Literal["get_age()uint64"],
         return_value: algokit_utils.ABIReturn | None
-    ) -> list[str] | None: ...
+    ) -> int | None: ...
     @typing.overload
     def decode_return_value(
         self,
-        method: typing.Literal["hello(string)string"],
+        method: typing.Literal["custom_create(uint64)void"],
         return_value: algokit_utils.ABIReturn | None
-    ) -> str | None: ...
-    @typing.overload
-    def decode_return_value(
-        self,
-        method: typing.Literal["arc4_dynamic_bytes()byte[]"],
-        return_value: algokit_utils.ABIReturn | None
-    ) -> bytes | None: ...
+    ) -> None: ...
     @typing.overload
     def decode_return_value(
         self,
@@ -426,7 +411,7 @@ class Arc4DynamicArrayClient:
         self,
         method: str,
         return_value: algokit_utils.ABIReturn | None
-    ) -> algokit_utils.ABIValue | algokit_utils.ABIStruct | None | bytes | list[str] | str:
+    ) -> algokit_utils.ABIValue | algokit_utils.ABIStruct | None | int:
         """Decode ABI return value for the given method."""
         if return_value is None:
             return None
@@ -446,15 +431,28 @@ class Arc4DynamicArrayClient:
 
 
 @dataclasses.dataclass(frozen=True)
-class Arc4DynamicArrayBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
-    """Parameters for creating Arc4DynamicArray contract with bare calls"""
+class CustomCreateMethodCallCreateParams(
+    algokit_utils.AppClientCreateSchema, algokit_utils.BaseAppClientMethodCallParams[
+        CustomCreateArgs,
+        str | None,
+    ]
+):
+    """Parameters for creating CustomCreate contract using ABI"""
     on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+    method: str | None = None
 
-    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
-        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientMethodCallCreateParams:
+        method_args = _parse_abi_args(self.args)
+        return algokit_utils.AppClientMethodCallCreateParams(
+            **{
+                **self.__dict__,
+                "method": self.method or getattr(self.args, "abi_method_signature", None),
+                "args": method_args,
+            }
+        )
 
-class Arc4DynamicArrayFactory(algokit_utils.TypedAppFactoryProtocol[Arc4DynamicArrayBareCallCreateParams, None, None]):
-    """Factory for deploying and managing Arc4DynamicArrayClient smart contracts"""
+class CustomCreateFactory(algokit_utils.TypedAppFactoryProtocol[CustomCreateMethodCallCreateParams, None, None]):
+    """Factory for deploying and managing CustomCreateClient smart contracts"""
 
     def __init__(
         self,
@@ -477,9 +475,9 @@ class Arc4DynamicArrayFactory(algokit_utils.TypedAppFactoryProtocol[Arc4DynamicA
                 compilation_params=compilation_params,
             )
         )
-        self.params = Arc4DynamicArrayFactoryParams(self.app_factory)
-        self.create_transaction = Arc4DynamicArrayFactoryCreateTransaction(self.app_factory)
-        self.send = Arc4DynamicArrayFactorySend(self.app_factory)
+        self.params = CustomCreateFactoryParams(self.app_factory)
+        self.create_transaction = CustomCreateFactoryCreateTransaction(self.app_factory)
+        self.send = CustomCreateFactorySend(self.app_factory)
 
     @property
     def app_name(self) -> str:
@@ -498,7 +496,7 @@ class Arc4DynamicArrayFactory(algokit_utils.TypedAppFactoryProtocol[Arc4DynamicA
         *,
         on_update: algokit_utils.OnUpdate | None = None,
         on_schema_break: algokit_utils.OnSchemaBreak | None = None,
-        create_params: Arc4DynamicArrayBareCallCreateParams | None = None,
+        create_params: CustomCreateMethodCallCreateParams | None = None,
         update_params: None = None,
         delete_params: None = None,
         existing_deployments: algokit_utils.ApplicationLookup | None = None,
@@ -506,7 +504,7 @@ class Arc4DynamicArrayFactory(algokit_utils.TypedAppFactoryProtocol[Arc4DynamicA
         app_name: str | None = None,
         compilation_params: algokit_utils.AppClientCompilationParams | None = None,
         send_params: algokit_utils.SendParams | None = None,
-    ) -> tuple[Arc4DynamicArrayClient, algokit_utils.AppFactoryDeployResult]:
+    ) -> tuple[CustomCreateClient, algokit_utils.AppFactoryDeployResult]:
         """Deploy the application"""
         deploy_response = self.app_factory.deploy(
             on_update=on_update,
@@ -521,7 +519,7 @@ class Arc4DynamicArrayFactory(algokit_utils.TypedAppFactoryProtocol[Arc4DynamicA
             send_params=send_params,
         )
 
-        return Arc4DynamicArrayClient(deploy_response[0]), deploy_response[1]
+        return CustomCreateClient(deploy_response[0]), deploy_response[1]
 
     def get_app_client_by_creator_and_name(
         self,
@@ -533,9 +531,9 @@ class Arc4DynamicArrayFactory(algokit_utils.TypedAppFactoryProtocol[Arc4DynamicA
         app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
         approval_source_map: SourceMap | None = None,
         clear_source_map: SourceMap | None = None,
-    ) -> Arc4DynamicArrayClient:
+    ) -> CustomCreateClient:
         """Get an app client by creator address and name"""
-        return Arc4DynamicArrayClient(
+        return CustomCreateClient(
             self.app_factory.get_app_client_by_creator_and_name(
                 creator_address,
                 app_name,
@@ -556,9 +554,9 @@ class Arc4DynamicArrayFactory(algokit_utils.TypedAppFactoryProtocol[Arc4DynamicA
         default_signer: TransactionSigner | None = None,
         approval_source_map: SourceMap | None = None,
         clear_source_map: SourceMap | None = None,
-    ) -> Arc4DynamicArrayClient:
+    ) -> CustomCreateClient:
         """Get an app client by app ID"""
-        return Arc4DynamicArrayClient(
+        return CustomCreateClient(
             self.app_factory.get_app_client_by_id(
                 app_id,
                 app_name,
@@ -570,17 +568,17 @@ class Arc4DynamicArrayFactory(algokit_utils.TypedAppFactoryProtocol[Arc4DynamicA
         )
 
 
-class Arc4DynamicArrayFactoryParams:
-    """Parameters for creating transactions for Arc4DynamicArray contract"""
+class CustomCreateFactoryParams:
+    """Parameters for creating transactions for CustomCreate contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
-        self.create = Arc4DynamicArrayFactoryCreateParams(app_factory)
-        self.update = Arc4DynamicArrayFactoryUpdateParams(app_factory)
-        self.delete = Arc4DynamicArrayFactoryDeleteParams(app_factory)
+        self.create = CustomCreateFactoryCreateParams(app_factory)
+        self.update = CustomCreateFactoryUpdateParams(app_factory)
+        self.delete = CustomCreateFactoryDeleteParams(app_factory)
 
-class Arc4DynamicArrayFactoryCreateParams:
-    """Parameters for 'create' operations of Arc4DynamicArray contract"""
+class CustomCreateFactoryCreateParams:
+    """Parameters for 'create' operations of CustomCreate contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
@@ -597,67 +595,47 @@ class Arc4DynamicArrayFactoryCreateParams:
             algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
             compilation_params=compilation_params)
 
-    def goodbye(
-        self,
-        args: tuple[str] | GoodbyeArgs,
-        *,
-        params: algokit_utils.CommonAppCallCreateParams | None = None,
-        compilation_params: algokit_utils.AppClientCompilationParams | None = None
-    ) -> algokit_utils.AppCreateMethodCallParams:
-        """Creates a new instance using the goodbye(string)string[] ABI method"""
-        params = params or algokit_utils.CommonAppCallCreateParams()
-        return self.app_factory.params.create(
-            algokit_utils.AppFactoryCreateMethodCallParams(
-                **{
-                **dataclasses.asdict(params),
-                "method": "goodbye(string)string[]",
-                "args": _parse_abi_args(args),
-                }
-            ),
-            compilation_params=compilation_params
-        )
-
-    def hello(
-        self,
-        args: tuple[str] | HelloArgs,
-        *,
-        params: algokit_utils.CommonAppCallCreateParams | None = None,
-        compilation_params: algokit_utils.AppClientCompilationParams | None = None
-    ) -> algokit_utils.AppCreateMethodCallParams:
-        """Creates a new instance using the hello(string)string ABI method"""
-        params = params or algokit_utils.CommonAppCallCreateParams()
-        return self.app_factory.params.create(
-            algokit_utils.AppFactoryCreateMethodCallParams(
-                **{
-                **dataclasses.asdict(params),
-                "method": "hello(string)string",
-                "args": _parse_abi_args(args),
-                }
-            ),
-            compilation_params=compilation_params
-        )
-
-    def arc4_dynamic_bytes(
+    def get_age(
         self,
         *,
         params: algokit_utils.CommonAppCallCreateParams | None = None,
         compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> algokit_utils.AppCreateMethodCallParams:
-        """Creates a new instance using the arc4_dynamic_bytes()byte[] ABI method"""
+        """Creates a new instance using the get_age()uint64 ABI method"""
         params = params or algokit_utils.CommonAppCallCreateParams()
         return self.app_factory.params.create(
             algokit_utils.AppFactoryCreateMethodCallParams(
                 **{
                 **dataclasses.asdict(params),
-                "method": "arc4_dynamic_bytes()byte[]",
+                "method": "get_age()uint64",
                 "args": None,
                 }
             ),
             compilation_params=compilation_params
         )
 
-class Arc4DynamicArrayFactoryUpdateParams:
-    """Parameters for 'update' operations of Arc4DynamicArray contract"""
+    def custom_create(
+        self,
+        args: tuple[int] | CustomCreateArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the custom_create(uint64)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "custom_create(uint64)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class CustomCreateFactoryUpdateParams:
+    """Parameters for 'update' operations of CustomCreate contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
@@ -674,8 +652,8 @@ class Arc4DynamicArrayFactoryUpdateParams:
             algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
             )
 
-class Arc4DynamicArrayFactoryDeleteParams:
-    """Parameters for 'delete' operations of Arc4DynamicArray contract"""
+class CustomCreateFactoryDeleteParams:
+    """Parameters for 'delete' operations of CustomCreate contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
@@ -693,16 +671,16 @@ class Arc4DynamicArrayFactoryDeleteParams:
             )
 
 
-class Arc4DynamicArrayFactoryCreateTransaction:
-    """Create transactions for Arc4DynamicArray contract"""
+class CustomCreateFactoryCreateTransaction:
+    """Create transactions for CustomCreate contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
-        self.create = Arc4DynamicArrayFactoryCreateTransactionCreate(app_factory)
+        self.create = CustomCreateFactoryCreateTransactionCreate(app_factory)
 
 
-class Arc4DynamicArrayFactoryCreateTransactionCreate:
-    """Create new instances of Arc4DynamicArray contract"""
+class CustomCreateFactoryCreateTransactionCreate:
+    """Create new instances of CustomCreate contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
@@ -718,16 +696,16 @@ class Arc4DynamicArrayFactoryCreateTransactionCreate:
         )
 
 
-class Arc4DynamicArrayFactorySend:
-    """Send calls to Arc4DynamicArray contract"""
+class CustomCreateFactorySend:
+    """Send calls to CustomCreate contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
-        self.create = Arc4DynamicArrayFactorySendCreate(app_factory)
+        self.create = CustomCreateFactorySendCreate(app_factory)
 
 
-class Arc4DynamicArrayFactorySendCreate:
-    """Send create calls to Arc4DynamicArray contract"""
+class CustomCreateFactorySendCreate:
+    """Send create calls to CustomCreate contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
@@ -738,7 +716,7 @@ class Arc4DynamicArrayFactorySendCreate:
         params: algokit_utils.CommonAppCallCreateParams | None = None,
         send_params: algokit_utils.SendParams | None = None,
         compilation_params: algokit_utils.AppClientCompilationParams | None = None,
-    ) -> tuple[Arc4DynamicArrayClient, algokit_utils.SendAppCreateTransactionResult]:
+    ) -> tuple[CustomCreateClient, algokit_utils.SendAppCreateTransactionResult]:
         """Creates a new instance using a bare call"""
         params = params or algokit_utils.CommonAppCallCreateParams()
         result = self.app_factory.send.bare.create(
@@ -746,66 +724,86 @@ class Arc4DynamicArrayFactorySendCreate:
             send_params=send_params,
             compilation_params=compilation_params
         )
-        return Arc4DynamicArrayClient(result[0]), result[1]
+        return CustomCreateClient(result[0]), result[1]
+
+    def custom_create(
+        self,
+        args: tuple[int] | CustomCreateArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> tuple[CustomCreateClient, algokit_utils.AppFactoryCreateMethodCallResult[None]]:
+            """Creates and sends a transaction using the custom_create(uint64)void ABI method"""
+            params = params or algokit_utils.CommonAppCallCreateParams()
+            client, result = self.app_factory.send.create(
+                algokit_utils.AppFactoryCreateMethodCallParams(
+                    **{
+                    **dataclasses.asdict(params),
+                    "method": "custom_create(uint64)void",
+                    "args": _parse_abi_args(args),
+                    }
+                ),
+                send_params=send_params,
+                compilation_params=compilation_params
+            )
+            return_value = None if result.abi_return is None else typing.cast(None, result.abi_return)
+    
+            return CustomCreateClient(client), algokit_utils.AppFactoryCreateMethodCallResult[None](
+                **{
+                    **result.__dict__,
+                    "app_id": result.app_id,
+                    "abi_return": return_value,
+                    "transaction": result.transaction,
+                    "confirmation": result.confirmation,
+                    "group_id": result.group_id,
+                    "tx_ids": result.tx_ids,
+                    "transactions": result.transactions,
+                    "confirmations": result.confirmations,
+                    "app_address": result.app_address,
+                }
+            )
 
 
-class Arc4DynamicArrayComposer:
-    """Composer for creating transaction groups for Arc4DynamicArray contract calls"""
+class CustomCreateComposer:
+    """Composer for creating transaction groups for CustomCreate contract calls"""
 
-    def __init__(self, client: "Arc4DynamicArrayClient"):
+    def __init__(self, client: "CustomCreateClient"):
         self.client = client
         self._composer = client.algorand.new_group()
         self._result_mappers: list[typing.Callable[[algokit_utils.ABIReturn | None], object] | None] = []
 
-    def goodbye(
-        self,
-        args: tuple[str] | GoodbyeArgs,
-        params: algokit_utils.CommonAppCallParams | None = None
-    ) -> "Arc4DynamicArrayComposer":
-        self._composer.add_app_call_method_call(
-            self.client.params.goodbye(
-                args=args,
-                params=params,
-            )
-        )
-        self._result_mappers.append(
-            lambda v: self.client.decode_return_value(
-                "goodbye(string)string[]", v
-            )
-        )
-        return self
-
-    def hello(
-        self,
-        args: tuple[str] | HelloArgs,
-        params: algokit_utils.CommonAppCallParams | None = None
-    ) -> "Arc4DynamicArrayComposer":
-        self._composer.add_app_call_method_call(
-            self.client.params.hello(
-                args=args,
-                params=params,
-            )
-        )
-        self._result_mappers.append(
-            lambda v: self.client.decode_return_value(
-                "hello(string)string", v
-            )
-        )
-        return self
-
-    def arc4_dynamic_bytes(
+    def get_age(
         self,
         params: algokit_utils.CommonAppCallParams | None = None
-    ) -> "Arc4DynamicArrayComposer":
+    ) -> "CustomCreateComposer":
         self._composer.add_app_call_method_call(
-            self.client.params.arc4_dynamic_bytes(
+            self.client.params.get_age(
                 
                 params=params,
             )
         )
         self._result_mappers.append(
             lambda v: self.client.decode_return_value(
-                "arc4_dynamic_bytes()byte[]", v
+                "get_age()uint64", v
+            )
+        )
+        return self
+
+    def custom_create(
+        self,
+        args: tuple[int] | CustomCreateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "CustomCreateComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.custom_create(
+                args=args,
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "custom_create(uint64)void", v
             )
         )
         return self
@@ -815,7 +813,7 @@ class Arc4DynamicArrayComposer:
         *,
         args: list[bytes] | None = None,
         params: algokit_utils.CommonAppCallParams | None = None,
-    ) -> "Arc4DynamicArrayComposer":
+    ) -> "CustomCreateComposer":
         params=params or algokit_utils.CommonAppCallParams()
         self._composer.add_app_call(
             self.client.params.clear_state(
@@ -831,7 +829,7 @@ class Arc4DynamicArrayComposer:
     
     def add_transaction(
         self, txn: Transaction, signer: TransactionSigner | None = None
-    ) -> "Arc4DynamicArrayComposer":
+    ) -> "CustomCreateComposer":
         self._composer.add_transaction(txn, signer)
         return self
     
