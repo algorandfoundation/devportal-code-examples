@@ -601,10 +601,6 @@ main_bare_routing@31:
 
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.getBox() -> uint64:
 getBox:
-    // contracts/BoxStorage/contract.algo.ts:56-57
-    // @abimethod({ readonly: true })
-    // public getBox(): uint64 {
-    proto 0 1
     // contracts/BoxStorage/contract.algo.ts:42
     // public boxInt = Box<uint64>({ key: 'boxInt' })
     bytec_3 // "boxInt"
@@ -620,10 +616,6 @@ getBox:
 
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.valueBox() -> uint64:
 valueBox:
-    // contracts/BoxStorage/contract.algo.ts:66-67
-    // @abimethod({ readonly: true })
-    // public valueBox(): uint64 {
-    proto 0 1
     // contracts/BoxStorage/contract.algo.ts:42
     // public boxInt = Box<uint64>({ key: 'boxInt' })
     bytec_3 // "boxInt"
@@ -702,9 +694,6 @@ setBoxDynamicBytes:
 
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.deleteBox() -> void:
 deleteBox:
-    // contracts/BoxStorage/contract.algo.ts:106
-    // public deleteBox(): void {
-    proto 0 0
     // contracts/BoxStorage/contract.algo.ts:42
     // public boxInt = Box<uint64>({ key: 'boxInt' })
     bytec_3 // "boxInt"
@@ -771,10 +760,6 @@ deleteBox:
 
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.maybeBox() -> uint64, uint64:
 maybeBox:
-    // contracts/BoxStorage/contract.algo.ts:122-123
-    // @abimethod({ readonly: true })
-    // public maybeBox(): [uint64, boolean] {
-    proto 0 2
     // contracts/BoxStorage/contract.algo.ts:42
     // public boxInt = Box<uint64>({ key: 'boxInt' })
     bytec_3 // "boxInt"
@@ -1231,9 +1216,6 @@ boxMapStructExists:
 
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.getBoxRef() -> bytes:
 getBoxRef:
-    // contracts/BoxStorage/contract.algo.ts:301
-    // public getBoxRef(): arc4.Address {
-    proto 0 1
     // contracts/BoxStorage/contract.algo.ts:45
     // public boxRef = BoxRef({ key: 'boxRef' })
     bytec 8 // "boxRef"
@@ -1446,8 +1428,8 @@ arc4Box:
     frame_dig -1
     box_get
     assert // Box must have value
-    extract 0 1 // on error: Index access is out of bounds
-    btoi
+    intc_1 // 0
+    getbyte
     !
     assert
     // contracts/BoxStorage/contract.algo.ts:405
@@ -1455,8 +1437,8 @@ arc4Box:
     frame_dig -1
     box_get
     assert // Box must have value
-    extract 1 1 // on error: Index access is out of bounds
-    btoi
+    intc_0 // 1
+    getbyte
     intc_0 // 1
     ==
     assert
@@ -1465,8 +1447,8 @@ arc4Box:
     frame_dig -1
     box_get
     assert // Box must have value
-    extract 2 1 // on error: Index access is out of bounds
-    btoi
+    pushint 2 // 2
+    getbyte
     pushint 2 // 2
     ==
     assert
@@ -1475,8 +1457,8 @@ arc4Box:
     frame_dig -1
     box_get
     assert // Box must have value
-    extract 3 1 // on error: Index access is out of bounds
-    btoi
+    pushint 3 // 3
+    getbyte
     pushint 3 // 3
     ==
     assert
