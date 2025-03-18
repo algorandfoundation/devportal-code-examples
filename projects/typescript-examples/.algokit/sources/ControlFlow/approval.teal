@@ -405,112 +405,72 @@ getDay:
     proto 1 1
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     frame_dig -1
-    intc_0
-    ==
+    switch getDay_switch_case_default@15 getDay_switch_case_0@1 getDay_switch_case_1@3 getDay_switch_case_2@5 getDay_switch_case_3@7 getDay_switch_case_4@9 getDay_switch_case_5@11 getDay_switch_case_6@13
+
+getDay_switch_case_default@15:
 
 
-
-    bz getDay_after_if_else@3
-
-
-    pushbytes "Monday"
+    pushbytes "Invalid day"
     retsub
 
-getDay_after_if_else@3:
-
-
-    frame_dig -1
-    intc_3
-    ==
-
-
-
-    bz getDay_after_if_else@6
-
-
-    pushbytes "Tuesday"
-    retsub
-
-getDay_after_if_else@6:
-
-
-    frame_dig -1
-    pushint 3
-    ==
-
-
-
-    bz getDay_after_if_else@9
-
-
-    pushbytes "Wednesday"
-    retsub
-
-getDay_after_if_else@9:
-
-
-    frame_dig -1
-    pushint 4
-    ==
-
-
-
-    bz getDay_after_if_else@12
-
-
-    pushbytes "Thursday"
-    retsub
-
-getDay_after_if_else@12:
-
-
-    frame_dig -1
-    pushint 5
-    ==
-
-
-
-    bz getDay_after_if_else@15
-
-
-    pushbytes "Friday"
-    retsub
-
-getDay_after_if_else@15:
-
-
-    frame_dig -1
-    pushint 6
-    ==
-
-
-
-    bz getDay_after_if_else@18
-
-
-    pushbytes "Saturday"
-    retsub
-
-getDay_after_if_else@18:
-
-
-    frame_dig -1
-    pushint 7
-    ==
-
-
-
-    bz getDay_after_if_else@21
+getDay_switch_case_6@13:
 
 
     pushbytes "Sunday"
     retsub
 
-getDay_after_if_else@21:
+getDay_switch_case_5@11:
 
 
-    pushbytes "Invalid day"
+    pushbytes "Saturday"
+    retsub
+
+getDay_switch_case_4@9:
+
+
+    pushbytes "Friday"
+    retsub
+
+getDay_switch_case_3@7:
+
+
+    pushbytes "Thursday"
+    retsub
+
+getDay_switch_case_2@5:
+
+
+    pushbytes "Wednesday"
+    retsub
+
+getDay_switch_case_1@3:
+
+
+    pushbytes "Tuesday"
+    retsub
+
+getDay_switch_case_0@1:
+
+
+    pushbytes "Monday"
     retsub
 
 
@@ -526,19 +486,47 @@ calculateBoxStorageCost:
     len
 
 
+    pushbytess "xs" "sm" "md" "lg" "max"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     frame_dig -2
-    pushbytes "xs"
-    ==
+    match calculateBoxStorageCost_switch_case_0@1 calculateBoxStorageCost_switch_case_1@3 calculateBoxStorageCost_switch_case_2@5 calculateBoxStorageCost_switch_case_3@7 calculateBoxStorageCost_switch_case_4@9
 
 
+    intc_1
+    swap
+    retsub
+
+calculateBoxStorageCost_switch_case_4@9:
 
 
-    bz calculateBoxStorageCost_after_if_else@3
+    pushint 32000
 
-
-    intc_2
-
-calculateBoxStorageCost_block@17:
+calculateBoxStorageCost_block@13:
 
 
     frame_dig 0
@@ -560,84 +548,37 @@ calculateBoxStorageCost_block@17:
     swap
     retsub
 
-calculateBoxStorageCost_after_if_else@3:
-
-
-    frame_dig -2
-    pushbytes "sm"
-    ==
-
-
-
-
-    bz calculateBoxStorageCost_after_if_else@6
-
-
-    pushint 64
-
-
-    b calculateBoxStorageCost_block@17
-
-calculateBoxStorageCost_after_if_else@6:
-
-
-    frame_dig -2
-    pushbytes "md"
-    ==
-
-
-
-
-    bz calculateBoxStorageCost_after_if_else@9
-
-
-    pushint 256
-
-
-    b calculateBoxStorageCost_block@17
-
-calculateBoxStorageCost_after_if_else@9:
-
-
-    frame_dig -2
-    pushbytes "lg"
-    ==
-
-
-
-
-    bz calculateBoxStorageCost_after_if_else@12
+calculateBoxStorageCost_switch_case_3@7:
 
 
     pushint 1024
 
 
-    b calculateBoxStorageCost_block@17
+    b calculateBoxStorageCost_block@13
 
-calculateBoxStorageCost_after_if_else@12:
-
-
-    frame_dig -2
-    pushbytes "max"
-    ==
+calculateBoxStorageCost_switch_case_2@5:
 
 
+    pushint 256
 
 
-    bz calculateBoxStorageCost_after_if_else@15
+    b calculateBoxStorageCost_block@13
+
+calculateBoxStorageCost_switch_case_1@3:
 
 
-    pushint 32000
+    pushint 64
 
 
-    b calculateBoxStorageCost_block@17
+    b calculateBoxStorageCost_block@13
 
-calculateBoxStorageCost_after_if_else@15:
+calculateBoxStorageCost_switch_case_0@1:
 
 
-    intc_1
-    swap
-    retsub
+    intc_2
+
+
+    b calculateBoxStorageCost_block@13
 
 
 

@@ -39,6 +39,6 @@ describe('CustomCreate contract', () => {
 
     const result = await client.send.getAge()
 
-    expect(result).toBe(28)
+    expect(result.return).toBe(28n)
   })
 })
