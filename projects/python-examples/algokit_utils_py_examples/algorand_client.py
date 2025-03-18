@@ -145,12 +145,13 @@ def app_client() -> None:
 
     # example: GET_APP_CLIENT_WHEN_DEPLOYED
     from smart_contracts.artifacts.hello_world.hello_world_client import (
+        HelloArgs,
         HelloWorldClient,
         HelloWorldFactory,
     )
 
     """
-    For single app client instance
+    Get a single typed app client by id
     """
     app_client = algorand_client.client.get_typed_app_client_by_id(
         HelloWorldClient,
@@ -176,29 +177,19 @@ def app_client() -> None:
         app_id=4321,
     )
 
-    from smart_contracts.artifacts.custom_create.custom_create_client import (
-        CustomCreateArgs,
-        CustomCreateFactory,
-    )
-    from smart_contracts.artifacts.hello_world.hello_world_client import (
-        HelloArgs,
-        HelloWorldClient,
-        HelloWorldFactory,
-    )
-
     """
-    For single app client instance
+    Get typed app client by creator and name
     """
     app_client = algorand_client.client.get_typed_app_client_by_creator_and_name(
         HelloWorldClient,
-        creator_address="CREATORADDRESS",
+        creator_address=account_a.address,
         app_name="contract-name",
         # ...
     )
     # or
     app_client = HelloWorldClient.from_creator_and_name(
         algorand=algorand_client,
-        creator_address="CREATORADDRESS",
+        creator_address=account_a.address,
         app_name="contract-name",
         # ...
     )
@@ -224,6 +215,11 @@ def app_client() -> None:
     # example: GET_APP_CLIENT_WHEN_DEPLOYED
 
     # example: APP_NOT_DEPLOYED_APP_CREATE
+    from smart_contracts.artifacts.custom_create.custom_create_client import (
+        CustomCreateArgs,
+        CustomCreateFactory,
+    )
+
     """
     Deploy a New App
     """
