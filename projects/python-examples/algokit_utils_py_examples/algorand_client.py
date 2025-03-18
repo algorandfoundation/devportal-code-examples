@@ -137,14 +137,13 @@ def algorand_client_bootstrap() -> None:
     :return: The `AlgorandClient` so method calls can be chained
     """
     algorand_client.set_suggested_params_cache_timeout(0)
-
     # example: SUGGESTED_PARAMS_CONFIG
 
 
 def app_client() -> None:
     algorand_client, _, account_a, account_b, _ = setup_localnet_environment()
 
-    # example: APP_DEPLOYED_APP_CLIENT_ID
+    # example: GET_APP_CLIENT_WHEN_DEPLOYED
     from smart_contracts.artifacts.hello_world.hello_world_client import (
         HelloWorldClient,
         HelloWorldFactory,
@@ -176,14 +175,11 @@ def app_client() -> None:
     app_client2 = factory.get_app_client_by_id(
         app_id=4321,
     )
-    # example: APP_DEPLOYED_APP_CLIENT_ID
 
     from smart_contracts.artifacts.custom_create.custom_create_client import (
         CustomCreateArgs,
         CustomCreateFactory,
     )
-
-    # example: APP_DEPLOYED_APP_CLIENT_CREATOR_AND_NAME
     from smart_contracts.artifacts.hello_world.hello_world_client import (
         HelloArgs,
         HelloWorldClient,
@@ -225,7 +221,7 @@ def app_client() -> None:
         # ...
     )
 
-    # example: APP_DEPLOYED_APP_CLIENT_CREATOR_AND_NAME
+    # example: GET_APP_CLIENT_WHEN_DEPLOYED
 
     # example: APP_NOT_DEPLOYED_APP_CREATE
     """
@@ -254,7 +250,7 @@ def app_client() -> None:
 
     # example: APP_CLIENT_CALL_METHOD
     response = app_client.send.hello(args=HelloArgs(name="world"))
-    print(response)
+    print(response.abi_return)
 
     # example: APP_CLIENT_CALL_METHOD
 
@@ -286,5 +282,5 @@ def app_client() -> None:
 
     # Make a call to an ABI method and print the result
     response = app_client.send.hello(args=HelloArgs(name="world"))
-    print(response)
+    print(response.abi_return)
     # example: FULL_APP_CLIENT_EXAMPLE
