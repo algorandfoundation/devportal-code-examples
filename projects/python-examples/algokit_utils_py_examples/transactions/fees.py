@@ -96,7 +96,7 @@ def fees() -> None:
     sp.fee = 2000
 
     # Cache the configured suggested parameters and use it for future transactions
-    algorand_client.set_suggested_params(sp)
+    algorand_client.set_suggested_params_cache(sp)
 
     # example: FLAT_FEE
 
