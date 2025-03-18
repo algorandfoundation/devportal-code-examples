@@ -1,0 +1,46 @@
+import { Contract, Account, abimethod, Asset } from '@algorandfoundation/algorand-typescript'
+import { Address } from '@algorandfoundation/algorand-typescript/arc4'
+/**
+ * A contract that demonstrates how to use resource usage in a contract
+ */
+export default class Reference extends Contract {
+  // example: ACCOUNT_REFERENCE_EXAMPLE
+  /**
+   * Returns the balance of the account
+   * @returns The balance of the account
+   */
+  @abimethod({ readonly: true })
+  public getAccountBalance() {
+    const address = new Address('R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM')
+    const addressBytes = address.bytes
+    const account = Account(addressBytes)
+
+    return account.balance
+  }
+
+  /**
+   * Returns the balance of the account
+   * @param account The account to get the balance of
+   * @returns The balance of the account
+   */
+  @abimethod({ readonly: true })
+  public getAccountBalanceWithArgument(account: Account) {
+    return account.balance
+  }
+
+  // example: GET_ASSET_BALANCE
+  /**
+   * Returns the balance of the asset
+   * @param asset The asset to get the balance of
+   * @returns The balance of the asset
+   */
+  @abimethod({ readonly: true })
+  public getAssetBalance(asset: Asset) {
+    const address = new Address('R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM')
+    const addressBytes = address.bytes
+    const account = Account(addressBytes)
+
+    return asset.balance(account)
+  }
+  // example: GET_ASSET_BALANCE
+}

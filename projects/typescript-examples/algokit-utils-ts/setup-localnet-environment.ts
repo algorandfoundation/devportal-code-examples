@@ -1,16 +1,30 @@
 import { AlgorandClient, algo } from '@algorandfoundation/algokit-utils'
-import type { TransactionSignerAccount, SigningAccount } from '@algorandfoundation/algokit-utils/types/account'
-import type { Account, Address } from 'algosdk'
+import type {
+  TransactionSignerAccount,
+  SigningAccount as SigningAccountType,
+} from '@algorandfoundation/algokit-utils/types/account'
+import type { Account as AccountType, Address } from 'algosdk'
+import { ReferenceFactory, ReferenceClient } from '../contracts/artifacts/clients/Reference/ReferenceClient'
 
-export type RandomAccount = Address &
+export type Account = Address &
   TransactionSignerAccount & {
-    account: Account
+    account: AccountType
   }
 
-export type DispenserAccount = Address &
+export type SigningAccount = Address &
   TransactionSignerAccount & {
-    account: SigningAccount
+    account: SigningAccountType
   }
+
+async function deployReferenceApp(algorand: AlgorandClient, account: Account) {
+  const factory = algorand.client.getTypedAppFactory(ReferenceFactory, {
+    defaultSender: account,
+  })
+
+  const client = await factory.deploy()
+
+  return client.appClient
+}
 
 /**
  * Sets up funded accounts for demonstration purposes.
@@ -19,24 +33,37 @@ export type DispenserAccount = Address &
  */
 export async function setupLocalnetEnvironment(): Promise<{
   algorand: AlgorandClient
-  dispenser: DispenserAccount
-  randomAccountA: RandomAccount
-  randomAccountB: RandomAccount
-  randomAccountC: RandomAccount
-  randomAccountD: RandomAccount
+  dispenser: SigningAccount
+  randomAccountA: Account
+  randomAccountB: Account
+  randomAccountC: Account
+  randomAccountD: Account
+  referenceAccount: SigningAccount
+  referenceAppClient: ReferenceClient
 }> {
   // Initialize the Algorand client
   const algorand = AlgorandClient.defaultLocalNet()
   // Get the dispenser account
   const dispenser = await algorand.account.localNetDispenser()
 
+  // Create an account from mnemonic for reference examples
+  const referenceAccount = algorand.account.fromMnemonic(
+    'rice broken rail solve mobile pill glue maximum speak mean stumble orbit mixed empower rent congress nest input peanut crush comfort spell swear abandon actual',
+  )
+
   // Create random accounts
   const randomAccounts = Array.from({ length: 4 }, () => algorand.account.random())
 
+  // Include referenceAccount in the accounts to be funded
+  const allAccounts = [...randomAccounts, referenceAccount]
+
   // Fund all test accounts with 10 Algos each
-  await Promise.all(randomAccounts.map((account) => algorand.account.ensureFunded(account, dispenser, algo(10))))
+  await Promise.all(allAccounts.map((account) => algorand.account.ensureFunded(account, dispenser, algo(10))))
 
   const [randomAccountA, randomAccountB, randomAccountC, randomAccountD] = randomAccounts
+
+  // Deploy the reference app
+  const referenceAppClient = await deployReferenceApp(algorand, randomAccountA)
 
   return {
     algorand,
@@ -45,5 +72,7 @@ export async function setupLocalnetEnvironment(): Promise<{
     randomAccountB,
     randomAccountC,
     randomAccountD,
+    referenceAccount,
+    referenceAppClient,
   }
 }

@@ -1,0 +1,139 @@
+#pragma version 10
+#pragma typetrack false
+
+// @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
+main:
+    intcblock 1
+    bytecblock 0x151f7c75 base32(R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDA)
+    // contracts/Reference/contract.algo.ts:6
+    // export default class Reference extends Contract {
+    txn NumAppArgs
+    bz main_bare_routing@8
+    pushbytess 0x55448e69 0x93b0416b 0xc57199a8 // method "getAccountBalance()uint64", method "getAccountBalanceWithArgument(account)uint64", method "getAssetBalance(asset)uint64"
+    txna ApplicationArgs 0
+    match main_getAccountBalance_route@3 main_getAccountBalanceWithArgument_route@4 main_getAssetBalance_route@5
+
+main_after_if_else@12:
+    // contracts/Reference/contract.algo.ts:6
+    // export default class Reference extends Contract {
+    pushint 0 // 0
+    return
+
+main_getAssetBalance_route@5:
+    // contracts/Reference/contract.algo.ts:37
+    // @abimethod({ readonly: true })
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // contracts/Reference/contract.algo.ts:6
+    // export default class Reference extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    txnas Assets
+    // contracts/Reference/contract.algo.ts:37
+    // @abimethod({ readonly: true })
+    callsub getAssetBalance
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_getAccountBalanceWithArgument_route@4:
+    // contracts/Reference/contract.algo.ts:26
+    // @abimethod({ readonly: true })
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // contracts/Reference/contract.algo.ts:6
+    // export default class Reference extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    txnas Accounts
+    // contracts/Reference/contract.algo.ts:26
+    // @abimethod({ readonly: true })
+    callsub getAccountBalanceWithArgument
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_getAccountBalance_route@3:
+    // contracts/Reference/contract.algo.ts:12
+    // @abimethod({ readonly: true })
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub getAccountBalance
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_bare_routing@8:
+    // contracts/Reference/contract.algo.ts:6
+    // export default class Reference extends Contract {
+    txn OnCompletion
+    bnz main_after_if_else@12
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    intc_0 // 1
+    return
+
+
+// contracts/Reference/contract.algo.ts::Reference.getAccountBalance() -> uint64:
+getAccountBalance:
+    // contracts/Reference/contract.algo.ts:14
+    // const address = new Address('R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM')
+    bytec_1 // addr R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM
+    // contracts/Reference/contract.algo.ts:18
+    // return account.balance
+    acct_params_get AcctBalance
+    assert // account funded
+    retsub
+
+
+// contracts/Reference/contract.algo.ts::Reference.getAccountBalanceWithArgument(account: bytes) -> uint64:
+getAccountBalanceWithArgument:
+    // contracts/Reference/contract.algo.ts:26-27
+    // @abimethod({ readonly: true })
+    // public getAccountBalanceWithArgument(account: Account) {
+    proto 1 1
+    // contracts/Reference/contract.algo.ts:28
+    // return account.balance
+    frame_dig -1
+    acct_params_get AcctBalance
+    assert // account funded
+    retsub
+
+
+// contracts/Reference/contract.algo.ts::Reference.getAssetBalance(asset: uint64) -> uint64:
+getAssetBalance:
+    // contracts/Reference/contract.algo.ts:37-38
+    // @abimethod({ readonly: true })
+    // public getAssetBalance(asset: Asset) {
+    proto 1 1
+    // contracts/Reference/contract.algo.ts:39
+    // const address = new Address('R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM')
+    bytec_1 // addr R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM
+    // contracts/Reference/contract.algo.ts:43
+    // return asset.balance(account)
+    frame_dig -1
+    asset_holding_get AssetBalance
+    assert // account opted into asset
+    retsub
