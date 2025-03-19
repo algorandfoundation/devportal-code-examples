@@ -486,7 +486,7 @@ export abstract class InnerTransactionsParamsFactory {
    * Constructs a no op call for the deployApp()uint64 ABI method
    *
   * Deploys a HelloWorld contract using direct application call
-
+  
   This method uses the itxn.applicationCall to deploy the HelloWorld contract.
 
    *
@@ -504,7 +504,7 @@ export abstract class InnerTransactionsParamsFactory {
    * Constructs a no op call for the arc4DeployApp()uint64 ABI method
    *
   * Deploys a HelloWorld contract using arc4
-
+  
   This method uses arc4 to deploy the HelloWorld contract.
 
    *
@@ -555,22 +555,22 @@ export class InnerTransactionsFactory {
       appSpec: APP_SPEC,
     })
   }
-
+  
   /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
   public get appName() {
     return this.appFactory.appName
   }
-
+  
   /** The ARC-56 app spec being used */
   get appSpec() {
     return APP_SPEC
   }
-
+  
   /** A reference to the underlying `AlgorandClient` this app factory is using. */
   public get algorand(): AlgorandClientInterface {
     return this.appFactory.algorand
   }
-
+  
   /**
    * Returns a new `AppClient` client for an app instance of the given ID.
    *
@@ -582,7 +582,7 @@ export class InnerTransactionsFactory {
   public getAppClientById(params: AppFactoryAppClientParams) {
     return new InnerTransactionsClient(this.appFactory.getAppClientById(params))
   }
-
+  
   /**
    * Returns a new `AppClient` client, resolving the app by creator address and name
    * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
@@ -703,7 +703,7 @@ export class InnerTransactionsClient {
       appSpec: APP_SPEC,
     })
   }
-
+  
   /**
    * Checks for decode errors on the given return value and maps the return value to the return type for the given method
    * @returns The typed return value or undefined if there was no value
@@ -711,7 +711,7 @@ export class InnerTransactionsClient {
   decodeReturnValue<TSignature extends InnerTransactionsNonVoidMethodSignatures>(method: TSignature, returnValue: ABIReturn | undefined) {
     return returnValue !== undefined ? getArc56ReturnValue<MethodReturn<TSignature>>(returnValue, this.appClient.getABIMethod(method), APP_SPEC.structs) : undefined
   }
-
+  
   /**
    * Returns a new `InnerTransactionsClient` client, resolving the app by creator address and name
    * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
@@ -720,7 +720,7 @@ export class InnerTransactionsClient {
   public static async fromCreatorAndName(params: Omit<ResolveAppClientByCreatorAndName, 'appSpec'>): Promise<InnerTransactionsClient> {
     return new InnerTransactionsClient(await _AppClient.fromCreatorAndName({...params, appSpec: APP_SPEC}))
   }
-
+  
   /**
    * Returns an `InnerTransactionsClient` instance for the current network based on
    * pre-determined network-specific app IDs specified in the ARC-56 app spec.
@@ -733,27 +733,27 @@ export class InnerTransactionsClient {
   ): Promise<InnerTransactionsClient> {
     return new InnerTransactionsClient(await _AppClient.fromNetwork({...params, appSpec: APP_SPEC}))
   }
-
+  
   /** The ID of the app instance this client is linked to. */
   public get appId() {
     return this.appClient.appId
   }
-
+  
   /** The app address of the app instance this client is linked to. */
   public get appAddress() {
     return this.appClient.appAddress
   }
-
+  
   /** The name of the app. */
   public get appName() {
     return this.appClient.appName
   }
-
+  
   /** The ARC-56 app spec being used */
   public get appSpec() {
     return this.appClient.appSpec
   }
-
+  
   /** A reference to the underlying `AlgorandClient` this app client is using. */
   public get algorand(): AlgorandClientInterface {
     return this.appClient.algorand
@@ -901,7 +901,7 @@ export class InnerTransactionsClient {
      * Makes a call to the InnerTransactions smart contract using the `deployApp()uint64` ABI method.
      *
     * Deploys a HelloWorld contract using direct application call
-
+    
     This method uses the itxn.applicationCall to deploy the HelloWorld contract.
 
      *
@@ -916,7 +916,7 @@ export class InnerTransactionsClient {
      * Makes a call to the InnerTransactions smart contract using the `arc4DeployApp()uint64` ABI method.
      *
     * Deploys a HelloWorld contract using arc4
-
+    
     This method uses arc4 to deploy the HelloWorld contract.
 
      *
@@ -1083,7 +1083,7 @@ export class InnerTransactionsClient {
      * Makes a call to the InnerTransactions smart contract using the `deployApp()uint64` ABI method.
      *
     * Deploys a HelloWorld contract using direct application call
-
+    
     This method uses the itxn.applicationCall to deploy the HelloWorld contract.
 
      *
@@ -1098,7 +1098,7 @@ export class InnerTransactionsClient {
      * Makes a call to the InnerTransactions smart contract using the `arc4DeployApp()uint64` ABI method.
      *
     * Deploys a HelloWorld contract using arc4
-
+    
     This method uses arc4 to deploy the HelloWorld contract.
 
      *
@@ -1275,7 +1275,7 @@ export class InnerTransactionsClient {
      * Makes a call to the InnerTransactions smart contract using the `deployApp()uint64` ABI method.
      *
     * Deploys a HelloWorld contract using direct application call
-
+    
     This method uses the itxn.applicationCall to deploy the HelloWorld contract.
 
      *
@@ -1291,7 +1291,7 @@ export class InnerTransactionsClient {
      * Makes a call to the InnerTransactions smart contract using the `arc4DeployApp()uint64` ABI method.
      *
     * Deploys a HelloWorld contract using arc4
-
+    
     This method uses arc4 to deploy the HelloWorld contract.
 
      *
@@ -1597,7 +1597,7 @@ export type InnerTransactionsComposer<TReturns extends [...any[]] = []> = {
    * Calls the deployApp()uint64 ABI method.
    *
   * Deploys a HelloWorld contract using direct application call
-
+  
   This method uses the itxn.applicationCall to deploy the HelloWorld contract.
 
    *
@@ -1611,7 +1611,7 @@ export type InnerTransactionsComposer<TReturns extends [...any[]] = []> = {
    * Calls the arc4DeployApp()uint64 ABI method.
    *
   * Deploys a HelloWorld contract using arc4
-
+  
   This method uses arc4 to deploy the HelloWorld contract.
 
    *
