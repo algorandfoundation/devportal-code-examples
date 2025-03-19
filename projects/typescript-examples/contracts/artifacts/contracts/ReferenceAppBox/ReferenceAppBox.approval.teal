@@ -261,9 +261,13 @@ incrementBoxCounter:
     // public accountBoxCounter = BoxMap<Account, uint64>({ keyPrefix: 'counter' })
     bytec 5 // "counter"
     // contracts/ReferenceAppBox/contract.algo.ts:54
-    // const [counter, hasCounter] = this.accountBoxCounter.maybe(Txn.sender)
+    // const [counter, hasCounter] = this.accountBoxCounter(Txn.sender).maybe()
     txn Sender
+    // contracts/ReferenceAppBox/contract.algo.ts:30
+    // public accountBoxCounter = BoxMap<Account, uint64>({ keyPrefix: 'counter' })
     concat
+    // contracts/ReferenceAppBox/contract.algo.ts:54
+    // const [counter, hasCounter] = this.accountBoxCounter(Txn.sender).maybe()
     box_get
     swap
     btoi
@@ -275,9 +279,13 @@ incrementBoxCounter:
     // public accountBoxCounter = BoxMap<Account, uint64>({ keyPrefix: 'counter' })
     bytec 5 // "counter"
     // contracts/ReferenceAppBox/contract.algo.ts:58
-    // this.accountBoxCounter.set(Txn.sender, counter + 1)
+    // this.accountBoxCounter(Txn.sender).value = counter + 1
     txn Sender
+    // contracts/ReferenceAppBox/contract.algo.ts:30
+    // public accountBoxCounter = BoxMap<Account, uint64>({ keyPrefix: 'counter' })
     concat
+    // contracts/ReferenceAppBox/contract.algo.ts:58
+    // this.accountBoxCounter(Txn.sender).value = counter + 1
     frame_dig 0
     intc_1 // 1
     +
@@ -296,9 +304,13 @@ incrementBoxCounter_else_body@2:
     // public accountBoxCounter = BoxMap<Account, uint64>({ keyPrefix: 'counter' })
     bytec 5 // "counter"
     // contracts/ReferenceAppBox/contract.algo.ts:62
-    // this.accountBoxCounter.set(Txn.sender, Uint64(1))
+    // this.accountBoxCounter(Txn.sender).value = Uint64(1)
     txn Sender
+    // contracts/ReferenceAppBox/contract.algo.ts:30
+    // public accountBoxCounter = BoxMap<Account, uint64>({ keyPrefix: 'counter' })
     concat
+    // contracts/ReferenceAppBox/contract.algo.ts:62
+    // this.accountBoxCounter(Txn.sender).value = Uint64(1)
     intc_1 // 1
     itob
     box_put
@@ -319,9 +331,13 @@ getBoxCounter:
     // public accountBoxCounter = BoxMap<Account, uint64>({ keyPrefix: 'counter' })
     bytec 5 // "counter"
     // contracts/ReferenceAppBox/contract.algo.ts:73
-    // const [counter, hasCounter] = this.accountBoxCounter.maybe(Txn.sender)
+    // const [counter, hasCounter] = this.accountBoxCounter(Txn.sender).maybe()
     txn Sender
+    // contracts/ReferenceAppBox/contract.algo.ts:30
+    // public accountBoxCounter = BoxMap<Account, uint64>({ keyPrefix: 'counter' })
     concat
+    // contracts/ReferenceAppBox/contract.algo.ts:73
+    // const [counter, hasCounter] = this.accountBoxCounter(Txn.sender).maybe()
     box_get
     swap
     btoi
@@ -352,10 +368,10 @@ getBoxCounterForAccount:
     // contracts/ReferenceAppBox/contract.algo.ts:30
     // public accountBoxCounter = BoxMap<Account, uint64>({ keyPrefix: 'counter' })
     bytec 5 // "counter"
-    // contracts/ReferenceAppBox/contract.algo.ts:89
-    // const [counter, hasCounter] = this.accountBoxCounter.maybe(account)
     frame_dig -1
     concat
+    // contracts/ReferenceAppBox/contract.algo.ts:89
+    // const [counter, hasCounter] = this.accountBoxCounter(account).maybe()
     box_get
     swap
     btoi
