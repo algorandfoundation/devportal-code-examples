@@ -1,0 +1,1016 @@
+#pragma version 10
+#pragma typetrack false
+
+// @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
+main:
+    intcblock 1 0 3 4
+    bytecblock 0x151f7c75 0x3aad6d86 0x0003446f65
+    // contracts/InnerTransactions/contract.algo.ts:19
+    // export default class InnerTransactions extends Contract {
+    txn NumAppArgs
+    bz main_bare_routing@18
+    pushbytess 0x23950027 0x0207f77d 0xd2249284 0x66a063bf 0x12563767 0xcfb12db1 0x7b58e236 0xd0864ff4 0x5351d7be 0x5727ecae 0xda20a87e 0x38ecc014 0x9aeec159 // method "payment()uint64", method "fungibleAssetCreate()uint64", method "nonFungibleAssetCreate()uint64", method "assetOptIn(asset)void", method "assetTransfer(asset,account,uint64)void", method "assetFreeze(account,asset)void", method "assetRevoke(asset,account,uint64)void", method "assetConfig(asset)void", method "assetDelete(asset)void", method "multiInnerTxns(application)(uint64,string)", method "deployApp()uint64", method "arc4DeployApp()uint64", method "noopAppCall(application)string"
+    txna ApplicationArgs 0
+    match main_payment_route@3 main_fungibleAssetCreate_route@4 main_nonFungibleAssetCreate_route@5 main_assetOptIn_route@6 main_assetTransfer_route@7 main_assetFreeze_route@8 main_assetRevoke_route@9 main_assetConfig_route@10 main_assetDelete_route@11 main_multiInnerTxns_route@12 main_deployApp_route@13 main_arc4DeployApp_route@14 main_noopAppCall_route@15
+
+main_after_if_else@22:
+    // contracts/InnerTransactions/contract.algo.ts:19
+    // export default class InnerTransactions extends Contract {
+    intc_1 // 0
+    return
+
+main_noopAppCall_route@15:
+    // contracts/InnerTransactions/contract.algo.ts:329
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // contracts/InnerTransactions/contract.algo.ts:19
+    // export default class InnerTransactions extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    txnas Applications
+    // contracts/InnerTransactions/contract.algo.ts:329
+    // @abimethod()
+    callsub noopAppCall
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_arc4DeployApp_route@14:
+    // contracts/InnerTransactions/contract.algo.ts:311
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    pushbytes 0x151f7c7500000000000004d2
+    log
+    intc_0 // 1
+    return
+
+main_deployApp_route@13:
+    // contracts/InnerTransactions/contract.algo.ts:290
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub deployApp
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_multiInnerTxns_route@12:
+    // contracts/InnerTransactions/contract.algo.ts:250
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // contracts/InnerTransactions/contract.algo.ts:19
+    // export default class InnerTransactions extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    txnas Applications
+    // contracts/InnerTransactions/contract.algo.ts:250
+    // @abimethod()
+    callsub multiInnerTxns
+    swap
+    itob
+    dig 1
+    len
+    itob
+    extract 6 2
+    uncover 2
+    concat
+    swap
+    pushbytes 0x000a
+    concat
+    swap
+    concat
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_assetDelete_route@11:
+    // contracts/InnerTransactions/contract.algo.ts:233
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // contracts/InnerTransactions/contract.algo.ts:19
+    // export default class InnerTransactions extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    txnas Assets
+    // contracts/InnerTransactions/contract.algo.ts:233
+    // @abimethod()
+    callsub assetDelete
+    intc_0 // 1
+    return
+
+main_assetConfig_route@10:
+    // contracts/InnerTransactions/contract.algo.ts:205
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // contracts/InnerTransactions/contract.algo.ts:19
+    // export default class InnerTransactions extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    txnas Assets
+    // contracts/InnerTransactions/contract.algo.ts:205
+    // @abimethod()
+    callsub assetConfig
+    intc_0 // 1
+    return
+
+main_assetRevoke_route@9:
+    // contracts/InnerTransactions/contract.algo.ts:179
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // contracts/InnerTransactions/contract.algo.ts:19
+    // export default class InnerTransactions extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    txnas Assets
+    txna ApplicationArgs 2
+    btoi
+    txnas Accounts
+    txna ApplicationArgs 3
+    btoi
+    // contracts/InnerTransactions/contract.algo.ts:179
+    // @abimethod()
+    callsub assetRevoke
+    intc_0 // 1
+    return
+
+main_assetFreeze_route@8:
+    // contracts/InnerTransactions/contract.algo.ts:154
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // contracts/InnerTransactions/contract.algo.ts:19
+    // export default class InnerTransactions extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    txnas Accounts
+    txna ApplicationArgs 2
+    btoi
+    txnas Assets
+    // contracts/InnerTransactions/contract.algo.ts:154
+    // @abimethod()
+    callsub assetFreeze
+    intc_0 // 1
+    return
+
+main_assetTransfer_route@7:
+    // contracts/InnerTransactions/contract.algo.ts:127
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // contracts/InnerTransactions/contract.algo.ts:19
+    // export default class InnerTransactions extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    txnas Assets
+    txna ApplicationArgs 2
+    btoi
+    txnas Accounts
+    txna ApplicationArgs 3
+    btoi
+    // contracts/InnerTransactions/contract.algo.ts:127
+    // @abimethod()
+    callsub assetTransfer
+    intc_0 // 1
+    return
+
+main_assetOptIn_route@6:
+    // contracts/InnerTransactions/contract.algo.ts:99
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // contracts/InnerTransactions/contract.algo.ts:19
+    // export default class InnerTransactions extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    txnas Assets
+    // contracts/InnerTransactions/contract.algo.ts:99
+    // @abimethod()
+    callsub assetOptIn
+    intc_0 // 1
+    return
+
+main_nonFungibleAssetCreate_route@5:
+    // contracts/InnerTransactions/contract.algo.ts:73
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub nonFungibleAssetCreate
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_fungibleAssetCreate_route@4:
+    // contracts/InnerTransactions/contract.algo.ts:52
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub fungibleAssetCreate
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_payment_route@3:
+    // contracts/InnerTransactions/contract.algo.ts:25
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub payment
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_bare_routing@18:
+    // contracts/InnerTransactions/contract.algo.ts:19
+    // export default class InnerTransactions extends Contract {
+    txn OnCompletion
+    bnz main_after_if_else@22
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    intc_0 // 1
+    return
+
+
+// contracts/InnerTransactions/contract.algo.ts::InnerTransactions.payment() -> uint64:
+payment:
+    // contracts/InnerTransactions/contract.algo.ts:27-33
+    // const result = itxn
+    //   .payment({
+    //     amount: 5000,
+    //     receiver: Txn.sender,
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_begin
+    // contracts/InnerTransactions/contract.algo.ts:30
+    // receiver: Txn.sender,
+    txn Sender
+    itxn_field Receiver
+    // contracts/InnerTransactions/contract.algo.ts:29
+    // amount: 5000,
+    pushint 5000 // 5000
+    itxn_field Amount
+    // contracts/InnerTransactions/contract.algo.ts:27-32
+    // const result = itxn
+    //   .payment({
+    //     amount: 5000,
+    //     receiver: Txn.sender,
+    //     fee: 0,
+    //   })
+    intc_0 // 1
+    itxn_field TypeEnum
+    // contracts/InnerTransactions/contract.algo.ts:31
+    // fee: 0,
+    intc_1 // 0
+    itxn_field Fee
+    // contracts/InnerTransactions/contract.algo.ts:27-33
+    // const result = itxn
+    //   .payment({
+    //     amount: 5000,
+    //     receiver: Txn.sender,
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_submit
+    itxn Amount
+    // contracts/InnerTransactions/contract.algo.ts:35
+    // return result.amount
+    retsub
+
+
+// contracts/InnerTransactions/contract.algo.ts::InnerTransactions.fungibleAssetCreate() -> uint64:
+fungibleAssetCreate:
+    // contracts/InnerTransactions/contract.algo.ts:54-61
+    // const itxnResult = itxn
+    //   .assetConfig({
+    //     total: 100_000_000_000,
+    //     decimals: 2,
+    //     unitName: 'RP',
+    //     assetName: 'Royalty Points',
+    //   })
+    //   .submit()
+    itxn_begin
+    // contracts/InnerTransactions/contract.algo.ts:59
+    // assetName: 'Royalty Points',
+    pushbytes "Royalty Points"
+    itxn_field ConfigAssetName
+    // contracts/InnerTransactions/contract.algo.ts:58
+    // unitName: 'RP',
+    pushbytes "RP"
+    itxn_field ConfigAssetUnitName
+    // contracts/InnerTransactions/contract.algo.ts:57
+    // decimals: 2,
+    pushint 2 // 2
+    itxn_field ConfigAssetDecimals
+    // contracts/InnerTransactions/contract.algo.ts:56
+    // total: 100_000_000_000,
+    pushint 100000000000 // 100000000000
+    itxn_field ConfigAssetTotal
+    // contracts/InnerTransactions/contract.algo.ts:54-60
+    // const itxnResult = itxn
+    //   .assetConfig({
+    //     total: 100_000_000_000,
+    //     decimals: 2,
+    //     unitName: 'RP',
+    //     assetName: 'Royalty Points',
+    //   })
+    intc_2 // 3
+    itxn_field TypeEnum
+    intc_1 // 0
+    itxn_field Fee
+    // contracts/InnerTransactions/contract.algo.ts:54-61
+    // const itxnResult = itxn
+    //   .assetConfig({
+    //     total: 100_000_000_000,
+    //     decimals: 2,
+    //     unitName: 'RP',
+    //     assetName: 'Royalty Points',
+    //   })
+    //   .submit()
+    itxn_submit
+    itxn CreatedAssetID
+    // contracts/InnerTransactions/contract.algo.ts:63
+    // return itxnResult.createdAsset.id
+    retsub
+
+
+// contracts/InnerTransactions/contract.algo.ts::InnerTransactions.nonFungibleAssetCreate() -> uint64:
+nonFungibleAssetCreate:
+    // contracts/InnerTransactions/contract.algo.ts:75-88
+    // const itxnResult = itxn
+    //   .assetConfig({
+    //     total: 100,
+    //     decimals: 2,
+    //     unitName: 'ML',
+    //     assetName: 'Mona Lisa',
+    //     url: 'https://link_to_ipfs/Mona_Lisa',
+    //     manager: Global.currentApplicationAddress,
+    //     reserve: Global.currentApplicationAddress,
+    //     freeze: Global.currentApplicationAddress,
+    //     clawback: Global.currentApplicationAddress,
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_begin
+    // contracts/InnerTransactions/contract.algo.ts:82
+    // manager: Global.currentApplicationAddress,
+    global CurrentApplicationAddress
+    // contracts/InnerTransactions/contract.algo.ts:83-85
+    // reserve: Global.currentApplicationAddress,
+    // freeze: Global.currentApplicationAddress,
+    // clawback: Global.currentApplicationAddress,
+    dupn 3
+    itxn_field ConfigAssetClawback
+    itxn_field ConfigAssetFreeze
+    itxn_field ConfigAssetReserve
+    itxn_field ConfigAssetManager
+    // contracts/InnerTransactions/contract.algo.ts:81
+    // url: 'https://link_to_ipfs/Mona_Lisa',
+    pushbytes "https://link_to_ipfs/Mona_Lisa"
+    itxn_field ConfigAssetURL
+    // contracts/InnerTransactions/contract.algo.ts:80
+    // assetName: 'Mona Lisa',
+    pushbytes "Mona Lisa"
+    itxn_field ConfigAssetName
+    // contracts/InnerTransactions/contract.algo.ts:79
+    // unitName: 'ML',
+    pushbytes "ML"
+    itxn_field ConfigAssetUnitName
+    // contracts/InnerTransactions/contract.algo.ts:78
+    // decimals: 2,
+    pushint 2 // 2
+    itxn_field ConfigAssetDecimals
+    // contracts/InnerTransactions/contract.algo.ts:77
+    // total: 100,
+    pushint 100 // 100
+    itxn_field ConfigAssetTotal
+    // contracts/InnerTransactions/contract.algo.ts:75-87
+    // const itxnResult = itxn
+    //   .assetConfig({
+    //     total: 100,
+    //     decimals: 2,
+    //     unitName: 'ML',
+    //     assetName: 'Mona Lisa',
+    //     url: 'https://link_to_ipfs/Mona_Lisa',
+    //     manager: Global.currentApplicationAddress,
+    //     reserve: Global.currentApplicationAddress,
+    //     freeze: Global.currentApplicationAddress,
+    //     clawback: Global.currentApplicationAddress,
+    //     fee: 0,
+    //   })
+    intc_2 // 3
+    itxn_field TypeEnum
+    // contracts/InnerTransactions/contract.algo.ts:86
+    // fee: 0,
+    intc_1 // 0
+    itxn_field Fee
+    // contracts/InnerTransactions/contract.algo.ts:75-88
+    // const itxnResult = itxn
+    //   .assetConfig({
+    //     total: 100,
+    //     decimals: 2,
+    //     unitName: 'ML',
+    //     assetName: 'Mona Lisa',
+    //     url: 'https://link_to_ipfs/Mona_Lisa',
+    //     manager: Global.currentApplicationAddress,
+    //     reserve: Global.currentApplicationAddress,
+    //     freeze: Global.currentApplicationAddress,
+    //     clawback: Global.currentApplicationAddress,
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_submit
+    itxn CreatedAssetID
+    // contracts/InnerTransactions/contract.algo.ts:90
+    // return itxnResult.createdAsset.id
+    retsub
+
+
+// contracts/InnerTransactions/contract.algo.ts::InnerTransactions.assetOptIn(asset: uint64) -> void:
+assetOptIn:
+    // contracts/InnerTransactions/contract.algo.ts:99-100
+    // @abimethod()
+    // public assetOptIn(asset: Asset): void {
+    proto 1 0
+    // contracts/InnerTransactions/contract.algo.ts:101-108
+    // itxn
+    //   .assetTransfer({
+    //     assetReceiver: Global.currentApplicationAddress,
+    //     xferAsset: asset,
+    //     assetAmount: 0,
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_begin
+    // contracts/InnerTransactions/contract.algo.ts:103
+    // assetReceiver: Global.currentApplicationAddress,
+    global CurrentApplicationAddress
+    // contracts/InnerTransactions/contract.algo.ts:105
+    // assetAmount: 0,
+    intc_1 // 0
+    itxn_field AssetAmount
+    frame_dig -1
+    itxn_field XferAsset
+    itxn_field AssetReceiver
+    // contracts/InnerTransactions/contract.algo.ts:101-107
+    // itxn
+    //   .assetTransfer({
+    //     assetReceiver: Global.currentApplicationAddress,
+    //     xferAsset: asset,
+    //     assetAmount: 0,
+    //     fee: 0,
+    //   })
+    intc_3 // 4
+    itxn_field TypeEnum
+    // contracts/InnerTransactions/contract.algo.ts:106
+    // fee: 0,
+    intc_1 // 0
+    itxn_field Fee
+    // contracts/InnerTransactions/contract.algo.ts:101-108
+    // itxn
+    //   .assetTransfer({
+    //     assetReceiver: Global.currentApplicationAddress,
+    //     xferAsset: asset,
+    //     assetAmount: 0,
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_submit
+    retsub
+
+
+// contracts/InnerTransactions/contract.algo.ts::InnerTransactions.assetTransfer(asset: uint64, receiver: bytes, amount: uint64) -> void:
+assetTransfer:
+    // contracts/InnerTransactions/contract.algo.ts:127-128
+    // @abimethod()
+    // public assetTransfer(asset: Asset, receiver: Account, amount: uint64): void {
+    proto 3 0
+    // contracts/InnerTransactions/contract.algo.ts:129-136
+    // itxn
+    //   .assetTransfer({
+    //     assetReceiver: receiver,
+    //     xferAsset: asset,
+    //     assetAmount: amount,
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_begin
+    frame_dig -1
+    itxn_field AssetAmount
+    frame_dig -3
+    itxn_field XferAsset
+    frame_dig -2
+    itxn_field AssetReceiver
+    // contracts/InnerTransactions/contract.algo.ts:129-135
+    // itxn
+    //   .assetTransfer({
+    //     assetReceiver: receiver,
+    //     xferAsset: asset,
+    //     assetAmount: amount,
+    //     fee: 0,
+    //   })
+    intc_3 // 4
+    itxn_field TypeEnum
+    // contracts/InnerTransactions/contract.algo.ts:134
+    // fee: 0,
+    intc_1 // 0
+    itxn_field Fee
+    // contracts/InnerTransactions/contract.algo.ts:129-136
+    // itxn
+    //   .assetTransfer({
+    //     assetReceiver: receiver,
+    //     xferAsset: asset,
+    //     assetAmount: amount,
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_submit
+    retsub
+
+
+// contracts/InnerTransactions/contract.algo.ts::InnerTransactions.assetFreeze(acctToBeFrozen: bytes, asset: uint64) -> void:
+assetFreeze:
+    // contracts/InnerTransactions/contract.algo.ts:154-155
+    // @abimethod()
+    // public assetFreeze(acctToBeFrozen: Account, asset: Asset): void {
+    proto 2 0
+    // contracts/InnerTransactions/contract.algo.ts:156-163
+    // itxn
+    //   .assetFreeze({
+    //     freezeAccount: acctToBeFrozen, // account to be frozen
+    //     freezeAsset: asset,
+    //     frozen: true,
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_begin
+    // contracts/InnerTransactions/contract.algo.ts:160
+    // frozen: true,
+    intc_0 // 1
+    itxn_field FreezeAssetFrozen
+    frame_dig -1
+    itxn_field FreezeAsset
+    frame_dig -2
+    itxn_field FreezeAssetAccount
+    // contracts/InnerTransactions/contract.algo.ts:156-162
+    // itxn
+    //   .assetFreeze({
+    //     freezeAccount: acctToBeFrozen, // account to be frozen
+    //     freezeAsset: asset,
+    //     frozen: true,
+    //     fee: 0,
+    //   })
+    pushint 5 // 5
+    itxn_field TypeEnum
+    // contracts/InnerTransactions/contract.algo.ts:161
+    // fee: 0,
+    intc_1 // 0
+    itxn_field Fee
+    // contracts/InnerTransactions/contract.algo.ts:156-163
+    // itxn
+    //   .assetFreeze({
+    //     freezeAccount: acctToBeFrozen, // account to be frozen
+    //     freezeAsset: asset,
+    //     frozen: true,
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_submit
+    retsub
+
+
+// contracts/InnerTransactions/contract.algo.ts::InnerTransactions.assetRevoke(asset: uint64, accountToBeRevoked: bytes, amount: uint64) -> void:
+assetRevoke:
+    // contracts/InnerTransactions/contract.algo.ts:179-180
+    // @abimethod()
+    // public assetRevoke(asset: Asset, accountToBeRevoked: Account, amount: uint64): void {
+    proto 3 0
+    // contracts/InnerTransactions/contract.algo.ts:181-189
+    // itxn
+    //   .assetTransfer({
+    //     assetReceiver: Global.currentApplicationAddress,
+    //     xferAsset: asset,
+    //     assetSender: accountToBeRevoked, // AssetSender is only used in the case of clawback
+    //     assetAmount: amount,
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_begin
+    // contracts/InnerTransactions/contract.algo.ts:183
+    // assetReceiver: Global.currentApplicationAddress,
+    global CurrentApplicationAddress
+    frame_dig -1
+    itxn_field AssetAmount
+    frame_dig -2
+    itxn_field AssetSender
+    frame_dig -3
+    itxn_field XferAsset
+    itxn_field AssetReceiver
+    // contracts/InnerTransactions/contract.algo.ts:181-188
+    // itxn
+    //   .assetTransfer({
+    //     assetReceiver: Global.currentApplicationAddress,
+    //     xferAsset: asset,
+    //     assetSender: accountToBeRevoked, // AssetSender is only used in the case of clawback
+    //     assetAmount: amount,
+    //     fee: 0,
+    //   })
+    intc_3 // 4
+    itxn_field TypeEnum
+    // contracts/InnerTransactions/contract.algo.ts:187
+    // fee: 0,
+    intc_1 // 0
+    itxn_field Fee
+    // contracts/InnerTransactions/contract.algo.ts:181-189
+    // itxn
+    //   .assetTransfer({
+    //     assetReceiver: Global.currentApplicationAddress,
+    //     xferAsset: asset,
+    //     assetSender: accountToBeRevoked, // AssetSender is only used in the case of clawback
+    //     assetAmount: amount,
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_submit
+    retsub
+
+
+// contracts/InnerTransactions/contract.algo.ts::InnerTransactions.assetConfig(asset: uint64) -> void:
+assetConfig:
+    // contracts/InnerTransactions/contract.algo.ts:205-206
+    // @abimethod()
+    // public assetConfig(asset: Asset): void {
+    proto 1 0
+    // contracts/InnerTransactions/contract.algo.ts:207-216
+    // itxn
+    //   .assetConfig({
+    //     configAsset: asset,
+    //     manager: Global.currentApplicationAddress,
+    //     reserve: Global.currentApplicationAddress,
+    //     freeze: Txn.sender,
+    //     clawback: Txn.sender,
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_begin
+    // contracts/InnerTransactions/contract.algo.ts:210
+    // manager: Global.currentApplicationAddress,
+    global CurrentApplicationAddress
+    // contracts/InnerTransactions/contract.algo.ts:211
+    // reserve: Global.currentApplicationAddress,
+    dup
+    // contracts/InnerTransactions/contract.algo.ts:212
+    // freeze: Txn.sender,
+    txn Sender
+    // contracts/InnerTransactions/contract.algo.ts:213
+    // clawback: Txn.sender,
+    dup
+    itxn_field ConfigAssetClawback
+    itxn_field ConfigAssetFreeze
+    itxn_field ConfigAssetReserve
+    itxn_field ConfigAssetManager
+    frame_dig -1
+    itxn_field ConfigAsset
+    // contracts/InnerTransactions/contract.algo.ts:207-215
+    // itxn
+    //   .assetConfig({
+    //     configAsset: asset,
+    //     manager: Global.currentApplicationAddress,
+    //     reserve: Global.currentApplicationAddress,
+    //     freeze: Txn.sender,
+    //     clawback: Txn.sender,
+    //     fee: 0,
+    //   })
+    intc_2 // 3
+    itxn_field TypeEnum
+    // contracts/InnerTransactions/contract.algo.ts:214
+    // fee: 0,
+    intc_1 // 0
+    itxn_field Fee
+    // contracts/InnerTransactions/contract.algo.ts:207-216
+    // itxn
+    //   .assetConfig({
+    //     configAsset: asset,
+    //     manager: Global.currentApplicationAddress,
+    //     reserve: Global.currentApplicationAddress,
+    //     freeze: Txn.sender,
+    //     clawback: Txn.sender,
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_submit
+    retsub
+
+
+// contracts/InnerTransactions/contract.algo.ts::InnerTransactions.assetDelete(asset: uint64) -> void:
+assetDelete:
+    // contracts/InnerTransactions/contract.algo.ts:233-234
+    // @abimethod()
+    // public assetDelete(asset: Asset): void {
+    proto 1 0
+    // contracts/InnerTransactions/contract.algo.ts:235-240
+    // itxn
+    //   .assetConfig({
+    //     configAsset: asset,
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_begin
+    frame_dig -1
+    itxn_field ConfigAsset
+    // contracts/InnerTransactions/contract.algo.ts:235-239
+    // itxn
+    //   .assetConfig({
+    //     configAsset: asset,
+    //     fee: 0,
+    //   })
+    intc_2 // 3
+    itxn_field TypeEnum
+    // contracts/InnerTransactions/contract.algo.ts:238
+    // fee: 0,
+    intc_1 // 0
+    itxn_field Fee
+    // contracts/InnerTransactions/contract.algo.ts:235-240
+    // itxn
+    //   .assetConfig({
+    //     configAsset: asset,
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_submit
+    retsub
+
+
+// contracts/InnerTransactions/contract.algo.ts::InnerTransactions.multiInnerTxns(appId: uint64) -> uint64, bytes:
+multiInnerTxns:
+    // contracts/InnerTransactions/contract.algo.ts:250-251
+    // @abimethod()
+    // public multiInnerTxns(appId: Application): [uint64, string] {
+    proto 1 2
+    // contracts/InnerTransactions/contract.algo.ts:253-259
+    // const payTxn = itxn
+    //   .payment({
+    //     amount: 5000,
+    //     receiver: Txn.sender,
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_begin
+    // contracts/InnerTransactions/contract.algo.ts:256
+    // receiver: Txn.sender,
+    txn Sender
+    itxn_field Receiver
+    // contracts/InnerTransactions/contract.algo.ts:255
+    // amount: 5000,
+    pushint 5000 // 5000
+    itxn_field Amount
+    // contracts/InnerTransactions/contract.algo.ts:253-258
+    // const payTxn = itxn
+    //   .payment({
+    //     amount: 5000,
+    //     receiver: Txn.sender,
+    //     fee: 0,
+    //   })
+    intc_0 // 1
+    itxn_field TypeEnum
+    // contracts/InnerTransactions/contract.algo.ts:257
+    // fee: 0,
+    intc_1 // 0
+    itxn_field Fee
+    // contracts/InnerTransactions/contract.algo.ts:253-259
+    // const payTxn = itxn
+    //   .payment({
+    //     amount: 5000,
+    //     receiver: Txn.sender,
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_submit
+    itxn Amount
+    // contracts/InnerTransactions/contract.algo.ts:262-268
+    // const appCallTxn = itxn
+    //   .applicationCall({
+    //     appId: appId.id,
+    //     appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('Jane'), new arc4.Str('Doe')],
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_begin
+    // contracts/InnerTransactions/contract.algo.ts:265
+    // appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('Jane'), new arc4.Str('Doe')],
+    bytec_1 // method "sayHello(string,string)string"
+    itxn_field ApplicationArgs
+    pushbytes 0x00044a616e65
+    itxn_field ApplicationArgs
+    bytec_2 // 0x0003446f65
+    itxn_field ApplicationArgs
+    frame_dig -1
+    itxn_field ApplicationID
+    // contracts/InnerTransactions/contract.algo.ts:262-267
+    // const appCallTxn = itxn
+    //   .applicationCall({
+    //     appId: appId.id,
+    //     appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('Jane'), new arc4.Str('Doe')],
+    //     fee: 0,
+    //   })
+    pushint 6 // 6
+    itxn_field TypeEnum
+    // contracts/InnerTransactions/contract.algo.ts:266
+    // fee: 0,
+    intc_1 // 0
+    itxn_field Fee
+    // contracts/InnerTransactions/contract.algo.ts:262-268
+    // const appCallTxn = itxn
+    //   .applicationCall({
+    //     appId: appId.id,
+    //     appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('Jane'), new arc4.Str('Doe')],
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_submit
+    itxn LastLog
+    // contracts/InnerTransactions/contract.algo.ts:271
+    // const helloWorldResult = arc4.decodeArc4<string>(appCallTxn.lastLog, 'log')
+    dup
+    extract 0 4
+    bytec_0 // 0x151f7c75
+    ==
+    assert // Bytes has valid prefix
+    extract 6 0
+    // contracts/InnerTransactions/contract.algo.ts:272
+    // return [payTxn.amount, helloWorldResult]
+    retsub
+
+
+// contracts/InnerTransactions/contract.algo.ts::InnerTransactions.deployApp() -> uint64:
+deployApp:
+    // contracts/InnerTransactions/contract.algo.ts:294-300
+    // const appTxn = itxn
+    //   .applicationCall({
+    //     approvalProgram: Bytes('approval_program'),
+    //     clearStateProgram: Bytes('clear_state_program'),
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_begin
+    // contracts/InnerTransactions/contract.algo.ts:297
+    // clearStateProgram: Bytes('clear_state_program'),
+    pushbytes "clear_state_program"
+    itxn_field ClearStateProgramPages
+    // contracts/InnerTransactions/contract.algo.ts:296
+    // approvalProgram: Bytes('approval_program'),
+    pushbytes "approval_program"
+    itxn_field ApprovalProgramPages
+    // contracts/InnerTransactions/contract.algo.ts:294-299
+    // const appTxn = itxn
+    //   .applicationCall({
+    //     approvalProgram: Bytes('approval_program'),
+    //     clearStateProgram: Bytes('clear_state_program'),
+    //     fee: 0,
+    //   })
+    pushint 6 // 6
+    itxn_field TypeEnum
+    // contracts/InnerTransactions/contract.algo.ts:298
+    // fee: 0,
+    intc_1 // 0
+    itxn_field Fee
+    // contracts/InnerTransactions/contract.algo.ts:294-300
+    // const appTxn = itxn
+    //   .applicationCall({
+    //     approvalProgram: Bytes('approval_program'),
+    //     clearStateProgram: Bytes('clear_state_program'),
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_submit
+    itxn CreatedApplicationID
+    // contracts/InnerTransactions/contract.algo.ts:302
+    // return appTxn.createdApp.id
+    retsub
+
+
+// contracts/InnerTransactions/contract.algo.ts::InnerTransactions.noopAppCall(appId: uint64) -> bytes:
+noopAppCall:
+    // contracts/InnerTransactions/contract.algo.ts:329-330
+    // @abimethod()
+    // public noopAppCall(appId: Application): string {
+    proto 1 1
+    // contracts/InnerTransactions/contract.algo.ts:332-337
+    // const callTxn = itxn
+    //   .applicationCall({
+    //     appId: appId.id,
+    //     appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('John'), new arc4.Str('Doe')],
+    //   })
+    //   .submit()
+    itxn_begin
+    // contracts/InnerTransactions/contract.algo.ts:335
+    // appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('John'), new arc4.Str('Doe')],
+    bytec_1 // method "sayHello(string,string)string"
+    itxn_field ApplicationArgs
+    pushbytes 0x00044a6f686e
+    itxn_field ApplicationArgs
+    bytec_2 // 0x0003446f65
+    itxn_field ApplicationArgs
+    frame_dig -1
+    itxn_field ApplicationID
+    // contracts/InnerTransactions/contract.algo.ts:332-336
+    // const callTxn = itxn
+    //   .applicationCall({
+    //     appId: appId.id,
+    //     appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('John'), new arc4.Str('Doe')],
+    //   })
+    pushint 6 // 6
+    itxn_field TypeEnum
+    intc_1 // 0
+    itxn_field Fee
+    // contracts/InnerTransactions/contract.algo.ts:332-337
+    // const callTxn = itxn
+    //   .applicationCall({
+    //     appId: appId.id,
+    //     appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('John'), new arc4.Str('Doe')],
+    //   })
+    //   .submit()
+    itxn_submit
+    itxn LastLog
+    // contracts/InnerTransactions/contract.algo.ts:340
+    // return arc4.decodeArc4<string>(callTxn.lastLog, 'log')
+    dup
+    extract 0 4
+    bytec_0 // 0x151f7c75
+    ==
+    assert // Bytes has valid prefix
+    extract 6 0
+    retsub
