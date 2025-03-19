@@ -262,7 +262,7 @@ export default class InnerTransactions extends Contract {
     const appCallTxn = itxn
       .applicationCall({
         appId: appId.id,
-        appArgs: [arc4.methodSelector('sayHello(string,string)string'), 'Jane', 'Doe'],
+        appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('Jane'), new arc4.Str('Doe')],
         fee: 0,
       })
       .submit()
@@ -332,7 +332,7 @@ export default class InnerTransactions extends Contract {
     const callTxn = itxn
       .applicationCall({
         appId: appId.id,
-        appArgs: [arc4.methodSelector('sayHello(string,string)string'), Bytes('John'), Bytes('Doe')],
+        appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('John'), new arc4.Str('Doe')],
       })
       .submit()
 

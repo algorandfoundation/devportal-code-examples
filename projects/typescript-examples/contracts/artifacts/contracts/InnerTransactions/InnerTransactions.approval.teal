@@ -4,7 +4,7 @@
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
 main:
     intcblock 1 0 3 4
-    bytecblock 0x151f7c75 0x3aad6d86 "Doe"
+    bytecblock 0x151f7c75 0x3aad6d86 0x0003446f65
     // contracts/InnerTransactions/contract.algo.ts:19
     // export default class InnerTransactions extends Contract {
     txn NumAppArgs
@@ -864,18 +864,18 @@ multiInnerTxns:
     // const appCallTxn = itxn
     //   .applicationCall({
     //     appId: appId.id,
-    //     appArgs: [arc4.methodSelector('sayHello(string,string)string'), 'Jane', 'Doe'],
+    //     appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('Jane'), new arc4.Str('Doe')],
     //     fee: 0,
     //   })
     //   .submit()
     itxn_begin
     // contracts/InnerTransactions/contract.algo.ts:265
-    // appArgs: [arc4.methodSelector('sayHello(string,string)string'), 'Jane', 'Doe'],
+    // appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('Jane'), new arc4.Str('Doe')],
     bytec_1 // method "sayHello(string,string)string"
     itxn_field ApplicationArgs
-    pushbytes "Jane"
+    pushbytes 0x00044a616e65
     itxn_field ApplicationArgs
-    bytec_2 // "Doe"
+    bytec_2 // 0x0003446f65
     itxn_field ApplicationArgs
     frame_dig -1
     itxn_field ApplicationID
@@ -883,7 +883,7 @@ multiInnerTxns:
     // const appCallTxn = itxn
     //   .applicationCall({
     //     appId: appId.id,
-    //     appArgs: [arc4.methodSelector('sayHello(string,string)string'), 'Jane', 'Doe'],
+    //     appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('Jane'), new arc4.Str('Doe')],
     //     fee: 0,
     //   })
     pushint 6 // 6
@@ -896,7 +896,7 @@ multiInnerTxns:
     // const appCallTxn = itxn
     //   .applicationCall({
     //     appId: appId.id,
-    //     appArgs: [arc4.methodSelector('sayHello(string,string)string'), 'Jane', 'Doe'],
+    //     appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('Jane'), new arc4.Str('Doe')],
     //     fee: 0,
     //   })
     //   .submit()
@@ -972,17 +972,17 @@ noopAppCall:
     // const callTxn = itxn
     //   .applicationCall({
     //     appId: appId.id,
-    //     appArgs: [arc4.methodSelector('sayHello(string,string)string'), Bytes('John'), Bytes('Doe')],
+    //     appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('John'), new arc4.Str('Doe')],
     //   })
     //   .submit()
     itxn_begin
     // contracts/InnerTransactions/contract.algo.ts:335
-    // appArgs: [arc4.methodSelector('sayHello(string,string)string'), Bytes('John'), Bytes('Doe')],
+    // appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('John'), new arc4.Str('Doe')],
     bytec_1 // method "sayHello(string,string)string"
     itxn_field ApplicationArgs
-    pushbytes "John"
+    pushbytes 0x00044a6f686e
     itxn_field ApplicationArgs
-    bytec_2 // "Doe"
+    bytec_2 // 0x0003446f65
     itxn_field ApplicationArgs
     frame_dig -1
     itxn_field ApplicationID
@@ -990,7 +990,7 @@ noopAppCall:
     // const callTxn = itxn
     //   .applicationCall({
     //     appId: appId.id,
-    //     appArgs: [arc4.methodSelector('sayHello(string,string)string'), Bytes('John'), Bytes('Doe')],
+    //     appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('John'), new arc4.Str('Doe')],
     //   })
     pushint 6 // 6
     itxn_field TypeEnum
@@ -1000,7 +1000,7 @@ noopAppCall:
     // const callTxn = itxn
     //   .applicationCall({
     //     appId: appId.id,
-    //     appArgs: [arc4.methodSelector('sayHello(string,string)string'), Bytes('John'), Bytes('Doe')],
+    //     appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('John'), new arc4.Str('Doe')],
     //   })
     //   .submit()
     itxn_submit

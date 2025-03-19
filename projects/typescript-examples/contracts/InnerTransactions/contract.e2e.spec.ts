@@ -204,11 +204,7 @@ describe('InnerTransactions contract', () => {
     if (result) {
       const [paymentAmount, helloResult] = result
       expect(paymentAmount).toBe(5000n)
-      /** @TODO This is a bug in the contract's arc4.decodeArc4 method, it should be 'Hello Jane Doe'
-       * but it's returning 'Hello ne e'
-       * See projects/typescript-examples/contracts/InnerTransactions/contract.algo.ts line 265
-       */
-      expect(helloResult).toBe('Hello ne e')
+      expect(helloResult).toBe('Hello Jane Doe')
     }
   })
 
@@ -251,10 +247,7 @@ describe('InnerTransactions contract', () => {
       appReferences: [helloWorldClient.appId],
       extraFee: microAlgo(2000),
     })
-    /** @TODO This is a bug in the contract's arc4.decodeArc4 method, it should be 'Hello John Doe'
-     * but it's returning 'Hello hn e'
-     * See projects/typescript-examples/contracts/InnerTransactions/contract.algo.ts line 335
-     */
-    expect(result).toBe('Hello hn e')
+
+    expect(result).toBe('Hello John Doe')
   })
 })
