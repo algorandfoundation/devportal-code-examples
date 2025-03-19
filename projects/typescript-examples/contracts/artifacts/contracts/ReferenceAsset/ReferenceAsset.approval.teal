@@ -1,0 +1,95 @@
+#pragma version 10
+#pragma typetrack false
+
+// @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
+main:
+    bytecblock 0x151f7c75
+    // contracts/ReferenceAsset/contract.algo.ts:5
+    // export default class ReferenceAsset extends Contract {
+    txn NumAppArgs
+    bz main_bare_routing@7
+    pushbytess 0x1d90e1ba 0x95fe420a // method "getAssetTotalSupply()uint64", method "getAssetTotalSupplyWithArgument(asset)uint64"
+    txna ApplicationArgs 0
+    match main_getAssetTotalSupply_route@3 main_getAssetTotalSupplyWithArgument_route@4
+
+main_after_if_else@11:
+    // contracts/ReferenceAsset/contract.algo.ts:5
+    // export default class ReferenceAsset extends Contract {
+    pushint 0 // 0
+    return
+
+main_getAssetTotalSupplyWithArgument_route@4:
+    // contracts/ReferenceAsset/contract.algo.ts:21
+    // @abimethod({ readonly: true })
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // contracts/ReferenceAsset/contract.algo.ts:5
+    // export default class ReferenceAsset extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    txnas Assets
+    // contracts/ReferenceAsset/contract.algo.ts:21
+    // @abimethod({ readonly: true })
+    callsub getAssetTotalSupplyWithArgument
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    pushint 1 // 1
+    return
+
+main_getAssetTotalSupply_route@3:
+    // contracts/ReferenceAsset/contract.algo.ts:11
+    // @abimethod({ readonly: true })
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub getAssetTotalSupply
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    pushint 1 // 1
+    return
+
+main_bare_routing@7:
+    // contracts/ReferenceAsset/contract.algo.ts:5
+    // export default class ReferenceAsset extends Contract {
+    txn OnCompletion
+    bnz main_after_if_else@11
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    pushint 1 // 1
+    return
+
+
+// contracts/ReferenceAsset/contract.algo.ts::ReferenceAsset.getAssetTotalSupply() -> uint64:
+getAssetTotalSupply:
+    // contracts/ReferenceAsset/contract.algo.ts:13
+    // return Asset(1005).total // Replace with your asset id
+    pushint 1005 // 1005
+    asset_params_get AssetTotal
+    assert // asset exists
+    retsub
+
+
+// contracts/ReferenceAsset/contract.algo.ts::ReferenceAsset.getAssetTotalSupplyWithArgument(asset: uint64) -> uint64:
+getAssetTotalSupplyWithArgument:
+    // contracts/ReferenceAsset/contract.algo.ts:21-22
+    // @abimethod({ readonly: true })
+    // public getAssetTotalSupplyWithArgument(asset: Asset) {
+    proto 1 1
+    // contracts/ReferenceAsset/contract.algo.ts:23
+    // return asset.total
+    frame_dig -1
+    asset_params_get AssetTotal
+    assert // asset exists
+    retsub

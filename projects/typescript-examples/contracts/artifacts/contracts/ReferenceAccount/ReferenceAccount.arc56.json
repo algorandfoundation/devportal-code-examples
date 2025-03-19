@@ -1,0 +1,138 @@
+{
+    "name": "ReferenceAccount",
+    "structs": {},
+    "methods": [
+        {
+            "name": "getAccountBalance",
+            "args": [],
+            "returns": {
+                "type": "uint64",
+                "desc": "The balance of the account"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Returns the balance of the account",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getAccountBalanceWithArgument",
+            "args": [
+                {
+                    "type": "account",
+                    "name": "account",
+                    "desc": "The account to get the balance of"
+                }
+            ],
+            "returns": {
+                "type": "uint64",
+                "desc": "The balance of the account"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Returns the balance of the account",
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "A contract that demonstrates how to use resource usage in a contract using an account reference",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        40,
+                        64
+                    ],
+                    "errorMessage": "OnCompletion is not NoOp"
+                },
+                {
+                    "pc": [
+                        127,
+                        136
+                    ],
+                    "errorMessage": "account funded"
+                },
+                {
+                    "pc": [
+                        87
+                    ],
+                    "errorMessage": "can only call when creating"
+                },
+                {
+                    "pc": [
+                        43,
+                        67
+                    ],
+                    "errorMessage": "can only call when not creating"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBieXRlY2Jsb2NrIDB4MTUxZjdjNzUKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6NgogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgUmVmZXJlbmNlQWNjb3VudCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX2JhcmVfcm91dGluZ0A3CiAgICBwdXNoYnl0ZXNzIDB4NTU0NDhlNjkgMHg5M2IwNDE2YiAvLyBtZXRob2QgImdldEFjY291bnRCYWxhbmNlKCl1aW50NjQiLCBtZXRob2QgImdldEFjY291bnRCYWxhbmNlV2l0aEFyZ3VtZW50KGFjY291bnQpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9nZXRBY2NvdW50QmFsYW5jZV9yb3V0ZUAzIG1haW5fZ2V0QWNjb3VudEJhbGFuY2VXaXRoQXJndW1lbnRfcm91dGVANAoKbWFpbl9hZnRlcl9pZl9lbHNlQDExOgogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnQvY29udHJhY3QuYWxnby50czo2CiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBSZWZlcmVuY2VBY2NvdW50IGV4dGVuZHMgQ29udHJhY3QgewogICAgcHVzaGludCAwIC8vIDAKICAgIHJldHVybgoKbWFpbl9nZXRBY2NvdW50QmFsYW5jZVdpdGhBcmd1bWVudF9yb3V0ZUA0OgogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnQvY29udHJhY3QuYWxnby50czoyNgogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6NgogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgUmVmZXJlbmNlQWNjb3VudCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGJ0b2kKICAgIHR4bmFzIEFjY291bnRzCiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudC9jb250cmFjdC5hbGdvLnRzOjI2CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIGNhbGxzdWIgZ2V0QWNjb3VudEJhbGFuY2VXaXRoQXJndW1lbnQKICAgIGl0b2IKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0QWNjb3VudEJhbGFuY2Vfcm91dGVAMzoKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6MTIKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIGdldEFjY291bnRCYWxhbmNlCiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCgptYWluX2JhcmVfcm91dGluZ0A3OgogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnQvY29udHJhY3QuYWxnby50czo2CiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBSZWZlcmVuY2VBY2NvdW50IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAxMQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4KCgovLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudC9jb250cmFjdC5hbGdvLnRzOjpSZWZlcmVuY2VBY2NvdW50LmdldEFjY291bnRCYWxhbmNlKCkgLT4gdWludDY0OgpnZXRBY2NvdW50QmFsYW5jZToKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6MTQKICAgIC8vIGNvbnN0IGFkZHJlc3MgPSBuZXcgQWRkcmVzcygnUjNKNzZNRFBFWFFFV0JWMkxRNkZMUTRQWUM0UVhOSEhQSUwyQlgyS1NGVTRXVU5KSk1EQlRMUk5FTScpCiAgICBwdXNoYnl0ZXMgYmFzZTMyKFIzSjc2TURQRVhRRVdCVjJMUTZGTFE0UFlDNFFYTkhIUElMMkJYMktTRlU0V1VOSkpNREEpIC8vIGFkZHIgUjNKNzZNRFBFWFFFV0JWMkxRNkZMUTRQWUM0UVhOSEhQSUwyQlgyS1NGVTRXVU5KSk1EQlRMUk5FTQogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnQvY29udHJhY3QuYWxnby50czoxOAogICAgLy8gcmV0dXJuIGFjY291bnQuYmFsYW5jZQogICAgYWNjdF9wYXJhbXNfZ2V0IEFjY3RCYWxhbmNlCiAgICBhc3NlcnQgLy8gYWNjb3VudCBmdW5kZWQKICAgIHJldHN1YgoKCi8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6OlJlZmVyZW5jZUFjY291bnQuZ2V0QWNjb3VudEJhbGFuY2VXaXRoQXJndW1lbnQoYWNjb3VudDogYnl0ZXMpIC0+IHVpbnQ2NDoKZ2V0QWNjb3VudEJhbGFuY2VXaXRoQXJndW1lbnQ6CiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudC9jb250cmFjdC5hbGdvLnRzOjI2LTI3CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIC8vIHB1YmxpYyBnZXRBY2NvdW50QmFsYW5jZVdpdGhBcmd1bWVudChhY2NvdW50OiBBY2NvdW50KSB7CiAgICBwcm90byAxIDEKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6MjgKICAgIC8vIHJldHVybiBhY2NvdW50LmJhbGFuY2UKICAgIGZyYW1lX2RpZyAtMQogICAgYWNjdF9wYXJhbXNfZ2V0IEFjY3RCYWxhbmNlCiAgICBhc3NlcnQgLy8gYWNjb3VudCBmdW5kZWQKICAgIHJldHN1Ygo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CiYBBBUffHUxG0EAQoICBFVEjmkEk7BBazYaAI4CABsAA4EAQzEZFEQxGEQ2GgEXwByIAEwWKExQsIEBQzEZFEQxGESIABQWKExQsIEBQzEZQP/OMRgURIEBQ4AgjtP/MG8l4EsGulw8VcOPwLkLtOd6F6DfSpFpy1GpSwZzAESJigEBi/9zAESJ",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 4,
+            "minor": 4,
+            "patch": 4
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}
