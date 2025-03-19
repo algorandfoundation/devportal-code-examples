@@ -1,0 +1,97 @@
+#pragma version 10
+#pragma typetrack false
+
+// @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
+main:
+    bytecblock 0x151f7c75
+    // contracts/ReferenceAccount/contract.algo.ts:6
+    // export default class ReferenceAccount extends Contract {
+    txn NumAppArgs
+    bz main_bare_routing@7
+    pushbytess 0x55448e69 0x93b0416b // method "getAccountBalance()uint64", method "getAccountBalanceWithArgument(account)uint64"
+    txna ApplicationArgs 0
+    match main_getAccountBalance_route@3 main_getAccountBalanceWithArgument_route@4
+
+main_after_if_else@11:
+    // contracts/ReferenceAccount/contract.algo.ts:6
+    // export default class ReferenceAccount extends Contract {
+    pushint 0 // 0
+    return
+
+main_getAccountBalanceWithArgument_route@4:
+    // contracts/ReferenceAccount/contract.algo.ts:26
+    // @abimethod({ readonly: true })
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // contracts/ReferenceAccount/contract.algo.ts:6
+    // export default class ReferenceAccount extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    txnas Accounts
+    // contracts/ReferenceAccount/contract.algo.ts:26
+    // @abimethod({ readonly: true })
+    callsub getAccountBalanceWithArgument
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    pushint 1 // 1
+    return
+
+main_getAccountBalance_route@3:
+    // contracts/ReferenceAccount/contract.algo.ts:12
+    // @abimethod({ readonly: true })
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub getAccountBalance
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    pushint 1 // 1
+    return
+
+main_bare_routing@7:
+    // contracts/ReferenceAccount/contract.algo.ts:6
+    // export default class ReferenceAccount extends Contract {
+    txn OnCompletion
+    bnz main_after_if_else@11
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    pushint 1 // 1
+    return
+
+
+// contracts/ReferenceAccount/contract.algo.ts::ReferenceAccount.getAccountBalance() -> uint64:
+getAccountBalance:
+    // contracts/ReferenceAccount/contract.algo.ts:14
+    // const address = new Address('R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM')
+    pushbytes base32(R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDA) // addr R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM
+    // contracts/ReferenceAccount/contract.algo.ts:18
+    // return account.balance
+    acct_params_get AcctBalance
+    assert // account funded
+    retsub
+
+
+// contracts/ReferenceAccount/contract.algo.ts::ReferenceAccount.getAccountBalanceWithArgument(account: bytes) -> uint64:
+getAccountBalanceWithArgument:
+    // contracts/ReferenceAccount/contract.algo.ts:26-27
+    // @abimethod({ readonly: true })
+    // public getAccountBalanceWithArgument(account: Account) {
+    proto 1 1
+    // contracts/ReferenceAccount/contract.algo.ts:28
+    // return account.balance
+    frame_dig -1
+    acct_params_get AcctBalance
+    assert // account funded
+    retsub
