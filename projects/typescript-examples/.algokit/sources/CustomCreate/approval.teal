@@ -1,0 +1,85 @@
+#pragma version 10
+#pragma typetrack false
+
+
+main:
+    intcblock 0 1
+    bytecblock "age"
+
+
+    txn NumAppArgs
+    bz main_after_if_else@8
+    pushbytess 0x483331ee 0xd26ce06c
+    txna ApplicationArgs 0
+    match main_custom_create_route@3 main_getAge_route@4
+
+main_after_if_else@8:
+
+
+    intc_0
+    return
+
+main_getAge_route@4:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub getAge
+    itob
+    pushbytes 0x151f7c75
+    swap
+    concat
+    log
+    intc_1
+    return
+
+main_custom_create_route@3:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    !
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+
+
+    callsub custom_create
+    intc_1
+    return
+
+
+
+custom_create:
+
+
+
+    proto 1 0
+
+
+    bytec_0
+
+
+    frame_dig -1
+    app_global_put
+    retsub
+
+
+
+getAge:
+
+
+    intc_0
+    bytec_0
+    app_global_get_ex
+    assert
+
+
+    retsub

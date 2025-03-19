@@ -1,0 +1,134 @@
+{
+    "name": "CustomCreate",
+    "structs": {},
+    "methods": [
+        {
+            "name": "custom_create",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "age"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [
+                    "NoOp"
+                ],
+                "call": []
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getAge",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 1,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "age": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "YWdl"
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        42,
+                        64
+                    ],
+                    "errorMessage": "OnCompletion is not NoOp"
+                },
+                {
+                    "pc": [
+                        68
+                    ],
+                    "errorMessage": "can only call when creating"
+                },
+                {
+                    "pc": [
+                        45
+                    ],
+                    "errorMessage": "can only call when not creating"
+                },
+                {
+                    "pc": [
+                        89
+                    ],
+                    "errorMessage": "check GlobalState exists"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxCiAgICBieXRlY2Jsb2NrICJhZ2UiCiAgICAvLyBjb250cmFjdHMvQ3VzdG9tQ3JlYXRlL2NvbnRyYWN0LmFsZ28udHM6NQogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgQ3VzdG9tQ3JlYXRlIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fYWZ0ZXJfaWZfZWxzZUA4CiAgICBwdXNoYnl0ZXNzIDB4NDgzMzMxZWUgMHhkMjZjZTA2YyAvLyBtZXRob2QgImN1c3RvbV9jcmVhdGUodWludDY0KXZvaWQiLCBtZXRob2QgImdldEFnZSgpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9jdXN0b21fY3JlYXRlX3JvdXRlQDMgbWFpbl9nZXRBZ2Vfcm91dGVANAoKbWFpbl9hZnRlcl9pZl9lbHNlQDg6CiAgICAvLyBjb250cmFjdHMvQ3VzdG9tQ3JlYXRlL2NvbnRyYWN0LmFsZ28udHM6NQogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgQ3VzdG9tQ3JlYXRlIGV4dGVuZHMgQ29udHJhY3QgewogICAgaW50Y18wIC8vIDAKICAgIHJldHVybgoKbWFpbl9nZXRBZ2Vfcm91dGVANDoKICAgIC8vIGNvbnRyYWN0cy9DdXN0b21DcmVhdGUvY29udHJhY3QuYWxnby50czoxMwogICAgLy8gcHVibGljIGdldEFnZSgpOiB1aW50NjQgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIGdldEFnZQogICAgaXRvYgogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2N1c3RvbV9jcmVhdGVfcm91dGVAMzoKICAgIC8vIGNvbnRyYWN0cy9DdXN0b21DcmVhdGUvY29udHJhY3QuYWxnby50czo4CiAgICAvLyBAYXJjNC5hYmltZXRob2Qoe29uQ3JlYXRlOiAncmVxdWlyZSd9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIC8vIGNvbnRyYWN0cy9DdXN0b21DcmVhdGUvY29udHJhY3QuYWxnby50czo1CiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBDdXN0b21DcmVhdGUgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICAvLyBjb250cmFjdHMvQ3VzdG9tQ3JlYXRlL2NvbnRyYWN0LmFsZ28udHM6OAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHtvbkNyZWF0ZTogJ3JlcXVpcmUnfSkKICAgIGNhbGxzdWIgY3VzdG9tX2NyZWF0ZQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIGNvbnRyYWN0cy9DdXN0b21DcmVhdGUvY29udHJhY3QuYWxnby50czo6Q3VzdG9tQ3JlYXRlLmN1c3RvbV9jcmVhdGUoYWdlOiB1aW50NjQpIC0+IHZvaWQ6CmN1c3RvbV9jcmVhdGU6CiAgICAvLyBjb250cmFjdHMvQ3VzdG9tQ3JlYXRlL2NvbnRyYWN0LmFsZ28udHM6OC05CiAgICAvLyBAYXJjNC5hYmltZXRob2Qoe29uQ3JlYXRlOiAncmVxdWlyZSd9KQogICAgLy8gcHVibGljIGN1c3RvbV9jcmVhdGUoYWdlOiB1aW50NjQpOiB2b2lkIHsKICAgIHByb3RvIDEgMAogICAgLy8gY29udHJhY3RzL0N1c3RvbUNyZWF0ZS9jb250cmFjdC5hbGdvLnRzOjYKICAgIC8vIHB1YmxpYyBhZ2UgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KCkgLy8gVUludDY0IHdpdGggbm8gZGVmYXVsdCB2YWx1ZQogICAgYnl0ZWNfMCAvLyAiYWdlIgogICAgLy8gY29udHJhY3RzL0N1c3RvbUNyZWF0ZS9jb250cmFjdC5hbGdvLnRzOjEwCiAgICAvLyB0aGlzLmFnZS52YWx1ZSA9IFVpbnQ2NChhZ2UpCiAgICBmcmFtZV9kaWcgLTEKICAgIGFwcF9nbG9iYWxfcHV0CiAgICByZXRzdWIKCgovLyBjb250cmFjdHMvQ3VzdG9tQ3JlYXRlL2NvbnRyYWN0LmFsZ28udHM6OkN1c3RvbUNyZWF0ZS5nZXRBZ2UoKSAtPiB1aW50NjQ6CmdldEFnZToKICAgIC8vIGNvbnRyYWN0cy9DdXN0b21DcmVhdGUvY29udHJhY3QuYWxnby50czo2CiAgICAvLyBwdWJsaWMgYWdlID0gR2xvYmFsU3RhdGU8dWludDY0PigpIC8vIFVJbnQ2NCB3aXRoIG5vIGRlZmF1bHQgdmFsdWUKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJhZ2UiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgLy8gY29udHJhY3RzL0N1c3RvbUNyZWF0ZS9jb250cmFjdC5hbGdvLnRzOjE0CiAgICAvLyByZXR1cm4gdGhpcy5hZ2UudmFsdWUKICAgIHJldHN1Ygo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CiACAAEmAQNhZ2UxG0EAFYICBEgzMe4E0mzgbDYaAI4CABgAAiJDMRkURDEYRIgAJRaABBUffHVMULAjQzEZFEQxGBRENhoBF4gAAiNDigEAKIv/Z4kiKGVEiQ==",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 4,
+            "minor": 4,
+            "patch": 4
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}
