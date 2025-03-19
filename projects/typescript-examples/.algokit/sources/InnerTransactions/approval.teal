@@ -1,0 +1,1016 @@
+#pragma version 10
+#pragma typetrack false
+
+
+main:
+    intcblock 1 0 3 4
+    bytecblock 0x151f7c75 0x3aad6d86 "Doe"
+
+
+    txn NumAppArgs
+    bz main_bare_routing@18
+    pushbytess 0x23950027 0x0207f77d 0xd2249284 0x66a063bf 0x12563767 0xcfb12db1 0x7b58e236 0xd0864ff4 0x5351d7be 0x5727ecae 0xda20a87e 0x38ecc014 0x9aeec159
+    txna ApplicationArgs 0
+    match main_payment_route@3 main_fungibleAssetCreate_route@4 main_nonFungibleAssetCreate_route@5 main_assetOptIn_route@6 main_assetTransfer_route@7 main_assetFreeze_route@8 main_assetRevoke_route@9 main_assetConfig_route@10 main_assetDelete_route@11 main_multiInnerTxns_route@12 main_deployApp_route@13 main_arc4DeployApp_route@14 main_noopAppCall_route@15
+
+main_after_if_else@22:
+
+
+    intc_1
+    return
+
+main_noopAppCall_route@15:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+    txnas Applications
+
+
+    callsub noopAppCall
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_arc4DeployApp_route@14:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    pushbytes 0x151f7c7500000000000004d2
+    log
+    intc_0
+    return
+
+main_deployApp_route@13:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub deployApp
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_multiInnerTxns_route@12:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+    txnas Applications
+
+
+    callsub multiInnerTxns
+    swap
+    itob
+    dig 1
+    len
+    itob
+    extract 6 2
+    uncover 2
+    concat
+    swap
+    pushbytes 0x000a
+    concat
+    swap
+    concat
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_assetDelete_route@11:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+    txnas Assets
+
+
+    callsub assetDelete
+    intc_0
+    return
+
+main_assetConfig_route@10:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+    txnas Assets
+
+
+    callsub assetConfig
+    intc_0
+    return
+
+main_assetRevoke_route@9:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+    txnas Assets
+    txna ApplicationArgs 2
+    btoi
+    txnas Accounts
+    txna ApplicationArgs 3
+    btoi
+
+
+    callsub assetRevoke
+    intc_0
+    return
+
+main_assetFreeze_route@8:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+    txnas Accounts
+    txna ApplicationArgs 2
+    btoi
+    txnas Assets
+
+
+    callsub assetFreeze
+    intc_0
+    return
+
+main_assetTransfer_route@7:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+    txnas Assets
+    txna ApplicationArgs 2
+    btoi
+    txnas Accounts
+    txna ApplicationArgs 3
+    btoi
+
+
+    callsub assetTransfer
+    intc_0
+    return
+
+main_assetOptIn_route@6:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+    txnas Assets
+
+
+    callsub assetOptIn
+    intc_0
+    return
+
+main_nonFungibleAssetCreate_route@5:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub nonFungibleAssetCreate
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_fungibleAssetCreate_route@4:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub fungibleAssetCreate
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_payment_route@3:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub payment
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_bare_routing@18:
+
+
+    txn OnCompletion
+    bnz main_after_if_else@22
+    txn ApplicationID
+    !
+    assert
+    intc_0
+    return
+
+
+
+payment:
+
+
+
+
+
+
+
+
+    itxn_begin
+
+
+    txn Sender
+    itxn_field Receiver
+
+
+    pushint 5000
+    itxn_field Amount
+
+
+
+
+
+
+
+    intc_0
+    itxn_field TypeEnum
+
+
+    intc_1
+    itxn_field Fee
+
+
+
+
+
+
+
+
+    itxn_submit
+    itxn Amount
+
+
+    retsub
+
+
+
+fungibleAssetCreate:
+
+
+
+
+
+
+
+
+
+    itxn_begin
+
+
+    pushbytes "Royalty Points"
+    itxn_field ConfigAssetName
+
+
+    pushbytes "RP"
+    itxn_field ConfigAssetUnitName
+
+
+    pushint 2
+    itxn_field ConfigAssetDecimals
+
+
+    pushint 100000000000
+    itxn_field ConfigAssetTotal
+
+
+
+
+
+
+
+
+    intc_2
+    itxn_field TypeEnum
+    intc_1
+    itxn_field Fee
+
+
+
+
+
+
+
+
+
+    itxn_submit
+    itxn CreatedAssetID
+
+
+    retsub
+
+
+
+nonFungibleAssetCreate:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    itxn_begin
+
+
+    global CurrentApplicationAddress
+
+
+
+
+    dupn 3
+    itxn_field ConfigAssetClawback
+    itxn_field ConfigAssetFreeze
+    itxn_field ConfigAssetReserve
+    itxn_field ConfigAssetManager
+
+
+    pushbytes "https://link_to_ipfs/Mona_Lisa"
+    itxn_field ConfigAssetURL
+
+
+    pushbytes "Mona Lisa"
+    itxn_field ConfigAssetName
+
+
+    pushbytes "ML"
+    itxn_field ConfigAssetUnitName
+
+
+    pushint 2
+    itxn_field ConfigAssetDecimals
+
+
+    pushint 100
+    itxn_field ConfigAssetTotal
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    intc_2
+    itxn_field TypeEnum
+
+
+    intc_1
+    itxn_field Fee
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    itxn_submit
+    itxn CreatedAssetID
+
+
+    retsub
+
+
+
+assetOptIn:
+
+
+
+    proto 1 0
+
+
+
+
+
+
+
+
+
+    itxn_begin
+
+
+    global CurrentApplicationAddress
+
+
+    intc_1
+    itxn_field AssetAmount
+    frame_dig -1
+    itxn_field XferAsset
+    itxn_field AssetReceiver
+
+
+
+
+
+
+
+
+    intc_3
+    itxn_field TypeEnum
+
+
+    intc_1
+    itxn_field Fee
+
+
+
+
+
+
+
+
+
+    itxn_submit
+    retsub
+
+
+
+assetTransfer:
+
+
+
+    proto 3 0
+
+
+
+
+
+
+
+
+
+    itxn_begin
+    frame_dig -1
+    itxn_field AssetAmount
+    frame_dig -3
+    itxn_field XferAsset
+    frame_dig -2
+    itxn_field AssetReceiver
+
+
+
+
+
+
+
+
+    intc_3
+    itxn_field TypeEnum
+
+
+    intc_1
+    itxn_field Fee
+
+
+
+
+
+
+
+
+
+    itxn_submit
+    retsub
+
+
+
+assetFreeze:
+
+
+
+    proto 2 0
+
+
+
+
+
+
+
+
+
+    itxn_begin
+
+
+    intc_0
+    itxn_field FreezeAssetFrozen
+    frame_dig -1
+    itxn_field FreezeAsset
+    frame_dig -2
+    itxn_field FreezeAssetAccount
+
+
+
+
+
+
+
+
+    pushint 5
+    itxn_field TypeEnum
+
+
+    intc_1
+    itxn_field Fee
+
+
+
+
+
+
+
+
+
+    itxn_submit
+    retsub
+
+
+
+assetRevoke:
+
+
+
+    proto 3 0
+
+
+
+
+
+
+
+
+
+
+    itxn_begin
+
+
+    global CurrentApplicationAddress
+    frame_dig -1
+    itxn_field AssetAmount
+    frame_dig -2
+    itxn_field AssetSender
+    frame_dig -3
+    itxn_field XferAsset
+    itxn_field AssetReceiver
+
+
+
+
+
+
+
+
+
+    intc_3
+    itxn_field TypeEnum
+
+
+    intc_1
+    itxn_field Fee
+
+
+
+
+
+
+
+
+
+
+    itxn_submit
+    retsub
+
+
+
+assetConfig:
+
+
+
+    proto 1 0
+
+
+
+
+
+
+
+
+
+
+
+    itxn_begin
+
+
+    global CurrentApplicationAddress
+
+
+    dup
+
+
+    txn Sender
+
+
+    dup
+    itxn_field ConfigAssetClawback
+    itxn_field ConfigAssetFreeze
+    itxn_field ConfigAssetReserve
+    itxn_field ConfigAssetManager
+    frame_dig -1
+    itxn_field ConfigAsset
+
+
+
+
+
+
+
+
+
+
+    intc_2
+    itxn_field TypeEnum
+
+
+    intc_1
+    itxn_field Fee
+
+
+
+
+
+
+
+
+
+
+
+    itxn_submit
+    retsub
+
+
+
+assetDelete:
+
+
+
+    proto 1 0
+
+
+
+
+
+
+
+    itxn_begin
+    frame_dig -1
+    itxn_field ConfigAsset
+
+
+
+
+
+
+    intc_2
+    itxn_field TypeEnum
+
+
+    intc_1
+    itxn_field Fee
+
+
+
+
+
+
+
+    itxn_submit
+    retsub
+
+
+
+multiInnerTxns:
+
+
+
+    proto 1 2
+
+
+
+
+
+
+
+
+    itxn_begin
+
+
+    txn Sender
+    itxn_field Receiver
+
+
+    pushint 5000
+    itxn_field Amount
+
+
+
+
+
+
+
+    intc_0
+    itxn_field TypeEnum
+
+
+    intc_1
+    itxn_field Fee
+
+
+
+
+
+
+
+
+    itxn_submit
+    itxn Amount
+
+
+
+
+
+
+
+
+    itxn_begin
+
+
+    bytec_1
+    itxn_field ApplicationArgs
+    pushbytes "Jane"
+    itxn_field ApplicationArgs
+    bytec_2
+    itxn_field ApplicationArgs
+    frame_dig -1
+    itxn_field ApplicationID
+
+
+
+
+
+
+
+    pushint 6
+    itxn_field TypeEnum
+
+
+    intc_1
+    itxn_field Fee
+
+
+
+
+
+
+
+
+    itxn_submit
+    itxn LastLog
+
+
+    dup
+    extract 0 4
+    bytec_0
+    ==
+    assert
+    extract 6 0
+
+
+    retsub
+
+
+
+deployApp:
+
+
+
+
+
+
+
+
+    itxn_begin
+
+
+    pushbytes "clear_state_program"
+    itxn_field ClearStateProgramPages
+
+
+    pushbytes "approval_program"
+    itxn_field ApprovalProgramPages
+
+
+
+
+
+
+
+    pushint 6
+    itxn_field TypeEnum
+
+
+    intc_1
+    itxn_field Fee
+
+
+
+
+
+
+
+
+    itxn_submit
+    itxn CreatedApplicationID
+
+
+    retsub
+
+
+
+noopAppCall:
+
+
+
+    proto 1 1
+
+
+
+
+
+
+
+    itxn_begin
+
+
+    bytec_1
+    itxn_field ApplicationArgs
+    pushbytes "John"
+    itxn_field ApplicationArgs
+    bytec_2
+    itxn_field ApplicationArgs
+    frame_dig -1
+    itxn_field ApplicationID
+
+
+
+
+
+
+    pushint 6
+    itxn_field TypeEnum
+    intc_1
+    itxn_field Fee
+
+
+
+
+
+
+
+    itxn_submit
+    itxn LastLog
+
+
+    dup
+    extract 0 4
+    bytec_0
+    ==
+    assert
+    extract 6 0
+    retsub
