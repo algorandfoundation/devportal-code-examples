@@ -1,0 +1,123 @@
+#pragma version 10
+#pragma typetrack false
+
+
+main:
+    intcblock 1 1185
+    bytecblock 0x151f7c75 base32(R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDA)
+
+
+    txn NumAppArgs
+    bz main_bare_routing@7
+    pushbytess 0x6d68e54d 0x8264b405
+    txna ApplicationArgs 0
+    match main_getAssetBalance_route@3 main_getAssetBalanceWithArg_route@4
+
+main_after_if_else@11:
+
+
+    pushint 0
+    return
+
+main_getAssetBalanceWithArg_route@4:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+    txnas Accounts
+    txna ApplicationArgs 2
+    btoi
+    txnas Assets
+
+
+    callsub getAssetBalanceWithArg
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_getAssetBalance_route@3:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub getAssetBalance
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_bare_routing@7:
+
+
+    txn OnCompletion
+    bnz main_after_if_else@11
+    txn ApplicationID
+    !
+    assert
+    intc_0
+    return
+
+
+
+getAssetBalance:
+
+
+    bytec_1
+
+
+    intc_1
+
+
+    asset_holding_get AssetBalance
+    bury 1
+    assert
+
+
+    bytec_1
+
+
+    intc_1
+
+
+    asset_holding_get AssetBalance
+    assert
+    retsub
+
+
+
+getAssetBalanceWithArg:
+
+
+
+    proto 2 1
+
+
+    frame_dig -2
+    frame_dig -1
+    asset_holding_get AssetBalance
+    bury 1
+    assert
+
+
+    frame_dig -2
+    frame_dig -1
+    asset_holding_get AssetBalance
+    assert
+    retsub

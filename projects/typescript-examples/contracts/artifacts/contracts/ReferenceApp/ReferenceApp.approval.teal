@@ -1,0 +1,190 @@
+#pragma version 10
+#pragma typetrack false
+
+// @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
+main:
+    intcblock 0 1 6
+    bytecblock 0x151f7c75 0x4a325901
+    // contracts/ReferenceApp/contract.algo.ts:32
+    // export default class ReferenceApp extends Contract {
+    txn NumAppArgs
+    bz main_bare_routing@7
+    pushbytess 0x9407ae96 0x1118334b // method "incrementViaInner()uint64", method "incrementViaInnerWithArg(application)uint64"
+    txna ApplicationArgs 0
+    match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4
+
+main_after_if_else@11:
+    // contracts/ReferenceApp/contract.algo.ts:32
+    // export default class ReferenceApp extends Contract {
+    intc_0 // 0
+    return
+
+main_incrementViaInnerWithArg_route@4:
+    // contracts/ReferenceApp/contract.algo.ts:61
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // contracts/ReferenceApp/contract.algo.ts:32
+    // export default class ReferenceApp extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    txnas Applications
+    // contracts/ReferenceApp/contract.algo.ts:61
+    // @abimethod()
+    callsub incrementViaInnerWithArg
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_incrementViaInner_route@3:
+    // contracts/ReferenceApp/contract.algo.ts:37
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub incrementViaInner
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_bare_routing@7:
+    // contracts/ReferenceApp/contract.algo.ts:32
+    // export default class ReferenceApp extends Contract {
+    txn OnCompletion
+    bnz main_after_if_else@11
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    intc_1 // 1
+    return
+
+
+// contracts/ReferenceApp/contract.algo.ts::ReferenceApp.incrementViaInner() -> uint64:
+incrementViaInner:
+    // contracts/ReferenceApp/contract.algo.ts:42-49
+    // const appCallTxn = itxn
+    //   .applicationCall({
+    //     appId: app.id,
+    //     // Use methodSelector to get the ABI selector for the increment method
+    //     appArgs: [arc4.methodSelector('increment()uint64')],
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_begin
+    // contracts/ReferenceApp/contract.algo.ts:46
+    // appArgs: [arc4.methodSelector('increment()uint64')],
+    bytec_1 // method "increment()uint64"
+    itxn_field ApplicationArgs
+    // contracts/ReferenceApp/contract.algo.ts:39
+    // const app = Application(1717) // Replace with your application id
+    pushint 1717 // 1717
+    itxn_field ApplicationID
+    // contracts/ReferenceApp/contract.algo.ts:42-48
+    // const appCallTxn = itxn
+    //   .applicationCall({
+    //     appId: app.id,
+    //     // Use methodSelector to get the ABI selector for the increment method
+    //     appArgs: [arc4.methodSelector('increment()uint64')],
+    //     fee: 0,
+    //   })
+    intc_2 // 6
+    itxn_field TypeEnum
+    // contracts/ReferenceApp/contract.algo.ts:47
+    // fee: 0,
+    intc_0 // 0
+    itxn_field Fee
+    // contracts/ReferenceApp/contract.algo.ts:42-49
+    // const appCallTxn = itxn
+    //   .applicationCall({
+    //     appId: app.id,
+    //     // Use methodSelector to get the ABI selector for the increment method
+    //     appArgs: [arc4.methodSelector('increment()uint64')],
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_submit
+    itxn LastLog
+    // contracts/ReferenceApp/contract.algo.ts:53
+    // return arc4.decodeArc4<uint64>(appCallTxn.lastLog, 'log')
+    dup
+    extract 4 0
+    swap
+    extract 0 4
+    bytec_0 // 0x151f7c75
+    ==
+    assert // Bytes has valid prefix
+    btoi
+    retsub
+
+
+// contracts/ReferenceApp/contract.algo.ts::ReferenceApp.incrementViaInnerWithArg(app: uint64) -> uint64:
+incrementViaInnerWithArg:
+    // contracts/ReferenceApp/contract.algo.ts:61-62
+    // @abimethod()
+    // public incrementViaInnerWithArg(app: Application): uint64 {
+    proto 1 1
+    // contracts/ReferenceApp/contract.algo.ts:64-71
+    // const appCallTxn = itxn
+    //   .applicationCall({
+    //     appId: app.id,
+    //     // Use methodSelector to get the ABI selector for the increment method
+    //     appArgs: [arc4.methodSelector('increment()uint64')],
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_begin
+    // contracts/ReferenceApp/contract.algo.ts:68
+    // appArgs: [arc4.methodSelector('increment()uint64')],
+    bytec_1 // method "increment()uint64"
+    itxn_field ApplicationArgs
+    frame_dig -1
+    itxn_field ApplicationID
+    // contracts/ReferenceApp/contract.algo.ts:64-70
+    // const appCallTxn = itxn
+    //   .applicationCall({
+    //     appId: app.id,
+    //     // Use methodSelector to get the ABI selector for the increment method
+    //     appArgs: [arc4.methodSelector('increment()uint64')],
+    //     fee: 0,
+    //   })
+    intc_2 // 6
+    itxn_field TypeEnum
+    // contracts/ReferenceApp/contract.algo.ts:69
+    // fee: 0,
+    intc_0 // 0
+    itxn_field Fee
+    // contracts/ReferenceApp/contract.algo.ts:64-71
+    // const appCallTxn = itxn
+    //   .applicationCall({
+    //     appId: app.id,
+    //     // Use methodSelector to get the ABI selector for the increment method
+    //     appArgs: [arc4.methodSelector('increment()uint64')],
+    //     fee: 0,
+    //   })
+    //   .submit()
+    itxn_submit
+    itxn LastLog
+    // contracts/ReferenceApp/contract.algo.ts:75
+    // return arc4.decodeArc4<uint64>(appCallTxn.lastLog, 'log')
+    dup
+    extract 4 0
+    swap
+    extract 0 4
+    bytec_0 // 0x151f7c75
+    ==
+    assert // Bytes has valid prefix
+    btoi
+    retsub

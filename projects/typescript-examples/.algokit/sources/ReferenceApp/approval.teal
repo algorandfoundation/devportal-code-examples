@@ -1,0 +1,190 @@
+#pragma version 10
+#pragma typetrack false
+
+
+main:
+    intcblock 0 1 6
+    bytecblock 0x151f7c75 0x4a325901
+
+
+    txn NumAppArgs
+    bz main_bare_routing@7
+    pushbytess 0x9407ae96 0x1118334b
+    txna ApplicationArgs 0
+    match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4
+
+main_after_if_else@11:
+
+
+    intc_0
+    return
+
+main_incrementViaInnerWithArg_route@4:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+    txnas Applications
+
+
+    callsub incrementViaInnerWithArg
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    intc_1
+    return
+
+main_incrementViaInner_route@3:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub incrementViaInner
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    intc_1
+    return
+
+main_bare_routing@7:
+
+
+    txn OnCompletion
+    bnz main_after_if_else@11
+    txn ApplicationID
+    !
+    assert
+    intc_1
+    return
+
+
+
+incrementViaInner:
+
+
+
+
+
+
+
+
+
+    itxn_begin
+
+
+    bytec_1
+    itxn_field ApplicationArgs
+
+
+    pushint 1717
+    itxn_field ApplicationID
+
+
+
+
+
+
+
+
+    intc_2
+    itxn_field TypeEnum
+
+
+    intc_0
+    itxn_field Fee
+
+
+
+
+
+
+
+
+
+    itxn_submit
+    itxn LastLog
+
+
+    dup
+    extract 4 0
+    swap
+    extract 0 4
+    bytec_0
+    ==
+    assert
+    btoi
+    retsub
+
+
+
+incrementViaInnerWithArg:
+
+
+
+    proto 1 1
+
+
+
+
+
+
+
+
+
+    itxn_begin
+
+
+    bytec_1
+    itxn_field ApplicationArgs
+    frame_dig -1
+    itxn_field ApplicationID
+
+
+
+
+
+
+
+
+    intc_2
+    itxn_field TypeEnum
+
+
+    intc_0
+    itxn_field Fee
+
+
+
+
+
+
+
+
+
+    itxn_submit
+    itxn LastLog
+
+
+    dup
+    extract 4 0
+    swap
+    extract 0 4
+    bytec_0
+    ==
+    assert
+    btoi
+    retsub

@@ -1,0 +1,87 @@
+#pragma version 10
+#pragma typetrack false
+
+
+main:
+    intcblock 0 1
+    bytecblock "counter"
+    txn ApplicationID
+    bnz main_after_if_else@2
+
+
+    bytec_0
+    intc_0
+    app_global_put
+
+main_after_if_else@2:
+
+
+    txn NumAppArgs
+    bz main_bare_routing@8
+    pushbytes 0x4a325901
+    txna ApplicationArgs 0
+    match main_increment_route@5
+
+main_after_if_else@12:
+
+
+    intc_0
+    return
+
+main_increment_route@5:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub increment
+    itob
+    pushbytes 0x151f7c75
+    swap
+    concat
+    log
+    intc_1
+    return
+
+main_bare_routing@8:
+
+
+    txn OnCompletion
+    bnz main_after_if_else@12
+    txn ApplicationID
+    !
+    assert
+    intc_1
+    return
+
+
+
+increment:
+
+
+    intc_0
+    bytec_0
+    app_global_get_ex
+    assert
+
+
+    intc_1
+    +
+
+
+    bytec_0
+
+
+    swap
+    app_global_put
+
+
+    intc_0
+    bytec_0
+    app_global_get_ex
+    assert
+
+
+    retsub

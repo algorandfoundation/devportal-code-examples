@@ -1,0 +1,485 @@
+#pragma version 10
+#pragma typetrack false
+
+
+main:
+    intcblock 0 1 400 2500
+    bytecblock "keyLength" "valueLength" "boxSize" "boxMbr" 0x151f7c75 "counter"
+    txn ApplicationID
+    bnz main_after_if_else@2
+
+
+    bytec_0
+    pushint 51
+    app_global_put
+
+
+    bytec_1
+    pushint 8
+    app_global_put
+
+
+    intc_0
+    bytec_0
+    app_global_get_ex
+    assert
+
+
+    intc_0
+    bytec_1
+    app_global_get_ex
+    assert
+
+
+    +
+
+
+    bytec_2
+
+
+    swap
+    app_global_put
+
+
+    intc_0
+    bytec_2
+    app_global_get_ex
+    assert
+
+
+    intc_2
+    *
+    intc_3
+    +
+
+
+    bytec_3
+
+
+    swap
+    app_global_put
+
+main_after_if_else@2:
+
+
+
+    txn NumAppArgs
+    bz main_bare_routing@13
+    pushbytess 0x040a235e 0x5425a145 0xb3b4a265 0xbbb5239e 0x1aefe7f5 0x0e385162
+    txna ApplicationArgs 0
+    match main_incrementBoxCounter_route@5 main_getBoxCounter_route@6 main_getBoxCounterForAccount_route@7 main_getBoxMbr_route@8 main_getBoxConfiguration_route@9 main_updateBoxConfiguration_route@10
+
+main_after_if_else@17:
+
+
+
+    intc_0
+    return
+
+main_updateBoxConfiguration_route@10:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+
+    txna ApplicationArgs 1
+    btoi
+    txna ApplicationArgs 2
+    btoi
+
+
+    callsub updateBoxConfiguration
+    intc_1
+    return
+
+main_getBoxConfiguration_route@9:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub getBoxConfiguration
+    uncover 3
+    itob
+    uncover 3
+    itob
+    uncover 3
+    itob
+    uncover 3
+    itob
+    uncover 3
+    uncover 3
+    concat
+    uncover 2
+    concat
+    swap
+    concat
+    bytec 4
+    swap
+    concat
+    log
+    intc_1
+    return
+
+main_getBoxMbr_route@8:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub getBoxMbr
+    itob
+    bytec 4
+    swap
+    concat
+    log
+    intc_1
+    return
+
+main_getBoxCounterForAccount_route@7:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+
+    txna ApplicationArgs 1
+    btoi
+    txnas Accounts
+
+
+    callsub getBoxCounterForAccount
+    itob
+    bytec 4
+    swap
+    concat
+    log
+    intc_1
+    return
+
+main_getBoxCounter_route@6:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub getBoxCounter
+    itob
+    bytec 4
+    swap
+    concat
+    log
+    intc_1
+    return
+
+main_incrementBoxCounter_route@5:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+
+    txn GroupIndex
+    intc_1
+    -
+    dup
+    gtxns TypeEnum
+    intc_1
+    ==
+    assert
+
+
+    callsub incrementBoxCounter
+    itob
+    bytec 4
+    swap
+    concat
+    log
+    intc_1
+    return
+
+main_bare_routing@13:
+
+
+
+    txn OnCompletion
+    bnz main_after_if_else@17
+    txn ApplicationID
+    !
+    assert
+    intc_1
+    return
+
+
+
+incrementBoxCounter:
+
+
+
+    proto 1 1
+
+
+    frame_dig -1
+    gtxns Amount
+
+
+    intc_0
+    bytec_3
+    app_global_get_ex
+    assert
+
+
+    ==
+    assert
+
+
+    frame_dig -1
+    gtxns Receiver
+    global CurrentApplicationAddress
+    ==
+    assert
+
+
+    bytec 5
+
+
+    txn Sender
+    concat
+    box_get
+    swap
+    btoi
+    swap
+
+
+    bz incrementBoxCounter_else_body@2
+
+
+    bytec 5
+
+
+    txn Sender
+    concat
+    frame_dig 0
+    intc_1
+    +
+    dup
+    itob
+    uncover 2
+    swap
+    box_put
+
+
+    swap
+    retsub
+
+incrementBoxCounter_else_body@2:
+
+
+    bytec 5
+
+
+    txn Sender
+    concat
+    intc_1
+    itob
+    box_put
+
+
+    intc_1
+    swap
+    retsub
+
+
+
+getBoxCounter:
+
+
+
+    proto 0 1
+
+
+    bytec 5
+
+
+    txn Sender
+    concat
+    box_get
+    swap
+    btoi
+    swap
+
+
+    bz getBoxCounter_after_if_else@2
+
+
+    frame_dig 0
+    swap
+    retsub
+
+getBoxCounter_after_if_else@2:
+
+
+    intc_0
+    swap
+    retsub
+
+
+
+getBoxCounterForAccount:
+
+
+
+    proto 1 1
+
+
+    bytec 5
+
+
+    frame_dig -1
+    concat
+    box_get
+    swap
+    btoi
+    swap
+
+
+    bz getBoxCounterForAccount_after_if_else@2
+
+
+    frame_dig 0
+    swap
+    retsub
+
+getBoxCounterForAccount_after_if_else@2:
+
+
+    intc_0
+    swap
+    retsub
+
+
+
+getBoxMbr:
+
+
+    intc_0
+    bytec_3
+    app_global_get_ex
+    assert
+
+
+    retsub
+
+
+
+getBoxConfiguration:
+
+
+    intc_0
+    bytec_0
+    app_global_get_ex
+    assert
+
+
+    intc_0
+    bytec_1
+    app_global_get_ex
+    assert
+
+
+    intc_0
+    bytec_2
+    app_global_get_ex
+    assert
+
+
+    intc_0
+    bytec_3
+    app_global_get_ex
+    assert
+
+
+    retsub
+
+
+
+updateBoxConfiguration:
+
+
+
+    proto 2 0
+
+
+    bytec_0
+
+
+    frame_dig -2
+    app_global_put
+
+
+    bytec_1
+
+
+    frame_dig -1
+    app_global_put
+
+
+    intc_0
+    bytec_0
+    app_global_get_ex
+    assert
+
+
+    intc_0
+    bytec_1
+    app_global_get_ex
+    assert
+
+
+    +
+
+
+    bytec_2
+
+
+    swap
+    app_global_put
+
+
+    intc_0
+    bytec_2
+    app_global_get_ex
+    assert
+
+
+    intc_2
+    *
+    intc_3
+    +
+
+
+    bytec_3
+
+
+    swap
+    app_global_put
+    retsub

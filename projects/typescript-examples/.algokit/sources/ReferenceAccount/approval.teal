@@ -1,0 +1,97 @@
+#pragma version 10
+#pragma typetrack false
+
+
+main:
+    bytecblock 0x151f7c75
+
+
+    txn NumAppArgs
+    bz main_bare_routing@7
+    pushbytess 0x55448e69 0x93b0416b
+    txna ApplicationArgs 0
+    match main_getAccountBalance_route@3 main_getAccountBalanceWithArgument_route@4
+
+main_after_if_else@11:
+
+
+    pushint 0
+    return
+
+main_getAccountBalanceWithArgument_route@4:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+    txnas Accounts
+
+
+    callsub getAccountBalanceWithArgument
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    pushint 1
+    return
+
+main_getAccountBalance_route@3:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub getAccountBalance
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    pushint 1
+    return
+
+main_bare_routing@7:
+
+
+    txn OnCompletion
+    bnz main_after_if_else@11
+    txn ApplicationID
+    !
+    assert
+    pushint 1
+    return
+
+
+
+getAccountBalance:
+
+
+    pushbytes base32(R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDA)
+
+
+    acct_params_get AcctBalance
+    assert
+    retsub
+
+
+
+getAccountBalanceWithArgument:
+
+
+
+    proto 1 1
+
+
+    frame_dig -1
+    acct_params_get AcctBalance
+    assert
+    retsub

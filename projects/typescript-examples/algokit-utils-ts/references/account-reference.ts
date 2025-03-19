@@ -2,11 +2,11 @@ import { Config } from '@algorandfoundation/algokit-utils'
 import { setupLocalnetEnvironment } from '../setup-localnet-environment'
 
 async function AccountReferenceExampleMethod1() {
-  const { referenceAppClient } = await setupLocalnetEnvironment()
+  const { referenceAccountAppClient } = await setupLocalnetEnvironment()
 
   // example: ACCOUNT_REFERENCE_EXAMPLE_METHOD_1
   // Configure automatic resource population per app call
-  const result1 = await referenceAppClient.send.getAccountBalance({
+  const result1 = await referenceAccountAppClient.send.getAccountBalance({
     args: {},
   })
 
@@ -17,7 +17,7 @@ async function AccountReferenceExampleMethod1() {
     populateAppCallResources: true,
   })
 
-  const result2 = await referenceAppClient.send.getAccountBalance({
+  const result2 = await referenceAccountAppClient.send.getAccountBalance({
     args: {},
   })
 
@@ -28,11 +28,11 @@ async function AccountReferenceExampleMethod1() {
 AccountReferenceExampleMethod1().catch(console.error)
 
 async function AccountReferenceExampleMethod2() {
-  const { referenceAppClient, referenceAccount } = await setupLocalnetEnvironment()
+  const { referenceAccountAppClient, referenceAccount } = await setupLocalnetEnvironment()
 
   // example: ACCOUNT_REFERENCE_EXAMPLE_METHOD_2
   // Include the account reference in the app call argument to be populated automatically
-  const result = await referenceAppClient.send.getAccountBalanceWithArgument({
+  const result = await referenceAccountAppClient.send.getAccountBalanceWithArgument({
     args: {
       account: referenceAccount.addr.toString(),
     },
@@ -45,11 +45,11 @@ async function AccountReferenceExampleMethod2() {
 AccountReferenceExampleMethod2().catch(console.error)
 
 async function AccountReferenceExampleMethod3() {
-  const { referenceAppClient, referenceAccount } = await setupLocalnetEnvironment()
+  const { referenceAccountAppClient, referenceAccount } = await setupLocalnetEnvironment()
 
   // example: ACCOUNT_REFERENCE_EXAMPLE_METHOD_3
   // Include the account reference in the accountReferences array to be populated
-  const result = await referenceAppClient.send.getAccountBalance({
+  const result = await referenceAccountAppClient.send.getAccountBalance({
     args: {},
     accountReferences: [referenceAccount],
   })
