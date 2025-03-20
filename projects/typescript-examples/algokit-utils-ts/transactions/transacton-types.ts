@@ -195,6 +195,7 @@ assetTransactionTypes()
 async function applicationTransactionTypes() {
   const { algorand, randomAccountA } = await setupLocalnetEnvironment()
 
+  // example: APPLICATION_CREATE_TRANSACTION
   // Minimal TEAL program that just returns 1 (success)
   const minimalTEAL = `
     #pragma version 10
@@ -202,15 +203,22 @@ async function applicationTransactionTypes() {
     return
   `
 
-  // example: APP_CREATE_TRANSACTION
-  const result = await algorand.send.appCreate({
-    sender: randomAccountA, // Creator of the application
-    approvalProgram: minimalTEAL, // Logic that processes all application calls
-    clearStateProgram: minimalTEAL, // Logic that processes clear state calls
+  /**
+   * Create a unsigned application call transaction calling the hello method on the hello world contract
+   *
+   * Parameters for creating an application:
+   * - sender: The address of the account that will send the transaction
+   * - approvalProgram: The program to execute for all OnCompletes other than ClearState as raw teal (string)
+   *     or compiled teal (bytes)
+   * - clearStateProgram: The program to execute for ClearState OnComplete as raw teal (string)
+   *     or compiled teal (bytes)
+   */
+  await algorand.send.appCreate({
+    sender: randomAccountA,
+    approvalProgram: minimalTEAL,
+    clearStateProgram: minimalTEAL,
   })
-
-  console.log('App created with TEAL source:', result.appId)
-  // example: APP_CREATE_TRANSACTION
+  // example: APPLICATION_CREATE_TRANSACTION
 
   // Create app using compiled bytes
   const algodClient = algorand.client.algod

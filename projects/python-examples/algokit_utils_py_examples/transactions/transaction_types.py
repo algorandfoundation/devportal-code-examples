@@ -263,7 +263,6 @@ def transaction_types() -> None:
     # example: ASSET_DESTROY_TRANSACTION
 
     # example: APPLICATION_CREATE_TRANSACTION
-
     # Minimal TEAL program that just returns 1 (success)
     minimal_teal = """
     #pragma version 10
@@ -288,7 +287,6 @@ def transaction_types() -> None:
             clear_state_program=minimal_teal,
         )
     )
-
     # example: APPLICATION_CREATE_TRANSACTION
 
     # example: APPLICATION_NO_OP_TRANSACTION
