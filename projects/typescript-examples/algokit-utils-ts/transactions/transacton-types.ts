@@ -43,11 +43,32 @@ async function assetTransactionTypes() {
   const { algorand, randomAccountA, randomAccountB } = await setupLocalnetEnvironment()
 
   // example: ASSET_CREATE_TRANSACTION
+  /**
+   * Create an unsigned asset creation transaction to create a new Algorand Standard Asset (ASA)
+   *
+   * Parameters for asset creation:
+   * - sender: The account that will create and manage the asset
+   * - total: The total number of base units of the asset to create (e.g., 10_000_000)
+   * - decimals: The number of decimals for display purposes. If decimals is 6, then 1_000_000 base units = 1.000000 asset units
+   * - defaultFrozen: Whether accounts must be unfrozen by the freeze address before they can receive this asset
+   * - manager: The address that can manage the configuration of the asset. Can be permanently disabled by setting to undefined
+   * - reserve: The address holding reserve (non-minted) units of the asset. Can be permanently disabled by setting to undefined
+   * - freeze: The address that can freeze or unfreeze holder accounts. Can be permanently disabled by setting to undefined
+   * - clawback: The address that can clawback holdings of this asset. Can be permanently disabled by setting to undefined
+   * - unitName: The name of a unit of this asset (e.g., "MYA")
+   * - assetName: The name of the asset (e.g., "My Asset")
+   */
   await algorand.createTransaction.assetCreate({
-    sender: randomAccountA, // Creator and manager of the asset
-    total: 1000n, // Total amount of the smallest divisible unit to create
-    decimals: 0, // Number of decimals for display (0 = not divisible)
-    defaultFrozen: false, // Whether accounts must be unfrozen before receiving the asset
+    sender: randomAccountA,
+    total: 10_000_000n,
+    decimals: 6,
+    defaultFrozen: false, // optional
+    manager: randomAccountA, // optional. Can be permanently disabled by setting to undefined
+    reserve: randomAccountA, // optional. Can be permanently disabled by setting to undefined
+    freeze: randomAccountA, // optional. Can be permanently disabled by setting to undefined
+    clawback: randomAccountA, // optional. Can be permanently disabled by setting to undefined
+    unitName: 'MYA',
+    assetName: 'My Asset',
   })
   // example: ASSET_CREATE_TRANSACTION
 
