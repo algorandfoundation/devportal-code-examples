@@ -275,10 +275,10 @@ def transaction_types() -> None:
 
     Parameters for creating an application.
     - sender: The address of the account that will send the transaction
-    - approval_program: The program to execute for all OnCompletes other than ClearState as raw teal (string)
-        or compiled teal (bytes)
-    - clear_state_program: The program to execute for ClearState OnComplete as raw teal (string)
-        or compiled teal (bytes)
+    - approval_program: The program to execute for all OnCompletes other than ClearState as raw TEAL (string)
+        or compiled TEAL (bytes)
+    - clear_state_program: The program to execute for ClearState OnComplete as raw TEAL (string)
+        or compiled TEAL (bytes)
     """
     result1 = algorand_client.create_transaction.app_create(
         AppCreateParams(
@@ -317,10 +317,10 @@ def transaction_types() -> None:
     Parameters for updating an application.
     - sender: The address of the account that will send the transaction
     - app_id: ID of the application
-    - approval_program: The program to execute for all OnCompletes other than ClearState as raw teal (string)
-        or compiled teal (bytes)
-    - clear_state_program: The program to execute for ClearState OnComplete as raw teal (string)
-        or compiled teal (bytes)
+    - approval_program: The program to execute for all OnCompletes other than ClearState as raw TEAL (string)
+        or compiled TEAL (bytes)
+    - clear_state_program: The program to execute for ClearState OnComplete as raw TEAL (string)
+        or compiled TEAL (bytes)
     """
     algorand_client.create_transaction.app_update(
         AppUpdateParams(

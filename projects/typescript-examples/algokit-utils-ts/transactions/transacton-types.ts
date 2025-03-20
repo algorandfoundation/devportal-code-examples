@@ -1,5 +1,6 @@
 import { algo } from '@algorandfoundation/algokit-utils'
 import { setupLocalnetEnvironment } from '@/algokit-utils-ts/setup-localnet-environment'
+import { OnApplicationComplete } from 'algosdk'
 
 async function paymentTransactionTypes() {
   const { algorand, randomAccountA, randomAccountB } = await setupLocalnetEnvironment()
@@ -208,10 +209,10 @@ async function applicationTransactionTypes() {
    *
    * Parameters for creating an application:
    * - sender: The address of the account that will send the transaction
-   * - approvalProgram: The program to execute for all OnCompletes other than ClearState as raw teal (string)
-   *     or compiled teal (bytes)
-   * - clearStateProgram: The program to execute for ClearState OnComplete as raw teal (string)
-   *     or compiled teal (bytes)
+   * - approvalProgram: The program to execute for all OnCompletes other than ClearState as raw TEAL (string)
+   *     or compiled TEAL (bytes)
+   * - clearStateProgram: The program to execute for ClearState OnComplete as raw TEAL (string)
+   *     or compiled TEAL (bytes)
    */
   await algorand.send.appCreate({
     sender: randomAccountA,
@@ -231,28 +232,55 @@ async function applicationTransactionTypes() {
     clearStateProgram: new Uint8Array(Buffer.from(compiledClear.result, 'base64')),
   })
 
-  // example: APP_UPDATE_TRANSACTION
+  // example: APPLICATION_UPDATE_TRANSACTION
+  /**
+   * Create a unsigned application update transaction updating the approval program and clear state program of an application
+   *
+   * Parameters for updating an application:
+   * - sender: The address of the account that will send the transaction
+   * - appId: ID of the application
+   * - approvalProgram: The program to execute for all OnCompletes other than ClearState as raw TEAL (string)
+   *     or compiled TEAL (bytes)
+   * - clearStateProgram: The program to execute for ClearState OnComplete as raw TEAL (string)
+   *     or compiled TEAL (bytes)
+   */
   await algorand.createTransaction.appUpdate({
-    sender: randomAccountA, // Must be the application creator
-    appId: 123n, // ID of the app to update
-    approvalProgram: new Uint8Array(), // New approval program logic
-    clearStateProgram: new Uint8Array(), // New clear state program logic
+    sender: randomAccountA,
+    appId: 1234n,
+    approvalProgram: new Uint8Array(),
+    clearStateProgram: new Uint8Array(),
   })
-  // example: APP_UPDATE_TRANSACTION
+  // example: APPLICATION_UPDATE_TRANSACTION
 
-  // example: APP_CALL_TRANSACTION
+  // example: APPLICATION_NO_OP_TRANSACTION
+  /**
+   * Create a unsigned application call transaction with the NoOp OnComplete actions
+   *
+   * Parameters for calling an application:
+   * - sender: The address of the account that will send the transaction
+   * - onComplete: The OnComplete action
+   * - appId: ID of the application, defaults to undefined
+   */
   await algorand.createTransaction.appCall({
-    sender: randomAccountA, // The address of the account sending the transaction.
-    appId: 123n, // ID of the application; 0 if the application is being created.
+    sender: randomAccountA,
+    appId: 1234n,
+    onComplete: OnApplicationComplete.NoOpOC,
   })
-  // example: APP_CALL_TRANSACTION
+  // example: APPLICATION_NO_OP_TRANSACTION
 
-  // example: APP_DELETE_TRANSACTION
+  // example: APPLICATION_DELETE_TRANSACTION
+  /**
+   * Create an unsigned application delete transaction deleting an application with app id 1234
+   *
+   * Parameters for deleting an application:
+   * - sender: The address of the account that will send the transaction
+   * - appId: ID of the application
+   */
   await algorand.createTransaction.appDelete({
-    sender: randomAccountA, // The address of the account sending the transaction.
-    appId: 123n, // ID of the application; 0 if the application is being created.
+    sender: randomAccountA,
+    appId: 1234n,
   })
-  // example: APP_DELETE_TRANSACTION
+  // example: APPLICATION_DELETE_TRANSACTION
 }
 
 applicationTransactionTypes()
