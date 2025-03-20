@@ -14,23 +14,27 @@ async function fundingAccounts() {
 
   // example: DISPENSER_ACCOUNT
   /**
-   * Get a dispenser account from environment variables.
+   * Returns an account (with private key loaded) that can act as a dispenser from environment variables.
+   * If environment variables are not present, returns the default LocalNet dispenser account.
    */
   const environmentDispenser = await algorand.account.dispenserFromEnvironment()
   // example: DISPENSER_ACCOUNT
 
   // example: ENSURE_FUNDED
   /**
-   * Ensure an account has sufficient funds by transferring
-   * Algos from a dispenser account if needed
+   * Funds a given account using a dispenser account as a funding source.
+   * Ensures the given account has a certain amount of Algo free to spend (accounting for Algo locked in
+   * minimum balance requirement).
    */
   await algorand.account.ensureFunded('ACCOUNTADDRESS', localNetDispenser, algo(1))
   // example: ENSURE_FUNDED
 
   // example: ENSURE_FUNDED_FROM_ENV
   /**
-   * Ensure an account has sufficient funds using a dispenser account
-   * loaded from environment variables
+   * Ensure an account is funded from a dispenser account configured in environment.
+   * Uses a dispenser account retrieved from the environment, per the dispenser_from_environment method,
+   * as a funding source such that the given account has a certain amount of Algo free to spend
+   * (accounting for Algo locked in minimum balance requirement).
    */
   await algorand.account.ensureFundedFromEnvironment('ACCOUNTADDRESS', algo(1))
   // example: ENSURE_FUNDED_FROM_ENV

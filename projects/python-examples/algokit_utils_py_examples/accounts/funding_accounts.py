@@ -1,7 +1,6 @@
 from algokit_utils import (
     AlgoAmount,
     AlgorandClient,
-    PaymentParams,
 )
 
 
@@ -19,8 +18,7 @@ def funding_accounts() -> None:
 
     # example: LOCALNET_DISPENSER
     """
-    Returns the default LocalNet dispenser account.
-    This account can be used to fund test accounts on LocalNet.
+    Get the default LocalNet dispenser account that can be used to fund other accounts
     """
     localnet_dispenser = algorand_client.account.localnet_dispenser()
     # example: LOCALNET_DISPENSER
@@ -33,33 +31,25 @@ def funding_accounts() -> None:
     dispenser = algorand_client.account.dispenser_from_environment()
     # example: DISPENSER_ACCOUNT
 
-    """
-    Send a payment from the dispenser account to the random account.
-    """
-    algorand_client.send.payment(
-        PaymentParams(
-            sender=localnet_dispenser.address,
-            receiver=random_account.address,
-            amount=AlgoAmount(algo=10),
-        )
-    )
-
     # example: ENSURE_FUNDED
     """
     Funds a given account using a dispenser account as a funding source.
-    Ensures the given account has a certain amount of Algo free to spend (accounting for Algo locked in minimum balance requirement).
+    Ensures the given account has a certain amount of Algo free to spend (accounting for Algo locked in
+    minimum balance requirement).
     """
     algorand_client.account.ensure_funded(
         account_to_fund=random_account.address,
         dispenser_account=localnet_dispenser.address,
-        min_spending_balance=AlgoAmount(algo=10),
+        min_spending_balance=AlgoAmount(algo=1),
     )
     # example: ENSURE_FUNDED
 
     # example: ENSURE_FUNDED_FROM_ENV
     """
     Ensure an account is funded from a dispenser account configured in environment.
-    Uses a dispenser account retrieved from the environment, per the dispenser_from_environment method, as a funding source such that the given account has a certain amount of Algo free to spend (accounting for Algo locked in minimum balance requirement).
+    Uses a dispenser account retrieved from the environment, per the dispenser_from_environment method,
+    as a funding source such that the given account has a certain amount of Algo free to spend
+    (accounting for Algo locked in minimum balance requirement).
     """
     algorand_client.account.ensure_funded_from_environment(
         account_to_fund=random_account.address,
@@ -86,5 +76,8 @@ def funding_accounts() -> None:
     Directly fund an account using the TestNet Dispenser API
     """
     testnet_dispenser = algorand_client.client.get_testnet_dispenser()
-    testnet_dispenser.fund(address=random_account.address, amount=10, asset_id=0)
+    testnet_dispenser.fund(address=random_account.address, amount=10)
     # example: TESTNET_DISPENSER_FUND
+
+
+funding_accounts()

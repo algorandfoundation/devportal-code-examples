@@ -19,6 +19,18 @@ async function rekeyingAccounts() {
     amount: algo(1),
   })
 
+  const unsigned_payment_txn = await algorand.createTransaction.payment({
+    sender: randomAccountA,
+    receiver: randomAccountC,
+    amount: algo(1),
+  })
+
+  /**
+   * The unsigned transaction can be signed by the signer when sending with the `add_transaction` method.
+   */
+  const result = await algorand.newGroup().addTransaction(unsigned_payment_txn, randomAccountB.signer).send()
+
+  console.log(result.txIds)
   // example: REKEY_ACCOUNT
 }
 
