@@ -62,9 +62,11 @@ export async function algorandBootstrap() {
   // example: INSTANTIATE_ALGORAND_CLIENT
 
   // example: SDK_CLIENTS
-  const algodClient = algorand.client.algod
-  const indexerClient = algorand.client.indexer
-  const kmdClient = algorand.client.kmd
+  const algorandClient = AlgorandClient.fromEnvironment()
+
+  const algodClient = algorandClient.client.algod
+  const indexerClient = algorandClient.client.indexer
+  const kmdClient = algorandClient.client.kmd
   // example: SDK_CLIENTS
 
   // example: TXN_WITHOUT_SIGNER_CACHE
