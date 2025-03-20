@@ -162,22 +162,41 @@ applicationTransactionTypes()
 async function keyRegistrationTransactionTypes() {
   const { algorand, randomAccountA } = await setupLocalnetEnvironment()
 
-  // example: KEY_REG_ONLINE_TRANSACTION
+  // example: KEY_REGISTRATION_ONLINE_TRANSACTION
+  /**
+   * Create an unsigned online key registration transaction
+   *
+   * Parameters for online key registration.
+   * - sender: The address of the account that will send the transaction
+   * - voteKey: The root participation public key
+   * - selectionKey: The VRF public key
+   * - voteFirst: The first round that the participation key is valid. Not to be confused with the firstValid round of the keyreg transaction
+   * - voteLast: The last round that the participation key is valid. Not to be confused with the lastValid round of the keyreg transaction
+   * - voteKeyDilution: This is the dilution for the 2-level participation key. It determines the interval (number of rounds) for generating new ephemeral keys
+   */
   await algorand.createTransaction.onlineKeyRegistration({
-    sender: randomAccountA, // The address of the account sending the transaction
-    voteKey: new Uint8Array(), // The root participation public key
-    selectionKey: new Uint8Array(), // The VRF public key
-    voteFirst: 1000n, // The first round that the participation key is valid. Not to be confused with the firstValid round of the keyreg transaction
-    voteLast: 2000n, // The last round that the participation key is valid. Not to be confused with the lastValid round of the keyreg transaction
-    voteKeyDilution: 10n, // This is the dilution for the 2-level participation key. It determines the interval (number of rounds) for generating new ephemeral keys
+    sender: randomAccountA,
+    voteKey: new Uint8Array(),
+    selectionKey: new Uint8Array(),
+    voteFirst: 1000n,
+    voteLast: 2000n,
+    voteKeyDilution: 10n,
   })
-  // example: KEY_REG_ONLINE_TRANSACTION
+  // example: KEY_REGISTRATION_ONLINE_TRANSACTION
 
-  // example: KEY_REG_OFFLINE_TRANSACTION
+  // example: KEY_REGISTRATION_OFFLINE_TRANSACTION
+  /**
+   * Create an unsigned offline key registration transaction
+   *
+   * Parameters for offline key registration.
+   * - sender: The address of the account that will send the transaction
+   * - preventAccountFromEverParticipatingAgain: Whether to prevent the account from ever participating again
+   */
   await algorand.createTransaction.offlineKeyRegistration({
-    sender: randomAccountA, // The address of the account sending the transaction
+    sender: randomAccountA,
+    preventAccountFromEverParticipatingAgain: false,
   })
-  // example: KEY_REG_OFFLINE_TRANSACTION
+  // example: KEY_REGISTRATION_OFFLINE_TRANSACTION
 }
 
 keyRegistrationTransactionTypes()

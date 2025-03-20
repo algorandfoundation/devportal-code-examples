@@ -388,8 +388,7 @@ def transaction_types() -> None:
     )
     # example: APPLICATION_CLEAR_STATE_TRANSACTION
 
-    # example: KEY_REGISTRATION_TRANSACTION
-
+    # example: KEY_REGISTRATION_ONLINE_TRANSACTION
     """
     Create an unsigned online key registration transaction
 
@@ -413,7 +412,9 @@ def transaction_types() -> None:
             )
         )
     )
+    # example: KEY_REGISTRATION_ONLINE_TRANSACTION
 
+    # example: KEY_REGISTRATION_OFFLINE_TRANSACTION
     """
     Create an unsigned offline key registration transaction
 
@@ -429,8 +430,7 @@ def transaction_types() -> None:
             )
         )
     )
-
-    # example: KEY_REGISTRATION_TRANSACTION
+    # example: KEY_REGISTRATION_OFFLINE_TRANSACTION
 
 
 transaction_types()
