@@ -105,6 +105,27 @@ async function assetTransactionTypes() {
   })
   // example: ASSET_TRANSFER_TRANSACTION
 
+  // example: ASSET_CLAWBACK_TRANSACTION
+  /**
+   * Create an unsigned asset clawback transaction. This allows an authorized clawback address
+   * to revoke assets from an account and send them to another.
+   *
+   * Parameters for asset clawback:
+   * - sender: The address of the clawback authority (must be the configured clawback address for the asset)
+   * - clawbackTarget: The address to clawback assets from
+   * - receiver: The address to send the clawed back assets to
+   * - assetId: ID of the asset
+   * - amount: The number of asset units to transfer
+   */
+  await algorand.createTransaction.assetTransfer({
+    sender: randomAccountA,
+    clawbackTarget: randomAccountB,
+    receiver: randomAccountA,
+    assetId: 123n,
+    amount: 500000n,
+  })
+  // example: ASSET_CLAWBACK_TRANSACTION
+
   // example: ASSET_FREEZE_TRANSACTION
   await algorand.createTransaction.assetFreeze({
     sender: randomAccountA, // Must be the freeze address

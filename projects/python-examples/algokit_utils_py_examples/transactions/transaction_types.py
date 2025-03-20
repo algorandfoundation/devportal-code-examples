@@ -200,6 +200,29 @@ def transaction_types() -> None:
 
     # example: ASSET_CONFIG_TRANSACTION
 
+    # example: ASSET_CLAWBACK_TRANSACTION
+    """
+    Create an unsigned asset clawback transaction. This allows an authorized clawback address
+    to revoke assets from an account and send them to another.
+
+    Parameters for asset clawback:
+    - sender: The address of the clawback authority (must be the configured clawback address for the asset)
+    - clawback_target: The address to clawback assets from
+    - receiver: The address to send the clawed back assets to
+    - asset_id: ID of the asset
+    - amount: The number of asset units to transfer
+    """
+    asset_clawback_txn = algorand_client.create_transaction.asset_transfer(
+        AssetTransferParams(
+            sender=account_a.address,
+            clawback_target=account_b.address,
+            receiver=account_a.address,
+            asset_id=1234,
+            amount=500000,
+        )
+    )
+    # example: ASSET_CLAWBACK_TRANSACTION
+
     # example: ASSET_FREEZE_TRANSACTION
 
     """
