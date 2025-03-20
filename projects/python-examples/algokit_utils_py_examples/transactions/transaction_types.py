@@ -45,6 +45,25 @@ def transaction_types() -> None:
 
     # example: PAYMENT_TRANSACTION
 
+    # example: CLOSE_ACCOUNT_TRANSACTION
+    """
+    Close an Algorand account by transferring all remaining funds to another account
+
+    Parameters:
+    - sender: The address of the account to close
+    - receiver: The address that will receive the closed account's remaining Algo balance
+    - close_remainder_to: The address that will receive all remaining Algo balance
+    """
+    close_account_txn = algorand_client.create_transaction.payment(
+        PaymentParams(
+            sender=account_a.address,
+            receiver=account_b.address,
+            amount=AlgoAmount(algo=0),
+            close_remainder_to=account_b.address,  # All remaining balance will be sent here
+        )
+    )
+    # example: CLOSE_ACCOUNT_TRANSACTION
+
     # example: ASSET_TRANSFER_TRANSACTION
 
     """

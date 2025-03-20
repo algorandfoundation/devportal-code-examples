@@ -4,6 +4,7 @@ import { setupLocalnetEnvironment } from '@/algokit-utils-ts/setup-localnet-envi
 async function paymentTransactionTypes() {
   const { algorand, randomAccountA, randomAccountB } = await setupLocalnetEnvironment()
 
+  // example: PAYMENT_TRANSACTION
   /**
    * Create a unsigned payment transaction sending 1 Algo from account_a to account_b
    *
@@ -17,7 +18,23 @@ async function paymentTransactionTypes() {
     receiver: randomAccountB,
     amount: algo(1),
   })
-  // example: PAYMENT_TRANSACTION
+
+  // example: CLOSE_ACCOUNT_TRANSACTION
+  /**
+   * Close an Algorand account by transferring all remaining funds to another account
+   *
+   * Parameters:
+   * - sender: The address of the account to close
+   * - receiver: The address that will receive the closed account's remaining Algo balance
+   * - closeRemainderTo: The address that will receive all remaining Algo balance
+   */
+  await algorand.createTransaction.payment({
+    sender: randomAccountA,
+    receiver: randomAccountB,
+    amount: algo(0),
+    closeRemainderTo: randomAccountB, // All remaining balance will be sent here
+  })
+  // example: CLOSE_ACCOUNT_TRANSACTION
 }
 
 paymentTransactionTypes()
