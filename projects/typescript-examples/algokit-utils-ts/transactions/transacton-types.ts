@@ -73,10 +73,26 @@ async function assetTransactionTypes() {
   // example: ASSET_CREATE_TRANSACTION
 
   // example: ASSET_CONFIG_TRANSACTION
+  /**
+   * Create an unsigned asset config transaction updating four mutable fields of an asset:
+   * manager, reserve, freeze, clawback. This operation is only possible if the sender is
+   * the asset manager and the asset has all four mutable fields set.
+   *
+   * Parameters for configuring an existing asset:
+   * - sender: The address of the account that will send the transaction
+   * - assetId: ID of the asset
+   * - manager: The address that can change the manager, reserve, clawback, and freeze addresses, defaults to undefined
+   * - reserve: The address that holds the uncirculated supply, defaults to undefined
+   * - freeze: The address that can freeze the asset in any account, defaults to undefined
+   * - clawback: The address that can clawback the asset from any account, defaults to undefined
+   */
   await algorand.createTransaction.assetConfig({
-    sender: randomAccountA, // Account sending the transaction
-    assetId: 123n, // ID of the asset to reconfigure
-    manager: randomAccountA, // Account that can manage the configuration
+    sender: randomAccountA,
+    assetId: 123n,
+    manager: randomAccountA,
+    reserve: randomAccountA,
+    freeze: randomAccountA,
+    clawback: randomAccountA,
   })
   // example: ASSET_CONFIG_TRANSACTION
 
