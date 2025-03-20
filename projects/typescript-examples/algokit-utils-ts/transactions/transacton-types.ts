@@ -19,6 +19,7 @@ async function paymentTransactionTypes() {
     receiver: randomAccountB,
     amount: algo(1),
   })
+  // example: PAYMENT_TRANSACTION
 
   // example: CLOSE_ACCOUNT_TRANSACTION
   /**
