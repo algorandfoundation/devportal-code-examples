@@ -129,20 +129,35 @@ async function assetTransactionTypes() {
   })
   // example: ASSET_DESTROY_TRANSACTION
 
-  // example: ASSET_OPTIN_TRANSACTION
+  // example: ASSET_OPT_IN_TRANSACTION
+  /**
+   * Create an unsigned asset opt in transaction for accountA opting in to asset with asset id 1234
+   *
+   * Parameters for an asset opt in transaction:
+   * - sender: The address of the account that will opt in to the asset
+   * - assetId: ID of the asset
+   */
   await algorand.createTransaction.assetOptIn({
-    sender: randomAccountA, // Account that wants to receive the asset
-    assetId: 123n, // ID of the asset to opt into
+    sender: randomAccountA, // The address of the account that will opt in to the asset
+    assetId: 1234n, // ID of the asset
   })
-  // example: ASSET_OPTIN_TRANSACTION
+  // example: ASSET_OPT_IN_TRANSACTION
 
-  // example: ASSET_OPTOUT_TRANSACTION
+  // example: ASSET_OPT_OUT_TRANSACTION
+  /**
+   * Create an unsigned asset opt out transaction for accountA opting out of asset with asset id 1234
+   *
+   * Parameters for an asset opt out transaction:
+   * - sender: The address of the account that will opt out of the asset
+   * - assetId: ID of the asset
+   * - creator: The creator address of the asset
+   */
   await algorand.createTransaction.assetOptOut({
-    creator: randomAccountA, // The address of the asset creator account to close the asset position to (any remaining asset units will be sent to this account).
-    sender: randomAccountA, // The address of the account sending the transaction.
-    assetId: 123n, // ID of the asset that will be opted-out of.
+    sender: randomAccountA,
+    assetId: 1234n,
+    creator: randomAccountB,
   })
-  // example: ASSET_OPTOUT_TRANSACTION
+  // example: ASSET_OPT_OUT_TRANSACTION
 }
 
 assetTransactionTypes()
