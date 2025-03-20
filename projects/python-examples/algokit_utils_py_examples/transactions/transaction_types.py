@@ -31,8 +31,8 @@ def transaction_types() -> None:
     Create a unsigned payment transaction sending 1 Algo from account_a to account_b
 
     Parameters for a payment transaction.
-    - sender: The address of the account that will send the ALGO
-    - receiver: The address of the account that will receive the ALGO
+    - sender: The address of the account that will send the Algo
+    - receiver: The address of the account that will receive the Algo
     - amount: Amount to send
     """
     payment_txn = algorand_client.create_transaction.payment(
@@ -44,6 +44,25 @@ def transaction_types() -> None:
     )
 
     # example: PAYMENT_TRANSACTION
+
+    # example: CLOSE_ACCOUNT_TRANSACTION
+    """
+    Close an Algorand account by transferring all remaining funds to another account
+
+    Parameters:
+    - sender: The address of the account to close
+    - receiver: The address that will receive the closed account's remaining Algo balance
+    - close_remainder_to: The address that will receive all remaining Algo balance
+    """
+    close_account_txn = algorand_client.create_transaction.payment(
+        PaymentParams(
+            sender=account_a.address,
+            receiver=account_b.address,
+            amount=AlgoAmount(algo=0),
+            close_remainder_to=account_b.address,  # All remaining balance will be sent here
+        )
+    )
+    # example: CLOSE_ACCOUNT_TRANSACTION
 
     # example: ASSET_TRANSFER_TRANSACTION
 
@@ -181,6 +200,29 @@ def transaction_types() -> None:
 
     # example: ASSET_CONFIG_TRANSACTION
 
+    # example: ASSET_CLAWBACK_TRANSACTION
+    """
+    Create an unsigned asset clawback transaction. This allows an authorized clawback address
+    to revoke assets from an account and send them to another.
+
+    Parameters for asset clawback:
+    - sender: The address of the clawback authority (must be the configured clawback address for the asset)
+    - clawback_target: The address to clawback assets from
+    - receiver: The address to send the clawed back assets to
+    - asset_id: ID of the asset
+    - amount: The number of asset units to transfer
+    """
+    asset_clawback_txn = algorand_client.create_transaction.asset_transfer(
+        AssetTransferParams(
+            sender=account_a.address,
+            clawback_target=account_b.address,
+            receiver=account_a.address,
+            asset_id=1234,
+            amount=500000,
+        )
+    )
+    # example: ASSET_CLAWBACK_TRANSACTION
+
     # example: ASSET_FREEZE_TRANSACTION
 
     """
@@ -204,7 +246,6 @@ def transaction_types() -> None:
     # example: ASSET_FREEZE_TRANSACTION
 
     # example: ASSET_DESTROY_TRANSACTION
-
     """
     Create an unsigned asset destroy transaction destroying an asset with asset id 1234
     All of the assets must be owned by the creator of the asset before the asset can be deleted.
@@ -219,11 +260,9 @@ def transaction_types() -> None:
             asset_id=1234,
         )
     )
-
     # example: ASSET_DESTROY_TRANSACTION
 
     # example: APPLICATION_CREATE_TRANSACTION
-
     # Minimal TEAL program that just returns 1 (success)
     minimal_teal = """
     #pragma version 10
@@ -236,10 +275,10 @@ def transaction_types() -> None:
 
     Parameters for creating an application.
     - sender: The address of the account that will send the transaction
-    - approval_program: The program to execute for all OnCompletes other than ClearState as raw teal (string)
-        or compiled teal (bytes)
-    - clear_state_program: The program to execute for ClearState OnComplete as raw teal (string)
-        or compiled teal (bytes)
+    - approval_program: The program to execute for all OnCompletes other than ClearState as raw TEAL (string)
+        or compiled TEAL (bytes)
+    - clear_state_program: The program to execute for ClearState OnComplete as raw TEAL (string)
+        or compiled TEAL (bytes)
     """
     result1 = algorand_client.create_transaction.app_create(
         AppCreateParams(
@@ -248,7 +287,6 @@ def transaction_types() -> None:
             clear_state_program=minimal_teal,
         )
     )
-
     # example: APPLICATION_CREATE_TRANSACTION
 
     # example: APPLICATION_NO_OP_TRANSACTION
@@ -279,10 +317,10 @@ def transaction_types() -> None:
     Parameters for updating an application.
     - sender: The address of the account that will send the transaction
     - app_id: ID of the application
-    - approval_program: The program to execute for all OnCompletes other than ClearState as raw teal (string)
-        or compiled teal (bytes)
-    - clear_state_program: The program to execute for ClearState OnComplete as raw teal (string)
-        or compiled teal (bytes)
+    - approval_program: The program to execute for all OnCompletes other than ClearState as raw TEAL (string)
+        or compiled TEAL (bytes)
+    - clear_state_program: The program to execute for ClearState OnComplete as raw TEAL (string)
+        or compiled TEAL (bytes)
     """
     algorand_client.create_transaction.app_update(
         AppUpdateParams(
@@ -369,8 +407,7 @@ def transaction_types() -> None:
     )
     # example: APPLICATION_CLEAR_STATE_TRANSACTION
 
-    # example: KEY_REGISTRATION_TRANSACTION
-
+    # example: KEY_REGISTRATION_ONLINE_TRANSACTION
     """
     Create an unsigned online key registration transaction
 
@@ -394,7 +431,9 @@ def transaction_types() -> None:
             )
         )
     )
+    # example: KEY_REGISTRATION_ONLINE_TRANSACTION
 
+    # example: KEY_REGISTRATION_OFFLINE_TRANSACTION
     """
     Create an unsigned offline key registration transaction
 
@@ -410,8 +449,7 @@ def transaction_types() -> None:
             )
         )
     )
-
-    # example: KEY_REGISTRATION_TRANSACTION
+    # example: KEY_REGISTRATION_OFFLINE_TRANSACTION
 
 
 transaction_types()
