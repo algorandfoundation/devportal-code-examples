@@ -223,7 +223,6 @@ def transaction_types() -> None:
     # example: ASSET_FREEZE_TRANSACTION
 
     # example: ASSET_DESTROY_TRANSACTION
-
     """
     Create an unsigned asset destroy transaction destroying an asset with asset id 1234
     All of the assets must be owned by the creator of the asset before the asset can be deleted.
@@ -238,7 +237,6 @@ def transaction_types() -> None:
             asset_id=1234,
         )
     )
-
     # example: ASSET_DESTROY_TRANSACTION
 
     # example: APPLICATION_CREATE_TRANSACTION

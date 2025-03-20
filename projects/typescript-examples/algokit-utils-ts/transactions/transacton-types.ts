@@ -114,12 +114,20 @@ async function assetTransactionTypes() {
   })
   // example: ASSET_FREEZE_TRANSACTION
 
-  // example: ASSET_DELETE_TRANSACTION
+  // example: ASSET_DESTROY_TRANSACTION
+  /**
+   * Create an unsigned asset destroy transaction destroying an asset with asset id 1234
+   * All of the assets must be owned by the creator of the asset before the asset can be deleted.
+   *
+   * Parameters for destroying an asset:
+   * - sender: The address of the account that will send the transaction
+   * - assetId: ID of the asset
+   */
   await algorand.createTransaction.assetDestroy({
-    sender: randomAccountA, // Must be the asset manager
-    assetId: 123n, // ID of the asset to destroy
+    sender: randomAccountA,
+    assetId: 1234n,
   })
-  // example: ASSET_DELETE_TRANSACTION
+  // example: ASSET_DESTROY_TRANSACTION
 
   // example: ASSET_OPTIN_TRANSACTION
   await algorand.createTransaction.assetOptIn({
