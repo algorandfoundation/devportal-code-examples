@@ -135,7 +135,7 @@ export default class BoxStorage extends Contract {
    */
   @abimethod({ readonly: true })
   public getBoxMap(key: uint64): string {
-    return this.boxMap.get(key)
+    return this.boxMap(key).value
   }
   // example: GET_BOX_STORAGE_MAP
 
@@ -147,7 +147,7 @@ export default class BoxStorage extends Contract {
    */
   @abimethod({ readonly: true })
   public getBoxMapWithDefault(key: uint64): string {
-    return this.boxMap.get(key, { default: 'default' })
+    return this.boxMap(key).get({ default: 'default' })
   }
   // example: GET_BOX_STORAGE_MAP_DEFAULT
 
@@ -158,7 +158,7 @@ export default class BoxStorage extends Contract {
    * @param value The value to set in the boxMap box
    */
   public setBoxMap(key: uint64, value: string): void {
-    this.boxMap.set(key, value)
+    this.boxMap(key).value = value
   }
   // example: SET_BOX_STORAGE_MAP
 
@@ -168,7 +168,7 @@ export default class BoxStorage extends Contract {
    * @param key The key to delete the value from
    */
   public deleteBoxMap(key: uint64): void {
-    this.boxMap.delete(key)
+    this.boxMap(key).delete()
   }
   // example: DELETE_BOX_STORAGE_MAP
 
@@ -180,7 +180,7 @@ export default class BoxStorage extends Contract {
    */
   @abimethod({ readonly: true })
   public maybeBoxMap(key: uint64): [string, boolean] {
-    const [value, exists] = this.boxMap.maybe(key)
+    const [value, exists] = this.boxMap(key).maybe()
     return [exists ? value : '', exists]
   }
   // example: GET_BOX_STORAGE_MAYBE_BOX_MAP
@@ -193,11 +193,11 @@ export default class BoxStorage extends Contract {
    */
   @abimethod({ readonly: true })
   public boxMapLength(key: uint64): uint64 {
-    if (!this.boxMap.has(key)) {
+    if (!this.boxMap(key).exists) {
       return Uint64(0)
     }
 
-    return this.boxMap.length(key)
+    return this.boxMap(key).length
   }
   // example: LENGTH_BOX_STORAGE_MAP
 
@@ -209,7 +209,7 @@ export default class BoxStorage extends Contract {
    */
   @abimethod({ readonly: true })
   public boxMapExists(key: uint64): boolean {
-    return this.boxMap.has(key)
+    return this.boxMap(key).exists
   }
   // example: CHECK_BOX_STORAGE_MAP_EXISTS
 
@@ -233,7 +233,7 @@ export default class BoxStorage extends Contract {
    */
   @abimethod({ readonly: true })
   public getBoxMapStruct(key: uint64): UserStruct {
-    return this.boxMapStruct.get(key)
+    return this.boxMapStruct(key).value
   }
   // example: GET_BOX_STORAGE_MAP_STRUCT
 
@@ -244,9 +244,10 @@ export default class BoxStorage extends Contract {
    * @param value The value to set in the boxMapStruct box
    */
   public setBoxMapStruct(key: uint64, value: UserStruct): boolean {
-    this.boxMapStruct.set(key, value)
+    // Mutable references to ARC4-encoded values must be copied using .copy() when being assigned to another variable
+    this.boxMapStruct(key).value = value.copy()
     assertMatch(
-      this.boxMapStruct.get(key),
+      this.boxMapStruct(key).value,
       {
         name: value.name,
         id: value.id,
@@ -271,10 +272,11 @@ export default class BoxStorage extends Contract {
       asset: new arc4.UintN64(1234),
     })
 
-    this.boxMapStruct.set(key, value)
+    // Mutable references to ARC4-encoded values must be copied using .copy() when being assigned to another variable
+    this.boxMapStruct(key).value = value.copy()
 
-    assert(this.boxMapStruct.get(key).bytes.length === value.bytes.length, 'boxMapStruct bytes length mismatch')
-    assert(this.boxMapStruct.length(key) === value.bytes.length, 'boxMapStruct length mismatch')
+    assert(this.boxMapStruct(key).value.bytes.length === value.bytes.length, 'boxMapStruct bytes length mismatch')
+    assert(this.boxMapStruct(key).length === value.bytes.length, 'boxMapStruct length mismatch')
 
     return true
   }
@@ -288,7 +290,7 @@ export default class BoxStorage extends Contract {
    */
   @abimethod({ readonly: true })
   public boxMapStructExists(key: uint64): boolean {
-    return this.boxMapStruct.has(key)
+    return this.boxMapStruct(key).exists
   }
   // example: CHECK_BOX_STORAGE_MAP_STRUCT_EXISTS
 

@@ -51,15 +51,15 @@ export default class ReferenceAppBox extends Contract {
     assert(payMbr.amount === this.boxMbr.value, 'Payment must cover the box MBR')
     assert(payMbr.receiver === Global.currentApplicationAddress, 'Payment must be to the contract')
 
-    const [counter, hasCounter] = this.accountBoxCounter.maybe(Txn.sender)
+    const [counter, hasCounter] = this.accountBoxCounter(Txn.sender).maybe()
 
     if (hasCounter) {
       // Increment existing counter
-      this.accountBoxCounter.set(Txn.sender, counter + 1)
+      this.accountBoxCounter(Txn.sender).value = counter + 1
       return counter + 1
     } else {
       // Initialize new counter to 1
-      this.accountBoxCounter.set(Txn.sender, Uint64(1))
+      this.accountBoxCounter(Txn.sender).value = Uint64(1)
       return Uint64(1)
     }
   }
@@ -70,7 +70,7 @@ export default class ReferenceAppBox extends Contract {
    */
   @abimethod({ readonly: true })
   public getBoxCounter(): uint64 {
-    const [counter, hasCounter] = this.accountBoxCounter.maybe(Txn.sender)
+    const [counter, hasCounter] = this.accountBoxCounter(Txn.sender).maybe()
 
     if (hasCounter) {
       return counter
@@ -86,7 +86,7 @@ export default class ReferenceAppBox extends Contract {
    */
   @abimethod({ readonly: true })
   public getBoxCounterForAccount(account: Account): uint64 {
-    const [counter, hasCounter] = this.accountBoxCounter.maybe(account)
+    const [counter, hasCounter] = this.accountBoxCounter(account).maybe()
 
     if (hasCounter) {
       return counter
