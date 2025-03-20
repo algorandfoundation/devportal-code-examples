@@ -31,8 +31,8 @@ def transaction_types() -> None:
     Create a unsigned payment transaction sending 1 Algo from account_a to account_b
 
     Parameters for a payment transaction.
-    - sender: The address of the account that will send the ALGO
-    - receiver: The address of the account that will receive the ALGO
+    - sender: The address of the account that will send the Algo
+    - receiver: The address of the account that will receive the Algo
     - amount: Amount to send
     """
     payment_txn = algorand_client.create_transaction.payment(

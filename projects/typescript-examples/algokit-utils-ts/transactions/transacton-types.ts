@@ -4,11 +4,18 @@ import { setupLocalnetEnvironment } from '@/algokit-utils-ts/setup-localnet-envi
 async function paymentTransactionTypes() {
   const { algorand, randomAccountA, randomAccountB } = await setupLocalnetEnvironment()
 
-  // example: PAYMENT_TRANSACTION
+  /**
+   * Create a unsigned payment transaction sending 1 Algo from account_a to account_b
+   *
+   * Parameters for a payment transaction:
+   * - sender: The account or address of the account that will send the Algo
+   * - receiver: The account or address of the account that will receive the Algo
+   * - amount: Amount to send
+   */
   await algorand.createTransaction.payment({
-    sender: randomAccountA, // The address of the account sending the transaction
-    receiver: randomAccountB, // The address of the account that will receive the Algo
-    amount: algo(1), // Amount to send
+    sender: randomAccountA,
+    receiver: randomAccountB,
+    amount: algo(1),
   })
   // example: PAYMENT_TRANSACTION
 }
