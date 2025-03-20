@@ -787,10 +787,10 @@ getBoxMap:
 
 
     bytec_2
-
-
     swap
     concat
+
+
     box_get
     assert
     retsub
@@ -809,10 +809,10 @@ getBoxMapWithDefault:
 
 
     bytec_2
-
-
     swap
     concat
+
+
     box_get
     pushbytes "default"
     cover 2
@@ -832,10 +832,10 @@ setBoxMap:
 
 
     bytec_2
-
-
     swap
     concat
+
+
     dup
     box_del
     pop
@@ -856,10 +856,10 @@ deleteBoxMap:
 
 
     bytec_2
-
-
     swap
     concat
+
+
     box_del
     pop
     retsub
@@ -878,10 +878,10 @@ maybeBoxMap:
 
 
     bytec_2
-
-
     swap
     concat
+
+
     box_get
     dup
     uncover 2
@@ -919,11 +919,11 @@ boxMapLength:
 
 
     bytec_2
-
-
     swap
     concat
     dup
+
+
     box_len
     bury 1
     bnz boxMapLength_after_if_else@2
@@ -956,10 +956,10 @@ boxMapExists:
 
 
     bytec_2
-
-
     swap
     concat
+
+
     box_len
     bury 1
     retsub
@@ -978,10 +978,10 @@ getBoxMapStruct:
 
 
     bytec 6
-
-
     swap
     concat
+
+
     box_get
     assert
     retsub
@@ -999,11 +999,11 @@ setBoxMapStruct:
 
 
     bytec 6
-
-
     swap
     concat
     dupn 2
+
+
     box_del
     pop
     dup
@@ -1152,10 +1152,10 @@ boxMapStructLength:
 
 
     bytec 6
-
-
     swap
     concat
+
+
     dup
     box_del
     pop
@@ -1205,10 +1205,10 @@ boxMapStructExists:
 
 
     bytec 6
-
-
     swap
     concat
+
+
     box_len
     bury 1
     retsub
