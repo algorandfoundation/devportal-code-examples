@@ -282,6 +282,54 @@ async function applicationTransactionTypes() {
     appId: 1234n,
   })
   // example: APPLICATION_DELETE_TRANSACTION
+
+  // example: APPLICATION_OPT_IN_TRANSACTION
+  /**
+   * Create a unsigned application call transaction with the OptIn OnComplete action
+   *
+   * Parameters for calling an application:
+   * - sender: The address of the account that will send the transaction
+   * - onComplete: The OnComplete action
+   * - appId: ID of the application, defaults to undefined
+   */
+  await algorand.createTransaction.appCall({
+    sender: randomAccountA,
+    appId: 1234n,
+    onComplete: OnApplicationComplete.OptInOC,
+  })
+  // example: APPLICATION_OPT_IN_TRANSACTION
+
+  // example: APPLICATION_CLOSE_OUT_TRANSACTION
+  /**
+   * Create a unsigned application call transaction with the CloseOut OnComplete action
+   *
+   * Parameters for calling an application:
+   * - sender: The address of the account that will send the transaction
+   * - onComplete: The OnComplete action
+   * - appId: ID of the application, defaults to undefined
+   */
+  await algorand.createTransaction.appCall({
+    sender: randomAccountA,
+    appId: 1234n,
+    onComplete: OnApplicationComplete.CloseOutOC,
+  })
+  // example: APPLICATION_CLOSE_OUT_TRANSACTION
+
+  // example: APPLICATION_CLEAR_STATE_TRANSACTION
+  /**
+   * Create a unsigned application call transaction with the ClearState OnComplete action
+   *
+   * Parameters for calling an application:
+   * - sender: The address of the account that will send the transaction
+   * - onComplete: The OnComplete action
+   * - appId: ID of the application, defaults to undefined
+   */
+  await algorand.createTransaction.appCall({
+    sender: randomAccountA,
+    appId: 1234n,
+    onComplete: OnApplicationComplete.ClearStateOC,
+  })
+  // example: APPLICATION_CLEAR_STATE_TRANSACTION
 }
 
 applicationTransactionTypes()
