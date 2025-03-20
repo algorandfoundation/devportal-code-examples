@@ -127,11 +127,20 @@ async function assetTransactionTypes() {
   // example: ASSET_CLAWBACK_TRANSACTION
 
   // example: ASSET_FREEZE_TRANSACTION
+  /**
+   * Create a unsigned asset freeze transaction freezing an asset with asset id 1234
+   *
+   * Parameters for freezing an asset:
+   * - sender: The address of the account that will send the transaction
+   * - assetId: The ID of the asset
+   * - account: The account to freeze or unfreeze
+   * - frozen: Whether the assets in the account should be frozen
+   */
   await algorand.createTransaction.assetFreeze({
-    sender: randomAccountA, // Must be the freeze address
-    assetId: 123n, // ID of the asset to freeze/unfreeze
-    account: randomAccountB, // Account to freeze/unfreeze
-    frozen: true, // Whether the assets should be frozen
+    sender: randomAccountA,
+    assetId: 1234n,
+    account: randomAccountB,
+    frozen: true,
   })
   // example: ASSET_FREEZE_TRANSACTION
 
