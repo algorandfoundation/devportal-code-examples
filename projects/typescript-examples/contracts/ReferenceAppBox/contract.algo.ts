@@ -13,6 +13,7 @@ import {
 } from '@algorandfoundation/algorand-typescript'
 import type { uint64 } from '@algorandfoundation/algorand-typescript'
 
+// example: REFERENCE_APP_BOX_EXAMPLE
 /**
  * A contract that uses box storage to maintain a counter for each account
  * Each account needs to pay for the Minimum Balance Requirement (MBR) for their box
@@ -128,3 +129,4 @@ export default class ReferenceAppBox extends Contract {
     this.boxMbr.value = Uint64(2500) + this.boxSize.value * Uint64(400)
   }
 }
+// example: REFERENCE_APP_BOX_EXAMPLE
