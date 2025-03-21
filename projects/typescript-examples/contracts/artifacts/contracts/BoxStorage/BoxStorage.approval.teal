@@ -20,7 +20,7 @@ main_after_if_else@35:
     return
 
 main_arc4Box_route@28:
-    // contracts/BoxStorage/contract.algo.ts:351
+    // contracts/BoxStorage/contract.algo.ts:352
     // public arc4Box(key: string): StaticInts {
     txn OnCompletion
     !
@@ -31,7 +31,7 @@ main_arc4Box_route@28:
     // export default class BoxStorage extends Contract {
     txna ApplicationArgs 1
     extract 2 0
-    // contracts/BoxStorage/contract.algo.ts:351
+    // contracts/BoxStorage/contract.algo.ts:352
     // public arc4Box(key: string): StaticInts {
     callsub arc4Box
     bytec_0 // 0x151f7c75
@@ -1410,10 +1410,10 @@ boxMapStructLength:
 
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.arc4Box(key: bytes) -> bytes:
 arc4Box:
-    // contracts/BoxStorage/contract.algo.ts:351
+    // contracts/BoxStorage/contract.algo.ts:352
     // public arc4Box(key: string): StaticInts {
     proto 1 1
-    // contracts/BoxStorage/contract.algo.ts:354-359
+    // contracts/BoxStorage/contract.algo.ts:355-360
     // staticIntBox.value = new arc4.StaticArray<arc4.UintN8, 4>(
     //   new arc4.UintN8(0),
     //   new arc4.UintN8(1),
@@ -1423,7 +1423,7 @@ arc4Box:
     frame_dig -1
     pushbytes 0x00010203
     box_put
-    // contracts/BoxStorage/contract.algo.ts:361
+    // contracts/BoxStorage/contract.algo.ts:362
     // assert(staticIntBox.value[0].native === 0)
     frame_dig -1
     box_get
@@ -1432,7 +1432,7 @@ arc4Box:
     getbyte
     !
     assert
-    // contracts/BoxStorage/contract.algo.ts:362
+    // contracts/BoxStorage/contract.algo.ts:363
     // assert(staticIntBox.value[1].native === 1)
     frame_dig -1
     box_get
@@ -1442,7 +1442,7 @@ arc4Box:
     intc_0 // 1
     ==
     assert
-    // contracts/BoxStorage/contract.algo.ts:363
+    // contracts/BoxStorage/contract.algo.ts:364
     // assert(staticIntBox.value[2].native === 2)
     frame_dig -1
     box_get
@@ -1452,7 +1452,7 @@ arc4Box:
     pushint 2 // 2
     ==
     assert
-    // contracts/BoxStorage/contract.algo.ts:364
+    // contracts/BoxStorage/contract.algo.ts:365
     // assert(staticIntBox.value[3].native === 3)
     frame_dig -1
     box_get
@@ -1462,7 +1462,7 @@ arc4Box:
     pushint 3 // 3
     ==
     assert
-    // contracts/BoxStorage/contract.algo.ts:366
+    // contracts/BoxStorage/contract.algo.ts:367
     // return staticIntBox.value
     frame_dig -1
     box_get
