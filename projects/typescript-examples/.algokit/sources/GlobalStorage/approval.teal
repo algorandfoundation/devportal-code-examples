@@ -4,7 +4,7 @@
 
 main:
     intcblock 0 1
-    bytecblock "globalString" "globalBool" "globalIntNoDefault" "globalAccount" 0x151f7c75 "globalInt" "globalBytes"
+    bytecblock "globalString" "globalBool" "globalIntNoDefault" "globalAccount" 0x151f7c75 "globalInt" 0x00 "globalBytes"
     txn ApplicationID
     bnz main_after_if_else@2
 
@@ -14,7 +14,7 @@ main:
     app_global_put
 
 
-    bytec 6
+    bytec 7
     pushbytes "Silvio"
     app_global_put
 
@@ -47,16 +47,36 @@ main_after_if_else@2:
 
 
     txn NumAppArgs
-    bz main_bare_routing@11
-    pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6
+    bz main_bare_routing@12
+    pushbytess 0xd38f6072 0x47b45cd1 0xf7a04ede 0x4a4c6bf6 0x3c7b1f00
     txna ApplicationArgs 0
-    match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8
+    match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8 main_deleteGlobalState_route@9
 
-main_after_if_else@15:
+main_after_if_else@16:
 
 
 
     intc_0
+    return
+
+main_deleteGlobalState_route@9:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub deleteGlobalState
+    bytec 6
+    intc_0
+    uncover 2
+    setbit
+    bytec 4
+    swap
+    concat
+    log
+    intc_1
     return
 
 main_writeDynamicGlobalState_route@8:
@@ -126,7 +146,7 @@ main_hasGlobalState_route@6:
     callsub hasGlobalState
     swap
     itob
-    pushbytes 0x00
+    bytec 6
     intc_0
     uncover 3
     setbit
@@ -163,7 +183,7 @@ main_readGlobalState_route@5:
     extract 6 2
     uncover 6
     concat
-    pushbytes 0x00
+    bytec 6
     intc_0
     uncover 7
     setbit
@@ -194,12 +214,12 @@ main_readGlobalState_route@5:
     intc_1
     return
 
-main_bare_routing@11:
+main_bare_routing@12:
 
 
 
     txn OnCompletion
-    bnz main_after_if_else@15
+    bnz main_after_if_else@16
     txn ApplicationID
     !
     assert
@@ -230,7 +250,7 @@ readGlobalState:
 
 
     intc_0
-    bytec 6
+    bytec 7
     app_global_get_ex
     assert
 
@@ -371,4 +391,18 @@ writeDynamicGlobalState:
     frame_dig -2
     app_global_get_ex
     assert
+    retsub
+
+
+
+deleteGlobalState:
+
+
+    bytec 5
+
+
+    app_global_del
+
+
+    intc_1
     retsub

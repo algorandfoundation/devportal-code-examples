@@ -106,12 +106,11 @@ export default class GlobalStorage extends Contract {
     return globalDynamicAccess.value
   }
 
-  // @TODO: Not yet implemented in puya-ts
   // example: DELETE_GLOBAL_STATE
-  // @arc4.abimethod()
-  // public deleteGlobalState(): boolean {
-  //   this.globalInt.delete()
-  //   return true
-  // }
+  @arc4.abimethod()
+  public deleteGlobalState(): boolean {
+    this.globalInt.delete()
+    return true
+  }
   // example: DELETE_GLOBAL_STATE
 }
