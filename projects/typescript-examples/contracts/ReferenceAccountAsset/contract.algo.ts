@@ -1,6 +1,7 @@
 import { Contract, abimethod, Account, Asset, assert } from '@algorandfoundation/algorand-typescript'
 import { Address } from '@algorandfoundation/algorand-typescript/arc4'
 
+// example: REFERENCE_ACCOUNT_ASSET_EXAMPLE
 /**
  * A contract that demonstrates how to reference both accounts and assets in a smart contract
  */
@@ -34,3 +35,4 @@ export default class ReferenceAccountAsset extends Contract {
     return asset.balance(account)
   }
 }
+// example: REFERENCE_ACCOUNT_ASSET_EXAMPLE

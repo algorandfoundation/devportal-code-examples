@@ -19,7 +19,11 @@ import type { uint64 } from '@algorandfoundation/algorand-typescript'
 export default class InnerTransactions extends Contract {
   // example: PAYMENT
   /**
-   * Demonstrates a simple payment inner transaction
+   * Demonstrates a simple payment inner transaction.
+   * The fee is set to 0 by default. Manually set here for demonstration purposes.
+   * The `Sender` for the payment is implied to be Global.currentApplicationAddress.
+   * If a different sender is needed, it'd have to be an account that has been
+   * rekeyed to the application address.
    * @returns The amount of the payment
    */
   @abimethod()
@@ -34,14 +38,6 @@ export default class InnerTransactions extends Contract {
 
     return result.amount
   }
-
-  /**
-   * fee is set to 0 by default. Manually set here for demonstration purposes.
-   * The `Sender` for the above is implied to be Global.currentApplicationAddress.
-   *
-   * If a different sender is needed, it'd have to be an account that has been
-   * rekeyed to the application address.
-   */
   // example: PAYMENT
 
   // example: ASSET_CREATE
@@ -64,10 +60,12 @@ export default class InnerTransactions extends Contract {
   }
 
   /**
-   * Creates a non-fungible asset (NFT)
+   * Creates a non-fungible asset (NFT).
    * Following the ARC3 standard, the total supply must be 1 for a non-fungible asset.
    * If you want to create fractional NFTs, `total` * `decimals` point must be 1.
    * ex) total=100, decimals=2, 100 * 0.01 = 1
+   * The fee is set to 0 by default for inner transactions.
+   * The Sender is implied to be Global.currentApplicationAddress.
    * @returns The ID of the created asset
    */
   @abimethod()
@@ -93,7 +91,10 @@ export default class InnerTransactions extends Contract {
 
   // example: ASSET_OPT_IN
   /**
-   * Opts the application into an asset
+   * Opts the application into an asset.
+   * A zero amount asset transfer to one's self is a special type of asset transfer
+   * that is used to opt-in to an asset.
+   * To send an asset transfer, the asset must be an available resource.
    * @param asset The asset to opt into
    */
   @abimethod()
@@ -107,19 +108,14 @@ export default class InnerTransactions extends Contract {
       })
       .submit()
   }
-
-  /**
-   * A zero amount asset transfer to one's self is a special type of asset transfer
-   * that is used to opt-in to an asset.
-   *
-   * To send an asset transfer, the asset must be an available resource.
-   * Refer the Resource Availability section for more information.
-   */
   // example: ASSET_OPT_IN
 
   // example: ASSET_TRANSFER
   /**
-   * Transfers an asset from the application to another account
+   * Transfers an asset from the application to another account.
+   * For a smart contract to transfer an asset, the app account must be opted into the asset
+   * and be holding non zero amount of assets.
+   * To send an asset transfer, the asset must be an available resource.
    * @param asset The asset to transfer
    * @param receiver The account to receive the asset
    * @param amount The amount to transfer
@@ -136,18 +132,13 @@ export default class InnerTransactions extends Contract {
       .submit()
   }
 
-  /**
-   * For a smart contract to transfer an asset, the app account must be opted into the asset
-   * and be holding non zero amount of assets.
-   *
-   * To send an asset transfer, the asset must be an available resource.
-   * Refer the Resource Availability section for more information.
-   */
   // example: ASSET_TRANSFER
 
   // example: ASSET_FREEZE
   /**
-   * Freezes an asset for a specific account
+   * Freezes an asset for a specific account.
+   * To freeze an asset, the asset must be a freezable asset
+   * by having an account with freeze authority.
    * @param acctToBeFrozen The account to freeze the asset for
    * @param asset The asset to freeze
    */
@@ -162,16 +153,14 @@ export default class InnerTransactions extends Contract {
       })
       .submit()
   }
-
-  /**
-   * To freeze an asset, the asset must be a freezable asset
-   * by having an account with freeze authority.
-   */
   // example: ASSET_FREEZE
 
   // example: ASSET_REVOKE
   /**
-   * Revokes (clawbacks) an asset from an account
+   * Revokes (clawbacks) an asset from an account.
+   * To revoke an asset, the asset must be a revocable asset
+   * by having an account with clawback authority.
+   * The Sender is implied to be current_application_address.
    * @param asset The asset to revoke
    * @param accountToBeRevoked The account to revoke the asset from
    * @param amount The amount to revoke
@@ -188,18 +177,15 @@ export default class InnerTransactions extends Contract {
       })
       .submit()
   }
-
-  /**
-   * To revoke an asset, the asset must be a revocable asset
-   * by having an account with clawback authority.
-   *
-   * Sender is implied to be current_application_address
-   */
   // example: ASSET_REVOKE
 
   // example: ASSET_CONFIG
   /**
-   * Reconfigures an existing asset
+   * Reconfigures an existing asset.
+   * For a smart contract to transfer an asset, the app account must be opted into the asset
+   * and be holding non zero amount of assets.
+   * To send an asset transfer, the asset must be an available resource.
+   * Refer the Resource Availability section for more information.
    * @param asset The asset to reconfigure
    */
   @abimethod()
@@ -215,19 +201,14 @@ export default class InnerTransactions extends Contract {
       })
       .submit()
   }
-
-  /**
-   * For a smart contract to transfer an asset, the app account must be opted into the asset
-   * and be holding non zero amount of assets.
-   *
-   * To send an asset transfer, the asset must be an available resource.
-   * Refer the Resource Availability section for more information.
-   */
   // example: ASSET_CONFIG
 
   // example: ASSET_DELETE
   /**
-   * Deletes an asset
+   * Deletes an asset.
+   * To delete an asset, the asset must be a deleteable asset
+   * by having an account with delete authority.
+   * The Sender is implied to be current_application_address.
    * @param asset The asset to delete
    */
   @abimethod()

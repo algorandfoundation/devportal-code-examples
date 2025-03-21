@@ -4,12 +4,11 @@ from algokit_utils_py_examples.helpers import setup_localnet_environment
 
 
 def atomic_transaction_groups() -> None:
-    # example: ATOMIC_TRANSACTION_GROUP
-
     algorand_client, dispenser, account_a, account_b, account_c = (
         setup_localnet_environment()
     )
 
+    # example: ATOMIC_TRANSACTION_GROUP
     """
     Create a transaction group that will execute atomically
     Either all transactions succeed, or they all fail
@@ -31,7 +30,6 @@ def atomic_transaction_groups() -> None:
             note=b"Second payment in atomic group",
         )
     ).send()  # Send the atomic group of transactions
-
     # example: ATOMIC_TRANSACTION_GROUP
 
     # example: ATOMIC_GROUP_SIMULATE

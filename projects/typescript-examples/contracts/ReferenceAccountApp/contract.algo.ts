@@ -13,6 +13,7 @@ import {
 import type { uint64 } from '@algorandfoundation/algorand-typescript'
 import { Address } from '@algorandfoundation/algorand-typescript/arc4'
 
+// example: REFERENCE_ACCOUNT_APP_EXAMPLE
 /**
  * A contract that maintains a per-account counter in local state
  * Accounts must opt in to use the counter
@@ -87,3 +88,4 @@ export default class ReferenceAccountApp extends Contract {
     return value
   }
 }
+// example: REFERENCE_ACCOUNT_APP_EXAMPLE

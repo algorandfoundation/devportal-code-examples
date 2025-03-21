@@ -48,7 +48,7 @@ async function AccountReferenceExampleMethod3() {
   const { referenceAccountAppClient, referenceAccount } = await setupLocalnetEnvironment()
 
   // example: ACCOUNT_REFERENCE_EXAMPLE_METHOD_3
-  // Include the account reference in the accountReferences array to be populated
+  // Include the account reference in the accountReferences array to be populated manually
   const result = await referenceAccountAppClient.send.getAccountBalance({
     args: {},
     accountReferences: [referenceAccount],
