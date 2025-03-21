@@ -343,6 +343,7 @@ export default class BoxStorage extends Contract {
   }
   // example: STRUCT_BOX_STORAGE
 
+  // example: OTHER_OPS_BOX
   /**
    * Creates and manipulates a box containing a static array of 8-bit unsigned integers
    * @param key The key for the static array box
@@ -365,4 +366,5 @@ export default class BoxStorage extends Contract {
 
     return staticIntBox.value
   }
+  // example: OTHER_OPS_BOX
 }
