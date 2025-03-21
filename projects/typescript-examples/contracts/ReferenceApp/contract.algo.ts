@@ -9,6 +9,7 @@ import {
 } from '@algorandfoundation/algorand-typescript'
 import type { uint64 } from '@algorandfoundation/algorand-typescript'
 
+// example: APP_REFERENCE_EXAMPLE
 /**
  * A contract that increments a counter
  */
@@ -75,3 +76,4 @@ export default class ReferenceApp extends Contract {
     return arc4.decodeArc4<uint64>(appCallTxn.lastLog, 'log')
   }
 }
+// example: APP_REFERENCE_EXAMPLE
