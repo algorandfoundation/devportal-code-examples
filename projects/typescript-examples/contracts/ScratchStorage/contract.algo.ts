@@ -1,3 +1,4 @@
+// example: SCRATCH_STORAGE
 import {
   abimethod,
   uint64,
@@ -25,7 +26,6 @@ import { Scratch, gloadBytes, gloadUint64 } from '@algorandfoundation/algorand-t
  */
 @contract({ scratchSlots: [0, 1, 2, { from: 10, to: 20 }] }) // This reserves slots 0, 1, 2 and slots 10-20
 export default class ScratchStorage extends Contract {
-  // example: STORE_SCRATCH_VALUES
   /**
    * Stores values in scratch space
    * This method demonstrates how to store different types of values in scratch slots
@@ -36,9 +36,7 @@ export default class ScratchStorage extends Contract {
     Scratch.store(2, Uint64(100))
     Scratch.store(15, Uint64(999))
   }
-  // example: STORE_SCRATCH_VALUES
 
-  // example: LOAD_SCRATCH_VALUES
   /**
    * Reads values from scratch space
    * This method demonstrates how to read different types of values from scratch slots
@@ -55,9 +53,7 @@ export default class ScratchStorage extends Contract {
     assert(value2 === 100, 'Value in slot 2 should be 100')
     assert(value3 === 999, 'Value in slot 15 should be 999')
   }
-  // example: LOAD_SCRATCH_VALUES
 
-  // example: DEMONSTRATE_SCRATCH_STORAGE
   /**
    * Demonstrates basic scratch storage operations
    * @returns true if all operations succeed
@@ -68,9 +64,7 @@ export default class ScratchStorage extends Contract {
 
     return true
   }
-  // example: DEMONSTRATE_SCRATCH_STORAGE
 
-  // example: READ_FROM_GROUP_TRANSACTION
   /**
    * Demonstrates reading values from another transaction in the same group
    * @param groupIndex The index of the transaction in the group to read from
@@ -81,9 +75,7 @@ export default class ScratchStorage extends Contract {
   public readFromGroupTransaction(groupIndex: uint64, scratchSlot: uint64): uint64 {
     return gloadUint64(groupIndex, scratchSlot)
   }
-  // example: READ_FROM_GROUP_TRANSACTION
 
-  // example: READ_BYTES_FROM_GROUP_TRANSACTION
   /**
    * Demonstrates reading bytes values from another transaction in the same group
    * @param groupIndex The index of the transaction in the group to read from
@@ -94,5 +86,5 @@ export default class ScratchStorage extends Contract {
   public readBytesFromGroupTransaction(groupIndex: uint64, scratchSlot: uint64): bytes {
     return gloadBytes(groupIndex, scratchSlot)
   }
-  // example: READ_BYTES_FROM_GROUP_TRANSACTION
 }
+// example: SCRATCH_STORAGE
