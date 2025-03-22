@@ -3,9 +3,8 @@ import typing as t
 from algopy import ARC4Contract, String, UInt64, arc4, uenumerate, urange
 
 
-# example: IF_ELSE
 class IfElseExample(ARC4Contract):
-
+    # example: IF_ELSE
     @arc4.abimethod
     def is_rich(self, account_balance: UInt64) -> String:
         if account_balance > 1000:
@@ -15,19 +14,21 @@ class IfElseExample(ARC4Contract):
         else:
             return String("This account is poor :(")
 
+    # example: IF_ELSE
+
+    # example: TERNARY
     @arc4.abimethod
     def is_even(self, number: UInt64) -> String:
         return String("Even") if number % 2 == 0 else String("Odd")
 
+    # example: TERNARY
 
-# example: IF_ELSE
 
 # example: FOR_LOOP
 FourArray: t.TypeAlias = arc4.StaticArray[arc4.UInt8, t.Literal[4]]
 
 
 class ForLoopsExample(ARC4Contract):
-
     # urange: reversed items, forward index
     @arc4.abimethod
     def for_loop(self) -> FourArray:
@@ -51,10 +52,8 @@ class ForLoopsExample(ARC4Contract):
 
 # example: MATCH
 class MatchStatements(ARC4Contract):
-
     @arc4.abimethod
     def get_day(self, date: UInt64) -> String:
-
         match date:
             case UInt64(0):
                 return String("Monday")
@@ -79,10 +78,8 @@ class MatchStatements(ARC4Contract):
 
 # example: WHILE_LOOP
 class WhileLoopExample(ARC4Contract):
-
     @arc4.abimethod
     def loop(self) -> UInt64:
-
         num = UInt64(10)
         loop_count = UInt64(0)
 
