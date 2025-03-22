@@ -126,7 +126,6 @@ add_contact_info:
     assert
     // smart_contracts/arc4_types/contract.py:293
     // assert phone == arc4.UInt64(555_555_555)
-    dup
     pushbytes 0x00000000211d1ae3
     b==
     assert
@@ -137,16 +136,18 @@ add_contact_info:
     app_global_put
     // smart_contracts/arc4_types/contract.py:297
     // return phone.native
-    btoi
+    frame_dig -1
+    // smart_contracts/arc4_types/contract.py:289
+    // name, email, phone = contact.native
+    pushint 4 // 4
+    // smart_contracts/arc4_types/contract.py:297
+    // return phone.native
+    extract_uint64
     retsub
 
 
 // smart_contracts.arc4_types.contract.Arc4Tuple.return_contact() -> bytes:
 return_contact:
-    // smart_contracts/arc4_types/contract.py:299-300
-    // @abimethod()
-    // def return_contact(self) -> arc4.Tuple[arc4.String, arc4.String, arc4.UInt64]:
-    proto 0 1
     // smart_contracts/arc4_types/contract.py:303
     // return self.contact_info.value
     intc_0 // 0

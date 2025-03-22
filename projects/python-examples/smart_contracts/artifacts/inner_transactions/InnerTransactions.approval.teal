@@ -334,11 +334,6 @@ main_bare_routing@18:
 
 // smart_contracts.inner_transactions.contract.InnerTransactions.payment() -> uint64:
 payment:
-    // smart_contracts/inner_transactions/contract.py:20-22
-    // # example: PAYMENT
-    // @abimethod()
-    // def payment(self) -> UInt64:
-    proto 0 1
     // smart_contracts/inner_transactions/contract.py:23
     // result = itxn.Payment(amount=5000, receiver=Txn.sender, fee=0).submit()
     itxn_begin
@@ -359,11 +354,6 @@ payment:
 
 // smart_contracts.inner_transactions.contract.InnerTransactions.fungible_asset_create() -> uint64:
 fungible_asset_create:
-    // smart_contracts/inner_transactions/contract.py:35-37
-    // # example: ASSET_CREATE
-    // @abimethod
-    // def fungible_asset_create(self) -> UInt64:
-    proto 0 1
     // smart_contracts/inner_transactions/contract.py:38-43
     // itxn_result = itxn.AssetConfig(
     //     total=100_000_000_000,
@@ -410,10 +400,6 @@ fungible_asset_create:
 
 // smart_contracts.inner_transactions.contract.InnerTransactions.non_fungible_asset_create() -> uint64:
 non_fungible_asset_create:
-    // smart_contracts/inner_transactions/contract.py:47-48
-    // @abimethod
-    // def non_fungible_asset_create(self) -> UInt64:
-    proto 0 1
     // smart_contracts/inner_transactions/contract.py:54-64
     // itxn_result = itxn.AssetConfig(
     //     total=100,
@@ -808,10 +794,6 @@ multi_inner_txns:
 
 // smart_contracts.inner_transactions.contract.InnerTransactions.deploy_app() -> uint64:
 deploy_app:
-    // smart_contracts/inner_transactions/contract.py:202-203
-    // @abimethod
-    // def deploy_app(self) -> UInt64:
-    proto 0 1
     // smart_contracts/inner_transactions/contract.py:209-213
     // app_txn = itxn.ApplicationCall(
     //     approval_program=compiled_contract.approval_program,
@@ -848,10 +830,6 @@ deploy_app:
 
 // smart_contracts.inner_transactions.contract.InnerTransactions.arc4_deploy_app() -> uint64:
 arc4_deploy_app:
-    // smart_contracts/inner_transactions/contract.py:218-219
-    // @abimethod
-    // def arc4_deploy_app(self) -> UInt64:
-    proto 0 1
     // smart_contracts/inner_transactions/contract.py:223
     // app_txn = arc4.arc4_create(HelloWorld)
     itxn_begin
@@ -947,13 +925,11 @@ noop_app_call:
     itxn_submit
     itxn LastLog
     dup
-    extract 4 0
-    swap
     extract 0 4
     bytec_0 // 0x151f7c75
     ==
     assert // ARC4 prefix is valid
-    extract 2 0
+    extract 6 0
     // smart_contracts/inner_transactions/contract.py:247
     // return first_hello_world_result, second_hello_world_result
     retsub

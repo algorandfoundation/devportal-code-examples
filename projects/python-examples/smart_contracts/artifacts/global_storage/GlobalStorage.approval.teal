@@ -269,11 +269,6 @@ main_bare_routing@14:
 
 // smart_contracts.global_storage.contract.GlobalStorage.get_global_state() -> uint64:
 get_global_state:
-    // smart_contracts/global_storage/contract.py:41-43
-    // # example: READ_GLOBAL_STATE
-    // @arc4.abimethod
-    // def get_global_state(self) -> UInt64:
-    proto 0 1
     // smart_contracts/global_storage/contract.py:44
     // return self.global_int_full.get(default=UInt64(0))
     intc_0 // 0
@@ -319,10 +314,6 @@ maybe_global_state_after_if_else@2:
 
 // smart_contracts.global_storage.contract.GlobalStorage.get_global_state_example() -> uint64:
 get_global_state_example:
-    // smart_contracts/global_storage/contract.py:53-54
-    // @arc4.abimethod
-    // def get_global_state_example(self) -> bool:
-    proto 0 1
     // smart_contracts/global_storage/contract.py:55
     // assert self.global_int_full.get(default=UInt64(0)) == 50  # uint64
     intc_0 // 0
@@ -372,11 +363,6 @@ get_global_state_example:
 
 // smart_contracts.global_storage.contract.GlobalStorage.maybe_global_state_example() -> uint64:
 maybe_global_state_example:
-    // smart_contracts/global_storage/contract.py:64-66
-    // # example: READ_GLOBAL_STATE_EXAMPLES
-    // @arc4.abimethod
-    // def maybe_global_state_example(self) -> bool:
-    proto 0 1
     // smart_contracts/global_storage/contract.py:67
     // int_value, i_exists = self.global_int_full.maybe()  # uint64
     intc_0 // 0
@@ -467,11 +453,6 @@ maybe_global_state_example:
 
 // smart_contracts.global_storage.contract.GlobalStorage.check_global_state_example() -> uint64:
 check_global_state_example:
-    // smart_contracts/global_storage/contract.py:95-97
-    // # example: VALUE_PROPERTY_GLOBAL_STATE_EXAMPLES
-    // @arc4.abimethod
-    // def check_global_state_example(self) -> bool:
-    proto 0 1
     // smart_contracts/global_storage/contract.py:98
     // assert self.global_int_full.value == 50  # uint64
     intc_0 // 0
@@ -647,11 +628,6 @@ set_global_state_example:
 
 // smart_contracts.global_storage.contract.GlobalStorage.del_global_state() -> uint64:
 del_global_state:
-    // smart_contracts/global_storage/contract.py:143-145
-    // # example: DELETE_GLOBAL_STATE
-    // @arc4.abimethod
-    // def del_global_state(self) -> bool:
-    proto 0 1
     // smart_contracts/global_storage/contract.py:146
     // del self.global_int_full.value
     bytec_1 // "global_int_full"
@@ -664,11 +640,6 @@ del_global_state:
 
 // smart_contracts.global_storage.contract.GlobalStorage.del_global_state_example() -> uint64:
 del_global_state_example:
-    // smart_contracts/global_storage/contract.py:151-153
-    // # example: DELETE_GLOBAL_STATE_EXAMPLES
-    // @arc4.abimethod
-    // def del_global_state_example(self) -> bool:
-    proto 0 1
     // smart_contracts/global_storage/contract.py:154
     // del self.global_bytes_no_default.value
     bytec 7 // "global_bytes_no_default"

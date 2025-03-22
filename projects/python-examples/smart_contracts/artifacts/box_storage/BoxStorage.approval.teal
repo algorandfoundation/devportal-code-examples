@@ -728,11 +728,6 @@ main_bare_routing@41:
 
 // smart_contracts.box_storage.contract.BoxStorage.get_box() -> uint64:
 get_box:
-    // smart_contracts/box_storage/contract.py:40-42
-    // # example: GET_BOX_STORAGE
-    // @arc4.abimethod
-    // def get_box(self) -> UInt64:
-    proto 0 1
     // smart_contracts/box_storage/contract.py:43
     // return self.box_int.value
     bytec_2 // "box_int"
@@ -761,10 +756,6 @@ get_item_box_map:
 
 // smart_contracts.box_storage.contract.BoxStorage.get_box_map() -> bytes:
 get_box_map:
-    // smart_contracts/box_storage/contract.py:49-50
-    // @arc4.abimethod
-    // def get_box_map(self) -> String:
-    proto 0 1
     // smart_contracts/box_storage/contract.py:51
     // key_1 = UInt64(1)
     intc_0 // 1
@@ -780,10 +771,6 @@ get_box_map:
 
 // smart_contracts.box_storage.contract.BoxStorage.get_box_ref() -> void:
 get_box_ref:
-    // smart_contracts/box_storage/contract.py:54-55
-    // @arc4.abimethod
-    // def get_box_ref(self) -> None:
-    proto 0 0
     // smart_contracts/box_storage/contract.py:56
     // box_ref = BoxRef(key=String("blob"))
     bytec_0 // "blob"
@@ -818,10 +805,6 @@ get_box_ref:
 
 // smart_contracts.box_storage.contract.BoxStorage.maybe_box() -> uint64, uint64:
 maybe_box:
-    // smart_contracts/box_storage/contract.py:64-65
-    // @arc4.abimethod
-    // def maybe_box(self) -> tuple[UInt64, bool]:
-    proto 0 2
     // smart_contracts/box_storage/contract.py:66
     // box_int_value, box_int_exists = self.box_int.maybe()
     bytec_2 // "box_int"
@@ -911,11 +894,6 @@ maybe_box_ref_after_if_else@2:
 
 // smart_contracts.box_storage.contract.BoxStorage.get_box_example() -> uint64, bytes, bytes:
 get_box_example:
-    // smart_contracts/box_storage/contract.py:89-91
-    // # example: GET_BOX_STORAGE_EXAMPLE
-    // @arc4.abimethod
-    // def get_box_example(self) -> tuple[UInt64, Bytes, arc4.String]:
-    proto 0 3
     // smart_contracts/box_storage/contract.py:93
     // self.box_int.value,
     bytec_2 // "box_int"
@@ -946,10 +924,6 @@ get_box_example:
 
 // smart_contracts.box_storage.contract.BoxStorage.get_box_map_example() -> uint64:
 get_box_map_example:
-    // smart_contracts/box_storage/contract.py:98-99
-    // @arc4.abimethod
-    // def get_box_map_example(self) -> bool:
-    proto 0 1
     // smart_contracts/box_storage/contract.py:100
     // key_1 = UInt64(1)
     intc_0 // 1
@@ -971,10 +945,6 @@ get_box_map_example:
 
 // smart_contracts.box_storage.contract.BoxStorage.maybe_box_example() -> void:
 maybe_box_example:
-    // smart_contracts/box_storage/contract.py:104-105
-    // @arc4.abimethod
-    // def maybe_box_example(self) -> None:
-    proto 0 0
     // smart_contracts/box_storage/contract.py:106
     // del self.box_int.value
     bytec_2 // "box_int"
@@ -1013,10 +983,6 @@ maybe_box_example:
 
 // smart_contracts.box_storage.contract.BoxStorage.maybe_box_map_example() -> void:
 maybe_box_map_example:
-    // smart_contracts/box_storage/contract.py:112-113
-    // @arc4.abimethod
-    // def maybe_box_map_example(self) -> None:
-    proto 0 0
     // smart_contracts/box_storage/contract.py:115
     // key_1 = UInt64(1)
     intc_0 // 1
@@ -1207,11 +1173,6 @@ set_box_example:
 
 // smart_contracts.box_storage.contract.BoxStorage.delete_box() -> void:
 delete_box:
-    // smart_contracts/box_storage/contract.py:165-167
-    // # example: DELETE_BOX_STORAGE
-    // @arc4.abimethod
-    // def delete_box(self) -> None:
-    proto 0 0
     // smart_contracts/box_storage/contract.py:168
     // del self.box_int.value
     bytec_2 // "box_int"
@@ -1285,10 +1246,6 @@ delete_box_map:
 
 // smart_contracts.box_storage.contract.BoxStorage.delete_box_ref() -> void:
 delete_box_ref:
-    // smart_contracts/box_storage/contract.py:182-183
-    // @arc4.abimethod
-    // def delete_box_ref(self) -> None:
-    proto 0 0
     // smart_contracts/box_storage/contract.py:185
     // self.box_ref.create(size=UInt64(32))
     bytec 14 // "box_ref"
@@ -1359,10 +1316,6 @@ box_map_length_after_if_else@2:
 
 // smart_contracts.box_storage.contract.BoxStorage.length_box_ref() -> uint64:
 length_box_ref:
-    // smart_contracts/box_storage/contract.py:203-204
-    // @arc4.abimethod
-    // def length_box_ref(self) -> UInt64:
-    proto 0 1
     // smart_contracts/box_storage/contract.py:205
     // box_ref = BoxRef(key=String("blob"))
     bytec_0 // "blob"
@@ -1383,10 +1336,6 @@ length_box_ref:
 
 // smart_contracts.box_storage.contract.BoxStorage.box_map_struct_length() -> uint64:
 box_map_struct_length:
-    // smart_contracts/box_storage/contract.py:209-210
-    // @arc4.abimethod
-    // def box_map_struct_length(self) -> bool:
-    proto 0 1
     // smart_contracts/box_storage/contract.py:214
     // self.box_map_struct[key_0] = value.copy()
     bytec 7 // 0x75736572730000000000000000
@@ -1423,11 +1372,6 @@ box_map_struct_length:
 
 // smart_contracts.box_storage.contract.BoxStorage.box_map_length_example() -> void:
 box_map_length_example:
-    // smart_contracts/box_storage/contract.py:221-223
-    // # example: LENGTH_BOX_STORAGE_EXAMPLES
-    // @arc4.abimethod
-    // def box_map_length_example(self) -> None:
-    proto 0 0
     // smart_contracts/box_storage/contract.py:224
     // key_0 = UInt64(0)
     intc_1 // 0
@@ -1464,10 +1408,6 @@ box_map_length_example:
 
 // smart_contracts.box_storage.contract.BoxStorage.length_box_ref_example() -> void:
 length_box_ref_example:
-    // smart_contracts/box_storage/contract.py:230-231
-    // @arc4.abimethod
-    // def length_box_ref_example(self) -> None:
-    proto 0 0
     // smart_contracts/box_storage/contract.py:232
     // box_ref = BoxRef(key="blob")
     bytec_0 // "blob"
@@ -1545,11 +1485,6 @@ length_box_ref_example:
 
 // smart_contracts.box_storage.contract.BoxStorage.extract_box_ref() -> void:
 extract_box_ref:
-    // smart_contracts/box_storage/contract.py:250-252
-    // # example: EXTRACT_BOX_REF
-    // @arc4.abimethod
-    // def extract_box_ref(self) -> None:
-    proto 0 0
     // smart_contracts/box_storage/contract.py:253
     // box_ref = BoxRef(key=String("blob"))
     bytec_0 // "blob"
@@ -1619,11 +1554,6 @@ extract_box_ref:
 
 // smart_contracts.box_storage.contract.BoxStorage.manipulate_box_ref() -> void:
 manipulate_box_ref:
-    // smart_contracts/box_storage/contract.py:267-269
-    // # example: OTHER_OPS_BOX_REF
-    // @arc4.abimethod
-    // def manipulate_box_ref(self) -> None:
-    proto 0 0
     // smart_contracts/box_storage/contract.py:270
     // box_ref = BoxRef(key=String("blob"))
     bytec_0 // "blob"
@@ -1737,11 +1667,6 @@ manipulate_box_ref:
 
 // smart_contracts.box_storage.contract.BoxStorage.value_box() -> void:
 value_box:
-    // smart_contracts/box_storage/contract.py:293-295
-    // # example: OTHER_OPS_BOX
-    // @arc4.abimethod
-    // def value_box(self) -> None:
-    proto 0 0
     // smart_contracts/box_storage/contract.py:296
     // assert self.box_int.value == UInt64(10)
     bytec_2 // "box_int"
@@ -1758,10 +1683,6 @@ value_box:
 
 // smart_contracts.box_storage.contract.BoxStorage.exist_box() -> uint64:
 exist_box:
-    // smart_contracts/box_storage/contract.py:298-299
-    // @arc4.abimethod
-    // def exist_box(self) -> bool:
-    proto 0 1
     // smart_contracts/box_storage/contract.py:300
     // return bool(self.box_int)
     bytec_2 // "box_int"
@@ -1772,10 +1693,6 @@ exist_box:
 
 // smart_contracts.box_storage.contract.BoxStorage.exist_box_example() -> uint64, uint64, uint64:
 exist_box_example:
-    // smart_contracts/box_storage/contract.py:302-303
-    // @arc4.abimethod
-    // def exist_box_example(self) -> tuple[bool, bool, bool]:
-    proto 0 3
     // smart_contracts/box_storage/contract.py:304
     // return bool(self.box_dynamic_bytes), bool(self.box_string), bool(self.box_bytes)
     bytec 5 // "b"
@@ -1792,10 +1709,6 @@ exist_box_example:
 
 // smart_contracts.box_storage.contract.BoxStorage.slice_box() -> void:
 slice_box:
-    // smart_contracts/box_storage/contract.py:306-307
-    // @arc4.abimethod
-    // def slice_box(self) -> None:
-    proto 0 0
     // smart_contracts/box_storage/contract.py:308
     // box_0 = Box(Bytes, key=String("0"))
     bytec 9 // "0"
@@ -1880,10 +1793,6 @@ slice_box:
 
 // smart_contracts.box_storage.contract.BoxStorage.arc4_box() -> void:
 arc4_box:
-    // smart_contracts/box_storage/contract.py:315-316
-    // @arc4.abimethod
-    // def arc4_box(self) -> None:
-    proto 0 0
     // smart_contracts/box_storage/contract.py:317
     // box_bytes = Box(StaticInts, key=Bytes(b"d"))
     bytec 6 // 0x64
@@ -1942,10 +1851,6 @@ arc4_box:
 
 // smart_contracts.box_storage.contract.BoxStorage.key_box_example() -> void:
 key_box_example:
-    // smart_contracts/box_storage/contract.py:331-332
-    // @arc4.abimethod
-    // def key_box_example(self) -> None:
-    proto 0 0
     // smart_contracts/box_storage/contract.py:334
     // assert self.box_string.key == b"BOX_STRING", "box string key ok"
     intc_1 // 0
