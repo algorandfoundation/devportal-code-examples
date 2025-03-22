@@ -81,6 +81,7 @@ export default class ControlFlow extends Contract {
 
     return reversed
   }
+  // example: FOR_LOOP
 
   // example: SWITCH_CASE
   /**
