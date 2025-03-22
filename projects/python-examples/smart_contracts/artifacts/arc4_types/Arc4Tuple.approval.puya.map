@@ -3,7 +3,7 @@
   "sources": [
     "../../arc4_types/contract.py"
   ],
-  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAyRQ;AACI;;;;;;;;;;;;;;;;;;AADJ;AAHR;;AAAA;;;AAAA;;;;;;;;;;;;AAAA;;;AAAA;;;;;;AAAA;;AAoBK;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAAA;AAAA;;AAbA;;AAAA;AAAA;AAAA;;AAAA;AAPL;;;AAOK;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;AAPL;;AAAA;;;;;;;;;AAOA;;;AAG6B;;AAAA;AAAA;AAAA;;AAAA;;AAAA;AAAA;;AAAA;;AAAA;;AAAA;AAAA;;AAAA;AAAA;;AAAA;;AAAA;;AAAA;AAAA;;AAAA;;;AAEd;;AAAA;;;AAAe;;;;;;;AAAf;AAAP;AACO;AAAA;;;AAAgB;;;;;;;;;;;;;;;;;;;;;AAAhB;AAAP;AACO;AAAS;;;;;;;;;;AAAT;AAAP;AAEA;AAAA;;AAAA;AAEO;AAAP;AAER;;;AAIe;AAAA;AAAA;AAAA;AAAP",
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAyRQ;AACI;;;;;;;;;;;;;;;;;;AADJ;AAHR;;AAAA;;;AAAA;;;;;;;;;;;;AAAA;;;AAAA;;;;;;AAAA;;AAoBK;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAAA;AAAA;;AAbA;;AAAA;AAAA;AAAA;;AAAA;AAPL;;;AAOK;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;AAPL;;AAAA;;;;;;;;;AAOA;;;AAG6B;;AAAA;AAAA;AAAA;;AAAA;;AAAA;AAAA;;AAAA;;AAAA;;AAAA;AAAA;;AAAA;AAAA;;AAAA;;AAAA;;AAAA;AAAA;;AAAA;;;AAEd;;AAAA;;;AAAe;;;;;;;AAAf;AAAP;AACO;AAAA;;;AAAgB;;;;;;;;;;;;;;;;;;;;;AAAhB;AAAP;AACgB;;;;;;;;;;AAAT;AAAP;AAEA;AAAA;;AAAA;AAEO;;AARc;;AAQd;AAAP;AAMO;AAAA;AAAA;AAAA;AAAP",
   "op_pc_offset": 0,
   "pc_events": {
     "1": {
@@ -30,13 +30,28 @@
       "stack_out": []
     },
     "30": {
-      "op": "bytec_0 // \"contact_info\""
+      "op": "bytec_0 // \"contact_info\"",
+      "defined_out": [
+        "\"contact_info\""
+      ],
+      "stack_out": [
+        "\"contact_info\""
+      ]
     },
     "31": {
-      "op": "pushbytes 0x000c000e000000000000000000000000"
+      "op": "pushbytes 0x000c000e000000000000000000000000",
+      "defined_out": [
+        "\"contact_info\"",
+        "0x000c000e000000000000000000000000"
+      ],
+      "stack_out": [
+        "\"contact_info\"",
+        "0x000c000e000000000000000000000000"
+      ]
     },
     "49": {
-      "op": "app_global_put"
+      "op": "app_global_put",
+      "stack_out": []
     },
     "50": {
       "block": "main_after_if_else@2",
@@ -54,13 +69,32 @@
       "stack_out": []
     },
     "55": {
-      "op": "pushbytess 0x7f68c13f 0x288dc75f // method \"add_contact_info((string,string,uint64))uint64\", method \"return_contact()(string,string,uint64)\""
+      "op": "pushbytess 0x7f68c13f 0x288dc75f // method \"add_contact_info((string,string,uint64))uint64\", method \"return_contact()(string,string,uint64)\"",
+      "defined_out": [
+        "Method(add_contact_info((string,string,uint64))uint64)",
+        "Method(return_contact()(string,string,uint64))"
+      ],
+      "stack_out": [
+        "Method(add_contact_info((string,string,uint64))uint64)",
+        "Method(return_contact()(string,string,uint64))"
+      ]
     },
     "67": {
-      "op": "txna ApplicationArgs 0"
+      "op": "txna ApplicationArgs 0",
+      "defined_out": [
+        "Method(add_contact_info((string,string,uint64))uint64)",
+        "Method(return_contact()(string,string,uint64))",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "Method(add_contact_info((string,string,uint64))uint64)",
+        "Method(return_contact()(string,string,uint64))",
+        "tmp%2#0"
+      ]
     },
     "70": {
-      "op": "match main_add_contact_info_route@5 main_return_contact_route@6"
+      "op": "match main_add_contact_info_route@5 main_return_contact_route@6",
+      "stack_out": []
     },
     "76": {
       "block": "main_after_if_else@9",
@@ -74,7 +108,8 @@
       ]
     },
     "77": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "78": {
       "block": "main_return_contact_route@6",
@@ -166,7 +201,8 @@
       ]
     },
     "93": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "94": {
       "block": "main_add_contact_info_route@5",
@@ -276,7 +312,8 @@
       ]
     },
     "113": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "114": {
       "block": "main_bare_routing@7",
@@ -294,20 +331,40 @@
       "stack_out": []
     },
     "119": {
-      "op": "txn ApplicationID"
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%16#0"
+      ],
+      "stack_out": [
+        "tmp%16#0"
+      ]
     },
     "121": {
-      "op": "!"
+      "op": "!",
+      "defined_out": [
+        "tmp%17#0"
+      ],
+      "stack_out": [
+        "tmp%17#0"
+      ]
     },
     "122": {
       "error": "can only call when creating",
-      "op": "assert // can only call when creating"
+      "op": "assert // can only call when creating",
+      "stack_out": []
     },
     "123": {
-      "op": "intc_1 // 1"
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
     },
     "124": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "125": {
       "subroutine": "smart_contracts.arc4_types.contract.Arc4Tuple.add_contact_info",
@@ -606,73 +663,68 @@
       ]
     },
     "200": {
-      "op": "dup",
-      "defined_out": [
-        "phone#0",
-        "phone#0 (copy)"
-      ],
-      "stack_out": [
-        "phone#0",
-        "phone#0 (copy)"
-      ]
-    },
-    "201": {
       "op": "pushbytes 0x00000000211d1ae3",
       "defined_out": [
         "0x00000000211d1ae3",
-        "phone#0",
-        "phone#0 (copy)"
+        "phone#0"
       ],
       "stack_out": [
         "phone#0",
-        "phone#0 (copy)",
         "0x00000000211d1ae3"
       ]
     },
-    "211": {
+    "210": {
       "op": "b==",
       "defined_out": [
-        "phone#0",
         "tmp%4#0"
       ],
       "stack_out": [
-        "phone#0",
         "tmp%4#0"
       ]
+    },
+    "211": {
+      "op": "assert",
+      "stack_out": []
     },
     "212": {
-      "op": "assert",
-      "stack_out": [
-        "phone#0"
-      ]
-    },
-    "213": {
       "op": "bytec_0 // \"contact_info\"",
       "defined_out": [
-        "\"contact_info\"",
-        "phone#0"
+        "\"contact_info\""
       ],
       "stack_out": [
-        "phone#0",
         "\"contact_info\""
       ]
     },
-    "214": {
+    "213": {
       "op": "frame_dig -1",
       "stack_out": [
-        "phone#0",
         "\"contact_info\"",
         "contact#0 (copy)"
       ]
     },
-    "216": {
+    "215": {
       "op": "app_global_put",
+      "stack_out": []
+    },
+    "216": {
+      "op": "frame_dig -1",
       "stack_out": [
-        "phone#0"
+        "contact#0 (copy)"
       ]
     },
-    "217": {
-      "op": "btoi",
+    "218": {
+      "op": "pushint 4 // 4",
+      "defined_out": [
+        "4",
+        "contact#0 (copy)"
+      ],
+      "stack_out": [
+        "contact#0 (copy)",
+        "4"
+      ]
+    },
+    "220": {
+      "op": "extract_uint64",
       "defined_out": [
         "tmp%5#0"
       ],
@@ -680,18 +732,15 @@
         "tmp%5#0"
       ]
     },
-    "218": {
+    "221": {
       "retsub": true,
       "op": "retsub"
     },
-    "219": {
+    "222": {
       "subroutine": "smart_contracts.arc4_types.contract.Arc4Tuple.return_contact",
       "params": {},
       "block": "return_contact",
       "stack_in": [],
-      "op": "proto 0 1"
-    },
-    "222": {
       "op": "intc_0 // 0",
       "defined_out": [
         "0"

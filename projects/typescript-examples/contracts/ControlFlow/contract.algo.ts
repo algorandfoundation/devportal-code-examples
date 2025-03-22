@@ -31,7 +31,9 @@ export default class ControlFlow extends Contract {
       return 'This account is poor :('
     }
   }
+  // example: IF_ELSE
 
+  // example: TERNARY
   /**
    * Determines if a number is even or odd
    * @param number The number to check
@@ -41,7 +43,7 @@ export default class ControlFlow extends Contract {
   public isEven(number: uint64): string {
     return number % 2 === 0 ? 'Even' : 'Odd'
   }
-  // example: IF_ELSE
+  // example: TERNARY
 
   // example: FOR_LOOP
   /**

@@ -3,7 +3,7 @@
   "sources": [
     "../../control_flow/contract.py"
   ],
-  "mappings": ";;;;;AA4BA;;AAAA;;;AAAA;;;;;;AAAA;;;AAAA;;;;AAAA;;AAGK;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;;AAHL;;AAAA;;;;;;;;;AAGA;;;AAEgB;;;;;;;;AAE+B;;;AACpB;;AAAA;AAAA;AAAA;;;AAAf;;AAAA;AAAA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;;AADZ;;;AAA+C;;AAAA;AAAA;AAAA;;AAAA;;AAAA;AAAA;AAAA;;;;;AAGnC;AAAJ;;AAEmB;AAAf;;AAAQ;;AAAU;;AAAV;AAApB;;;AACY;;AAAA;;AAAA;AAAA;;AAAA;AAAA;;AADQ;AAAA;AAAA;;;;;AAGL;;AAAK;;AAAL;AAAP;AAEA;;AAAA;;AAAA",
+  "mappings": ";;;;;AA8BA;;AAAA;;;AAAA;;;;;;AAAA;;;AAAA;;;;AAAA;;AAEK;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;;AAFL;;AAAA;;;;;;;;;AAEA;;;AAEgB;;;;;;;;AAE+B;;;AACpB;;AAAA;AAAA;AAAA;;;AAAf;;AAAA;AAAA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;;AADZ;;;AAA+C;;AAAA;AAAA;AAAA;;AAAA;;AAAA;AAAA;AAAA;;;;;AAGnC;AAAJ;;AAEmB;AAAf;;AAAQ;;AAAU;;AAAV;AAApB;;;AACY;;AAAA;;AAAA;AAAA;;AAAA;AAAA;;AADQ;AAAA;AAAA;;;;;AAGL;;AAAK;;AAAL;AAAP;AAEA;;AAAA;;AAAA",
   "op_pc_offset": 0,
   "pc_events": {
     "1": {
@@ -27,13 +27,28 @@
       "stack_out": []
     },
     "10": {
-      "op": "pushbytes 0x91d632fb // method \"for_loop()uint8[4]\""
+      "op": "pushbytes 0x91d632fb // method \"for_loop()uint8[4]\"",
+      "defined_out": [
+        "Method(for_loop()uint8[4])"
+      ],
+      "stack_out": [
+        "Method(for_loop()uint8[4])"
+      ]
     },
     "16": {
-      "op": "txna ApplicationArgs 0"
+      "op": "txna ApplicationArgs 0",
+      "defined_out": [
+        "Method(for_loop()uint8[4])",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "Method(for_loop()uint8[4])",
+        "tmp%2#0"
+      ]
     },
     "19": {
-      "op": "match main_for_loop_route@3"
+      "op": "match main_for_loop_route@3",
+      "stack_out": []
     },
     "23": {
       "block": "main_after_if_else@10",
@@ -47,7 +62,8 @@
       ]
     },
     "24": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "25": {
       "block": "main_for_loop_route@3",
@@ -139,7 +155,8 @@
       ]
     },
     "45": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "46": {
       "block": "main_bare_routing@6",
@@ -157,20 +174,40 @@
       "stack_out": []
     },
     "51": {
-      "op": "txn ApplicationID"
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%10#0"
+      ],
+      "stack_out": [
+        "tmp%10#0"
+      ]
     },
     "53": {
-      "op": "!"
+      "op": "!",
+      "defined_out": [
+        "tmp%11#0"
+      ],
+      "stack_out": [
+        "tmp%11#0"
+      ]
     },
     "54": {
       "error": "can only call when creating",
-      "op": "assert // can only call when creating"
+      "op": "assert // can only call when creating",
+      "stack_out": []
     },
     "55": {
-      "op": "intc_0 // 1"
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
     },
     "56": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "57": {
       "subroutine": "smart_contracts.control_flow.contract.ForLoopsExample.for_loop",
@@ -180,7 +217,10 @@
       "op": "proto 0 1"
     },
     "60": {
-      "op": "pushbytess \"\" 0x00000000 // \"\", 0x00000000"
+      "op": "pushbytess \"\" 0x00000000 // \"\", 0x00000000",
+      "stack_out": [
+        "x#0"
+      ]
     },
     "68": {
       "op": "pushint 3 // 3"
@@ -434,28 +474,100 @@
       ]
     },
     "96": {
-      "op": "frame_dig 2"
+      "op": "frame_dig 2",
+      "stack_out": [
+        "x#0",
+        "array#0",
+        "item#0",
+        "index#0",
+        "item#0"
+      ]
     },
     "98": {
-      "op": "intc_0 // 1"
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "array#0",
+        "index#0",
+        "item#0"
+      ],
+      "stack_out": [
+        "x#0",
+        "array#0",
+        "item#0",
+        "index#0",
+        "item#0",
+        "1"
+      ]
     },
     "99": {
-      "op": "-"
+      "op": "-",
+      "stack_out": [
+        "x#0",
+        "array#0",
+        "item#0",
+        "index#0",
+        "item#0"
+      ]
     },
     "100": {
-      "op": "frame_bury 2"
+      "op": "frame_bury 2",
+      "defined_out": [
+        "array#0",
+        "index#0",
+        "item#0"
+      ],
+      "stack_out": [
+        "x#0",
+        "array#0",
+        "item#0",
+        "index#0"
+      ]
     },
     "102": {
-      "op": "frame_dig 3"
+      "op": "frame_dig 3",
+      "stack_out": [
+        "x#0",
+        "array#0",
+        "item#0",
+        "index#0",
+        "index#0"
+      ]
     },
     "104": {
-      "op": "intc_0 // 1"
+      "op": "intc_0 // 1",
+      "stack_out": [
+        "x#0",
+        "array#0",
+        "item#0",
+        "index#0",
+        "index#0",
+        "1"
+      ]
     },
     "105": {
-      "op": "+"
+      "op": "+",
+      "stack_out": [
+        "x#0",
+        "array#0",
+        "item#0",
+        "index#0",
+        "index#0"
+      ]
     },
     "106": {
-      "op": "frame_bury 3"
+      "op": "frame_bury 3",
+      "defined_out": [
+        "array#0",
+        "index#0",
+        "item#0"
+      ],
+      "stack_out": [
+        "x#0",
+        "array#0",
+        "item#0",
+        "index#0"
+      ]
     },
     "108": {
       "op": "b for_loop_for_body@2"
@@ -578,31 +690,122 @@
       ]
     },
     "125": {
-      "op": "frame_dig 0"
+      "op": "frame_dig 0",
+      "defined_out": [
+        "item#0",
+        "x#0"
+      ],
+      "stack_out": [
+        "x#0",
+        "array#0",
+        "item#0",
+        "index#0",
+        "x#0"
+      ]
     },
     "127": {
-      "op": "frame_dig 2"
+      "op": "frame_dig 2",
+      "stack_out": [
+        "x#0",
+        "array#0",
+        "item#0",
+        "index#0",
+        "x#0",
+        "item#0"
+      ]
     },
     "129": {
-      "op": "dup"
+      "op": "dup",
+      "defined_out": [
+        "item#0",
+        "item#0 (copy)",
+        "x#0"
+      ],
+      "stack_out": [
+        "x#0",
+        "array#0",
+        "item#0",
+        "index#0",
+        "x#0",
+        "item#0 (copy)",
+        "item#0 (copy)"
+      ]
     },
     "130": {
-      "op": "cover 2"
+      "op": "cover 2",
+      "stack_out": [
+        "x#0",
+        "array#0",
+        "item#0",
+        "index#0",
+        "item#0",
+        "x#0",
+        "item#0 (copy)"
+      ]
     },
     "132": {
-      "op": "+"
+      "op": "+",
+      "stack_out": [
+        "x#0",
+        "array#0",
+        "item#0",
+        "index#0",
+        "item#0",
+        "x#0"
+      ]
     },
     "133": {
-      "op": "frame_bury 0"
+      "op": "frame_bury 0",
+      "defined_out": [
+        "item#0",
+        "x#0"
+      ],
+      "stack_out": [
+        "x#0",
+        "array#0",
+        "item#0",
+        "index#0",
+        "item#0"
+      ]
     },
     "135": {
-      "op": "intc_0 // 1"
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "item#0",
+        "x#0"
+      ],
+      "stack_out": [
+        "x#0",
+        "array#0",
+        "item#0",
+        "index#0",
+        "item#0",
+        "1"
+      ]
     },
     "136": {
-      "op": "+"
+      "op": "+",
+      "stack_out": [
+        "x#0",
+        "array#0",
+        "item#0",
+        "index#0",
+        "item#0"
+      ]
     },
     "137": {
-      "op": "frame_bury 2"
+      "op": "frame_bury 2",
+      "defined_out": [
+        "item#0",
+        "x#0"
+      ],
+      "stack_out": [
+        "x#0",
+        "array#0",
+        "item#0",
+        "index#0"
+      ]
     },
     "139": {
       "op": "b for_loop_for_header@6"

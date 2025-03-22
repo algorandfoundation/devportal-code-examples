@@ -3,7 +3,7 @@
   "sources": [
     "../../arc4_types/contract.py"
   ],
-  "mappings": ";;;;;;AA4HA;;AAAA;;;AAAA;;;;;;AAAA;;;AAAA;;;;AAAA;;AAEK;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;;AAFL;;AAAA;;;;;;;;;AAEA;;;AASgB;;AAChB;;AAAA;AAAA;AAAA;;;AAAA;;AAAA;AAAA;AAAA;AAL8B;;;;;;;;;;;;;;;;;;AAKlB;AAAZ;AAAA;AACqB;AAAT;;AAAA;AAAA;;;;;;;;;AAEG;;AAAS;;;AAAT;AAAP;",
+  "mappings": ";;;;;;AA4HA;;AAAA;;;AAAA;;;;;;AAAA;;;AAAA;;;;AAAA;;AAEK;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;;AAFL;;AAAA;;;;;;;;;AAEA;;;AASgB;;AAChB;;AAAA;AAAA;AAAA;;;AAAA;;AAAA;AAAA;AAAA;AAL8B;;;;;;;;;;;;;;;;;;AAMT;AAAA;AAAT;;AAAA;AAAA;;;;;;;;;AAEG;;AAAS;;;AAAT;AAAP;",
   "op_pc_offset": 0,
   "pc_events": {
     "1": {
@@ -11,7 +11,7 @@
       "params": {},
       "block": "main",
       "stack_in": [],
-      "op": "intcblock 1 4 0"
+      "op": "intcblock 1 0 4"
     },
     "6": {
       "op": "txn NumAppArgs",
@@ -27,18 +27,33 @@
       "stack_out": []
     },
     "11": {
-      "op": "pushbytes 0x0a28e7b6 // method \"arc4_static_array()void\""
+      "op": "pushbytes 0x0a28e7b6 // method \"arc4_static_array()void\"",
+      "defined_out": [
+        "Method(arc4_static_array()void)"
+      ],
+      "stack_out": [
+        "Method(arc4_static_array()void)"
+      ]
     },
     "17": {
-      "op": "txna ApplicationArgs 0"
+      "op": "txna ApplicationArgs 0",
+      "defined_out": [
+        "Method(arc4_static_array()void)",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "Method(arc4_static_array()void)",
+        "tmp%2#0"
+      ]
     },
     "20": {
-      "op": "match main_arc4_static_array_route@3"
+      "op": "match main_arc4_static_array_route@3",
+      "stack_out": []
     },
     "24": {
       "block": "main_after_if_else@10",
       "stack_in": [],
-      "op": "intc_2 // 0",
+      "op": "intc_1 // 0",
       "defined_out": [
         "tmp%0#0"
       ],
@@ -47,7 +62,8 @@
       ]
     },
     "25": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "26": {
       "block": "main_arc4_static_array_route@3",
@@ -102,7 +118,8 @@
       ]
     },
     "37": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "38": {
       "block": "main_bare_routing@6",
@@ -120,20 +137,40 @@
       "stack_out": []
     },
     "43": {
-      "op": "txn ApplicationID"
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "tmp%8#0"
+      ]
     },
     "45": {
-      "op": "!"
+      "op": "!",
+      "defined_out": [
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%9#0"
+      ]
     },
     "46": {
       "error": "can only call when creating",
-      "op": "assert // can only call when creating"
+      "op": "assert // can only call when creating",
+      "stack_out": []
     },
     "47": {
-      "op": "intc_0 // 1"
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
     },
     "48": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "49": {
       "subroutine": "smart_contracts.arc4_types.contract.Arc4StaticArray.arc4_static_array",
@@ -143,7 +180,7 @@
       "op": "proto 0 0"
     },
     "52": {
-      "op": "intc_2 // 0"
+      "op": "intc_1 // 0"
     },
     "53": {
       "op": "dup",
@@ -173,7 +210,7 @@
       ]
     },
     "56": {
-      "op": "intc_1 // 4",
+      "op": "intc_2 // 4",
       "defined_out": [
         "4",
         "item_index_internal%0#0"
@@ -205,55 +242,160 @@
       ]
     },
     "61": {
-      "op": "frame_dig 1"
+      "op": "frame_dig 1",
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0",
+        "item_index_internal%0#0"
+      ]
     },
     "63": {
-      "op": "dup"
+      "op": "dup",
+      "defined_out": [
+        "item_index_internal%0#0",
+        "item_index_internal%0#0 (copy)"
+      ],
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0",
+        "item_index_internal%0#0",
+        "item_index_internal%0#0 (copy)"
+      ]
     },
     "64": {
-      "op": "intc_1 // 4"
+      "op": "intc_2 // 4",
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0",
+        "item_index_internal%0#0",
+        "item_index_internal%0#0 (copy)",
+        "4"
+      ]
     },
     "65": {
-      "op": "*"
+      "op": "*",
+      "defined_out": [
+        "item_index_internal%0#0",
+        "item_offset%0#0"
+      ],
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0",
+        "item_index_internal%0#0",
+        "item_offset%0#0"
+      ]
     },
     "66": {
-      "op": "pushbytes 0x000000010000000a000000ff00000080"
+      "op": "pushbytes 0x000000010000000a000000ff00000080",
+      "defined_out": [
+        "0x000000010000000a000000ff00000080",
+        "item_index_internal%0#0",
+        "item_offset%0#0"
+      ],
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0",
+        "item_index_internal%0#0",
+        "item_offset%0#0",
+        "0x000000010000000a000000ff00000080"
+      ]
     },
     "84": {
-      "op": "swap"
+      "op": "swap",
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0",
+        "item_index_internal%0#0",
+        "0x000000010000000a000000ff00000080",
+        "item_offset%0#0"
+      ]
     },
     "85": {
-      "op": "intc_1 // 4"
+      "op": "extract_uint32",
+      "defined_out": [
+        "item_index_internal%0#0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0",
+        "item_index_internal%0#0",
+        "tmp%0#0"
+      ]
     },
     "86": {
-      "error": "Index access is out of bounds",
-      "op": "extract3 // on error: Index access is out of bounds"
-    },
-    "87": {
-      "op": "btoi"
+      "op": "frame_dig 0",
+      "defined_out": [
+        "item_index_internal%0#0",
+        "tmp%0#0",
+        "total#0"
+      ],
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0",
+        "item_index_internal%0#0",
+        "tmp%0#0",
+        "total#0"
+      ]
     },
     "88": {
-      "op": "frame_dig 0"
+      "op": "+",
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0",
+        "item_index_internal%0#0",
+        "total#0"
+      ]
     },
-    "90": {
-      "op": "+"
+    "89": {
+      "op": "frame_bury 0",
+      "defined_out": [
+        "item_index_internal%0#0",
+        "total#0"
+      ],
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0",
+        "item_index_internal%0#0"
+      ]
     },
     "91": {
-      "op": "frame_bury 0"
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "item_index_internal%0#0",
+        "total#0"
+      ],
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0",
+        "item_index_internal%0#0",
+        "1"
+      ]
+    },
+    "92": {
+      "op": "+",
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0",
+        "item_index_internal%0#0"
+      ]
     },
     "93": {
-      "op": "intc_0 // 1"
-    },
-    "94": {
-      "op": "+"
+      "op": "frame_bury 1",
+      "defined_out": [
+        "item_index_internal%0#0",
+        "total#0"
+      ],
+      "stack_out": [
+        "total#0",
+        "item_index_internal%0#0"
+      ]
     },
     "95": {
-      "op": "frame_bury 1"
-    },
-    "97": {
       "op": "b arc4_static_array_for_header@1"
     },
-    "100": {
+    "98": {
       "block": "arc4_static_array_after_for@4",
       "stack_in": [
         "total#0",
@@ -269,7 +411,7 @@
         "total#0"
       ]
     },
-    "102": {
+    "100": {
       "op": "pushint 394 // 394",
       "defined_out": [
         "394",
@@ -282,7 +424,7 @@
         "394"
       ]
     },
-    "105": {
+    "103": {
       "op": "==",
       "defined_out": [
         "tmp%1#0",
@@ -294,14 +436,14 @@
         "tmp%1#0"
       ]
     },
-    "106": {
+    "104": {
       "op": "assert",
       "stack_out": [
         "total#0",
         "item_index_internal%0#0"
       ]
     },
-    "107": {
+    "105": {
       "retsub": true,
       "op": "retsub"
     }

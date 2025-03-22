@@ -4,7 +4,7 @@
 // algopy.arc4.ARC4Contract.approval_program() -> uint64:
 main:
     intcblock 1 0
-    // smart_contracts/control_flow/contract.py:29
+    // smart_contracts/control_flow/contract.py:31
     // class ForLoopsExample(ARC4Contract):
     txn NumAppArgs
     bz main_bare_routing@6
@@ -13,13 +13,13 @@ main:
     match main_for_loop_route@3
 
 main_after_if_else@10:
-    // smart_contracts/control_flow/contract.py:29
+    // smart_contracts/control_flow/contract.py:31
     // class ForLoopsExample(ARC4Contract):
     intc_1 // 0
     return
 
 main_for_loop_route@3:
-    // smart_contracts/control_flow/contract.py:31-32
+    // smart_contracts/control_flow/contract.py:32-33
     // # urange: reversed items, forward index
     // @arc4.abimethod
     txn OnCompletion
@@ -36,7 +36,7 @@ main_for_loop_route@3:
     return
 
 main_bare_routing@6:
-    // smart_contracts/control_flow/contract.py:29
+    // smart_contracts/control_flow/contract.py:31
     // class ForLoopsExample(ARC4Contract):
     txn OnCompletion
     bnz main_after_if_else@10
@@ -49,21 +49,21 @@ main_bare_routing@6:
 
 // smart_contracts.control_flow.contract.ForLoopsExample.for_loop() -> bytes:
 for_loop:
-    // smart_contracts/control_flow/contract.py:31-33
+    // smart_contracts/control_flow/contract.py:32-34
     // # urange: reversed items, forward index
     // @arc4.abimethod
     // def for_loop(self) -> FourArray:
     proto 0 1
-    // smart_contracts/control_flow/contract.py:34
+    // smart_contracts/control_flow/contract.py:35
     // array = FourArray(arc4.UInt8(0), arc4.UInt8(0), arc4.UInt8(0), arc4.UInt8(0))
     pushbytess "" 0x00000000 // "", 0x00000000
-    // smart_contracts/control_flow/contract.py:36
+    // smart_contracts/control_flow/contract.py:37
     // for index, item in uenumerate(reversed(urange(4))):  # [3, 2, 1, 0]
     pushint 3 // 3
     intc_1 // 0
 
 for_loop_for_body@2:
-    // smart_contracts/control_flow/contract.py:37
+    // smart_contracts/control_flow/contract.py:38
     // array[index] = arc4.UInt8(item)
     frame_dig 2
     dup
@@ -79,7 +79,7 @@ for_loop_for_body@2:
     uncover 2
     replace3
     frame_bury 1
-    // smart_contracts/control_flow/contract.py:36
+    // smart_contracts/control_flow/contract.py:37
     // for index, item in uenumerate(reversed(urange(4))):  # [3, 2, 1, 0]
     bz for_loop_after_for@5
     frame_dig 2
@@ -93,23 +93,23 @@ for_loop_for_body@2:
     b for_loop_for_body@2
 
 for_loop_after_for@5:
-    // smart_contracts/control_flow/contract.py:39
+    // smart_contracts/control_flow/contract.py:40
     // x = UInt64(0)
     intc_1 // 0
     frame_bury 0
-    // smart_contracts/control_flow/contract.py:41
+    // smart_contracts/control_flow/contract.py:42
     // for item in urange(1, 5):  # [1, 2, 3, 4]
     intc_0 // 1
     frame_bury 2
 
 for_loop_for_header@6:
-    // smart_contracts/control_flow/contract.py:41
+    // smart_contracts/control_flow/contract.py:42
     // for item in urange(1, 5):  # [1, 2, 3, 4]
     frame_dig 2
     pushint 5 // 5
     <
     bz for_loop_after_for@9
-    // smart_contracts/control_flow/contract.py:42
+    // smart_contracts/control_flow/contract.py:43
     // x += item
     frame_dig 0
     frame_dig 2
@@ -117,7 +117,7 @@ for_loop_for_header@6:
     cover 2
     +
     frame_bury 0
-    // smart_contracts/control_flow/contract.py:41
+    // smart_contracts/control_flow/contract.py:42
     // for item in urange(1, 5):  # [1, 2, 3, 4]
     intc_0 // 1
     +
@@ -125,13 +125,13 @@ for_loop_for_header@6:
     b for_loop_for_header@6
 
 for_loop_after_for@9:
-    // smart_contracts/control_flow/contract.py:44
+    // smart_contracts/control_flow/contract.py:45
     // assert x == 10
     frame_dig 0
     pushint 10 // 10
     ==
     assert
-    // smart_contracts/control_flow/contract.py:46
+    // smart_contracts/control_flow/contract.py:47
     // return array
     frame_dig 1
     frame_bury 0

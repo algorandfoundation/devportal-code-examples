@@ -30,13 +30,48 @@
       "stack_out": []
     },
     "17": {
-      "op": "pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58 // method \"add_arc4_uint64(uint64,uint64)uint64\", method \"add_arc4_uint_n(uint8,uint16,uint32,uint64)uint64\", method \"add_arc4_biguint_n(uint128,uint256,uint512)uint512\", method \"arc4_byte(byte)byte\", method \"arc4_address_properties(address)uint64\", method \"arc4_address_return(address)address\""
+      "op": "pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58 // method \"add_arc4_uint64(uint64,uint64)uint64\", method \"add_arc4_uint_n(uint8,uint16,uint32,uint64)uint64\", method \"add_arc4_biguint_n(uint128,uint256,uint512)uint512\", method \"arc4_byte(byte)byte\", method \"arc4_address_properties(address)uint64\", method \"arc4_address_return(address)address\"",
+      "defined_out": [
+        "Method(add_arc4_biguint_n(uint128,uint256,uint512)uint512)",
+        "Method(add_arc4_uint64(uint64,uint64)uint64)",
+        "Method(add_arc4_uint_n(uint8,uint16,uint32,uint64)uint64)",
+        "Method(arc4_address_properties(address)uint64)",
+        "Method(arc4_address_return(address)address)",
+        "Method(arc4_byte(byte)byte)"
+      ],
+      "stack_out": [
+        "Method(add_arc4_uint64(uint64,uint64)uint64)",
+        "Method(add_arc4_uint_n(uint8,uint16,uint32,uint64)uint64)",
+        "Method(add_arc4_biguint_n(uint128,uint256,uint512)uint512)",
+        "Method(arc4_byte(byte)byte)",
+        "Method(arc4_address_properties(address)uint64)",
+        "Method(arc4_address_return(address)address)"
+      ]
     },
     "49": {
-      "op": "txna ApplicationArgs 0"
+      "op": "txna ApplicationArgs 0",
+      "defined_out": [
+        "Method(add_arc4_biguint_n(uint128,uint256,uint512)uint512)",
+        "Method(add_arc4_uint64(uint64,uint64)uint64)",
+        "Method(add_arc4_uint_n(uint8,uint16,uint32,uint64)uint64)",
+        "Method(arc4_address_properties(address)uint64)",
+        "Method(arc4_address_return(address)address)",
+        "Method(arc4_byte(byte)byte)",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "Method(add_arc4_uint64(uint64,uint64)uint64)",
+        "Method(add_arc4_uint_n(uint8,uint16,uint32,uint64)uint64)",
+        "Method(add_arc4_biguint_n(uint128,uint256,uint512)uint512)",
+        "Method(arc4_byte(byte)byte)",
+        "Method(arc4_address_properties(address)uint64)",
+        "Method(arc4_address_return(address)address)",
+        "tmp%2#0"
+      ]
     },
     "52": {
-      "op": "match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+      "op": "match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8",
+      "stack_out": []
     },
     "66": {
       "block": "main_after_if_else@15",
@@ -50,26 +85,27 @@
       ]
     },
     "68": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "69": {
       "block": "main_arc4_address_return_route@8",
       "stack_in": [],
       "op": "txn OnCompletion",
       "defined_out": [
-        "tmp%43#0"
+        "tmp%32#0"
       ],
       "stack_out": [
-        "tmp%43#0"
+        "tmp%32#0"
       ]
     },
     "71": {
       "op": "!",
       "defined_out": [
-        "tmp%44#0"
+        "tmp%33#0"
       ],
       "stack_out": [
-        "tmp%44#0"
+        "tmp%33#0"
       ]
     },
     "72": {
@@ -80,10 +116,10 @@
     "73": {
       "op": "txn ApplicationID",
       "defined_out": [
-        "tmp%45#0"
+        "tmp%34#0"
       ],
       "stack_out": [
-        "tmp%45#0"
+        "tmp%34#0"
       ]
     },
     "75": {
@@ -92,7 +128,13 @@
       "stack_out": []
     },
     "76": {
-      "op": "bytec_0 // 0x151f7c75"
+      "op": "bytec_0 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75"
+      ],
+      "stack_out": [
+        "0x151f7c75"
+      ]
     },
     "77": {
       "op": "txna ApplicationArgs 1",
@@ -108,10 +150,10 @@
     "80": {
       "op": "concat",
       "defined_out": [
-        "tmp%49#0"
+        "tmp%37#0"
       ],
       "stack_out": [
-        "tmp%49#0"
+        "tmp%37#0"
       ]
     },
     "81": {
@@ -128,26 +170,27 @@
       ]
     },
     "83": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "84": {
       "block": "main_arc4_address_properties_route@7",
       "stack_in": [],
       "op": "txn OnCompletion",
       "defined_out": [
-        "tmp%37#0"
+        "tmp%27#0"
       ],
       "stack_out": [
-        "tmp%37#0"
+        "tmp%27#0"
       ]
     },
     "86": {
       "op": "!",
       "defined_out": [
-        "tmp%38#0"
+        "tmp%28#0"
       ],
       "stack_out": [
-        "tmp%38#0"
+        "tmp%28#0"
       ]
     },
     "87": {
@@ -158,10 +201,10 @@
     "88": {
       "op": "txn ApplicationID",
       "defined_out": [
-        "tmp%39#0"
+        "tmp%29#0"
       ],
       "stack_out": [
-        "tmp%39#0"
+        "tmp%29#0"
       ]
     },
     "90": {
@@ -172,10 +215,10 @@
     "91": {
       "op": "txna ApplicationArgs 1",
       "defined_out": [
-        "tmp%41#0"
+        "reinterpret_bytes[32]%1#0"
       ],
       "stack_out": [
-        "tmp%41#0"
+        "reinterpret_bytes[32]%1#0"
       ]
     },
     "94": {
@@ -218,10 +261,10 @@
     "100": {
       "op": "concat",
       "defined_out": [
-        "tmp%42#0"
+        "tmp%31#0"
       ],
       "stack_out": [
-        "tmp%42#0"
+        "tmp%31#0"
       ]
     },
     "101": {
@@ -238,26 +281,27 @@
       ]
     },
     "103": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "104": {
       "block": "main_arc4_byte_route@6",
       "stack_in": [],
       "op": "txn OnCompletion",
       "defined_out": [
-        "tmp%30#0"
+        "tmp%21#0"
       ],
       "stack_out": [
-        "tmp%30#0"
+        "tmp%21#0"
       ]
     },
     "106": {
       "op": "!",
       "defined_out": [
-        "tmp%31#0"
+        "tmp%22#0"
       ],
       "stack_out": [
-        "tmp%31#0"
+        "tmp%22#0"
       ]
     },
     "107": {
@@ -268,10 +312,10 @@
     "108": {
       "op": "txn ApplicationID",
       "defined_out": [
-        "tmp%32#0"
+        "tmp%23#0"
       ],
       "stack_out": [
-        "tmp%32#0"
+        "tmp%23#0"
       ]
     },
     "110": {
@@ -282,30 +326,30 @@
     "111": {
       "op": "txna ApplicationArgs 1",
       "defined_out": [
-        "tmp%34#0"
+        "reinterpret_bytes[1]%1#0"
       ],
       "stack_out": [
-        "tmp%34#0"
+        "reinterpret_bytes[1]%1#0"
       ]
     },
     "114": {
       "callsub": "smart_contracts.arc4_types.contract.Arc4Types.arc4_byte",
       "op": "callsub arc4_byte",
       "defined_out": [
-        "tmp%35#0"
+        "tmp%25#0"
       ],
       "stack_out": [
-        "tmp%35#0"
+        "tmp%25#0"
       ]
     },
     "117": {
       "op": "bytec_0 // 0x151f7c75",
       "defined_out": [
         "0x151f7c75",
-        "tmp%35#0"
+        "tmp%25#0"
       ],
       "stack_out": [
-        "tmp%35#0",
+        "tmp%25#0",
         "0x151f7c75"
       ]
     },
@@ -313,16 +357,16 @@
       "op": "swap",
       "stack_out": [
         "0x151f7c75",
-        "tmp%35#0"
+        "tmp%25#0"
       ]
     },
     "119": {
       "op": "concat",
       "defined_out": [
-        "tmp%36#0"
+        "tmp%26#0"
       ],
       "stack_out": [
-        "tmp%36#0"
+        "tmp%26#0"
       ]
     },
     "120": {
@@ -339,26 +383,27 @@
       ]
     },
     "122": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "123": {
       "block": "main_add_arc4_biguint_n_route@5",
       "stack_in": [],
       "op": "txn OnCompletion",
       "defined_out": [
-        "tmp%21#0"
+        "tmp%15#0"
       ],
       "stack_out": [
-        "tmp%21#0"
+        "tmp%15#0"
       ]
     },
     "125": {
       "op": "!",
       "defined_out": [
-        "tmp%22#0"
+        "tmp%16#0"
       ],
       "stack_out": [
-        "tmp%22#0"
+        "tmp%16#0"
       ]
     },
     "126": {
@@ -369,10 +414,10 @@
     "127": {
       "op": "txn ApplicationID",
       "defined_out": [
-        "tmp%23#0"
+        "tmp%17#0"
       ],
       "stack_out": [
-        "tmp%23#0"
+        "tmp%17#0"
       ]
     },
     "129": {
@@ -381,42 +426,56 @@
       "stack_out": []
     },
     "130": {
-      "op": "txna ApplicationArgs 1"
+      "op": "txna ApplicationArgs 1",
+      "defined_out": [
+        "reinterpret_bytes[16]%0#0"
+      ],
+      "stack_out": [
+        "reinterpret_bytes[16]%0#0"
+      ]
     },
     "133": {
-      "op": "txna ApplicationArgs 2"
+      "op": "txna ApplicationArgs 2",
+      "defined_out": [
+        "reinterpret_bytes[16]%0#0",
+        "reinterpret_bytes[32]%0#0"
+      ],
+      "stack_out": [
+        "reinterpret_bytes[16]%0#0",
+        "reinterpret_bytes[32]%0#0"
+      ]
     },
     "136": {
       "op": "txna ApplicationArgs 3",
       "defined_out": [
-        "tmp%25#0",
-        "tmp%26#0",
-        "tmp%27#0"
+        "reinterpret_bytes[16]%0#0",
+        "reinterpret_bytes[32]%0#0",
+        "reinterpret_bytes[64]%0#0"
       ],
       "stack_out": [
-        "tmp%25#0",
-        "tmp%26#0",
-        "tmp%27#0"
+        "reinterpret_bytes[16]%0#0",
+        "reinterpret_bytes[32]%0#0",
+        "reinterpret_bytes[64]%0#0"
       ]
     },
     "139": {
       "callsub": "smart_contracts.arc4_types.contract.Arc4Types.add_arc4_biguint_n",
       "op": "callsub add_arc4_biguint_n",
       "defined_out": [
-        "tmp%28#0"
+        "tmp%19#0"
       ],
       "stack_out": [
-        "tmp%28#0"
+        "tmp%19#0"
       ]
     },
     "142": {
       "op": "bytec_0 // 0x151f7c75",
       "defined_out": [
         "0x151f7c75",
-        "tmp%28#0"
+        "tmp%19#0"
       ],
       "stack_out": [
-        "tmp%28#0",
+        "tmp%19#0",
         "0x151f7c75"
       ]
     },
@@ -424,16 +483,16 @@
       "op": "swap",
       "stack_out": [
         "0x151f7c75",
-        "tmp%28#0"
+        "tmp%19#0"
       ]
     },
     "144": {
       "op": "concat",
       "defined_out": [
-        "tmp%29#0"
+        "tmp%20#0"
       ],
       "stack_out": [
-        "tmp%29#0"
+        "tmp%20#0"
       ]
     },
     "145": {
@@ -450,26 +509,27 @@
       ]
     },
     "147": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "148": {
       "block": "main_add_arc4_uint_n_route@4",
       "stack_in": [],
       "op": "txn OnCompletion",
       "defined_out": [
-        "tmp%11#0"
+        "tmp%9#0"
       ],
       "stack_out": [
-        "tmp%11#0"
+        "tmp%9#0"
       ]
     },
     "150": {
       "op": "!",
       "defined_out": [
-        "tmp%12#0"
+        "tmp%10#0"
       ],
       "stack_out": [
-        "tmp%12#0"
+        "tmp%10#0"
       ]
     },
     "151": {
@@ -480,10 +540,10 @@
     "152": {
       "op": "txn ApplicationID",
       "defined_out": [
-        "tmp%13#0"
+        "tmp%11#0"
       ],
       "stack_out": [
-        "tmp%13#0"
+        "tmp%11#0"
       ]
     },
     "154": {
@@ -492,47 +552,71 @@
       "stack_out": []
     },
     "155": {
-      "op": "txna ApplicationArgs 1"
+      "op": "txna ApplicationArgs 1",
+      "defined_out": [
+        "reinterpret_bytes[1]%0#0"
+      ],
+      "stack_out": [
+        "reinterpret_bytes[1]%0#0"
+      ]
     },
     "158": {
-      "op": "txna ApplicationArgs 2"
+      "op": "txna ApplicationArgs 2",
+      "defined_out": [
+        "reinterpret_bytes[1]%0#0",
+        "reinterpret_bytes[2]%0#0"
+      ],
+      "stack_out": [
+        "reinterpret_bytes[1]%0#0",
+        "reinterpret_bytes[2]%0#0"
+      ]
     },
     "161": {
-      "op": "txna ApplicationArgs 3"
+      "op": "txna ApplicationArgs 3",
+      "defined_out": [
+        "reinterpret_bytes[1]%0#0",
+        "reinterpret_bytes[2]%0#0",
+        "reinterpret_bytes[4]%0#0"
+      ],
+      "stack_out": [
+        "reinterpret_bytes[1]%0#0",
+        "reinterpret_bytes[2]%0#0",
+        "reinterpret_bytes[4]%0#0"
+      ]
     },
     "164": {
       "op": "txna ApplicationArgs 4",
       "defined_out": [
-        "tmp%15#0",
-        "tmp%16#0",
-        "tmp%17#0",
-        "tmp%18#0"
+        "reinterpret_bytes[1]%0#0",
+        "reinterpret_bytes[2]%0#0",
+        "reinterpret_bytes[4]%0#0",
+        "reinterpret_bytes[8]%2#0"
       ],
       "stack_out": [
-        "tmp%15#0",
-        "tmp%16#0",
-        "tmp%17#0",
-        "tmp%18#0"
+        "reinterpret_bytes[1]%0#0",
+        "reinterpret_bytes[2]%0#0",
+        "reinterpret_bytes[4]%0#0",
+        "reinterpret_bytes[8]%2#0"
       ]
     },
     "167": {
       "callsub": "smart_contracts.arc4_types.contract.Arc4Types.add_arc4_uint_n",
       "op": "callsub add_arc4_uint_n",
       "defined_out": [
-        "tmp%19#0"
+        "tmp%13#0"
       ],
       "stack_out": [
-        "tmp%19#0"
+        "tmp%13#0"
       ]
     },
     "170": {
       "op": "bytec_0 // 0x151f7c75",
       "defined_out": [
         "0x151f7c75",
-        "tmp%19#0"
+        "tmp%13#0"
       ],
       "stack_out": [
-        "tmp%19#0",
+        "tmp%13#0",
         "0x151f7c75"
       ]
     },
@@ -540,16 +624,16 @@
       "op": "swap",
       "stack_out": [
         "0x151f7c75",
-        "tmp%19#0"
+        "tmp%13#0"
       ]
     },
     "172": {
       "op": "concat",
       "defined_out": [
-        "tmp%20#0"
+        "tmp%14#0"
       ],
       "stack_out": [
-        "tmp%20#0"
+        "tmp%14#0"
       ]
     },
     "173": {
@@ -566,7 +650,8 @@
       ]
     },
     "175": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "176": {
       "block": "main_add_arc4_uint64_route@3",
@@ -608,37 +693,43 @@
       "stack_out": []
     },
     "183": {
-      "op": "txna ApplicationArgs 1"
+      "op": "txna ApplicationArgs 1",
+      "defined_out": [
+        "reinterpret_bytes[8]%0#0"
+      ],
+      "stack_out": [
+        "reinterpret_bytes[8]%0#0"
+      ]
     },
     "186": {
       "op": "txna ApplicationArgs 2",
       "defined_out": [
-        "tmp%7#0",
-        "tmp%8#0"
+        "reinterpret_bytes[8]%0#0",
+        "reinterpret_bytes[8]%1#0"
       ],
       "stack_out": [
-        "tmp%7#0",
-        "tmp%8#0"
+        "reinterpret_bytes[8]%0#0",
+        "reinterpret_bytes[8]%1#0"
       ]
     },
     "189": {
       "callsub": "smart_contracts.arc4_types.contract.Arc4Types.add_arc4_uint64",
       "op": "callsub add_arc4_uint64",
       "defined_out": [
-        "tmp%9#0"
+        "tmp%7#0"
       ],
       "stack_out": [
-        "tmp%9#0"
+        "tmp%7#0"
       ]
     },
     "192": {
       "op": "bytec_0 // 0x151f7c75",
       "defined_out": [
         "0x151f7c75",
-        "tmp%9#0"
+        "tmp%7#0"
       ],
       "stack_out": [
-        "tmp%9#0",
+        "tmp%7#0",
         "0x151f7c75"
       ]
     },
@@ -646,16 +737,16 @@
       "op": "swap",
       "stack_out": [
         "0x151f7c75",
-        "tmp%9#0"
+        "tmp%7#0"
       ]
     },
     "194": {
       "op": "concat",
       "defined_out": [
-        "tmp%10#0"
+        "tmp%8#0"
       ],
       "stack_out": [
-        "tmp%10#0"
+        "tmp%8#0"
       ]
     },
     "195": {
@@ -672,17 +763,18 @@
       ]
     },
     "197": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "198": {
       "block": "main_bare_routing@11",
       "stack_in": [],
       "op": "txn OnCompletion",
       "defined_out": [
-        "tmp%50#0"
+        "tmp%38#0"
       ],
       "stack_out": [
-        "tmp%50#0"
+        "tmp%38#0"
       ]
     },
     "200": {
@@ -690,20 +782,40 @@
       "stack_out": []
     },
     "203": {
-      "op": "txn ApplicationID"
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%39#0"
+      ],
+      "stack_out": [
+        "tmp%39#0"
+      ]
     },
     "205": {
-      "op": "!"
+      "op": "!",
+      "defined_out": [
+        "tmp%40#0"
+      ],
+      "stack_out": [
+        "tmp%40#0"
+      ]
     },
     "206": {
       "error": "can only call when creating",
-      "op": "assert // can only call when creating"
+      "op": "assert // can only call when creating",
+      "stack_out": []
     },
     "207": {
-      "op": "intc_0 // 1"
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
     },
     "208": {
-      "op": "return"
+      "op": "return",
+      "stack_out": []
     },
     "209": {
       "subroutine": "smart_contracts.arc4_types.contract.Arc4Types.add_arc4_uint64",
