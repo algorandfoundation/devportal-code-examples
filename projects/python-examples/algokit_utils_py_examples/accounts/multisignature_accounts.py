@@ -27,6 +27,7 @@ def multisignature_accounts() -> None:
         signing_accounts=[account_a, account_b, account_c],
     )
 
+    # Fund the multisig account
     algorand_client.account.ensure_funded(
         multisig_account.address, dispenser, AlgoAmount(algo=10)
     )

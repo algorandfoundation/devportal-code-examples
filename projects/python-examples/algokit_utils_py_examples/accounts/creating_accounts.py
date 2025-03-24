@@ -13,15 +13,9 @@ def account_code_example() -> None:
     Each account will have a newly generated private/public key pair.
     """
     random_account = algorand_client.account.random()
+    random_account2 = algorand_client.account.random()
+    random_account3 = algorand_client.account.random()
     # example: RANDOM_ACCOUNTS
-
-    # example: KMD_ACCOUNT
-    """
-    Get or create an account from LocalNet's KMD (Key Management Daemon)
-    by name. If the account doesn't exist, it will be created.
-    """
-    kmd_account = algorand_client.account.from_kmd(name="ACCOUNT_NAME")
-    # example: KMD_ACCOUNT
 
     # example: ENV_ACCOUNT
     """
@@ -30,7 +24,7 @@ def account_code_example() -> None:
     if it doesn't exist.
     """
     env_account = algorand_client.account.from_environment(
-        name="MY_ACCOUNT", fund_with=AlgoAmount(algo=10)
+        name="MY_ACCOUNT", fund_with=AlgoAmount(algo=1)
     )
     # example: ENV_ACCOUNT
 
@@ -41,6 +35,14 @@ def account_code_example() -> None:
     """
     mnemonic_account = algorand_client.account.from_mnemonic(mnemonic="MNEMONIC_PHRASE")
     # example: MNEMONIC_ACCOUNT
+
+    # example: KMD_ACCOUNT
+    """
+    Get or create an account from LocalNet's KMD (Key Management Daemon)
+    by name. If the account doesn't exist, it will be created.
+    """
+    kmd_account = algorand_client.account.from_kmd(name="ACCOUNT_NAME")
+    # example: KMD_ACCOUNT
 
     # example: KMD_WALLET_OPERATIONS
     """

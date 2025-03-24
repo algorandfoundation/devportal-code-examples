@@ -33,4 +33,6 @@ def asset_clawback() -> None:
         )
     )
 
+    print("Asset clawback transaction ID:", txn_result.tx_id)
+
     # example: ASSET_CLAWBACK_TRANSACTION

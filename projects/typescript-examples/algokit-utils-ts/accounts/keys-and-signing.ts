@@ -7,10 +7,12 @@ export async function keysAndSigning() {
 
   // example: DEFAULT_SIGNER
   /**
-   * Set up a default signer for transactions.
-   * This will be used when no specific signer is provided.
+   * Sets the default signer to use if no other signer is specified.
+   * If this isn't set and a transaction needs signing for a given sender then an error will be
+   * thrown from get_signer / get_account.
    */
   algorand.account.setDefaultSigner(randomAccountA)
+
   // example: DEFAULT_SIGNER
 
   // example: MULTIPLE_SIGNERS
