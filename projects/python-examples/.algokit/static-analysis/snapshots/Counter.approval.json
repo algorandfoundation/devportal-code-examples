@@ -1,0 +1,1212 @@
+{
+  "success": false,
+  "error": null,
+  "result": [
+    {
+      "type": "ExecutionPaths",
+      "count": 4,
+      "description": "\nCheck: \"unprotected-deletable\", Impact: High, Confidence: High\nDescription: Unprotected Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-deletable-application\n",
+      "check": "unprotected-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "16: main_after_if_else@9:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "39: main_opt_in_route@5:",
+              "42: txn OnCompletion",
+              "43: intc_0",
+              "44: ==",
+              "45: assert",
+              "46: txn ApplicationID",
+              "47: assert",
+              "48: callsub opt_in"
+            ],
+            [
+              "65: opt_in:",
+              "68: txn Sender",
+              "69: bytec_0",
+              "70: intc_1",
+              "71: app_local_put",
+              "72: retsub"
+            ],
+            [
+              "49: intc_0",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "22: main_increment_my_counter_route@6:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "30: callsub increment_my_counter"
+            ],
+            [
+              "76: increment_my_counter:",
+              "79: txn Sender",
+              "80: global CurrentApplicationID",
+              "81: app_opted_in",
+              "82: assert",
+              "85: txn Sender",
+              "86: dup",
+              "87: intc_1",
+              "88: bytec_0",
+              "89: app_local_get_ex",
+              "90: assert",
+              "91: intc_0",
+              "92: +",
+              "93: bytec_0",
+              "94: swap",
+              "95: app_local_put",
+              "98: txn Sender",
+              "99: intc_1",
+              "100: bytec_0",
+              "101: app_local_get_ex",
+              "102: assert",
+              "103: retsub"
+            ],
+            [
+              "31: itob",
+              "32: pushbytes 0x151f7c75",
+              "33: swap",
+              "34: concat",
+              "35: log",
+              "36: intc_0",
+              "37: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "52: main_bare_routing@7:",
+              "55: txn OnCompletion",
+              "56: bnz main_after_if_else@9"
+            ],
+            [
+              "16: main_after_if_else@9:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 4,
+      "description": "\nCheck: \"unprotected-updatable\", Impact: High, Confidence: High\nDescription: Unprotected Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-updatable-application\n",
+      "check": "unprotected-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "16: main_after_if_else@9:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "39: main_opt_in_route@5:",
+              "42: txn OnCompletion",
+              "43: intc_0",
+              "44: ==",
+              "45: assert",
+              "46: txn ApplicationID",
+              "47: assert",
+              "48: callsub opt_in"
+            ],
+            [
+              "65: opt_in:",
+              "68: txn Sender",
+              "69: bytec_0",
+              "70: intc_1",
+              "71: app_local_put",
+              "72: retsub"
+            ],
+            [
+              "49: intc_0",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "22: main_increment_my_counter_route@6:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "30: callsub increment_my_counter"
+            ],
+            [
+              "76: increment_my_counter:",
+              "79: txn Sender",
+              "80: global CurrentApplicationID",
+              "81: app_opted_in",
+              "82: assert",
+              "85: txn Sender",
+              "86: dup",
+              "87: intc_1",
+              "88: bytec_0",
+              "89: app_local_get_ex",
+              "90: assert",
+              "91: intc_0",
+              "92: +",
+              "93: bytec_0",
+              "94: swap",
+              "95: app_local_put",
+              "98: txn Sender",
+              "99: intc_1",
+              "100: bytec_0",
+              "101: app_local_get_ex",
+              "102: assert",
+              "103: retsub"
+            ],
+            [
+              "31: itob",
+              "32: pushbytes 0x151f7c75",
+              "33: swap",
+              "34: concat",
+              "35: log",
+              "36: intc_0",
+              "37: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "52: main_bare_routing@7:",
+              "55: txn OnCompletion",
+              "56: bnz main_after_if_else@9"
+            ],
+            [
+              "16: main_after_if_else@9:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 2,
+      "description": "\nCheck: \"can-close-account\", Impact: High, Confidence: High\nDescription: Missing CloseRemainderTo field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-closeremainderto-field-validation\n",
+      "check": "can-close-account",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `CloseRemainderTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "16: main_after_if_else@9:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "52: main_bare_routing@7:",
+              "55: txn OnCompletion",
+              "56: bnz main_after_if_else@9"
+            ],
+            [
+              "16: main_after_if_else@9:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 2,
+      "description": "\nCheck: \"can-close-asset\", Impact: High, Confidence: High\nDescription: Missing AssetCloseTo Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-assetcloseto-field-validation\n",
+      "check": "can-close-asset",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `AssetCloseTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "16: main_after_if_else@9:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "52: main_bare_routing@7:",
+              "55: txn OnCompletion",
+              "56: bnz main_after_if_else@9"
+            ],
+            [
+              "16: main_after_if_else@9:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 4,
+      "description": "\nCheck: \"is-deletable\", Impact: High, Confidence: High\nDescription: Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#deletable-application\n",
+      "check": "is-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `DeleteApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "16: main_after_if_else@9:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "39: main_opt_in_route@5:",
+              "42: txn OnCompletion",
+              "43: intc_0",
+              "44: ==",
+              "45: assert",
+              "46: txn ApplicationID",
+              "47: assert",
+              "48: callsub opt_in"
+            ],
+            [
+              "65: opt_in:",
+              "68: txn Sender",
+              "69: bytec_0",
+              "70: intc_1",
+              "71: app_local_put",
+              "72: retsub"
+            ],
+            [
+              "49: intc_0",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "22: main_increment_my_counter_route@6:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "30: callsub increment_my_counter"
+            ],
+            [
+              "76: increment_my_counter:",
+              "79: txn Sender",
+              "80: global CurrentApplicationID",
+              "81: app_opted_in",
+              "82: assert",
+              "85: txn Sender",
+              "86: dup",
+              "87: intc_1",
+              "88: bytec_0",
+              "89: app_local_get_ex",
+              "90: assert",
+              "91: intc_0",
+              "92: +",
+              "93: bytec_0",
+              "94: swap",
+              "95: app_local_put",
+              "98: txn Sender",
+              "99: intc_1",
+              "100: bytec_0",
+              "101: app_local_get_ex",
+              "102: assert",
+              "103: retsub"
+            ],
+            [
+              "31: itob",
+              "32: pushbytes 0x151f7c75",
+              "33: swap",
+              "34: concat",
+              "35: log",
+              "36: intc_0",
+              "37: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "52: main_bare_routing@7:",
+              "55: txn OnCompletion",
+              "56: bnz main_after_if_else@9"
+            ],
+            [
+              "16: main_after_if_else@9:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 4,
+      "description": "\nCheck: \"is-updatable\", Impact: High, Confidence: High\nDescription: Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#upgradable-application\n",
+      "check": "is-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `UpdateApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "16: main_after_if_else@9:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "39: main_opt_in_route@5:",
+              "42: txn OnCompletion",
+              "43: intc_0",
+              "44: ==",
+              "45: assert",
+              "46: txn ApplicationID",
+              "47: assert",
+              "48: callsub opt_in"
+            ],
+            [
+              "65: opt_in:",
+              "68: txn Sender",
+              "69: bytec_0",
+              "70: intc_1",
+              "71: app_local_put",
+              "72: retsub"
+            ],
+            [
+              "49: intc_0",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "22: main_increment_my_counter_route@6:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "30: callsub increment_my_counter"
+            ],
+            [
+              "76: increment_my_counter:",
+              "79: txn Sender",
+              "80: global CurrentApplicationID",
+              "81: app_opted_in",
+              "82: assert",
+              "85: txn Sender",
+              "86: dup",
+              "87: intc_1",
+              "88: bytec_0",
+              "89: app_local_get_ex",
+              "90: assert",
+              "91: intc_0",
+              "92: +",
+              "93: bytec_0",
+              "94: swap",
+              "95: app_local_put",
+              "98: txn Sender",
+              "99: intc_1",
+              "100: bytec_0",
+              "101: app_local_get_ex",
+              "102: assert",
+              "103: retsub"
+            ],
+            [
+              "31: itob",
+              "32: pushbytes 0x151f7c75",
+              "33: swap",
+              "34: concat",
+              "35: log",
+              "36: intc_0",
+              "37: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "52: main_bare_routing@7:",
+              "55: txn OnCompletion",
+              "56: bnz main_after_if_else@9"
+            ],
+            [
+              "16: main_after_if_else@9:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 5,
+      "description": "\nCheck: \"missing-fee-check\", Impact: High, Confidence: High\nDescription: Missing Fee Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-fee-field-validation\n",
+      "check": "missing-fee-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `Fee` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "16: main_after_if_else@9:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "39: main_opt_in_route@5:",
+              "42: txn OnCompletion",
+              "43: intc_0",
+              "44: ==",
+              "45: assert",
+              "46: txn ApplicationID",
+              "47: assert",
+              "48: callsub opt_in"
+            ],
+            [
+              "65: opt_in:",
+              "68: txn Sender",
+              "69: bytec_0",
+              "70: intc_1",
+              "71: app_local_put",
+              "72: retsub"
+            ],
+            [
+              "49: intc_0",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "22: main_increment_my_counter_route@6:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "30: callsub increment_my_counter"
+            ],
+            [
+              "76: increment_my_counter:",
+              "79: txn Sender",
+              "80: global CurrentApplicationID",
+              "81: app_opted_in",
+              "82: assert",
+              "85: txn Sender",
+              "86: dup",
+              "87: intc_1",
+              "88: bytec_0",
+              "89: app_local_get_ex",
+              "90: assert",
+              "91: intc_0",
+              "92: +",
+              "93: bytec_0",
+              "94: swap",
+              "95: app_local_put",
+              "98: txn Sender",
+              "99: intc_1",
+              "100: bytec_0",
+              "101: app_local_get_ex",
+              "102: assert",
+              "103: retsub"
+            ],
+            [
+              "31: itob",
+              "32: pushbytes 0x151f7c75",
+              "33: swap",
+              "34: concat",
+              "35: log",
+              "36: intc_0",
+              "37: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "52: main_bare_routing@7:",
+              "55: txn OnCompletion",
+              "56: bnz main_after_if_else@9"
+            ],
+            [
+              "57: txn ApplicationID",
+              "58: !",
+              "59: assert",
+              "60: intc_0",
+              "61: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "52: main_bare_routing@7:",
+              "55: txn OnCompletion",
+              "56: bnz main_after_if_else@9"
+            ],
+            [
+              "16: main_after_if_else@9:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"group-size-check\", Impact: High, Confidence: High\nDescription: Usage of absolute indexes without validating GroupSize\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-groupsize-validation\n",
+      "check": "group-size-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid using absolute indexes. Validate GroupSize if used.\n- Favor using ARC-4 ABI and relative indexes for group transactions.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 5,
+      "description": "\nCheck: \"rekey-to\", Impact: High, Confidence: High\nDescription: Rekeyable Logic Signatures\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#rekeyable-logicsig\n",
+      "check": "rekey-to",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `RekeyTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "16: main_after_if_else@9:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "39: main_opt_in_route@5:",
+              "42: txn OnCompletion",
+              "43: intc_0",
+              "44: ==",
+              "45: assert",
+              "46: txn ApplicationID",
+              "47: assert",
+              "48: callsub opt_in"
+            ],
+            [
+              "65: opt_in:",
+              "68: txn Sender",
+              "69: bytec_0",
+              "70: intc_1",
+              "71: app_local_put",
+              "72: retsub"
+            ],
+            [
+              "49: intc_0",
+              "50: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x30c6d58a 0x856a1202",
+              "13: txna ApplicationArgs 0",
+              "14: match main_opt_in_route@5 main_increment_my_counter_route@6"
+            ],
+            [
+              "22: main_increment_my_counter_route@6:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "30: callsub increment_my_counter"
+            ],
+            [
+              "76: increment_my_counter:",
+              "79: txn Sender",
+              "80: global CurrentApplicationID",
+              "81: app_opted_in",
+              "82: assert",
+              "85: txn Sender",
+              "86: dup",
+              "87: intc_1",
+              "88: bytec_0",
+              "89: app_local_get_ex",
+              "90: assert",
+              "91: intc_0",
+              "92: +",
+              "93: bytec_0",
+              "94: swap",
+              "95: app_local_put",
+              "98: txn Sender",
+              "99: intc_1",
+              "100: bytec_0",
+              "101: app_local_get_ex",
+              "102: assert",
+              "103: retsub"
+            ],
+            [
+              "31: itob",
+              "32: pushbytes 0x151f7c75",
+              "33: swap",
+              "34: concat",
+              "35: log",
+              "36: intc_0",
+              "37: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "52: main_bare_routing@7:",
+              "55: txn OnCompletion",
+              "56: bnz main_after_if_else@9"
+            ],
+            [
+              "57: txn ApplicationID",
+              "58: !",
+              "59: assert",
+              "60: intc_0",
+              "61: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 0",
+              "7: bytecblock \"my_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "52: main_bare_routing@7:",
+              "55: txn OnCompletion",
+              "56: bnz main_after_if_else@9"
+            ],
+            [
+              "16: main_after_if_else@9:",
+              "19: intc_1",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}
