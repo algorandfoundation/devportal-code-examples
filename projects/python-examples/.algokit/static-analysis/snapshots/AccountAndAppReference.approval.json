@@ -1,0 +1,1932 @@
+{
+  "success": false,
+  "error": null,
+  "result": [
+    {
+      "type": "ExecutionPaths",
+      "count": 6,
+      "description": "\nCheck: \"unprotected-deletable\", Impact: High, Confidence: High\nDescription: Unprotected Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-deletable-application\n",
+      "check": "unprotected-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_0",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 11 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "49: main_get_my_counter_route@3:",
+              "52: txn OnCompletion",
+              "53: !",
+              "54: assert",
+              "55: txn ApplicationID",
+              "56: assert",
+              "57: callsub get_my_counter"
+            ],
+            [
+              "79: get_my_counter:",
+              "83: proto 0 1",
+              "88: pushbytes 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "91: pushint 1717",
+              "94: bytec_1",
+              "95: app_local_get_ex",
+              "98: bz get_my_counter_after_if_else@2"
+            ],
+            [
+              "101: frame_dig 0",
+              "102: swap",
+              "103: retsub"
+            ],
+            [
+              "58: itob",
+              "59: bytec_0",
+              "60: swap",
+              "61: concat",
+              "62: log",
+              "63: intc_1",
+              "64: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "49: main_get_my_counter_route@3:",
+              "52: txn OnCompletion",
+              "53: !",
+              "54: assert",
+              "55: txn ApplicationID",
+              "56: assert",
+              "57: callsub get_my_counter"
+            ],
+            [
+              "79: get_my_counter:",
+              "83: proto 0 1",
+              "88: pushbytes 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "91: pushint 1717",
+              "94: bytec_1",
+              "95: app_local_get_ex",
+              "98: bz get_my_counter_after_if_else@2"
+            ],
+            [
+              "105: get_my_counter_after_if_else@2:",
+              "108: intc_0",
+              "109: swap",
+              "110: retsub"
+            ],
+            [
+              "58: itob",
+              "59: bytec_0",
+              "60: swap",
+              "61: concat",
+              "62: log",
+              "63: intc_1",
+              "64: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 13 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "22: main_get_my_counter_with_arg_route@4:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "34: txnas Accounts",
+              "35: txna ApplicationArgs 2",
+              "36: btoi",
+              "37: txnas Applications",
+              "40: callsub get_my_counter_with_arg"
+            ],
+            [
+              "114: get_my_counter_with_arg:",
+              "118: proto 2 1",
+              "121: frame_dig -2",
+              "122: frame_dig -1",
+              "123: bytec_1",
+              "124: app_local_get_ex",
+              "127: bz get_my_counter_with_arg_after_if_else@2"
+            ],
+            [
+              "130: frame_dig 0",
+              "131: swap",
+              "132: retsub"
+            ],
+            [
+              "41: itob",
+              "42: bytec_0",
+              "43: swap",
+              "44: concat",
+              "45: log",
+              "46: intc_1",
+              "47: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 13 -> 15 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "22: main_get_my_counter_with_arg_route@4:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "34: txnas Accounts",
+              "35: txna ApplicationArgs 2",
+              "36: btoi",
+              "37: txnas Applications",
+              "40: callsub get_my_counter_with_arg"
+            ],
+            [
+              "114: get_my_counter_with_arg:",
+              "118: proto 2 1",
+              "121: frame_dig -2",
+              "122: frame_dig -1",
+              "123: bytec_1",
+              "124: app_local_get_ex",
+              "127: bz get_my_counter_with_arg_after_if_else@2"
+            ],
+            [
+              "134: get_my_counter_with_arg_after_if_else@2:",
+              "137: intc_0",
+              "138: swap",
+              "139: retsub"
+            ],
+            [
+              "41: itob",
+              "42: bytec_0",
+              "43: swap",
+              "44: concat",
+              "45: log",
+              "46: intc_1",
+              "47: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "66: main_bare_routing@7:",
+              "69: txn OnCompletion",
+              "70: bnz main_after_if_else@11"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_0",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 6,
+      "description": "\nCheck: \"unprotected-updatable\", Impact: High, Confidence: High\nDescription: Unprotected Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-updatable-application\n",
+      "check": "unprotected-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_0",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 11 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "49: main_get_my_counter_route@3:",
+              "52: txn OnCompletion",
+              "53: !",
+              "54: assert",
+              "55: txn ApplicationID",
+              "56: assert",
+              "57: callsub get_my_counter"
+            ],
+            [
+              "79: get_my_counter:",
+              "83: proto 0 1",
+              "88: pushbytes 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "91: pushint 1717",
+              "94: bytec_1",
+              "95: app_local_get_ex",
+              "98: bz get_my_counter_after_if_else@2"
+            ],
+            [
+              "101: frame_dig 0",
+              "102: swap",
+              "103: retsub"
+            ],
+            [
+              "58: itob",
+              "59: bytec_0",
+              "60: swap",
+              "61: concat",
+              "62: log",
+              "63: intc_1",
+              "64: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "49: main_get_my_counter_route@3:",
+              "52: txn OnCompletion",
+              "53: !",
+              "54: assert",
+              "55: txn ApplicationID",
+              "56: assert",
+              "57: callsub get_my_counter"
+            ],
+            [
+              "79: get_my_counter:",
+              "83: proto 0 1",
+              "88: pushbytes 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "91: pushint 1717",
+              "94: bytec_1",
+              "95: app_local_get_ex",
+              "98: bz get_my_counter_after_if_else@2"
+            ],
+            [
+              "105: get_my_counter_after_if_else@2:",
+              "108: intc_0",
+              "109: swap",
+              "110: retsub"
+            ],
+            [
+              "58: itob",
+              "59: bytec_0",
+              "60: swap",
+              "61: concat",
+              "62: log",
+              "63: intc_1",
+              "64: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 13 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "22: main_get_my_counter_with_arg_route@4:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "34: txnas Accounts",
+              "35: txna ApplicationArgs 2",
+              "36: btoi",
+              "37: txnas Applications",
+              "40: callsub get_my_counter_with_arg"
+            ],
+            [
+              "114: get_my_counter_with_arg:",
+              "118: proto 2 1",
+              "121: frame_dig -2",
+              "122: frame_dig -1",
+              "123: bytec_1",
+              "124: app_local_get_ex",
+              "127: bz get_my_counter_with_arg_after_if_else@2"
+            ],
+            [
+              "130: frame_dig 0",
+              "131: swap",
+              "132: retsub"
+            ],
+            [
+              "41: itob",
+              "42: bytec_0",
+              "43: swap",
+              "44: concat",
+              "45: log",
+              "46: intc_1",
+              "47: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 13 -> 15 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "22: main_get_my_counter_with_arg_route@4:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "34: txnas Accounts",
+              "35: txna ApplicationArgs 2",
+              "36: btoi",
+              "37: txnas Applications",
+              "40: callsub get_my_counter_with_arg"
+            ],
+            [
+              "114: get_my_counter_with_arg:",
+              "118: proto 2 1",
+              "121: frame_dig -2",
+              "122: frame_dig -1",
+              "123: bytec_1",
+              "124: app_local_get_ex",
+              "127: bz get_my_counter_with_arg_after_if_else@2"
+            ],
+            [
+              "134: get_my_counter_with_arg_after_if_else@2:",
+              "137: intc_0",
+              "138: swap",
+              "139: retsub"
+            ],
+            [
+              "41: itob",
+              "42: bytec_0",
+              "43: swap",
+              "44: concat",
+              "45: log",
+              "46: intc_1",
+              "47: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "66: main_bare_routing@7:",
+              "69: txn OnCompletion",
+              "70: bnz main_after_if_else@11"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_0",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 2,
+      "description": "\nCheck: \"can-close-account\", Impact: High, Confidence: High\nDescription: Missing CloseRemainderTo field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-closeremainderto-field-validation\n",
+      "check": "can-close-account",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `CloseRemainderTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_0",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "66: main_bare_routing@7:",
+              "69: txn OnCompletion",
+              "70: bnz main_after_if_else@11"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_0",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 2,
+      "description": "\nCheck: \"can-close-asset\", Impact: High, Confidence: High\nDescription: Missing AssetCloseTo Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-assetcloseto-field-validation\n",
+      "check": "can-close-asset",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `AssetCloseTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_0",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "66: main_bare_routing@7:",
+              "69: txn OnCompletion",
+              "70: bnz main_after_if_else@11"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_0",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 6,
+      "description": "\nCheck: \"is-deletable\", Impact: High, Confidence: High\nDescription: Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#deletable-application\n",
+      "check": "is-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `DeleteApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_0",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 11 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "49: main_get_my_counter_route@3:",
+              "52: txn OnCompletion",
+              "53: !",
+              "54: assert",
+              "55: txn ApplicationID",
+              "56: assert",
+              "57: callsub get_my_counter"
+            ],
+            [
+              "79: get_my_counter:",
+              "83: proto 0 1",
+              "88: pushbytes 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "91: pushint 1717",
+              "94: bytec_1",
+              "95: app_local_get_ex",
+              "98: bz get_my_counter_after_if_else@2"
+            ],
+            [
+              "101: frame_dig 0",
+              "102: swap",
+              "103: retsub"
+            ],
+            [
+              "58: itob",
+              "59: bytec_0",
+              "60: swap",
+              "61: concat",
+              "62: log",
+              "63: intc_1",
+              "64: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "49: main_get_my_counter_route@3:",
+              "52: txn OnCompletion",
+              "53: !",
+              "54: assert",
+              "55: txn ApplicationID",
+              "56: assert",
+              "57: callsub get_my_counter"
+            ],
+            [
+              "79: get_my_counter:",
+              "83: proto 0 1",
+              "88: pushbytes 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "91: pushint 1717",
+              "94: bytec_1",
+              "95: app_local_get_ex",
+              "98: bz get_my_counter_after_if_else@2"
+            ],
+            [
+              "105: get_my_counter_after_if_else@2:",
+              "108: intc_0",
+              "109: swap",
+              "110: retsub"
+            ],
+            [
+              "58: itob",
+              "59: bytec_0",
+              "60: swap",
+              "61: concat",
+              "62: log",
+              "63: intc_1",
+              "64: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 13 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "22: main_get_my_counter_with_arg_route@4:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "34: txnas Accounts",
+              "35: txna ApplicationArgs 2",
+              "36: btoi",
+              "37: txnas Applications",
+              "40: callsub get_my_counter_with_arg"
+            ],
+            [
+              "114: get_my_counter_with_arg:",
+              "118: proto 2 1",
+              "121: frame_dig -2",
+              "122: frame_dig -1",
+              "123: bytec_1",
+              "124: app_local_get_ex",
+              "127: bz get_my_counter_with_arg_after_if_else@2"
+            ],
+            [
+              "130: frame_dig 0",
+              "131: swap",
+              "132: retsub"
+            ],
+            [
+              "41: itob",
+              "42: bytec_0",
+              "43: swap",
+              "44: concat",
+              "45: log",
+              "46: intc_1",
+              "47: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 13 -> 15 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "22: main_get_my_counter_with_arg_route@4:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "34: txnas Accounts",
+              "35: txna ApplicationArgs 2",
+              "36: btoi",
+              "37: txnas Applications",
+              "40: callsub get_my_counter_with_arg"
+            ],
+            [
+              "114: get_my_counter_with_arg:",
+              "118: proto 2 1",
+              "121: frame_dig -2",
+              "122: frame_dig -1",
+              "123: bytec_1",
+              "124: app_local_get_ex",
+              "127: bz get_my_counter_with_arg_after_if_else@2"
+            ],
+            [
+              "134: get_my_counter_with_arg_after_if_else@2:",
+              "137: intc_0",
+              "138: swap",
+              "139: retsub"
+            ],
+            [
+              "41: itob",
+              "42: bytec_0",
+              "43: swap",
+              "44: concat",
+              "45: log",
+              "46: intc_1",
+              "47: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "66: main_bare_routing@7:",
+              "69: txn OnCompletion",
+              "70: bnz main_after_if_else@11"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_0",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 6,
+      "description": "\nCheck: \"is-updatable\", Impact: High, Confidence: High\nDescription: Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#upgradable-application\n",
+      "check": "is-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `UpdateApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_0",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 11 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "49: main_get_my_counter_route@3:",
+              "52: txn OnCompletion",
+              "53: !",
+              "54: assert",
+              "55: txn ApplicationID",
+              "56: assert",
+              "57: callsub get_my_counter"
+            ],
+            [
+              "79: get_my_counter:",
+              "83: proto 0 1",
+              "88: pushbytes 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "91: pushint 1717",
+              "94: bytec_1",
+              "95: app_local_get_ex",
+              "98: bz get_my_counter_after_if_else@2"
+            ],
+            [
+              "101: frame_dig 0",
+              "102: swap",
+              "103: retsub"
+            ],
+            [
+              "58: itob",
+              "59: bytec_0",
+              "60: swap",
+              "61: concat",
+              "62: log",
+              "63: intc_1",
+              "64: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "49: main_get_my_counter_route@3:",
+              "52: txn OnCompletion",
+              "53: !",
+              "54: assert",
+              "55: txn ApplicationID",
+              "56: assert",
+              "57: callsub get_my_counter"
+            ],
+            [
+              "79: get_my_counter:",
+              "83: proto 0 1",
+              "88: pushbytes 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "91: pushint 1717",
+              "94: bytec_1",
+              "95: app_local_get_ex",
+              "98: bz get_my_counter_after_if_else@2"
+            ],
+            [
+              "105: get_my_counter_after_if_else@2:",
+              "108: intc_0",
+              "109: swap",
+              "110: retsub"
+            ],
+            [
+              "58: itob",
+              "59: bytec_0",
+              "60: swap",
+              "61: concat",
+              "62: log",
+              "63: intc_1",
+              "64: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 13 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "22: main_get_my_counter_with_arg_route@4:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "34: txnas Accounts",
+              "35: txna ApplicationArgs 2",
+              "36: btoi",
+              "37: txnas Applications",
+              "40: callsub get_my_counter_with_arg"
+            ],
+            [
+              "114: get_my_counter_with_arg:",
+              "118: proto 2 1",
+              "121: frame_dig -2",
+              "122: frame_dig -1",
+              "123: bytec_1",
+              "124: app_local_get_ex",
+              "127: bz get_my_counter_with_arg_after_if_else@2"
+            ],
+            [
+              "130: frame_dig 0",
+              "131: swap",
+              "132: retsub"
+            ],
+            [
+              "41: itob",
+              "42: bytec_0",
+              "43: swap",
+              "44: concat",
+              "45: log",
+              "46: intc_1",
+              "47: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 13 -> 15 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "22: main_get_my_counter_with_arg_route@4:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "34: txnas Accounts",
+              "35: txna ApplicationArgs 2",
+              "36: btoi",
+              "37: txnas Applications",
+              "40: callsub get_my_counter_with_arg"
+            ],
+            [
+              "114: get_my_counter_with_arg:",
+              "118: proto 2 1",
+              "121: frame_dig -2",
+              "122: frame_dig -1",
+              "123: bytec_1",
+              "124: app_local_get_ex",
+              "127: bz get_my_counter_with_arg_after_if_else@2"
+            ],
+            [
+              "134: get_my_counter_with_arg_after_if_else@2:",
+              "137: intc_0",
+              "138: swap",
+              "139: retsub"
+            ],
+            [
+              "41: itob",
+              "42: bytec_0",
+              "43: swap",
+              "44: concat",
+              "45: log",
+              "46: intc_1",
+              "47: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "66: main_bare_routing@7:",
+              "69: txn OnCompletion",
+              "70: bnz main_after_if_else@11"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_0",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 7,
+      "description": "\nCheck: \"missing-fee-check\", Impact: High, Confidence: High\nDescription: Missing Fee Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-fee-field-validation\n",
+      "check": "missing-fee-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `Fee` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_0",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 11 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "49: main_get_my_counter_route@3:",
+              "52: txn OnCompletion",
+              "53: !",
+              "54: assert",
+              "55: txn ApplicationID",
+              "56: assert",
+              "57: callsub get_my_counter"
+            ],
+            [
+              "79: get_my_counter:",
+              "83: proto 0 1",
+              "88: pushbytes 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "91: pushint 1717",
+              "94: bytec_1",
+              "95: app_local_get_ex",
+              "98: bz get_my_counter_after_if_else@2"
+            ],
+            [
+              "101: frame_dig 0",
+              "102: swap",
+              "103: retsub"
+            ],
+            [
+              "58: itob",
+              "59: bytec_0",
+              "60: swap",
+              "61: concat",
+              "62: log",
+              "63: intc_1",
+              "64: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "49: main_get_my_counter_route@3:",
+              "52: txn OnCompletion",
+              "53: !",
+              "54: assert",
+              "55: txn ApplicationID",
+              "56: assert",
+              "57: callsub get_my_counter"
+            ],
+            [
+              "79: get_my_counter:",
+              "83: proto 0 1",
+              "88: pushbytes 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "91: pushint 1717",
+              "94: bytec_1",
+              "95: app_local_get_ex",
+              "98: bz get_my_counter_after_if_else@2"
+            ],
+            [
+              "105: get_my_counter_after_if_else@2:",
+              "108: intc_0",
+              "109: swap",
+              "110: retsub"
+            ],
+            [
+              "58: itob",
+              "59: bytec_0",
+              "60: swap",
+              "61: concat",
+              "62: log",
+              "63: intc_1",
+              "64: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 13 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "22: main_get_my_counter_with_arg_route@4:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "34: txnas Accounts",
+              "35: txna ApplicationArgs 2",
+              "36: btoi",
+              "37: txnas Applications",
+              "40: callsub get_my_counter_with_arg"
+            ],
+            [
+              "114: get_my_counter_with_arg:",
+              "118: proto 2 1",
+              "121: frame_dig -2",
+              "122: frame_dig -1",
+              "123: bytec_1",
+              "124: app_local_get_ex",
+              "127: bz get_my_counter_with_arg_after_if_else@2"
+            ],
+            [
+              "130: frame_dig 0",
+              "131: swap",
+              "132: retsub"
+            ],
+            [
+              "41: itob",
+              "42: bytec_0",
+              "43: swap",
+              "44: concat",
+              "45: log",
+              "46: intc_1",
+              "47: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 13 -> 15 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "22: main_get_my_counter_with_arg_route@4:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "34: txnas Accounts",
+              "35: txna ApplicationArgs 2",
+              "36: btoi",
+              "37: txnas Applications",
+              "40: callsub get_my_counter_with_arg"
+            ],
+            [
+              "114: get_my_counter_with_arg:",
+              "118: proto 2 1",
+              "121: frame_dig -2",
+              "122: frame_dig -1",
+              "123: bytec_1",
+              "124: app_local_get_ex",
+              "127: bz get_my_counter_with_arg_after_if_else@2"
+            ],
+            [
+              "134: get_my_counter_with_arg_after_if_else@2:",
+              "137: intc_0",
+              "138: swap",
+              "139: retsub"
+            ],
+            [
+              "41: itob",
+              "42: bytec_0",
+              "43: swap",
+              "44: concat",
+              "45: log",
+              "46: intc_1",
+              "47: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "66: main_bare_routing@7:",
+              "69: txn OnCompletion",
+              "70: bnz main_after_if_else@11"
+            ],
+            [
+              "71: txn ApplicationID",
+              "72: !",
+              "73: assert",
+              "74: intc_1",
+              "75: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "66: main_bare_routing@7:",
+              "69: txn OnCompletion",
+              "70: bnz main_after_if_else@11"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_0",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"group-size-check\", Impact: High, Confidence: High\nDescription: Usage of absolute indexes without validating GroupSize\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-groupsize-validation\n",
+      "check": "group-size-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid using absolute indexes. Validate GroupSize if used.\n- Favor using ARC-4 ABI and relative indexes for group transactions.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 7,
+      "description": "\nCheck: \"rekey-to\", Impact: High, Confidence: High\nDescription: Rekeyable Logic Signatures\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#rekeyable-logicsig\n",
+      "check": "rekey-to",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `RekeyTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_0",
+              "20: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 11 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "49: main_get_my_counter_route@3:",
+              "52: txn OnCompletion",
+              "53: !",
+              "54: assert",
+              "55: txn ApplicationID",
+              "56: assert",
+              "57: callsub get_my_counter"
+            ],
+            [
+              "79: get_my_counter:",
+              "83: proto 0 1",
+              "88: pushbytes 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "91: pushint 1717",
+              "94: bytec_1",
+              "95: app_local_get_ex",
+              "98: bz get_my_counter_after_if_else@2"
+            ],
+            [
+              "101: frame_dig 0",
+              "102: swap",
+              "103: retsub"
+            ],
+            [
+              "58: itob",
+              "59: bytec_0",
+              "60: swap",
+              "61: concat",
+              "62: log",
+              "63: intc_1",
+              "64: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "49: main_get_my_counter_route@3:",
+              "52: txn OnCompletion",
+              "53: !",
+              "54: assert",
+              "55: txn ApplicationID",
+              "56: assert",
+              "57: callsub get_my_counter"
+            ],
+            [
+              "79: get_my_counter:",
+              "83: proto 0 1",
+              "88: pushbytes 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "91: pushint 1717",
+              "94: bytec_1",
+              "95: app_local_get_ex",
+              "98: bz get_my_counter_after_if_else@2"
+            ],
+            [
+              "105: get_my_counter_after_if_else@2:",
+              "108: intc_0",
+              "109: swap",
+              "110: retsub"
+            ],
+            [
+              "58: itob",
+              "59: bytec_0",
+              "60: swap",
+              "61: concat",
+              "62: log",
+              "63: intc_1",
+              "64: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 13 -> 14 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "22: main_get_my_counter_with_arg_route@4:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "34: txnas Accounts",
+              "35: txna ApplicationArgs 2",
+              "36: btoi",
+              "37: txnas Applications",
+              "40: callsub get_my_counter_with_arg"
+            ],
+            [
+              "114: get_my_counter_with_arg:",
+              "118: proto 2 1",
+              "121: frame_dig -2",
+              "122: frame_dig -1",
+              "123: bytec_1",
+              "124: app_local_get_ex",
+              "127: bz get_my_counter_with_arg_after_if_else@2"
+            ],
+            [
+              "130: frame_dig 0",
+              "131: swap",
+              "132: retsub"
+            ],
+            [
+              "41: itob",
+              "42: bytec_0",
+              "43: swap",
+              "44: concat",
+              "45: log",
+              "46: intc_1",
+              "47: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 13 -> 15 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "12: pushbytess 0x9f5db3a7 0x62240c55",
+              "13: txna ApplicationArgs 0",
+              "14: match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4"
+            ],
+            [
+              "22: main_get_my_counter_with_arg_route@4:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "34: txnas Accounts",
+              "35: txna ApplicationArgs 2",
+              "36: btoi",
+              "37: txnas Applications",
+              "40: callsub get_my_counter_with_arg"
+            ],
+            [
+              "114: get_my_counter_with_arg:",
+              "118: proto 2 1",
+              "121: frame_dig -2",
+              "122: frame_dig -1",
+              "123: bytec_1",
+              "124: app_local_get_ex",
+              "127: bz get_my_counter_with_arg_after_if_else@2"
+            ],
+            [
+              "134: get_my_counter_with_arg_after_if_else@2:",
+              "137: intc_0",
+              "138: swap",
+              "139: retsub"
+            ],
+            [
+              "41: itob",
+              "42: bytec_0",
+              "43: swap",
+              "44: concat",
+              "45: log",
+              "46: intc_1",
+              "47: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "66: main_bare_routing@7:",
+              "69: txn OnCompletion",
+              "70: bnz main_after_if_else@11"
+            ],
+            [
+              "71: txn ApplicationID",
+              "72: !",
+              "73: assert",
+              "74: intc_1",
+              "75: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 8 -> 3",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock 0x151f7c75 0x6d795f636f756e746572",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@7"
+            ],
+            [
+              "66: main_bare_routing@7:",
+              "69: txn OnCompletion",
+              "70: bnz main_after_if_else@11"
+            ],
+            [
+              "16: main_after_if_else@11:",
+              "19: intc_0",
+              "20: return"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

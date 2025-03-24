@@ -1,0 +1,532 @@
+{
+  "version": 3,
+  "sources": [
+    "../../reference_account_app/contract.py"
+  ],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAaA;;AAAA;;;AAAA;;;;;;;;;;;;AAAA;;;AAAA;;;;;;AAAA;;AASK;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;;AAJA;;AAAA;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;;AALL;;AAAA;;;;;;;;;AAOwB;;AAAhB;AAA8B;AAA9B;;AAIO;;AAAuB;;AAAvB;AAAP;AAEgB;;AAAhB;AAAA;AAAA;AAAA;AAAA;AAA+B;AAA/B;AAAA;AAAA;AAAA;AACuB;;AAAhB;AAAA;AAAA;AAAA;AAAP",
+  "op_pc_offset": 0,
+  "pc_events": {
+    "1": {
+      "subroutine": "smart_contracts.reference_account_app.contract.Counter.__algopy_entrypoint_with_init",
+      "params": {},
+      "block": "main",
+      "stack_in": [],
+      "op": "intcblock 1 0"
+    },
+    "5": {
+      "op": "bytecblock \"my_counter\""
+    },
+    "18": {
+      "op": "txn NumAppArgs",
+      "defined_out": [
+        "tmp%0#2"
+      ],
+      "stack_out": [
+        "tmp%0#2"
+      ]
+    },
+    "20": {
+      "op": "bz main_bare_routing@7",
+      "stack_out": []
+    },
+    "23": {
+      "op": "pushbytess 0x30c6d58a 0x856a1202 // method \"opt_in()void\", method \"increment_my_counter()uint64\"",
+      "defined_out": [
+        "Method(increment_my_counter()uint64)",
+        "Method(opt_in()void)"
+      ],
+      "stack_out": [
+        "Method(opt_in()void)",
+        "Method(increment_my_counter()uint64)"
+      ]
+    },
+    "35": {
+      "op": "txna ApplicationArgs 0",
+      "defined_out": [
+        "Method(increment_my_counter()uint64)",
+        "Method(opt_in()void)",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "Method(opt_in()void)",
+        "Method(increment_my_counter()uint64)",
+        "tmp%2#0"
+      ]
+    },
+    "38": {
+      "op": "match main_opt_in_route@5 main_increment_my_counter_route@6",
+      "stack_out": []
+    },
+    "44": {
+      "block": "main_after_if_else@9",
+      "stack_in": [],
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "tmp%0#1"
+      ],
+      "stack_out": [
+        "tmp%0#1"
+      ]
+    },
+    "45": {
+      "op": "return",
+      "stack_out": []
+    },
+    "46": {
+      "block": "main_increment_my_counter_route@6",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%7#0"
+      ]
+    },
+    "48": {
+      "op": "!",
+      "defined_out": [
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "tmp%8#0"
+      ]
+    },
+    "49": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "50": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%9#0"
+      ]
+    },
+    "52": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "53": {
+      "callsub": "smart_contracts.reference_account_app.contract.Counter.increment_my_counter",
+      "op": "callsub increment_my_counter",
+      "defined_out": [
+        "to_encode%0#0"
+      ],
+      "stack_out": [
+        "to_encode%0#0"
+      ]
+    },
+    "56": {
+      "op": "itob",
+      "defined_out": [
+        "val_as_bytes%0#0"
+      ],
+      "stack_out": [
+        "val_as_bytes%0#0"
+      ]
+    },
+    "57": {
+      "op": "pushbytes 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "val_as_bytes%0#0"
+      ],
+      "stack_out": [
+        "val_as_bytes%0#0",
+        "0x151f7c75"
+      ]
+    },
+    "63": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "val_as_bytes%0#0"
+      ]
+    },
+    "64": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%11#0"
+      ],
+      "stack_out": [
+        "tmp%11#0"
+      ]
+    },
+    "65": {
+      "op": "log",
+      "stack_out": []
+    },
+    "66": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#1"
+      ],
+      "stack_out": [
+        "tmp%0#1"
+      ]
+    },
+    "67": {
+      "op": "return",
+      "stack_out": []
+    },
+    "68": {
+      "block": "main_opt_in_route@5",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "70": {
+      "op": "intc_0 // OptIn",
+      "defined_out": [
+        "OptIn",
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0",
+        "OptIn"
+      ]
+    },
+    "71": {
+      "op": "==",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "72": {
+      "error": "OnCompletion is not OptIn",
+      "op": "assert // OnCompletion is not OptIn",
+      "stack_out": []
+    },
+    "73": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%5#0"
+      ]
+    },
+    "75": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "76": {
+      "callsub": "smart_contracts.reference_account_app.contract.Counter.opt_in",
+      "op": "callsub opt_in"
+    },
+    "79": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#1"
+      ],
+      "stack_out": [
+        "tmp%0#1"
+      ]
+    },
+    "80": {
+      "op": "return",
+      "stack_out": []
+    },
+    "81": {
+      "block": "main_bare_routing@7",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%12#0"
+      ],
+      "stack_out": [
+        "tmp%12#0"
+      ]
+    },
+    "83": {
+      "op": "bnz main_after_if_else@9",
+      "stack_out": []
+    },
+    "86": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%13#0"
+      ],
+      "stack_out": [
+        "tmp%13#0"
+      ]
+    },
+    "88": {
+      "op": "!",
+      "defined_out": [
+        "tmp%14#0"
+      ],
+      "stack_out": [
+        "tmp%14#0"
+      ]
+    },
+    "89": {
+      "error": "can only call when creating",
+      "op": "assert // can only call when creating",
+      "stack_out": []
+    },
+    "90": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#1"
+      ],
+      "stack_out": [
+        "tmp%0#1"
+      ]
+    },
+    "91": {
+      "op": "return",
+      "stack_out": []
+    },
+    "92": {
+      "subroutine": "smart_contracts.reference_account_app.contract.Counter.opt_in",
+      "params": {},
+      "block": "opt_in",
+      "stack_in": [],
+      "op": "txn Sender",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "94": {
+      "op": "bytec_0 // \"my_counter\"",
+      "defined_out": [
+        "\"my_counter\"",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "\"my_counter\""
+      ]
+    },
+    "95": {
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "\"my_counter\"",
+        "0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "\"my_counter\"",
+        "0"
+      ]
+    },
+    "96": {
+      "op": "app_local_put",
+      "stack_out": []
+    },
+    "97": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "98": {
+      "subroutine": "smart_contracts.reference_account_app.contract.Counter.increment_my_counter",
+      "params": {},
+      "block": "increment_my_counter",
+      "stack_in": [],
+      "op": "txn Sender",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "100": {
+      "op": "global CurrentApplicationID",
+      "defined_out": [
+        "tmp%0#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tmp%1#0"
+      ]
+    },
+    "102": {
+      "op": "app_opted_in",
+      "defined_out": [
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%2#0"
+      ]
+    },
+    "103": {
+      "op": "assert",
+      "stack_out": []
+    },
+    "104": {
+      "op": "txn Sender",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "106": {
+      "op": "dup",
+      "defined_out": [
+        "tmp%3#0",
+        "tmp%3#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%3#0",
+        "tmp%3#0 (copy)"
+      ]
+    },
+    "107": {
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "0",
+        "tmp%3#0",
+        "tmp%3#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%3#0",
+        "tmp%3#0 (copy)",
+        "0"
+      ]
+    },
+    "108": {
+      "op": "bytec_0 // \"my_counter\"",
+      "defined_out": [
+        "\"my_counter\"",
+        "0",
+        "tmp%3#0",
+        "tmp%3#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%3#0",
+        "tmp%3#0 (copy)",
+        "0",
+        "\"my_counter\""
+      ]
+    },
+    "109": {
+      "op": "app_local_get_ex",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0",
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0",
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "110": {
+      "error": "check self.my_counter exists for account",
+      "op": "assert // check self.my_counter exists for account",
+      "stack_out": [
+        "tmp%3#0",
+        "maybe_value%0#0"
+      ]
+    },
+    "111": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "maybe_value%0#0",
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0",
+        "maybe_value%0#0",
+        "1"
+      ]
+    },
+    "112": {
+      "op": "+",
+      "defined_out": [
+        "new_state_value%0#0",
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0",
+        "new_state_value%0#0"
+      ]
+    },
+    "113": {
+      "op": "bytec_0 // \"my_counter\""
+    },
+    "114": {
+      "op": "swap",
+      "stack_out": [
+        "tmp%3#0",
+        "\"my_counter\"",
+        "new_state_value%0#0"
+      ]
+    },
+    "115": {
+      "op": "app_local_put",
+      "stack_out": []
+    },
+    "116": {
+      "op": "txn Sender",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "118": {
+      "op": "intc_1 // 0",
+      "stack_out": [
+        "tmp%4#0",
+        "0"
+      ]
+    },
+    "119": {
+      "op": "bytec_0 // \"my_counter\"",
+      "stack_out": [
+        "tmp%4#0",
+        "0",
+        "\"my_counter\""
+      ]
+    },
+    "120": {
+      "op": "app_local_get_ex",
+      "defined_out": [
+        "maybe_exists%1#0",
+        "maybe_value%1#0"
+      ],
+      "stack_out": [
+        "maybe_value%1#0",
+        "maybe_exists%1#0"
+      ]
+    },
+    "121": {
+      "error": "check self.my_counter exists for account",
+      "op": "assert // check self.my_counter exists for account",
+      "stack_out": [
+        "maybe_value%1#0"
+      ]
+    },
+    "122": {
+      "retsub": true,
+      "op": "retsub"
+    }
+  }
+}

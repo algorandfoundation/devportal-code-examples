@@ -1,0 +1,1256 @@
+{
+  "success": false,
+  "error": null,
+  "result": [
+    {
+      "type": "ExecutionPaths",
+      "count": 2,
+      "description": "\nCheck: \"unprotected-deletable\", Impact: High, Confidence: High\nDescription: Unprotected Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-deletable-application\n",
+      "check": "unprotected-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 10 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock \"account_box_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0x035c8f99",
+              "13: txna ApplicationArgs 0",
+              "14: match main_increment_box_counter_route@5"
+            ],
+            [
+              "22: main_increment_box_counter_route@5:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txn GroupIndex",
+              "33: intc_0",
+              "34: -",
+              "35: dup",
+              "36: Gtxns TypeEnum",
+              "37: intc_0",
+              "38: ==",
+              "39: assert",
+              "42: callsub increment_box_counter"
+            ],
+            [
+              "64: increment_box_counter:",
+              "68: proto 1 1",
+              "71: frame_dig -1",
+              "72: Gtxns Amount",
+              "73: pushint 26100",
+              "74: ==",
+              "75: assert",
+              "78: frame_dig -1",
+              "79: Gtxns Receiver",
+              "80: global CurrentApplicationAddress",
+              "81: ==",
+              "82: assert",
+              "85: bytec_0",
+              "86: txn Sender",
+              "87: concat",
+              "88: box_len",
+              "89: bury 1",
+              "90: bz increment_box_counter_else_body@2"
+            ],
+            [
+              "93: bytec_0",
+              "94: txn Sender",
+              "95: concat",
+              "96: dup",
+              "97: box_get",
+              "98: swap",
+              "99: btoi",
+              "100: swap",
+              "101: assert",
+              "102: intc_0",
+              "103: +",
+              "104: itob",
+              "105: box_put"
+            ],
+            [
+              "107: increment_box_counter_after_if_else@3:",
+              "110: bytec_0",
+              "111: txn Sender",
+              "112: concat",
+              "113: box_get",
+              "114: swap",
+              "115: btoi",
+              "116: swap",
+              "117: assert",
+              "118: retsub"
+            ],
+            [
+              "43: itob",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: intc_0",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 11 -> 10 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock \"account_box_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0x035c8f99",
+              "13: txna ApplicationArgs 0",
+              "14: match main_increment_box_counter_route@5"
+            ],
+            [
+              "22: main_increment_box_counter_route@5:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txn GroupIndex",
+              "33: intc_0",
+              "34: -",
+              "35: dup",
+              "36: Gtxns TypeEnum",
+              "37: intc_0",
+              "38: ==",
+              "39: assert",
+              "42: callsub increment_box_counter"
+            ],
+            [
+              "64: increment_box_counter:",
+              "68: proto 1 1",
+              "71: frame_dig -1",
+              "72: Gtxns Amount",
+              "73: pushint 26100",
+              "74: ==",
+              "75: assert",
+              "78: frame_dig -1",
+              "79: Gtxns Receiver",
+              "80: global CurrentApplicationAddress",
+              "81: ==",
+              "82: assert",
+              "85: bytec_0",
+              "86: txn Sender",
+              "87: concat",
+              "88: box_len",
+              "89: bury 1",
+              "90: bz increment_box_counter_else_body@2"
+            ],
+            [
+              "120: increment_box_counter_else_body@2:",
+              "123: bytec_0",
+              "124: txn Sender",
+              "125: concat",
+              "126: intc_0",
+              "127: itob",
+              "128: box_put",
+              "129: b increment_box_counter_after_if_else@3"
+            ],
+            [
+              "107: increment_box_counter_after_if_else@3:",
+              "110: bytec_0",
+              "111: txn Sender",
+              "112: concat",
+              "113: box_get",
+              "114: swap",
+              "115: btoi",
+              "116: swap",
+              "117: assert",
+              "118: retsub"
+            ],
+            [
+              "43: itob",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: intc_0",
+              "49: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 2,
+      "description": "\nCheck: \"unprotected-updatable\", Impact: High, Confidence: High\nDescription: Unprotected Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-updatable-application\n",
+      "check": "unprotected-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 10 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock \"account_box_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0x035c8f99",
+              "13: txna ApplicationArgs 0",
+              "14: match main_increment_box_counter_route@5"
+            ],
+            [
+              "22: main_increment_box_counter_route@5:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txn GroupIndex",
+              "33: intc_0",
+              "34: -",
+              "35: dup",
+              "36: Gtxns TypeEnum",
+              "37: intc_0",
+              "38: ==",
+              "39: assert",
+              "42: callsub increment_box_counter"
+            ],
+            [
+              "64: increment_box_counter:",
+              "68: proto 1 1",
+              "71: frame_dig -1",
+              "72: Gtxns Amount",
+              "73: pushint 26100",
+              "74: ==",
+              "75: assert",
+              "78: frame_dig -1",
+              "79: Gtxns Receiver",
+              "80: global CurrentApplicationAddress",
+              "81: ==",
+              "82: assert",
+              "85: bytec_0",
+              "86: txn Sender",
+              "87: concat",
+              "88: box_len",
+              "89: bury 1",
+              "90: bz increment_box_counter_else_body@2"
+            ],
+            [
+              "93: bytec_0",
+              "94: txn Sender",
+              "95: concat",
+              "96: dup",
+              "97: box_get",
+              "98: swap",
+              "99: btoi",
+              "100: swap",
+              "101: assert",
+              "102: intc_0",
+              "103: +",
+              "104: itob",
+              "105: box_put"
+            ],
+            [
+              "107: increment_box_counter_after_if_else@3:",
+              "110: bytec_0",
+              "111: txn Sender",
+              "112: concat",
+              "113: box_get",
+              "114: swap",
+              "115: btoi",
+              "116: swap",
+              "117: assert",
+              "118: retsub"
+            ],
+            [
+              "43: itob",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: intc_0",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 11 -> 10 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock \"account_box_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0x035c8f99",
+              "13: txna ApplicationArgs 0",
+              "14: match main_increment_box_counter_route@5"
+            ],
+            [
+              "22: main_increment_box_counter_route@5:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txn GroupIndex",
+              "33: intc_0",
+              "34: -",
+              "35: dup",
+              "36: Gtxns TypeEnum",
+              "37: intc_0",
+              "38: ==",
+              "39: assert",
+              "42: callsub increment_box_counter"
+            ],
+            [
+              "64: increment_box_counter:",
+              "68: proto 1 1",
+              "71: frame_dig -1",
+              "72: Gtxns Amount",
+              "73: pushint 26100",
+              "74: ==",
+              "75: assert",
+              "78: frame_dig -1",
+              "79: Gtxns Receiver",
+              "80: global CurrentApplicationAddress",
+              "81: ==",
+              "82: assert",
+              "85: bytec_0",
+              "86: txn Sender",
+              "87: concat",
+              "88: box_len",
+              "89: bury 1",
+              "90: bz increment_box_counter_else_body@2"
+            ],
+            [
+              "120: increment_box_counter_else_body@2:",
+              "123: bytec_0",
+              "124: txn Sender",
+              "125: concat",
+              "126: intc_0",
+              "127: itob",
+              "128: box_put",
+              "129: b increment_box_counter_after_if_else@3"
+            ],
+            [
+              "107: increment_box_counter_after_if_else@3:",
+              "110: bytec_0",
+              "111: txn Sender",
+              "112: concat",
+              "113: box_get",
+              "114: swap",
+              "115: btoi",
+              "116: swap",
+              "117: assert",
+              "118: retsub"
+            ],
+            [
+              "43: itob",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: intc_0",
+              "49: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"can-close-account\", Impact: High, Confidence: High\nDescription: Missing CloseRemainderTo field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-closeremainderto-field-validation\n",
+      "check": "can-close-account",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `CloseRemainderTo` field in the LogicSig.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"can-close-asset\", Impact: High, Confidence: High\nDescription: Missing AssetCloseTo Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-assetcloseto-field-validation\n",
+      "check": "can-close-asset",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `AssetCloseTo` field in the LogicSig.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 2,
+      "description": "\nCheck: \"is-deletable\", Impact: High, Confidence: High\nDescription: Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#deletable-application\n",
+      "check": "is-deletable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `DeleteApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 10 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock \"account_box_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0x035c8f99",
+              "13: txna ApplicationArgs 0",
+              "14: match main_increment_box_counter_route@5"
+            ],
+            [
+              "22: main_increment_box_counter_route@5:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txn GroupIndex",
+              "33: intc_0",
+              "34: -",
+              "35: dup",
+              "36: Gtxns TypeEnum",
+              "37: intc_0",
+              "38: ==",
+              "39: assert",
+              "42: callsub increment_box_counter"
+            ],
+            [
+              "64: increment_box_counter:",
+              "68: proto 1 1",
+              "71: frame_dig -1",
+              "72: Gtxns Amount",
+              "73: pushint 26100",
+              "74: ==",
+              "75: assert",
+              "78: frame_dig -1",
+              "79: Gtxns Receiver",
+              "80: global CurrentApplicationAddress",
+              "81: ==",
+              "82: assert",
+              "85: bytec_0",
+              "86: txn Sender",
+              "87: concat",
+              "88: box_len",
+              "89: bury 1",
+              "90: bz increment_box_counter_else_body@2"
+            ],
+            [
+              "93: bytec_0",
+              "94: txn Sender",
+              "95: concat",
+              "96: dup",
+              "97: box_get",
+              "98: swap",
+              "99: btoi",
+              "100: swap",
+              "101: assert",
+              "102: intc_0",
+              "103: +",
+              "104: itob",
+              "105: box_put"
+            ],
+            [
+              "107: increment_box_counter_after_if_else@3:",
+              "110: bytec_0",
+              "111: txn Sender",
+              "112: concat",
+              "113: box_get",
+              "114: swap",
+              "115: btoi",
+              "116: swap",
+              "117: assert",
+              "118: retsub"
+            ],
+            [
+              "43: itob",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: intc_0",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 11 -> 10 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock \"account_box_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0x035c8f99",
+              "13: txna ApplicationArgs 0",
+              "14: match main_increment_box_counter_route@5"
+            ],
+            [
+              "22: main_increment_box_counter_route@5:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txn GroupIndex",
+              "33: intc_0",
+              "34: -",
+              "35: dup",
+              "36: Gtxns TypeEnum",
+              "37: intc_0",
+              "38: ==",
+              "39: assert",
+              "42: callsub increment_box_counter"
+            ],
+            [
+              "64: increment_box_counter:",
+              "68: proto 1 1",
+              "71: frame_dig -1",
+              "72: Gtxns Amount",
+              "73: pushint 26100",
+              "74: ==",
+              "75: assert",
+              "78: frame_dig -1",
+              "79: Gtxns Receiver",
+              "80: global CurrentApplicationAddress",
+              "81: ==",
+              "82: assert",
+              "85: bytec_0",
+              "86: txn Sender",
+              "87: concat",
+              "88: box_len",
+              "89: bury 1",
+              "90: bz increment_box_counter_else_body@2"
+            ],
+            [
+              "120: increment_box_counter_else_body@2:",
+              "123: bytec_0",
+              "124: txn Sender",
+              "125: concat",
+              "126: intc_0",
+              "127: itob",
+              "128: box_put",
+              "129: b increment_box_counter_after_if_else@3"
+            ],
+            [
+              "107: increment_box_counter_after_if_else@3:",
+              "110: bytec_0",
+              "111: txn Sender",
+              "112: concat",
+              "113: box_get",
+              "114: swap",
+              "115: btoi",
+              "116: swap",
+              "117: assert",
+              "118: retsub"
+            ],
+            [
+              "43: itob",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: intc_0",
+              "49: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 2,
+      "description": "\nCheck: \"is-updatable\", Impact: High, Confidence: High\nDescription: Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#upgradable-application\n",
+      "check": "is-updatable",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Do not approve `UpdateApplication` type application calls.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 10 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock \"account_box_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0x035c8f99",
+              "13: txna ApplicationArgs 0",
+              "14: match main_increment_box_counter_route@5"
+            ],
+            [
+              "22: main_increment_box_counter_route@5:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txn GroupIndex",
+              "33: intc_0",
+              "34: -",
+              "35: dup",
+              "36: Gtxns TypeEnum",
+              "37: intc_0",
+              "38: ==",
+              "39: assert",
+              "42: callsub increment_box_counter"
+            ],
+            [
+              "64: increment_box_counter:",
+              "68: proto 1 1",
+              "71: frame_dig -1",
+              "72: Gtxns Amount",
+              "73: pushint 26100",
+              "74: ==",
+              "75: assert",
+              "78: frame_dig -1",
+              "79: Gtxns Receiver",
+              "80: global CurrentApplicationAddress",
+              "81: ==",
+              "82: assert",
+              "85: bytec_0",
+              "86: txn Sender",
+              "87: concat",
+              "88: box_len",
+              "89: bury 1",
+              "90: bz increment_box_counter_else_body@2"
+            ],
+            [
+              "93: bytec_0",
+              "94: txn Sender",
+              "95: concat",
+              "96: dup",
+              "97: box_get",
+              "98: swap",
+              "99: btoi",
+              "100: swap",
+              "101: assert",
+              "102: intc_0",
+              "103: +",
+              "104: itob",
+              "105: box_put"
+            ],
+            [
+              "107: increment_box_counter_after_if_else@3:",
+              "110: bytec_0",
+              "111: txn Sender",
+              "112: concat",
+              "113: box_get",
+              "114: swap",
+              "115: btoi",
+              "116: swap",
+              "117: assert",
+              "118: retsub"
+            ],
+            [
+              "43: itob",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: intc_0",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 11 -> 10 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock \"account_box_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0x035c8f99",
+              "13: txna ApplicationArgs 0",
+              "14: match main_increment_box_counter_route@5"
+            ],
+            [
+              "22: main_increment_box_counter_route@5:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txn GroupIndex",
+              "33: intc_0",
+              "34: -",
+              "35: dup",
+              "36: Gtxns TypeEnum",
+              "37: intc_0",
+              "38: ==",
+              "39: assert",
+              "42: callsub increment_box_counter"
+            ],
+            [
+              "64: increment_box_counter:",
+              "68: proto 1 1",
+              "71: frame_dig -1",
+              "72: Gtxns Amount",
+              "73: pushint 26100",
+              "74: ==",
+              "75: assert",
+              "78: frame_dig -1",
+              "79: Gtxns Receiver",
+              "80: global CurrentApplicationAddress",
+              "81: ==",
+              "82: assert",
+              "85: bytec_0",
+              "86: txn Sender",
+              "87: concat",
+              "88: box_len",
+              "89: bury 1",
+              "90: bz increment_box_counter_else_body@2"
+            ],
+            [
+              "120: increment_box_counter_else_body@2:",
+              "123: bytec_0",
+              "124: txn Sender",
+              "125: concat",
+              "126: intc_0",
+              "127: itob",
+              "128: box_put",
+              "129: b increment_box_counter_after_if_else@3"
+            ],
+            [
+              "107: increment_box_counter_after_if_else@3:",
+              "110: bytec_0",
+              "111: txn Sender",
+              "112: concat",
+              "113: box_get",
+              "114: swap",
+              "115: btoi",
+              "116: swap",
+              "117: assert",
+              "118: retsub"
+            ],
+            [
+              "43: itob",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: intc_0",
+              "49: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 3,
+      "description": "\nCheck: \"missing-fee-check\", Impact: High, Confidence: High\nDescription: Missing Fee Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-fee-field-validation\n",
+      "check": "missing-fee-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `Fee` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 10 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock \"account_box_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0x035c8f99",
+              "13: txna ApplicationArgs 0",
+              "14: match main_increment_box_counter_route@5"
+            ],
+            [
+              "22: main_increment_box_counter_route@5:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txn GroupIndex",
+              "33: intc_0",
+              "34: -",
+              "35: dup",
+              "36: Gtxns TypeEnum",
+              "37: intc_0",
+              "38: ==",
+              "39: assert",
+              "42: callsub increment_box_counter"
+            ],
+            [
+              "64: increment_box_counter:",
+              "68: proto 1 1",
+              "71: frame_dig -1",
+              "72: Gtxns Amount",
+              "73: pushint 26100",
+              "74: ==",
+              "75: assert",
+              "78: frame_dig -1",
+              "79: Gtxns Receiver",
+              "80: global CurrentApplicationAddress",
+              "81: ==",
+              "82: assert",
+              "85: bytec_0",
+              "86: txn Sender",
+              "87: concat",
+              "88: box_len",
+              "89: bury 1",
+              "90: bz increment_box_counter_else_body@2"
+            ],
+            [
+              "93: bytec_0",
+              "94: txn Sender",
+              "95: concat",
+              "96: dup",
+              "97: box_get",
+              "98: swap",
+              "99: btoi",
+              "100: swap",
+              "101: assert",
+              "102: intc_0",
+              "103: +",
+              "104: itob",
+              "105: box_put"
+            ],
+            [
+              "107: increment_box_counter_after_if_else@3:",
+              "110: bytec_0",
+              "111: txn Sender",
+              "112: concat",
+              "113: box_get",
+              "114: swap",
+              "115: btoi",
+              "116: swap",
+              "117: assert",
+              "118: retsub"
+            ],
+            [
+              "43: itob",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: intc_0",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 11 -> 10 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock \"account_box_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0x035c8f99",
+              "13: txna ApplicationArgs 0",
+              "14: match main_increment_box_counter_route@5"
+            ],
+            [
+              "22: main_increment_box_counter_route@5:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txn GroupIndex",
+              "33: intc_0",
+              "34: -",
+              "35: dup",
+              "36: Gtxns TypeEnum",
+              "37: intc_0",
+              "38: ==",
+              "39: assert",
+              "42: callsub increment_box_counter"
+            ],
+            [
+              "64: increment_box_counter:",
+              "68: proto 1 1",
+              "71: frame_dig -1",
+              "72: Gtxns Amount",
+              "73: pushint 26100",
+              "74: ==",
+              "75: assert",
+              "78: frame_dig -1",
+              "79: Gtxns Receiver",
+              "80: global CurrentApplicationAddress",
+              "81: ==",
+              "82: assert",
+              "85: bytec_0",
+              "86: txn Sender",
+              "87: concat",
+              "88: box_len",
+              "89: bury 1",
+              "90: bz increment_box_counter_else_body@2"
+            ],
+            [
+              "120: increment_box_counter_else_body@2:",
+              "123: bytec_0",
+              "124: txn Sender",
+              "125: concat",
+              "126: intc_0",
+              "127: itob",
+              "128: box_put",
+              "129: b increment_box_counter_after_if_else@3"
+            ],
+            [
+              "107: increment_box_counter_after_if_else@3:",
+              "110: bytec_0",
+              "111: txn Sender",
+              "112: concat",
+              "113: box_get",
+              "114: swap",
+              "115: btoi",
+              "116: swap",
+              "117: assert",
+              "118: retsub"
+            ],
+            [
+              "43: itob",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: intc_0",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 6 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock \"account_box_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "51: main_bare_routing@6:",
+              "54: txn OnCompletion",
+              "55: bnz main_after_if_else@8"
+            ],
+            [
+              "56: txn ApplicationID",
+              "57: !",
+              "58: assert",
+              "59: intc_0",
+              "60: return"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 0,
+      "description": "\nCheck: \"group-size-check\", Impact: High, Confidence: High\nDescription: Usage of absolute indexes without validating GroupSize\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-groupsize-validation\n",
+      "check": "group-size-check",
+      "impact": "High",
+      "confidence": "High",
+      "help": "- Avoid using absolute indexes. Validate GroupSize if used.\n- Favor using ARC-4 ABI and relative indexes for group transactions.",
+      "paths": []
+    },
+    {
+      "type": "ExecutionPaths",
+      "count": 3,
+      "description": "\nCheck: \"rekey-to\", Impact: High, Confidence: High\nDescription: Rekeyable Logic Signatures\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#rekeyable-logicsig\n",
+      "check": "rekey-to",
+      "impact": "High",
+      "confidence": "High",
+      "help": "Validate `RekeyTo` field in the LogicSig.",
+      "paths": [
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 10 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock \"account_box_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0x035c8f99",
+              "13: txna ApplicationArgs 0",
+              "14: match main_increment_box_counter_route@5"
+            ],
+            [
+              "22: main_increment_box_counter_route@5:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txn GroupIndex",
+              "33: intc_0",
+              "34: -",
+              "35: dup",
+              "36: Gtxns TypeEnum",
+              "37: intc_0",
+              "38: ==",
+              "39: assert",
+              "42: callsub increment_box_counter"
+            ],
+            [
+              "64: increment_box_counter:",
+              "68: proto 1 1",
+              "71: frame_dig -1",
+              "72: Gtxns Amount",
+              "73: pushint 26100",
+              "74: ==",
+              "75: assert",
+              "78: frame_dig -1",
+              "79: Gtxns Receiver",
+              "80: global CurrentApplicationAddress",
+              "81: ==",
+              "82: assert",
+              "85: bytec_0",
+              "86: txn Sender",
+              "87: concat",
+              "88: box_len",
+              "89: bury 1",
+              "90: bz increment_box_counter_else_body@2"
+            ],
+            [
+              "93: bytec_0",
+              "94: txn Sender",
+              "95: concat",
+              "96: dup",
+              "97: box_get",
+              "98: swap",
+              "99: btoi",
+              "100: swap",
+              "101: assert",
+              "102: intc_0",
+              "103: +",
+              "104: itob",
+              "105: box_put"
+            ],
+            [
+              "107: increment_box_counter_after_if_else@3:",
+              "110: bytec_0",
+              "111: txn Sender",
+              "112: concat",
+              "113: box_get",
+              "114: swap",
+              "115: btoi",
+              "116: swap",
+              "117: assert",
+              "118: retsub"
+            ],
+            [
+              "43: itob",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: intc_0",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 11 -> 10 -> 5",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock \"account_box_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "12: pushbytes 0x035c8f99",
+              "13: txna ApplicationArgs 0",
+              "14: match main_increment_box_counter_route@5"
+            ],
+            [
+              "22: main_increment_box_counter_route@5:",
+              "25: txn OnCompletion",
+              "26: !",
+              "27: assert",
+              "28: txn ApplicationID",
+              "29: assert",
+              "32: txn GroupIndex",
+              "33: intc_0",
+              "34: -",
+              "35: dup",
+              "36: Gtxns TypeEnum",
+              "37: intc_0",
+              "38: ==",
+              "39: assert",
+              "42: callsub increment_box_counter"
+            ],
+            [
+              "64: increment_box_counter:",
+              "68: proto 1 1",
+              "71: frame_dig -1",
+              "72: Gtxns Amount",
+              "73: pushint 26100",
+              "74: ==",
+              "75: assert",
+              "78: frame_dig -1",
+              "79: Gtxns Receiver",
+              "80: global CurrentApplicationAddress",
+              "81: ==",
+              "82: assert",
+              "85: bytec_0",
+              "86: txn Sender",
+              "87: concat",
+              "88: box_len",
+              "89: bury 1",
+              "90: bz increment_box_counter_else_body@2"
+            ],
+            [
+              "120: increment_box_counter_else_body@2:",
+              "123: bytec_0",
+              "124: txn Sender",
+              "125: concat",
+              "126: intc_0",
+              "127: itob",
+              "128: box_put",
+              "129: b increment_box_counter_after_if_else@3"
+            ],
+            [
+              "107: increment_box_counter_after_if_else@3:",
+              "110: bytec_0",
+              "111: txn Sender",
+              "112: concat",
+              "113: box_get",
+              "114: swap",
+              "115: btoi",
+              "116: swap",
+              "117: assert",
+              "118: retsub"
+            ],
+            [
+              "43: itob",
+              "44: pushbytes 0x151f7c75",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: intc_0",
+              "49: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 6 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 10",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock \"account_box_counter\"",
+              "10: txn NumAppArgs",
+              "11: bz main_bare_routing@6"
+            ],
+            [
+              "51: main_bare_routing@6:",
+              "54: txn OnCompletion",
+              "55: bnz main_after_if_else@8"
+            ],
+            [
+              "56: txn ApplicationID",
+              "57: !",
+              "58: assert",
+              "59: intc_0",
+              "60: return"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

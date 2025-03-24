@@ -1,0 +1,139 @@
+#pragma version 10
+#pragma typetrack false
+
+// algopy.arc4.ARC4Contract.approval_program() -> uint64:
+main:
+    intcblock 0 1
+    bytecblock 0x151f7c75 0x6d795f636f756e746572
+    // smart_contracts/reference_account_app/contract.py:31
+    // class AccountAndAppReference(ARC4Contract):
+    txn NumAppArgs
+    bz main_bare_routing@7
+    pushbytess 0x9f5db3a7 0x62240c55 // method "get_my_counter()uint64", method "get_my_counter_with_arg(account,application)uint64"
+    txna ApplicationArgs 0
+    match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4
+
+main_after_if_else@11:
+    // smart_contracts/reference_account_app/contract.py:31
+    // class AccountAndAppReference(ARC4Contract):
+    intc_0 // 0
+    return
+
+main_get_my_counter_with_arg_route@4:
+    // smart_contracts/reference_account_app/contract.py:44
+    // @abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/reference_account_app/contract.py:31
+    // class AccountAndAppReference(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txnas Accounts
+    txna ApplicationArgs 2
+    btoi
+    txnas Applications
+    // smart_contracts/reference_account_app/contract.py:44
+    // @abimethod
+    callsub get_my_counter_with_arg
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_get_my_counter_route@3:
+    // smart_contracts/reference_account_app/contract.py:33
+    // @abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub get_my_counter
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_bare_routing@7:
+    // smart_contracts/reference_account_app/contract.py:31
+    // class AccountAndAppReference(ARC4Contract):
+    txn OnCompletion
+    bnz main_after_if_else@11
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    intc_1 // 1
+    return
+
+
+// smart_contracts.reference_account_app.contract.AccountAndAppReference.get_my_counter() -> uint64:
+get_my_counter:
+    // smart_contracts/reference_account_app/contract.py:33-34
+    // @abimethod
+    // def get_my_counter(self) -> UInt64:
+    proto 0 1
+    // smart_contracts/reference_account_app/contract.py:35-37
+    // acct = Account(
+    //     "WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M"
+    // )  # Replace with your account address
+    pushbytes base32(WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRA) // addr WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M
+    // smart_contracts/reference_account_app/contract.py:38
+    // app = Application(1717)  # Replace with your application id
+    pushint 1717 // 1717
+    // smart_contracts/reference_account_app/contract.py:39
+    // my_count, exist = op.AppLocal.get_ex_uint64(acct, app, b"my_counter")
+    bytec_1 // 0x6d795f636f756e746572
+    app_local_get_ex
+    // smart_contracts/reference_account_app/contract.py:40
+    // if exist:
+    bz get_my_counter_after_if_else@2
+    // smart_contracts/reference_account_app/contract.py:41
+    // return my_count
+    frame_dig 0
+    swap
+    retsub
+
+get_my_counter_after_if_else@2:
+    // smart_contracts/reference_account_app/contract.py:42
+    // return UInt64(0)
+    intc_0 // 0
+    swap
+    retsub
+
+
+// smart_contracts.reference_account_app.contract.AccountAndAppReference.get_my_counter_with_arg(acct: bytes, app: uint64) -> uint64:
+get_my_counter_with_arg:
+    // smart_contracts/reference_account_app/contract.py:44-45
+    // @abimethod
+    // def get_my_counter_with_arg(self, acct: Account, app: Application) -> UInt64:
+    proto 2 1
+    // smart_contracts/reference_account_app/contract.py:46
+    // my_count, exist = op.AppLocal.get_ex_uint64(acct, app, b"my_counter")
+    frame_dig -2
+    frame_dig -1
+    bytec_1 // 0x6d795f636f756e746572
+    app_local_get_ex
+    // smart_contracts/reference_account_app/contract.py:47
+    // if exist:
+    bz get_my_counter_with_arg_after_if_else@2
+    // smart_contracts/reference_account_app/contract.py:48
+    // return my_count
+    frame_dig 0
+    swap
+    retsub
+
+get_my_counter_with_arg_after_if_else@2:
+    // smart_contracts/reference_account_app/contract.py:49
+    // return UInt64(0)
+    intc_0 // 0
+    swap
+    retsub
