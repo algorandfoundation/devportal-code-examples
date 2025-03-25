@@ -1,0 +1,254 @@
+#pragma version 10
+#pragma typetrack false
+
+
+main:
+    intcblock 1 0 28
+    bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 "users"
+
+
+    txn NumAppArgs
+    bz main_bare_routing@9
+    pushbytess 0xf165cdd9 0x0f05f332 0x699eb0fe 0xd829d2a3
+    txna ApplicationArgs 0
+    match main_boxMapTest_route@3 main_boxMapSet_route@4 main_boxMapGet_route@5 main_boxMapExists_route@6
+
+main_after_if_else@13:
+
+
+    intc_1
+    return
+
+main_boxMapExists_route@6:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+
+
+    callsub boxMapExists
+    bytec_2
+    intc_1
+    uncover 2
+    setbit
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_boxMapGet_route@5:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+
+
+    callsub boxMapGet
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_boxMapSet_route@4:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+
+
+    txna ApplicationArgs 1
+    btoi
+    txna ApplicationArgs 2
+
+
+    callsub boxMapSet
+    bytec_2
+    intc_1
+    uncover 2
+    setbit
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_boxMapTest_route@3:
+
+
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    callsub boxMapTest
+    bytec_2
+    intc_1
+    uncover 2
+    setbit
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
+
+main_bare_routing@9:
+
+
+    txn OnCompletion
+    bnz main_after_if_else@13
+    txn ApplicationID
+    !
+    assert
+    intc_0
+    return
+
+
+
+boxMapTest:
+
+
+    bytec_1
+
+
+    box_del
+    pop
+
+
+    bytec_1
+
+
+
+
+
+
+    pushbytes 0x0012000000000000004600000000000000020008746573744e616d65
+
+
+    box_put
+
+
+    bytec_1
+
+
+    box_len
+    assert
+    intc_2
+    ==
+    assert
+
+
+    bytec_1
+
+
+    box_len
+    assert
+    intc_2
+    ==
+    assert
+
+
+    intc_0
+    retsub
+
+
+
+boxMapSet:
+
+
+
+    proto 2 1
+
+
+    frame_dig -2
+    itob
+
+
+    bytec_3
+    swap
+    concat
+
+
+    dup
+    box_del
+    pop
+    dup
+    frame_dig -1
+    box_put
+
+
+    box_get
+    assert
+    frame_dig -1
+    ==
+    assert
+
+
+    intc_0
+    retsub
+
+
+
+boxMapGet:
+
+
+
+    proto 1 1
+
+
+    frame_dig -1
+    itob
+
+
+    bytec_3
+    swap
+    concat
+
+
+    box_get
+    assert
+    retsub
+
+
+
+boxMapExists:
+
+
+
+    proto 1 1
+
+
+    frame_dig -1
+    itob
+
+
+    bytec_3
+    swap
+    concat
+
+
+    box_len
+    bury 1
+    retsub
