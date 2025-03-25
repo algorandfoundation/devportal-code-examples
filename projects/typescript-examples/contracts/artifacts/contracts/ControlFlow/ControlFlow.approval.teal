@@ -20,7 +20,7 @@ main_after_if_else@15:
     return
 
 main_loop_route@8:
-    // contracts/ControlFlow/contract.algo.ts:175
+    // contracts/ControlFlow/contract.algo.ts:176
     // @arc4.abimethod({ readonly: true })
     txn OnCompletion
     !
@@ -37,7 +37,7 @@ main_loop_route@8:
     return
 
 main_calculateBoxStorageCost_route@7:
-    // contracts/ControlFlow/contract.algo.ts:124
+    // contracts/ControlFlow/contract.algo.ts:125
     // @arc4.abimethod({ readonly: true })
     txn OnCompletion
     !
@@ -50,7 +50,7 @@ main_calculateBoxStorageCost_route@7:
     extract 2 0
     txna ApplicationArgs 2
     extract 2 0
-    // contracts/ControlFlow/contract.algo.ts:124
+    // contracts/ControlFlow/contract.algo.ts:125
     // @arc4.abimethod({ readonly: true })
     callsub calculateBoxStorageCost
     itob
@@ -62,7 +62,7 @@ main_calculateBoxStorageCost_route@7:
     return
 
 main_getDay_route@6:
-    // contracts/ControlFlow/contract.algo.ts:91
+    // contracts/ControlFlow/contract.algo.ts:92
     // @arc4.abimethod({ readonly: true })
     txn OnCompletion
     !
@@ -73,7 +73,7 @@ main_getDay_route@6:
     // export default class ControlFlow extends Contract {
     txna ApplicationArgs 1
     btoi
-    // contracts/ControlFlow/contract.algo.ts:91
+    // contracts/ControlFlow/contract.algo.ts:92
     // @arc4.abimethod({ readonly: true })
     callsub getDay
     dup
@@ -399,116 +399,116 @@ forLoop_after_for@12:
 
 // contracts/ControlFlow/contract.algo.ts::ControlFlow.getDay(date: uint64) -> bytes:
 getDay:
-    // contracts/ControlFlow/contract.algo.ts:91-92
+    // contracts/ControlFlow/contract.algo.ts:92-93
     // @arc4.abimethod({ readonly: true })
     // public getDay(date: uint64): string {
     proto 1 1
-    // contracts/ControlFlow/contract.algo.ts:94
+    // contracts/ControlFlow/contract.algo.ts:95
     // case Uint64(1):
     frame_dig -1
     intc_0 // 1
     ==
-    // contracts/ControlFlow/contract.algo.ts:94-95
+    // contracts/ControlFlow/contract.algo.ts:95-96
     // case Uint64(1):
     //   return 'Monday'
     bz getDay_after_if_else@3
-    // contracts/ControlFlow/contract.algo.ts:95
+    // contracts/ControlFlow/contract.algo.ts:96
     // return 'Monday'
     pushbytes "Monday"
     retsub
 
 getDay_after_if_else@3:
-    // contracts/ControlFlow/contract.algo.ts:96
+    // contracts/ControlFlow/contract.algo.ts:97
     // case Uint64(2):
     frame_dig -1
     intc_3 // 2
     ==
-    // contracts/ControlFlow/contract.algo.ts:96-97
+    // contracts/ControlFlow/contract.algo.ts:97-98
     // case Uint64(2):
     //   return 'Tuesday'
     bz getDay_after_if_else@6
-    // contracts/ControlFlow/contract.algo.ts:97
+    // contracts/ControlFlow/contract.algo.ts:98
     // return 'Tuesday'
     pushbytes "Tuesday"
     retsub
 
 getDay_after_if_else@6:
-    // contracts/ControlFlow/contract.algo.ts:98
+    // contracts/ControlFlow/contract.algo.ts:99
     // case Uint64(3):
     frame_dig -1
     pushint 3 // 3
     ==
-    // contracts/ControlFlow/contract.algo.ts:98-99
+    // contracts/ControlFlow/contract.algo.ts:99-100
     // case Uint64(3):
     //   return 'Wednesday'
     bz getDay_after_if_else@9
-    // contracts/ControlFlow/contract.algo.ts:99
+    // contracts/ControlFlow/contract.algo.ts:100
     // return 'Wednesday'
     pushbytes "Wednesday"
     retsub
 
 getDay_after_if_else@9:
-    // contracts/ControlFlow/contract.algo.ts:100
+    // contracts/ControlFlow/contract.algo.ts:101
     // case Uint64(4):
     frame_dig -1
     pushint 4 // 4
     ==
-    // contracts/ControlFlow/contract.algo.ts:100-101
+    // contracts/ControlFlow/contract.algo.ts:101-102
     // case Uint64(4):
     //   return 'Thursday'
     bz getDay_after_if_else@12
-    // contracts/ControlFlow/contract.algo.ts:101
+    // contracts/ControlFlow/contract.algo.ts:102
     // return 'Thursday'
     pushbytes "Thursday"
     retsub
 
 getDay_after_if_else@12:
-    // contracts/ControlFlow/contract.algo.ts:102
+    // contracts/ControlFlow/contract.algo.ts:103
     // case Uint64(5):
     frame_dig -1
     pushint 5 // 5
     ==
-    // contracts/ControlFlow/contract.algo.ts:102-103
+    // contracts/ControlFlow/contract.algo.ts:103-104
     // case Uint64(5):
     //   return 'Friday'
     bz getDay_after_if_else@15
-    // contracts/ControlFlow/contract.algo.ts:103
+    // contracts/ControlFlow/contract.algo.ts:104
     // return 'Friday'
     pushbytes "Friday"
     retsub
 
 getDay_after_if_else@15:
-    // contracts/ControlFlow/contract.algo.ts:104
+    // contracts/ControlFlow/contract.algo.ts:105
     // case Uint64(6):
     frame_dig -1
     pushint 6 // 6
     ==
-    // contracts/ControlFlow/contract.algo.ts:104-105
+    // contracts/ControlFlow/contract.algo.ts:105-106
     // case Uint64(6):
     //   return 'Saturday'
     bz getDay_after_if_else@18
-    // contracts/ControlFlow/contract.algo.ts:105
+    // contracts/ControlFlow/contract.algo.ts:106
     // return 'Saturday'
     pushbytes "Saturday"
     retsub
 
 getDay_after_if_else@18:
-    // contracts/ControlFlow/contract.algo.ts:106
+    // contracts/ControlFlow/contract.algo.ts:107
     // case Uint64(7):
     frame_dig -1
     pushint 7 // 7
     ==
-    // contracts/ControlFlow/contract.algo.ts:106-107
+    // contracts/ControlFlow/contract.algo.ts:107-108
     // case Uint64(7):
     //   return 'Sunday'
     bz getDay_after_if_else@21
-    // contracts/ControlFlow/contract.algo.ts:107
+    // contracts/ControlFlow/contract.algo.ts:108
     // return 'Sunday'
     pushbytes "Sunday"
     retsub
 
 getDay_after_if_else@21:
-    // contracts/ControlFlow/contract.algo.ts:109
+    // contracts/ControlFlow/contract.algo.ts:110
     // return 'Invalid day'
     pushbytes "Invalid day"
     retsub
@@ -516,124 +516,124 @@ getDay_after_if_else@21:
 
 // contracts/ControlFlow/contract.algo.ts::ControlFlow.calculateBoxStorageCost(boxSizeLabel: bytes, boxName: bytes) -> uint64:
 calculateBoxStorageCost:
-    // contracts/ControlFlow/contract.algo.ts:124-125
+    // contracts/ControlFlow/contract.algo.ts:125-126
     // @arc4.abimethod({ readonly: true })
     // public calculateBoxStorageCost(boxSizeLabel: string, boxName: string): uint64 {
     proto 2 1
-    // contracts/ControlFlow/contract.algo.ts:131
+    // contracts/ControlFlow/contract.algo.ts:132
     // const boxNameLength: uint64 = Bytes(boxName).length
     frame_dig -1
     len
-    // contracts/ControlFlow/contract.algo.ts:137
+    // contracts/ControlFlow/contract.algo.ts:138
     // case 'xs':
     frame_dig -2
     pushbytes "xs"
     ==
-    // contracts/ControlFlow/contract.algo.ts:137-139
+    // contracts/ControlFlow/contract.algo.ts:138-140
     // case 'xs':
     //   boxSize = 8 // 8 bytes (enough for a uint64)
     //   break
     bz calculateBoxStorageCost_after_if_else@3
-    // contracts/ControlFlow/contract.algo.ts:138
+    // contracts/ControlFlow/contract.algo.ts:139
     // boxSize = 8 // 8 bytes (enough for a uint64)
     intc_2 // 8
 
 calculateBoxStorageCost_block@17:
-    // contracts/ControlFlow/contract.algo.ts:164
+    // contracts/ControlFlow/contract.algo.ts:165
     // const mbrIncrease: uint64 = baseCost + byteUnitCost * (boxNameLength + boxSize)
     frame_dig 0
     +
-    // contracts/ControlFlow/contract.algo.ts:128
+    // contracts/ControlFlow/contract.algo.ts:129
     // const byteUnitCost: uint64 = 400 // microAlgos per byte
     pushint 400 // 400
-    // contracts/ControlFlow/contract.algo.ts:164
+    // contracts/ControlFlow/contract.algo.ts:165
     // const mbrIncrease: uint64 = baseCost + byteUnitCost * (boxNameLength + boxSize)
     *
-    // contracts/ControlFlow/contract.algo.ts:127
+    // contracts/ControlFlow/contract.algo.ts:128
     // const baseCost: uint64 = 2500 // microAlgos
     pushint 2500 // 2500
-    // contracts/ControlFlow/contract.algo.ts:164
+    // contracts/ControlFlow/contract.algo.ts:165
     // const mbrIncrease: uint64 = baseCost + byteUnitCost * (boxNameLength + boxSize)
     +
-    // contracts/ControlFlow/contract.algo.ts:166
+    // contracts/ControlFlow/contract.algo.ts:167
     // return mbrIncrease
     swap
     retsub
 
 calculateBoxStorageCost_after_if_else@3:
-    // contracts/ControlFlow/contract.algo.ts:141
+    // contracts/ControlFlow/contract.algo.ts:142
     // case 'sm':
     frame_dig -2
     pushbytes "sm"
     ==
-    // contracts/ControlFlow/contract.algo.ts:141-143
+    // contracts/ControlFlow/contract.algo.ts:142-144
     // case 'sm':
     //   boxSize = 64 // 64 bytes
     //   break
     bz calculateBoxStorageCost_after_if_else@6
-    // contracts/ControlFlow/contract.algo.ts:142
+    // contracts/ControlFlow/contract.algo.ts:143
     // boxSize = 64 // 64 bytes
     pushint 64 // 64
-    // contracts/ControlFlow/contract.algo.ts:143
+    // contracts/ControlFlow/contract.algo.ts:144
     // break
     b calculateBoxStorageCost_block@17
 
 calculateBoxStorageCost_after_if_else@6:
-    // contracts/ControlFlow/contract.algo.ts:145
+    // contracts/ControlFlow/contract.algo.ts:146
     // case 'md':
     frame_dig -2
     pushbytes "md"
     ==
-    // contracts/ControlFlow/contract.algo.ts:145-147
+    // contracts/ControlFlow/contract.algo.ts:146-148
     // case 'md':
     //   boxSize = 256 // 256 bytes
     //   break
     bz calculateBoxStorageCost_after_if_else@9
-    // contracts/ControlFlow/contract.algo.ts:146
+    // contracts/ControlFlow/contract.algo.ts:147
     // boxSize = 256 // 256 bytes
     pushint 256 // 256
-    // contracts/ControlFlow/contract.algo.ts:147
+    // contracts/ControlFlow/contract.algo.ts:148
     // break
     b calculateBoxStorageCost_block@17
 
 calculateBoxStorageCost_after_if_else@9:
-    // contracts/ControlFlow/contract.algo.ts:149
+    // contracts/ControlFlow/contract.algo.ts:150
     // case 'lg':
     frame_dig -2
     pushbytes "lg"
     ==
-    // contracts/ControlFlow/contract.algo.ts:149-151
+    // contracts/ControlFlow/contract.algo.ts:150-152
     // case 'lg':
     //   boxSize = 1024 // 1KB
     //   break
     bz calculateBoxStorageCost_after_if_else@12
-    // contracts/ControlFlow/contract.algo.ts:150
+    // contracts/ControlFlow/contract.algo.ts:151
     // boxSize = 1024 // 1KB
     pushint 1024 // 1024
-    // contracts/ControlFlow/contract.algo.ts:151
+    // contracts/ControlFlow/contract.algo.ts:152
     // break
     b calculateBoxStorageCost_block@17
 
 calculateBoxStorageCost_after_if_else@12:
-    // contracts/ControlFlow/contract.algo.ts:153
+    // contracts/ControlFlow/contract.algo.ts:154
     // case 'max':
     frame_dig -2
     pushbytes "max"
     ==
-    // contracts/ControlFlow/contract.algo.ts:153-155
+    // contracts/ControlFlow/contract.algo.ts:154-156
     // case 'max':
     //   boxSize = 32000 // 32KB (close to max allowed)
     //   break
     bz calculateBoxStorageCost_after_if_else@15
-    // contracts/ControlFlow/contract.algo.ts:154
+    // contracts/ControlFlow/contract.algo.ts:155
     // boxSize = 32000 // 32KB (close to max allowed)
     pushint 32000 // 32000
-    // contracts/ControlFlow/contract.algo.ts:155
+    // contracts/ControlFlow/contract.algo.ts:156
     // break
     b calculateBoxStorageCost_block@17
 
 calculateBoxStorageCost_after_if_else@15:
-    // contracts/ControlFlow/contract.algo.ts:159
+    // contracts/ControlFlow/contract.algo.ts:160
     // return 0
     intc_1 // 0
     swap
@@ -642,19 +642,19 @@ calculateBoxStorageCost_after_if_else@15:
 
 // contracts/ControlFlow/contract.algo.ts::ControlFlow.loop() -> uint64:
 loop:
-    // contracts/ControlFlow/contract.algo.ts:175-176
+    // contracts/ControlFlow/contract.algo.ts:176-177
     // @arc4.abimethod({ readonly: true })
     // public loop(): uint64 {
     proto 0 1
-    // contracts/ControlFlow/contract.algo.ts:177
+    // contracts/ControlFlow/contract.algo.ts:178
     // let num: uint64 = 10
     pushint 10 // 10
-    // contracts/ControlFlow/contract.algo.ts:178
+    // contracts/ControlFlow/contract.algo.ts:179
     // let loopCount: uint64 = 0
     intc_1 // 0
 
 loop_while_top@1:
-    // contracts/ControlFlow/contract.algo.ts:180-193
+    // contracts/ControlFlow/contract.algo.ts:181-194
     // while (num > 0) {
     //   if (num > 5) {
     //     num -= 1
@@ -671,50 +671,50 @@ loop_while_top@1:
     // }
     frame_dig 0
     bz loop_block@9
-    // contracts/ControlFlow/contract.algo.ts:181
+    // contracts/ControlFlow/contract.algo.ts:182
     // if (num > 5) {
     frame_dig 0
     pushint 5 // 5
     >
     bz loop_after_if_else@4
-    // contracts/ControlFlow/contract.algo.ts:182
+    // contracts/ControlFlow/contract.algo.ts:183
     // num -= 1
     frame_dig 0
     intc_0 // 1
     -
     frame_bury 0
-    // contracts/ControlFlow/contract.algo.ts:183
+    // contracts/ControlFlow/contract.algo.ts:184
     // loopCount += 1
     frame_dig 1
     intc_0 // 1
     +
     frame_bury 1
-    // contracts/ControlFlow/contract.algo.ts:184
+    // contracts/ControlFlow/contract.algo.ts:185
     // continue
     b loop_while_top@1
 
 loop_after_if_else@4:
-    // contracts/ControlFlow/contract.algo.ts:187
+    // contracts/ControlFlow/contract.algo.ts:188
     // num -= 2
     frame_dig 0
     intc_3 // 2
     -
     dup
     frame_bury 0
-    // contracts/ControlFlow/contract.algo.ts:188
+    // contracts/ControlFlow/contract.algo.ts:189
     // loopCount += 1
     frame_dig 1
     intc_0 // 1
     +
     frame_bury 1
-    // contracts/ControlFlow/contract.algo.ts:190
+    // contracts/ControlFlow/contract.algo.ts:191
     // if (num === 1) {
     intc_0 // 1
     ==
     bz loop_while_top@1
 
 loop_block@9:
-    // contracts/ControlFlow/contract.algo.ts:195
+    // contracts/ControlFlow/contract.algo.ts:196
     // return loopCount
     frame_dig 1
     frame_bury 0
