@@ -1,0 +1,567 @@
+{
+  "version": 3,
+  "sources": [
+    "/Users/gabe.algo/Code/devportal-code-examples/projects/typescript-examples/contracts/SelfPayment/contract.algo.ts"
+  ],
+  "mappings": "AAmBA;;AAAA;;;AAAA;;;;;;AAAA;;;AAAA;;;;AAAA;;AAEG;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;;;AAAA;AAAA;;AAAA;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;;AAFH;;AAAA;;;AAAA;;AAAA;AAAA;AAAA;;AAKU;;AAA6B;AAAjC;AAAA;;;AACI;;AAAiB;;AAArB;AADA;;;AAEI;;AAFJ;;;AAGI;;AAAmB;;AAAvB;AAHA;;;AAII;;AAA4B;;AAAhC;AAJA;;;AAKI;;AAAe;;AAAnB;AALA;;;AAMO;;AAAgB;AAAvB;AANA;;;AAQI;;AAAc;AAAlB;AARA;;;AASI;;AAA0B;;;;;;;;;;;;;;AAAhB;AAAd;AATA;;;;AADF;;AAAA",
+  "op_pc_offset": 2,
+  "pc_events": {
+    "0": {
+      "op": "txn NumAppArgs",
+      "defined_out": [
+        "tmp%0#1"
+      ],
+      "stack_out": [
+        "tmp%0#1"
+      ]
+    },
+    "2": {
+      "op": "bz main_bare_routing@6",
+      "stack_out": []
+    },
+    "5": {
+      "op": "pushbytes 0x1f89ac50 // method \"selfPayment()bool\"",
+      "defined_out": [
+        "Method(selfPayment()bool)"
+      ],
+      "stack_out": [
+        "Method(selfPayment()bool)"
+      ]
+    },
+    "11": {
+      "op": "txna ApplicationArgs 0",
+      "defined_out": [
+        "Method(selfPayment()bool)",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "Method(selfPayment()bool)",
+        "tmp%2#0"
+      ]
+    },
+    "14": {
+      "op": "match main_selfPayment_route@3",
+      "stack_out": []
+    },
+    "18": {
+      "block": "main_after_if_else@10",
+      "stack_in": [],
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "19": {
+      "op": "return",
+      "stack_out": []
+    },
+    "20": {
+      "block": "main_selfPayment_route@3",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "22": {
+      "op": "!",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "23": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "24": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%5#0"
+      ]
+    },
+    "26": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "27": {
+      "callsub": "contracts/SelfPayment/contract.algo.ts::SelfPayment.selfPayment",
+      "op": "callsub selfPayment",
+      "defined_out": [
+        "to_encode%0#0"
+      ],
+      "stack_out": [
+        "to_encode%0#0"
+      ]
+    },
+    "30": {
+      "op": "pushbytes 0x00",
+      "defined_out": [
+        "0x00",
+        "to_encode%0#0"
+      ],
+      "stack_out": [
+        "to_encode%0#0",
+        "0x00"
+      ]
+    },
+    "33": {
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "0",
+        "0x00",
+        "to_encode%0#0"
+      ],
+      "stack_out": [
+        "to_encode%0#0",
+        "0x00",
+        "0"
+      ]
+    },
+    "34": {
+      "op": "uncover 2",
+      "stack_out": [
+        "0x00",
+        "0",
+        "to_encode%0#0"
+      ]
+    },
+    "36": {
+      "op": "setbit",
+      "defined_out": [
+        "encoded_bool%0#0"
+      ],
+      "stack_out": [
+        "encoded_bool%0#0"
+      ]
+    },
+    "37": {
+      "op": "pushbytes 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "encoded_bool%0#0"
+      ],
+      "stack_out": [
+        "encoded_bool%0#0",
+        "0x151f7c75"
+      ]
+    },
+    "43": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "encoded_bool%0#0"
+      ]
+    },
+    "44": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%7#0"
+      ]
+    },
+    "45": {
+      "op": "log",
+      "stack_out": []
+    },
+    "46": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "47": {
+      "op": "return",
+      "stack_out": []
+    },
+    "48": {
+      "block": "main_bare_routing@6",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "tmp%8#0"
+      ]
+    },
+    "50": {
+      "op": "bnz main_after_if_else@10",
+      "stack_out": []
+    },
+    "53": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%9#0"
+      ]
+    },
+    "55": {
+      "op": "!",
+      "defined_out": [
+        "tmp%10#0"
+      ],
+      "stack_out": [
+        "tmp%10#0"
+      ]
+    },
+    "56": {
+      "error": "can only call when creating",
+      "op": "assert // can only call when creating",
+      "stack_out": []
+    },
+    "57": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "58": {
+      "op": "return",
+      "stack_out": []
+    },
+    "59": {
+      "subroutine": "contracts/SelfPayment/contract.algo.ts::SelfPayment.selfPayment",
+      "params": {},
+      "block": "selfPayment",
+      "stack_in": [],
+      "op": "txn TypeEnum",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "61": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "1"
+      ]
+    },
+    "62": {
+      "op": "==",
+      "defined_out": [
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "63": {
+      "op": "bz selfPayment_bool_false@10",
+      "stack_out": []
+    },
+    "66": {
+      "op": "txn Receiver",
+      "defined_out": [
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%2#0"
+      ]
+    },
+    "68": {
+      "op": "txn Sender",
+      "defined_out": [
+        "tmp%2#0",
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%2#0",
+        "tmp%3#0"
+      ]
+    },
+    "70": {
+      "op": "==",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "71": {
+      "op": "bz selfPayment_bool_false@10",
+      "stack_out": []
+    },
+    "74": {
+      "op": "txn Amount",
+      "defined_out": [
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%5#0"
+      ]
+    },
+    "76": {
+      "op": "bnz selfPayment_bool_false@10",
+      "stack_out": []
+    },
+    "79": {
+      "op": "txn RekeyTo",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%7#0"
+      ]
+    },
+    "81": {
+      "op": "global ZeroAddress",
+      "defined_out": [
+        "tmp%7#0",
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "tmp%7#0",
+        "tmp%8#0"
+      ]
+    },
+    "83": {
+      "op": "==",
+      "defined_out": [
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%9#0"
+      ]
+    },
+    "84": {
+      "op": "bz selfPayment_bool_false@10",
+      "stack_out": []
+    },
+    "87": {
+      "op": "txn CloseRemainderTo",
+      "defined_out": [
+        "tmp%10#0"
+      ],
+      "stack_out": [
+        "tmp%10#0"
+      ]
+    },
+    "89": {
+      "op": "global ZeroAddress",
+      "defined_out": [
+        "tmp%10#0",
+        "tmp%11#0"
+      ],
+      "stack_out": [
+        "tmp%10#0",
+        "tmp%11#0"
+      ]
+    },
+    "91": {
+      "op": "==",
+      "defined_out": [
+        "tmp%12#0"
+      ],
+      "stack_out": [
+        "tmp%12#0"
+      ]
+    },
+    "92": {
+      "op": "bz selfPayment_bool_false@10",
+      "stack_out": []
+    },
+    "95": {
+      "op": "txn Fee",
+      "defined_out": [
+        "tmp%13#0"
+      ],
+      "stack_out": [
+        "tmp%13#0"
+      ]
+    },
+    "97": {
+      "op": "global MinTxnFee",
+      "defined_out": [
+        "tmp%13#0",
+        "tmp%14#0"
+      ],
+      "stack_out": [
+        "tmp%13#0",
+        "tmp%14#0"
+      ]
+    },
+    "99": {
+      "op": "==",
+      "defined_out": [
+        "tmp%15#0"
+      ],
+      "stack_out": [
+        "tmp%15#0"
+      ]
+    },
+    "100": {
+      "op": "bz selfPayment_bool_false@10",
+      "stack_out": []
+    },
+    "103": {
+      "op": "global GenesisHash",
+      "defined_out": [
+        "tmp%16#0"
+      ],
+      "stack_out": [
+        "tmp%16#0"
+      ]
+    },
+    "105": {
+      "op": "bytec_0 // TMPL_TARGET_NETWORK_GENESIS",
+      "defined_out": [
+        "TMPL_TARGET_NETWORK_GENESIS",
+        "tmp%16#0"
+      ],
+      "stack_out": [
+        "tmp%16#0",
+        "TMPL_TARGET_NETWORK_GENESIS"
+      ]
+    },
+    "106": {
+      "op": "==",
+      "defined_out": [
+        "tmp%17#0"
+      ],
+      "stack_out": [
+        "tmp%17#0"
+      ]
+    },
+    "107": {
+      "op": "bz selfPayment_bool_false@10",
+      "stack_out": []
+    },
+    "110": {
+      "op": "txn LastValid",
+      "defined_out": [
+        "tmp%18#0"
+      ],
+      "stack_out": [
+        "tmp%18#0"
+      ]
+    },
+    "112": {
+      "op": "intc_2 // TMPL_LAST_ROUND",
+      "defined_out": [
+        "TMPL_LAST_ROUND",
+        "tmp%18#0"
+      ],
+      "stack_out": [
+        "tmp%18#0",
+        "TMPL_LAST_ROUND"
+      ]
+    },
+    "113": {
+      "op": "==",
+      "defined_out": [
+        "tmp%19#0"
+      ],
+      "stack_out": [
+        "tmp%19#0"
+      ]
+    },
+    "114": {
+      "op": "bz selfPayment_bool_false@10",
+      "stack_out": []
+    },
+    "117": {
+      "op": "txn Lease",
+      "defined_out": [
+        "tmp%20#0"
+      ],
+      "stack_out": [
+        "tmp%20#0"
+      ]
+    },
+    "119": {
+      "op": "pushbytes \"self-payment\"",
+      "defined_out": [
+        "\"self-payment\"",
+        "tmp%20#0"
+      ],
+      "stack_out": [
+        "tmp%20#0",
+        "\"self-payment\""
+      ]
+    },
+    "133": {
+      "op": "sha256",
+      "defined_out": [
+        "tmp%20#0",
+        "tmp%21#0"
+      ],
+      "stack_out": [
+        "tmp%20#0",
+        "tmp%21#0"
+      ]
+    },
+    "134": {
+      "op": "==",
+      "defined_out": [
+        "tmp%22#0"
+      ],
+      "stack_out": [
+        "tmp%22#0"
+      ]
+    },
+    "135": {
+      "op": "bz selfPayment_bool_false@10",
+      "stack_out": []
+    },
+    "138": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "and_result%0#0"
+      ],
+      "stack_out": [
+        "and_result%0#0"
+      ]
+    },
+    "139": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "140": {
+      "block": "selfPayment_bool_false@10",
+      "stack_in": [],
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "and_result%0#0"
+      ],
+      "stack_out": [
+        "and_result%0#0"
+      ]
+    },
+    "141": {
+      "retsub": true,
+      "op": "retsub"
+    }
+  }
+}

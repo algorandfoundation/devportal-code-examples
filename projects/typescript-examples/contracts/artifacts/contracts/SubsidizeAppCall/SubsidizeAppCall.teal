@@ -1,0 +1,198 @@
+#pragma version 10
+#pragma typetrack false
+
+// contracts/SubsidizeAppCall/contract.algo.ts::program() -> uint64:
+main:
+    intcblock 1 TMPL_EXPIRATION_ROUND TMPL_KNOWN_APP
+    bytecblock TMPL_TARGET_NETWORK_GENESIS
+    // contracts/SubsidizeAppCall/contract.algo.ts:23
+    // const prevTxn = gtxn.Transaction(Txn.groupIndex - 1)
+    txn GroupIndex
+    intc_0 // 1
+    -
+    // contracts/SubsidizeAppCall/contract.algo.ts:27
+    // Txn.typeEnum === TransactionType.Payment &&
+    txn TypeEnum
+    intc_0 // 1
+    ==
+    // contracts/SubsidizeAppCall/contract.algo.ts:27-28
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    bz main_bool_false@12
+    // contracts/SubsidizeAppCall/contract.algo.ts:28
+    // Txn.receiver === Txn.sender &&
+    txn Receiver
+    txn Sender
+    ==
+    // contracts/SubsidizeAppCall/contract.algo.ts:27-28
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    bz main_bool_false@12
+    // contracts/SubsidizeAppCall/contract.algo.ts:29
+    // Txn.amount === 0 &&
+    txn Amount
+    // contracts/SubsidizeAppCall/contract.algo.ts:27-29
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    // Txn.amount === 0 &&
+    bnz main_bool_false@12
+    // contracts/SubsidizeAppCall/contract.algo.ts:30
+    // Txn.rekeyTo === Global.zeroAddress &&
+    txn RekeyTo
+    global ZeroAddress
+    ==
+    // contracts/SubsidizeAppCall/contract.algo.ts:27-30
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    // Txn.amount === 0 &&
+    // Txn.rekeyTo === Global.zeroAddress &&
+    bz main_bool_false@12
+    // contracts/SubsidizeAppCall/contract.algo.ts:31
+    // Txn.closeRemainderTo === Global.zeroAddress &&
+    txn CloseRemainderTo
+    global ZeroAddress
+    ==
+    // contracts/SubsidizeAppCall/contract.algo.ts:27-31
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    // Txn.amount === 0 &&
+    // Txn.rekeyTo === Global.zeroAddress &&
+    // Txn.closeRemainderTo === Global.zeroAddress &&
+    bz main_bool_false@12
+    // contracts/SubsidizeAppCall/contract.algo.ts:32
+    // Txn.fee === 2 * Global.minTxnFee &&
+    txn Fee
+    pushint 2 // 2
+    global MinTxnFee
+    *
+    ==
+    // contracts/SubsidizeAppCall/contract.algo.ts:27-32
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    // Txn.amount === 0 &&
+    // Txn.rekeyTo === Global.zeroAddress &&
+    // Txn.closeRemainderTo === Global.zeroAddress &&
+    // Txn.fee === 2 * Global.minTxnFee &&
+    bz main_bool_false@12
+    // contracts/SubsidizeAppCall/contract.algo.ts:33
+    // Txn.lastValid <= TemplateVar<uint64>('EXPIRATION_ROUND') &&
+    txn LastValid
+    intc_1 // TMPL_EXPIRATION_ROUND
+    <=
+    // contracts/SubsidizeAppCall/contract.algo.ts:27-33
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    // Txn.amount === 0 &&
+    // Txn.rekeyTo === Global.zeroAddress &&
+    // Txn.closeRemainderTo === Global.zeroAddress &&
+    // Txn.fee === 2 * Global.minTxnFee &&
+    // Txn.lastValid <= TemplateVar<uint64>('EXPIRATION_ROUND') &&
+    bz main_bool_false@12
+    // contracts/SubsidizeAppCall/contract.algo.ts:34
+    // Global.genesisHash === TemplateVar<bytes>('TARGET_NETWORK_GENESIS') &&
+    global GenesisHash
+    bytec_0 // TMPL_TARGET_NETWORK_GENESIS
+    ==
+    // contracts/SubsidizeAppCall/contract.algo.ts:27-34
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    // Txn.amount === 0 &&
+    // Txn.rekeyTo === Global.zeroAddress &&
+    // Txn.closeRemainderTo === Global.zeroAddress &&
+    // Txn.fee === 2 * Global.minTxnFee &&
+    // Txn.lastValid <= TemplateVar<uint64>('EXPIRATION_ROUND') &&
+    // Global.genesisHash === TemplateVar<bytes>('TARGET_NETWORK_GENESIS') &&
+    bz main_bool_false@12
+    // contracts/SubsidizeAppCall/contract.algo.ts:36
+    // prevTxn.type === TransactionType.ApplicationCall &&
+    dup
+    gtxns TypeEnum
+    pushint 6 // 6
+    ==
+    // contracts/SubsidizeAppCall/contract.algo.ts:27-36
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    // Txn.amount === 0 &&
+    // Txn.rekeyTo === Global.zeroAddress &&
+    // Txn.closeRemainderTo === Global.zeroAddress &&
+    // Txn.fee === 2 * Global.minTxnFee &&
+    // Txn.lastValid <= TemplateVar<uint64>('EXPIRATION_ROUND') &&
+    // Global.genesisHash === TemplateVar<bytes>('TARGET_NETWORK_GENESIS') &&
+    // // is the previous transaction in the group an application call to a known app?
+    // prevTxn.type === TransactionType.ApplicationCall &&
+    bz main_bool_false@12
+    // contracts/SubsidizeAppCall/contract.algo.ts:37
+    // prevTxn.appId === TemplateVar<Application>('KNOWN_APP') &&
+    dup
+    gtxns ApplicationID
+    intc_2 // TMPL_KNOWN_APP
+    ==
+    // contracts/SubsidizeAppCall/contract.algo.ts:27-37
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    // Txn.amount === 0 &&
+    // Txn.rekeyTo === Global.zeroAddress &&
+    // Txn.closeRemainderTo === Global.zeroAddress &&
+    // Txn.fee === 2 * Global.minTxnFee &&
+    // Txn.lastValid <= TemplateVar<uint64>('EXPIRATION_ROUND') &&
+    // Global.genesisHash === TemplateVar<bytes>('TARGET_NETWORK_GENESIS') &&
+    // // is the previous transaction in the group an application call to a known app?
+    // prevTxn.type === TransactionType.ApplicationCall &&
+    // prevTxn.appId === TemplateVar<Application>('KNOWN_APP') &&
+    bz main_bool_false@12
+    // contracts/SubsidizeAppCall/contract.algo.ts:38
+    // prevTxn.fee === 0
+    dup
+    gtxns Fee
+    // contracts/SubsidizeAppCall/contract.algo.ts:27-38
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    // Txn.amount === 0 &&
+    // Txn.rekeyTo === Global.zeroAddress &&
+    // Txn.closeRemainderTo === Global.zeroAddress &&
+    // Txn.fee === 2 * Global.minTxnFee &&
+    // Txn.lastValid <= TemplateVar<uint64>('EXPIRATION_ROUND') &&
+    // Global.genesisHash === TemplateVar<bytes>('TARGET_NETWORK_GENESIS') &&
+    // // is the previous transaction in the group an application call to a known app?
+    // prevTxn.type === TransactionType.ApplicationCall &&
+    // prevTxn.appId === TemplateVar<Application>('KNOWN_APP') &&
+    // prevTxn.fee === 0
+    bnz main_bool_false@12
+    intc_0 // 1
+    // contracts/SubsidizeAppCall/contract.algo.ts:25-39
+    // return (
+    //   // is it safe to pay for the fees of the previous transaction?
+    //   Txn.typeEnum === TransactionType.Payment &&
+    //   Txn.receiver === Txn.sender &&
+    //   Txn.amount === 0 &&
+    //   Txn.rekeyTo === Global.zeroAddress &&
+    //   Txn.closeRemainderTo === Global.zeroAddress &&
+    //   Txn.fee === 2 * Global.minTxnFee &&
+    //   Txn.lastValid <= TemplateVar<uint64>('EXPIRATION_ROUND') &&
+    //   Global.genesisHash === TemplateVar<bytes>('TARGET_NETWORK_GENESIS') &&
+    //   // is the previous transaction in the group an application call to a known app?
+    //   prevTxn.type === TransactionType.ApplicationCall &&
+    //   prevTxn.appId === TemplateVar<Application>('KNOWN_APP') &&
+    //   prevTxn.fee === 0
+    // )
+    return
+
+main_bool_false@12:
+    pushint 0 // 0
+    // contracts/SubsidizeAppCall/contract.algo.ts:25-39
+    // return (
+    //   // is it safe to pay for the fees of the previous transaction?
+    //   Txn.typeEnum === TransactionType.Payment &&
+    //   Txn.receiver === Txn.sender &&
+    //   Txn.amount === 0 &&
+    //   Txn.rekeyTo === Global.zeroAddress &&
+    //   Txn.closeRemainderTo === Global.zeroAddress &&
+    //   Txn.fee === 2 * Global.minTxnFee &&
+    //   Txn.lastValid <= TemplateVar<uint64>('EXPIRATION_ROUND') &&
+    //   Global.genesisHash === TemplateVar<bytes>('TARGET_NETWORK_GENESIS') &&
+    //   // is the previous transaction in the group an application call to a known app?
+    //   prevTxn.type === TransactionType.ApplicationCall &&
+    //   prevTxn.appId === TemplateVar<Application>('KNOWN_APP') &&
+    //   prevTxn.fee === 0
+    // )
+    return
