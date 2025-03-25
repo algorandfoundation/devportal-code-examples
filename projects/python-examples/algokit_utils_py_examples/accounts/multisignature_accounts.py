@@ -1,14 +1,20 @@
 from algokit_utils import AlgoAmount, MultisigMetadata, PaymentParams
 
-from algokit_utils_py_examples.helpers import setup_localnet_environment
+from algokit_utils_py_examples.helpers import (
+    LocalnetEnvironment,
+    setup_localnet_environment,
+)
 
 
 def multisignature_accounts() -> None:
     # example: MULTISIG_ACCOUNT
 
-    algorand_client, dispenser, account_a, account_b, account_c = (
-        setup_localnet_environment()
-    )
+    env: LocalnetEnvironment = setup_localnet_environment()
+    algorand_client = env.algorand_client
+    dispenser = env.dispenser
+    account_a = env.account_a
+    account_b = env.account_b
+    account_c = env.account_c
 
     """
     Create a 2-of-3 multisig account that requires

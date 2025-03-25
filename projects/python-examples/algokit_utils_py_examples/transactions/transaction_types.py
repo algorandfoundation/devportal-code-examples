@@ -17,13 +17,20 @@ from algokit_utils import (
     PaymentParams,
 )
 
-from algokit_utils_py_examples.helpers import setup_localnet_environment
+from algokit_utils_py_examples.helpers import (
+    LocalnetEnvironment,
+    setup_localnet_environment,
+)
 
 
 def transaction_types() -> None:
     # example: TRANSACTION_TYPES
 
-    algorand_client, _, account_a, account_b, account_c = setup_localnet_environment()
+    env: LocalnetEnvironment = setup_localnet_environment()
+    algorand_client = env.algorand_client
+    account_a = env.account_a
+    account_b = env.account_b
+    account_c = env.account_c
 
     # example: PAYMENT_TRANSACTION
 

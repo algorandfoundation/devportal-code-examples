@@ -1,11 +1,16 @@
 from algokit_utils import AssetCreateParams
 
-from algokit_utils_py_examples.helpers import setup_localnet_environment
+from algokit_utils_py_examples.helpers import (
+    LocalnetEnvironment,
+    setup_localnet_environment,
+)
 
 
 def asset_create() -> None:
 
-    algorand_client, _, account_a, _, _ = setup_localnet_environment()
+    env: LocalnetEnvironment = setup_localnet_environment()
+    algorand_client = env.algorand_client
+    account_a = env.account_a
 
     # example: ASSET_CREATE_TRANSACTION
 

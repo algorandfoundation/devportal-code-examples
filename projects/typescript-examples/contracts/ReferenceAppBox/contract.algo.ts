@@ -1,3 +1,4 @@
+// example: REFERENCE_APP_BOX_EXAMPLE
 import {
   Contract,
   abimethod,
@@ -13,7 +14,6 @@ import {
 } from '@algorandfoundation/algorand-typescript'
 import type { uint64 } from '@algorandfoundation/algorand-typescript'
 
-// example: REFERENCE_APP_BOX_EXAMPLE
 /**
  * A contract that uses box storage to maintain a counter for each account
  * Each account needs to pay for the Minimum Balance Requirement (MBR) for their box

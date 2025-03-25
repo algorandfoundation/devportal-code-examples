@@ -1,3 +1,4 @@
+// example: APP_REFERENCE_EXAMPLE
 import {
   Contract,
   abimethod,
@@ -9,7 +10,6 @@ import {
 } from '@algorandfoundation/algorand-typescript'
 import type { uint64 } from '@algorandfoundation/algorand-typescript'
 
-// example: APP_REFERENCE_EXAMPLE
 /**
  * A contract that increments a counter
  */

@@ -1,12 +1,20 @@
 from algokit_utils import AlgoAmount, PaymentParams
 
-from algokit_utils_py_examples.helpers import setup_localnet_environment
+from algokit_utils_py_examples.helpers import (
+    LocalnetEnvironment,
+    setup_localnet_environment,
+)
 
 
 def keys_and_signing() -> None:
     # example: KEYS_AND_SIGNING
 
-    algorand_client, _, account_a, account_b, account_c = setup_localnet_environment()
+    env: LocalnetEnvironment = setup_localnet_environment()
+    algorand_client = env.algorand_client
+    account_a = env.account_a
+    account_b = env.account_b
+    account_c = env.account_c
+
     algorand_client._default_validity_window = 1000
 
     # example: DEFAULT_SIGNER

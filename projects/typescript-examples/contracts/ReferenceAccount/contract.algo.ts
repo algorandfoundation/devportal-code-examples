@@ -1,10 +1,11 @@
+// example: ACCOUNT_REFERENCE_EXAMPLE
 import { Contract, Account, abimethod } from '@algorandfoundation/algorand-typescript'
 import { Address } from '@algorandfoundation/algorand-typescript/arc4'
+
 /**
  * A contract that demonstrates how to use resource usage in a contract using an account reference
  */
 export default class ReferenceAccount extends Contract {
-  // example: ACCOUNT_REFERENCE_EXAMPLE
   /**
    * Returns the balance of the account
    * @returns The balance of the account
@@ -27,5 +28,5 @@ export default class ReferenceAccount extends Contract {
   public getAccountBalanceWithArgument(account: Account) {
     return account.balance
   }
-  // example: ACCOUNT_REFERENCE_EXAMPLE
 }
+// example: ACCOUNT_REFERENCE_EXAMPLE

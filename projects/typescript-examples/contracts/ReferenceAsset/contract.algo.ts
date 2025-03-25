@@ -1,9 +1,10 @@
+// example: GET_ASSET_REFERENCE_EXAMPLE
 import { Contract, abimethod, Asset } from '@algorandfoundation/algorand-typescript'
+
 /**
  * A contract that demonstrates how to use resource usage in a contract using an asset reference
  */
 export default class ReferenceAsset extends Contract {
-  // example: GET_ASSET_REFERENCE_EXAMPLE
   /**
    * Returns the total supply of the asset
    * @returns The total supply of the asset
@@ -22,5 +23,5 @@ export default class ReferenceAsset extends Contract {
   public getAssetTotalSupplyWithArgument(asset: Asset) {
     return asset.total
   }
-  // example: GET_ASSET_REFERENCE_EXAMPLE
 }
+// example: GET_ASSET_REFERENCE_EXAMPLE
