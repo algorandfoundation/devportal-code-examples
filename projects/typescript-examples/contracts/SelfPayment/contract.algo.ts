@@ -10,15 +10,16 @@ import {
   LogicSig,
 } from '@algorandfoundation/algorand-typescript'
 
+// example: LSIG_SELFPAYMENT
 /**
- * SelfPayment Contract
- *
- * This contract implements a delegated logic signature that authorizes
- * a single empty self payment in a block known ahead of time.
+ * A contract that authorizes a single self-payment transaction
  */
-
 export default class SelfPayment extends LogicSig {
-  // example: LSIG_SELFPAYMENT
+  /**
+   * This Contract Account authorizes a single empty self-payment transaction in a specific block.
+   * The contract includes safety measures like lease and network validation to prevent replay attacks.
+   * @returns True if the transaction should be approved
+   */
   public program(): boolean {
     return (
       Txn.typeEnum === TransactionType.Payment &&
