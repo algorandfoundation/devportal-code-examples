@@ -1,13 +1,19 @@
 from algokit_utils import AssetTransferParams
 
-from algokit_utils_py_examples.helpers import setup_localnet_environment
+from algokit_utils_py_examples.helpers import (
+    LocalnetEnvironment,
+    setup_localnet_environment,
+)
 
 
 def asset_clawback() -> None:
 
-    algorand_client, _, manager, account_to_be_clawbacked, _ = (
-        setup_localnet_environment()
-    )
+    env: LocalnetEnvironment = setup_localnet_environment()
+    algorand_client = env.algorand_client
+    manager = env.account_a  # Using account_a as the manager
+    account_to_be_clawbacked = (
+        env.account_b
+    )  # Using account_b as the account to be clawed back
 
     # example: ASSET_CLAWBACK_TRANSACTION
 

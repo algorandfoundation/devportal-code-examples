@@ -9,16 +9,21 @@ from algokit_utils import (
     SendParams,
 )
 
-from algokit_utils_py_examples.helpers import setup_localnet_environment
+from algokit_utils_py_examples.helpers import (
+    LocalnetEnvironment,
+    setup_localnet_environment,
+)
 from smart_contracts.artifacts.inner_transactions.inner_transactions_client import (
     InnerTransactionsFactory,
 )
 
 
 def fees() -> None:
-    algorand_client, localnet_dispenser, account_a, account_b, _ = (
-        setup_localnet_environment()
-    )
+    env: LocalnetEnvironment = setup_localnet_environment()
+    algorand_client = env.algorand_client
+    localnet_dispenser = env.dispenser
+    account_a = env.account_a
+    account_b = env.account_b
 
     # example: SUGGESTED_PARAMS
 

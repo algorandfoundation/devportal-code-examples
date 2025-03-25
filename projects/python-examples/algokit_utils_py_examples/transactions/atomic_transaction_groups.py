@@ -1,12 +1,17 @@
 from algokit_utils import AlgoAmount, PaymentParams
 
-from algokit_utils_py_examples.helpers import setup_localnet_environment
+from algokit_utils_py_examples.helpers import (
+    LocalnetEnvironment,
+    setup_localnet_environment,
+)
 
 
 def atomic_transaction_groups() -> None:
-    algorand_client, dispenser, account_a, account_b, account_c = (
-        setup_localnet_environment()
-    )
+    env: LocalnetEnvironment = setup_localnet_environment()
+    algorand_client = env.algorand_client
+    account_a = env.account_a
+    account_b = env.account_b
+    account_c = env.account_c
 
     # example: ATOMIC_TRANSACTION_GROUP
     """

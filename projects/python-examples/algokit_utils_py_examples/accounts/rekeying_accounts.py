@@ -1,12 +1,19 @@
 from algokit_utils import AlgoAmount, PaymentParams
 
-from algokit_utils_py_examples.helpers import setup_localnet_environment
+from algokit_utils_py_examples.helpers import (
+    LocalnetEnvironment,
+    setup_localnet_environment,
+)
 
 
 def rekeying_accounts() -> None:
     # example: REKEY_ACCOUNT
 
-    algorand_client, dispenser, account_a, account_b, _ = setup_localnet_environment()
+    env: LocalnetEnvironment = setup_localnet_environment()
+    algorand_client = env.algorand_client
+    dispenser = env.dispenser
+    account_a = env.account_a
+    account_b = env.account_b
 
     """
     Rekey an account to use a different address for signing.

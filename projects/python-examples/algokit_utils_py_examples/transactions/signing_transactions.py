@@ -1,14 +1,20 @@
 import algosdk
 from algokit_utils import AlgoAmount, MultisigMetadata, PaymentParams, SigningAccount
 
-from algokit_utils_py_examples.helpers import setup_localnet_environment
+from algokit_utils_py_examples.helpers import (
+    LocalnetEnvironment,
+    setup_localnet_environment,
+)
 
 
 def signing_transactions() -> None:
 
-    algorand_client, dispenser, account_a, account_b, account_c = (
-        setup_localnet_environment()
-    )
+    env: LocalnetEnvironment = setup_localnet_environment()
+    algorand_client = env.algorand_client
+    dispenser = env.dispenser
+    account_a = env.account_a
+    account_b = env.account_b
+    account_c = env.account_c
 
     # example: TRANSACTION_WITH_NO_SIGNER
 
