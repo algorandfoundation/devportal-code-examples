@@ -1,70 +1,88 @@
-# import { Config } from '@algorandfoundation/algokit-utils'
-# import { setupLocalnetEnvironment } from '../setup-localnet-environment'
+from algokit_utils import AssetOptInParams, CommonAppCallParams, SendParams, config
 
-# async function AccountAssetReferenceExampleMethod1() {
-#   const { referenceAccount, accountAssetReferenceAppClient, referenceAssetId, algorand } =
-#     await setupLocalnetEnvironment()
+from algokit_utils_py_examples.helpers import (
+    LocalnetEnvironment,
+    setup_localnet_environment,
+)
+from smart_contracts.artifacts.reference_account_asset.reference_account_asset_client import (
+    GetAssetBalanceWithArgArgs,
+)
 
-#   await algorand.send.assetOptIn({
-#     sender: referenceAccount,
-#     assetId: referenceAssetId,
-#   })
 
-#   // example: ACCOUNT_ASSET_REFERENCE_EXAMPLE_METHOD_1
-#   // Configure automatic resource population per app call
-#   const result1 = await accountAssetReferenceAppClient.send.getAssetBalance({
-#     args: {},
-#     // populateAppCallResources: true,
-#   })
+def account_asset_reference_example_method1() -> None:
+    # Setup the test environment
+    env: LocalnetEnvironment = setup_localnet_environment()
+    reference_account = env.reference_account
+    account_asset_reference_app_client = env.account_asset_reference_app_client
+    reference_asset_id = env.reference_asset_id
+    algorand_client = env.algorand_client
 
-#   console.log('Method #1 Asset Balance', result1)
+    # Opt into the asset
+    algorand_client.send.asset_opt_in(
+        AssetOptInParams(
+            sender=reference_account.address,
+            asset_id=reference_asset_id,
+        )
+    )
 
-#   // Or set the default value for populateAppCallResources to true globally and apply to all app calls
-#   Config.configure({
-#     populateAppCallResources: true,
-#   })
+    # example: ACCOUNT_ASSET_REFERENCE_EXAMPLE_METHOD_1
+    # Configure automatic resource population per app call
+    result1 = account_asset_reference_app_client.send.get_asset_balance(
+        send_params=SendParams(populate_app_call_resources=True)
+    )
 
-#   const result2 = await accountAssetReferenceAppClient.send.getAssetBalance({
-#     args: {},
-#   })
+    print("Method #1 Asset Balance", result1.abi_return)
 
-#   console.log('Method #1 Asset Balance', result2)
-#   // example: ACCOUNT_ASSET_REFERENCE_EXAMPLE_METHOD_1
-# }
+    # Or set the default value for populate_app_call_resources to true globally and apply to all app calls
+    config.config.configure(populate_app_call_resources=True)
 
-# AccountAssetReferenceExampleMethod1().catch(console.error)
+    result2 = account_asset_reference_app_client.send.get_asset_balance()
 
-# async function AccountAssetReferenceExampleMethod2() {
-#   const { accountAssetReferenceAppClient, referenceAssetId } = await setupLocalnetEnvironment()
+    print("Method #1 Asset Balance", result2.abi_return)
+    # example: ACCOUNT_ASSET_REFERENCE_EXAMPLE_METHOD_1
 
-#   // example: ACCOUNT_ASSET_REFERENCE_EXAMPLE_METHOD_2
-#   // Include the account and asset references in the app call arguments to be populated automatically
-#   const result = await accountAssetReferenceAppClient.getAssetBalanceWithArg({
-#     args: {
-#       account: 'R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM',
-#       asset: referenceAssetId,
-#     },
-#   })
 
-#   console.log('Method #2 Asset Balance', result)
-#   // example: ACCOUNT_ASSET_REFERENCE_EXAMPLE_METHOD_2
-# }
+def account_asset_reference_example_method2() -> None:
+    # Setup the test environment
+    env: LocalnetEnvironment = setup_localnet_environment()
+    account_asset_reference_app_client = env.account_asset_reference_app_client
+    reference_asset_id = env.reference_asset_id
 
-# AccountAssetReferenceExampleMethod2().catch(console.error)
+    # example: ACCOUNT_ASSET_REFERENCE_EXAMPLE_METHOD_2
+    # Include the account and asset references in the app call arguments to be populated automatically
+    result = account_asset_reference_app_client.send.get_asset_balance_with_arg(
+        args=GetAssetBalanceWithArgArgs(
+            acct="R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM",
+            asset=reference_asset_id,
+        )
+    )
 
-# async function AccountAssetReferenceExampleMethod3() {
-#   const { accountAssetReferenceAppClient, referenceAssetId } = await setupLocalnetEnvironment()
+    print("Method #2 Asset Balance", result.abi_return)
+    # example: ACCOUNT_ASSET_REFERENCE_EXAMPLE_METHOD_2
 
-#   // example: ACCOUNT_ASSET_REFERENCE_EXAMPLE_METHOD_3
-#   // Manually provide both account and asset references in the respective arrays
-#   const result = await accountAssetReferenceAppClient.getAssetBalance({
-#     args: {},
-#     accountReferences: ['R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM'],
-#     assetReferences: [referenceAssetId],
-#   })
 
-#   console.log('Method #3 Asset Balance', result)
-#   // example: ACCOUNT_ASSET_REFERENCE_EXAMPLE_METHOD_3
-# }
+def account_asset_reference_example_method3() -> None:
+    # Setup the test environment
+    env: LocalnetEnvironment = setup_localnet_environment()
+    account_asset_reference_app_client = env.account_asset_reference_app_client
+    reference_asset_id = env.reference_asset_id
 
-# AccountAssetReferenceExampleMethod3().catch(console.error)
+    # example: ACCOUNT_ASSET_REFERENCE_EXAMPLE_METHOD_3
+    # Manually provide both account and asset references in the respective arrays
+    result = account_asset_reference_app_client.send.get_asset_balance(
+        params=CommonAppCallParams(
+            account_references=[
+                "R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM"
+            ],
+            asset_references=[reference_asset_id],
+        )
+    )
+
+    print("Method #3 Asset Balance", result.abi_return)
+    # example: ACCOUNT_ASSET_REFERENCE_EXAMPLE_METHOD_3
+
+
+if __name__ == "__main__":
+    account_asset_reference_example_method1()
+    account_asset_reference_example_method2()
+    account_asset_reference_example_method3()

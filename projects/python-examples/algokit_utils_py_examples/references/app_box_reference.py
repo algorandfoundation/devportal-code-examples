@@ -1,113 +1,136 @@
-# // implement app box reference example
+from algokit_utils import (
+    AlgoAmount,
+    CommonAppCallParams,
+    PaymentParams,
+    SendParams,
+    config,
+)
 
-# import { Config, microAlgos } from '@algorandfoundation/algokit-utils'
-# import { setupLocalnetEnvironment } from '../setup-localnet-environment'
+from algokit_utils_py_examples.helpers import (
+    LocalnetEnvironment,
+    setup_localnet_environment,
+)
+from smart_contracts.artifacts.reference_app_box.reference_app_box_client import (
+    IncrementBoxCounterArgs,
+)
 
-# async function AppBoxReferenceExampleMethod1() {
-#   const { algorand, randomAccountA, referenceAppBoxAppClient } = await setupLocalnetEnvironment()
 
-#   // Get the box MBR amount from the contract
-#   const boxMBRResponse = await referenceAppBoxAppClient.getBoxMbr()
-#   const boxMBR = Number(boxMBRResponse)
+def app_box_reference_example_method1() -> None:
+    # Setup the test environment
+    env: LocalnetEnvironment = setup_localnet_environment()
+    algorand_client = env.algorand_client
+    account_a = env.account_a
+    reference_app_box_app_client = env.reference_app_box_app_client
 
-#   const counterAppAddress = referenceAppBoxAppClient.appAddress
+    # Get the box MBR amount from the contract
+    box_mbr_response = reference_app_box_app_client.send.get_box_mbr()
+    box_mbr: int = box_mbr_response.abi_return or 0
 
-#   // Fund the contract account with enough Algos before proceeding
-#   await algorand.send.payment({
-#     sender: randomAccountA,
-#     receiver: counterAppAddress,
-#     amount: microAlgos(1_000_000), // Fund with 1 Algo
-#     note: 'METHOD 1: Funding contract account',
-#   })
+    counter_app_address = reference_app_box_app_client.app_address
 
-#   // example: APP_BOX_REFERENCE_EXAMPLE_METHOD_1
-#   // Create payment for MBR
-#   const payMbr = await algorand.createTransaction.payment({
-#     amount: microAlgos(boxMBR),
-#     sender: randomAccountA,
-#     receiver: counterAppAddress,
-#   })
+    # Fund the contract account with enough Algos before proceeding
+    algorand_client.send.payment(
+        PaymentParams(
+            sender=account_a.address,
+            receiver=counter_app_address,
+            amount=AlgoAmount(algo=1),
+            note=b"METHOD 1: Funding contract account",
+        )
+    )
 
-#   // Method 1: Using populateAppCallResources in sendParams
-#   const response1 = await referenceAppBoxAppClient.send.incrementBoxCounter({
-#     args: {
-#       payMbr: payMbr,
-#     },
-#     sender: randomAccountA,
-#     populateAppCallResources: true,
-#   })
+    # example: APP_BOX_REFERENCE_EXAMPLE_METHOD_1
+    # Create payment for MBR
+    pay_mbr = algorand_client.create_transaction.payment(
+        PaymentParams(
+            sender=account_a.address,
+            receiver=counter_app_address,
+            amount=AlgoAmount(micro_algo=box_mbr),
+        )
+    )
 
-#   console.log('Method #2 Box Counter (explicit)', response1.return)
+    # Method 1: Using populate_app_call_resources in send_params
+    response1 = reference_app_box_app_client.send.increment_box_counter(
+        args=IncrementBoxCounterArgs(pay_mbr=pay_mbr),
+        params=CommonAppCallParams(sender=account_a.address),
+        send_params=SendParams(populate_app_call_resources=True),
+    )
 
-#   // Method 2: Configure globally
-#   // Set the default value for populateAppCallResources to true once and apply to all contract invocations
-#   Config.configure({ populateAppCallResources: true })
+    print("Method #1 Box Counter (explicit):", response1.abi_return)
 
-#   // Create another payment for MBR
-#   const payMbr2 = await algorand.createTransaction.payment({
-#     amount: microAlgos(boxMBR),
-#     sender: randomAccountA,
-#     receiver: counterAppAddress,
-#   })
+    # Method 2: Configure globally
+    # Set the default value for populate_app_call_resources to true once and apply to all contract invocations
+    config.config.configure(populate_app_call_resources=True)
 
-#   // With global configuration, we don't need to specify populateAppCallResources
-#   const response2 = await referenceAppBoxAppClient.send.incrementBoxCounter({
-#     args: {
-#       payMbr: payMbr2,
-#     },
-#     sender: randomAccountA,
-#   })
+    # Create another payment for MBR
+    pay_mbr2 = algorand_client.create_transaction.payment(
+        PaymentParams(
+            sender=account_a.address,
+            receiver=counter_app_address,
+            amount=AlgoAmount(micro_algo=box_mbr),
+        )
+    )
 
-#   console.log('Method #1 Box Counter (global)', response2.return)
-#   // example: APP_BOX_REFERENCE_EXAMPLE_METHOD_1
-# }
+    # With global configuration, we don't need to specify populate_app_call_resources
+    response2 = reference_app_box_app_client.send.increment_box_counter(
+        args=IncrementBoxCounterArgs(pay_mbr=pay_mbr2),
+        params=CommonAppCallParams(sender=account_a.address),
+    )
 
-# AppBoxReferenceExampleMethod1().catch(console.error)
+    print("Method #1 Box Counter (global):", response2.abi_return)
+    # example: APP_BOX_REFERENCE_EXAMPLE_METHOD_1
 
-# async function AppBoxReferenceExampleMethod2() {
-#   const { algorand, randomAccountB, referenceAppBoxAppClient } = await setupLocalnetEnvironment()
 
-#   // Get the box MBR amount from the contract
-#   const boxMBRResponse = await referenceAppBoxAppClient.getBoxMbr()
-#   const boxMBR = Number(boxMBRResponse)
+def app_box_reference_example_method2() -> None:
+    # Setup the test environment
+    env: LocalnetEnvironment = setup_localnet_environment()
+    algorand_client = env.algorand_client
+    account_b = env.account_b
+    reference_app_box_app_client = env.reference_app_box_app_client
 
-#   const counterAppAddress = referenceAppBoxAppClient.appAddress
+    # Get the box MBR amount from the contract
+    box_mbr_response = reference_app_box_app_client.send.get_box_mbr()
+    box_mbr: int = box_mbr_response.abi_return or 0
 
-#   // IMPORTANT: Fund the contract account with enough Algo before proceeding
-#   await algorand.send.payment({
-#     sender: randomAccountB,
-#     receiver: counterAppAddress,
-#     amount: microAlgos(1_000_000), // Fund with 1 Algo
-#     note: 'METHOD 2: Funding contract account',
-#   })
+    counter_app_address = reference_app_box_app_client.app_address
 
-#   // example: APP_BOX_REFERENCE_EXAMPLE_METHOD_2
-#   const boxPrefix = 'counter' // box identifier prefix
-#   const encoder = new TextEncoder()
-#   const boxPrefixBytes = encoder.encode(boxPrefix) // UInt8Array of boxPrefix
-#   const publicKey = randomAccountB.addr.publicKey
+    # IMPORTANT: Fund the contract account with enough Algo before proceeding
+    algorand_client.send.payment(
+        PaymentParams(
+            sender=account_b.address,
+            receiver=counter_app_address,
+            amount=AlgoAmount(algo=1),
+            note=b"METHOD 2: Funding contract account",
+        )
+    )
 
-#   // Create the box reference
-#   const boxReference = new Uint8Array([...boxPrefixBytes, ...publicKey])
+    # example: APP_BOX_REFERENCE_EXAMPLE_METHOD_2
+    box_prefix = b"counter"  # box identifier prefix
+    public_key = account_b.public_key
 
-#   // Create payment for MBR
-#   const payMbr = await algorand.createTransaction.payment({
-#     amount: microAlgos(boxMBR),
-#     sender: randomAccountB,
-#     receiver: counterAppAddress,
-#   })
+    # Create the box reference
+    box_reference = box_prefix + public_key
 
-#   // Call the smart contract with manually specified box reference
-#   const response = await referenceAppBoxAppClient.send.incrementBoxCounter({
-#     args: {
-#       payMbr: payMbr,
-#     },
-#     boxReferences: [boxReference],
-#     sender: randomAccountB,
-#   })
+    # Create payment for MBR
+    pay_mbr = algorand_client.create_transaction.payment(
+        PaymentParams(
+            sender=account_b.address,
+            receiver=counter_app_address,
+            amount=AlgoAmount(micro_algo=box_mbr),
+        )
+    )
 
-#   console.log('Method #2 Box Counter', response.return)
-#   // example: APP_BOX_REFERENCE_EXAMPLE_METHOD_2
-# }
+    # Call the smart contract with manually specified box reference
+    response = reference_app_box_app_client.send.increment_box_counter(
+        args=IncrementBoxCounterArgs(pay_mbr=pay_mbr),
+        params=CommonAppCallParams(
+            sender=account_b.address, box_references=[box_reference]
+        ),
+    )
 
-# AppBoxReferenceExampleMethod2().catch(console.error)
+    print("Method #2 Box Counter:", response.abi_return)
+    # example: APP_BOX_REFERENCE_EXAMPLE_METHOD_2
+
+
+if __name__ == "__main__":
+    app_box_reference_example_method1()
+    app_box_reference_example_method2()

@@ -1,62 +1,71 @@
-# import { Config } from '@algorandfoundation/algokit-utils'
-# import { setupLocalnetEnvironment } from '../setup-localnet-environment'
+from algokit_utils import CommonAppCallParams, SendParams, config
 
-# async function AssetReferenceExampleMethod1() {
-#   const { referenceAssetAppClient } = await setupLocalnetEnvironment()
+from algokit_utils_py_examples.helpers import (
+    LocalnetEnvironment,
+    setup_localnet_environment,
+)
+from smart_contracts.artifacts.reference_asset.reference_asset_client import (
+    GetAssetTotalSupplyWithArgArgs,
+)
 
-#   // example: ACCOUNT_REFERENCE_EXAMPLE_METHOD_1
-#   // Configure automatic resource population per app call
-#   const result1 = await referenceAssetAppClient.send.getAssetTotalSupply({
-#     args: {},
-#     populateAppCallResources: false,
-#   })
 
-#   console.log('Method #1 Asset Total Supply', result1.return)
+def asset_reference_example_method1() -> None:
+    # Setup the test environment
+    env: LocalnetEnvironment = setup_localnet_environment()
+    reference_asset_client = env.reference_asset_app_client
 
-#   // Or set the default value for populateAppCallResources to true globally and apply to all app calls
-#   Config.configure({
-#     populateAppCallResources: true,
-#   })
+    # example: ACCOUNT_REFERENCE_EXAMPLE_METHOD_1
+    # Configure automatic resource population per app call
+    result1 = reference_asset_client.send.get_asset_total_supply(
+        send_params=SendParams(populate_app_call_resources=True),
+    )
 
-#   const result2 = await referenceAssetAppClient.send.getAssetTotalSupply({
-#     args: {},
-#   })
+    print("Method #1 Asset Total Supply:", result1.abi_return)
 
-#   console.log('Method #1 Asset Total Supply', result2.return)
-#   // example: ACCOUNT_REFERENCE_EXAMPLE_METHOD_1
-# }
+    # Or set the default value for populate_app_call_resources to true globally and apply to all app calls
+    config.config.configure(
+        populate_app_call_resources=True,
+    )
 
-# AssetReferenceExampleMethod1().catch(console.error)
+    result2 = reference_asset_client.send.get_asset_total_supply()
 
-# async function AssetReferenceExampleMethod2() {
-#   const { referenceAssetAppClient, referenceAssetId } = await setupLocalnetEnvironment()
+    print("Method #1 Asset Total Supply:", result2.abi_return)
+    # example: ACCOUNT_REFERENCE_EXAMPLE_METHOD_1
 
-#   // example: ACCOUNT_REFERENCE_EXAMPLE_METHOD_2
-#   // Include the account reference in the app call argument to be populated automatically
-#   const result = await referenceAssetAppClient.send.getAssetTotalSupplyWithArgument({
-#     args: {
-#       asset: referenceAssetId,
-#     },
-#   })
 
-#   console.log('Method #2 Asset Total Supply', result.return)
-#   // example: ACCOUNT_REFERENCE_EXAMPLE_METHOD_2
-# }
+def asset_reference_example_method2() -> None:
+    # Setup the test environment
+    env: LocalnetEnvironment = setup_localnet_environment()
+    reference_asset_client = env.reference_asset_app_client
+    reference_asset_id = env.reference_asset_id
 
-# AssetReferenceExampleMethod2().catch(console.error)
+    # example: ACCOUNT_REFERENCE_EXAMPLE_METHOD_2
+    # Include the account reference in the app call argument to be populated automatically
+    result = reference_asset_client.send.get_asset_total_supply_with_arg(
+        args=GetAssetTotalSupplyWithArgArgs(asset=reference_asset_id),
+    )
 
-# async function AssetReferenceExampleMethod3() {
-#   const { referenceAssetAppClient, referenceAssetId } = await setupLocalnetEnvironment()
+    print("Method #2 Asset Total Supply:", result.abi_return)
+    # example: ACCOUNT_REFERENCE_EXAMPLE_METHOD_2
 
-#   // example: ACCOUNT_REFERENCE_EXAMPLE_METHOD_3
-#   // Include the account reference in the accountReferences array to be populated
-#   const result = await referenceAssetAppClient.send.getAssetTotalSupply({
-#     args: {},
-#     assetReferences: [referenceAssetId],
-#   })
 
-#   console.log('Method #3 Asset Total Supply', result.return)
-#   // example: ACCOUNT_REFERENCE_EXAMPLE_METHOD_3
-# }
+def asset_reference_example_method3() -> None:
+    # Setup the test environment
+    env: LocalnetEnvironment = setup_localnet_environment()
+    reference_asset_client = env.reference_asset_app_client
+    reference_asset_id = env.reference_asset_id
 
-# AssetReferenceExampleMethod3().catch(console.error)
+    # example: ACCOUNT_REFERENCE_EXAMPLE_METHOD_3
+    # Include the asset reference in the asset_references array to be populated
+    result = reference_asset_client.send.get_asset_total_supply(
+        params=CommonAppCallParams(asset_references=[reference_asset_id]),
+    )
+
+    print("Method #3 Asset Total Supply:", result.abi_return)
+    # example: ACCOUNT_REFERENCE_EXAMPLE_METHOD_3
+
+
+if __name__ == "__main__":
+    asset_reference_example_method1()
+    asset_reference_example_method2()
+    asset_reference_example_method3()

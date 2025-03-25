@@ -14,7 +14,7 @@ async function AccountAssetReferenceExampleMethod1() {
   // Configure automatic resource population per app call
   const result1 = await accountAssetReferenceAppClient.send.getAssetBalance({
     args: {},
-    // populateAppCallResources: true,
+    populateAppCallResources: true,
   })
 
   console.log('Method #1 Asset Balance', result1)

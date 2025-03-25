@@ -8,7 +8,7 @@ async function AssetReferenceExampleMethod1() {
   // Configure automatic resource population per app call
   const result1 = await referenceAssetAppClient.send.getAssetTotalSupply({
     args: {},
-    populateAppCallResources: false,
+    populateAppCallResources: true,
   })
 
   console.log('Method #1 Asset Total Supply', result1.return)

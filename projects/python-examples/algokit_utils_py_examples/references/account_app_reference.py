@@ -69,6 +69,6 @@ def account_app_reference_example_method3() -> None:
 
 
 if __name__ == "__main__":
-    account_app_reference_example_method1()
+    # account_app_reference_example_method1()
     account_app_reference_example_method2()
-    account_app_reference_example_method3()
+    # account_app_reference_example_method3()
