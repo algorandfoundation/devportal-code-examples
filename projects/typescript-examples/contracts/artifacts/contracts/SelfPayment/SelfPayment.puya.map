@@ -1,0 +1,326 @@
+{
+  "version": 3,
+  "sources": [
+    "/Users/gabe.algo/Code/devportal-code-examples/projects/typescript-examples/contracts/SelfPayment/contract.algo.ts"
+  ],
+  "mappings": "AAuBU;;AAA6B;AAAjC;AAAA;;;AACI;;AAAiB;;AAArB;AADA;;;AAEI;;AAFJ;;;AAGI;;AAAmB;;AAAvB;AAHA;;;AAII;;AAA4B;;AAAhC;AAJA;;;AAKI;;AAAe;;AAAnB;AALA;;;AAMO;;AAAgB;AAAvB;AANA;;;AAQI;;AAAc;AAAlB;AARA;;;AASI;;AAA0B;;;;;;;;;;;;;;AAAhB;AAAd;AATA;;;;AADF;;;AAAA",
+  "op_pc_offset": 2,
+  "pc_events": {
+    "0": {
+      "op": "txn TypeEnum",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "2": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "1"
+      ]
+    },
+    "3": {
+      "op": "==",
+      "defined_out": [
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "4": {
+      "op": "bz main_bool_false@10",
+      "stack_out": []
+    },
+    "7": {
+      "op": "txn Receiver",
+      "defined_out": [
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%2#0"
+      ]
+    },
+    "9": {
+      "op": "txn Sender",
+      "defined_out": [
+        "tmp%2#0",
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%2#0",
+        "tmp%3#0"
+      ]
+    },
+    "11": {
+      "op": "==",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "12": {
+      "op": "bz main_bool_false@10",
+      "stack_out": []
+    },
+    "15": {
+      "op": "txn Amount",
+      "defined_out": [
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%5#0"
+      ]
+    },
+    "17": {
+      "op": "bnz main_bool_false@10",
+      "stack_out": []
+    },
+    "20": {
+      "op": "txn RekeyTo",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%7#0"
+      ]
+    },
+    "22": {
+      "op": "global ZeroAddress",
+      "defined_out": [
+        "tmp%7#0",
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "tmp%7#0",
+        "tmp%8#0"
+      ]
+    },
+    "24": {
+      "op": "==",
+      "defined_out": [
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%9#0"
+      ]
+    },
+    "25": {
+      "op": "bz main_bool_false@10",
+      "stack_out": []
+    },
+    "28": {
+      "op": "txn CloseRemainderTo",
+      "defined_out": [
+        "tmp%10#0"
+      ],
+      "stack_out": [
+        "tmp%10#0"
+      ]
+    },
+    "30": {
+      "op": "global ZeroAddress",
+      "defined_out": [
+        "tmp%10#0",
+        "tmp%11#0"
+      ],
+      "stack_out": [
+        "tmp%10#0",
+        "tmp%11#0"
+      ]
+    },
+    "32": {
+      "op": "==",
+      "defined_out": [
+        "tmp%12#0"
+      ],
+      "stack_out": [
+        "tmp%12#0"
+      ]
+    },
+    "33": {
+      "op": "bz main_bool_false@10",
+      "stack_out": []
+    },
+    "36": {
+      "op": "txn Fee",
+      "defined_out": [
+        "tmp%13#0"
+      ],
+      "stack_out": [
+        "tmp%13#0"
+      ]
+    },
+    "38": {
+      "op": "global MinTxnFee",
+      "defined_out": [
+        "tmp%13#0",
+        "tmp%14#0"
+      ],
+      "stack_out": [
+        "tmp%13#0",
+        "tmp%14#0"
+      ]
+    },
+    "40": {
+      "op": "==",
+      "defined_out": [
+        "tmp%15#0"
+      ],
+      "stack_out": [
+        "tmp%15#0"
+      ]
+    },
+    "41": {
+      "op": "bz main_bool_false@10",
+      "stack_out": []
+    },
+    "44": {
+      "op": "global GenesisHash",
+      "defined_out": [
+        "tmp%16#0"
+      ],
+      "stack_out": [
+        "tmp%16#0"
+      ]
+    },
+    "46": {
+      "op": "bytec_0 // TMPL_TARGET_NETWORK_GENESIS",
+      "defined_out": [
+        "TMPL_TARGET_NETWORK_GENESIS",
+        "tmp%16#0"
+      ],
+      "stack_out": [
+        "tmp%16#0",
+        "TMPL_TARGET_NETWORK_GENESIS"
+      ]
+    },
+    "47": {
+      "op": "==",
+      "defined_out": [
+        "tmp%17#0"
+      ],
+      "stack_out": [
+        "tmp%17#0"
+      ]
+    },
+    "48": {
+      "op": "bz main_bool_false@10",
+      "stack_out": []
+    },
+    "51": {
+      "op": "txn LastValid",
+      "defined_out": [
+        "tmp%18#0"
+      ],
+      "stack_out": [
+        "tmp%18#0"
+      ]
+    },
+    "53": {
+      "op": "intc_1 // TMPL_LAST_ROUND",
+      "defined_out": [
+        "TMPL_LAST_ROUND",
+        "tmp%18#0"
+      ],
+      "stack_out": [
+        "tmp%18#0",
+        "TMPL_LAST_ROUND"
+      ]
+    },
+    "54": {
+      "op": "==",
+      "defined_out": [
+        "tmp%19#0"
+      ],
+      "stack_out": [
+        "tmp%19#0"
+      ]
+    },
+    "55": {
+      "op": "bz main_bool_false@10",
+      "stack_out": []
+    },
+    "58": {
+      "op": "txn Lease",
+      "defined_out": [
+        "tmp%20#0"
+      ],
+      "stack_out": [
+        "tmp%20#0"
+      ]
+    },
+    "60": {
+      "op": "pushbytes \"self-payment\"",
+      "defined_out": [
+        "\"self-payment\"",
+        "tmp%20#0"
+      ],
+      "stack_out": [
+        "tmp%20#0",
+        "\"self-payment\""
+      ]
+    },
+    "74": {
+      "op": "sha256",
+      "defined_out": [
+        "tmp%20#0",
+        "tmp%21#0"
+      ],
+      "stack_out": [
+        "tmp%20#0",
+        "tmp%21#0"
+      ]
+    },
+    "75": {
+      "op": "==",
+      "defined_out": [
+        "tmp%22#0"
+      ],
+      "stack_out": [
+        "tmp%22#0"
+      ]
+    },
+    "76": {
+      "op": "bz main_bool_false@10",
+      "stack_out": []
+    },
+    "79": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "and_result%0#0"
+      ],
+      "stack_out": [
+        "and_result%0#0"
+      ]
+    },
+    "80": {
+      "op": "return",
+      "stack_out": []
+    },
+    "81": {
+      "block": "main_bool_false@10",
+      "stack_in": [],
+      "op": "pushint 0 // 0",
+      "defined_out": [
+        "and_result%0#0"
+      ],
+      "stack_out": [
+        "and_result%0#0"
+      ]
+    },
+    "83": {
+      "op": "return",
+      "stack_out": []
+    }
+  }
+}

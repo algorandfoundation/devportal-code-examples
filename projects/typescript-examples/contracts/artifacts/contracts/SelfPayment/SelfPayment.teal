@@ -1,0 +1,149 @@
+#pragma version 10
+#pragma typetrack false
+
+// contracts/SelfPayment/contract.algo.ts::program() -> uint64:
+main:
+    intcblock 1 TMPL_LAST_ROUND
+    bytecblock TMPL_TARGET_NETWORK_GENESIS
+    // contracts/SelfPayment/contract.algo.ts:24
+    // Txn.typeEnum === TransactionType.Payment &&
+    txn TypeEnum
+    intc_0 // 1
+    ==
+    // contracts/SelfPayment/contract.algo.ts:24-25
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    bz main_bool_false@10
+    // contracts/SelfPayment/contract.algo.ts:25
+    // Txn.receiver === Txn.sender &&
+    txn Receiver
+    txn Sender
+    ==
+    // contracts/SelfPayment/contract.algo.ts:24-25
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    bz main_bool_false@10
+    // contracts/SelfPayment/contract.algo.ts:26
+    // Txn.amount === 0 &&
+    txn Amount
+    // contracts/SelfPayment/contract.algo.ts:24-26
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    // Txn.amount === 0 &&
+    bnz main_bool_false@10
+    // contracts/SelfPayment/contract.algo.ts:27
+    // Txn.rekeyTo === Global.zeroAddress &&
+    txn RekeyTo
+    global ZeroAddress
+    ==
+    // contracts/SelfPayment/contract.algo.ts:24-27
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    // Txn.amount === 0 &&
+    // Txn.rekeyTo === Global.zeroAddress &&
+    bz main_bool_false@10
+    // contracts/SelfPayment/contract.algo.ts:28
+    // Txn.closeRemainderTo === Global.zeroAddress &&
+    txn CloseRemainderTo
+    global ZeroAddress
+    ==
+    // contracts/SelfPayment/contract.algo.ts:24-28
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    // Txn.amount === 0 &&
+    // Txn.rekeyTo === Global.zeroAddress &&
+    // Txn.closeRemainderTo === Global.zeroAddress &&
+    bz main_bool_false@10
+    // contracts/SelfPayment/contract.algo.ts:29
+    // Txn.fee === Global.minTxnFee &&
+    txn Fee
+    global MinTxnFee
+    ==
+    // contracts/SelfPayment/contract.algo.ts:24-29
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    // Txn.amount === 0 &&
+    // Txn.rekeyTo === Global.zeroAddress &&
+    // Txn.closeRemainderTo === Global.zeroAddress &&
+    // Txn.fee === Global.minTxnFee &&
+    bz main_bool_false@10
+    // contracts/SelfPayment/contract.algo.ts:30
+    // Global.genesisHash === TemplateVar<bytes>('TARGET_NETWORK_GENESIS') &&
+    global GenesisHash
+    bytec_0 // TMPL_TARGET_NETWORK_GENESIS
+    ==
+    // contracts/SelfPayment/contract.algo.ts:24-30
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    // Txn.amount === 0 &&
+    // Txn.rekeyTo === Global.zeroAddress &&
+    // Txn.closeRemainderTo === Global.zeroAddress &&
+    // Txn.fee === Global.minTxnFee &&
+    // Global.genesisHash === TemplateVar<bytes>('TARGET_NETWORK_GENESIS') &&
+    bz main_bool_false@10
+    // contracts/SelfPayment/contract.algo.ts:32
+    // Txn.lastValid === TemplateVar<uint64>('LAST_ROUND') &&
+    txn LastValid
+    intc_1 // TMPL_LAST_ROUND
+    ==
+    // contracts/SelfPayment/contract.algo.ts:24-32
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    // Txn.amount === 0 &&
+    // Txn.rekeyTo === Global.zeroAddress &&
+    // Txn.closeRemainderTo === Global.zeroAddress &&
+    // Txn.fee === Global.minTxnFee &&
+    // Global.genesisHash === TemplateVar<bytes>('TARGET_NETWORK_GENESIS') &&
+    // // Acquiring a lease with last_round and a non-empty lease field prevents replay attacks
+    // Txn.lastValid === TemplateVar<uint64>('LAST_ROUND') &&
+    bz main_bool_false@10
+    // contracts/SelfPayment/contract.algo.ts:33
+    // Txn.lease === op.sha256(Bytes('self-payment'))
+    txn Lease
+    pushbytes "self-payment"
+    sha256
+    ==
+    // contracts/SelfPayment/contract.algo.ts:24-33
+    // Txn.typeEnum === TransactionType.Payment &&
+    // Txn.receiver === Txn.sender &&
+    // Txn.amount === 0 &&
+    // Txn.rekeyTo === Global.zeroAddress &&
+    // Txn.closeRemainderTo === Global.zeroAddress &&
+    // Txn.fee === Global.minTxnFee &&
+    // Global.genesisHash === TemplateVar<bytes>('TARGET_NETWORK_GENESIS') &&
+    // // Acquiring a lease with last_round and a non-empty lease field prevents replay attacks
+    // Txn.lastValid === TemplateVar<uint64>('LAST_ROUND') &&
+    // Txn.lease === op.sha256(Bytes('self-payment'))
+    bz main_bool_false@10
+    intc_0 // 1
+    // contracts/SelfPayment/contract.algo.ts:23-34
+    // return (
+    //   Txn.typeEnum === TransactionType.Payment &&
+    //   Txn.receiver === Txn.sender &&
+    //   Txn.amount === 0 &&
+    //   Txn.rekeyTo === Global.zeroAddress &&
+    //   Txn.closeRemainderTo === Global.zeroAddress &&
+    //   Txn.fee === Global.minTxnFee &&
+    //   Global.genesisHash === TemplateVar<bytes>('TARGET_NETWORK_GENESIS') &&
+    //   // Acquiring a lease with last_round and a non-empty lease field prevents replay attacks
+    //   Txn.lastValid === TemplateVar<uint64>('LAST_ROUND') &&
+    //   Txn.lease === op.sha256(Bytes('self-payment'))
+    // )
+    return
+
+main_bool_false@10:
+    pushint 0 // 0
+    // contracts/SelfPayment/contract.algo.ts:23-34
+    // return (
+    //   Txn.typeEnum === TransactionType.Payment &&
+    //   Txn.receiver === Txn.sender &&
+    //   Txn.amount === 0 &&
+    //   Txn.rekeyTo === Global.zeroAddress &&
+    //   Txn.closeRemainderTo === Global.zeroAddress &&
+    //   Txn.fee === Global.minTxnFee &&
+    //   Global.genesisHash === TemplateVar<bytes>('TARGET_NETWORK_GENESIS') &&
+    //   // Acquiring a lease with last_round and a non-empty lease field prevents replay attacks
+    //   Txn.lastValid === TemplateVar<uint64>('LAST_ROUND') &&
+    //   Txn.lease === op.sha256(Bytes('self-payment'))
+    // )
+    return

@@ -1,0 +1,773 @@
+{
+  "version": 3,
+  "sources": [
+    "/Users/gabe.algo/Code/devportal-code-examples/projects/typescript-examples/contracts/SubsidizeAppCall/contract.algo.ts"
+  ],
+  "mappings": "AAiBA;;AAAA;;;AAAA;;;;;;AAAA;;;AAAA;;;;AAAA;;AAKG;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;;;AAAA;AAAA;;AAAA;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;;AALH;;AAAA;;;AAAA;;AAAA;AAAA;AAAA;;AAKE;;;AAEuC;;AAAa;AAAjB;AAG3B;;AAA6B;AAAjC;AAAA;;;AACI;;AAAiB;;AAArB;AADA;;;AAEI;;AAFJ;;;AAGI;;AAAmB;;AAAvB;AAHA;;;AAII;;AAA4B;;AAAhC;AAJA;;;AAKI;;AAAQ;;AAAW;;AAAX;AAAZ;AALA;;;AAMI;;AAAa;AAAjB;AANA;;;AAOO;;AAAgB;AAAvB;AAPA;;;AASQ;;AAAA;;AAAyB;;AAAjC;AATA;;;AAUQ;;AAAA;;AAAU;AAAlB;AAVA;;;AAWQ;;AAAA;;AAXR;;;;AAFF;AAAA;;",
+  "op_pc_offset": 2,
+  "pc_events": {
+    "0": {
+      "op": "txn NumAppArgs",
+      "defined_out": [
+        "tmp%0#1"
+      ],
+      "stack_out": [
+        "tmp%0#1"
+      ]
+    },
+    "2": {
+      "op": "bz main_bare_routing@6",
+      "stack_out": []
+    },
+    "5": {
+      "op": "pushbytes 0x55e323aa // method \"subsidize()bool\"",
+      "defined_out": [
+        "Method(subsidize()bool)"
+      ],
+      "stack_out": [
+        "Method(subsidize()bool)"
+      ]
+    },
+    "11": {
+      "op": "txna ApplicationArgs 0",
+      "defined_out": [
+        "Method(subsidize()bool)",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "Method(subsidize()bool)",
+        "tmp%2#0"
+      ]
+    },
+    "14": {
+      "op": "match main_subsidize_route@3",
+      "stack_out": []
+    },
+    "18": {
+      "block": "main_after_if_else@10",
+      "stack_in": [],
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "19": {
+      "op": "return",
+      "stack_out": []
+    },
+    "20": {
+      "block": "main_subsidize_route@3",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "22": {
+      "op": "!",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "23": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "24": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%5#0"
+      ]
+    },
+    "26": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "27": {
+      "callsub": "contracts/SubsidizeAppCall/contract.algo.ts::SubsidizeAppCall.subsidize",
+      "op": "callsub subsidize",
+      "defined_out": [
+        "to_encode%0#0"
+      ],
+      "stack_out": [
+        "to_encode%0#0"
+      ]
+    },
+    "30": {
+      "op": "pushbytes 0x00",
+      "defined_out": [
+        "0x00",
+        "to_encode%0#0"
+      ],
+      "stack_out": [
+        "to_encode%0#0",
+        "0x00"
+      ]
+    },
+    "33": {
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "0",
+        "0x00",
+        "to_encode%0#0"
+      ],
+      "stack_out": [
+        "to_encode%0#0",
+        "0x00",
+        "0"
+      ]
+    },
+    "34": {
+      "op": "uncover 2",
+      "stack_out": [
+        "0x00",
+        "0",
+        "to_encode%0#0"
+      ]
+    },
+    "36": {
+      "op": "setbit",
+      "defined_out": [
+        "encoded_bool%0#0"
+      ],
+      "stack_out": [
+        "encoded_bool%0#0"
+      ]
+    },
+    "37": {
+      "op": "pushbytes 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "encoded_bool%0#0"
+      ],
+      "stack_out": [
+        "encoded_bool%0#0",
+        "0x151f7c75"
+      ]
+    },
+    "43": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "encoded_bool%0#0"
+      ]
+    },
+    "44": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%7#0"
+      ]
+    },
+    "45": {
+      "op": "log",
+      "stack_out": []
+    },
+    "46": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "47": {
+      "op": "return",
+      "stack_out": []
+    },
+    "48": {
+      "block": "main_bare_routing@6",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "tmp%8#0"
+      ]
+    },
+    "50": {
+      "op": "bnz main_after_if_else@10",
+      "stack_out": []
+    },
+    "53": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%9#0"
+      ]
+    },
+    "55": {
+      "op": "!",
+      "defined_out": [
+        "tmp%10#0"
+      ],
+      "stack_out": [
+        "tmp%10#0"
+      ]
+    },
+    "56": {
+      "error": "can only call when creating",
+      "op": "assert // can only call when creating",
+      "stack_out": []
+    },
+    "57": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "58": {
+      "op": "return",
+      "stack_out": []
+    },
+    "59": {
+      "subroutine": "contracts/SubsidizeAppCall/contract.algo.ts::SubsidizeAppCall.subsidize",
+      "params": {},
+      "block": "subsidize",
+      "stack_in": [],
+      "op": "proto 0 1"
+    },
+    "62": {
+      "op": "txn GroupIndex",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "64": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "1"
+      ]
+    },
+    "65": {
+      "op": "-",
+      "defined_out": [
+        "prevTxn#0"
+      ],
+      "stack_out": [
+        "prevTxn#0"
+      ]
+    },
+    "66": {
+      "op": "txn TypeEnum",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%1#0"
+      ]
+    },
+    "68": {
+      "op": "intc_0 // 1",
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%1#0",
+        "1"
+      ]
+    },
+    "69": {
+      "op": "==",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%2#0"
+      ]
+    },
+    "70": {
+      "op": "bz subsidize_bool_false@12",
+      "stack_out": [
+        "prevTxn#0"
+      ]
+    },
+    "73": {
+      "op": "txn Receiver",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%3#0"
+      ]
+    },
+    "75": {
+      "op": "txn Sender",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%3#0",
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%3#0",
+        "tmp%4#0"
+      ]
+    },
+    "77": {
+      "op": "==",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%5#0"
+      ]
+    },
+    "78": {
+      "op": "bz subsidize_bool_false@12",
+      "stack_out": [
+        "prevTxn#0"
+      ]
+    },
+    "81": {
+      "op": "txn Amount",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%6#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%6#0"
+      ]
+    },
+    "83": {
+      "op": "bnz subsidize_bool_false@12",
+      "stack_out": [
+        "prevTxn#0"
+      ]
+    },
+    "86": {
+      "op": "txn RekeyTo",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%8#0"
+      ]
+    },
+    "88": {
+      "op": "global ZeroAddress",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%8#0",
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%8#0",
+        "tmp%9#0"
+      ]
+    },
+    "90": {
+      "op": "==",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%10#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%10#0"
+      ]
+    },
+    "91": {
+      "op": "bz subsidize_bool_false@12",
+      "stack_out": [
+        "prevTxn#0"
+      ]
+    },
+    "94": {
+      "op": "txn CloseRemainderTo",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%11#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%11#0"
+      ]
+    },
+    "96": {
+      "op": "global ZeroAddress",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%11#0",
+        "tmp%12#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%11#0",
+        "tmp%12#0"
+      ]
+    },
+    "98": {
+      "op": "==",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%13#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%13#0"
+      ]
+    },
+    "99": {
+      "op": "bz subsidize_bool_false@12",
+      "stack_out": [
+        "prevTxn#0"
+      ]
+    },
+    "102": {
+      "op": "txn Fee",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%14#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%14#0"
+      ]
+    },
+    "104": {
+      "op": "pushint 2 // 2",
+      "defined_out": [
+        "2",
+        "prevTxn#0",
+        "tmp%14#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%14#0",
+        "2"
+      ]
+    },
+    "106": {
+      "op": "global MinTxnFee",
+      "defined_out": [
+        "2",
+        "prevTxn#0",
+        "tmp%14#0",
+        "tmp%15#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%14#0",
+        "2",
+        "tmp%15#0"
+      ]
+    },
+    "108": {
+      "op": "*",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%14#0",
+        "tmp%16#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%14#0",
+        "tmp%16#0"
+      ]
+    },
+    "109": {
+      "op": "==",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%17#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%17#0"
+      ]
+    },
+    "110": {
+      "op": "bz subsidize_bool_false@12",
+      "stack_out": [
+        "prevTxn#0"
+      ]
+    },
+    "113": {
+      "op": "txn LastValid",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%18#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%18#0"
+      ]
+    },
+    "115": {
+      "op": "intc_2 // TMPL_EXPIRATION_ROUND",
+      "defined_out": [
+        "TMPL_EXPIRATION_ROUND",
+        "prevTxn#0",
+        "tmp%18#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%18#0",
+        "TMPL_EXPIRATION_ROUND"
+      ]
+    },
+    "116": {
+      "op": "<=",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%19#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%19#0"
+      ]
+    },
+    "117": {
+      "op": "bz subsidize_bool_false@12",
+      "stack_out": [
+        "prevTxn#0"
+      ]
+    },
+    "120": {
+      "op": "global GenesisHash",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%20#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%20#0"
+      ]
+    },
+    "122": {
+      "op": "bytec_0 // TMPL_TARGET_NETWORK_GENESIS",
+      "defined_out": [
+        "TMPL_TARGET_NETWORK_GENESIS",
+        "prevTxn#0",
+        "tmp%20#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%20#0",
+        "TMPL_TARGET_NETWORK_GENESIS"
+      ]
+    },
+    "123": {
+      "op": "==",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%21#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%21#0"
+      ]
+    },
+    "124": {
+      "op": "bz subsidize_bool_false@12",
+      "stack_out": [
+        "prevTxn#0"
+      ]
+    },
+    "127": {
+      "op": "frame_dig 0",
+      "stack_out": [
+        "prevTxn#0",
+        "prevTxn#0"
+      ]
+    },
+    "129": {
+      "op": "gtxns TypeEnum",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%22#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%22#0"
+      ]
+    },
+    "131": {
+      "op": "pushint 6 // 6",
+      "defined_out": [
+        "6",
+        "prevTxn#0",
+        "tmp%22#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%22#0",
+        "6"
+      ]
+    },
+    "133": {
+      "op": "==",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%23#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%23#0"
+      ]
+    },
+    "134": {
+      "op": "bz subsidize_bool_false@12",
+      "stack_out": [
+        "prevTxn#0"
+      ]
+    },
+    "137": {
+      "op": "frame_dig 0",
+      "stack_out": [
+        "prevTxn#0",
+        "prevTxn#0"
+      ]
+    },
+    "139": {
+      "op": "gtxns ApplicationID",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%24#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%24#0"
+      ]
+    },
+    "141": {
+      "op": "intc_3 // TMPL_KNOWN_APP",
+      "defined_out": [
+        "TMPL_KNOWN_APP",
+        "prevTxn#0",
+        "tmp%24#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%24#0",
+        "TMPL_KNOWN_APP"
+      ]
+    },
+    "142": {
+      "op": "==",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%25#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%25#0"
+      ]
+    },
+    "143": {
+      "op": "bz subsidize_bool_false@12",
+      "stack_out": [
+        "prevTxn#0"
+      ]
+    },
+    "146": {
+      "op": "frame_dig 0",
+      "stack_out": [
+        "prevTxn#0",
+        "prevTxn#0"
+      ]
+    },
+    "148": {
+      "op": "gtxns Fee",
+      "defined_out": [
+        "prevTxn#0",
+        "tmp%26#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "tmp%26#0"
+      ]
+    },
+    "150": {
+      "op": "bnz subsidize_bool_false@12",
+      "stack_out": [
+        "prevTxn#0"
+      ]
+    },
+    "153": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "and_result%0#0",
+        "prevTxn#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "and_result%0#0"
+      ]
+    },
+    "154": {
+      "block": "subsidize_bool_merge@13",
+      "stack_in": [
+        "prevTxn#0",
+        "and_result%0#0"
+      ],
+      "op": "swap",
+      "defined_out": [
+        "and_result%0#0"
+      ]
+    },
+    "155": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "156": {
+      "block": "subsidize_bool_false@12",
+      "stack_in": [
+        "prevTxn#0"
+      ],
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "and_result%0#0"
+      ],
+      "stack_out": [
+        "prevTxn#0",
+        "and_result%0#0"
+      ]
+    },
+    "157": {
+      "op": "b subsidize_bool_merge@13"
+    }
+  }
+}
