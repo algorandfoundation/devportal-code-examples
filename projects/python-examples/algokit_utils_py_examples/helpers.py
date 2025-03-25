@@ -163,9 +163,7 @@ def bootstrap_app_box_example(
         default_sender=account.address,
     )
 
-    client, deploy_result = factory.deploy(
-        on_update=OnUpdate.AppendApp, on_schema_break=OnSchemaBreak.AppendApp
-    )
+    client, deploy_result = factory.send.create.create()
 
     return client
 
