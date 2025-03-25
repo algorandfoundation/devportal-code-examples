@@ -7,14 +7,14 @@ main:
     bytecblock "counter"
     txn ApplicationID
     bnz main_after_if_else@2
-    // smart_contracts/reference_app/contract.py:8
+    // smart_contracts/reference_app/contract.py:14
     // self.counter = UInt64(0)
     bytec_0 // "counter"
     intc_0 // 0
     app_global_put
 
 main_after_if_else@2:
-    // smart_contracts/reference_app/contract.py:5
+    // smart_contracts/reference_app/contract.py:11
     // class Counter(ARC4Contract):
     txn NumAppArgs
     bz main_bare_routing@6
@@ -23,13 +23,13 @@ main_after_if_else@2:
     match main_increment_route@5
 
 main_after_if_else@8:
-    // smart_contracts/reference_app/contract.py:5
+    // smart_contracts/reference_app/contract.py:11
     // class Counter(ARC4Contract):
     intc_0 // 0
     return
 
 main_increment_route@5:
-    // smart_contracts/reference_app/contract.py:10
+    // smart_contracts/reference_app/contract.py:21
     // @abimethod
     txn OnCompletion
     !
@@ -46,7 +46,7 @@ main_increment_route@5:
     return
 
 main_bare_routing@6:
-    // smart_contracts/reference_app/contract.py:5
+    // smart_contracts/reference_app/contract.py:11
     // class Counter(ARC4Contract):
     txn OnCompletion
     bnz main_after_if_else@8
@@ -59,7 +59,7 @@ main_bare_routing@6:
 
 // smart_contracts.reference_app.contract.Counter.increment() -> uint64:
 increment:
-    // smart_contracts/reference_app/contract.py:12
+    // smart_contracts/reference_app/contract.py:23
     // self.counter += 1
     intc_0 // 0
     bytec_0 // "counter"
@@ -70,7 +70,7 @@ increment:
     bytec_0 // "counter"
     swap
     app_global_put
-    // smart_contracts/reference_app/contract.py:13
+    // smart_contracts/reference_app/contract.py:24
     // return self.counter
     intc_0 // 0
     bytec_0 // "counter"

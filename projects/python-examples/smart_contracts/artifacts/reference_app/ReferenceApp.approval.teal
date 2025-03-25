@@ -1,0 +1,153 @@
+#pragma version 10
+#pragma typetrack false
+
+// algopy.arc4.ARC4Contract.approval_program() -> uint64:
+main:
+    intcblock 0 1 6
+    bytecblock 0x151f7c75 0x4a325901
+    // smart_contracts/reference_app/contract.py:32
+    // class ReferenceApp(ARC4Contract):
+    txn NumAppArgs
+    bz main_bare_routing@7
+    pushbytess 0xd06846a9 0x06c48686 // method "increment_via_inner()uint64", method "increment_via_inner_with_arg(application)uint64"
+    txna ApplicationArgs 0
+    match main_increment_via_inner_route@3 main_increment_via_inner_with_arg_route@4
+
+main_after_if_else@11:
+    // smart_contracts/reference_app/contract.py:32
+    // class ReferenceApp(ARC4Contract):
+    intc_0 // 0
+    return
+
+main_increment_via_inner_with_arg_route@4:
+    // smart_contracts/reference_app/contract.py:55
+    // @abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/reference_app/contract.py:32
+    // class ReferenceApp(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txnas Applications
+    // smart_contracts/reference_app/contract.py:55
+    // @abimethod
+    callsub increment_via_inner_with_arg
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_increment_via_inner_route@3:
+    // smart_contracts/reference_app/contract.py:38
+    // @abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub increment_via_inner
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_bare_routing@7:
+    // smart_contracts/reference_app/contract.py:32
+    // class ReferenceApp(ARC4Contract):
+    txn OnCompletion
+    bnz main_after_if_else@11
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    intc_1 // 1
+    return
+
+
+// smart_contracts.reference_app.contract.ReferenceApp.increment_via_inner() -> uint64:
+increment_via_inner:
+    // smart_contracts/reference_app/contract.py:42-46
+    // counter_result, call_txn = arc4.abi_call(
+    //     Counter.increment,
+    //     fee=0,
+    //     app_id=app,
+    // )
+    itxn_begin
+    // smart_contracts/reference_app/contract.py:40
+    // app = Application(1717)  # Replace with your application id
+    pushint 1717 // 1717
+    itxn_field ApplicationID
+    // smart_contracts/reference_app/contract.py:42-46
+    // counter_result, call_txn = arc4.abi_call(
+    //     Counter.increment,
+    //     fee=0,
+    //     app_id=app,
+    // )
+    bytec_1 // method "increment()uint64"
+    itxn_field ApplicationArgs
+    intc_2 // appl
+    itxn_field TypeEnum
+    // smart_contracts/reference_app/contract.py:44
+    // fee=0,
+    intc_0 // 0
+    itxn_field Fee
+    // smart_contracts/reference_app/contract.py:42-46
+    // counter_result, call_txn = arc4.abi_call(
+    //     Counter.increment,
+    //     fee=0,
+    //     app_id=app,
+    // )
+    itxn_submit
+    itxn LastLog
+    dup
+    extract 4 0
+    swap
+    extract 0 4
+    bytec_0 // 0x151f7c75
+    ==
+    assert // ARC4 prefix is valid
+    btoi
+    // smart_contracts/reference_app/contract.py:47
+    // return counter_result
+    retsub
+
+
+// smart_contracts.reference_app.contract.ReferenceApp.increment_via_inner_with_arg(app: uint64) -> uint64:
+increment_via_inner_with_arg:
+    // smart_contracts/reference_app/contract.py:55-56
+    // @abimethod
+    // def increment_via_inner_with_arg(self, app: Application) -> UInt64:
+    proto 1 1
+    // smart_contracts/reference_app/contract.py:57-58
+    // # Call the increment method on the provided Counter application
+    // counter_result, call_txn = arc4.abi_call(Counter.increment, fee=0, app_id=app)
+    itxn_begin
+    frame_dig -1
+    itxn_field ApplicationID
+    bytec_1 // method "increment()uint64"
+    itxn_field ApplicationArgs
+    intc_2 // appl
+    itxn_field TypeEnum
+    intc_0 // 0
+    itxn_field Fee
+    itxn_submit
+    itxn LastLog
+    dup
+    extract 4 0
+    swap
+    extract 0 4
+    bytec_0 // 0x151f7c75
+    ==
+    assert // ARC4 prefix is valid
+    btoi
+    // smart_contracts/reference_app/contract.py:59
+    // return counter_result
+    retsub

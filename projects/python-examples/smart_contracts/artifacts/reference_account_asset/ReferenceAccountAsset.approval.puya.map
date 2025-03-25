@@ -1,0 +1,559 @@
+{
+  "version": 3,
+  "sources": [
+    "../../reference_account_asset/contract.py"
+  ],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AASA;;AAAA;;;AAAA;;;;;;;;;;;;AAAA;;;AAAA;;;;;;AAAA;;;AAwBK;;AAAA;AAAA;AAAA;;AAAA;AAxBL;;;AAAA;AAAA;;AAAA;;;AAAA;AAAA;;AAwBK;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;AAlBA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;AANL;;AAAA;;;;;;;;;AAQe;AAGC;AAED;;AAAA;;AAAP;AALO;AAGC;AAID;;AAAA;AAAP;AASR;;;AAEe;;AAAA;;AAAA;;AAAA;;AAAP;AAEO;;AAAA;;AAAA;;AAAA;AAAP",
+  "op_pc_offset": 0,
+  "pc_events": {
+    "1": {
+      "subroutine": "algopy.arc4.ARC4Contract.approval_program",
+      "params": {},
+      "block": "main",
+      "stack_in": [],
+      "op": "intcblock 1 1185"
+    },
+    "6": {
+      "op": "bytecblock 0x151f7c75 base32(WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRA)"
+    },
+    "46": {
+      "op": "txn NumAppArgs",
+      "defined_out": [
+        "tmp%0#1"
+      ],
+      "stack_out": [
+        "tmp%0#1"
+      ]
+    },
+    "48": {
+      "op": "bz main_bare_routing@7",
+      "stack_out": []
+    },
+    "51": {
+      "op": "pushbytess 0xa65e7b96 0x3313495a // method \"get_asset_balance()uint64\", method \"get_asset_balance_with_arg(account,asset)uint64\"",
+      "defined_out": [
+        "Method(get_asset_balance()uint64)",
+        "Method(get_asset_balance_with_arg(account,asset)uint64)"
+      ],
+      "stack_out": [
+        "Method(get_asset_balance()uint64)",
+        "Method(get_asset_balance_with_arg(account,asset)uint64)"
+      ]
+    },
+    "63": {
+      "op": "txna ApplicationArgs 0",
+      "defined_out": [
+        "Method(get_asset_balance()uint64)",
+        "Method(get_asset_balance_with_arg(account,asset)uint64)",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "Method(get_asset_balance()uint64)",
+        "Method(get_asset_balance_with_arg(account,asset)uint64)",
+        "tmp%2#0"
+      ]
+    },
+    "66": {
+      "op": "match main_get_asset_balance_route@3 main_get_asset_balance_with_arg_route@4",
+      "stack_out": []
+    },
+    "72": {
+      "block": "main_after_if_else@11",
+      "stack_in": [],
+      "op": "pushint 0 // 0",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "74": {
+      "op": "return",
+      "stack_out": []
+    },
+    "75": {
+      "block": "main_get_asset_balance_with_arg_route@4",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "tmp%8#0"
+      ]
+    },
+    "77": {
+      "op": "!",
+      "defined_out": [
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%9#0"
+      ]
+    },
+    "78": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "79": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%10#0"
+      ],
+      "stack_out": [
+        "tmp%10#0"
+      ]
+    },
+    "81": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "82": {
+      "op": "txna ApplicationArgs 1",
+      "defined_out": [
+        "reinterpret_bytes[1]%0#0"
+      ],
+      "stack_out": [
+        "reinterpret_bytes[1]%0#0"
+      ]
+    },
+    "85": {
+      "op": "btoi",
+      "defined_out": [
+        "tmp%12#0"
+      ],
+      "stack_out": [
+        "tmp%12#0"
+      ]
+    },
+    "86": {
+      "op": "txnas Accounts",
+      "defined_out": [
+        "tmp%13#0"
+      ],
+      "stack_out": [
+        "tmp%13#0"
+      ]
+    },
+    "88": {
+      "op": "txna ApplicationArgs 2",
+      "defined_out": [
+        "reinterpret_bytes[1]%1#0",
+        "tmp%13#0"
+      ],
+      "stack_out": [
+        "tmp%13#0",
+        "reinterpret_bytes[1]%1#0"
+      ]
+    },
+    "91": {
+      "op": "btoi",
+      "defined_out": [
+        "tmp%13#0",
+        "tmp%14#0"
+      ],
+      "stack_out": [
+        "tmp%13#0",
+        "tmp%14#0"
+      ]
+    },
+    "92": {
+      "op": "txnas Assets",
+      "defined_out": [
+        "tmp%13#0",
+        "tmp%15#0"
+      ],
+      "stack_out": [
+        "tmp%13#0",
+        "tmp%15#0"
+      ]
+    },
+    "94": {
+      "callsub": "smart_contracts.reference_account_asset.contract.ReferenceAccountAsset.get_asset_balance_with_arg",
+      "op": "callsub get_asset_balance_with_arg",
+      "defined_out": [
+        "to_encode%1#0"
+      ],
+      "stack_out": [
+        "to_encode%1#0"
+      ]
+    },
+    "97": {
+      "op": "itob",
+      "defined_out": [
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "val_as_bytes%1#0"
+      ]
+    },
+    "98": {
+      "op": "bytec_0 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "val_as_bytes%1#0",
+        "0x151f7c75"
+      ]
+    },
+    "99": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "val_as_bytes%1#0"
+      ]
+    },
+    "100": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%16#0"
+      ],
+      "stack_out": [
+        "tmp%16#0"
+      ]
+    },
+    "101": {
+      "op": "log",
+      "stack_out": []
+    },
+    "102": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "103": {
+      "op": "return",
+      "stack_out": []
+    },
+    "104": {
+      "block": "main_get_asset_balance_route@3",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "106": {
+      "op": "!",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "107": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "108": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%5#0"
+      ]
+    },
+    "110": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "111": {
+      "callsub": "smart_contracts.reference_account_asset.contract.ReferenceAccountAsset.get_asset_balance",
+      "op": "callsub get_asset_balance",
+      "defined_out": [
+        "to_encode%0#0"
+      ],
+      "stack_out": [
+        "to_encode%0#0"
+      ]
+    },
+    "114": {
+      "op": "itob",
+      "defined_out": [
+        "val_as_bytes%0#0"
+      ],
+      "stack_out": [
+        "val_as_bytes%0#0"
+      ]
+    },
+    "115": {
+      "op": "bytec_0 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "val_as_bytes%0#0"
+      ],
+      "stack_out": [
+        "val_as_bytes%0#0",
+        "0x151f7c75"
+      ]
+    },
+    "116": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "val_as_bytes%0#0"
+      ]
+    },
+    "117": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%7#0"
+      ]
+    },
+    "118": {
+      "op": "log",
+      "stack_out": []
+    },
+    "119": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "120": {
+      "op": "return",
+      "stack_out": []
+    },
+    "121": {
+      "block": "main_bare_routing@7",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%17#0"
+      ],
+      "stack_out": [
+        "tmp%17#0"
+      ]
+    },
+    "123": {
+      "op": "bnz main_after_if_else@11",
+      "stack_out": []
+    },
+    "126": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%18#0"
+      ],
+      "stack_out": [
+        "tmp%18#0"
+      ]
+    },
+    "128": {
+      "op": "!",
+      "defined_out": [
+        "tmp%19#0"
+      ],
+      "stack_out": [
+        "tmp%19#0"
+      ]
+    },
+    "129": {
+      "error": "can only call when creating",
+      "op": "assert // can only call when creating",
+      "stack_out": []
+    },
+    "130": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "131": {
+      "op": "return",
+      "stack_out": []
+    },
+    "132": {
+      "subroutine": "smart_contracts.reference_account_asset.contract.ReferenceAccountAsset.get_asset_balance",
+      "params": {},
+      "block": "get_asset_balance",
+      "stack_in": [],
+      "op": "bytec_1 // addr WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M",
+      "defined_out": [
+        "Address(WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M)"
+      ],
+      "stack_out": [
+        "Address(WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M)"
+      ]
+    },
+    "133": {
+      "op": "intc_1 // 1185",
+      "defined_out": [
+        "1185",
+        "Address(WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M)"
+      ],
+      "stack_out": [
+        "Address(WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M)",
+        "1185"
+      ]
+    },
+    "134": {
+      "op": "asset_holding_get AssetBalance",
+      "defined_out": [
+        "tmp%0#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tmp%1#0"
+      ]
+    },
+    "136": {
+      "op": "bury 1",
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "138": {
+      "error": "Account is not opted in to the asset",
+      "op": "assert // Account is not opted in to the asset",
+      "stack_out": []
+    },
+    "139": {
+      "op": "bytec_1 // addr WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M",
+      "stack_out": [
+        "Address(WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M)"
+      ]
+    },
+    "140": {
+      "op": "intc_1 // 1185",
+      "stack_out": [
+        "Address(WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M)",
+        "1185"
+      ]
+    },
+    "141": {
+      "op": "asset_holding_get AssetBalance",
+      "defined_out": [
+        "check%0#0",
+        "value%0#0"
+      ],
+      "stack_out": [
+        "value%0#0",
+        "check%0#0"
+      ]
+    },
+    "143": {
+      "error": "account opted into asset",
+      "op": "assert // account opted into asset",
+      "stack_out": [
+        "value%0#0"
+      ]
+    },
+    "144": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "145": {
+      "subroutine": "smart_contracts.reference_account_asset.contract.ReferenceAccountAsset.get_asset_balance_with_arg",
+      "params": {
+        "acct#0": "bytes",
+        "asset#0": "uint64"
+      },
+      "block": "get_asset_balance_with_arg",
+      "stack_in": [],
+      "op": "proto 2 1"
+    },
+    "148": {
+      "op": "frame_dig -2",
+      "defined_out": [
+        "acct#0 (copy)"
+      ],
+      "stack_out": [
+        "acct#0 (copy)"
+      ]
+    },
+    "150": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "acct#0 (copy)",
+        "asset#0 (copy)"
+      ],
+      "stack_out": [
+        "acct#0 (copy)",
+        "asset#0 (copy)"
+      ]
+    },
+    "152": {
+      "op": "asset_holding_get AssetBalance",
+      "defined_out": [
+        "tmp%0#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tmp%1#0"
+      ]
+    },
+    "154": {
+      "op": "bury 1",
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "156": {
+      "error": "Account is not opted in to the asset",
+      "op": "assert // Account is not opted in to the asset",
+      "stack_out": []
+    },
+    "157": {
+      "op": "frame_dig -2",
+      "stack_out": [
+        "acct#0 (copy)"
+      ]
+    },
+    "159": {
+      "op": "frame_dig -1",
+      "stack_out": [
+        "acct#0 (copy)",
+        "asset#0 (copy)"
+      ]
+    },
+    "161": {
+      "op": "asset_holding_get AssetBalance",
+      "defined_out": [
+        "check%0#0",
+        "value%0#0"
+      ],
+      "stack_out": [
+        "value%0#0",
+        "check%0#0"
+      ]
+    },
+    "163": {
+      "error": "account opted into asset",
+      "op": "assert // account opted into asset",
+      "stack_out": [
+        "value%0#0"
+      ]
+    },
+    "164": {
+      "retsub": true,
+      "op": "retsub"
+    }
+  }
+}

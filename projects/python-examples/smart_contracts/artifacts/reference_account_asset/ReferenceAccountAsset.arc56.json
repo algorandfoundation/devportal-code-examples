@@ -1,0 +1,144 @@
+{
+    "name": "ReferenceAccountAsset",
+    "structs": {},
+    "methods": [
+        {
+            "name": "get_asset_balance",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_asset_balance_with_arg",
+            "args": [
+                {
+                    "type": "account",
+                    "name": "acct"
+                },
+                {
+                    "type": "asset",
+                    "name": "asset"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "\n    Returns the balance of a specific asset in a hardcoded account\n    @returns The asset balance of the account\n    ",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        138,
+                        156
+                    ],
+                    "errorMessage": "Account is not opted in to the asset"
+                },
+                {
+                    "pc": [
+                        78,
+                        107
+                    ],
+                    "errorMessage": "OnCompletion is not NoOp"
+                },
+                {
+                    "pc": [
+                        143,
+                        163
+                    ],
+                    "errorMessage": "account opted into asset"
+                },
+                {
+                    "pc": [
+                        129
+                    ],
+                    "errorMessage": "can only call when creating"
+                },
+                {
+                    "pc": [
+                        81,
+                        110
+                    ],
+                    "errorMessage": "can only call when not creating"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDExODUKICAgIGJ5dGVjYmxvY2sgMHgxNTFmN2M3NSBiYXNlMzIoV01IRjRGTEpOS1kyQlBGSzdZUFY1SUQ2T1o3TFZEQjJCNjZaVFhFQU1MTDJOWDRXSlpSQSkKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hc3NldC9jb250cmFjdC5weToxMAogICAgLy8gY2xhc3MgUmVmZXJlbmNlQWNjb3VudEFzc2V0KEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9iYXJlX3JvdXRpbmdANwogICAgcHVzaGJ5dGVzcyAweGE2NWU3Yjk2IDB4MzMxMzQ5NWEgLy8gbWV0aG9kICJnZXRfYXNzZXRfYmFsYW5jZSgpdWludDY0IiwgbWV0aG9kICJnZXRfYXNzZXRfYmFsYW5jZV93aXRoX2FyZyhhY2NvdW50LGFzc2V0KXVpbnQ2NCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fZ2V0X2Fzc2V0X2JhbGFuY2Vfcm91dGVAMyBtYWluX2dldF9hc3NldF9iYWxhbmNlX3dpdGhfYXJnX3JvdXRlQDQKCm1haW5fYWZ0ZXJfaWZfZWxzZUAxMToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hc3NldC9jb250cmFjdC5weToxMAogICAgLy8gY2xhc3MgUmVmZXJlbmNlQWNjb3VudEFzc2V0KEFSQzRDb250cmFjdCk6CiAgICBwdXNoaW50IDAgLy8gMAogICAgcmV0dXJuCgptYWluX2dldF9hc3NldF9iYWxhbmNlX3dpdGhfYXJnX3JvdXRlQDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnRfYXNzZXQvY29udHJhY3QucHk6MzQKICAgIC8vIEBhYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2Fzc2V0L2NvbnRyYWN0LnB5OjEwCiAgICAvLyBjbGFzcyBSZWZlcmVuY2VBY2NvdW50QXNzZXQoQVJDNENvbnRyYWN0KToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGJ0b2kKICAgIHR4bmFzIEFjY291bnRzCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBidG9pCiAgICB0eG5hcyBBc3NldHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hc3NldC9jb250cmFjdC5weTozNAogICAgLy8gQGFiaW1ldGhvZAogICAgY2FsbHN1YiBnZXRfYXNzZXRfYmFsYW5jZV93aXRoX2FyZwogICAgaXRvYgogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRfYXNzZXRfYmFsYW5jZV9yb3V0ZUAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2Fzc2V0L2NvbnRyYWN0LnB5OjE2CiAgICAvLyBAYWJpbWV0aG9kCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGNhbGxzdWIgZ2V0X2Fzc2V0X2JhbGFuY2UKICAgIGl0b2IKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fYmFyZV9yb3V0aW5nQDc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnRfYXNzZXQvY29udHJhY3QucHk6MTAKICAgIC8vIGNsYXNzIFJlZmVyZW5jZUFjY291bnRBc3NldChBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAxMQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMucmVmZXJlbmNlX2FjY291bnRfYXNzZXQuY29udHJhY3QuUmVmZXJlbmNlQWNjb3VudEFzc2V0LmdldF9hc3NldF9iYWxhbmNlKCkgLT4gdWludDY0OgpnZXRfYXNzZXRfYmFsYW5jZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hc3NldC9jb250cmFjdC5weToxOC0yMAogICAgLy8gYWNjdCA9IEFjY291bnQoCiAgICAvLyAgICAgIldNSEY0RkxKTktZMkJQRks3WVBWNUlENk9aN0xWREIyQjY2WlRYRUFNTEwyTlg0V0paUkpGVlg2Nk0iCiAgICAvLyApICAjIFJlcGxhY2Ugd2l0aCB5b3VyIGFjY291bnQgYWRkcmVzcwogICAgYnl0ZWNfMSAvLyBhZGRyIFdNSEY0RkxKTktZMkJQRks3WVBWNUlENk9aN0xWREIyQjY2WlRYRUFNTEwyTlg0V0paUkpGVlg2Nk0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hc3NldC9jb250cmFjdC5weToyMQogICAgLy8gYXNzZXQgPSBBc3NldCgxMTg1KSAgIyBSZXBsYWNlIHdpdGggeW91ciBhc3NldCBpZAogICAgaW50Y18xIC8vIDExODUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hc3NldC9jb250cmFjdC5weToyMwogICAgLy8gYXNzZXJ0IGFjY3QuaXNfb3B0ZWRfaW4oYXNzZXQpLCAiQWNjb3VudCBpcyBub3Qgb3B0ZWQgaW4gdG8gdGhlIGFzc2V0IgogICAgYXNzZXRfaG9sZGluZ19nZXQgQXNzZXRCYWxhbmNlCiAgICBidXJ5IDEKICAgIGFzc2VydCAvLyBBY2NvdW50IGlzIG5vdCBvcHRlZCBpbiB0byB0aGUgYXNzZXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hc3NldC9jb250cmFjdC5weToxOC0yMAogICAgLy8gYWNjdCA9IEFjY291bnQoCiAgICAvLyAgICAgIldNSEY0RkxKTktZMkJQRks3WVBWNUlENk9aN0xWREIyQjY2WlRYRUFNTEwyTlg0V0paUkpGVlg2Nk0iCiAgICAvLyApICAjIFJlcGxhY2Ugd2l0aCB5b3VyIGFjY291bnQgYWRkcmVzcwogICAgYnl0ZWNfMSAvLyBhZGRyIFdNSEY0RkxKTktZMkJQRks3WVBWNUlENk9aN0xWREIyQjY2WlRYRUFNTEwyTlg0V0paUkpGVlg2Nk0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hc3NldC9jb250cmFjdC5weToyMQogICAgLy8gYXNzZXQgPSBBc3NldCgxMTg1KSAgIyBSZXBsYWNlIHdpdGggeW91ciBhc3NldCBpZAogICAgaW50Y18xIC8vIDExODUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hc3NldC9jb250cmFjdC5weToyNQogICAgLy8gcmV0dXJuIGFzc2V0LmJhbGFuY2UoYWNjdCkKICAgIGFzc2V0X2hvbGRpbmdfZ2V0IEFzc2V0QmFsYW5jZQogICAgYXNzZXJ0IC8vIGFjY291bnQgb3B0ZWQgaW50byBhc3NldAogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzLnJlZmVyZW5jZV9hY2NvdW50X2Fzc2V0LmNvbnRyYWN0LlJlZmVyZW5jZUFjY291bnRBc3NldC5nZXRfYXNzZXRfYmFsYW5jZV93aXRoX2FyZyhhY2N0OiBieXRlcywgYXNzZXQ6IHVpbnQ2NCkgLT4gdWludDY0OgpnZXRfYXNzZXRfYmFsYW5jZV93aXRoX2FyZzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hc3NldC9jb250cmFjdC5weTozNC0zNQogICAgLy8gQGFiaW1ldGhvZAogICAgLy8gZGVmIGdldF9hc3NldF9iYWxhbmNlX3dpdGhfYXJnKHNlbGYsIGFjY3Q6IEFjY291bnQsIGFzc2V0OiBBc3NldCkgLT4gVUludDY0OgogICAgcHJvdG8gMiAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnRfYXNzZXQvY29udHJhY3QucHk6MzYKICAgIC8vIGFzc2VydCBhY2N0LmlzX29wdGVkX2luKGFzc2V0KSwgIkFjY291bnQgaXMgbm90IG9wdGVkIGluIHRvIHRoZSBhc3NldCIKICAgIGZyYW1lX2RpZyAtMgogICAgZnJhbWVfZGlnIC0xCiAgICBhc3NldF9ob2xkaW5nX2dldCBBc3NldEJhbGFuY2UKICAgIGJ1cnkgMQogICAgYXNzZXJ0IC8vIEFjY291bnQgaXMgbm90IG9wdGVkIGluIHRvIHRoZSBhc3NldAogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2Fzc2V0L2NvbnRyYWN0LnB5OjM3LTM4CiAgICAvLyAjIEdldCB0aGUgYXNzZXQgYmFsYW5jZQogICAgLy8gcmV0dXJuIGFzc2V0LmJhbGFuY2UoYWNjdCkKICAgIGZyYW1lX2RpZyAtMgogICAgZnJhbWVfZGlnIC0xCiAgICBhc3NldF9ob2xkaW5nX2dldCBBc3NldEJhbGFuY2UKICAgIGFzc2VydCAvLyBhY2NvdW50IG9wdGVkIGludG8gYXNzZXQKICAgIHJldHN1Ygo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"
+    },
+    "byteCode": {
+        "approval": "CiACAaEJJgIEFR98dSCzDl4VaWqxoLyq/h9eoH52frqMOg+9mdyAYtem35ZOYjEbQQBGggIEpl57lgQzE0laNhoAjgIAIAADgQBDMRkURDEYRDYaARfAHDYaAhfAMIgAMBYoTFCwIkMxGRREMRhEiAASFihMULAiQzEZQP/KMRgURCJDKSNwAEUBRCkjcABEiYoCAYv+i/9wAEUBRIv+i/9wAESJ",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 4,
+            "minor": 5,
+            "patch": 3
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}
