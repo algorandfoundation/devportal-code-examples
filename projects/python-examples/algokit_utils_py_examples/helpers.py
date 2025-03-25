@@ -14,6 +14,9 @@ from smart_contracts.artifacts.reference_account.reference_account_client import
     ReferenceAccountClient,
     ReferenceAccountFactory,
 )
+from smart_contracts.artifacts.reference_account_app.my_counter_client import (
+    MyCounterFactory,
+)
 from smart_contracts.artifacts.reference_account_app.reference_account_app_client import (
     ReferenceAccountAppClient,
     ReferenceAccountAppFactory,
@@ -130,6 +133,16 @@ def bootstrap_account_asset_reference_example(
 def bootstrap_reference_account_app_example(
     algorand: AlgorandClient, account: SigningAccount
 ) -> ReferenceAccountAppClient:
+
+    counter_factory = algorand.client.get_typed_app_factory(
+        MyCounterFactory,
+        default_sender=account.address,
+    )
+
+    counter_client, deploy_result = counter_factory.deploy(
+        on_update=OnUpdate.AppendApp, on_schema_break=OnSchemaBreak.AppendApp
+    )
+
     factory = algorand.client.get_typed_app_factory(
         ReferenceAccountAppFactory,
         default_sender=account.address,
