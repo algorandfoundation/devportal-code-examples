@@ -52,3 +52,63 @@ def asset_optin_optout() -> None:
     )
 
     # example: ASSET_OPT_OUT_TRANSACTION
+
+    # example: ASSET_BULK_OPT_IN_TRANSACTION
+
+    """
+    Opt an account in to a list of Algorand Standard Assets.
+
+    :param account: The account to opt-in
+    :param asset_ids: The list of asset IDs to opt-in to
+    :param signer: The signer to use for the transaction, defaults to None
+    :param rekey_to: The address to rekey the account to, defaults to None
+    :param note: The note to include in the transaction, defaults to None
+    :param lease: The lease to include in the transaction, defaults to None
+    :param static_fee: The static fee to include in the transaction, defaults to None
+    :param extra_fee: The extra fee to include in the transaction, defaults to None
+    :param max_fee: The maximum fee to include in the transaction, defaults to None
+    :param validity_window: The validity window to include in the transaction, defaults to None
+    :param first_valid_round: The first valid round to include in the transaction, defaults to None
+    :param last_valid_round: The last valid round to include in the transaction, defaults to None
+    :param send_params: The send parameters to use for the transaction, defaults to None
+    :return: An array of records matching asset ID to transaction ID of the opt in
+    """
+    txn_results = algorand_client.asset.bulk_opt_in(
+        account=account_a.address,
+        asset_ids=[1234, 5678],
+    )
+
+    print(txn_results[0].transaction_id, txn_results[1].transaction_id)
+
+    # example: ASSET_BULK_OPT_IN_TRANSACTION
+
+    # example: ASSET_BULK_OPT_OUT_TRANSACTION
+
+    """
+    Opt an account out of a list of Algorand Standard Assets.
+
+    :param account: The account to opt-out
+    :param asset_ids: The list of asset IDs to opt-out of
+    :param ensure_zero_balance: Whether to check if the account has a zero balance first, defaults to True
+    :param signer: The signer to use for the transaction, defaults to None
+    :param rekey_to: The address to rekey the account to, defaults to None
+    :param note: The note to include in the transaction, defaults to None
+    :param lease: The lease to include in the transaction, defaults to None
+    :param static_fee: The static fee to include in the transaction, defaults to None
+    :param extra_fee: The extra fee to include in the transaction, defaults to None
+    :param max_fee: The maximum fee to include in the transaction, defaults to None
+    :param validity_window: The validity window to include in the transaction, defaults to None
+    :param first_valid_round: The first valid round to include in the transaction, defaults to None
+    :param last_valid_round: The last valid round to include in the transaction, defaults to None
+    :param send_params: The send parameters to use for the transaction, defaults to None
+    :raises ValueError: If ensure_zero_balance is True and account has non-zero balance or is not opted in
+    :return: An array of records matching asset ID to transaction ID of the opt out
+    """
+    txn_results = algorand_client.asset.bulk_opt_out(
+        account=account_a.address,
+        asset_ids=[1234, 5678],
+    )
+
+    print(txn_results[0].transaction_id, txn_results[1].transaction_id)
+
+    # example: ASSET_BULK_OPT_OUT_TRANSACTION
