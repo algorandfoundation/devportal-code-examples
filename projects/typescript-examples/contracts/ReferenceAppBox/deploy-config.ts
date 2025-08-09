@@ -1,5 +1,5 @@
 import { AlgorandClient } from '@algorandfoundation/algokit-utils'
-import { BoxCounterFactory } from '@/contracts/artifacts/clients/BoxCounter/BoxCounterClient'
+import { ReferenceAppBoxFactory } from '@/contracts/artifacts/clients/ReferenceAppBox/ReferenceAppBoxClient'
 import { getOperationMessage } from '@/utils'
 
 export async function deploy() {
@@ -14,7 +14,7 @@ export async function deploy() {
 
   // Create a typed factory for the contract
   // This provides type-safe interaction with the contract
-  const typedFactory = algorand.client.getTypedAppFactory(BoxCounterFactory, {
+  const typedFactory = algorand.client.getTypedAppFactory(ReferenceAppBoxFactory, {
     defaultSender: deployer.addr,
   })
 

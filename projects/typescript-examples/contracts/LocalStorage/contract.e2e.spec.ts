@@ -102,7 +102,7 @@ describe('LocalStorage contract', () => {
     await client.newGroup().optIn.optInToApplication().send()
     await client.newGroup().clearLocalState().send()
 
-    await expect(client.newGroup().readLocalState().simulate()).rejects.toThrow('assert failed')
+    await expect(client.newGroup().readLocalState().simulate()).rejects.toThrow('check LocalState exists')
   })
 
   test('verify app budget consumption is reasonable', async () => {

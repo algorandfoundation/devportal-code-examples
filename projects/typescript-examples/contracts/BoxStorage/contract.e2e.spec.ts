@@ -170,7 +170,7 @@ describe('BoxStorage contract', () => {
     const [valueBeforeCreate, existsBeforeCreate] = beforeCreateReturns?.[0]?.returnValue as [Uint8Array, boolean]
 
     expect(existsBeforeCreate).toBe(false)
-    expect(valueBeforeCreate).toStrictEqual([])
+    expect(valueBeforeCreate).toStrictEqual(new Uint8Array())
     expect(valueBeforeCreate.length).toBe(0)
 
     const { returns: afterCreateReturns } = await client
@@ -462,7 +462,7 @@ describe('BoxStorage contract', () => {
     await fundContract(testAccount, client.appAddress)
 
     const keyPrefix = await client.keyPrefixBoxMap()
-    expect(keyPrefix).toStrictEqual([...new TextEncoder().encode('boxMap')])
+    expect(keyPrefix).toStrictEqual(new TextEncoder().encode('boxMap'))
   })
 
   test('box map struct length returns correct value', async () => {

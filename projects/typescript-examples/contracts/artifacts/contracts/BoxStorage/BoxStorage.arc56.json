@@ -634,7 +634,7 @@
                 },
                 "boxInt": {
                     "keyType": "AVMString",
-                    "valueType": "AVMUint64",
+                    "valueType": "uint64",
                     "key": "Ym94SW50"
                 },
                 "boxBytes": {
@@ -651,23 +651,24 @@
                     "keyType": "AVMString",
                     "valueType": "AVMBytes",
                     "key": "Ym94UmVm"
-                },
-                "boxMap": {
-                    "keyType": "AVMString",
-                    "valueType": "AVMString",
-                    "key": "Ym94TWFw"
-                },
-                "boxMapStruct": {
-                    "keyType": "AVMString",
-                    "valueType": "UserStruct",
-                    "key": "dXNlcnM="
                 }
             }
         },
         "maps": {
             "global": {},
             "local": {},
-            "box": {}
+            "box": {
+                "boxMap": {
+                    "keyType": "uint64",
+                    "valueType": "AVMString",
+                    "prefix": "Ym94TWFw"
+                },
+                "boxMapStruct": {
+                    "keyType": "uint64",
+                    "valueType": "UserStruct",
+                    "prefix": "dXNlcnM="
+                }
+            }
         }
     },
     "bareActions": {
@@ -846,8 +847,8 @@
         "compiler": "puya",
         "compilerVersion": {
             "major": 4,
-            "minor": 4,
-            "patch": 4
+            "minor": 7,
+            "patch": 0
         }
     },
     "events": [],

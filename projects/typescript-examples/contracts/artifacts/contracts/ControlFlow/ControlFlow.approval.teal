@@ -4,7 +4,7 @@
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
 main:
     intcblock 1 0 8 2
-    bytecblock 0x151f7c75 0x0000
+    bytecblock 0x151f7c75 0x0000 0x0001
     // contracts/ControlFlow/contract.algo.ts:17
     // export default class ControlFlow extends Contract {
     txn NumAppArgs
@@ -262,12 +262,7 @@ forLoop_for_header@1:
     dup
     cover 2
     itob
-    dup
-    len
-    intc_2 // 8
-    /
-    itob
-    extract 6 2
+    bytec_2 // 0x0001
     swap
     concat
     extract 2 0
@@ -320,12 +315,7 @@ forLoop_for_header@5:
     // contracts/ControlFlow/contract.algo.ts:70
     // reversed = [num, ...reversed]
     itob
-    dup
-    len
-    intc_2 // 8
-    /
-    itob
-    extract 6 2
+    bytec_2 // 0x0001
     swap
     concat
     extract 2 0

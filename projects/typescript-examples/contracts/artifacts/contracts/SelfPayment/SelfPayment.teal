@@ -100,8 +100,7 @@ main:
     // contracts/SelfPayment/contract.algo.ts:34
     // Txn.lease === op.sha256(Bytes('self-payment'))
     txn Lease
-    pushbytes "self-payment"
-    sha256
+    pushbytes 0xd751a814da6b1673556450ce8f7de3c5cc2eb93ac6c1e54339682c0a8f0af709
     ==
     // contracts/SelfPayment/contract.algo.ts:25-34
     // Txn.typeEnum === TransactionType.Payment &&
