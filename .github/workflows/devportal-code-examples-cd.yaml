@@ -12,6 +12,15 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.14.0'
+          check-latest: true
+          cache: 'npm'
+          cache-dependency-path: |
+            projects/typescript-examples/package-lock.json
+
       - name: Install poetry
         run: pipx install poetry
 
