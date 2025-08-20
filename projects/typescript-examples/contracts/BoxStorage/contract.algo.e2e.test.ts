@@ -198,7 +198,7 @@ describe('BoxStorage contract', () => {
 
     await fundContract(testAccount, client.appAddress)
 
-    const testStruct = {
+    const testObject = {
       name: 'TestUser',
       id: 123n,
       asset: 456n,
@@ -206,23 +206,23 @@ describe('BoxStorage contract', () => {
 
     await client
       .newGroup()
-      .setBoxMapStruct({
+      .setBoxMapObject({
         args: {
           key: 1n,
-          value: testStruct,
+          value: testObject,
         },
         boxReferences: [createBoxReference(client.appId, 'users', 1n)],
       })
       .send()
 
-    const storedStruct = await client.getBoxMapStruct({
+    const storedObject = await client.getBoxMapObject({
       args: { key: 1n },
       boxReferences: [createBoxReference(client.appId, 'users', 1n)],
     })
 
-    expect(storedStruct.name).toBe(testStruct.name)
-    expect(storedStruct.id).toBe(testStruct.id)
-    expect(storedStruct.asset).toBe(testStruct.asset)
+    expect(storedObject.name).toBe(testObject.name)
+    expect(storedObject.id).toBe(testObject.id)
+    expect(storedObject.asset).toBe(testObject.asset)
   })
 
   test('delete boxes and verify deletion', async () => {
@@ -423,14 +423,14 @@ describe('BoxStorage contract', () => {
 
     await fundContract(testAccount, client.appAddress)
 
-    const { returns: initialExists } = await client.send.boxMapStructExists({
+    const { returns: initialExists } = await client.send.boxMapObjectExists({
       args: { key: 1n },
       boxReferences: [createBoxReference(client.appId, 'users', 1n)],
     })
 
     expect(initialExists?.[0]?.returnValue).toBe(false)
 
-    const testStruct = {
+    const testObject = {
       name: 'TestUser',
       id: 123n,
       asset: 456n,
@@ -438,16 +438,16 @@ describe('BoxStorage contract', () => {
 
     await client
       .newGroup()
-      .setBoxMapStruct({
+      .setBoxMapObject({
         args: {
           key: 1n,
-          value: testStruct,
+          value: testObject,
         },
         boxReferences: [createBoxReference(client.appId, 'users', 1n)],
       })
       .send()
 
-    const { returns: existsAfterSet } = await client.send.boxMapStructExists({
+    const { returns: existsAfterSet } = await client.send.boxMapObjectExists({
       args: { key: 1n },
       boxReferences: [createBoxReference(client.appId, 'users', 1n)],
     })
@@ -471,22 +471,22 @@ describe('BoxStorage contract', () => {
 
     await fundContract(testAccount, client.appAddress)
 
-    const { returns: result } = await client.send.boxMapStructLength({
+    const { returns: result } = await client.send.boxMapObjectLength({
       args: { key: 1n },
       boxReferences: [createBoxReference(client.appId, 'users', 1n)],
     })
 
-    expect(result?.[0]?.returnValue).toBe(true)
+    expect(result?.[0]?.returnValue).toBe(28n)
 
-    const storedStruct = await client.getBoxMapStruct({
+    const storedObject = await client.getBoxMapObject({
       args: { key: 1n },
       boxReferences: [createBoxReference(client.appId, 'users', 1n)],
     })
 
-    expect(storedStruct).toBeDefined()
-    expect(storedStruct.name).toBe('testName')
-    expect(storedStruct.id).toBe(70n)
-    expect(storedStruct.asset).toBe(1234n)
+    expect(storedObject).toBeDefined()
+    expect(storedObject.name).toBe('testName')
+    expect(storedObject.id).toBe(70n)
+    expect(storedObject.asset).toBe(1234n)
   })
 
   test('arc4 box handles static array correctly', async () => {

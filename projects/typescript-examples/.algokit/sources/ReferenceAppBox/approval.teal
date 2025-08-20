@@ -3,8 +3,8 @@
 
 
 main:
-    intcblock 0 1 400 2500
-    bytecblock "keyLength" "valueLength" "boxSize" "boxMbr" 0x151f7c75 "counter"
+    intcblock 1 0 8 400
+    bytecblock "keyLength" "boxMbr" 0x151f7c75 "counter" "valueLength" "boxSize"
     txn ApplicationID
     bnz main_after_if_else@2
 
@@ -14,46 +14,41 @@ main:
     app_global_put
 
 
-    bytec_1
-    pushint 8
+    bytec 4
+    intc_2
     app_global_put
 
 
-    intc_0
+    intc_1
+
+
     bytec_0
-    app_global_get_ex
-    assert
 
 
-    intc_0
-    bytec_1
-    app_global_get_ex
-    assert
-
-
-    +
-
-
-    bytec_2
-
-
-    swap
-    app_global_put
-
-
-    intc_0
-    bytec_2
     app_global_get_ex
     assert
 
 
     intc_2
-    *
-    intc_3
+
+
     +
 
 
-    bytec_3
+    bytec 5
+
+
+    dig 1
+    app_global_put
+
+
+    intc_3
+    *
+    pushint 2500
+    +
+
+
+    bytec_1
 
 
     swap
@@ -65,16 +60,12 @@ main_after_if_else@2:
 
     txn NumAppArgs
     bz main_bare_routing@13
-    pushbytess 0x040a235e 0x5425a145 0xb3b4a265 0xbbb5239e 0x1aefe7f5 0x0e385162
+    pushbytess 0x040a235e 0x5425a145 0xe924e5e0 0xbbb5239e 0x1aefe7f5 0x0e385162
     txna ApplicationArgs 0
     match main_incrementBoxCounter_route@5 main_getBoxCounter_route@6 main_getBoxCounterForAccount_route@7 main_getBoxMbr_route@8 main_getBoxConfiguration_route@9 main_updateBoxConfiguration_route@10
 
 main_after_if_else@17:
-
-
-
-    intc_0
-    return
+    err
 
 main_updateBoxConfiguration_route@10:
 
@@ -94,7 +85,7 @@ main_updateBoxConfiguration_route@10:
 
 
     callsub updateBoxConfiguration
-    intc_1
+    intc_0
     return
 
 main_getBoxConfiguration_route@9:
@@ -106,26 +97,11 @@ main_getBoxConfiguration_route@9:
     txn ApplicationID
     assert
     callsub getBoxConfiguration
-    uncover 3
-    itob
-    uncover 3
-    itob
-    uncover 3
-    itob
-    uncover 3
-    itob
-    uncover 3
-    uncover 3
-    concat
-    uncover 2
-    concat
-    swap
-    concat
-    bytec 4
+    bytec_2
     swap
     concat
     log
-    intc_1
+    intc_0
     return
 
 main_getBoxMbr_route@8:
@@ -138,11 +114,11 @@ main_getBoxMbr_route@8:
     assert
     callsub getBoxMbr
     itob
-    bytec 4
+    bytec_2
     swap
     concat
     log
-    intc_1
+    intc_0
     return
 
 main_getBoxCounterForAccount_route@7:
@@ -157,17 +133,15 @@ main_getBoxCounterForAccount_route@7:
 
 
     txna ApplicationArgs 1
-    btoi
-    txnas Accounts
 
 
     callsub getBoxCounterForAccount
     itob
-    bytec 4
+    bytec_2
     swap
     concat
     log
-    intc_1
+    intc_0
     return
 
 main_getBoxCounter_route@6:
@@ -180,11 +154,11 @@ main_getBoxCounter_route@6:
     assert
     callsub getBoxCounter
     itob
-    bytec 4
+    bytec_2
     swap
     concat
     log
-    intc_1
+    intc_0
     return
 
 main_incrementBoxCounter_route@5:
@@ -199,22 +173,22 @@ main_incrementBoxCounter_route@5:
 
 
     txn GroupIndex
-    intc_1
+    intc_0
     -
     dup
     gtxns TypeEnum
-    intc_1
+    intc_0
     ==
     assert
 
 
     callsub incrementBoxCounter
     itob
-    bytec 4
+    bytec_2
     swap
     concat
     log
-    intc_1
+    intc_0
     return
 
 main_bare_routing@13:
@@ -226,7 +200,7 @@ main_bare_routing@13:
     txn ApplicationID
     !
     assert
-    intc_1
+    intc_0
     return
 
 
@@ -240,14 +214,14 @@ incrementBoxCounter:
 
     frame_dig -1
     gtxns Amount
+    intc_1
 
 
-    intc_0
-    bytec_3
+    bytec_1
+
+
     app_global_get_ex
     assert
-
-
     ==
     assert
 
@@ -259,7 +233,7 @@ incrementBoxCounter:
     assert
 
 
-    bytec 5
+    bytec_3
 
 
     txn Sender
@@ -277,7 +251,12 @@ incrementBoxCounter:
     bz incrementBoxCounter_else_body@2
 
 
-    bytec 5
+    frame_dig 0
+    intc_0
+    +
+
+
+    bytec_3
 
 
     txn Sender
@@ -286,13 +265,8 @@ incrementBoxCounter:
     concat
 
 
-    frame_dig 0
-    intc_1
-    +
-    dup
+    dig 1
     itob
-    uncover 2
-    swap
     box_put
 
 
@@ -302,7 +276,7 @@ incrementBoxCounter:
 incrementBoxCounter_else_body@2:
 
 
-    bytec 5
+    bytec_3
 
 
     txn Sender
@@ -311,12 +285,12 @@ incrementBoxCounter_else_body@2:
     concat
 
 
-    intc_1
+    intc_0
     itob
     box_put
 
 
-    intc_1
+    intc_0
     swap
     retsub
 
@@ -329,7 +303,7 @@ getBoxCounter:
     proto 0 1
 
 
-    bytec 5
+    bytec_3
 
 
     txn Sender
@@ -354,7 +328,7 @@ getBoxCounter:
 getBoxCounter_after_if_else@2:
 
 
-    intc_0
+    intc_1
     swap
     retsub
 
@@ -367,7 +341,7 @@ getBoxCounterForAccount:
     proto 1 1
 
 
-    bytec 5
+    bytec_3
     frame_dig -1
     concat
 
@@ -388,7 +362,7 @@ getBoxCounterForAccount:
 getBoxCounterForAccount_after_if_else@2:
 
 
-    intc_0
+    intc_1
     swap
     retsub
 
@@ -397,12 +371,14 @@ getBoxCounterForAccount_after_if_else@2:
 getBoxMbr:
 
 
-    intc_0
-    bytec_3
+    intc_1
+
+
+    bytec_1
+
+
     app_global_get_ex
     assert
-
-
     retsub
 
 
@@ -410,30 +386,49 @@ getBoxMbr:
 getBoxConfiguration:
 
 
-    intc_0
+    intc_1
+
+
     bytec_0
+
+
     app_global_get_ex
     assert
+    intc_1
 
 
-    intc_0
+    bytec 4
+
+
+    app_global_get_ex
+    assert
+    intc_1
+
+
+    bytec 5
+
+
+    app_global_get_ex
+    assert
+    intc_1
+
+
     bytec_1
+
+
     app_global_get_ex
     assert
-
-
-    intc_0
-    bytec_2
-    app_global_get_ex
-    assert
-
-
-    intc_0
-    bytec_3
-    app_global_get_ex
-    assert
-
-
+    uncover 3
+    itob
+    uncover 3
+    itob
+    concat
+    uncover 2
+    itob
+    concat
+    swap
+    itob
+    concat
     retsub
 
 
@@ -452,48 +447,39 @@ updateBoxConfiguration:
     app_global_put
 
 
-    bytec_1
+    bytec 4
 
 
     frame_dig -1
     app_global_put
 
 
-    intc_0
+    intc_1
+
+
     bytec_0
+
+
     app_global_get_ex
     assert
-
-
-    intc_0
-    bytec_1
-    app_global_get_ex
-    assert
-
-
+    frame_dig -1
     +
 
 
-    bytec_2
+    bytec 5
 
 
-    swap
+    dig 1
     app_global_put
 
 
-    intc_0
-    bytec_2
-    app_global_get_ex
-    assert
-
-
-    intc_2
-    *
     intc_3
+    *
+    pushint 2500
     +
 
 
-    bytec_3
+    bytec_1
 
 
     swap

@@ -8,15 +8,12 @@ main:
     // export default class ReferenceAccount extends Contract {
     txn NumAppArgs
     bz main_bare_routing@7
-    pushbytess 0x55448e69 0x93b0416b // method "getAccountBalance()uint64", method "getAccountBalanceWithArgument(account)uint64"
+    pushbytess 0x55448e69 0x6102e20b // method "getAccountBalance()uint64", method "getAccountBalanceWithArgument(address)uint64"
     txna ApplicationArgs 0
     match main_getAccountBalance_route@3 main_getAccountBalanceWithArgument_route@4
 
 main_after_if_else@11:
-    // contracts/ReferenceAccount/contract.algo.ts:8
-    // export default class ReferenceAccount extends Contract {
-    pushint 0 // 0
-    return
+    err
 
 main_getAccountBalanceWithArgument_route@4:
     // contracts/ReferenceAccount/contract.algo.ts:27
@@ -29,8 +26,6 @@ main_getAccountBalanceWithArgument_route@4:
     // contracts/ReferenceAccount/contract.algo.ts:8
     // export default class ReferenceAccount extends Contract {
     txna ApplicationArgs 1
-    btoi
-    txnas Accounts
     // contracts/ReferenceAccount/contract.algo.ts:27
     // @abimethod({ readonly: true })
     callsub getAccountBalanceWithArgument
@@ -73,8 +68,8 @@ main_bare_routing@7:
 
 // contracts/ReferenceAccount/contract.algo.ts::ReferenceAccount.getAccountBalance() -> uint64:
 getAccountBalance:
-    // contracts/ReferenceAccount/contract.algo.ts:15
-    // const address = new Address('R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM')
+    // contracts/ReferenceAccount/contract.algo.ts:16
+    // const addressBytes = address.bytes
     pushbytes base32(R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDA) // addr R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM
     // contracts/ReferenceAccount/contract.algo.ts:19
     // return account.balance

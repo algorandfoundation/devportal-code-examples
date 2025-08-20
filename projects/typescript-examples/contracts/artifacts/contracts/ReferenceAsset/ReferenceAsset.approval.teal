@@ -8,15 +8,12 @@ main:
     // export default class ReferenceAsset extends Contract {
     txn NumAppArgs
     bz main_bare_routing@7
-    pushbytess 0x1d90e1ba 0x95fe420a // method "getAssetTotalSupply()uint64", method "getAssetTotalSupplyWithArgument(asset)uint64"
+    pushbytess 0x1d90e1ba 0x390076ea // method "getAssetTotalSupply()uint64", method "getAssetTotalSupplyWithArgument(uint64)uint64"
     txna ApplicationArgs 0
     match main_getAssetTotalSupply_route@3 main_getAssetTotalSupplyWithArgument_route@4
 
 main_after_if_else@11:
-    // contracts/ReferenceAsset/contract.algo.ts:7
-    // export default class ReferenceAsset extends Contract {
-    pushint 0 // 0
-    return
+    err
 
 main_getAssetTotalSupplyWithArgument_route@4:
     // contracts/ReferenceAsset/contract.algo.ts:22
@@ -30,7 +27,6 @@ main_getAssetTotalSupplyWithArgument_route@4:
     // export default class ReferenceAsset extends Contract {
     txna ApplicationArgs 1
     btoi
-    txnas Assets
     // contracts/ReferenceAsset/contract.algo.ts:22
     // @abimethod({ readonly: true })
     callsub getAssetTotalSupplyWithArgument

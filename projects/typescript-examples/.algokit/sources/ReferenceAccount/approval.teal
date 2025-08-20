@@ -8,15 +8,12 @@ main:
 
     txn NumAppArgs
     bz main_bare_routing@7
-    pushbytess 0x55448e69 0x93b0416b
+    pushbytess 0x55448e69 0x6102e20b
     txna ApplicationArgs 0
     match main_getAccountBalance_route@3 main_getAccountBalanceWithArgument_route@4
 
 main_after_if_else@11:
-
-
-    pushint 0
-    return
+    err
 
 main_getAccountBalanceWithArgument_route@4:
 
@@ -29,8 +26,6 @@ main_getAccountBalanceWithArgument_route@4:
 
 
     txna ApplicationArgs 1
-    btoi
-    txnas Accounts
 
 
     callsub getAccountBalanceWithArgument

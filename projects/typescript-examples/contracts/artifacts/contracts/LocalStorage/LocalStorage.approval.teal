@@ -10,16 +10,12 @@ main:
     // export default class LocalStorage extends Contract {
     txn NumAppArgs
     bz main_bare_routing@11
-    pushbytess 0x01a3a3ff 0xd0013fc5 0x02818b4c 0x2793c249 0x213631f5 0x5e58051a // method "optInToApplication()void", method "readLocalState()(uint64,uint64,byte[],string,bool,address)", method "writeLocalState(string,bool,account)void", method "writeDynamicLocalState(string,string)string", method "readDynamicLocalState(string)string", method "clearLocalState()void"
+    pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a // method "optInToApplication()void", method "readLocalState()(uint64,uint64,byte[],string,bool,address)", method "writeLocalState(string,bool,address)void", method "writeDynamicLocalState(string,string)string", method "readDynamicLocalState(string)string", method "clearLocalState()void"
     txna ApplicationArgs 0
     match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8
 
 main_after_if_else@15:
-    // contracts/LocalStorage/contract.algo.ts:23-24
-    // @contract({ stateTotals: { localBytes: 4, localUints: 3 } })
-    // export default class LocalStorage extends Contract {
-    intc_0 // 0
-    return
+    err
 
 main_clearLocalState_route@8:
     // contracts/LocalStorage/contract.algo.ts:155
@@ -110,8 +106,6 @@ main_writeLocalState_route@5:
     intc_0 // 0
     getbit
     txna ApplicationArgs 3
-    btoi
-    txnas Accounts
     // contracts/LocalStorage/contract.algo.ts:92
     // public writeLocalState(valueString: string, valueBool: boolean, valueAccount: Account): void {
     callsub writeLocalState
@@ -127,46 +121,6 @@ main_readLocalState_route@4:
     txn ApplicationID
     assert // can only call when not creating
     callsub readLocalState
-    uncover 5
-    itob
-    uncover 5
-    itob
-    dig 5
-    len
-    itob
-    extract 6 2
-    uncover 6
-    concat
-    dig 5
-    len
-    itob
-    extract 6 2
-    uncover 6
-    concat
-    pushbytes 0x00
-    intc_0 // 0
-    uncover 7
-    setbit
-    uncover 4
-    uncover 4
-    concat
-    pushbytes 0x0035
-    concat
-    dig 3
-    len
-    pushint 53 // 53
-    +
-    itob
-    extract 6 2
-    concat
-    swap
-    concat
-    uncover 3
-    concat
-    uncover 2
-    concat
-    swap
-    concat
     bytec_3 // 0x151f7c75
     swap
     concat
@@ -265,7 +219,7 @@ optInToApplication:
     retsub
 
 
-// contracts/LocalStorage/contract.algo.ts::LocalStorage.readLocalState() -> uint64, uint64, bytes, bytes, uint64, bytes:
+// contracts/LocalStorage/contract.algo.ts::LocalStorage.readLocalState() -> bytes:
 readLocalState:
     // contracts/LocalStorage/contract.algo.ts:69
     // const sender = Txn.sender
@@ -345,7 +299,47 @@ readLocalState:
     //   this.localBool(sender).value,
     //   accountAddress,
     // ]
+    uncover 4
+    itob
+    uncover 4
+    itob
+    concat
+    dig 3
+    len
+    itob
+    extract 6 2
+    uncover 4
+    concat
+    swap
+    pushbytes 0x0035
+    concat
+    dig 1
+    len
+    pushint 53 // 53
+    +
+    dig 4
+    len
+    itob
+    extract 6 2
     uncover 5
+    concat
+    swap
+    itob
+    extract 6 2
+    uncover 2
+    swap
+    concat
+    pushbytes 0x00
+    intc_0 // 0
+    uncover 5
+    setbit
+    concat
+    uncover 3
+    concat
+    uncover 2
+    concat
+    swap
+    concat
     retsub
 
 
@@ -409,7 +403,6 @@ writeLocalState:
     assert
     // contracts/LocalStorage/contract.algo.ts:103
     // assert(this.localBool(sender).value === valueBool)
-    dup
     intc_0 // 0
     // contracts/LocalStorage/contract.algo.ts:30
     // public localBool = LocalState<boolean>()
@@ -419,19 +412,6 @@ writeLocalState:
     app_local_get_ex
     assert // check LocalState exists
     frame_dig -2
-    ==
-    assert
-    // contracts/LocalStorage/contract.algo.ts:104
-    // assert(this.localAccount(sender).value === valueAccount)
-    intc_0 // 0
-    // contracts/LocalStorage/contract.algo.ts:31
-    // public localAccount = LocalState<Account>()
-    bytec_2 // "localAccount"
-    // contracts/LocalStorage/contract.algo.ts:104
-    // assert(this.localAccount(sender).value === valueAccount)
-    app_local_get_ex
-    assert // check LocalState exists
-    frame_dig -1
     ==
     assert
     retsub
@@ -453,26 +433,12 @@ writeDynamicLocalState:
     assert // Account must opt in to contract first
     // contracts/LocalStorage/contract.algo.ts:123
     // localDynamicAccess(sender).value = value
-    dup
     frame_dig -2
     frame_dig -1
     app_local_put
-    // contracts/LocalStorage/contract.algo.ts:125
-    // assert(localDynamicAccess(sender).value === value)
-    dup
-    intc_0 // 0
-    frame_dig -2
-    app_local_get_ex
-    assert // check LocalState exists
-    frame_dig -1
-    ==
-    assert
     // contracts/LocalStorage/contract.algo.ts:127
     // return localDynamicAccess(sender).value
-    intc_0 // 0
-    frame_dig -2
-    app_local_get_ex
-    assert // check LocalState exists
+    frame_dig -1
     retsub
 
 
@@ -492,18 +458,12 @@ readDynamicLocalState:
     assert // Account must opt in to contract first
     // contracts/LocalStorage/contract.algo.ts:144
     // assert(localDynamicAccess(sender).hasValue, 'Key not found')
-    dup
     intc_0 // 0
     frame_dig -1
     app_local_get_ex
-    bury 1
     assert // Key not found
     // contracts/LocalStorage/contract.algo.ts:146
     // return localDynamicAccess(sender).value
-    intc_0 // 0
-    frame_dig -1
-    app_local_get_ex
-    assert // check LocalState exists
     retsub
 
 

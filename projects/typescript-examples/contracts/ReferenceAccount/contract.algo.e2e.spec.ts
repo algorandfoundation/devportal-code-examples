@@ -84,7 +84,7 @@ describe('ResourceUsage contract', () => {
 
     const { return: result } = await client.send.getAccountBalanceWithArgument({
       args: {
-        account: testAccount.addr.publicKey,
+        account: testAccount.addr.toString(),
       },
       sender: testAccount,
       populateAppCallResources: false,

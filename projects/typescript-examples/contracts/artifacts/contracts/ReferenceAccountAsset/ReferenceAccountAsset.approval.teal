@@ -9,15 +9,12 @@ main:
     // export default class ReferenceAccountAsset extends Contract {
     txn NumAppArgs
     bz main_bare_routing@7
-    pushbytess 0x6d68e54d 0x8264b405 // method "getAssetBalance()uint64", method "getAssetBalanceWithArg(account,asset)uint64"
+    pushbytess 0x6d68e54d 0x6acd0ce2 // method "getAssetBalance()uint64", method "getAssetBalanceWithArg(address,uint64)uint64"
     txna ApplicationArgs 0
     match main_getAssetBalance_route@3 main_getAssetBalanceWithArg_route@4
 
 main_after_if_else@11:
-    // contracts/ReferenceAccountAsset/contract.algo.ts:9
-    // export default class ReferenceAccountAsset extends Contract {
-    pushint 0 // 0
-    return
+    err
 
 main_getAssetBalanceWithArg_route@4:
     // contracts/ReferenceAccountAsset/contract.algo.ts:32
@@ -30,11 +27,8 @@ main_getAssetBalanceWithArg_route@4:
     // contracts/ReferenceAccountAsset/contract.algo.ts:9
     // export default class ReferenceAccountAsset extends Contract {
     txna ApplicationArgs 1
-    btoi
-    txnas Accounts
     txna ApplicationArgs 2
     btoi
-    txnas Assets
     // contracts/ReferenceAccountAsset/contract.algo.ts:32
     // @abimethod({ readonly: true })
     callsub getAssetBalanceWithArg
@@ -77,8 +71,8 @@ main_bare_routing@7:
 
 // contracts/ReferenceAccountAsset/contract.algo.ts::ReferenceAccountAsset.getAssetBalance() -> uint64:
 getAssetBalance:
-    // contracts/ReferenceAccountAsset/contract.algo.ts:16
-    // const address = new Address('R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM') // Replace with your account address
+    // contracts/ReferenceAccountAsset/contract.algo.ts:17
+    // const addressBytes = address.bytes
     bytec_1 // addr R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM
     // contracts/ReferenceAccountAsset/contract.algo.ts:19
     // const asset = Asset(1472) // Replace with your asset ID
@@ -88,8 +82,8 @@ getAssetBalance:
     asset_holding_get AssetBalance
     bury 1
     assert // Account is not opted in to the asset
-    // contracts/ReferenceAccountAsset/contract.algo.ts:16
-    // const address = new Address('R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM') // Replace with your account address
+    // contracts/ReferenceAccountAsset/contract.algo.ts:17
+    // const addressBytes = address.bytes
     bytec_1 // addr R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM
     // contracts/ReferenceAccountAsset/contract.algo.ts:19
     // const asset = Asset(1472) // Replace with your asset ID

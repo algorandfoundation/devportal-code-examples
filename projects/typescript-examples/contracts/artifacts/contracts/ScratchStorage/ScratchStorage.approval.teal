@@ -3,7 +3,7 @@
 
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
 main:
-    intcblock 1 0 42 100
+    intcblock 1 42 100 999
     bytecblock 0x151f7c75 "Hello, Algorand!"
     // contracts/ScratchStorage/contract.algo.ts:27-28
     // @contract({ scratchSlots: [0, 1, 2, { from: 10, to: 20 }] }) // This reserves slots 0, 1, 2 and slots 10-20
@@ -15,11 +15,7 @@ main:
     match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5
 
 main_after_if_else@12:
-    // contracts/ScratchStorage/contract.algo.ts:27-28
-    // @contract({ scratchSlots: [0, 1, 2, { from: 10, to: 20 }] }) // This reserves slots 0, 1, 2 and slots 10-20
-    // export default class ScratchStorage extends Contract {
-    intc_1 // 0
-    return
+    err
 
 main_readBytesFromGroupTransaction_route@5:
     // contracts/ScratchStorage/contract.algo.ts:85
@@ -88,7 +84,7 @@ main_demonstrateScratchStorage_route@3:
     assert // can only call when not creating
     callsub demonstrateScratchStorage
     pushbytes 0x00
-    intc_1 // 0
+    pushint 0 // 0
     uncover 2
     setbit
     bytec_0 // 0x151f7c75
@@ -115,7 +111,7 @@ main_bare_routing@8:
 demonstrateScratchStorage:
     // contracts/ScratchStorage/contract.algo.ts:34
     // Scratch.store(0, Uint64(42))
-    intc_2 // 42
+    intc_1 // 42
     store 0
     // contracts/ScratchStorage/contract.algo.ts:35
     // Scratch.store(1, Bytes('Hello, Algorand!'))
@@ -123,11 +119,11 @@ demonstrateScratchStorage:
     store 1
     // contracts/ScratchStorage/contract.algo.ts:36
     // Scratch.store(2, Uint64(100))
-    intc_3 // 100
+    intc_2 // 100
     store 2
     // contracts/ScratchStorage/contract.algo.ts:37
     // Scratch.store(15, Uint64(999))
-    pushint 999 // 999
+    intc_3 // 999
     store 15
     // contracts/ScratchStorage/contract.algo.ts:47
     // const value2 = Scratch.loadUint64(2)
@@ -143,7 +139,7 @@ demonstrateScratchStorage:
     load 0
     // contracts/ScratchStorage/contract.algo.ts:51
     // assert(value1 === 42, 'Value in slot 0 should be 42')
-    intc_2 // 42
+    intc_1 // 42
     ==
     assert // Value in slot 0 should be 42
     // contracts/ScratchStorage/contract.algo.ts:52
@@ -154,12 +150,12 @@ demonstrateScratchStorage:
     // contracts/ScratchStorage/contract.algo.ts:53
     // assert(value2 === 100, 'Value in slot 2 should be 100')
     swap
-    intc_3 // 100
+    intc_2 // 100
     ==
     assert // Value in slot 2 should be 100
     // contracts/ScratchStorage/contract.algo.ts:54
     // assert(value3 === 999, 'Value in slot 15 should be 999')
-    pushint 999 // 999
+    intc_3 // 999
     ==
     assert // Value in slot 15 should be 999
     // contracts/ScratchStorage/contract.algo.ts:65

@@ -3,9 +3,9 @@
 
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
 main:
-    intcblock 1 0 28
-    bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 "users"
-    // contracts/StructInBox/contract.algo.ts:11
+    intcblock 1 0 2 8
+    bytecblock 0x151f7c75 0x00 "users" 0x75736572730000000000000000
+    // contracts/StructInBox/contract.algo.ts:18
     // export default class StructInBoxMap extends Contract {
     txn NumAppArgs
     bz main_bare_routing@9
@@ -14,27 +14,24 @@ main:
     match main_boxMapTest_route@3 main_boxMapSet_route@4 main_boxMapGet_route@5 main_boxMapExists_route@6
 
 main_after_if_else@13:
-    // contracts/StructInBox/contract.algo.ts:11
-    // export default class StructInBoxMap extends Contract {
-    intc_1 // 0
-    return
+    err
 
 main_boxMapExists_route@6:
-    // contracts/StructInBox/contract.algo.ts:41
+    // contracts/StructInBox/contract.algo.ts:53
     // @abimethod()
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // contracts/StructInBox/contract.algo.ts:11
+    // contracts/StructInBox/contract.algo.ts:18
     // export default class StructInBoxMap extends Contract {
     txna ApplicationArgs 1
     btoi
-    // contracts/StructInBox/contract.algo.ts:41
+    // contracts/StructInBox/contract.algo.ts:53
     // @abimethod()
     callsub boxMapExists
-    bytec_2 // 0x00
+    bytec_1 // 0x00
     intc_1 // 0
     uncover 2
     setbit
@@ -46,18 +43,18 @@ main_boxMapExists_route@6:
     return
 
 main_boxMapGet_route@5:
-    // contracts/StructInBox/contract.algo.ts:36
+    // contracts/StructInBox/contract.algo.ts:48
     // @abimethod()
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // contracts/StructInBox/contract.algo.ts:11
+    // contracts/StructInBox/contract.algo.ts:18
     // export default class StructInBoxMap extends Contract {
     txna ApplicationArgs 1
     btoi
-    // contracts/StructInBox/contract.algo.ts:36
+    // contracts/StructInBox/contract.algo.ts:48
     // @abimethod()
     callsub boxMapGet
     bytec_0 // 0x151f7c75
@@ -68,22 +65,22 @@ main_boxMapGet_route@5:
     return
 
 main_boxMapSet_route@4:
-    // contracts/StructInBox/contract.algo.ts:29
+    // contracts/StructInBox/contract.algo.ts:35
     // @abimethod()
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // contracts/StructInBox/contract.algo.ts:11
+    // contracts/StructInBox/contract.algo.ts:18
     // export default class StructInBoxMap extends Contract {
     txna ApplicationArgs 1
     btoi
     txna ApplicationArgs 2
-    // contracts/StructInBox/contract.algo.ts:29
+    // contracts/StructInBox/contract.algo.ts:35
     // @abimethod()
     callsub boxMapSet
-    bytec_2 // 0x00
+    bytec_1 // 0x00
     intc_1 // 0
     uncover 2
     setbit
@@ -95,7 +92,7 @@ main_boxMapSet_route@4:
     return
 
 main_boxMapTest_route@3:
-    // contracts/StructInBox/contract.algo.ts:14
+    // contracts/StructInBox/contract.algo.ts:21
     // @abimethod()
     txn OnCompletion
     !
@@ -103,7 +100,7 @@ main_boxMapTest_route@3:
     txn ApplicationID
     assert // can only call when not creating
     callsub boxMapTest
-    bytec_2 // 0x00
+    bytec_1 // 0x00
     intc_1 // 0
     uncover 2
     setbit
@@ -115,7 +112,7 @@ main_boxMapTest_route@3:
     return
 
 main_bare_routing@9:
-    // contracts/StructInBox/contract.algo.ts:11
+    // contracts/StructInBox/contract.algo.ts:18
     // export default class StructInBoxMap extends Contract {
     txn OnCompletion
     bnz main_after_if_else@13
@@ -128,47 +125,21 @@ main_bare_routing@9:
 
 // contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapTest() -> uint64:
 boxMapTest:
-    // contracts/StructInBox/contract.algo.ts:12
-    // public userMap = BoxMap<uint64, UserStruct>({ keyPrefix: 'users' })
-    bytec_1 // 0x75736572730000000000000000
-    // contracts/StructInBox/contract.algo.ts:23
-    // this.userMap(key0).value = value.copy()
+    // contracts/StructInBox/contract.algo.ts:19
+    // public userMap = BoxMap<uint64, User>({ keyPrefix: 'users' })
+    bytec_3 // 0x75736572730000000000000000
+    // contracts/StructInBox/contract.algo.ts:30
+    // this.userMap(key0).value = clone(value)
     box_del
     pop
-    // contracts/StructInBox/contract.algo.ts:12
-    // public userMap = BoxMap<uint64, UserStruct>({ keyPrefix: 'users' })
-    bytec_1 // 0x75736572730000000000000000
-    // contracts/StructInBox/contract.algo.ts:17-21
-    // const value = new UserStruct({
-    //   name: new arc4.Str('testName'),
-    //   id: new arc4.UintN64(70),
-    //   asset: new arc4.UintN64(2),
-    // })
+    // contracts/StructInBox/contract.algo.ts:19
+    // public userMap = BoxMap<uint64, User>({ keyPrefix: 'users' })
+    bytec_3 // 0x75736572730000000000000000
+    // contracts/StructInBox/contract.algo.ts:30
+    // this.userMap(key0).value = clone(value)
     pushbytes 0x0012000000000000004600000000000000020008746573744e616d65
-    // contracts/StructInBox/contract.algo.ts:23
-    // this.userMap(key0).value = value.copy()
     box_put
-    // contracts/StructInBox/contract.algo.ts:12
-    // public userMap = BoxMap<uint64, UserStruct>({ keyPrefix: 'users' })
-    bytec_1 // 0x75736572730000000000000000
-    // contracts/StructInBox/contract.algo.ts:24
-    // assert(this.userMap(key0).length === value.bytes.length, 'Length mismatch')
-    box_len
-    assert // Box must have value
-    intc_2 // 28
-    ==
-    assert // Length mismatch
-    // contracts/StructInBox/contract.algo.ts:12
-    // public userMap = BoxMap<uint64, UserStruct>({ keyPrefix: 'users' })
-    bytec_1 // 0x75736572730000000000000000
-    // contracts/StructInBox/contract.algo.ts:25
-    // assert(this.userMap(key0).length === value.bytes.length, 'Length mismatch')
-    box_len
-    assert // Box must have value
-    intc_2 // 28
-    ==
-    assert // Length mismatch
-    // contracts/StructInBox/contract.algo.ts:26
+    // contracts/StructInBox/contract.algo.ts:32
     // return true
     intc_0 // 1
     retsub
@@ -176,35 +147,72 @@ boxMapTest:
 
 // contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapSet(key: uint64, value: bytes) -> uint64:
 boxMapSet:
-    // contracts/StructInBox/contract.algo.ts:29-30
+    // contracts/StructInBox/contract.algo.ts:35-36
     // @abimethod()
-    // public boxMapSet(key: uint64, value: UserStruct): boolean {
+    // public boxMapSet(key: uint64, value: User): boolean {
     proto 2 1
-    // contracts/StructInBox/contract.algo.ts:31
-    // this.userMap(key).value = value.copy()
+    // contracts/StructInBox/contract.algo.ts:37
+    // this.userMap(key).value = clone(value)
     frame_dig -2
     itob
-    // contracts/StructInBox/contract.algo.ts:12
-    // public userMap = BoxMap<uint64, UserStruct>({ keyPrefix: 'users' })
-    bytec_3 // "users"
+    // contracts/StructInBox/contract.algo.ts:19
+    // public userMap = BoxMap<uint64, User>({ keyPrefix: 'users' })
+    bytec_2 // "users"
     swap
     concat
-    // contracts/StructInBox/contract.algo.ts:31
-    // this.userMap(key).value = value.copy()
+    // contracts/StructInBox/contract.algo.ts:37
+    // this.userMap(key).value = clone(value)
     dup
     box_del
     pop
     dup
     frame_dig -1
     box_put
-    // contracts/StructInBox/contract.algo.ts:32
-    // assert(this.userMap(key).value === value.copy(), 'Value mismatch')
-    box_get
-    assert // Box must have value
+    // contracts/StructInBox/contract.algo.ts:39-43
+    // assertMatch(this.userMap(key).value, {
+    //   id: value.id,
+    //   asset: value.asset,
+    //   name: value.name,
+    // })
+    dup
+    intc_2 // 2
+    intc_3 // 8
+    box_extract
+    btoi
+    // contracts/StructInBox/contract.algo.ts:40
+    // id: value.id,
     frame_dig -1
+    intc_2 // 2
+    extract_uint64
+    // contracts/StructInBox/contract.algo.ts:39-43
+    // assertMatch(this.userMap(key).value, {
+    //   id: value.id,
+    //   asset: value.asset,
+    //   name: value.name,
+    // })
     ==
-    assert // Value mismatch
-    // contracts/StructInBox/contract.algo.ts:33
+    swap
+    pushint 10 // 10
+    intc_3 // 8
+    box_extract
+    btoi
+    // contracts/StructInBox/contract.algo.ts:41
+    // asset: value.asset,
+    frame_dig -1
+    pushint 10 // 10
+    extract_uint64
+    // contracts/StructInBox/contract.algo.ts:39-43
+    // assertMatch(this.userMap(key).value, {
+    //   id: value.id,
+    //   asset: value.asset,
+    //   name: value.name,
+    // })
+    ==
+    &&
+    intc_0 // 1
+    &&
+    assert // assert target is match for conditions
+    // contracts/StructInBox/contract.algo.ts:45
     // return true
     intc_0 // 1
     retsub
@@ -212,20 +220,20 @@ boxMapSet:
 
 // contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapGet(key: uint64) -> bytes:
 boxMapGet:
-    // contracts/StructInBox/contract.algo.ts:36-37
+    // contracts/StructInBox/contract.algo.ts:48-49
     // @abimethod()
-    // public boxMapGet(key: uint64): UserStruct {
+    // public boxMapGet(key: uint64): User {
     proto 1 1
-    // contracts/StructInBox/contract.algo.ts:38
+    // contracts/StructInBox/contract.algo.ts:50
     // return this.userMap(key).value
     frame_dig -1
     itob
-    // contracts/StructInBox/contract.algo.ts:12
-    // public userMap = BoxMap<uint64, UserStruct>({ keyPrefix: 'users' })
-    bytec_3 // "users"
+    // contracts/StructInBox/contract.algo.ts:19
+    // public userMap = BoxMap<uint64, User>({ keyPrefix: 'users' })
+    bytec_2 // "users"
     swap
     concat
-    // contracts/StructInBox/contract.algo.ts:38
+    // contracts/StructInBox/contract.algo.ts:50
     // return this.userMap(key).value
     box_get
     assert // Box must have value
@@ -234,20 +242,20 @@ boxMapGet:
 
 // contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapExists(key: uint64) -> uint64:
 boxMapExists:
-    // contracts/StructInBox/contract.algo.ts:41-42
+    // contracts/StructInBox/contract.algo.ts:53-54
     // @abimethod()
     // public boxMapExists(key: uint64): boolean {
     proto 1 1
-    // contracts/StructInBox/contract.algo.ts:43
+    // contracts/StructInBox/contract.algo.ts:55
     // return this.userMap(key).exists
     frame_dig -1
     itob
-    // contracts/StructInBox/contract.algo.ts:12
-    // public userMap = BoxMap<uint64, UserStruct>({ keyPrefix: 'users' })
-    bytec_3 // "users"
+    // contracts/StructInBox/contract.algo.ts:19
+    // public userMap = BoxMap<uint64, User>({ keyPrefix: 'users' })
+    bytec_2 // "users"
     swap
     concat
-    // contracts/StructInBox/contract.algo.ts:43
+    // contracts/StructInBox/contract.algo.ts:55
     // return this.userMap(key).exists
     box_len
     bury 1

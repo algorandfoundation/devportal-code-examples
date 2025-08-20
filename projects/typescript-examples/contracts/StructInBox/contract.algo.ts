@@ -1,40 +1,52 @@
-import { arc4, abimethod, Contract, uint64, Uint64, BoxMap } from '@algorandfoundation/algorand-typescript'
-import { assert } from '@algorandfoundation/algorand-typescript'
+import {
+  abimethod,
+  Contract,
+  uint64,
+  Uint64,
+  BoxMap,
+  clone,
+  assertMatch,
+} from '@algorandfoundation/algorand-typescript'
 
 // example: EXAMPLE_STRUCT_IN_BOX
-class UserStruct extends arc4.Struct<{
-  name: arc4.Str
-  id: arc4.UintN64
-  asset: arc4.UintN64
-}> {}
+type User = {
+  name: string
+  id: uint64
+  asset: uint64
+}
 
 export default class StructInBoxMap extends Contract {
-  public userMap = BoxMap<uint64, UserStruct>({ keyPrefix: 'users' })
+  public userMap = BoxMap<uint64, User>({ keyPrefix: 'users' })
 
   @abimethod()
   public boxMapTest(): boolean {
     const key0 = Uint64(0)
-    const value = new UserStruct({
-      name: new arc4.Str('testName'),
-      id: new arc4.UintN64(70),
-      asset: new arc4.UintN64(2),
+    const value = {
+      name: 'testName',
+      id: Uint64(70),
+      asset: Uint64(2),
+    } satisfies User
+
+    this.userMap(key0).value = clone(value)
+
+    return true
+  }
+
+  @abimethod()
+  public boxMapSet(key: uint64, value: User): boolean {
+    this.userMap(key).value = clone(value)
+
+    assertMatch(this.userMap(key).value, {
+      id: value.id,
+      asset: value.asset,
+      name: value.name,
     })
 
-    this.userMap(key0).value = value.copy()
-    assert(this.userMap(key0).length === value.bytes.length, 'Length mismatch')
-    assert(this.userMap(key0).length === value.bytes.length, 'Length mismatch')
     return true
   }
 
   @abimethod()
-  public boxMapSet(key: uint64, value: UserStruct): boolean {
-    this.userMap(key).value = value.copy()
-    assert(this.userMap(key).value === value.copy(), 'Value mismatch')
-    return true
-  }
-
-  @abimethod()
-  public boxMapGet(key: uint64): UserStruct {
+  public boxMapGet(key: uint64): User {
     return this.userMap(key).value
   }
 

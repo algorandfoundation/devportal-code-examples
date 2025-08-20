@@ -3,7 +3,7 @@
   "sources": [
     "/Users/gabe.algo/Code/devportal-code-examples/projects/typescript-examples/contracts/CustomCreate/contract.algo.ts"
   ],
-  "mappings": ";;;;;;;;;;;AAGA;;AAAA;;;AAAA;;;;;;;;;;;;AAAA;;;AAAA;;;;;;AAAA;;AAQE;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;;AALC;;AAAA;AAAA;AAAA;;AAAA;AAAA;AAHH;;;AAAA;AAGG;;;AAAA;;AAAD;;;AAFO;AAIL;;AAAA;;AAJK;AAAA;AAAA;AAAA;AAQL",
+  "mappings": ";;;;;;;AAGA;;AAAA;;;AAAA;;;;;;;;;;;;AAAA;;;AAAA;;;;;;;AAQE;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;;;AALC;;AAAA;AAAA;AAAA;;AAAA;AAAA;AAHH;;;AAAA;AACS;AAIL;AAAA;AAFD;;;AAMiB;;AARX;AAQW;AAAA;AAAhB",
   "op_pc_offset": 0,
   "pc_events": {
     "1": {
@@ -11,12 +11,9 @@
       "params": {},
       "block": "main",
       "stack_in": [],
-      "op": "intcblock 0 1"
-    },
-    "5": {
       "op": "bytecblock \"age\""
     },
-    "11": {
+    "7": {
       "op": "txn NumAppArgs",
       "defined_out": [
         "tmp%0#1"
@@ -25,11 +22,11 @@
         "tmp%0#1"
       ]
     },
-    "13": {
+    "9": {
       "op": "bz main_after_if_else@8",
       "stack_out": []
     },
-    "16": {
+    "12": {
       "op": "pushbytess 0x483331ee 0xd26ce06c // method \"custom_create(uint64)void\", method \"getAge()uint64\"",
       "defined_out": [
         "Method(custom_create(uint64)void)",
@@ -40,7 +37,7 @@
         "Method(getAge()uint64)"
       ]
     },
-    "28": {
+    "24": {
       "op": "txna ApplicationArgs 0",
       "defined_out": [
         "Method(custom_create(uint64)void)",
@@ -53,26 +50,17 @@
         "tmp%2#0"
       ]
     },
-    "31": {
+    "27": {
       "op": "match main_custom_create_route@3 main_getAge_route@4",
       "stack_out": []
     },
-    "37": {
+    "33": {
       "block": "main_after_if_else@8",
       "stack_in": [],
-      "op": "intc_0 // 0",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
+      "op": "err",
+      "defined_out": []
     },
-    "38": {
-      "op": "return",
-      "stack_out": []
-    },
-    "39": {
+    "34": {
       "block": "main_getAge_route@4",
       "stack_in": [],
       "op": "txn OnCompletion",
@@ -83,7 +71,7 @@
         "tmp%8#0"
       ]
     },
-    "41": {
+    "36": {
       "op": "!",
       "defined_out": [
         "tmp%9#0"
@@ -92,12 +80,12 @@
         "tmp%9#0"
       ]
     },
-    "42": {
+    "37": {
       "error": "OnCompletion is not NoOp",
       "op": "assert // OnCompletion is not NoOp",
       "stack_out": []
     },
-    "43": {
+    "38": {
       "op": "txn ApplicationID",
       "defined_out": [
         "tmp%10#0"
@@ -106,63 +94,63 @@
         "tmp%10#0"
       ]
     },
-    "45": {
+    "40": {
       "error": "can only call when not creating",
       "op": "assert // can only call when not creating",
       "stack_out": []
     },
-    "46": {
+    "41": {
       "callsub": "contracts/CustomCreate/contract.algo.ts::CustomCreate.getAge",
       "op": "callsub getAge",
       "defined_out": [
-        "to_encode%0#0"
+        "tmp%12#0"
       ],
       "stack_out": [
-        "to_encode%0#0"
+        "tmp%12#0"
       ]
     },
-    "49": {
+    "44": {
       "op": "itob",
       "defined_out": [
-        "val_as_bytes%0#0"
+        "aggregate%val_as_bytes%0#0"
       ],
       "stack_out": [
-        "val_as_bytes%0#0"
+        "aggregate%val_as_bytes%0#0"
       ]
     },
-    "50": {
+    "45": {
       "op": "pushbytes 0x151f7c75",
       "defined_out": [
         "0x151f7c75",
-        "val_as_bytes%0#0"
+        "aggregate%val_as_bytes%0#0"
       ],
       "stack_out": [
-        "val_as_bytes%0#0",
+        "aggregate%val_as_bytes%0#0",
         "0x151f7c75"
       ]
     },
-    "56": {
+    "51": {
       "op": "swap",
       "stack_out": [
         "0x151f7c75",
-        "val_as_bytes%0#0"
+        "aggregate%val_as_bytes%0#0"
       ]
     },
-    "57": {
+    "52": {
       "op": "concat",
       "defined_out": [
-        "tmp%12#0"
+        "tmp%14#0"
       ],
       "stack_out": [
-        "tmp%12#0"
+        "tmp%14#0"
       ]
     },
-    "58": {
+    "53": {
       "op": "log",
       "stack_out": []
     },
-    "59": {
-      "op": "intc_1 // 1",
+    "54": {
+      "op": "pushint 1 // 1",
       "defined_out": [
         "tmp%0#0"
       ],
@@ -170,11 +158,11 @@
         "tmp%0#0"
       ]
     },
-    "60": {
+    "56": {
       "op": "return",
       "stack_out": []
     },
-    "61": {
+    "57": {
       "block": "main_custom_create_route@3",
       "stack_in": [],
       "op": "txn OnCompletion",
@@ -185,7 +173,7 @@
         "tmp%3#0"
       ]
     },
-    "63": {
+    "59": {
       "op": "!",
       "defined_out": [
         "tmp%4#0"
@@ -194,12 +182,12 @@
         "tmp%4#0"
       ]
     },
-    "64": {
+    "60": {
       "error": "OnCompletion is not NoOp",
       "op": "assert // OnCompletion is not NoOp",
       "stack_out": []
     },
-    "65": {
+    "61": {
       "op": "txn ApplicationID",
       "defined_out": [
         "tmp%5#0"
@@ -208,7 +196,7 @@
         "tmp%5#0"
       ]
     },
-    "67": {
+    "63": {
       "op": "!",
       "defined_out": [
         "tmp%6#0"
@@ -217,90 +205,70 @@
         "tmp%6#0"
       ]
     },
-    "68": {
+    "64": {
       "error": "can only call when creating",
       "op": "assert // can only call when creating",
       "stack_out": []
     },
-    "69": {
+    "65": {
       "op": "txna ApplicationArgs 1",
       "defined_out": [
-        "reinterpret_bytes[8]%0#0"
+        "reinterpret_Encoded(uint64)%0#0"
       ],
       "stack_out": [
-        "reinterpret_bytes[8]%0#0"
+        "reinterpret_Encoded(uint64)%0#0"
       ]
     },
-    "72": {
+    "68": {
       "op": "btoi",
       "defined_out": [
-        "tmp%7#0"
+        "age#0"
       ],
       "stack_out": [
-        "tmp%7#0"
+        "age#0"
       ]
     },
-    "73": {
-      "callsub": "contracts/CustomCreate/contract.algo.ts::CustomCreate.custom_create",
-      "op": "callsub custom_create",
-      "stack_out": []
-    },
-    "76": {
-      "op": "intc_1 // 1",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
-    },
-    "77": {
-      "op": "return",
-      "stack_out": []
-    },
-    "78": {
-      "subroutine": "contracts/CustomCreate/contract.algo.ts::CustomCreate.custom_create",
-      "params": {
-        "age#0": "uint64"
-      },
-      "block": "custom_create",
-      "stack_in": [],
-      "op": "proto 1 0"
-    },
-    "81": {
+    "69": {
       "op": "bytec_0 // \"age\"",
       "defined_out": [
-        "\"age\""
+        "\"age\"",
+        "age#0"
       ],
       "stack_out": [
+        "age#0",
         "\"age\""
       ]
     },
-    "82": {
-      "op": "frame_dig -1",
-      "defined_out": [
-        "\"age\"",
-        "age#0 (copy)"
-      ],
+    "70": {
+      "op": "swap",
       "stack_out": [
         "\"age\"",
-        "age#0 (copy)"
+        "age#0"
       ]
     },
-    "84": {
+    "71": {
       "op": "app_global_put",
       "stack_out": []
     },
-    "85": {
-      "retsub": true,
-      "op": "retsub"
+    "72": {
+      "op": "pushint 1 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
     },
-    "86": {
+    "74": {
+      "op": "return",
+      "stack_out": []
+    },
+    "75": {
       "subroutine": "contracts/CustomCreate/contract.algo.ts::CustomCreate.getAge",
       "params": {},
       "block": "getAge",
       "stack_in": [],
-      "op": "intc_0 // 0",
+      "op": "pushint 0 // 0",
       "defined_out": [
         "0"
       ],
@@ -308,7 +276,7 @@
         "0"
       ]
     },
-    "87": {
+    "77": {
       "op": "bytec_0 // \"age\"",
       "defined_out": [
         "\"age\"",
@@ -319,7 +287,7 @@
         "\"age\""
       ]
     },
-    "88": {
+    "78": {
       "op": "app_global_get_ex",
       "defined_out": [
         "maybe_exists%0#0",
@@ -330,14 +298,14 @@
         "maybe_exists%0#0"
       ]
     },
-    "89": {
+    "79": {
       "error": "check GlobalState exists",
       "op": "assert // check GlobalState exists",
       "stack_out": [
         "maybe_value%0#0"
       ]
     },
-    "90": {
+    "80": {
       "retsub": true,
       "op": "retsub"
     }

@@ -9,15 +9,12 @@ main:
     // export default class InnerTransactions extends Contract {
     txn NumAppArgs
     bz main_bare_routing@18
-    pushbytess 0x23950027 0x0207f77d 0xd2249284 0x66a063bf 0x12563767 0xcfb12db1 0x7b58e236 0xd0864ff4 0x5351d7be 0x5727ecae 0xda20a87e 0x38ecc014 0x9aeec159 // method "payment()uint64", method "fungibleAssetCreate()uint64", method "nonFungibleAssetCreate()uint64", method "assetOptIn(asset)void", method "assetTransfer(asset,account,uint64)void", method "assetFreeze(account,asset)void", method "assetRevoke(asset,account,uint64)void", method "assetConfig(asset)void", method "assetDelete(asset)void", method "multiInnerTxns(application)(uint64,string)", method "deployApp()uint64", method "arc4DeployApp()uint64", method "noopAppCall(application)string"
+    pushbytess 0x23950027 0x0207f77d 0xd2249284 0x30bdb31f 0xc99afc61 0xbbf24873 0x550affff 0xd136e328 0x889299d8 0xce3ff2f5 0xda20a87e 0x38ecc014 0x46408ea5 // method "payment()uint64", method "fungibleAssetCreate()uint64", method "nonFungibleAssetCreate()uint64", method "assetOptIn(uint64)void", method "assetTransfer(uint64,address,uint64)void", method "assetFreeze(address,uint64)void", method "assetRevoke(uint64,address,uint64)void", method "assetConfig(uint64)void", method "assetDelete(uint64)void", method "multiInnerTxns(uint64)(uint64,string)", method "deployApp()uint64", method "arc4DeployApp()uint64", method "noopAppCall(uint64)string"
     txna ApplicationArgs 0
     match main_payment_route@3 main_fungibleAssetCreate_route@4 main_nonFungibleAssetCreate_route@5 main_assetOptIn_route@6 main_assetTransfer_route@7 main_assetFreeze_route@8 main_assetRevoke_route@9 main_assetConfig_route@10 main_assetDelete_route@11 main_multiInnerTxns_route@12 main_deployApp_route@13 main_arc4DeployApp_route@14 main_noopAppCall_route@15
 
 main_after_if_else@22:
-    // contracts/InnerTransactions/contract.algo.ts:19
-    // export default class InnerTransactions extends Contract {
-    intc_1 // 0
-    return
+    err
 
 main_noopAppCall_route@15:
     // contracts/InnerTransactions/contract.algo.ts:310
@@ -31,7 +28,6 @@ main_noopAppCall_route@15:
     // export default class InnerTransactions extends Contract {
     txna ApplicationArgs 1
     btoi
-    txnas Applications
     // contracts/InnerTransactions/contract.algo.ts:310
     // @abimethod()
     callsub noopAppCall
@@ -90,23 +86,9 @@ main_multiInnerTxns_route@12:
     // export default class InnerTransactions extends Contract {
     txna ApplicationArgs 1
     btoi
-    txnas Applications
     // contracts/InnerTransactions/contract.algo.ts:231
     // @abimethod()
     callsub multiInnerTxns
-    swap
-    itob
-    dig 1
-    len
-    itob
-    extract 6 2
-    uncover 2
-    concat
-    swap
-    pushbytes 0x000a
-    concat
-    swap
-    concat
     bytec_0 // 0x151f7c75
     swap
     concat
@@ -126,7 +108,6 @@ main_assetDelete_route@11:
     // export default class InnerTransactions extends Contract {
     txna ApplicationArgs 1
     btoi
-    txnas Assets
     // contracts/InnerTransactions/contract.algo.ts:214
     // @abimethod()
     callsub assetDelete
@@ -145,7 +126,6 @@ main_assetConfig_route@10:
     // export default class InnerTransactions extends Contract {
     txna ApplicationArgs 1
     btoi
-    txnas Assets
     // contracts/InnerTransactions/contract.algo.ts:191
     // @abimethod()
     callsub assetConfig
@@ -164,10 +144,7 @@ main_assetRevoke_route@9:
     // export default class InnerTransactions extends Contract {
     txna ApplicationArgs 1
     btoi
-    txnas Assets
     txna ApplicationArgs 2
-    btoi
-    txnas Accounts
     txna ApplicationArgs 3
     btoi
     // contracts/InnerTransactions/contract.algo.ts:168
@@ -187,11 +164,8 @@ main_assetFreeze_route@8:
     // contracts/InnerTransactions/contract.algo.ts:19
     // export default class InnerTransactions extends Contract {
     txna ApplicationArgs 1
-    btoi
-    txnas Accounts
     txna ApplicationArgs 2
     btoi
-    txnas Assets
     // contracts/InnerTransactions/contract.algo.ts:145
     // @abimethod()
     callsub assetFreeze
@@ -210,10 +184,7 @@ main_assetTransfer_route@7:
     // export default class InnerTransactions extends Contract {
     txna ApplicationArgs 1
     btoi
-    txnas Assets
     txna ApplicationArgs 2
-    btoi
-    txnas Accounts
     txna ApplicationArgs 3
     btoi
     // contracts/InnerTransactions/contract.algo.ts:123
@@ -234,7 +205,6 @@ main_assetOptIn_route@6:
     // export default class InnerTransactions extends Contract {
     txna ApplicationArgs 1
     btoi
-    txnas Assets
     // contracts/InnerTransactions/contract.algo.ts:100
     // @abimethod()
     callsub assetOptIn
@@ -814,12 +784,12 @@ assetDelete:
     retsub
 
 
-// contracts/InnerTransactions/contract.algo.ts::InnerTransactions.multiInnerTxns(appId: uint64) -> uint64, bytes:
+// contracts/InnerTransactions/contract.algo.ts::InnerTransactions.multiInnerTxns(appId: uint64) -> bytes:
 multiInnerTxns:
     // contracts/InnerTransactions/contract.algo.ts:231-232
     // @abimethod()
     // public multiInnerTxns(appId: Application): [uint64, string] {
-    proto 1 2
+    proto 1 1
     // contracts/InnerTransactions/contract.algo.ts:234-240
     // const payTxn = itxn
     //   .payment({
@@ -912,6 +882,19 @@ multiInnerTxns:
     extract 6 0
     // contracts/InnerTransactions/contract.algo.ts:253
     // return [payTxn.amount, helloWorldResult]
+    swap
+    itob
+    dig 1
+    len
+    itob
+    extract 6 2
+    uncover 2
+    concat
+    swap
+    pushbytes 0x000a
+    concat
+    swap
+    concat
     retsub
 
 

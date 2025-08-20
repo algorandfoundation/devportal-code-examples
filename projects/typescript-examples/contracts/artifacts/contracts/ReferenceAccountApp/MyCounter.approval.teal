@@ -14,10 +14,7 @@ main:
     match main_optIn_route@3 main_incrementMyCounter_route@4
 
 main_after_if_else@11:
-    // contracts/ReferenceAccountApp/contract.algo.ts:21
-    // export class MyCounter extends Contract {
-    intc_1 // 0
-    return
+    err
 
 main_incrementMyCounter_route@4:
     // contracts/ReferenceAccountApp/contract.algo.ts:37
@@ -95,16 +92,15 @@ incrementMyCounter:
     // this.myCounter(Txn.sender).value = this.myCounter(Txn.sender).value + 1
     app_local_get_ex
     assert // check LocalState exists
-    txn Sender
-    swap
     intc_0 // 1
     +
+    txn Sender
     // contracts/ReferenceAccountApp/contract.algo.ts:23
     // public myCounter = LocalState<uint64>({ key: 'my_counter' })
     bytec_0 // "my_counter"
     // contracts/ReferenceAccountApp/contract.algo.ts:41
     // this.myCounter(Txn.sender).value = this.myCounter(Txn.sender).value + 1
-    swap
+    uncover 2
     app_local_put
     // contracts/ReferenceAccountApp/contract.algo.ts:43
     // return this.myCounter(Txn.sender).value

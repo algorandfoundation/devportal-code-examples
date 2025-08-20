@@ -8,15 +8,12 @@ main:
 
     txn NumAppArgs
     bz main_bare_routing@7
-    pushbytess 0x1d90e1ba 0x95fe420a
+    pushbytess 0x1d90e1ba 0x390076ea
     txna ApplicationArgs 0
     match main_getAssetTotalSupply_route@3 main_getAssetTotalSupplyWithArgument_route@4
 
 main_after_if_else@11:
-
-
-    pushint 0
-    return
+    err
 
 main_getAssetTotalSupplyWithArgument_route@4:
 
@@ -30,7 +27,6 @@ main_getAssetTotalSupplyWithArgument_route@4:
 
     txna ApplicationArgs 1
     btoi
-    txnas Assets
 
 
     callsub getAssetTotalSupplyWithArgument

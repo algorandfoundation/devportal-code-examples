@@ -3,21 +3,18 @@
 
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
 main:
-    intcblock 0 1
+    intcblock 1 0
     bytecblock 0x151f7c75 "my_counter"
     // contracts/ReferenceAccountApp/contract.algo.ts:51
     // export default class ReferenceAccountApp extends Contract {
     txn NumAppArgs
     bz main_bare_routing@7
-    pushbytess 0x87ad70bf 0x31398f57 // method "getMyCounter()uint64", method "getMyCounterWithArg(account,application)uint64"
+    pushbytess 0x87ad70bf 0x605c4419 // method "getMyCounter()uint64", method "getMyCounterWithArg(address,uint64)uint64"
     txna ApplicationArgs 0
     match main_getMyCounter_route@3 main_getMyCounterWithArg_route@4
 
 main_after_if_else@11:
-    // contracts/ReferenceAccountApp/contract.algo.ts:51
-    // export default class ReferenceAccountApp extends Contract {
-    intc_0 // 0
-    return
+    err
 
 main_getMyCounterWithArg_route@4:
     // contracts/ReferenceAccountApp/contract.algo.ts:79
@@ -30,11 +27,8 @@ main_getMyCounterWithArg_route@4:
     // contracts/ReferenceAccountApp/contract.algo.ts:51
     // export default class ReferenceAccountApp extends Contract {
     txna ApplicationArgs 1
-    btoi
-    txnas Accounts
     txna ApplicationArgs 2
     btoi
-    txnas Applications
     // contracts/ReferenceAccountApp/contract.algo.ts:79
     // @abimethod({ readonly: true })
     callsub getMyCounterWithArg
@@ -43,7 +37,7 @@ main_getMyCounterWithArg_route@4:
     swap
     concat
     log
-    intc_1 // 1
+    intc_0 // 1
     return
 
 main_getMyCounter_route@3:
@@ -60,7 +54,7 @@ main_getMyCounter_route@3:
     swap
     concat
     log
-    intc_1 // 1
+    intc_0 // 1
     return
 
 main_bare_routing@7:
@@ -71,7 +65,7 @@ main_bare_routing@7:
     txn ApplicationID
     !
     assert // can only call when creating
-    intc_1 // 1
+    intc_0 // 1
     return
 
 
@@ -81,8 +75,8 @@ getMyCounter:
     // @abimethod({ readonly: true })
     // public getMyCounter(): uint64 {
     proto 0 1
-    // contracts/ReferenceAccountApp/contract.algo.ts:58
-    // const address = new Address('WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M')
+    // contracts/ReferenceAccountApp/contract.algo.ts:59
+    // const addressBytes = address.bytes
     pushbytes base32(WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRA) // addr WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M
     // contracts/ReferenceAccountApp/contract.algo.ts:61
     // const app = Application(1717) // Replace with your application id
@@ -96,7 +90,7 @@ getMyCounter:
     bnz getMyCounter_after_if_else@2
     // contracts/ReferenceAccountApp/contract.algo.ts:67
     // return 0
-    intc_0 // 0
+    intc_1 // 0
     swap
     retsub
 
@@ -125,7 +119,7 @@ getMyCounterWithArg:
     bnz getMyCounterWithArg_after_if_else@2
     // contracts/ReferenceAccountApp/contract.algo.ts:85
     // return 0
-    intc_0 // 0
+    intc_1 // 0
     swap
     retsub
 

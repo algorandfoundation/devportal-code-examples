@@ -40,7 +40,7 @@ describe('LocalStorage contract', () => {
 
       expect(localString).toBe('New String')
       expect(localBool).toBe(false)
-      expect(localAccount.bytes).toEqual(account.bytes)
+      expect(localAccount.bytes.toString()).toEqual(account.bytes.toString())
     })
   })
 

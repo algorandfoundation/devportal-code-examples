@@ -23,7 +23,7 @@ import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgumen
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ReferenceAccountApp","structs":{},"methods":[{"name":"getMyCounter","args":[],"returns":{"type":"uint64","desc":"The counter value or 0 if it doesn't exist"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get the counter value from another account's local state with hardcoded values","events":[],"recommendations":{}},{"name":"getMyCounterWithArg","args":[{"type":"account","name":"account","desc":"The account to check"},{"type":"application","name":"app","desc":"The application to query"}],"returns":{"type":"uint64","desc":"The counter value or 0 if it doesn't exist"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get the counter value from another account's local state with provided parameters","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"A contract that demonstrates how to reference accounts and applications\nto access local state from external contracts","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[54,83],"errorMessage":"OnCompletion is not NoOp"},{"pc":[105],"errorMessage":"can only call when creating"},{"pc":[57,86],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxCiAgICBieXRlY2Jsb2NrIDB4MTUxZjdjNzUgIm15X2NvdW50ZXIiCiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudEFwcC9jb250cmFjdC5hbGdvLnRzOjUxCiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBSZWZlcmVuY2VBY2NvdW50QXBwIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fYmFyZV9yb3V0aW5nQDcKICAgIHB1c2hieXRlc3MgMHg4N2FkNzBiZiAweDMxMzk4ZjU3IC8vIG1ldGhvZCAiZ2V0TXlDb3VudGVyKCl1aW50NjQiLCBtZXRob2QgImdldE15Q291bnRlcldpdGhBcmcoYWNjb3VudCxhcHBsaWNhdGlvbil1aW50NjQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX2dldE15Q291bnRlcl9yb3V0ZUAzIG1haW5fZ2V0TXlDb3VudGVyV2l0aEFyZ19yb3V0ZUA0CgptYWluX2FmdGVyX2lmX2Vsc2VAMTE6CiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudEFwcC9jb250cmFjdC5hbGdvLnRzOjUxCiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBSZWZlcmVuY2VBY2NvdW50QXBwIGV4dGVuZHMgQ29udHJhY3QgewogICAgaW50Y18wIC8vIDAKICAgIHJldHVybgoKbWFpbl9nZXRNeUNvdW50ZXJXaXRoQXJnX3JvdXRlQDQ6CiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudEFwcC9jb250cmFjdC5hbGdvLnRzOjc5CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnRBcHAvY29udHJhY3QuYWxnby50czo1MQogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgUmVmZXJlbmNlQWNjb3VudEFwcCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGJ0b2kKICAgIHR4bmFzIEFjY291bnRzCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBidG9pCiAgICB0eG5hcyBBcHBsaWNhdGlvbnMKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50QXBwL2NvbnRyYWN0LmFsZ28udHM6NzkKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgY2FsbHN1YiBnZXRNeUNvdW50ZXJXaXRoQXJnCiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2dldE15Q291bnRlcl9yb3V0ZUAzOgogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnRBcHAvY29udHJhY3QuYWxnby50czo1NgogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGNhbGxzdWIgZ2V0TXlDb3VudGVyCiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2JhcmVfcm91dGluZ0A3OgogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnRBcHAvY29udHJhY3QuYWxnby50czo1MQogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgUmVmZXJlbmNlQWNjb3VudEFwcCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMTEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnRBcHAvY29udHJhY3QuYWxnby50czo6UmVmZXJlbmNlQWNjb3VudEFwcC5nZXRNeUNvdW50ZXIoKSAtPiB1aW50NjQ6CmdldE15Q291bnRlcjoKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50QXBwL2NvbnRyYWN0LmFsZ28udHM6NTYtNTcKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgLy8gcHVibGljIGdldE15Q291bnRlcigpOiB1aW50NjQgewogICAgcHJvdG8gMCAxCiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudEFwcC9jb250cmFjdC5hbGdvLnRzOjU4CiAgICAvLyBjb25zdCBhZGRyZXNzID0gbmV3IEFkZHJlc3MoJ1dNSEY0RkxKTktZMkJQRks3WVBWNUlENk9aN0xWREIyQjY2WlRYRUFNTEwyTlg0V0paUkpGVlg2Nk0nKQogICAgcHVzaGJ5dGVzIGJhc2UzMihXTUhGNEZMSk5LWTJCUEZLN1lQVjVJRDZPWjdMVkRCMkI2NlpUWEVBTUxMMk5YNFdKWlJBKSAvLyBhZGRyIFdNSEY0RkxKTktZMkJQRks3WVBWNUlENk9aN0xWREIyQjY2WlRYRUFNTEwyTlg0V0paUkpGVlg2Nk0KICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50QXBwL2NvbnRyYWN0LmFsZ28udHM6NjEKICAgIC8vIGNvbnN0IGFwcCA9IEFwcGxpY2F0aW9uKDE3MTcpIC8vIFJlcGxhY2Ugd2l0aCB5b3VyIGFwcGxpY2F0aW9uIGlkCiAgICBwdXNoaW50IDE3MTcgLy8gMTcxNwogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnRBcHAvY29udHJhY3QuYWxnby50czo2NAogICAgLy8gY29uc3QgW3ZhbHVlLCBoYXNWYWx1ZV0gPSBvcC5BcHBMb2NhbC5nZXRFeFVpbnQ2NChhY2NvdW50LCBhcHAsIEJ5dGVzKCdteV9jb3VudGVyJykpCiAgICBieXRlY18xIC8vICJteV9jb3VudGVyIgogICAgYXBwX2xvY2FsX2dldF9leAogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnRBcHAvY29udHJhY3QuYWxnby50czo2NgogICAgLy8gaWYgKCFoYXNWYWx1ZSkgewogICAgYm56IGdldE15Q291bnRlcl9hZnRlcl9pZl9lbHNlQDIKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50QXBwL2NvbnRyYWN0LmFsZ28udHM6NjcKICAgIC8vIHJldHVybiAwCiAgICBpbnRjXzAgLy8gMAogICAgc3dhcAogICAgcmV0c3ViCgpnZXRNeUNvdW50ZXJfYWZ0ZXJfaWZfZWxzZUAyOgogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnRBcHAvY29udHJhY3QuYWxnby50czo3MAogICAgLy8gcmV0dXJuIHZhbHVlCiAgICBmcmFtZV9kaWcgMAogICAgc3dhcAogICAgcmV0c3ViCgoKLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnRBcHAvY29udHJhY3QuYWxnby50czo6UmVmZXJlbmNlQWNjb3VudEFwcC5nZXRNeUNvdW50ZXJXaXRoQXJnKGFjY291bnQ6IGJ5dGVzLCBhcHA6IHVpbnQ2NCkgLT4gdWludDY0OgpnZXRNeUNvdW50ZXJXaXRoQXJnOgogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnRBcHAvY29udHJhY3QuYWxnby50czo3OS04MAogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICAvLyBwdWJsaWMgZ2V0TXlDb3VudGVyV2l0aEFyZyhhY2NvdW50OiBBY2NvdW50LCBhcHA6IEFwcGxpY2F0aW9uKTogdWludDY0IHsKICAgIHByb3RvIDIgMQogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnRBcHAvY29udHJhY3QuYWxnby50czo4MgogICAgLy8gY29uc3QgW3ZhbHVlLCBoYXNWYWx1ZV0gPSBvcC5BcHBMb2NhbC5nZXRFeFVpbnQ2NChhY2NvdW50LCBhcHAsIEJ5dGVzKCdteV9jb3VudGVyJykpCiAgICBmcmFtZV9kaWcgLTIKICAgIGZyYW1lX2RpZyAtMQogICAgYnl0ZWNfMSAvLyAibXlfY291bnRlciIKICAgIGFwcF9sb2NhbF9nZXRfZXgKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50QXBwL2NvbnRyYWN0LmFsZ28udHM6ODQKICAgIC8vIGlmICghaGFzVmFsdWUpIHsKICAgIGJueiBnZXRNeUNvdW50ZXJXaXRoQXJnX2FmdGVyX2lmX2Vsc2VAMgogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnRBcHAvY29udHJhY3QuYWxnby50czo4NQogICAgLy8gcmV0dXJuIDAKICAgIGludGNfMCAvLyAwCiAgICBzd2FwCiAgICByZXRzdWIKCmdldE15Q291bnRlcldpdGhBcmdfYWZ0ZXJfaWZfZWxzZUAyOgogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnRBcHAvY29udHJhY3QuYWxnby50czo4OAogICAgLy8gcmV0dXJuIHZhbHVlCiAgICBmcmFtZV9kaWcgMAogICAgc3dhcAogICAgcmV0c3ViCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiACAAEmAgQVH3x1Cm15X2NvdW50ZXIxG0EARYICBIetcL8EMTmPVzYaAI4CAB8AAiJDMRkURDEYRDYaARfAHDYaAhfAMogAVxYoTFCwI0MxGRREMRhEiAASFihMULAjQzEZQP/LMRgURCNDigABgCCzDl4VaWqxoLyq/h9eoH52frqMOg+9mdyAYtem35ZOYoG1DSljQAADIkyJiwBMiYoCAYv+i/8pY0AAAyJMiYsATIk=","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ReferenceAccountApp","structs":{},"methods":[{"name":"getMyCounter","args":[],"returns":{"type":"uint64","desc":"The counter value or 0 if it doesn't exist"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get the counter value from another account's local state with hardcoded values","events":[],"recommendations":{}},{"name":"getMyCounterWithArg","args":[{"type":"address","name":"account","desc":"The account to check"},{"type":"uint64","name":"app","desc":"The application to query"}],"returns":{"type":"uint64","desc":"The counter value or 0 if it doesn't exist"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get the counter value from another account's local state with provided parameters","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"A contract that demonstrates how to reference accounts and applications\nto access local state from external contracts","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[53,77],"errorMessage":"OnCompletion is not NoOp"},{"pc":[99],"errorMessage":"can only call when creating"},{"pc":[56,80],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwCiAgICBieXRlY2Jsb2NrIDB4MTUxZjdjNzUgIm15X2NvdW50ZXIiCiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudEFwcC9jb250cmFjdC5hbGdvLnRzOjUxCiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBSZWZlcmVuY2VBY2NvdW50QXBwIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fYmFyZV9yb3V0aW5nQDcKICAgIHB1c2hieXRlc3MgMHg4N2FkNzBiZiAweDYwNWM0NDE5IC8vIG1ldGhvZCAiZ2V0TXlDb3VudGVyKCl1aW50NjQiLCBtZXRob2QgImdldE15Q291bnRlcldpdGhBcmcoYWRkcmVzcyx1aW50NjQpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9nZXRNeUNvdW50ZXJfcm91dGVAMyBtYWluX2dldE15Q291bnRlcldpdGhBcmdfcm91dGVANAoKbWFpbl9hZnRlcl9pZl9lbHNlQDExOgogICAgZXJyCgptYWluX2dldE15Q291bnRlcldpdGhBcmdfcm91dGVANDoKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50QXBwL2NvbnRyYWN0LmFsZ28udHM6NzkKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudEFwcC9jb250cmFjdC5hbGdvLnRzOjUxCiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBSZWZlcmVuY2VBY2NvdW50QXBwIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgYnRvaQogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnRBcHAvY29udHJhY3QuYWxnby50czo3OQogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICBjYWxsc3ViIGdldE15Q291bnRlcldpdGhBcmcKICAgIGl0b2IKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0TXlDb3VudGVyX3JvdXRlQDM6CiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudEFwcC9jb250cmFjdC5hbGdvLnRzOjU2CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgY2FsbHN1YiBnZXRNeUNvdW50ZXIKICAgIGl0b2IKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fYmFyZV9yb3V0aW5nQDc6CiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudEFwcC9jb250cmFjdC5hbGdvLnRzOjUxCiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBSZWZlcmVuY2VBY2NvdW50QXBwIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAxMQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudEFwcC9jb250cmFjdC5hbGdvLnRzOjpSZWZlcmVuY2VBY2NvdW50QXBwLmdldE15Q291bnRlcigpIC0+IHVpbnQ2NDoKZ2V0TXlDb3VudGVyOgogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnRBcHAvY29udHJhY3QuYWxnby50czo1Ni01NwogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICAvLyBwdWJsaWMgZ2V0TXlDb3VudGVyKCk6IHVpbnQ2NCB7CiAgICBwcm90byAwIDEKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50QXBwL2NvbnRyYWN0LmFsZ28udHM6NTkKICAgIC8vIGNvbnN0IGFkZHJlc3NCeXRlcyA9IGFkZHJlc3MuYnl0ZXMKICAgIHB1c2hieXRlcyBiYXNlMzIoV01IRjRGTEpOS1kyQlBGSzdZUFY1SUQ2T1o3TFZEQjJCNjZaVFhFQU1MTDJOWDRXSlpSQSkgLy8gYWRkciBXTUhGNEZMSk5LWTJCUEZLN1lQVjVJRDZPWjdMVkRCMkI2NlpUWEVBTUxMMk5YNFdKWlJKRlZYNjZNCiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudEFwcC9jb250cmFjdC5hbGdvLnRzOjYxCiAgICAvLyBjb25zdCBhcHAgPSBBcHBsaWNhdGlvbigxNzE3KSAvLyBSZXBsYWNlIHdpdGggeW91ciBhcHBsaWNhdGlvbiBpZAogICAgcHVzaGludCAxNzE3IC8vIDE3MTcKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50QXBwL2NvbnRyYWN0LmFsZ28udHM6NjQKICAgIC8vIGNvbnN0IFt2YWx1ZSwgaGFzVmFsdWVdID0gb3AuQXBwTG9jYWwuZ2V0RXhVaW50NjQoYWNjb3VudCwgYXBwLCBCeXRlcygnbXlfY291bnRlcicpKQogICAgYnl0ZWNfMSAvLyAibXlfY291bnRlciIKICAgIGFwcF9sb2NhbF9nZXRfZXgKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50QXBwL2NvbnRyYWN0LmFsZ28udHM6NjYKICAgIC8vIGlmICghaGFzVmFsdWUpIHsKICAgIGJueiBnZXRNeUNvdW50ZXJfYWZ0ZXJfaWZfZWxzZUAyCiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudEFwcC9jb250cmFjdC5hbGdvLnRzOjY3CiAgICAvLyByZXR1cm4gMAogICAgaW50Y18xIC8vIDAKICAgIHN3YXAKICAgIHJldHN1YgoKZ2V0TXlDb3VudGVyX2FmdGVyX2lmX2Vsc2VAMjoKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50QXBwL2NvbnRyYWN0LmFsZ28udHM6NzAKICAgIC8vIHJldHVybiB2YWx1ZQogICAgZnJhbWVfZGlnIDAKICAgIHN3YXAKICAgIHJldHN1YgoKCi8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50QXBwL2NvbnRyYWN0LmFsZ28udHM6OlJlZmVyZW5jZUFjY291bnRBcHAuZ2V0TXlDb3VudGVyV2l0aEFyZyhhY2NvdW50OiBieXRlcywgYXBwOiB1aW50NjQpIC0+IHVpbnQ2NDoKZ2V0TXlDb3VudGVyV2l0aEFyZzoKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50QXBwL2NvbnRyYWN0LmFsZ28udHM6NzktODAKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgLy8gcHVibGljIGdldE15Q291bnRlcldpdGhBcmcoYWNjb3VudDogQWNjb3VudCwgYXBwOiBBcHBsaWNhdGlvbik6IHVpbnQ2NCB7CiAgICBwcm90byAyIDEKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50QXBwL2NvbnRyYWN0LmFsZ28udHM6ODIKICAgIC8vIGNvbnN0IFt2YWx1ZSwgaGFzVmFsdWVdID0gb3AuQXBwTG9jYWwuZ2V0RXhVaW50NjQoYWNjb3VudCwgYXBwLCBCeXRlcygnbXlfY291bnRlcicpKQogICAgZnJhbWVfZGlnIC0yCiAgICBmcmFtZV9kaWcgLTEKICAgIGJ5dGVjXzEgLy8gIm15X2NvdW50ZXIiCiAgICBhcHBfbG9jYWxfZ2V0X2V4CiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudEFwcC9jb250cmFjdC5hbGdvLnRzOjg0CiAgICAvLyBpZiAoIWhhc1ZhbHVlKSB7CiAgICBibnogZ2V0TXlDb3VudGVyV2l0aEFyZ19hZnRlcl9pZl9lbHNlQDIKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50QXBwL2NvbnRyYWN0LmFsZ28udHM6ODUKICAgIC8vIHJldHVybiAwCiAgICBpbnRjXzEgLy8gMAogICAgc3dhcAogICAgcmV0c3ViCgpnZXRNeUNvdW50ZXJXaXRoQXJnX2FmdGVyX2lmX2Vsc2VAMjoKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50QXBwL2NvbnRyYWN0LmFsZ28udHM6ODgKICAgIC8vIHJldHVybiB2YWx1ZQogICAgZnJhbWVfZGlnIDAKICAgIHN3YXAKICAgIHJldHN1Ygo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiACAQAmAgQVH3x1Cm15X2NvdW50ZXIxG0EAP4ICBIetcL8EYFxEGTYaAI4CABkAAQAxGRREMRhENhoBNhoCF4gAVxYoTFCwIkMxGRREMRhEiAASFihMULAiQzEZQP/RMRgURCJDigABgCCzDl4VaWqxoLyq/h9eoH52frqMOg+9mdyAYtem35ZOYoG1DSljQAADI0yJiwBMiYoCAYv+i/8pY0AAAyNMiYsATIk=","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -71,15 +71,15 @@ export type ReferenceAccountAppArgs = {
    */
   obj: {
     'getMyCounter()uint64': Record<string, never>
-    'getMyCounterWithArg(account,application)uint64': {
+    'getMyCounterWithArg(address,uint64)uint64': {
       /**
        * The account to check
        */
-      account: Uint8Array | string
+      account: string
       /**
        * The application to query
        */
-      app: bigint
+      app: bigint | number
     }
   }
   /**
@@ -87,7 +87,7 @@ export type ReferenceAccountAppArgs = {
    */
   tuple: {
     'getMyCounter()uint64': []
-    'getMyCounterWithArg(account,application)uint64': [account: Uint8Array | string, app: bigint]
+    'getMyCounterWithArg(address,uint64)uint64': [account: string, app: bigint | number]
   }
 }
 
@@ -96,7 +96,7 @@ export type ReferenceAccountAppArgs = {
  */
 export type ReferenceAccountAppReturns = {
   'getMyCounter()uint64': bigint
-  'getMyCounterWithArg(account,application)uint64': bigint
+  'getMyCounterWithArg(address,uint64)uint64': bigint
 }
 
 /**
@@ -115,13 +115,13 @@ export type ReferenceAccountAppTypes = {
        */
       returns: ReferenceAccountAppReturns['getMyCounter()uint64']
     }>
-    & Record<'getMyCounterWithArg(account,application)uint64' | 'getMyCounterWithArg', {
-      argsObj: ReferenceAccountAppArgs['obj']['getMyCounterWithArg(account,application)uint64']
-      argsTuple: ReferenceAccountAppArgs['tuple']['getMyCounterWithArg(account,application)uint64']
+    & Record<'getMyCounterWithArg(address,uint64)uint64' | 'getMyCounterWithArg', {
+      argsObj: ReferenceAccountAppArgs['obj']['getMyCounterWithArg(address,uint64)uint64']
+      argsTuple: ReferenceAccountAppArgs['tuple']['getMyCounterWithArg(address,uint64)uint64']
       /**
        * The counter value or 0 if it doesn't exist
        */
-      returns: ReferenceAccountAppReturns['getMyCounterWithArg(account,application)uint64']
+      returns: ReferenceAccountAppReturns['getMyCounterWithArg(address,uint64)uint64']
     }>
 }
 
@@ -189,17 +189,17 @@ export abstract class ReferenceAccountAppParamsFactory {
     }
   }
   /**
-   * Constructs a no op call for the getMyCounterWithArg(account,application)uint64 ABI method
+   * Constructs a no op call for the getMyCounterWithArg(address,uint64)uint64 ABI method
    *
    * Get the counter value from another account's local state with provided parameters
    *
    * @param params Parameters for the call
    * @returns An `AppClientMethodCallParams` object for the call
    */
-  static getMyCounterWithArg(params: CallParams<ReferenceAccountAppArgs['obj']['getMyCounterWithArg(account,application)uint64'] | ReferenceAccountAppArgs['tuple']['getMyCounterWithArg(account,application)uint64']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
+  static getMyCounterWithArg(params: CallParams<ReferenceAccountAppArgs['obj']['getMyCounterWithArg(address,uint64)uint64'] | ReferenceAccountAppArgs['tuple']['getMyCounterWithArg(address,uint64)uint64']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
     return {
       ...params,
-      method: 'getMyCounterWithArg(account,application)uint64' as const,
+      method: 'getMyCounterWithArg(address,uint64)uint64' as const,
       args: Array.isArray(params.args) ? params.args : [params.args.account, params.args.app],
     }
   }
@@ -373,7 +373,7 @@ export class ReferenceAccountAppClient {
       appSpec: APP_SPEC,
     })
   }
-  
+
   /**
    * Checks for decode errors on the given return value and maps the return value to the return type for the given method
    * @returns The typed return value or undefined if there was no value
@@ -381,7 +381,7 @@ export class ReferenceAccountAppClient {
   decodeReturnValue<TSignature extends ReferenceAccountAppNonVoidMethodSignatures>(method: TSignature, returnValue: ABIReturn | undefined) {
     return returnValue !== undefined ? getArc56ReturnValue<MethodReturn<TSignature>>(returnValue, this.appClient.getABIMethod(method), APP_SPEC.structs) : undefined
   }
-  
+
   /**
    * Returns a new `ReferenceAccountAppClient` client, resolving the app by creator address and name
    * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
@@ -458,7 +458,7 @@ export class ReferenceAccountAppClient {
     },
 
     /**
-     * Makes a call to the ReferenceAccountApp smart contract using the `getMyCounterWithArg(account,application)uint64` ABI method.
+     * Makes a call to the ReferenceAccountApp smart contract using the `getMyCounterWithArg(address,uint64)uint64` ABI method.
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
@@ -467,7 +467,7 @@ export class ReferenceAccountAppClient {
      * @param params The params for the smart contract call
      * @returns The call params: The counter value or 0 if it doesn't exist
      */
-    getMyCounterWithArg: (params: CallParams<ReferenceAccountAppArgs['obj']['getMyCounterWithArg(account,application)uint64'] | ReferenceAccountAppArgs['tuple']['getMyCounterWithArg(account,application)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+    getMyCounterWithArg: (params: CallParams<ReferenceAccountAppArgs['obj']['getMyCounterWithArg(address,uint64)uint64'] | ReferenceAccountAppArgs['tuple']['getMyCounterWithArg(address,uint64)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       return this.appClient.params.call(ReferenceAccountAppParamsFactory.getMyCounterWithArg(params))
     },
 
@@ -502,7 +502,7 @@ export class ReferenceAccountAppClient {
     },
 
     /**
-     * Makes a call to the ReferenceAccountApp smart contract using the `getMyCounterWithArg(account,application)uint64` ABI method.
+     * Makes a call to the ReferenceAccountApp smart contract using the `getMyCounterWithArg(address,uint64)uint64` ABI method.
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
@@ -511,7 +511,7 @@ export class ReferenceAccountAppClient {
      * @param params The params for the smart contract call
      * @returns The call transaction: The counter value or 0 if it doesn't exist
      */
-    getMyCounterWithArg: (params: CallParams<ReferenceAccountAppArgs['obj']['getMyCounterWithArg(account,application)uint64'] | ReferenceAccountAppArgs['tuple']['getMyCounterWithArg(account,application)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+    getMyCounterWithArg: (params: CallParams<ReferenceAccountAppArgs['obj']['getMyCounterWithArg(address,uint64)uint64'] | ReferenceAccountAppArgs['tuple']['getMyCounterWithArg(address,uint64)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       return this.appClient.createTransaction.call(ReferenceAccountAppParamsFactory.getMyCounterWithArg(params))
     },
 
@@ -547,7 +547,7 @@ export class ReferenceAccountAppClient {
     },
 
     /**
-     * Makes a call to the ReferenceAccountApp smart contract using the `getMyCounterWithArg(account,application)uint64` ABI method.
+     * Makes a call to the ReferenceAccountApp smart contract using the `getMyCounterWithArg(address,uint64)uint64` ABI method.
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
@@ -556,9 +556,9 @@ export class ReferenceAccountAppClient {
      * @param params The params for the smart contract call
      * @returns The call result: The counter value or 0 if it doesn't exist
      */
-    getMyCounterWithArg: async (params: CallParams<ReferenceAccountAppArgs['obj']['getMyCounterWithArg(account,application)uint64'] | ReferenceAccountAppArgs['tuple']['getMyCounterWithArg(account,application)uint64']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+    getMyCounterWithArg: async (params: CallParams<ReferenceAccountAppArgs['obj']['getMyCounterWithArg(address,uint64)uint64'] | ReferenceAccountAppArgs['tuple']['getMyCounterWithArg(address,uint64)uint64']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       const result = await this.appClient.send.call(ReferenceAccountAppParamsFactory.getMyCounterWithArg(params))
-      return {...result, return: result.return as unknown as (undefined | ReferenceAccountAppReturns['getMyCounterWithArg(account,application)uint64'])}
+      return {...result, return: result.return as unknown as (undefined | ReferenceAccountAppReturns['getMyCounterWithArg(address,uint64)uint64'])}
     },
 
   }
@@ -589,7 +589,7 @@ export class ReferenceAccountAppClient {
   }
 
   /**
-   * Makes a readonly (simulated) call to the ReferenceAccountApp smart contract using the `getMyCounterWithArg(account,application)uint64` ABI method.
+   * Makes a readonly (simulated) call to the ReferenceAccountApp smart contract using the `getMyCounterWithArg(address,uint64)uint64` ABI method.
    * 
    * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
    *
@@ -598,9 +598,9 @@ export class ReferenceAccountAppClient {
    * @param params The params for the smart contract call
    * @returns The call result: The counter value or 0 if it doesn't exist
    */
-  async getMyCounterWithArg(params: CallParams<ReferenceAccountAppArgs['obj']['getMyCounterWithArg(account,application)uint64'] | ReferenceAccountAppArgs['tuple']['getMyCounterWithArg(account,application)uint64']>) {
+  async getMyCounterWithArg(params: CallParams<ReferenceAccountAppArgs['obj']['getMyCounterWithArg(address,uint64)uint64'] | ReferenceAccountAppArgs['tuple']['getMyCounterWithArg(address,uint64)uint64']>) {
     const result = await this.appClient.send.call(ReferenceAccountAppParamsFactory.getMyCounterWithArg(params))
-    return result.return as unknown as ReferenceAccountAppReturns['getMyCounterWithArg(account,application)uint64']
+    return result.return as unknown as ReferenceAccountAppReturns['getMyCounterWithArg(address,uint64)uint64']
   }
 
   /**
@@ -624,11 +624,11 @@ export class ReferenceAccountAppClient {
         return this
       },
       /**
-       * Add a getMyCounterWithArg(account,application)uint64 method call against the ReferenceAccountApp contract
+       * Add a getMyCounterWithArg(address,uint64)uint64 method call against the ReferenceAccountApp contract
        */
-      getMyCounterWithArg(params: CallParams<ReferenceAccountAppArgs['obj']['getMyCounterWithArg(account,application)uint64'] | ReferenceAccountAppArgs['tuple']['getMyCounterWithArg(account,application)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
+      getMyCounterWithArg(params: CallParams<ReferenceAccountAppArgs['obj']['getMyCounterWithArg(address,uint64)uint64'] | ReferenceAccountAppArgs['tuple']['getMyCounterWithArg(address,uint64)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
         promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.getMyCounterWithArg(params)))
-        resultMappers.push((v) => client.decodeReturnValue('getMyCounterWithArg(account,application)uint64', v))
+        resultMappers.push((v) => client.decodeReturnValue('getMyCounterWithArg(address,uint64)uint64', v))
         return this
       },
       /**
@@ -678,7 +678,7 @@ export type ReferenceAccountAppComposer<TReturns extends [...any[]] = []> = {
   getMyCounter(params?: CallParams<ReferenceAccountAppArgs['obj']['getMyCounter()uint64'] | ReferenceAccountAppArgs['tuple']['getMyCounter()uint64']>): ReferenceAccountAppComposer<[...TReturns, ReferenceAccountAppReturns['getMyCounter()uint64'] | undefined]>
 
   /**
-   * Calls the getMyCounterWithArg(account,application)uint64 ABI method.
+   * Calls the getMyCounterWithArg(address,uint64)uint64 ABI method.
    *
    * Get the counter value from another account's local state with provided parameters
    *
@@ -686,7 +686,7 @@ export type ReferenceAccountAppComposer<TReturns extends [...any[]] = []> = {
    * @param params Any additional parameters for the call
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
-  getMyCounterWithArg(params?: CallParams<ReferenceAccountAppArgs['obj']['getMyCounterWithArg(account,application)uint64'] | ReferenceAccountAppArgs['tuple']['getMyCounterWithArg(account,application)uint64']>): ReferenceAccountAppComposer<[...TReturns, ReferenceAccountAppReturns['getMyCounterWithArg(account,application)uint64'] | undefined]>
+  getMyCounterWithArg(params?: CallParams<ReferenceAccountAppArgs['obj']['getMyCounterWithArg(address,uint64)uint64'] | ReferenceAccountAppArgs['tuple']['getMyCounterWithArg(address,uint64)uint64']>): ReferenceAccountAppComposer<[...TReturns, ReferenceAccountAppReturns['getMyCounterWithArg(address,uint64)uint64'] | undefined]>
 
   /**
    * Makes a clear_state call to an existing instance of the ReferenceAccountApp smart contract.

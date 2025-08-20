@@ -109,7 +109,7 @@ describe('BoxCounter contract', () => {
     // Get the counter for a specific account
     const accountCounterResult = await client.getBoxCounterForAccount({
       args: {
-        account: testAccount.publicKey,
+        account: testAccount.addr.toString(),
       },
     })
 
@@ -183,7 +183,7 @@ describe('BoxCounter contract', () => {
     // Try to get counter for that account
     const result = await client.getBoxCounterForAccount({
       args: {
-        account: randomAccount.addr.publicKey,
+        account: randomAccount.addr.toString(),
       },
     })
 

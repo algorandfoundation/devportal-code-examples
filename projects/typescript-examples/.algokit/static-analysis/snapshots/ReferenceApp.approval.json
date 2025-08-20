@@ -4,7 +4,7 @@
   "result": [
     {
       "type": "ExecutionPaths",
-      "count": 4,
+      "count": 2,
       "description": "\nCheck: \"unprotected-deletable\", Impact: High, Confidence: High\nDescription: Unprotected Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-deletable-application\n",
       "check": "unprotected-deletable",
       "impact": "High",
@@ -12,32 +12,6 @@
       "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1 6",
-              "7: bytecblock 0x151f7c75 0x4a325901",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
-            ],
-            [
-              "12: pushbytess 0x9407ae96 0x1118334b",
-              "13: txna ApplicationArgs 0",
-              "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_0",
-              "20: return"
-            ]
-          ]
-        },
-        {
           "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
           "blocks": [
             [
@@ -46,56 +20,56 @@
             ],
             [
               "5: main:",
-              "6: intcblock 0 1 6",
+              "6: intcblock 1 6 0",
               "7: bytecblock 0x151f7c75 0x4a325901",
               "10: txn NumAppArgs",
               "11: bz main_bare_routing@7"
             ],
             [
-              "12: pushbytess 0x9407ae96 0x1118334b",
+              "12: pushbytess 0x9407ae96 0xec904a91",
               "13: txna ApplicationArgs 0",
               "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
             ],
             [
-              "46: main_incrementViaInner_route@3:",
-              "49: txn OnCompletion",
-              "50: !",
-              "51: assert",
-              "52: txn ApplicationID",
-              "53: assert",
-              "54: callsub incrementViaInner"
+              "42: main_incrementViaInner_route@3:",
+              "45: txn OnCompletion",
+              "46: !",
+              "47: assert",
+              "48: txn ApplicationID",
+              "49: assert",
+              "50: callsub incrementViaInner"
             ],
             [
-              "76: incrementViaInner:",
-              "86: itxn_begin",
-              "89: bytec_1",
-              "90: itxn_field ApplicationArgs",
-              "93: pushint 1717",
-              "94: itxn_field ApplicationID",
+              "72: incrementViaInner:",
+              "82: itxn_begin",
+              "85: bytec_1",
+              "86: itxn_field ApplicationArgs",
+              "89: pushint 1717",
+              "90: itxn_field ApplicationID",
+              "99: intc_1",
+              "100: itxn_field TypeEnum",
               "103: intc_2",
-              "104: itxn_field TypeEnum",
-              "107: intc_0",
-              "108: itxn_field Fee",
-              "118: itxn_submit",
-              "119: itxn LastLog",
-              "122: dup",
-              "123: extract 4 0",
-              "124: swap",
-              "125: extract 0 4",
-              "126: bytec_0",
-              "127: ==",
-              "128: assert",
-              "129: btoi",
-              "130: retsub"
+              "104: itxn_field Fee",
+              "114: itxn_submit",
+              "115: itxn LastLog",
+              "118: dup",
+              "119: extract 4 0",
+              "120: swap",
+              "121: extract 0 4",
+              "122: bytec_0",
+              "123: ==",
+              "124: assert",
+              "125: btoi",
+              "126: retsub"
             ],
             [
-              "55: itob",
-              "56: bytec_0",
-              "57: swap",
-              "58: concat",
-              "59: log",
-              "60: intc_1",
-              "61: return"
+              "51: itob",
+              "52: bytec_0",
+              "53: swap",
+              "54: concat",
+              "55: log",
+              "56: intc_0",
+              "57: return"
             ]
           ]
         },
@@ -108,86 +82,59 @@
             ],
             [
               "5: main:",
-              "6: intcblock 0 1 6",
+              "6: intcblock 1 6 0",
               "7: bytecblock 0x151f7c75 0x4a325901",
               "10: txn NumAppArgs",
               "11: bz main_bare_routing@7"
             ],
             [
-              "12: pushbytess 0x9407ae96 0x1118334b",
+              "12: pushbytess 0x9407ae96 0xec904a91",
               "13: txna ApplicationArgs 0",
               "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
             ],
             [
-              "22: main_incrementViaInnerWithArg_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "34: txnas Applications",
-              "37: callsub incrementViaInnerWithArg"
+              "19: main_incrementViaInnerWithArg_route@4:",
+              "22: txn OnCompletion",
+              "23: !",
+              "24: assert",
+              "25: txn ApplicationID",
+              "26: assert",
+              "29: txna ApplicationArgs 1",
+              "30: btoi",
+              "33: callsub incrementViaInnerWithArg"
             ],
             [
-              "134: incrementViaInnerWithArg:",
-              "138: proto 1 1",
-              "148: itxn_begin",
-              "151: bytec_1",
-              "152: itxn_field ApplicationArgs",
-              "153: frame_dig -1",
-              "154: itxn_field ApplicationID",
+              "130: incrementViaInnerWithArg:",
+              "134: proto 1 1",
+              "144: itxn_begin",
+              "147: bytec_1",
+              "148: itxn_field ApplicationArgs",
+              "149: frame_dig -1",
+              "150: itxn_field ApplicationID",
+              "159: intc_1",
+              "160: itxn_field TypeEnum",
               "163: intc_2",
-              "164: itxn_field TypeEnum",
-              "167: intc_0",
-              "168: itxn_field Fee",
-              "178: itxn_submit",
-              "179: itxn LastLog",
-              "182: dup",
-              "183: extract 4 0",
-              "184: swap",
-              "185: extract 0 4",
-              "186: bytec_0",
-              "187: ==",
-              "188: assert",
-              "189: btoi",
-              "190: retsub"
+              "164: itxn_field Fee",
+              "174: itxn_submit",
+              "175: itxn LastLog",
+              "178: dup",
+              "179: extract 4 0",
+              "180: swap",
+              "181: extract 0 4",
+              "182: bytec_0",
+              "183: ==",
+              "184: assert",
+              "185: btoi",
+              "186: retsub"
             ],
             [
-              "38: itob",
-              "39: bytec_0",
-              "40: swap",
-              "41: concat",
-              "42: log",
-              "43: intc_1",
-              "44: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 8 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1 6",
-              "7: bytecblock 0x151f7c75 0x4a325901",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
-            ],
-            [
-              "63: main_bare_routing@7:",
-              "66: txn OnCompletion",
-              "67: bnz main_after_if_else@11"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_0",
-              "20: return"
+              "34: itob",
+              "35: bytec_0",
+              "36: swap",
+              "37: concat",
+              "38: log",
+              "39: intc_0",
+              "40: return"
             ]
           ]
         }
@@ -195,7 +142,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 4,
+      "count": 2,
       "description": "\nCheck: \"unprotected-updatable\", Impact: High, Confidence: High\nDescription: Unprotected Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-updatable-application\n",
       "check": "unprotected-updatable",
       "impact": "High",
@@ -203,32 +150,6 @@
       "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1 6",
-              "7: bytecblock 0x151f7c75 0x4a325901",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
-            ],
-            [
-              "12: pushbytess 0x9407ae96 0x1118334b",
-              "13: txna ApplicationArgs 0",
-              "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_0",
-              "20: return"
-            ]
-          ]
-        },
-        {
           "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
           "blocks": [
             [
@@ -237,56 +158,56 @@
             ],
             [
               "5: main:",
-              "6: intcblock 0 1 6",
+              "6: intcblock 1 6 0",
               "7: bytecblock 0x151f7c75 0x4a325901",
               "10: txn NumAppArgs",
               "11: bz main_bare_routing@7"
             ],
             [
-              "12: pushbytess 0x9407ae96 0x1118334b",
+              "12: pushbytess 0x9407ae96 0xec904a91",
               "13: txna ApplicationArgs 0",
               "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
             ],
             [
-              "46: main_incrementViaInner_route@3:",
-              "49: txn OnCompletion",
-              "50: !",
-              "51: assert",
-              "52: txn ApplicationID",
-              "53: assert",
-              "54: callsub incrementViaInner"
+              "42: main_incrementViaInner_route@3:",
+              "45: txn OnCompletion",
+              "46: !",
+              "47: assert",
+              "48: txn ApplicationID",
+              "49: assert",
+              "50: callsub incrementViaInner"
             ],
             [
-              "76: incrementViaInner:",
-              "86: itxn_begin",
-              "89: bytec_1",
-              "90: itxn_field ApplicationArgs",
-              "93: pushint 1717",
-              "94: itxn_field ApplicationID",
+              "72: incrementViaInner:",
+              "82: itxn_begin",
+              "85: bytec_1",
+              "86: itxn_field ApplicationArgs",
+              "89: pushint 1717",
+              "90: itxn_field ApplicationID",
+              "99: intc_1",
+              "100: itxn_field TypeEnum",
               "103: intc_2",
-              "104: itxn_field TypeEnum",
-              "107: intc_0",
-              "108: itxn_field Fee",
-              "118: itxn_submit",
-              "119: itxn LastLog",
-              "122: dup",
-              "123: extract 4 0",
-              "124: swap",
-              "125: extract 0 4",
-              "126: bytec_0",
-              "127: ==",
-              "128: assert",
-              "129: btoi",
-              "130: retsub"
+              "104: itxn_field Fee",
+              "114: itxn_submit",
+              "115: itxn LastLog",
+              "118: dup",
+              "119: extract 4 0",
+              "120: swap",
+              "121: extract 0 4",
+              "122: bytec_0",
+              "123: ==",
+              "124: assert",
+              "125: btoi",
+              "126: retsub"
             ],
             [
-              "55: itob",
-              "56: bytec_0",
-              "57: swap",
-              "58: concat",
-              "59: log",
-              "60: intc_1",
-              "61: return"
+              "51: itob",
+              "52: bytec_0",
+              "53: swap",
+              "54: concat",
+              "55: log",
+              "56: intc_0",
+              "57: return"
             ]
           ]
         },
@@ -299,86 +220,59 @@
             ],
             [
               "5: main:",
-              "6: intcblock 0 1 6",
+              "6: intcblock 1 6 0",
               "7: bytecblock 0x151f7c75 0x4a325901",
               "10: txn NumAppArgs",
               "11: bz main_bare_routing@7"
             ],
             [
-              "12: pushbytess 0x9407ae96 0x1118334b",
+              "12: pushbytess 0x9407ae96 0xec904a91",
               "13: txna ApplicationArgs 0",
               "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
             ],
             [
-              "22: main_incrementViaInnerWithArg_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "34: txnas Applications",
-              "37: callsub incrementViaInnerWithArg"
+              "19: main_incrementViaInnerWithArg_route@4:",
+              "22: txn OnCompletion",
+              "23: !",
+              "24: assert",
+              "25: txn ApplicationID",
+              "26: assert",
+              "29: txna ApplicationArgs 1",
+              "30: btoi",
+              "33: callsub incrementViaInnerWithArg"
             ],
             [
-              "134: incrementViaInnerWithArg:",
-              "138: proto 1 1",
-              "148: itxn_begin",
-              "151: bytec_1",
-              "152: itxn_field ApplicationArgs",
-              "153: frame_dig -1",
-              "154: itxn_field ApplicationID",
+              "130: incrementViaInnerWithArg:",
+              "134: proto 1 1",
+              "144: itxn_begin",
+              "147: bytec_1",
+              "148: itxn_field ApplicationArgs",
+              "149: frame_dig -1",
+              "150: itxn_field ApplicationID",
+              "159: intc_1",
+              "160: itxn_field TypeEnum",
               "163: intc_2",
-              "164: itxn_field TypeEnum",
-              "167: intc_0",
-              "168: itxn_field Fee",
-              "178: itxn_submit",
-              "179: itxn LastLog",
-              "182: dup",
-              "183: extract 4 0",
-              "184: swap",
-              "185: extract 0 4",
-              "186: bytec_0",
-              "187: ==",
-              "188: assert",
-              "189: btoi",
-              "190: retsub"
+              "164: itxn_field Fee",
+              "174: itxn_submit",
+              "175: itxn LastLog",
+              "178: dup",
+              "179: extract 4 0",
+              "180: swap",
+              "181: extract 0 4",
+              "182: bytec_0",
+              "183: ==",
+              "184: assert",
+              "185: btoi",
+              "186: retsub"
             ],
             [
-              "38: itob",
-              "39: bytec_0",
-              "40: swap",
-              "41: concat",
-              "42: log",
-              "43: intc_1",
-              "44: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 8 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1 6",
-              "7: bytecblock 0x151f7c75 0x4a325901",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
-            ],
-            [
-              "63: main_bare_routing@7:",
-              "66: txn OnCompletion",
-              "67: bnz main_after_if_else@11"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_0",
-              "20: return"
+              "34: itob",
+              "35: bytec_0",
+              "36: swap",
+              "37: concat",
+              "38: log",
+              "39: intc_0",
+              "40: return"
             ]
           ]
         }
@@ -386,133 +280,27 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 2,
+      "count": 0,
       "description": "\nCheck: \"can-close-account\", Impact: High, Confidence: High\nDescription: Missing CloseRemainderTo field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-closeremainderto-field-validation\n",
       "check": "can-close-account",
       "impact": "High",
       "confidence": "High",
       "help": "Validate `CloseRemainderTo` field in the LogicSig.",
-      "paths": [
-        {
-          "short": "0 -> 1 -> 2 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1 6",
-              "7: bytecblock 0x151f7c75 0x4a325901",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
-            ],
-            [
-              "12: pushbytess 0x9407ae96 0x1118334b",
-              "13: txna ApplicationArgs 0",
-              "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_0",
-              "20: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 8 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1 6",
-              "7: bytecblock 0x151f7c75 0x4a325901",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
-            ],
-            [
-              "63: main_bare_routing@7:",
-              "66: txn OnCompletion",
-              "67: bnz main_after_if_else@11"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_0",
-              "20: return"
-            ]
-          ]
-        }
-      ]
+      "paths": []
     },
     {
       "type": "ExecutionPaths",
-      "count": 2,
+      "count": 0,
       "description": "\nCheck: \"can-close-asset\", Impact: High, Confidence: High\nDescription: Missing AssetCloseTo Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-assetcloseto-field-validation\n",
       "check": "can-close-asset",
       "impact": "High",
       "confidence": "High",
       "help": "Validate `AssetCloseTo` field in the LogicSig.",
-      "paths": [
-        {
-          "short": "0 -> 1 -> 2 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1 6",
-              "7: bytecblock 0x151f7c75 0x4a325901",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
-            ],
-            [
-              "12: pushbytess 0x9407ae96 0x1118334b",
-              "13: txna ApplicationArgs 0",
-              "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_0",
-              "20: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 8 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1 6",
-              "7: bytecblock 0x151f7c75 0x4a325901",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
-            ],
-            [
-              "63: main_bare_routing@7:",
-              "66: txn OnCompletion",
-              "67: bnz main_after_if_else@11"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_0",
-              "20: return"
-            ]
-          ]
-        }
-      ]
+      "paths": []
     },
     {
       "type": "ExecutionPaths",
-      "count": 4,
+      "count": 2,
       "description": "\nCheck: \"is-deletable\", Impact: High, Confidence: High\nDescription: Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#deletable-application\n",
       "check": "is-deletable",
       "impact": "High",
@@ -520,32 +308,6 @@
       "help": "Do not approve `DeleteApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1 6",
-              "7: bytecblock 0x151f7c75 0x4a325901",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
-            ],
-            [
-              "12: pushbytess 0x9407ae96 0x1118334b",
-              "13: txna ApplicationArgs 0",
-              "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_0",
-              "20: return"
-            ]
-          ]
-        },
-        {
           "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
           "blocks": [
             [
@@ -554,56 +316,56 @@
             ],
             [
               "5: main:",
-              "6: intcblock 0 1 6",
+              "6: intcblock 1 6 0",
               "7: bytecblock 0x151f7c75 0x4a325901",
               "10: txn NumAppArgs",
               "11: bz main_bare_routing@7"
             ],
             [
-              "12: pushbytess 0x9407ae96 0x1118334b",
+              "12: pushbytess 0x9407ae96 0xec904a91",
               "13: txna ApplicationArgs 0",
               "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
             ],
             [
-              "46: main_incrementViaInner_route@3:",
-              "49: txn OnCompletion",
-              "50: !",
-              "51: assert",
-              "52: txn ApplicationID",
-              "53: assert",
-              "54: callsub incrementViaInner"
+              "42: main_incrementViaInner_route@3:",
+              "45: txn OnCompletion",
+              "46: !",
+              "47: assert",
+              "48: txn ApplicationID",
+              "49: assert",
+              "50: callsub incrementViaInner"
             ],
             [
-              "76: incrementViaInner:",
-              "86: itxn_begin",
-              "89: bytec_1",
-              "90: itxn_field ApplicationArgs",
-              "93: pushint 1717",
-              "94: itxn_field ApplicationID",
+              "72: incrementViaInner:",
+              "82: itxn_begin",
+              "85: bytec_1",
+              "86: itxn_field ApplicationArgs",
+              "89: pushint 1717",
+              "90: itxn_field ApplicationID",
+              "99: intc_1",
+              "100: itxn_field TypeEnum",
               "103: intc_2",
-              "104: itxn_field TypeEnum",
-              "107: intc_0",
-              "108: itxn_field Fee",
-              "118: itxn_submit",
-              "119: itxn LastLog",
-              "122: dup",
-              "123: extract 4 0",
-              "124: swap",
-              "125: extract 0 4",
-              "126: bytec_0",
-              "127: ==",
-              "128: assert",
-              "129: btoi",
-              "130: retsub"
+              "104: itxn_field Fee",
+              "114: itxn_submit",
+              "115: itxn LastLog",
+              "118: dup",
+              "119: extract 4 0",
+              "120: swap",
+              "121: extract 0 4",
+              "122: bytec_0",
+              "123: ==",
+              "124: assert",
+              "125: btoi",
+              "126: retsub"
             ],
             [
-              "55: itob",
-              "56: bytec_0",
-              "57: swap",
-              "58: concat",
-              "59: log",
-              "60: intc_1",
-              "61: return"
+              "51: itob",
+              "52: bytec_0",
+              "53: swap",
+              "54: concat",
+              "55: log",
+              "56: intc_0",
+              "57: return"
             ]
           ]
         },
@@ -616,86 +378,59 @@
             ],
             [
               "5: main:",
-              "6: intcblock 0 1 6",
+              "6: intcblock 1 6 0",
               "7: bytecblock 0x151f7c75 0x4a325901",
               "10: txn NumAppArgs",
               "11: bz main_bare_routing@7"
             ],
             [
-              "12: pushbytess 0x9407ae96 0x1118334b",
+              "12: pushbytess 0x9407ae96 0xec904a91",
               "13: txna ApplicationArgs 0",
               "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
             ],
             [
-              "22: main_incrementViaInnerWithArg_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "34: txnas Applications",
-              "37: callsub incrementViaInnerWithArg"
+              "19: main_incrementViaInnerWithArg_route@4:",
+              "22: txn OnCompletion",
+              "23: !",
+              "24: assert",
+              "25: txn ApplicationID",
+              "26: assert",
+              "29: txna ApplicationArgs 1",
+              "30: btoi",
+              "33: callsub incrementViaInnerWithArg"
             ],
             [
-              "134: incrementViaInnerWithArg:",
-              "138: proto 1 1",
-              "148: itxn_begin",
-              "151: bytec_1",
-              "152: itxn_field ApplicationArgs",
-              "153: frame_dig -1",
-              "154: itxn_field ApplicationID",
+              "130: incrementViaInnerWithArg:",
+              "134: proto 1 1",
+              "144: itxn_begin",
+              "147: bytec_1",
+              "148: itxn_field ApplicationArgs",
+              "149: frame_dig -1",
+              "150: itxn_field ApplicationID",
+              "159: intc_1",
+              "160: itxn_field TypeEnum",
               "163: intc_2",
-              "164: itxn_field TypeEnum",
-              "167: intc_0",
-              "168: itxn_field Fee",
-              "178: itxn_submit",
-              "179: itxn LastLog",
-              "182: dup",
-              "183: extract 4 0",
-              "184: swap",
-              "185: extract 0 4",
-              "186: bytec_0",
-              "187: ==",
-              "188: assert",
-              "189: btoi",
-              "190: retsub"
+              "164: itxn_field Fee",
+              "174: itxn_submit",
+              "175: itxn LastLog",
+              "178: dup",
+              "179: extract 4 0",
+              "180: swap",
+              "181: extract 0 4",
+              "182: bytec_0",
+              "183: ==",
+              "184: assert",
+              "185: btoi",
+              "186: retsub"
             ],
             [
-              "38: itob",
-              "39: bytec_0",
-              "40: swap",
-              "41: concat",
-              "42: log",
-              "43: intc_1",
-              "44: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 8 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1 6",
-              "7: bytecblock 0x151f7c75 0x4a325901",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
-            ],
-            [
-              "63: main_bare_routing@7:",
-              "66: txn OnCompletion",
-              "67: bnz main_after_if_else@11"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_0",
-              "20: return"
+              "34: itob",
+              "35: bytec_0",
+              "36: swap",
+              "37: concat",
+              "38: log",
+              "39: intc_0",
+              "40: return"
             ]
           ]
         }
@@ -703,7 +438,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 4,
+      "count": 2,
       "description": "\nCheck: \"is-updatable\", Impact: High, Confidence: High\nDescription: Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#upgradable-application\n",
       "check": "is-updatable",
       "impact": "High",
@@ -711,32 +446,6 @@
       "help": "Do not approve `UpdateApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1 6",
-              "7: bytecblock 0x151f7c75 0x4a325901",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
-            ],
-            [
-              "12: pushbytess 0x9407ae96 0x1118334b",
-              "13: txna ApplicationArgs 0",
-              "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_0",
-              "20: return"
-            ]
-          ]
-        },
-        {
           "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
           "blocks": [
             [
@@ -745,56 +454,56 @@
             ],
             [
               "5: main:",
-              "6: intcblock 0 1 6",
+              "6: intcblock 1 6 0",
               "7: bytecblock 0x151f7c75 0x4a325901",
               "10: txn NumAppArgs",
               "11: bz main_bare_routing@7"
             ],
             [
-              "12: pushbytess 0x9407ae96 0x1118334b",
+              "12: pushbytess 0x9407ae96 0xec904a91",
               "13: txna ApplicationArgs 0",
               "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
             ],
             [
-              "46: main_incrementViaInner_route@3:",
-              "49: txn OnCompletion",
-              "50: !",
-              "51: assert",
-              "52: txn ApplicationID",
-              "53: assert",
-              "54: callsub incrementViaInner"
+              "42: main_incrementViaInner_route@3:",
+              "45: txn OnCompletion",
+              "46: !",
+              "47: assert",
+              "48: txn ApplicationID",
+              "49: assert",
+              "50: callsub incrementViaInner"
             ],
             [
-              "76: incrementViaInner:",
-              "86: itxn_begin",
-              "89: bytec_1",
-              "90: itxn_field ApplicationArgs",
-              "93: pushint 1717",
-              "94: itxn_field ApplicationID",
+              "72: incrementViaInner:",
+              "82: itxn_begin",
+              "85: bytec_1",
+              "86: itxn_field ApplicationArgs",
+              "89: pushint 1717",
+              "90: itxn_field ApplicationID",
+              "99: intc_1",
+              "100: itxn_field TypeEnum",
               "103: intc_2",
-              "104: itxn_field TypeEnum",
-              "107: intc_0",
-              "108: itxn_field Fee",
-              "118: itxn_submit",
-              "119: itxn LastLog",
-              "122: dup",
-              "123: extract 4 0",
-              "124: swap",
-              "125: extract 0 4",
-              "126: bytec_0",
-              "127: ==",
-              "128: assert",
-              "129: btoi",
-              "130: retsub"
+              "104: itxn_field Fee",
+              "114: itxn_submit",
+              "115: itxn LastLog",
+              "118: dup",
+              "119: extract 4 0",
+              "120: swap",
+              "121: extract 0 4",
+              "122: bytec_0",
+              "123: ==",
+              "124: assert",
+              "125: btoi",
+              "126: retsub"
             ],
             [
-              "55: itob",
-              "56: bytec_0",
-              "57: swap",
-              "58: concat",
-              "59: log",
-              "60: intc_1",
-              "61: return"
+              "51: itob",
+              "52: bytec_0",
+              "53: swap",
+              "54: concat",
+              "55: log",
+              "56: intc_0",
+              "57: return"
             ]
           ]
         },
@@ -807,86 +516,59 @@
             ],
             [
               "5: main:",
-              "6: intcblock 0 1 6",
+              "6: intcblock 1 6 0",
               "7: bytecblock 0x151f7c75 0x4a325901",
               "10: txn NumAppArgs",
               "11: bz main_bare_routing@7"
             ],
             [
-              "12: pushbytess 0x9407ae96 0x1118334b",
+              "12: pushbytess 0x9407ae96 0xec904a91",
               "13: txna ApplicationArgs 0",
               "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
             ],
             [
-              "22: main_incrementViaInnerWithArg_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "34: txnas Applications",
-              "37: callsub incrementViaInnerWithArg"
+              "19: main_incrementViaInnerWithArg_route@4:",
+              "22: txn OnCompletion",
+              "23: !",
+              "24: assert",
+              "25: txn ApplicationID",
+              "26: assert",
+              "29: txna ApplicationArgs 1",
+              "30: btoi",
+              "33: callsub incrementViaInnerWithArg"
             ],
             [
-              "134: incrementViaInnerWithArg:",
-              "138: proto 1 1",
-              "148: itxn_begin",
-              "151: bytec_1",
-              "152: itxn_field ApplicationArgs",
-              "153: frame_dig -1",
-              "154: itxn_field ApplicationID",
+              "130: incrementViaInnerWithArg:",
+              "134: proto 1 1",
+              "144: itxn_begin",
+              "147: bytec_1",
+              "148: itxn_field ApplicationArgs",
+              "149: frame_dig -1",
+              "150: itxn_field ApplicationID",
+              "159: intc_1",
+              "160: itxn_field TypeEnum",
               "163: intc_2",
-              "164: itxn_field TypeEnum",
-              "167: intc_0",
-              "168: itxn_field Fee",
-              "178: itxn_submit",
-              "179: itxn LastLog",
-              "182: dup",
-              "183: extract 4 0",
-              "184: swap",
-              "185: extract 0 4",
-              "186: bytec_0",
-              "187: ==",
-              "188: assert",
-              "189: btoi",
-              "190: retsub"
+              "164: itxn_field Fee",
+              "174: itxn_submit",
+              "175: itxn LastLog",
+              "178: dup",
+              "179: extract 4 0",
+              "180: swap",
+              "181: extract 0 4",
+              "182: bytec_0",
+              "183: ==",
+              "184: assert",
+              "185: btoi",
+              "186: retsub"
             ],
             [
-              "38: itob",
-              "39: bytec_0",
-              "40: swap",
-              "41: concat",
-              "42: log",
-              "43: intc_1",
-              "44: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 8 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1 6",
-              "7: bytecblock 0x151f7c75 0x4a325901",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
-            ],
-            [
-              "63: main_bare_routing@7:",
-              "66: txn OnCompletion",
-              "67: bnz main_after_if_else@11"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_0",
-              "20: return"
+              "34: itob",
+              "35: bytec_0",
+              "36: swap",
+              "37: concat",
+              "38: log",
+              "39: intc_0",
+              "40: return"
             ]
           ]
         }
@@ -894,39 +576,13 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 5,
+      "count": 3,
       "description": "\nCheck: \"missing-fee-check\", Impact: High, Confidence: High\nDescription: Missing Fee Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-fee-field-validation\n",
       "check": "missing-fee-check",
       "impact": "High",
       "confidence": "High",
       "help": "Validate `Fee` field in the LogicSig.",
       "paths": [
-        {
-          "short": "0 -> 1 -> 2 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1 6",
-              "7: bytecblock 0x151f7c75 0x4a325901",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
-            ],
-            [
-              "12: pushbytess 0x9407ae96 0x1118334b",
-              "13: txna ApplicationArgs 0",
-              "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_0",
-              "20: return"
-            ]
-          ]
-        },
         {
           "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
           "blocks": [
@@ -936,56 +592,56 @@
             ],
             [
               "5: main:",
-              "6: intcblock 0 1 6",
+              "6: intcblock 1 6 0",
               "7: bytecblock 0x151f7c75 0x4a325901",
               "10: txn NumAppArgs",
               "11: bz main_bare_routing@7"
             ],
             [
-              "12: pushbytess 0x9407ae96 0x1118334b",
+              "12: pushbytess 0x9407ae96 0xec904a91",
               "13: txna ApplicationArgs 0",
               "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
             ],
             [
-              "46: main_incrementViaInner_route@3:",
-              "49: txn OnCompletion",
-              "50: !",
-              "51: assert",
-              "52: txn ApplicationID",
-              "53: assert",
-              "54: callsub incrementViaInner"
+              "42: main_incrementViaInner_route@3:",
+              "45: txn OnCompletion",
+              "46: !",
+              "47: assert",
+              "48: txn ApplicationID",
+              "49: assert",
+              "50: callsub incrementViaInner"
             ],
             [
-              "76: incrementViaInner:",
-              "86: itxn_begin",
-              "89: bytec_1",
-              "90: itxn_field ApplicationArgs",
-              "93: pushint 1717",
-              "94: itxn_field ApplicationID",
+              "72: incrementViaInner:",
+              "82: itxn_begin",
+              "85: bytec_1",
+              "86: itxn_field ApplicationArgs",
+              "89: pushint 1717",
+              "90: itxn_field ApplicationID",
+              "99: intc_1",
+              "100: itxn_field TypeEnum",
               "103: intc_2",
-              "104: itxn_field TypeEnum",
-              "107: intc_0",
-              "108: itxn_field Fee",
-              "118: itxn_submit",
-              "119: itxn LastLog",
-              "122: dup",
-              "123: extract 4 0",
-              "124: swap",
-              "125: extract 0 4",
-              "126: bytec_0",
-              "127: ==",
-              "128: assert",
-              "129: btoi",
-              "130: retsub"
+              "104: itxn_field Fee",
+              "114: itxn_submit",
+              "115: itxn LastLog",
+              "118: dup",
+              "119: extract 4 0",
+              "120: swap",
+              "121: extract 0 4",
+              "122: bytec_0",
+              "123: ==",
+              "124: assert",
+              "125: btoi",
+              "126: retsub"
             ],
             [
-              "55: itob",
-              "56: bytec_0",
-              "57: swap",
-              "58: concat",
-              "59: log",
-              "60: intc_1",
-              "61: return"
+              "51: itob",
+              "52: bytec_0",
+              "53: swap",
+              "54: concat",
+              "55: log",
+              "56: intc_0",
+              "57: return"
             ]
           ]
         },
@@ -998,60 +654,59 @@
             ],
             [
               "5: main:",
-              "6: intcblock 0 1 6",
+              "6: intcblock 1 6 0",
               "7: bytecblock 0x151f7c75 0x4a325901",
               "10: txn NumAppArgs",
               "11: bz main_bare_routing@7"
             ],
             [
-              "12: pushbytess 0x9407ae96 0x1118334b",
+              "12: pushbytess 0x9407ae96 0xec904a91",
               "13: txna ApplicationArgs 0",
               "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
             ],
             [
-              "22: main_incrementViaInnerWithArg_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "34: txnas Applications",
-              "37: callsub incrementViaInnerWithArg"
+              "19: main_incrementViaInnerWithArg_route@4:",
+              "22: txn OnCompletion",
+              "23: !",
+              "24: assert",
+              "25: txn ApplicationID",
+              "26: assert",
+              "29: txna ApplicationArgs 1",
+              "30: btoi",
+              "33: callsub incrementViaInnerWithArg"
             ],
             [
-              "134: incrementViaInnerWithArg:",
-              "138: proto 1 1",
-              "148: itxn_begin",
-              "151: bytec_1",
-              "152: itxn_field ApplicationArgs",
-              "153: frame_dig -1",
-              "154: itxn_field ApplicationID",
+              "130: incrementViaInnerWithArg:",
+              "134: proto 1 1",
+              "144: itxn_begin",
+              "147: bytec_1",
+              "148: itxn_field ApplicationArgs",
+              "149: frame_dig -1",
+              "150: itxn_field ApplicationID",
+              "159: intc_1",
+              "160: itxn_field TypeEnum",
               "163: intc_2",
-              "164: itxn_field TypeEnum",
-              "167: intc_0",
-              "168: itxn_field Fee",
-              "178: itxn_submit",
-              "179: itxn LastLog",
-              "182: dup",
-              "183: extract 4 0",
-              "184: swap",
-              "185: extract 0 4",
-              "186: bytec_0",
-              "187: ==",
-              "188: assert",
-              "189: btoi",
-              "190: retsub"
+              "164: itxn_field Fee",
+              "174: itxn_submit",
+              "175: itxn LastLog",
+              "178: dup",
+              "179: extract 4 0",
+              "180: swap",
+              "181: extract 0 4",
+              "182: bytec_0",
+              "183: ==",
+              "184: assert",
+              "185: btoi",
+              "186: retsub"
             ],
             [
-              "38: itob",
-              "39: bytec_0",
-              "40: swap",
-              "41: concat",
-              "42: log",
-              "43: intc_1",
-              "44: return"
+              "34: itob",
+              "35: bytec_0",
+              "36: swap",
+              "37: concat",
+              "38: log",
+              "39: intc_0",
+              "40: return"
             ]
           ]
         },
@@ -1064,48 +719,22 @@
             ],
             [
               "5: main:",
-              "6: intcblock 0 1 6",
+              "6: intcblock 1 6 0",
               "7: bytecblock 0x151f7c75 0x4a325901",
               "10: txn NumAppArgs",
               "11: bz main_bare_routing@7"
             ],
             [
-              "63: main_bare_routing@7:",
-              "66: txn OnCompletion",
-              "67: bnz main_after_if_else@11"
+              "59: main_bare_routing@7:",
+              "62: txn OnCompletion",
+              "63: bnz main_after_if_else@11"
             ],
             [
-              "68: txn ApplicationID",
-              "69: !",
-              "70: assert",
-              "71: intc_1",
-              "72: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 8 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1 6",
-              "7: bytecblock 0x151f7c75 0x4a325901",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
-            ],
-            [
-              "63: main_bare_routing@7:",
-              "66: txn OnCompletion",
-              "67: bnz main_after_if_else@11"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_0",
-              "20: return"
+              "64: txn ApplicationID",
+              "65: !",
+              "66: assert",
+              "67: intc_0",
+              "68: return"
             ]
           ]
         }
@@ -1123,39 +752,13 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 5,
+      "count": 3,
       "description": "\nCheck: \"rekey-to\", Impact: High, Confidence: High\nDescription: Rekeyable Logic Signatures\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#rekeyable-logicsig\n",
       "check": "rekey-to",
       "impact": "High",
       "confidence": "High",
       "help": "Validate `RekeyTo` field in the LogicSig.",
       "paths": [
-        {
-          "short": "0 -> 1 -> 2 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1 6",
-              "7: bytecblock 0x151f7c75 0x4a325901",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
-            ],
-            [
-              "12: pushbytess 0x9407ae96 0x1118334b",
-              "13: txna ApplicationArgs 0",
-              "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_0",
-              "20: return"
-            ]
-          ]
-        },
         {
           "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
           "blocks": [
@@ -1165,56 +768,56 @@
             ],
             [
               "5: main:",
-              "6: intcblock 0 1 6",
+              "6: intcblock 1 6 0",
               "7: bytecblock 0x151f7c75 0x4a325901",
               "10: txn NumAppArgs",
               "11: bz main_bare_routing@7"
             ],
             [
-              "12: pushbytess 0x9407ae96 0x1118334b",
+              "12: pushbytess 0x9407ae96 0xec904a91",
               "13: txna ApplicationArgs 0",
               "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
             ],
             [
-              "46: main_incrementViaInner_route@3:",
-              "49: txn OnCompletion",
-              "50: !",
-              "51: assert",
-              "52: txn ApplicationID",
-              "53: assert",
-              "54: callsub incrementViaInner"
+              "42: main_incrementViaInner_route@3:",
+              "45: txn OnCompletion",
+              "46: !",
+              "47: assert",
+              "48: txn ApplicationID",
+              "49: assert",
+              "50: callsub incrementViaInner"
             ],
             [
-              "76: incrementViaInner:",
-              "86: itxn_begin",
-              "89: bytec_1",
-              "90: itxn_field ApplicationArgs",
-              "93: pushint 1717",
-              "94: itxn_field ApplicationID",
+              "72: incrementViaInner:",
+              "82: itxn_begin",
+              "85: bytec_1",
+              "86: itxn_field ApplicationArgs",
+              "89: pushint 1717",
+              "90: itxn_field ApplicationID",
+              "99: intc_1",
+              "100: itxn_field TypeEnum",
               "103: intc_2",
-              "104: itxn_field TypeEnum",
-              "107: intc_0",
-              "108: itxn_field Fee",
-              "118: itxn_submit",
-              "119: itxn LastLog",
-              "122: dup",
-              "123: extract 4 0",
-              "124: swap",
-              "125: extract 0 4",
-              "126: bytec_0",
-              "127: ==",
-              "128: assert",
-              "129: btoi",
-              "130: retsub"
+              "104: itxn_field Fee",
+              "114: itxn_submit",
+              "115: itxn LastLog",
+              "118: dup",
+              "119: extract 4 0",
+              "120: swap",
+              "121: extract 0 4",
+              "122: bytec_0",
+              "123: ==",
+              "124: assert",
+              "125: btoi",
+              "126: retsub"
             ],
             [
-              "55: itob",
-              "56: bytec_0",
-              "57: swap",
-              "58: concat",
-              "59: log",
-              "60: intc_1",
-              "61: return"
+              "51: itob",
+              "52: bytec_0",
+              "53: swap",
+              "54: concat",
+              "55: log",
+              "56: intc_0",
+              "57: return"
             ]
           ]
         },
@@ -1227,60 +830,59 @@
             ],
             [
               "5: main:",
-              "6: intcblock 0 1 6",
+              "6: intcblock 1 6 0",
               "7: bytecblock 0x151f7c75 0x4a325901",
               "10: txn NumAppArgs",
               "11: bz main_bare_routing@7"
             ],
             [
-              "12: pushbytess 0x9407ae96 0x1118334b",
+              "12: pushbytess 0x9407ae96 0xec904a91",
               "13: txna ApplicationArgs 0",
               "14: match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4"
             ],
             [
-              "22: main_incrementViaInnerWithArg_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "34: txnas Applications",
-              "37: callsub incrementViaInnerWithArg"
+              "19: main_incrementViaInnerWithArg_route@4:",
+              "22: txn OnCompletion",
+              "23: !",
+              "24: assert",
+              "25: txn ApplicationID",
+              "26: assert",
+              "29: txna ApplicationArgs 1",
+              "30: btoi",
+              "33: callsub incrementViaInnerWithArg"
             ],
             [
-              "134: incrementViaInnerWithArg:",
-              "138: proto 1 1",
-              "148: itxn_begin",
-              "151: bytec_1",
-              "152: itxn_field ApplicationArgs",
-              "153: frame_dig -1",
-              "154: itxn_field ApplicationID",
+              "130: incrementViaInnerWithArg:",
+              "134: proto 1 1",
+              "144: itxn_begin",
+              "147: bytec_1",
+              "148: itxn_field ApplicationArgs",
+              "149: frame_dig -1",
+              "150: itxn_field ApplicationID",
+              "159: intc_1",
+              "160: itxn_field TypeEnum",
               "163: intc_2",
-              "164: itxn_field TypeEnum",
-              "167: intc_0",
-              "168: itxn_field Fee",
-              "178: itxn_submit",
-              "179: itxn LastLog",
-              "182: dup",
-              "183: extract 4 0",
-              "184: swap",
-              "185: extract 0 4",
-              "186: bytec_0",
-              "187: ==",
-              "188: assert",
-              "189: btoi",
-              "190: retsub"
+              "164: itxn_field Fee",
+              "174: itxn_submit",
+              "175: itxn LastLog",
+              "178: dup",
+              "179: extract 4 0",
+              "180: swap",
+              "181: extract 0 4",
+              "182: bytec_0",
+              "183: ==",
+              "184: assert",
+              "185: btoi",
+              "186: retsub"
             ],
             [
-              "38: itob",
-              "39: bytec_0",
-              "40: swap",
-              "41: concat",
-              "42: log",
-              "43: intc_1",
-              "44: return"
+              "34: itob",
+              "35: bytec_0",
+              "36: swap",
+              "37: concat",
+              "38: log",
+              "39: intc_0",
+              "40: return"
             ]
           ]
         },
@@ -1293,48 +895,22 @@
             ],
             [
               "5: main:",
-              "6: intcblock 0 1 6",
+              "6: intcblock 1 6 0",
               "7: bytecblock 0x151f7c75 0x4a325901",
               "10: txn NumAppArgs",
               "11: bz main_bare_routing@7"
             ],
             [
-              "63: main_bare_routing@7:",
-              "66: txn OnCompletion",
-              "67: bnz main_after_if_else@11"
+              "59: main_bare_routing@7:",
+              "62: txn OnCompletion",
+              "63: bnz main_after_if_else@11"
             ],
             [
-              "68: txn ApplicationID",
-              "69: !",
-              "70: assert",
-              "71: intc_1",
-              "72: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 8 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1 6",
-              "7: bytecblock 0x151f7c75 0x4a325901",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
-            ],
-            [
-              "63: main_bare_routing@7:",
-              "66: txn OnCompletion",
-              "67: bnz main_after_if_else@11"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_0",
-              "20: return"
+              "64: txn ApplicationID",
+              "65: !",
+              "66: assert",
+              "67: intc_0",
+              "68: return"
             ]
           ]
         }

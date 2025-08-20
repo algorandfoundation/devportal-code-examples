@@ -3,8 +3,8 @@
 
 
 main:
-    intcblock 1 0 28
-    bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 "users"
+    intcblock 1 0 2 8
+    bytecblock 0x151f7c75 0x00 "users" 0x75736572730000000000000000
 
 
     txn NumAppArgs
@@ -14,10 +14,7 @@ main:
     match main_boxMapTest_route@3 main_boxMapSet_route@4 main_boxMapGet_route@5 main_boxMapExists_route@6
 
 main_after_if_else@13:
-
-
-    intc_1
-    return
+    err
 
 main_boxMapExists_route@6:
 
@@ -34,7 +31,7 @@ main_boxMapExists_route@6:
 
 
     callsub boxMapExists
-    bytec_2
+    bytec_1
     intc_1
     uncover 2
     setbit
@@ -83,7 +80,7 @@ main_boxMapSet_route@4:
 
 
     callsub boxMapSet
-    bytec_2
+    bytec_1
     intc_1
     uncover 2
     setbit
@@ -103,7 +100,7 @@ main_boxMapTest_route@3:
     txn ApplicationID
     assert
     callsub boxMapTest
-    bytec_2
+    bytec_1
     intc_1
     uncover 2
     setbit
@@ -130,44 +127,18 @@ main_bare_routing@9:
 boxMapTest:
 
 
-    bytec_1
+    bytec_3
 
 
     box_del
     pop
 
 
-    bytec_1
-
-
-
-
+    bytec_3
 
 
     pushbytes 0x0012000000000000004600000000000000020008746573744e616d65
-
-
     box_put
-
-
-    bytec_1
-
-
-    box_len
-    assert
-    intc_2
-    ==
-    assert
-
-
-    bytec_1
-
-
-    box_len
-    assert
-    intc_2
-    ==
-    assert
 
 
     intc_0
@@ -186,7 +157,7 @@ boxMapSet:
     itob
 
 
-    bytec_3
+    bytec_2
     swap
     concat
 
@@ -199,10 +170,47 @@ boxMapSet:
     box_put
 
 
-    box_get
-    assert
+
+
+
+
+    dup
+    intc_2
+    intc_3
+    box_extract
+    btoi
+
+
     frame_dig -1
+    intc_2
+    extract_uint64
+
+
+
+
+
+
     ==
+    swap
+    pushint 10
+    intc_3
+    box_extract
+    btoi
+
+
+    frame_dig -1
+    pushint 10
+    extract_uint64
+
+
+
+
+
+
+    ==
+    &&
+    intc_0
+    &&
     assert
 
 
@@ -222,7 +230,7 @@ boxMapGet:
     itob
 
 
-    bytec_3
+    bytec_2
     swap
     concat
 
@@ -244,7 +252,7 @@ boxMapExists:
     itob
 
 
-    bytec_3
+    bytec_2
     swap
     concat
 

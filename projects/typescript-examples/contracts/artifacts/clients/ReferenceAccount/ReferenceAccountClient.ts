@@ -23,7 +23,7 @@ import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgumen
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ReferenceAccount","structs":{},"methods":[{"name":"getAccountBalance","args":[],"returns":{"type":"uint64","desc":"The balance of the account"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Returns the balance of the account","events":[],"recommendations":{}},{"name":"getAccountBalanceWithArgument","args":[{"type":"account","name":"account","desc":"The account to get the balance of"}],"returns":{"type":"uint64","desc":"The balance of the account"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Returns the balance of the account","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"A contract that demonstrates how to use resource usage in a contract using an account reference","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[40,64],"errorMessage":"OnCompletion is not NoOp"},{"pc":[127,136],"errorMessage":"account funded"},{"pc":[87],"errorMessage":"can only call when creating"},{"pc":[43,67],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBieXRlY2Jsb2NrIDB4MTUxZjdjNzUKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6OAogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgUmVmZXJlbmNlQWNjb3VudCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX2JhcmVfcm91dGluZ0A3CiAgICBwdXNoYnl0ZXNzIDB4NTU0NDhlNjkgMHg5M2IwNDE2YiAvLyBtZXRob2QgImdldEFjY291bnRCYWxhbmNlKCl1aW50NjQiLCBtZXRob2QgImdldEFjY291bnRCYWxhbmNlV2l0aEFyZ3VtZW50KGFjY291bnQpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9nZXRBY2NvdW50QmFsYW5jZV9yb3V0ZUAzIG1haW5fZ2V0QWNjb3VudEJhbGFuY2VXaXRoQXJndW1lbnRfcm91dGVANAoKbWFpbl9hZnRlcl9pZl9lbHNlQDExOgogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnQvY29udHJhY3QuYWxnby50czo4CiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBSZWZlcmVuY2VBY2NvdW50IGV4dGVuZHMgQ29udHJhY3QgewogICAgcHVzaGludCAwIC8vIDAKICAgIHJldHVybgoKbWFpbl9nZXRBY2NvdW50QmFsYW5jZVdpdGhBcmd1bWVudF9yb3V0ZUA0OgogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnQvY29udHJhY3QuYWxnby50czoyNwogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6OAogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgUmVmZXJlbmNlQWNjb3VudCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGJ0b2kKICAgIHR4bmFzIEFjY291bnRzCiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudC9jb250cmFjdC5hbGdvLnRzOjI3CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIGNhbGxzdWIgZ2V0QWNjb3VudEJhbGFuY2VXaXRoQXJndW1lbnQKICAgIGl0b2IKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0QWNjb3VudEJhbGFuY2Vfcm91dGVAMzoKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6MTMKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIGdldEFjY291bnRCYWxhbmNlCiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCgptYWluX2JhcmVfcm91dGluZ0A3OgogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnQvY29udHJhY3QuYWxnby50czo4CiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBSZWZlcmVuY2VBY2NvdW50IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAxMQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4KCgovLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudC9jb250cmFjdC5hbGdvLnRzOjpSZWZlcmVuY2VBY2NvdW50LmdldEFjY291bnRCYWxhbmNlKCkgLT4gdWludDY0OgpnZXRBY2NvdW50QmFsYW5jZToKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6MTUKICAgIC8vIGNvbnN0IGFkZHJlc3MgPSBuZXcgQWRkcmVzcygnUjNKNzZNRFBFWFFFV0JWMkxRNkZMUTRQWUM0UVhOSEhQSUwyQlgyS1NGVTRXVU5KSk1EQlRMUk5FTScpCiAgICBwdXNoYnl0ZXMgYmFzZTMyKFIzSjc2TURQRVhRRVdCVjJMUTZGTFE0UFlDNFFYTkhIUElMMkJYMktTRlU0V1VOSkpNREEpIC8vIGFkZHIgUjNKNzZNRFBFWFFFV0JWMkxRNkZMUTRQWUM0UVhOSEhQSUwyQlgyS1NGVTRXVU5KSk1EQlRMUk5FTQogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnQvY29udHJhY3QuYWxnby50czoxOQogICAgLy8gcmV0dXJuIGFjY291bnQuYmFsYW5jZQogICAgYWNjdF9wYXJhbXNfZ2V0IEFjY3RCYWxhbmNlCiAgICBhc3NlcnQgLy8gYWNjb3VudCBmdW5kZWQKICAgIHJldHN1YgoKCi8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6OlJlZmVyZW5jZUFjY291bnQuZ2V0QWNjb3VudEJhbGFuY2VXaXRoQXJndW1lbnQoYWNjb3VudDogYnl0ZXMpIC0+IHVpbnQ2NDoKZ2V0QWNjb3VudEJhbGFuY2VXaXRoQXJndW1lbnQ6CiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudC9jb250cmFjdC5hbGdvLnRzOjI3LTI4CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIC8vIHB1YmxpYyBnZXRBY2NvdW50QmFsYW5jZVdpdGhBcmd1bWVudChhY2NvdW50OiBBY2NvdW50KSB7CiAgICBwcm90byAxIDEKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6MjkKICAgIC8vIHJldHVybiBhY2NvdW50LmJhbGFuY2UKICAgIGZyYW1lX2RpZyAtMQogICAgYWNjdF9wYXJhbXNfZ2V0IEFjY3RCYWxhbmNlCiAgICBhc3NlcnQgLy8gYWNjb3VudCBmdW5kZWQKICAgIHJldHN1Ygo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiYBBBUffHUxG0EAQoICBFVEjmkEk7BBazYaAI4CABsAA4EAQzEZFEQxGEQ2GgEXwByIAEwWKExQsIEBQzEZFEQxGESIABQWKExQsIEBQzEZQP/OMRgURIEBQ4AgjtP/MG8l4EsGulw8VcOPwLkLtOd6F6DfSpFpy1GpSwZzAESJigEBi/9zAESJ","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ReferenceAccount","structs":{},"methods":[{"name":"getAccountBalance","args":[],"returns":{"type":"uint64","desc":"The balance of the account"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Returns the balance of the account","events":[],"recommendations":{}},{"name":"getAccountBalanceWithArgument","args":[{"type":"address","name":"account","desc":"The account to get the balance of"}],"returns":{"type":"uint64","desc":"The balance of the account"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Returns the balance of the account","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"A contract that demonstrates how to use resource usage in a contract using an account reference","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[38,59],"errorMessage":"OnCompletion is not NoOp"},{"pc":[122,131],"errorMessage":"account funded"},{"pc":[82],"errorMessage":"can only call when creating"},{"pc":[41,62],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBieXRlY2Jsb2NrIDB4MTUxZjdjNzUKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6OAogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgUmVmZXJlbmNlQWNjb3VudCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX2JhcmVfcm91dGluZ0A3CiAgICBwdXNoYnl0ZXNzIDB4NTU0NDhlNjkgMHg2MTAyZTIwYiAvLyBtZXRob2QgImdldEFjY291bnRCYWxhbmNlKCl1aW50NjQiLCBtZXRob2QgImdldEFjY291bnRCYWxhbmNlV2l0aEFyZ3VtZW50KGFkZHJlc3MpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9nZXRBY2NvdW50QmFsYW5jZV9yb3V0ZUAzIG1haW5fZ2V0QWNjb3VudEJhbGFuY2VXaXRoQXJndW1lbnRfcm91dGVANAoKbWFpbl9hZnRlcl9pZl9lbHNlQDExOgogICAgZXJyCgptYWluX2dldEFjY291bnRCYWxhbmNlV2l0aEFyZ3VtZW50X3JvdXRlQDQ6CiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudC9jb250cmFjdC5hbGdvLnRzOjI3CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnQvY29udHJhY3QuYWxnby50czo4CiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBSZWZlcmVuY2VBY2NvdW50IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnQvY29udHJhY3QuYWxnby50czoyNwogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICBjYWxsc3ViIGdldEFjY291bnRCYWxhbmNlV2l0aEFyZ3VtZW50CiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCgptYWluX2dldEFjY291bnRCYWxhbmNlX3JvdXRlQDM6CiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudC9jb250cmFjdC5hbGdvLnRzOjEzCiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgY2FsbHN1YiBnZXRBY2NvdW50QmFsYW5jZQogICAgaXRvYgogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgcHVzaGludCAxIC8vIDEKICAgIHJldHVybgoKbWFpbl9iYXJlX3JvdXRpbmdANzoKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6OAogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgUmVmZXJlbmNlQWNjb3VudCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMTEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCgoKLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnQvY29udHJhY3QuYWxnby50czo6UmVmZXJlbmNlQWNjb3VudC5nZXRBY2NvdW50QmFsYW5jZSgpIC0+IHVpbnQ2NDoKZ2V0QWNjb3VudEJhbGFuY2U6CiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudC9jb250cmFjdC5hbGdvLnRzOjE2CiAgICAvLyBjb25zdCBhZGRyZXNzQnl0ZXMgPSBhZGRyZXNzLmJ5dGVzCiAgICBwdXNoYnl0ZXMgYmFzZTMyKFIzSjc2TURQRVhRRVdCVjJMUTZGTFE0UFlDNFFYTkhIUElMMkJYMktTRlU0V1VOSkpNREEpIC8vIGFkZHIgUjNKNzZNRFBFWFFFV0JWMkxRNkZMUTRQWUM0UVhOSEhQSUwyQlgyS1NGVTRXVU5KSk1EQlRMUk5FTQogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnQvY29udHJhY3QuYWxnby50czoxOQogICAgLy8gcmV0dXJuIGFjY291bnQuYmFsYW5jZQogICAgYWNjdF9wYXJhbXNfZ2V0IEFjY3RCYWxhbmNlCiAgICBhc3NlcnQgLy8gYWNjb3VudCBmdW5kZWQKICAgIHJldHN1YgoKCi8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6OlJlZmVyZW5jZUFjY291bnQuZ2V0QWNjb3VudEJhbGFuY2VXaXRoQXJndW1lbnQoYWNjb3VudDogYnl0ZXMpIC0+IHVpbnQ2NDoKZ2V0QWNjb3VudEJhbGFuY2VXaXRoQXJndW1lbnQ6CiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudC9jb250cmFjdC5hbGdvLnRzOjI3LTI4CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIC8vIHB1YmxpYyBnZXRBY2NvdW50QmFsYW5jZVdpdGhBcmd1bWVudChhY2NvdW50OiBBY2NvdW50KSB7CiAgICBwcm90byAxIDEKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6MjkKICAgIC8vIHJldHVybiBhY2NvdW50LmJhbGFuY2UKICAgIGZyYW1lX2RpZyAtMQogICAgYWNjdF9wYXJhbXNfZ2V0IEFjY3RCYWxhbmNlCiAgICBhc3NlcnQgLy8gYWNjb3VudCBmdW5kZWQKICAgIHJldHN1Ygo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiYBBBUffHUxG0EAPYICBFVEjmkEYQLiCzYaAI4CABYAAQAxGRREMRhENhoBiABMFihMULCBAUMxGRREMRhEiAAUFihMULCBAUMxGUD/0zEYFESBAUOAII7T/zBvJeBLBrpcPFXDj8C5C7Tneheg30qRactRqUsGcwBEiYoBAYv/cwBEiQ==","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -71,11 +71,11 @@ export type ReferenceAccountArgs = {
    */
   obj: {
     'getAccountBalance()uint64': Record<string, never>
-    'getAccountBalanceWithArgument(account)uint64': {
+    'getAccountBalanceWithArgument(address)uint64': {
       /**
        * The account to get the balance of
        */
-      account: Uint8Array | string
+      account: string
     }
   }
   /**
@@ -83,7 +83,7 @@ export type ReferenceAccountArgs = {
    */
   tuple: {
     'getAccountBalance()uint64': []
-    'getAccountBalanceWithArgument(account)uint64': [account: Uint8Array | string]
+    'getAccountBalanceWithArgument(address)uint64': [account: string]
   }
 }
 
@@ -92,7 +92,7 @@ export type ReferenceAccountArgs = {
  */
 export type ReferenceAccountReturns = {
   'getAccountBalance()uint64': bigint
-  'getAccountBalanceWithArgument(account)uint64': bigint
+  'getAccountBalanceWithArgument(address)uint64': bigint
 }
 
 /**
@@ -111,13 +111,13 @@ export type ReferenceAccountTypes = {
        */
       returns: ReferenceAccountReturns['getAccountBalance()uint64']
     }>
-    & Record<'getAccountBalanceWithArgument(account)uint64' | 'getAccountBalanceWithArgument', {
-      argsObj: ReferenceAccountArgs['obj']['getAccountBalanceWithArgument(account)uint64']
-      argsTuple: ReferenceAccountArgs['tuple']['getAccountBalanceWithArgument(account)uint64']
+    & Record<'getAccountBalanceWithArgument(address)uint64' | 'getAccountBalanceWithArgument', {
+      argsObj: ReferenceAccountArgs['obj']['getAccountBalanceWithArgument(address)uint64']
+      argsTuple: ReferenceAccountArgs['tuple']['getAccountBalanceWithArgument(address)uint64']
       /**
        * The balance of the account
        */
-      returns: ReferenceAccountReturns['getAccountBalanceWithArgument(account)uint64']
+      returns: ReferenceAccountReturns['getAccountBalanceWithArgument(address)uint64']
     }>
 }
 
@@ -185,17 +185,17 @@ export abstract class ReferenceAccountParamsFactory {
     }
   }
   /**
-   * Constructs a no op call for the getAccountBalanceWithArgument(account)uint64 ABI method
+   * Constructs a no op call for the getAccountBalanceWithArgument(address)uint64 ABI method
    *
    * Returns the balance of the account
    *
    * @param params Parameters for the call
    * @returns An `AppClientMethodCallParams` object for the call
    */
-  static getAccountBalanceWithArgument(params: CallParams<ReferenceAccountArgs['obj']['getAccountBalanceWithArgument(account)uint64'] | ReferenceAccountArgs['tuple']['getAccountBalanceWithArgument(account)uint64']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
+  static getAccountBalanceWithArgument(params: CallParams<ReferenceAccountArgs['obj']['getAccountBalanceWithArgument(address)uint64'] | ReferenceAccountArgs['tuple']['getAccountBalanceWithArgument(address)uint64']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
     return {
       ...params,
-      method: 'getAccountBalanceWithArgument(account)uint64' as const,
+      method: 'getAccountBalanceWithArgument(address)uint64' as const,
       args: Array.isArray(params.args) ? params.args : [params.args.account],
     }
   }
@@ -369,7 +369,7 @@ export class ReferenceAccountClient {
       appSpec: APP_SPEC,
     })
   }
-  
+
   /**
    * Checks for decode errors on the given return value and maps the return value to the return type for the given method
    * @returns The typed return value or undefined if there was no value
@@ -377,7 +377,7 @@ export class ReferenceAccountClient {
   decodeReturnValue<TSignature extends ReferenceAccountNonVoidMethodSignatures>(method: TSignature, returnValue: ABIReturn | undefined) {
     return returnValue !== undefined ? getArc56ReturnValue<MethodReturn<TSignature>>(returnValue, this.appClient.getABIMethod(method), APP_SPEC.structs) : undefined
   }
-  
+
   /**
    * Returns a new `ReferenceAccountClient` client, resolving the app by creator address and name
    * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
@@ -454,7 +454,7 @@ export class ReferenceAccountClient {
     },
 
     /**
-     * Makes a call to the ReferenceAccount smart contract using the `getAccountBalanceWithArgument(account)uint64` ABI method.
+     * Makes a call to the ReferenceAccount smart contract using the `getAccountBalanceWithArgument(address)uint64` ABI method.
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
@@ -463,7 +463,7 @@ export class ReferenceAccountClient {
      * @param params The params for the smart contract call
      * @returns The call params: The balance of the account
      */
-    getAccountBalanceWithArgument: (params: CallParams<ReferenceAccountArgs['obj']['getAccountBalanceWithArgument(account)uint64'] | ReferenceAccountArgs['tuple']['getAccountBalanceWithArgument(account)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+    getAccountBalanceWithArgument: (params: CallParams<ReferenceAccountArgs['obj']['getAccountBalanceWithArgument(address)uint64'] | ReferenceAccountArgs['tuple']['getAccountBalanceWithArgument(address)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       return this.appClient.params.call(ReferenceAccountParamsFactory.getAccountBalanceWithArgument(params))
     },
 
@@ -498,7 +498,7 @@ export class ReferenceAccountClient {
     },
 
     /**
-     * Makes a call to the ReferenceAccount smart contract using the `getAccountBalanceWithArgument(account)uint64` ABI method.
+     * Makes a call to the ReferenceAccount smart contract using the `getAccountBalanceWithArgument(address)uint64` ABI method.
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
@@ -507,7 +507,7 @@ export class ReferenceAccountClient {
      * @param params The params for the smart contract call
      * @returns The call transaction: The balance of the account
      */
-    getAccountBalanceWithArgument: (params: CallParams<ReferenceAccountArgs['obj']['getAccountBalanceWithArgument(account)uint64'] | ReferenceAccountArgs['tuple']['getAccountBalanceWithArgument(account)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+    getAccountBalanceWithArgument: (params: CallParams<ReferenceAccountArgs['obj']['getAccountBalanceWithArgument(address)uint64'] | ReferenceAccountArgs['tuple']['getAccountBalanceWithArgument(address)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       return this.appClient.createTransaction.call(ReferenceAccountParamsFactory.getAccountBalanceWithArgument(params))
     },
 
@@ -543,7 +543,7 @@ export class ReferenceAccountClient {
     },
 
     /**
-     * Makes a call to the ReferenceAccount smart contract using the `getAccountBalanceWithArgument(account)uint64` ABI method.
+     * Makes a call to the ReferenceAccount smart contract using the `getAccountBalanceWithArgument(address)uint64` ABI method.
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
@@ -552,9 +552,9 @@ export class ReferenceAccountClient {
      * @param params The params for the smart contract call
      * @returns The call result: The balance of the account
      */
-    getAccountBalanceWithArgument: async (params: CallParams<ReferenceAccountArgs['obj']['getAccountBalanceWithArgument(account)uint64'] | ReferenceAccountArgs['tuple']['getAccountBalanceWithArgument(account)uint64']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+    getAccountBalanceWithArgument: async (params: CallParams<ReferenceAccountArgs['obj']['getAccountBalanceWithArgument(address)uint64'] | ReferenceAccountArgs['tuple']['getAccountBalanceWithArgument(address)uint64']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       const result = await this.appClient.send.call(ReferenceAccountParamsFactory.getAccountBalanceWithArgument(params))
-      return {...result, return: result.return as unknown as (undefined | ReferenceAccountReturns['getAccountBalanceWithArgument(account)uint64'])}
+      return {...result, return: result.return as unknown as (undefined | ReferenceAccountReturns['getAccountBalanceWithArgument(address)uint64'])}
     },
 
   }
@@ -585,7 +585,7 @@ export class ReferenceAccountClient {
   }
 
   /**
-   * Makes a readonly (simulated) call to the ReferenceAccount smart contract using the `getAccountBalanceWithArgument(account)uint64` ABI method.
+   * Makes a readonly (simulated) call to the ReferenceAccount smart contract using the `getAccountBalanceWithArgument(address)uint64` ABI method.
    * 
    * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
    *
@@ -594,9 +594,9 @@ export class ReferenceAccountClient {
    * @param params The params for the smart contract call
    * @returns The call result: The balance of the account
    */
-  async getAccountBalanceWithArgument(params: CallParams<ReferenceAccountArgs['obj']['getAccountBalanceWithArgument(account)uint64'] | ReferenceAccountArgs['tuple']['getAccountBalanceWithArgument(account)uint64']>) {
+  async getAccountBalanceWithArgument(params: CallParams<ReferenceAccountArgs['obj']['getAccountBalanceWithArgument(address)uint64'] | ReferenceAccountArgs['tuple']['getAccountBalanceWithArgument(address)uint64']>) {
     const result = await this.appClient.send.call(ReferenceAccountParamsFactory.getAccountBalanceWithArgument(params))
-    return result.return as unknown as ReferenceAccountReturns['getAccountBalanceWithArgument(account)uint64']
+    return result.return as unknown as ReferenceAccountReturns['getAccountBalanceWithArgument(address)uint64']
   }
 
   /**
@@ -620,11 +620,11 @@ export class ReferenceAccountClient {
         return this
       },
       /**
-       * Add a getAccountBalanceWithArgument(account)uint64 method call against the ReferenceAccount contract
+       * Add a getAccountBalanceWithArgument(address)uint64 method call against the ReferenceAccount contract
        */
-      getAccountBalanceWithArgument(params: CallParams<ReferenceAccountArgs['obj']['getAccountBalanceWithArgument(account)uint64'] | ReferenceAccountArgs['tuple']['getAccountBalanceWithArgument(account)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
+      getAccountBalanceWithArgument(params: CallParams<ReferenceAccountArgs['obj']['getAccountBalanceWithArgument(address)uint64'] | ReferenceAccountArgs['tuple']['getAccountBalanceWithArgument(address)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
         promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.getAccountBalanceWithArgument(params)))
-        resultMappers.push((v) => client.decodeReturnValue('getAccountBalanceWithArgument(account)uint64', v))
+        resultMappers.push((v) => client.decodeReturnValue('getAccountBalanceWithArgument(address)uint64', v))
         return this
       },
       /**
@@ -674,7 +674,7 @@ export type ReferenceAccountComposer<TReturns extends [...any[]] = []> = {
   getAccountBalance(params?: CallParams<ReferenceAccountArgs['obj']['getAccountBalance()uint64'] | ReferenceAccountArgs['tuple']['getAccountBalance()uint64']>): ReferenceAccountComposer<[...TReturns, ReferenceAccountReturns['getAccountBalance()uint64'] | undefined]>
 
   /**
-   * Calls the getAccountBalanceWithArgument(account)uint64 ABI method.
+   * Calls the getAccountBalanceWithArgument(address)uint64 ABI method.
    *
    * Returns the balance of the account
    *
@@ -682,7 +682,7 @@ export type ReferenceAccountComposer<TReturns extends [...any[]] = []> = {
    * @param params Any additional parameters for the call
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
-  getAccountBalanceWithArgument(params?: CallParams<ReferenceAccountArgs['obj']['getAccountBalanceWithArgument(account)uint64'] | ReferenceAccountArgs['tuple']['getAccountBalanceWithArgument(account)uint64']>): ReferenceAccountComposer<[...TReturns, ReferenceAccountReturns['getAccountBalanceWithArgument(account)uint64'] | undefined]>
+  getAccountBalanceWithArgument(params?: CallParams<ReferenceAccountArgs['obj']['getAccountBalanceWithArgument(address)uint64'] | ReferenceAccountArgs['tuple']['getAccountBalanceWithArgument(address)uint64']>): ReferenceAccountComposer<[...TReturns, ReferenceAccountReturns['getAccountBalanceWithArgument(address)uint64'] | undefined]>
 
   /**
    * Makes a clear_state call to an existing instance of the ReferenceAccount smart contract.

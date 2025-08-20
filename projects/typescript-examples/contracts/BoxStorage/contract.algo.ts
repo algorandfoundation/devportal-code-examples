@@ -11,16 +11,20 @@ import {
   BoxRef,
   Global,
   Txn,
+  clone,
+  Account,
+  FixedArray,
 } from '@algorandfoundation/algorand-typescript'
 import { assert, assertMatch } from '@algorandfoundation/algorand-typescript'
+import { Uint8 } from '@algorandfoundation/algorand-typescript/arc4'
 
-type StaticInts = arc4.StaticArray<arc4.UintN8, 4>
+type Uint8x4 = FixedArray<arc4.Uint8, 4>
 
-class UserStruct extends arc4.Struct<{
-  name: arc4.Str
-  id: arc4.UintN64
-  asset: arc4.UintN64
-}> {}
+type User = {
+  name: string
+  id: uint64
+  asset: uint64
+}
 
 /**
  * BoxStorage Contract
@@ -44,7 +48,7 @@ export default class BoxStorage extends Contract {
   public boxDynamicBytes = Box<arc4.DynamicBytes>({ key: 'boxDynamicBytes' })
   public boxRef = BoxRef({ key: 'boxRef' })
   public boxMap = BoxMap<uint64, string>({ keyPrefix: 'boxMap' })
-  public boxMapStruct = BoxMap<uint64, UserStruct>({ keyPrefix: 'users' })
+  public boxMapObject = BoxMap<uint64, User>({ keyPrefix: 'users' })
   // example: INIT_BOX_STORAGE
 
   // example: GET_BOX_STORAGE
@@ -119,13 +123,13 @@ export default class BoxStorage extends Contract {
    * Retrieves the value stored in the boxRef box
    * @returns The value stored in the boxRef box
    */
-  public getBoxRef(): arc4.Address {
+  public getBoxRef(): Account {
     this.boxRef.create({ size: 32 })
     const senderBytes = Txn.sender.bytes
-    this.boxRef.put(senderBytes)
+    this.boxRef.put(Txn.sender.bytes)
     const value = this.boxRef.get({ default: senderBytes })
     assert(value === senderBytes, 'boxRef value mismatch')
-    return new arc4.Address(value)
+    return Account(value)
   }
 
   /**
@@ -283,81 +287,72 @@ export default class BoxStorage extends Contract {
 
   // example: STRUCT_BOX_STORAGE
   /**
-   * Retrieves the value stored in the boxMapStruct box
+   * Retrieves the value stored in the boxMapObject box
    * @param key The key to retrieve the value from
-   * @returns The value stored in the boxMapStruct box
+   * @returns The value stored in the boxMapObject box
    */
   @abimethod({ readonly: true })
-  public getBoxMapStruct(key: uint64): UserStruct {
-    return this.boxMapStruct(key).value
+  public getBoxMapObject(key: uint64): User {
+    return this.boxMapObject(key).value
   }
 
   /**
-   * Checks if the boxMapStruct box exists
+   * Checks if the boxMapObject box exists
    * @param key The key to check for
    * @returns true if the box exists, false otherwise
    */
   @abimethod({ readonly: true })
-  public boxMapStructExists(key: uint64): boolean {
-    return this.boxMapStruct(key).exists
+  public boxMapObjectExists(key: uint64): boolean {
+    return this.boxMapObject(key).exists
   }
 
   /**
-   * Sets the value of the boxMapStruct box
+   * Sets the value of the boxMapObject box
    * @param key The key to set the value for
-   * @param value The value to set in the boxMapStruct box
+   * @param value The value to set in the boxMapObject box
    */
-  public setBoxMapStruct(key: uint64, value: UserStruct): boolean {
-    // Mutable references to ARC4-encoded values must be copied using .copy() when being assigned to another variable
-    this.boxMapStruct(key).value = value.copy()
+  public setBoxMapObject(key: uint64, value: User): boolean {
+    this.boxMapObject(key).value = clone(value)
     assertMatch(
-      this.boxMapStruct(key).value,
+      this.boxMapObject(key).value,
       {
         name: value.name,
         id: value.id,
         asset: value.asset,
       },
-      'boxMapStruct value mismatch',
+      'boxMapObject value mismatch',
     )
     return true
   }
 
   /**
-   * Retrieves the length of the boxMapStruct box
+   * Retrieves the length of the boxMapObject box
    * @param key The key to get the length for
-   * @returns The length of the boxMapStruct box
+   * @returns The length of the boxMapObject box
    */
-  public boxMapStructLength(key: uint64): boolean {
-    const value = new UserStruct({
-      name: new arc4.Str('testName'),
-      id: new arc4.UintN64(70),
-      asset: new arc4.UintN64(1234),
-    })
+  public boxMapObjectLength(key: uint64): uint64 {
+    const value = {
+      name: 'testName',
+      id: Uint64(70),
+      asset: Uint64(1234),
+    }
 
-    this.boxMapStruct(key).value = value.copy()
+    this.boxMapObject(key).value = clone(value)
 
-    assert(this.boxMapStruct(key).value.bytes.length === value.bytes.length, 'boxMapStruct bytes length mismatch')
-    assert(this.boxMapStruct(key).length === value.bytes.length, 'boxMapStruct length mismatch')
-
-    return true
+    return this.boxMapObject(key).length
   }
   // example: STRUCT_BOX_STORAGE
 
   // example: OTHER_OPS_BOX
   /**
-   * Creates and manipulates a box containing a static array of 8-bit unsigned integers
+   * Creates and manipulates a box containing a fixed array of 8-bit unsigned integers
    * @param key The key for the static array box
    * @returns The static array stored in the box
    */
-  public arc4Box(key: string): StaticInts {
-    const staticIntBox = Box<StaticInts>({ key: Bytes(key) })
+  public arc4Box(key: string): Uint8x4 {
+    const staticIntBox = Box<Uint8x4>({ key: Bytes(key) })
 
-    staticIntBox.value = new arc4.StaticArray<arc4.UintN8, 4>(
-      new arc4.UintN8(0),
-      new arc4.UintN8(1),
-      new arc4.UintN8(2),
-      new arc4.UintN8(3),
-    )
+    staticIntBox.value = new FixedArray<arc4.Uint8, 4>(new Uint8(0), new Uint8(1), new Uint8(2), new Uint8(3))
 
     assert(staticIntBox.value[0].native === 0)
     assert(staticIntBox.value[1].native === 1)
