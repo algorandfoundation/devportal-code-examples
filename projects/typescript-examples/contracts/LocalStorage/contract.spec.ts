@@ -1,4 +1,4 @@
-import { Bytes } from '@algorandfoundation/algorand-typescript'
+import { Bytes, OnCompleteAction } from '@algorandfoundation/algorand-typescript'
 import { TestExecutionContext } from '@algorandfoundation/algorand-typescript-testing'
 import { describe, expect, it } from 'vitest'
 import LocalStorage from './contract.algo'
@@ -26,7 +26,9 @@ describe('LocalStorage contract', () => {
     const account = ctx.any.account({ optedApplications: [ctx.ledger.getApplicationForContract(contract)] })
 
     ctx.txn
-      .createScope([ctx.any.txn.applicationCall({ appId: contract, sender: account, onCompletion: 'OptIn' })])
+      .createScope([
+        ctx.any.txn.applicationCall({ appId: contract, sender: account, onCompletion: OnCompleteAction.OptIn }),
+      ])
       .execute(() => {
         contract.optInToApplication()
       })
@@ -47,7 +49,9 @@ describe('LocalStorage contract', () => {
     const account = ctx.any.account({ optedApplications: [ctx.ledger.getApplicationForContract(contract)] })
 
     ctx.txn
-      .createScope([ctx.any.txn.applicationCall({ appId: contract, sender: account, onCompletion: 'OptIn' })])
+      .createScope([
+        ctx.any.txn.applicationCall({ appId: contract, sender: account, onCompletion: OnCompleteAction.OptIn }),
+      ])
       .execute(() => {
         contract.optInToApplication()
       })
@@ -68,7 +72,9 @@ describe('LocalStorage contract', () => {
     const contract = ctx.contract.create(LocalStorage)
     const account = ctx.any.account({ optedApplications: [ctx.ledger.getApplicationForContract(contract)] })
     ctx.txn
-      .createScope([ctx.any.txn.applicationCall({ appId: contract, sender: account, onCompletion: 'OptIn' })])
+      .createScope([
+        ctx.any.txn.applicationCall({ appId: contract, sender: account, onCompletion: OnCompleteAction.OptIn }),
+      ])
       .execute(() => {
         contract.optInToApplication()
       })
@@ -93,7 +99,9 @@ describe('LocalStorage contract', () => {
     const contract = ctx.contract.create(LocalStorage)
     const account = ctx.any.account({ optedApplications: [ctx.ledger.getApplicationForContract(contract)] })
     ctx.txn
-      .createScope([ctx.any.txn.applicationCall({ appId: contract, sender: account, onCompletion: 'OptIn' })])
+      .createScope([
+        ctx.any.txn.applicationCall({ appId: contract, sender: account, onCompletion: OnCompleteAction.OptIn }),
+      ])
       .execute(() => {
         contract.optInToApplication()
       })

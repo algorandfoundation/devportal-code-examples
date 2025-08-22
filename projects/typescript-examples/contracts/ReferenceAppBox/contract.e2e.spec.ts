@@ -221,7 +221,7 @@ describe('BoxCounter contract', () => {
           boxReferences: [createBoxReference(testAccount.addr, 'counter')],
         })
         .simulate(),
-    ).rejects.toThrow('assert failed')
+    ).rejects.toThrow('Payment must cover the box MBR')
   })
 
   test('fails when payment receiver is incorrect', async () => {
@@ -273,7 +273,7 @@ describe('BoxCounter contract', () => {
           boxReferences: [createBoxReference(testAccount.addr, 'counter')],
         })
         .simulate(),
-    ).rejects.toThrow('assert failed')
+    ).rejects.toThrow('Payment must be to the contract')
   })
 
   test('verify app budget consumption is reasonable', async () => {

@@ -77,7 +77,7 @@ describe('GlobalStorage contract', () => {
     expect(state.globalBytes ? state.globalBytes.asString() : '').toBe('Silvio')
     expect(state.globalString).toBe('New String')
     expect(state.globalBool).toBe(0n)
-    expect(state.globalAccount?.asByteArray()).toEqual(testAccount.publicKey)
+    expect(state.globalAccount).toEqual(testAccount.addr.toString())
   })
 
   test('write and read dynamic global state', async () => {
