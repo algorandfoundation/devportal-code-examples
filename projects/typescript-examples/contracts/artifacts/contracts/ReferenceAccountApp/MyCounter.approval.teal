@@ -16,7 +16,7 @@ main:
 
 main_incrementMyCounter_route@4:
     // contracts/ReferenceAccountApp/contract.algo.ts:37
-    // @abimethod()
+    // public incrementMyCounter(): uint64 {
     txn OnCompletion
     !
     txn ApplicationID
@@ -66,20 +66,20 @@ optIn:
 
 // contracts/ReferenceAccountApp/contract.algo.ts::MyCounter.incrementMyCounter[routing]() -> void:
 incrementMyCounter:
-    // contracts/ReferenceAccountApp/contract.algo.ts:39
+    // contracts/ReferenceAccountApp/contract.algo.ts:38
     // assert(Txn.sender.isOptedIn(Global.currentApplicationId), 'Account must opt in to contract first')
     txn Sender
     global CurrentApplicationID
     app_opted_in
     assert // Account must opt in to contract first
-    // contracts/ReferenceAccountApp/contract.algo.ts:41
+    // contracts/ReferenceAccountApp/contract.algo.ts:40
     // this.myCounter(Txn.sender).value = this.myCounter(Txn.sender).value + 1
     txn Sender
     intc_1 // 0
     // contracts/ReferenceAccountApp/contract.algo.ts:23
     // public myCounter = LocalState<uint64>({ key: 'my_counter' })
     bytec_0 // "my_counter"
-    // contracts/ReferenceAccountApp/contract.algo.ts:41
+    // contracts/ReferenceAccountApp/contract.algo.ts:40
     // this.myCounter(Txn.sender).value = this.myCounter(Txn.sender).value + 1
     app_local_get_ex
     assert // check LocalState exists
@@ -89,23 +89,23 @@ incrementMyCounter:
     // contracts/ReferenceAccountApp/contract.algo.ts:23
     // public myCounter = LocalState<uint64>({ key: 'my_counter' })
     bytec_0 // "my_counter"
-    // contracts/ReferenceAccountApp/contract.algo.ts:41
+    // contracts/ReferenceAccountApp/contract.algo.ts:40
     // this.myCounter(Txn.sender).value = this.myCounter(Txn.sender).value + 1
     uncover 2
     app_local_put
-    // contracts/ReferenceAccountApp/contract.algo.ts:43
+    // contracts/ReferenceAccountApp/contract.algo.ts:42
     // return this.myCounter(Txn.sender).value
     txn Sender
     intc_1 // 0
     // contracts/ReferenceAccountApp/contract.algo.ts:23
     // public myCounter = LocalState<uint64>({ key: 'my_counter' })
     bytec_0 // "my_counter"
-    // contracts/ReferenceAccountApp/contract.algo.ts:43
+    // contracts/ReferenceAccountApp/contract.algo.ts:42
     // return this.myCounter(Txn.sender).value
     app_local_get_ex
     assert // check LocalState exists
     // contracts/ReferenceAccountApp/contract.algo.ts:37
-    // @abimethod()
+    // public incrementMyCounter(): uint64 {
     itob
     pushbytes 0x151f7c75
     swap

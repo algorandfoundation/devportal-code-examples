@@ -1,5 +1,5 @@
 // example: ACCOUNT_REFERENCE_EXAMPLE
-import { Contract, Account, abimethod } from '@algorandfoundation/algorand-typescript'
+import { Contract, Account, readonly } from '@algorandfoundation/algorand-typescript'
 import { Address } from '@algorandfoundation/algorand-typescript/arc4'
 
 /**
@@ -10,7 +10,7 @@ export default class ReferenceAccount extends Contract {
    * Returns the balance of the account
    * @returns The balance of the account
    */
-  @abimethod({ readonly: true })
+  @readonly
   public getAccountBalance() {
     const address = new Address('R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM')
     const addressBytes = address.bytes
@@ -24,7 +24,7 @@ export default class ReferenceAccount extends Contract {
    * @param account The account to get the balance of
    * @returns The balance of the account
    */
-  @abimethod({ readonly: true })
+  @readonly
   public getAccountBalanceWithArgument(account: Account) {
     return account.balance
   }

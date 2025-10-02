@@ -32,8 +32,9 @@ main___algots__.defaultCreate@13:
 
 // contracts/ControlFlow/contract.algo.ts::ControlFlow.isRich[routing]() -> void:
 isRich:
-    // contracts/ControlFlow/contract.algo.ts:24
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:24-25
+    // @readonly
+    // public isRich(accountBalance: uint64): string {
     txna ApplicationArgs 1
     btoi
     dup
@@ -47,8 +48,9 @@ isRich:
     pushbytes "This account is rich!"
 
 isRich_after_inlined_contracts/ControlFlow/contract.algo.ts::ControlFlow.isRich@6:
-    // contracts/ControlFlow/contract.algo.ts:24
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:24-25
+    // @readonly
+    // public isRich(accountBalance: uint64): string {
     dup
     len
     itob
@@ -72,23 +74,26 @@ isRich_else_body@3:
     // contracts/ControlFlow/contract.algo.ts:29
     // return 'This account is doing well.'
     pushbytes "This account is doing well."
-    // contracts/ControlFlow/contract.algo.ts:24
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:24-25
+    // @readonly
+    // public isRich(accountBalance: uint64): string {
     b isRich_after_inlined_contracts/ControlFlow/contract.algo.ts::ControlFlow.isRich@6
 
 isRich_else_body@5:
     // contracts/ControlFlow/contract.algo.ts:31
     // return 'This account is poor :('
     pushbytes "This account is poor :("
-    // contracts/ControlFlow/contract.algo.ts:24
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:24-25
+    // @readonly
+    // public isRich(accountBalance: uint64): string {
     b isRich_after_inlined_contracts/ControlFlow/contract.algo.ts::ControlFlow.isRich@6
 
 
 // contracts/ControlFlow/contract.algo.ts::ControlFlow.isEven[routing]() -> void:
 isEven:
-    // contracts/ControlFlow/contract.algo.ts:42
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:42-43
+    // @readonly
+    // public isEven(number: uint64): string {
     txna ApplicationArgs 1
     btoi
     // contracts/ControlFlow/contract.algo.ts:44
@@ -99,8 +104,9 @@ isEven:
     pushbytes "Even"
 
 isEven_ternary_merge@4:
-    // contracts/ControlFlow/contract.algo.ts:42
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:42-43
+    // @readonly
+    // public isEven(number: uint64): string {
     dup
     len
     itob
@@ -264,8 +270,9 @@ forLoop_after_for@13:
     pushint 6 // 6
     ==
     assert // Sum of reversed array should be 6
-    // contracts/ControlFlow/contract.algo.ts:53
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:53-54
+    // @readonly
+    // public forLoop(): uint64[] {
     bytec_0 // 0x151f7c75
     dig 9
     concat
@@ -276,8 +283,9 @@ forLoop_after_for@13:
 
 // contracts/ControlFlow/contract.algo.ts::ControlFlow.getDay[routing]() -> void:
 getDay:
-    // contracts/ControlFlow/contract.algo.ts:92
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:92-93
+    // @readonly
+    // public getDay(date: uint64): string {
     txna ApplicationArgs 1
     btoi
     dup
@@ -294,8 +302,9 @@ getDay:
     pushbytes "Monday"
 
 getDay_after_inlined_contracts/ControlFlow/contract.algo.ts::ControlFlow.getDay@24:
-    // contracts/ControlFlow/contract.algo.ts:92
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:92-93
+    // @readonly
+    // public getDay(date: uint64): string {
     dup
     len
     itob
@@ -322,8 +331,9 @@ getDay_after_if_else@4:
     // contracts/ControlFlow/contract.algo.ts:98
     // return 'Tuesday'
     pushbytes "Tuesday"
-    // contracts/ControlFlow/contract.algo.ts:92
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:92-93
+    // @readonly
+    // public getDay(date: uint64): string {
     b getDay_after_inlined_contracts/ControlFlow/contract.algo.ts::ControlFlow.getDay@24
 
 getDay_after_if_else@7:
@@ -339,8 +349,9 @@ getDay_after_if_else@7:
     // contracts/ControlFlow/contract.algo.ts:100
     // return 'Wednesday'
     pushbytes "Wednesday"
-    // contracts/ControlFlow/contract.algo.ts:92
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:92-93
+    // @readonly
+    // public getDay(date: uint64): string {
     b getDay_after_inlined_contracts/ControlFlow/contract.algo.ts::ControlFlow.getDay@24
 
 getDay_after_if_else@10:
@@ -356,8 +367,9 @@ getDay_after_if_else@10:
     // contracts/ControlFlow/contract.algo.ts:102
     // return 'Thursday'
     pushbytes "Thursday"
-    // contracts/ControlFlow/contract.algo.ts:92
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:92-93
+    // @readonly
+    // public getDay(date: uint64): string {
     b getDay_after_inlined_contracts/ControlFlow/contract.algo.ts::ControlFlow.getDay@24
 
 getDay_after_if_else@13:
@@ -373,8 +385,9 @@ getDay_after_if_else@13:
     // contracts/ControlFlow/contract.algo.ts:104
     // return 'Friday'
     pushbytes "Friday"
-    // contracts/ControlFlow/contract.algo.ts:92
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:92-93
+    // @readonly
+    // public getDay(date: uint64): string {
     b getDay_after_inlined_contracts/ControlFlow/contract.algo.ts::ControlFlow.getDay@24
 
 getDay_after_if_else@16:
@@ -390,8 +403,9 @@ getDay_after_if_else@16:
     // contracts/ControlFlow/contract.algo.ts:106
     // return 'Saturday'
     pushbytes "Saturday"
-    // contracts/ControlFlow/contract.algo.ts:92
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:92-93
+    // @readonly
+    // public getDay(date: uint64): string {
     b getDay_after_inlined_contracts/ControlFlow/contract.algo.ts::ControlFlow.getDay@24
 
 getDay_after_if_else@19:
@@ -407,23 +421,26 @@ getDay_after_if_else@19:
     // contracts/ControlFlow/contract.algo.ts:108
     // return 'Sunday'
     pushbytes "Sunday"
-    // contracts/ControlFlow/contract.algo.ts:92
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:92-93
+    // @readonly
+    // public getDay(date: uint64): string {
     b getDay_after_inlined_contracts/ControlFlow/contract.algo.ts::ControlFlow.getDay@24
 
 getDay_after_if_else@22:
     // contracts/ControlFlow/contract.algo.ts:110
     // return 'Invalid day'
     pushbytes "Invalid day"
-    // contracts/ControlFlow/contract.algo.ts:92
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:92-93
+    // @readonly
+    // public getDay(date: uint64): string {
     b getDay_after_inlined_contracts/ControlFlow/contract.algo.ts::ControlFlow.getDay@24
 
 
 // contracts/ControlFlow/contract.algo.ts::ControlFlow.calculateBoxStorageCost[routing]() -> void:
 calculateBoxStorageCost:
-    // contracts/ControlFlow/contract.algo.ts:125
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:125-126
+    // @readonly
+    // public calculateBoxStorageCost(boxSizeLabel: string, boxName: string): uint64 {
     txna ApplicationArgs 1
     extract 2 0
     dup
@@ -457,8 +474,9 @@ calculateBoxStorageCost_block@18:
     +
 
 calculateBoxStorageCost_after_inlined_contracts/ControlFlow/contract.algo.ts::ControlFlow.calculateBoxStorageCost@19:
-    // contracts/ControlFlow/contract.algo.ts:125
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:125-126
+    // @readonly
+    // public calculateBoxStorageCost(boxSizeLabel: string, boxName: string): uint64 {
     itob
     bytec_0 // 0x151f7c75
     swap
@@ -543,8 +561,9 @@ calculateBoxStorageCost_after_if_else@16:
     // contracts/ControlFlow/contract.algo.ts:160
     // return 0
     intc_1 // 0
-    // contracts/ControlFlow/contract.algo.ts:125
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:125-126
+    // @readonly
+    // public calculateBoxStorageCost(boxSizeLabel: string, boxName: string): uint64 {
     b calculateBoxStorageCost_after_inlined_contracts/ControlFlow/contract.algo.ts::ControlFlow.calculateBoxStorageCost@19
 
 
@@ -618,8 +637,9 @@ loop_after_if_else@5:
     bz loop_while_top@2
 
 loop_block@10:
-    // contracts/ControlFlow/contract.algo.ts:176
-    // @arc4.abimethod({ readonly: true })
+    // contracts/ControlFlow/contract.algo.ts:176-177
+    // @readonly
+    // public loop(): uint64 {
     dup
     itob
     bytec_0 // 0x151f7c75

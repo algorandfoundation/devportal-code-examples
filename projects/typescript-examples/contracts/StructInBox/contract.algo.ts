@@ -1,4 +1,4 @@
-import { Contract, uint64, BoxMap, clone, assertMatch } from '@algorandfoundation/algorand-typescript'
+import { Contract, uint64, BoxMap, clone, assertMatch, readonly } from '@algorandfoundation/algorand-typescript'
 
 // example: EXAMPLE_STRUCT_IN_BOX
 type User = {
@@ -21,10 +21,12 @@ export default class StructInBoxMap extends Contract {
     return true
   }
 
+  @readonly
   public getUser(id: uint64): User {
     return this.users(id).value
   }
 
+  @readonly
   public checkUserExists(id: uint64): boolean {
     return this.users(id).exists
   }

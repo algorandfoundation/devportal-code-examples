@@ -36,8 +36,9 @@ getAssetTotalSupply:
     pushint 1005 // 1005
     asset_params_get AssetTotal
     assert // asset exists
-    // contracts/ReferenceAsset/contract.algo.ts:12
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAsset/contract.algo.ts:12-13
+    // @readonly
+    // public getAssetTotalSupply() {
     itob
     bytec_0 // 0x151f7c75
     swap
@@ -49,16 +50,18 @@ getAssetTotalSupply:
 
 // contracts/ReferenceAsset/contract.algo.ts::ReferenceAsset.getAssetTotalSupplyWithArgument[routing]() -> void:
 getAssetTotalSupplyWithArgument:
-    // contracts/ReferenceAsset/contract.algo.ts:22
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAsset/contract.algo.ts:22-23
+    // @readonly
+    // public getAssetTotalSupplyWithArgument(asset: Asset) {
     txna ApplicationArgs 1
     btoi
     // contracts/ReferenceAsset/contract.algo.ts:24
     // return asset.total
     asset_params_get AssetTotal
     assert // asset exists
-    // contracts/ReferenceAsset/contract.algo.ts:22
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAsset/contract.algo.ts:22-23
+    // @readonly
+    // public getAssetTotalSupplyWithArgument(asset: Asset) {
     itob
     bytec_0 // 0x151f7c75
     swap

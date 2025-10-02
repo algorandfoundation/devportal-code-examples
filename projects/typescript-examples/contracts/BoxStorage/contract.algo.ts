@@ -1,7 +1,6 @@
 import {
   Box,
   arc4,
-  abimethod,
   Contract,
   bytes,
   Bytes,
@@ -12,6 +11,7 @@ import {
   Txn,
   clone,
   FixedArray,
+  readonly,
 } from '@algorandfoundation/algorand-typescript'
 import { assert, assertMatch } from '@algorandfoundation/algorand-typescript'
 import { Uint8 } from '@algorandfoundation/algorand-typescript/arc4'
@@ -53,7 +53,7 @@ export default class BoxStorage extends Contract {
    * Retrieves the value stored in the boxInt box
    * @returns The uint64 value stored in boxInt
    */
-  @abimethod({ readonly: true })
+  @readonly
   public getBox(): uint64 {
     return this.boxInt.value
   }
@@ -61,7 +61,7 @@ export default class BoxStorage extends Contract {
   /**
    * Retrieves the value of the boxInt box
    */
-  @abimethod({ readonly: true })
+  @readonly
   public valueBox(): uint64 {
     return this.boxInt.value
   }
@@ -70,7 +70,7 @@ export default class BoxStorage extends Contract {
    * Retrieves the value stored in the boxInt box and checks if it exists
    * @returns A tuple containing the value and a boolean indicating if the box exists
    */
-  @abimethod({ readonly: true })
+  @readonly
   public maybeBox(): [uint64, boolean] {
     const [boxIntValue, boxIntExists] = this.boxInt.maybe()
     return [boxIntValue, boxIntExists]
@@ -81,7 +81,7 @@ export default class BoxStorage extends Contract {
    * @param key The key of the boxMap to retrieve the value from
    * @returns The value stored in the boxMap box
    */
-  @abimethod({ readonly: true })
+  @readonly
   public getBoxMap(key: uint64): string {
     return this.boxMap(key).value
   }
@@ -91,7 +91,7 @@ export default class BoxStorage extends Contract {
    * @param key The key of the boxMap to retrieve the value from
    * @returns The value stored in the boxMap box
    */
-  @abimethod({ readonly: true })
+  @readonly
   public getBoxMapWithDefault(key: uint64): string {
     return this.boxMap(key).get({ default: 'default' })
   }
@@ -101,7 +101,7 @@ export default class BoxStorage extends Contract {
    * @param key The key to check in the boxMap
    * @returns A tuple containing the value and a boolean indicating if the box exists
    */
-  @abimethod({ readonly: true })
+  @readonly
   public maybeBoxMap(key: uint64): [string, boolean] {
     const [value, exists] = this.boxMap(key).maybe()
     return [exists ? value : '', exists]
@@ -111,7 +111,7 @@ export default class BoxStorage extends Contract {
    * Retrieves the key prefix of the boxMap box
    * @returns The key prefix of the boxMap box
    */
-  @abimethod({ readonly: true })
+  @readonly
   public keyPrefixBoxMap(): bytes {
     return this.boxMap.keyPrefix
   }
@@ -121,7 +121,7 @@ export default class BoxStorage extends Contract {
    * @param key The key to check for
    * @returns true if the box exists, false otherwise
    */
-  @abimethod({ readonly: true })
+  @readonly
   public boxMapExists(key: uint64): boolean {
     return this.boxMap(key).exists
   }
@@ -168,7 +168,7 @@ export default class BoxStorage extends Contract {
    * @param key The key to get the length for
    * @returns The length of the boxMap box
    */
-  @abimethod({ readonly: true })
+  @readonly
   public boxMapLength(key: uint64): uint64 {
     if (!this.boxMap(key).exists) {
       return Uint64(0)
@@ -231,7 +231,7 @@ export default class BoxStorage extends Contract {
    * @param key The key to retrieve the value from
    * @returns The value stored in the boxMapObject box
    */
-  @abimethod({ readonly: true })
+  @readonly
   public getBoxMapObject(key: uint64): User {
     return this.boxMapObject(key).value
   }
@@ -241,7 +241,7 @@ export default class BoxStorage extends Contract {
    * @param key The key to check for
    * @returns true if the box exists, false otherwise
    */
-  @abimethod({ readonly: true })
+  @readonly
   public boxMapObjectExists(key: uint64): boolean {
     return this.boxMapObject(key).exists
   }

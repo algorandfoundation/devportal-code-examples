@@ -20,8 +20,9 @@ main:
     err
 
 main_keyPrefixBoxMap_route@10:
-    // contracts/BoxStorage/contract.algo.ts:114
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:114-115
+    // @readonly
+    // public keyPrefixBoxMap(): bytes {
     pushbytes 0x151f7c750006626f784d6170
     log
     intc_0 // 1
@@ -48,8 +49,9 @@ getBox:
     box_get
     assert // Box must have value
     btoi
-    // contracts/BoxStorage/contract.algo.ts:56
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:56-57
+    // @readonly
+    // public getBox(): uint64 {
     itob
     bytec_0 // 0x151f7c75
     swap
@@ -69,8 +71,9 @@ valueBox:
     box_get
     assert // Box must have value
     btoi
-    // contracts/BoxStorage/contract.algo.ts:64
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:64-65
+    // @readonly
+    // public valueBox(): uint64 {
     itob
     bytec_0 // 0x151f7c75
     swap
@@ -98,8 +101,9 @@ maybeBox:
     uncover 3
     setbit
     concat
-    // contracts/BoxStorage/contract.algo.ts:73
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:73-74
+    // @readonly
+    // public maybeBox(): [uint64, boolean] {
     bytec_0 // 0x151f7c75
     swap
     concat
@@ -110,8 +114,9 @@ maybeBox:
 
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.getBoxMap[routing]() -> void:
 getBoxMap:
-    // contracts/BoxStorage/contract.algo.ts:84
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:84-85
+    // @readonly
+    // public getBoxMap(key: uint64): string {
     txna ApplicationArgs 1
     btoi
     // contracts/BoxStorage/contract.algo.ts:86
@@ -126,8 +131,9 @@ getBoxMap:
     // return this.boxMap(key).value
     box_get
     assert // Box must have value
-    // contracts/BoxStorage/contract.algo.ts:84
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:84-85
+    // @readonly
+    // public getBoxMap(key: uint64): string {
     dup
     len
     itob
@@ -144,8 +150,9 @@ getBoxMap:
 
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.getBoxMapWithDefault[routing]() -> void:
 getBoxMapWithDefault:
-    // contracts/BoxStorage/contract.algo.ts:94
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:94-95
+    // @readonly
+    // public getBoxMapWithDefault(key: uint64): string {
     txna ApplicationArgs 1
     btoi
     // contracts/BoxStorage/contract.algo.ts:96
@@ -162,8 +169,9 @@ getBoxMapWithDefault:
     pushbytes "default"
     cover 2
     select
-    // contracts/BoxStorage/contract.algo.ts:94
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:94-95
+    // @readonly
+    // public getBoxMapWithDefault(key: uint64): string {
     dup
     len
     itob
@@ -180,8 +188,9 @@ getBoxMapWithDefault:
 
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.maybeBoxMap[routing]() -> void:
 maybeBoxMap:
-    // contracts/BoxStorage/contract.algo.ts:104
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:104-105
+    // @readonly
+    // public maybeBoxMap(key: uint64): [string, boolean] {
     txna ApplicationArgs 1
     btoi
     // contracts/BoxStorage/contract.algo.ts:106
@@ -221,8 +230,9 @@ maybeBoxMap_ternary_merge@4:
     concat
     swap
     concat
-    // contracts/BoxStorage/contract.algo.ts:104
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:104-105
+    // @readonly
+    // public maybeBoxMap(key: uint64): [string, boolean] {
     bytec_0 // 0x151f7c75
     swap
     concat
@@ -239,8 +249,9 @@ maybeBoxMap_ternary_false@3:
 
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.boxMapExists[routing]() -> void:
 boxMapExists:
-    // contracts/BoxStorage/contract.algo.ts:124
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:124-125
+    // @readonly
+    // public boxMapExists(key: uint64): boolean {
     txna ApplicationArgs 1
     btoi
     // contracts/BoxStorage/contract.algo.ts:126
@@ -255,8 +266,9 @@ boxMapExists:
     // return this.boxMap(key).exists
     box_len
     bury 1
-    // contracts/BoxStorage/contract.algo.ts:124
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:124-125
+    // @readonly
+    // public boxMapExists(key: uint64): boolean {
     bytec 4 // 0x00
     intc_1 // 0
     uncover 2
@@ -374,8 +386,9 @@ setBoxMap:
 
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.boxMapLength[routing]() -> void:
 boxMapLength:
-    // contracts/BoxStorage/contract.algo.ts:171
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:171-172
+    // @readonly
+    // public boxMapLength(key: uint64): uint64 {
     txna ApplicationArgs 1
     btoi
     // contracts/BoxStorage/contract.algo.ts:173
@@ -397,8 +410,9 @@ boxMapLength:
     intc_1 // 0
 
 boxMapLength_after_inlined_contracts/BoxStorage/contract.algo.ts::BoxStorage.boxMapLength@4:
-    // contracts/BoxStorage/contract.algo.ts:171
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:171-172
+    // @readonly
+    // public boxMapLength(key: uint64): uint64 {
     itob
     bytec_0 // 0x151f7c75
     swap
@@ -413,8 +427,9 @@ boxMapLength_after_if_else@3:
     dup
     box_len
     assert // Box must have value
-    // contracts/BoxStorage/contract.algo.ts:171
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:171-172
+    // @readonly
+    // public boxMapLength(key: uint64): uint64 {
     b boxMapLength_after_inlined_contracts/BoxStorage/contract.algo.ts::BoxStorage.boxMapLength@4
 
 
@@ -572,8 +587,9 @@ extractBox:
 
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.getBoxMapObject[routing]() -> void:
 getBoxMapObject:
-    // contracts/BoxStorage/contract.algo.ts:234
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:234-235
+    // @readonly
+    // public getBoxMapObject(key: uint64): User {
     txna ApplicationArgs 1
     btoi
     // contracts/BoxStorage/contract.algo.ts:236
@@ -588,8 +604,9 @@ getBoxMapObject:
     // return this.boxMapObject(key).value
     box_get
     assert // Box must have value
-    // contracts/BoxStorage/contract.algo.ts:234
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:234-235
+    // @readonly
+    // public getBoxMapObject(key: uint64): User {
     bytec_0 // 0x151f7c75
     swap
     concat
@@ -600,8 +617,9 @@ getBoxMapObject:
 
 // contracts/BoxStorage/contract.algo.ts::BoxStorage.boxMapObjectExists[routing]() -> void:
 boxMapObjectExists:
-    // contracts/BoxStorage/contract.algo.ts:244
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:244-245
+    // @readonly
+    // public boxMapObjectExists(key: uint64): boolean {
     txna ApplicationArgs 1
     btoi
     // contracts/BoxStorage/contract.algo.ts:246
@@ -616,8 +634,9 @@ boxMapObjectExists:
     // return this.boxMapObject(key).exists
     box_len
     bury 1
-    // contracts/BoxStorage/contract.algo.ts:244
-    // @abimethod({ readonly: true })
+    // contracts/BoxStorage/contract.algo.ts:244-245
+    // @readonly
+    // public boxMapObjectExists(key: uint64): boolean {
     bytec 4 // 0x00
     intc_1 // 0
     uncover 2

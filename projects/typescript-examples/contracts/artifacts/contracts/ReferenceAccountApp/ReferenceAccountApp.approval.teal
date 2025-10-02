@@ -5,7 +5,7 @@
 main:
     intcblock 0 1
     bytecblock "my_counter" 0x151f7c75
-    // contracts/ReferenceAccountApp/contract.algo.ts:51
+    // contracts/ReferenceAccountApp/contract.algo.ts:50
     // export default class ReferenceAccountApp extends Contract {
     txn NumAppArgs
     bz main___algots__.defaultCreate@9
@@ -20,7 +20,7 @@ main:
     err
 
 main___algots__.defaultCreate@9:
-    // contracts/ReferenceAccountApp/contract.algo.ts:51
+    // contracts/ReferenceAccountApp/contract.algo.ts:50
     // export default class ReferenceAccountApp extends Contract {
     txn OnCompletion
     !
@@ -32,26 +32,27 @@ main___algots__.defaultCreate@9:
 
 // contracts/ReferenceAccountApp/contract.algo.ts::ReferenceAccountApp.getMyCounter[routing]() -> void:
 getMyCounter:
-    // contracts/ReferenceAccountApp/contract.algo.ts:59
+    // contracts/ReferenceAccountApp/contract.algo.ts:58
     // const addressBytes = address.bytes
     pushbytes base32(WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRA) // addr WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M
-    // contracts/ReferenceAccountApp/contract.algo.ts:61
+    // contracts/ReferenceAccountApp/contract.algo.ts:60
     // const app = Application(1717) // Replace with your application id
     pushint 1717 // 1717
-    // contracts/ReferenceAccountApp/contract.algo.ts:64
+    // contracts/ReferenceAccountApp/contract.algo.ts:63
     // const [value, hasValue] = op.AppLocal.getExUint64(account, app, Bytes('my_counter'))
     bytec_0 // "my_counter"
     app_local_get_ex
-    // contracts/ReferenceAccountApp/contract.algo.ts:66
+    // contracts/ReferenceAccountApp/contract.algo.ts:65
     // if (!hasValue) {
     bnz getMyCounter_after_if_else@3
-    // contracts/ReferenceAccountApp/contract.algo.ts:67
+    // contracts/ReferenceAccountApp/contract.algo.ts:66
     // return 0
     intc_0 // 0
 
 getMyCounter_after_inlined_contracts/ReferenceAccountApp/contract.algo.ts::ReferenceAccountApp.getMyCounter@4:
-    // contracts/ReferenceAccountApp/contract.algo.ts:56
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAccountApp/contract.algo.ts:55-56
+    // @readonly
+    // public getMyCounter(): uint64 {
     itob
     bytec_1 // 0x151f7c75
     swap
@@ -62,32 +63,35 @@ getMyCounter_after_inlined_contracts/ReferenceAccountApp/contract.algo.ts::Refer
 
 getMyCounter_after_if_else@3:
     dup
-    // contracts/ReferenceAccountApp/contract.algo.ts:56
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAccountApp/contract.algo.ts:55-56
+    // @readonly
+    // public getMyCounter(): uint64 {
     b getMyCounter_after_inlined_contracts/ReferenceAccountApp/contract.algo.ts::ReferenceAccountApp.getMyCounter@4
 
 
 // contracts/ReferenceAccountApp/contract.algo.ts::ReferenceAccountApp.getMyCounterWithArg[routing]() -> void:
 getMyCounterWithArg:
-    // contracts/ReferenceAccountApp/contract.algo.ts:79
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAccountApp/contract.algo.ts:78-79
+    // @readonly
+    // public getMyCounterWithArg(account: Account, app: Application): uint64 {
     txna ApplicationArgs 1
     txna ApplicationArgs 2
     btoi
-    // contracts/ReferenceAccountApp/contract.algo.ts:82
+    // contracts/ReferenceAccountApp/contract.algo.ts:81
     // const [value, hasValue] = op.AppLocal.getExUint64(account, app, Bytes('my_counter'))
     bytec_0 // "my_counter"
     app_local_get_ex
-    // contracts/ReferenceAccountApp/contract.algo.ts:84
+    // contracts/ReferenceAccountApp/contract.algo.ts:83
     // if (!hasValue) {
     bnz getMyCounterWithArg_after_if_else@3
-    // contracts/ReferenceAccountApp/contract.algo.ts:85
+    // contracts/ReferenceAccountApp/contract.algo.ts:84
     // return 0
     intc_0 // 0
 
 getMyCounterWithArg_after_inlined_contracts/ReferenceAccountApp/contract.algo.ts::ReferenceAccountApp.getMyCounterWithArg@4:
-    // contracts/ReferenceAccountApp/contract.algo.ts:79
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAccountApp/contract.algo.ts:78-79
+    // @readonly
+    // public getMyCounterWithArg(account: Account, app: Application): uint64 {
     itob
     bytec_1 // 0x151f7c75
     swap
@@ -98,6 +102,7 @@ getMyCounterWithArg_after_inlined_contracts/ReferenceAccountApp/contract.algo.ts
 
 getMyCounterWithArg_after_if_else@3:
     dup
-    // contracts/ReferenceAccountApp/contract.algo.ts:79
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAccountApp/contract.algo.ts:78-79
+    // @readonly
+    // public getMyCounterWithArg(account: Account, app: Application): uint64 {
     b getMyCounterWithArg_after_inlined_contracts/ReferenceAccountApp/contract.algo.ts::ReferenceAccountApp.getMyCounterWithArg@4

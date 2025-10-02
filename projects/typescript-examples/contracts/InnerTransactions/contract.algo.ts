@@ -5,7 +5,6 @@ import {
   Contract,
   Global,
   Txn,
-  abimethod,
   arc4,
   itxn,
   Bytes,
@@ -26,7 +25,6 @@ export default class InnerTransactions extends Contract {
    * rekeyed to the application address.
    * @returns The amount of the payment
    */
-  @abimethod()
   public payment(): uint64 {
     const result = itxn
       .payment({
@@ -45,7 +43,6 @@ export default class InnerTransactions extends Contract {
    * Creates a fungible asset (token)
    * @returns The ID of the created asset
    */
-  @abimethod()
   public fungibleAssetCreate(): uint64 {
     const itxnResult = itxn
       .assetConfig({
@@ -68,7 +65,6 @@ export default class InnerTransactions extends Contract {
    * The Sender is implied to be Global.currentApplicationAddress.
    * @returns The ID of the created asset
    */
-  @abimethod()
   public nonFungibleAssetCreate(): uint64 {
     const itxnResult = itxn
       .assetConfig({
@@ -97,7 +93,6 @@ export default class InnerTransactions extends Contract {
    * To send an asset transfer, the asset must be an available resource.
    * @param asset The asset to opt into
    */
-  @abimethod()
   public assetOptIn(asset: Asset): void {
     itxn
       .assetTransfer({
@@ -120,7 +115,6 @@ export default class InnerTransactions extends Contract {
    * @param receiver The account to receive the asset
    * @param amount The amount to transfer
    */
-  @abimethod()
   public assetTransfer(asset: Asset, receiver: Account, amount: uint64): void {
     itxn
       .assetTransfer({
@@ -142,7 +136,6 @@ export default class InnerTransactions extends Contract {
    * @param acctToBeFrozen The account to freeze the asset for
    * @param asset The asset to freeze
    */
-  @abimethod()
   public assetFreeze(acctToBeFrozen: Account, asset: Asset): void {
     itxn
       .assetFreeze({
@@ -165,7 +158,6 @@ export default class InnerTransactions extends Contract {
    * @param accountToBeRevoked The account to revoke the asset from
    * @param amount The amount to revoke
    */
-  @abimethod()
   public assetRevoke(asset: Asset, accountToBeRevoked: Account, amount: uint64): void {
     itxn
       .assetTransfer({
@@ -188,7 +180,6 @@ export default class InnerTransactions extends Contract {
    * Refer the Resource Availability section for more information.
    * @param asset The asset to reconfigure
    */
-  @abimethod()
   public assetConfig(asset: Asset): void {
     itxn
       .assetConfig({
@@ -211,7 +202,6 @@ export default class InnerTransactions extends Contract {
    * The Sender is implied to be current_application_address.
    * @param asset The asset to delete
    */
-  @abimethod()
   public assetDelete(asset: Asset): void {
     itxn
       .assetConfig({
@@ -228,7 +218,6 @@ export default class InnerTransactions extends Contract {
    * @param appId The application to call
    * @returns A tuple containing the payment amount and the result of the hello world call
    */
-  @abimethod()
   public multiInnerTxns(appId: Application): [uint64, string] {
     // First payment transaction
     const payTxn = itxn
@@ -268,7 +257,6 @@ export default class InnerTransactions extends Contract {
    * This method uses the itxn.applicationCall to deploy the HelloWorld contract.
    * @returns The ID of the deployed application
    */
-  @abimethod()
   public deployApp(): uint64 {
     // In a real implementation, we would compile the HelloWorld contract
     // This is a placeholder implementation that mocks the bytecode
@@ -289,7 +277,6 @@ export default class InnerTransactions extends Contract {
    * This method uses arc4 to deploy the HelloWorld contract.
    * @returns The ID of the deployed application
    */
-  @abimethod()
   public arc4DeployApp(): uint64 {
     // In a real implementation, we would use the SDK to create the app
     // This is a mock implementation that returns a hardcoded ID
@@ -307,7 +294,6 @@ export default class InnerTransactions extends Contract {
    * @param appId The application to call
    * @returns A string result from the hello world call
    */
-  @abimethod()
   public noopAppCall(appId: Application): string {
     // First application call - invoke an ABI method
     const callTxn = itxn

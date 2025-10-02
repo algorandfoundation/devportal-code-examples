@@ -5,7 +5,7 @@
 main:
     intcblock 1 0 3 4
     bytecblock 0x151f7c75 0x3aad6d86 0x0003446f65
-    // contracts/InnerTransactions/contract.algo.ts:19
+    // contracts/InnerTransactions/contract.algo.ts:18
     // export default class InnerTransactions extends Contract {
     txn NumAppArgs
     bz main___algots__.defaultCreate@20
@@ -20,15 +20,15 @@ main:
     err
 
 main_arc4DeployApp_route@15:
-    // contracts/InnerTransactions/contract.algo.ts:292
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:280
+    // public arc4DeployApp(): uint64 {
     pushbytes 0x151f7c7500000000000004d2
     log
     intc_0 // 1
     return
 
 main___algots__.defaultCreate@20:
-    // contracts/InnerTransactions/contract.algo.ts:19
+    // contracts/InnerTransactions/contract.algo.ts:18
     // export default class InnerTransactions extends Contract {
     txn OnCompletion
     !
@@ -40,7 +40,7 @@ main___algots__.defaultCreate@20:
 
 // contracts/InnerTransactions/contract.algo.ts::InnerTransactions.payment[routing]() -> void:
 payment:
-    // contracts/InnerTransactions/contract.algo.ts:31-37
+    // contracts/InnerTransactions/contract.algo.ts:29-35
     // const result = itxn
     //   .payment({
     //     amount: 5000,
@@ -49,15 +49,15 @@ payment:
     //   })
     //   .submit()
     itxn_begin
-    // contracts/InnerTransactions/contract.algo.ts:34
+    // contracts/InnerTransactions/contract.algo.ts:32
     // receiver: Txn.sender,
     txn Sender
     itxn_field Receiver
-    // contracts/InnerTransactions/contract.algo.ts:33
+    // contracts/InnerTransactions/contract.algo.ts:31
     // amount: 5000,
     pushint 5000 // 5000
     itxn_field Amount
-    // contracts/InnerTransactions/contract.algo.ts:31-36
+    // contracts/InnerTransactions/contract.algo.ts:29-34
     // const result = itxn
     //   .payment({
     //     amount: 5000,
@@ -66,11 +66,11 @@ payment:
     //   })
     intc_0 // 1
     itxn_field TypeEnum
-    // contracts/InnerTransactions/contract.algo.ts:35
+    // contracts/InnerTransactions/contract.algo.ts:33
     // fee: 0,
     intc_1 // 0
     itxn_field Fee
-    // contracts/InnerTransactions/contract.algo.ts:31-37
+    // contracts/InnerTransactions/contract.algo.ts:29-35
     // const result = itxn
     //   .payment({
     //     amount: 5000,
@@ -80,8 +80,8 @@ payment:
     //   .submit()
     itxn_submit
     itxn Amount
-    // contracts/InnerTransactions/contract.algo.ts:29
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:28
+    // public payment(): uint64 {
     itob
     bytec_0 // 0x151f7c75
     swap
@@ -93,7 +93,7 @@ payment:
 
 // contracts/InnerTransactions/contract.algo.ts::InnerTransactions.fungibleAssetCreate[routing]() -> void:
 fungibleAssetCreate:
-    // contracts/InnerTransactions/contract.algo.ts:50-57
+    // contracts/InnerTransactions/contract.algo.ts:47-54
     // const itxnResult = itxn
     //   .assetConfig({
     //     total: 100_000_000_000,
@@ -103,23 +103,23 @@ fungibleAssetCreate:
     //   })
     //   .submit()
     itxn_begin
-    // contracts/InnerTransactions/contract.algo.ts:55
+    // contracts/InnerTransactions/contract.algo.ts:52
     // assetName: 'Royalty Points',
     pushbytes "Royalty Points"
     itxn_field ConfigAssetName
-    // contracts/InnerTransactions/contract.algo.ts:54
+    // contracts/InnerTransactions/contract.algo.ts:51
     // unitName: 'RP',
     pushbytes "RP"
     itxn_field ConfigAssetUnitName
-    // contracts/InnerTransactions/contract.algo.ts:53
+    // contracts/InnerTransactions/contract.algo.ts:50
     // decimals: 2,
     pushint 2 // 2
     itxn_field ConfigAssetDecimals
-    // contracts/InnerTransactions/contract.algo.ts:52
+    // contracts/InnerTransactions/contract.algo.ts:49
     // total: 100_000_000_000,
     pushint 100000000000 // 100000000000
     itxn_field ConfigAssetTotal
-    // contracts/InnerTransactions/contract.algo.ts:50-56
+    // contracts/InnerTransactions/contract.algo.ts:47-53
     // const itxnResult = itxn
     //   .assetConfig({
     //     total: 100_000_000_000,
@@ -131,7 +131,7 @@ fungibleAssetCreate:
     itxn_field TypeEnum
     intc_1 // 0
     itxn_field Fee
-    // contracts/InnerTransactions/contract.algo.ts:50-57
+    // contracts/InnerTransactions/contract.algo.ts:47-54
     // const itxnResult = itxn
     //   .assetConfig({
     //     total: 100_000_000_000,
@@ -142,8 +142,8 @@ fungibleAssetCreate:
     //   .submit()
     itxn_submit
     itxn CreatedAssetID
-    // contracts/InnerTransactions/contract.algo.ts:48
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:46
+    // public fungibleAssetCreate(): uint64 {
     itob
     bytec_0 // 0x151f7c75
     swap
@@ -155,7 +155,7 @@ fungibleAssetCreate:
 
 // contracts/InnerTransactions/contract.algo.ts::InnerTransactions.nonFungibleAssetCreate[routing]() -> void:
 nonFungibleAssetCreate:
-    // contracts/InnerTransactions/contract.algo.ts:73-86
+    // contracts/InnerTransactions/contract.algo.ts:69-82
     // const itxnResult = itxn
     //   .assetConfig({
     //     total: 100,
@@ -171,10 +171,10 @@ nonFungibleAssetCreate:
     //   })
     //   .submit()
     itxn_begin
-    // contracts/InnerTransactions/contract.algo.ts:80
+    // contracts/InnerTransactions/contract.algo.ts:76
     // manager: Global.currentApplicationAddress,
     global CurrentApplicationAddress
-    // contracts/InnerTransactions/contract.algo.ts:81-83
+    // contracts/InnerTransactions/contract.algo.ts:77-79
     // reserve: Global.currentApplicationAddress,
     // freeze: Global.currentApplicationAddress,
     // clawback: Global.currentApplicationAddress,
@@ -183,27 +183,27 @@ nonFungibleAssetCreate:
     itxn_field ConfigAssetFreeze
     itxn_field ConfigAssetReserve
     itxn_field ConfigAssetManager
-    // contracts/InnerTransactions/contract.algo.ts:79
+    // contracts/InnerTransactions/contract.algo.ts:75
     // url: 'https://link_to_ipfs/Mona_Lisa',
     pushbytes "https://link_to_ipfs/Mona_Lisa"
     itxn_field ConfigAssetURL
-    // contracts/InnerTransactions/contract.algo.ts:78
+    // contracts/InnerTransactions/contract.algo.ts:74
     // assetName: 'Mona Lisa',
     pushbytes "Mona Lisa"
     itxn_field ConfigAssetName
-    // contracts/InnerTransactions/contract.algo.ts:77
+    // contracts/InnerTransactions/contract.algo.ts:73
     // unitName: 'ML',
     pushbytes "ML"
     itxn_field ConfigAssetUnitName
-    // contracts/InnerTransactions/contract.algo.ts:76
+    // contracts/InnerTransactions/contract.algo.ts:72
     // decimals: 2,
     pushint 2 // 2
     itxn_field ConfigAssetDecimals
-    // contracts/InnerTransactions/contract.algo.ts:75
+    // contracts/InnerTransactions/contract.algo.ts:71
     // total: 100,
     pushint 100 // 100
     itxn_field ConfigAssetTotal
-    // contracts/InnerTransactions/contract.algo.ts:73-85
+    // contracts/InnerTransactions/contract.algo.ts:69-81
     // const itxnResult = itxn
     //   .assetConfig({
     //     total: 100,
@@ -219,11 +219,11 @@ nonFungibleAssetCreate:
     //   })
     intc_2 // 3
     itxn_field TypeEnum
-    // contracts/InnerTransactions/contract.algo.ts:84
+    // contracts/InnerTransactions/contract.algo.ts:80
     // fee: 0,
     intc_1 // 0
     itxn_field Fee
-    // contracts/InnerTransactions/contract.algo.ts:73-86
+    // contracts/InnerTransactions/contract.algo.ts:69-82
     // const itxnResult = itxn
     //   .assetConfig({
     //     total: 100,
@@ -240,8 +240,8 @@ nonFungibleAssetCreate:
     //   .submit()
     itxn_submit
     itxn CreatedAssetID
-    // contracts/InnerTransactions/contract.algo.ts:71
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:68
+    // public nonFungibleAssetCreate(): uint64 {
     itob
     bytec_0 // 0x151f7c75
     swap
@@ -253,11 +253,11 @@ nonFungibleAssetCreate:
 
 // contracts/InnerTransactions/contract.algo.ts::InnerTransactions.assetOptIn[routing]() -> void:
 assetOptIn:
-    // contracts/InnerTransactions/contract.algo.ts:100
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:96
+    // public assetOptIn(asset: Asset): void {
     txna ApplicationArgs 1
     btoi
-    // contracts/InnerTransactions/contract.algo.ts:102-109
+    // contracts/InnerTransactions/contract.algo.ts:97-104
     // itxn
     //   .assetTransfer({
     //     assetReceiver: Global.currentApplicationAddress,
@@ -267,16 +267,16 @@ assetOptIn:
     //   })
     //   .submit()
     itxn_begin
-    // contracts/InnerTransactions/contract.algo.ts:104
+    // contracts/InnerTransactions/contract.algo.ts:99
     // assetReceiver: Global.currentApplicationAddress,
     global CurrentApplicationAddress
-    // contracts/InnerTransactions/contract.algo.ts:106
+    // contracts/InnerTransactions/contract.algo.ts:101
     // assetAmount: 0,
     intc_1 // 0
     itxn_field AssetAmount
     itxn_field AssetReceiver
     itxn_field XferAsset
-    // contracts/InnerTransactions/contract.algo.ts:102-108
+    // contracts/InnerTransactions/contract.algo.ts:97-103
     // itxn
     //   .assetTransfer({
     //     assetReceiver: Global.currentApplicationAddress,
@@ -286,11 +286,11 @@ assetOptIn:
     //   })
     intc_3 // 4
     itxn_field TypeEnum
-    // contracts/InnerTransactions/contract.algo.ts:107
+    // contracts/InnerTransactions/contract.algo.ts:102
     // fee: 0,
     intc_1 // 0
     itxn_field Fee
-    // contracts/InnerTransactions/contract.algo.ts:102-109
+    // contracts/InnerTransactions/contract.algo.ts:97-104
     // itxn
     //   .assetTransfer({
     //     assetReceiver: Global.currentApplicationAddress,
@@ -300,22 +300,22 @@ assetOptIn:
     //   })
     //   .submit()
     itxn_submit
-    // contracts/InnerTransactions/contract.algo.ts:100
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:96
+    // public assetOptIn(asset: Asset): void {
     intc_0 // 1
     return
 
 
 // contracts/InnerTransactions/contract.algo.ts::InnerTransactions.assetTransfer[routing]() -> void:
 assetTransfer:
-    // contracts/InnerTransactions/contract.algo.ts:123
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:118
+    // public assetTransfer(asset: Asset, receiver: Account, amount: uint64): void {
     txna ApplicationArgs 1
     btoi
     txna ApplicationArgs 2
     txna ApplicationArgs 3
     btoi
-    // contracts/InnerTransactions/contract.algo.ts:125-132
+    // contracts/InnerTransactions/contract.algo.ts:119-126
     // itxn
     //   .assetTransfer({
     //     assetReceiver: receiver,
@@ -328,7 +328,7 @@ assetTransfer:
     itxn_field AssetAmount
     itxn_field AssetReceiver
     itxn_field XferAsset
-    // contracts/InnerTransactions/contract.algo.ts:125-131
+    // contracts/InnerTransactions/contract.algo.ts:119-125
     // itxn
     //   .assetTransfer({
     //     assetReceiver: receiver,
@@ -338,11 +338,11 @@ assetTransfer:
     //   })
     intc_3 // 4
     itxn_field TypeEnum
-    // contracts/InnerTransactions/contract.algo.ts:130
+    // contracts/InnerTransactions/contract.algo.ts:124
     // fee: 0,
     intc_1 // 0
     itxn_field Fee
-    // contracts/InnerTransactions/contract.algo.ts:125-132
+    // contracts/InnerTransactions/contract.algo.ts:119-126
     // itxn
     //   .assetTransfer({
     //     assetReceiver: receiver,
@@ -352,20 +352,20 @@ assetTransfer:
     //   })
     //   .submit()
     itxn_submit
-    // contracts/InnerTransactions/contract.algo.ts:123
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:118
+    // public assetTransfer(asset: Asset, receiver: Account, amount: uint64): void {
     intc_0 // 1
     return
 
 
 // contracts/InnerTransactions/contract.algo.ts::InnerTransactions.assetFreeze[routing]() -> void:
 assetFreeze:
-    // contracts/InnerTransactions/contract.algo.ts:145
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:139
+    // public assetFreeze(acctToBeFrozen: Account, asset: Asset): void {
     txna ApplicationArgs 1
     txna ApplicationArgs 2
     btoi
-    // contracts/InnerTransactions/contract.algo.ts:147-154
+    // contracts/InnerTransactions/contract.algo.ts:140-147
     // itxn
     //   .assetFreeze({
     //     freezeAccount: acctToBeFrozen, // account to be frozen
@@ -375,13 +375,13 @@ assetFreeze:
     //   })
     //   .submit()
     itxn_begin
-    // contracts/InnerTransactions/contract.algo.ts:151
+    // contracts/InnerTransactions/contract.algo.ts:144
     // frozen: true,
     intc_0 // 1
     itxn_field FreezeAssetFrozen
     itxn_field FreezeAsset
     itxn_field FreezeAssetAccount
-    // contracts/InnerTransactions/contract.algo.ts:147-153
+    // contracts/InnerTransactions/contract.algo.ts:140-146
     // itxn
     //   .assetFreeze({
     //     freezeAccount: acctToBeFrozen, // account to be frozen
@@ -391,11 +391,11 @@ assetFreeze:
     //   })
     pushint 5 // 5
     itxn_field TypeEnum
-    // contracts/InnerTransactions/contract.algo.ts:152
+    // contracts/InnerTransactions/contract.algo.ts:145
     // fee: 0,
     intc_1 // 0
     itxn_field Fee
-    // contracts/InnerTransactions/contract.algo.ts:147-154
+    // contracts/InnerTransactions/contract.algo.ts:140-147
     // itxn
     //   .assetFreeze({
     //     freezeAccount: acctToBeFrozen, // account to be frozen
@@ -405,22 +405,22 @@ assetFreeze:
     //   })
     //   .submit()
     itxn_submit
-    // contracts/InnerTransactions/contract.algo.ts:145
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:139
+    // public assetFreeze(acctToBeFrozen: Account, asset: Asset): void {
     intc_0 // 1
     return
 
 
 // contracts/InnerTransactions/contract.algo.ts::InnerTransactions.assetRevoke[routing]() -> void:
 assetRevoke:
-    // contracts/InnerTransactions/contract.algo.ts:168
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:161
+    // public assetRevoke(asset: Asset, accountToBeRevoked: Account, amount: uint64): void {
     txna ApplicationArgs 1
     btoi
     txna ApplicationArgs 2
     txna ApplicationArgs 3
     btoi
-    // contracts/InnerTransactions/contract.algo.ts:170-178
+    // contracts/InnerTransactions/contract.algo.ts:162-170
     // itxn
     //   .assetTransfer({
     //     assetReceiver: Global.currentApplicationAddress,
@@ -431,14 +431,14 @@ assetRevoke:
     //   })
     //   .submit()
     itxn_begin
-    // contracts/InnerTransactions/contract.algo.ts:172
+    // contracts/InnerTransactions/contract.algo.ts:164
     // assetReceiver: Global.currentApplicationAddress,
     global CurrentApplicationAddress
     itxn_field AssetReceiver
     itxn_field AssetAmount
     itxn_field AssetSender
     itxn_field XferAsset
-    // contracts/InnerTransactions/contract.algo.ts:170-177
+    // contracts/InnerTransactions/contract.algo.ts:162-169
     // itxn
     //   .assetTransfer({
     //     assetReceiver: Global.currentApplicationAddress,
@@ -449,11 +449,11 @@ assetRevoke:
     //   })
     intc_3 // 4
     itxn_field TypeEnum
-    // contracts/InnerTransactions/contract.algo.ts:176
+    // contracts/InnerTransactions/contract.algo.ts:168
     // fee: 0,
     intc_1 // 0
     itxn_field Fee
-    // contracts/InnerTransactions/contract.algo.ts:170-178
+    // contracts/InnerTransactions/contract.algo.ts:162-170
     // itxn
     //   .assetTransfer({
     //     assetReceiver: Global.currentApplicationAddress,
@@ -464,19 +464,19 @@ assetRevoke:
     //   })
     //   .submit()
     itxn_submit
-    // contracts/InnerTransactions/contract.algo.ts:168
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:161
+    // public assetRevoke(asset: Asset, accountToBeRevoked: Account, amount: uint64): void {
     intc_0 // 1
     return
 
 
 // contracts/InnerTransactions/contract.algo.ts::InnerTransactions.assetConfig[routing]() -> void:
 assetConfig:
-    // contracts/InnerTransactions/contract.algo.ts:191
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:183
+    // public assetConfig(asset: Asset): void {
     txna ApplicationArgs 1
     btoi
-    // contracts/InnerTransactions/contract.algo.ts:193-202
+    // contracts/InnerTransactions/contract.algo.ts:184-193
     // itxn
     //   .assetConfig({
     //     configAsset: asset,
@@ -488,16 +488,16 @@ assetConfig:
     //   })
     //   .submit()
     itxn_begin
-    // contracts/InnerTransactions/contract.algo.ts:196
+    // contracts/InnerTransactions/contract.algo.ts:187
     // manager: Global.currentApplicationAddress,
     global CurrentApplicationAddress
-    // contracts/InnerTransactions/contract.algo.ts:197
+    // contracts/InnerTransactions/contract.algo.ts:188
     // reserve: Global.currentApplicationAddress,
     dup
-    // contracts/InnerTransactions/contract.algo.ts:198
+    // contracts/InnerTransactions/contract.algo.ts:189
     // freeze: Txn.sender,
     txn Sender
-    // contracts/InnerTransactions/contract.algo.ts:199
+    // contracts/InnerTransactions/contract.algo.ts:190
     // clawback: Txn.sender,
     dup
     itxn_field ConfigAssetClawback
@@ -505,7 +505,7 @@ assetConfig:
     itxn_field ConfigAssetReserve
     itxn_field ConfigAssetManager
     itxn_field ConfigAsset
-    // contracts/InnerTransactions/contract.algo.ts:193-201
+    // contracts/InnerTransactions/contract.algo.ts:184-192
     // itxn
     //   .assetConfig({
     //     configAsset: asset,
@@ -517,11 +517,11 @@ assetConfig:
     //   })
     intc_2 // 3
     itxn_field TypeEnum
-    // contracts/InnerTransactions/contract.algo.ts:200
+    // contracts/InnerTransactions/contract.algo.ts:191
     // fee: 0,
     intc_1 // 0
     itxn_field Fee
-    // contracts/InnerTransactions/contract.algo.ts:193-202
+    // contracts/InnerTransactions/contract.algo.ts:184-193
     // itxn
     //   .assetConfig({
     //     configAsset: asset,
@@ -533,19 +533,19 @@ assetConfig:
     //   })
     //   .submit()
     itxn_submit
-    // contracts/InnerTransactions/contract.algo.ts:191
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:183
+    // public assetConfig(asset: Asset): void {
     intc_0 // 1
     return
 
 
 // contracts/InnerTransactions/contract.algo.ts::InnerTransactions.assetDelete[routing]() -> void:
 assetDelete:
-    // contracts/InnerTransactions/contract.algo.ts:214
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:205
+    // public assetDelete(asset: Asset): void {
     txna ApplicationArgs 1
     btoi
-    // contracts/InnerTransactions/contract.algo.ts:216-221
+    // contracts/InnerTransactions/contract.algo.ts:206-211
     // itxn
     //   .assetConfig({
     //     configAsset: asset,
@@ -554,7 +554,7 @@ assetDelete:
     //   .submit()
     itxn_begin
     itxn_field ConfigAsset
-    // contracts/InnerTransactions/contract.algo.ts:216-220
+    // contracts/InnerTransactions/contract.algo.ts:206-210
     // itxn
     //   .assetConfig({
     //     configAsset: asset,
@@ -562,11 +562,11 @@ assetDelete:
     //   })
     intc_2 // 3
     itxn_field TypeEnum
-    // contracts/InnerTransactions/contract.algo.ts:219
+    // contracts/InnerTransactions/contract.algo.ts:209
     // fee: 0,
     intc_1 // 0
     itxn_field Fee
-    // contracts/InnerTransactions/contract.algo.ts:216-221
+    // contracts/InnerTransactions/contract.algo.ts:206-211
     // itxn
     //   .assetConfig({
     //     configAsset: asset,
@@ -574,19 +574,19 @@ assetDelete:
     //   })
     //   .submit()
     itxn_submit
-    // contracts/InnerTransactions/contract.algo.ts:214
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:205
+    // public assetDelete(asset: Asset): void {
     intc_0 // 1
     return
 
 
 // contracts/InnerTransactions/contract.algo.ts::InnerTransactions.multiInnerTxns[routing]() -> void:
 multiInnerTxns:
-    // contracts/InnerTransactions/contract.algo.ts:231
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:221
+    // public multiInnerTxns(appId: Application): [uint64, string] {
     txna ApplicationArgs 1
     btoi
-    // contracts/InnerTransactions/contract.algo.ts:234-240
+    // contracts/InnerTransactions/contract.algo.ts:223-229
     // const payTxn = itxn
     //   .payment({
     //     amount: 5000,
@@ -595,15 +595,15 @@ multiInnerTxns:
     //   })
     //   .submit()
     itxn_begin
-    // contracts/InnerTransactions/contract.algo.ts:237
+    // contracts/InnerTransactions/contract.algo.ts:226
     // receiver: Txn.sender,
     txn Sender
     itxn_field Receiver
-    // contracts/InnerTransactions/contract.algo.ts:236
+    // contracts/InnerTransactions/contract.algo.ts:225
     // amount: 5000,
     pushint 5000 // 5000
     itxn_field Amount
-    // contracts/InnerTransactions/contract.algo.ts:234-239
+    // contracts/InnerTransactions/contract.algo.ts:223-228
     // const payTxn = itxn
     //   .payment({
     //     amount: 5000,
@@ -612,11 +612,11 @@ multiInnerTxns:
     //   })
     intc_0 // 1
     itxn_field TypeEnum
-    // contracts/InnerTransactions/contract.algo.ts:238
+    // contracts/InnerTransactions/contract.algo.ts:227
     // fee: 0,
     intc_1 // 0
     itxn_field Fee
-    // contracts/InnerTransactions/contract.algo.ts:234-240
+    // contracts/InnerTransactions/contract.algo.ts:223-229
     // const payTxn = itxn
     //   .payment({
     //     amount: 5000,
@@ -626,7 +626,7 @@ multiInnerTxns:
     //   .submit()
     itxn_submit
     itxn Amount
-    // contracts/InnerTransactions/contract.algo.ts:243-249
+    // contracts/InnerTransactions/contract.algo.ts:232-238
     // const appCallTxn = itxn
     //   .applicationCall({
     //     appId: appId.id,
@@ -635,7 +635,7 @@ multiInnerTxns:
     //   })
     //   .submit()
     itxn_begin
-    // contracts/InnerTransactions/contract.algo.ts:246
+    // contracts/InnerTransactions/contract.algo.ts:235
     // appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('Jane'), new arc4.Str('Doe')],
     bytec_1 // method "sayHello(string,string)string"
     itxn_field ApplicationArgs
@@ -645,7 +645,7 @@ multiInnerTxns:
     itxn_field ApplicationArgs
     swap
     itxn_field ApplicationID
-    // contracts/InnerTransactions/contract.algo.ts:243-248
+    // contracts/InnerTransactions/contract.algo.ts:232-237
     // const appCallTxn = itxn
     //   .applicationCall({
     //     appId: appId.id,
@@ -654,11 +654,11 @@ multiInnerTxns:
     //   })
     pushint 6 // 6
     itxn_field TypeEnum
-    // contracts/InnerTransactions/contract.algo.ts:247
+    // contracts/InnerTransactions/contract.algo.ts:236
     // fee: 0,
     intc_1 // 0
     itxn_field Fee
-    // contracts/InnerTransactions/contract.algo.ts:243-249
+    // contracts/InnerTransactions/contract.algo.ts:232-238
     // const appCallTxn = itxn
     //   .applicationCall({
     //     appId: appId.id,
@@ -668,7 +668,7 @@ multiInnerTxns:
     //   .submit()
     itxn_submit
     itxn LastLog
-    // contracts/InnerTransactions/contract.algo.ts:252
+    // contracts/InnerTransactions/contract.algo.ts:241
     // const helloWorldResult = arc4.decodeArc4<string>(appCallTxn.lastLog, 'log')
     dup
     extract 0 4
@@ -676,7 +676,7 @@ multiInnerTxns:
     ==
     assert // Bytes has valid prefix
     extract 6 0
-    // contracts/InnerTransactions/contract.algo.ts:253
+    // contracts/InnerTransactions/contract.algo.ts:242
     // return [payTxn.amount, helloWorldResult]
     swap
     itob
@@ -691,8 +691,8 @@ multiInnerTxns:
     concat
     swap
     concat
-    // contracts/InnerTransactions/contract.algo.ts:231
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:221
+    // public multiInnerTxns(appId: Application): [uint64, string] {
     bytec_0 // 0x151f7c75
     swap
     concat
@@ -703,7 +703,7 @@ multiInnerTxns:
 
 // contracts/InnerTransactions/contract.algo.ts::InnerTransactions.deployApp[routing]() -> void:
 deployApp:
-    // contracts/InnerTransactions/contract.algo.ts:275-281
+    // contracts/InnerTransactions/contract.algo.ts:263-269
     // const appTxn = itxn
     //   .applicationCall({
     //     approvalProgram: Bytes('approval_program'),
@@ -712,15 +712,15 @@ deployApp:
     //   })
     //   .submit()
     itxn_begin
-    // contracts/InnerTransactions/contract.algo.ts:278
+    // contracts/InnerTransactions/contract.algo.ts:266
     // clearStateProgram: Bytes('clear_state_program'),
     pushbytes "clear_state_program"
     itxn_field ClearStateProgramPages
-    // contracts/InnerTransactions/contract.algo.ts:277
+    // contracts/InnerTransactions/contract.algo.ts:265
     // approvalProgram: Bytes('approval_program'),
     pushbytes "approval_program"
     itxn_field ApprovalProgramPages
-    // contracts/InnerTransactions/contract.algo.ts:275-280
+    // contracts/InnerTransactions/contract.algo.ts:263-268
     // const appTxn = itxn
     //   .applicationCall({
     //     approvalProgram: Bytes('approval_program'),
@@ -729,11 +729,11 @@ deployApp:
     //   })
     pushint 6 // 6
     itxn_field TypeEnum
-    // contracts/InnerTransactions/contract.algo.ts:279
+    // contracts/InnerTransactions/contract.algo.ts:267
     // fee: 0,
     intc_1 // 0
     itxn_field Fee
-    // contracts/InnerTransactions/contract.algo.ts:275-281
+    // contracts/InnerTransactions/contract.algo.ts:263-269
     // const appTxn = itxn
     //   .applicationCall({
     //     approvalProgram: Bytes('approval_program'),
@@ -743,8 +743,8 @@ deployApp:
     //   .submit()
     itxn_submit
     itxn CreatedApplicationID
-    // contracts/InnerTransactions/contract.algo.ts:271
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:260
+    // public deployApp(): uint64 {
     itob
     bytec_0 // 0x151f7c75
     swap
@@ -756,11 +756,11 @@ deployApp:
 
 // contracts/InnerTransactions/contract.algo.ts::InnerTransactions.noopAppCall[routing]() -> void:
 noopAppCall:
-    // contracts/InnerTransactions/contract.algo.ts:310
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:297
+    // public noopAppCall(appId: Application): string {
     txna ApplicationArgs 1
     btoi
-    // contracts/InnerTransactions/contract.algo.ts:313-318
+    // contracts/InnerTransactions/contract.algo.ts:299-304
     // const callTxn = itxn
     //   .applicationCall({
     //     appId: appId.id,
@@ -768,7 +768,7 @@ noopAppCall:
     //   })
     //   .submit()
     itxn_begin
-    // contracts/InnerTransactions/contract.algo.ts:316
+    // contracts/InnerTransactions/contract.algo.ts:302
     // appArgs: [arc4.methodSelector('sayHello(string,string)string'), new arc4.Str('John'), new arc4.Str('Doe')],
     bytec_1 // method "sayHello(string,string)string"
     itxn_field ApplicationArgs
@@ -777,7 +777,7 @@ noopAppCall:
     bytec_2 // 0x0003446f65
     itxn_field ApplicationArgs
     itxn_field ApplicationID
-    // contracts/InnerTransactions/contract.algo.ts:313-317
+    // contracts/InnerTransactions/contract.algo.ts:299-303
     // const callTxn = itxn
     //   .applicationCall({
     //     appId: appId.id,
@@ -787,7 +787,7 @@ noopAppCall:
     itxn_field TypeEnum
     intc_1 // 0
     itxn_field Fee
-    // contracts/InnerTransactions/contract.algo.ts:313-318
+    // contracts/InnerTransactions/contract.algo.ts:299-304
     // const callTxn = itxn
     //   .applicationCall({
     //     appId: appId.id,
@@ -796,7 +796,7 @@ noopAppCall:
     //   .submit()
     itxn_submit
     itxn LastLog
-    // contracts/InnerTransactions/contract.algo.ts:321
+    // contracts/InnerTransactions/contract.algo.ts:307
     // return arc4.decodeArc4<string>(callTxn.lastLog, 'log')
     dup
     extract 4 0
@@ -805,8 +805,8 @@ noopAppCall:
     bytec_0 // 0x151f7c75
     ==
     assert // Bytes has valid prefix
-    // contracts/InnerTransactions/contract.algo.ts:310
-    // @abimethod()
+    // contracts/InnerTransactions/contract.algo.ts:297
+    // public noopAppCall(appId: Application): string {
     bytec_0 // 0x151f7c75
     swap
     concat

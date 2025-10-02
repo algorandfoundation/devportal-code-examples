@@ -1,4 +1,4 @@
-import { arc4, Contract, assert, urange, Bytes, Uint64 } from '@algorandfoundation/algorand-typescript'
+import { Contract, assert, urange, Bytes, Uint64, readonly } from '@algorandfoundation/algorand-typescript'
 import type { uint64 } from '@algorandfoundation/algorand-typescript'
 
 /**
@@ -21,7 +21,7 @@ export default class ControlFlow extends Contract {
    * @param accountBalance The account balance to check
    * @returns A string describing the account's wealth status
    */
-  @arc4.abimethod({ readonly: true })
+  @readonly
   public isRich(accountBalance: uint64): string {
     if (accountBalance > 1000) {
       return 'This account is rich!'
@@ -39,7 +39,7 @@ export default class ControlFlow extends Contract {
    * @param number The number to check
    * @returns "Even" if the number is even, "Odd" otherwise
    */
-  @arc4.abimethod({ readonly: true })
+  @readonly
   public isEven(number: uint64): string {
     return number % 2 === 0 ? 'Even' : 'Odd'
   }
@@ -50,7 +50,7 @@ export default class ControlFlow extends Contract {
    * Demonstrates different types of for loops
    * @returns An array of uint64 values in reversed order
    */
-  @arc4.abimethod({ readonly: true })
+  @readonly
   public forLoop(): uint64[] {
     // Create an array with values [0, 1, 2, 3]
     let numbers: uint64[] = []
@@ -89,7 +89,7 @@ export default class ControlFlow extends Contract {
    * @param date A number from 0-6 representing a day of the week
    * @returns The name of the day, or "Invalid day" if out of range
    */
-  @arc4.abimethod({ readonly: true })
+  @readonly
   public getDay(date: uint64): string {
     switch (Uint64(date)) {
       case Uint64(1):
@@ -122,7 +122,7 @@ export default class ControlFlow extends Contract {
    * @param boxName The name of the box (used to calculate name length)
    * @returns The MBR increase in microAlgos, or 0 if invalid size label
    */
-  @arc4.abimethod({ readonly: true })
+  @readonly
   public calculateBoxStorageCost(boxSizeLabel: string, boxName: string): uint64 {
     // Base cost for any box
     const baseCost: uint64 = 2500 // microAlgos
@@ -173,7 +173,7 @@ export default class ControlFlow extends Contract {
    * Demonstrates while loop with continue and break statements
    * @returns The number of iterations performed
    */
-  @arc4.abimethod({ readonly: true })
+  @readonly
   public loop(): uint64 {
     let num: uint64 = 10
     let loopCount: uint64 = 0

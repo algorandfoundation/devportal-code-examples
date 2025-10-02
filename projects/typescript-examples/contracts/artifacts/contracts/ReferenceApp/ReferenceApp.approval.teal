@@ -5,7 +5,7 @@
 main:
     intcblock 6 0 1
     bytecblock 0x151f7c75 0x4a325901
-    // contracts/ReferenceApp/contract.algo.ts:33
+    // contracts/ReferenceApp/contract.algo.ts:24
     // export default class ReferenceApp extends Contract {
     txn NumAppArgs
     bz main___algots__.defaultCreate@9
@@ -20,7 +20,7 @@ main:
     err
 
 main___algots__.defaultCreate@9:
-    // contracts/ReferenceApp/contract.algo.ts:33
+    // contracts/ReferenceApp/contract.algo.ts:24
     // export default class ReferenceApp extends Contract {
     txn OnCompletion
     !
@@ -32,7 +32,7 @@ main___algots__.defaultCreate@9:
 
 // contracts/ReferenceApp/contract.algo.ts::ReferenceApp.incrementViaInner[routing]() -> void:
 incrementViaInner:
-    // contracts/ReferenceApp/contract.algo.ts:43-50
+    // contracts/ReferenceApp/contract.algo.ts:33-40
     // const appCallTxn = itxn
     //   .applicationCall({
     //     appId: app.id,
@@ -42,15 +42,15 @@ incrementViaInner:
     //   })
     //   .submit()
     itxn_begin
-    // contracts/ReferenceApp/contract.algo.ts:47
+    // contracts/ReferenceApp/contract.algo.ts:37
     // appArgs: [arc4.methodSelector('increment()uint64')],
     bytec_1 // method "increment()uint64"
     itxn_field ApplicationArgs
-    // contracts/ReferenceApp/contract.algo.ts:40
+    // contracts/ReferenceApp/contract.algo.ts:30
     // const app = Application(1717) // Replace with your application id
     pushint 1717 // 1717
     itxn_field ApplicationID
-    // contracts/ReferenceApp/contract.algo.ts:43-49
+    // contracts/ReferenceApp/contract.algo.ts:33-39
     // const appCallTxn = itxn
     //   .applicationCall({
     //     appId: app.id,
@@ -60,11 +60,11 @@ incrementViaInner:
     //   })
     intc_0 // 6
     itxn_field TypeEnum
-    // contracts/ReferenceApp/contract.algo.ts:48
+    // contracts/ReferenceApp/contract.algo.ts:38
     // fee: 0,
     intc_1 // 0
     itxn_field Fee
-    // contracts/ReferenceApp/contract.algo.ts:43-50
+    // contracts/ReferenceApp/contract.algo.ts:33-40
     // const appCallTxn = itxn
     //   .applicationCall({
     //     appId: app.id,
@@ -75,7 +75,7 @@ incrementViaInner:
     //   .submit()
     itxn_submit
     itxn LastLog
-    // contracts/ReferenceApp/contract.algo.ts:54
+    // contracts/ReferenceApp/contract.algo.ts:44
     // return arc4.decodeArc4<uint64>(appCallTxn.lastLog, 'log')
     dup
     extract 4 0
@@ -84,8 +84,8 @@ incrementViaInner:
     bytec_0 // 0x151f7c75
     ==
     assert // Bytes has valid prefix
-    // contracts/ReferenceApp/contract.algo.ts:38
-    // @abimethod()
+    // contracts/ReferenceApp/contract.algo.ts:29
+    // public incrementViaInner(): uint64 {
     bytec_0 // 0x151f7c75
     swap
     concat
@@ -96,11 +96,11 @@ incrementViaInner:
 
 // contracts/ReferenceApp/contract.algo.ts::ReferenceApp.incrementViaInnerWithArg[routing]() -> void:
 incrementViaInnerWithArg:
-    // contracts/ReferenceApp/contract.algo.ts:62
-    // @abimethod()
+    // contracts/ReferenceApp/contract.algo.ts:52
+    // public incrementViaInnerWithArg(app: Application): uint64 {
     txna ApplicationArgs 1
     btoi
-    // contracts/ReferenceApp/contract.algo.ts:65-72
+    // contracts/ReferenceApp/contract.algo.ts:54-61
     // const appCallTxn = itxn
     //   .applicationCall({
     //     appId: app.id,
@@ -110,12 +110,12 @@ incrementViaInnerWithArg:
     //   })
     //   .submit()
     itxn_begin
-    // contracts/ReferenceApp/contract.algo.ts:69
+    // contracts/ReferenceApp/contract.algo.ts:58
     // appArgs: [arc4.methodSelector('increment()uint64')],
     bytec_1 // method "increment()uint64"
     itxn_field ApplicationArgs
     itxn_field ApplicationID
-    // contracts/ReferenceApp/contract.algo.ts:65-71
+    // contracts/ReferenceApp/contract.algo.ts:54-60
     // const appCallTxn = itxn
     //   .applicationCall({
     //     appId: app.id,
@@ -125,11 +125,11 @@ incrementViaInnerWithArg:
     //   })
     intc_0 // 6
     itxn_field TypeEnum
-    // contracts/ReferenceApp/contract.algo.ts:70
+    // contracts/ReferenceApp/contract.algo.ts:59
     // fee: 0,
     intc_1 // 0
     itxn_field Fee
-    // contracts/ReferenceApp/contract.algo.ts:65-72
+    // contracts/ReferenceApp/contract.algo.ts:54-61
     // const appCallTxn = itxn
     //   .applicationCall({
     //     appId: app.id,
@@ -140,7 +140,7 @@ incrementViaInnerWithArg:
     //   .submit()
     itxn_submit
     itxn LastLog
-    // contracts/ReferenceApp/contract.algo.ts:76
+    // contracts/ReferenceApp/contract.algo.ts:65
     // return arc4.decodeArc4<uint64>(appCallTxn.lastLog, 'log')
     dup
     extract 4 0
@@ -149,8 +149,8 @@ incrementViaInnerWithArg:
     bytec_0 // 0x151f7c75
     ==
     assert // Bytes has valid prefix
-    // contracts/ReferenceApp/contract.algo.ts:62
-    // @abimethod()
+    // contracts/ReferenceApp/contract.algo.ts:52
+    // public incrementViaInnerWithArg(app: Application): uint64 {
     bytec_0 // 0x151f7c75
     swap
     concat

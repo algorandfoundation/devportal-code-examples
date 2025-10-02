@@ -1,7 +1,7 @@
 // example: REFERENCE_APP_BOX_EXAMPLE
 import {
   Contract,
-  abimethod,
+  readonly,
   Account,
   BoxMap,
   Txn,
@@ -46,7 +46,7 @@ export default class ReferenceAppBox extends Contract {
    * @param payMbr Payment transaction covering the box MBR
    * @returns The new counter value
    */
-  @abimethod()
+  @readonly
   public incrementBoxCounter(payMbr: gtxn.PaymentTxn): uint64 {
     // Verify the payment covers the MBR cost and is sent to the contract
     assert(payMbr.amount === this.boxMbr.value, 'Payment must cover the box MBR')
@@ -69,7 +69,7 @@ export default class ReferenceAppBox extends Contract {
    * Gets the current counter value for the transaction sender
    * @returns The current counter value or 0 if not set
    */
-  @abimethod({ readonly: true })
+  @readonly
   public getBoxCounter(): uint64 {
     const [counter, hasCounter] = this.accountBoxCounter(Txn.sender).maybe()
 
@@ -85,7 +85,7 @@ export default class ReferenceAppBox extends Contract {
    * @param account The account to check
    * @returns The current counter value or 0 if not set
    */
-  @abimethod({ readonly: true })
+  @readonly
   public getBoxCounterForAccount(account: Account): uint64 {
     const [counter, hasCounter] = this.accountBoxCounter(account).maybe()
 
@@ -100,7 +100,7 @@ export default class ReferenceAppBox extends Contract {
    * Returns the MBR cost for creating a box
    * @returns The MBR cost in microAlgos
    */
-  @abimethod({ readonly: true })
+  @readonly
   public getBoxMbr(): uint64 {
     return this.boxMbr.value
   }
@@ -109,7 +109,7 @@ export default class ReferenceAppBox extends Contract {
    * Returns all the box size configuration values
    * @returns A tuple containing [keyLength, valueLength, boxSize, boxMbr]
    */
-  @abimethod({ readonly: true })
+  @readonly
   public getBoxConfiguration(): [uint64, uint64, uint64, uint64] {
     return [this.keyLength.value, this.valueLength.value, this.boxSize.value, this.boxMbr.value]
   }
@@ -119,7 +119,7 @@ export default class ReferenceAppBox extends Contract {
    * @param newKeyLength The new key length
    * @param newValueLength The new value length
    */
-  @abimethod()
+  @readonly
   public updateBoxConfiguration(newKeyLength: uint64, newValueLength: uint64): void {
     this.keyLength.value = newKeyLength
     this.valueLength.value = newValueLength

@@ -22,6 +22,7 @@ main:
 main_keyPrefixBoxMap_route@10:
 
 
+
     pushbytes 0x151f7c750006626f784d6170
     log
     intc_0
@@ -50,6 +51,7 @@ getBox:
     btoi
 
 
+
     itob
     bytec_0
     swap
@@ -69,6 +71,7 @@ valueBox:
     box_get
     assert
     btoi
+
 
 
     itob
@@ -100,6 +103,7 @@ maybeBox:
     concat
 
 
+
     bytec_0
     swap
     concat
@@ -110,6 +114,7 @@ maybeBox:
 
 
 getBoxMap:
+
 
 
     txna ApplicationArgs 1
@@ -126,6 +131,7 @@ getBoxMap:
 
     box_get
     assert
+
 
 
     dup
@@ -146,6 +152,7 @@ getBoxMap:
 getBoxMapWithDefault:
 
 
+
     txna ApplicationArgs 1
     btoi
 
@@ -164,6 +171,7 @@ getBoxMapWithDefault:
     select
 
 
+
     dup
     len
     itob
@@ -180,6 +188,7 @@ getBoxMapWithDefault:
 
 
 maybeBoxMap:
+
 
 
     txna ApplicationArgs 1
@@ -223,6 +232,7 @@ maybeBoxMap_ternary_merge@4:
     concat
 
 
+
     bytec_0
     swap
     concat
@@ -241,6 +251,7 @@ maybeBoxMap_ternary_false@3:
 boxMapExists:
 
 
+
     txna ApplicationArgs 1
     btoi
 
@@ -255,6 +266,7 @@ boxMapExists:
 
     box_len
     bury 1
+
 
 
     bytec 4
@@ -376,6 +388,7 @@ setBoxMap:
 boxMapLength:
 
 
+
     txna ApplicationArgs 1
     btoi
 
@@ -399,6 +412,7 @@ boxMapLength:
 boxMapLength_after_inlined_contracts/BoxStorage/contract.algo.ts::BoxStorage.boxMapLength@4:
 
 
+
     itob
     bytec_0
     swap
@@ -413,6 +427,7 @@ boxMapLength_after_if_else@3:
     dup
     box_len
     assert
+
 
 
     b boxMapLength_after_inlined_contracts/BoxStorage/contract.algo.ts::BoxStorage.boxMapLength@4
@@ -574,6 +589,7 @@ extractBox:
 getBoxMapObject:
 
 
+
     txna ApplicationArgs 1
     btoi
 
@@ -590,6 +606,7 @@ getBoxMapObject:
     assert
 
 
+
     bytec_0
     swap
     concat
@@ -600,6 +617,7 @@ getBoxMapObject:
 
 
 boxMapObjectExists:
+
 
 
     txna ApplicationArgs 1
@@ -616,6 +634,7 @@ boxMapObjectExists:
 
     box_len
     bury 1
+
 
 
     bytec 4

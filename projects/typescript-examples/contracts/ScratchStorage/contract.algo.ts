@@ -1,6 +1,6 @@
 // example: SCRATCH_STORAGE
 import {
-  abimethod,
+  readonly,
   uint64,
   Uint64,
   bytes,
@@ -71,7 +71,7 @@ export default class ScratchStorage extends Contract {
    * @param scratchSlot The scratch slot to read from
    * @returns The uint64 value read from the specified transaction's scratch slot
    */
-  @abimethod({ readonly: true })
+  @readonly
   public readFromGroupTransaction(groupIndex: uint64, scratchSlot: uint64): uint64 {
     return gloadUint64(groupIndex, scratchSlot)
   }
@@ -82,7 +82,7 @@ export default class ScratchStorage extends Contract {
    * @param scratchSlot The scratch slot to read from
    * @returns The bytes value read from the specified transaction's scratch slot
    */
-  @abimethod({ readonly: true })
+  @readonly
   public readBytesFromGroupTransaction(groupIndex: uint64, scratchSlot: uint64): bytes {
     return gloadBytes(groupIndex, scratchSlot)
   }

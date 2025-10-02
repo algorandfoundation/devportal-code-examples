@@ -12,7 +12,7 @@ import {
   Bytes,
 } from '@algorandfoundation/algorand-typescript'
 import type { uint64 } from '@algorandfoundation/algorand-typescript'
-import { Address } from '@algorandfoundation/algorand-typescript/arc4'
+import { Address, readonly } from '@algorandfoundation/algorand-typescript/arc4'
 
 /**
  * A contract that maintains a per-account counter in local state
@@ -34,7 +34,6 @@ export class MyCounter extends Contract {
    * Increment the counter for the sender and return its new value
    * @returns The new counter value
    */
-  @abimethod()
   public incrementMyCounter(): uint64 {
     assert(Txn.sender.isOptedIn(Global.currentApplicationId), 'Account must opt in to contract first')
 
@@ -53,7 +52,7 @@ export default class ReferenceAccountApp extends Contract {
    * Get the counter value from another account's local state with hardcoded values
    * @returns The counter value or 0 if it doesn't exist
    */
-  @abimethod({ readonly: true })
+  @readonly
   public getMyCounter(): uint64 {
     const address = new Address('WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M')
     const addressBytes = address.bytes
@@ -76,7 +75,7 @@ export default class ReferenceAccountApp extends Contract {
    * @param app The application to query
    * @returns The counter value or 0 if it doesn't exist
    */
-  @abimethod({ readonly: true })
+  @readonly
   public getMyCounterWithArg(account: Account, app: Application): uint64 {
     // Check if the counter value exists in the account's local state for the specified app
     const [value, hasValue] = op.AppLocal.getExUint64(account, app, Bytes('my_counter'))

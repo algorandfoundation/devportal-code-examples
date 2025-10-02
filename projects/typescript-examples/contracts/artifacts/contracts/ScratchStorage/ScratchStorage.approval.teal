@@ -93,8 +93,9 @@ demonstrateScratchStorage:
 
 // contracts/ScratchStorage/contract.algo.ts::ScratchStorage.readFromGroupTransaction[routing]() -> void:
 readFromGroupTransaction:
-    // contracts/ScratchStorage/contract.algo.ts:74
-    // @abimethod({ readonly: true })
+    // contracts/ScratchStorage/contract.algo.ts:74-75
+    // @readonly
+    // public readFromGroupTransaction(groupIndex: uint64, scratchSlot: uint64): uint64 {
     txna ApplicationArgs 1
     btoi
     txna ApplicationArgs 2
@@ -102,8 +103,9 @@ readFromGroupTransaction:
     // contracts/ScratchStorage/contract.algo.ts:76
     // return gloadUint64(groupIndex, scratchSlot)
     gloadss
-    // contracts/ScratchStorage/contract.algo.ts:74
-    // @abimethod({ readonly: true })
+    // contracts/ScratchStorage/contract.algo.ts:74-75
+    // @readonly
+    // public readFromGroupTransaction(groupIndex: uint64, scratchSlot: uint64): uint64 {
     itob
     bytec_1 // 0x151f7c75
     swap
@@ -115,8 +117,9 @@ readFromGroupTransaction:
 
 // contracts/ScratchStorage/contract.algo.ts::ScratchStorage.readBytesFromGroupTransaction[routing]() -> void:
 readBytesFromGroupTransaction:
-    // contracts/ScratchStorage/contract.algo.ts:85
-    // @abimethod({ readonly: true })
+    // contracts/ScratchStorage/contract.algo.ts:85-86
+    // @readonly
+    // public readBytesFromGroupTransaction(groupIndex: uint64, scratchSlot: uint64): bytes {
     txna ApplicationArgs 1
     btoi
     txna ApplicationArgs 2
@@ -124,8 +127,9 @@ readBytesFromGroupTransaction:
     // contracts/ScratchStorage/contract.algo.ts:87
     // return gloadBytes(groupIndex, scratchSlot)
     gloadss
-    // contracts/ScratchStorage/contract.algo.ts:85
-    // @abimethod({ readonly: true })
+    // contracts/ScratchStorage/contract.algo.ts:85-86
+    // @readonly
+    // public readBytesFromGroupTransaction(groupIndex: uint64, scratchSlot: uint64): bytes {
     dup
     len
     itob

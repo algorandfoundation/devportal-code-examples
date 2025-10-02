@@ -53,8 +53,9 @@ getAssetBalance:
     // return asset.balance(account)
     asset_holding_get AssetBalance
     assert // account opted into asset
-    // contracts/ReferenceAccountAsset/contract.algo.ts:14
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAccountAsset/contract.algo.ts:14-15
+    // @readonly
+    // public getAssetBalance() {
     itob
     bytec_1 // 0x151f7c75
     swap
@@ -66,8 +67,9 @@ getAssetBalance:
 
 // contracts/ReferenceAccountAsset/contract.algo.ts::ReferenceAccountAsset.getAssetBalanceWithArg[routing]() -> void:
 getAssetBalanceWithArg:
-    // contracts/ReferenceAccountAsset/contract.algo.ts:32
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAccountAsset/contract.algo.ts:32-33
+    // @readonly
+    // public getAssetBalanceWithArg(account: Account, asset: Asset) {
     txna ApplicationArgs 1
     txna ApplicationArgs 2
     btoi
@@ -81,8 +83,9 @@ getAssetBalanceWithArg:
     // return asset.balance(account)
     asset_holding_get AssetBalance
     assert // account opted into asset
-    // contracts/ReferenceAccountAsset/contract.algo.ts:32
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAccountAsset/contract.algo.ts:32-33
+    // @readonly
+    // public getAssetBalanceWithArg(account: Account, asset: Asset) {
     itob
     bytec_1 // 0x151f7c75
     swap

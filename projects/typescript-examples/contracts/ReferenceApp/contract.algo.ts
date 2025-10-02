@@ -1,13 +1,5 @@
 // example: APP_REFERENCE_EXAMPLE
-import {
-  Contract,
-  abimethod,
-  Application,
-  GlobalState,
-  Uint64,
-  itxn,
-  arc4,
-} from '@algorandfoundation/algorand-typescript'
+import { Contract, Application, GlobalState, Uint64, itxn, arc4 } from '@algorandfoundation/algorand-typescript'
 import type { uint64 } from '@algorandfoundation/algorand-typescript'
 
 /**
@@ -20,7 +12,6 @@ export class Counter extends Contract {
    * Increments the counter and returns the new value
    * @returns The new counter value
    */
-  @abimethod()
   public increment(): uint64 {
     this.counter.value = this.counter.value + 1
     return this.counter.value
@@ -35,7 +26,6 @@ export default class ReferenceApp extends Contract {
    * Calls the increment method on another Counter app with a hardcoded app ID
    * @returns The incremented counter value from the inner call
    */
-  @abimethod()
   public incrementViaInner(): uint64 {
     const app = Application(1717) // Replace with your application id
 
@@ -59,7 +49,6 @@ export default class ReferenceApp extends Contract {
    * @param app The application to call
    * @returns The incremented counter value from the inner call
    */
-  @abimethod()
   public incrementViaInnerWithArg(app: Application): uint64 {
     // Call the increment method on the provided Counter application
     const appCallTxn = itxn

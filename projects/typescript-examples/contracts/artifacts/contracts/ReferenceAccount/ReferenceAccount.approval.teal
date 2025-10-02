@@ -38,8 +38,9 @@ getAccountBalance:
     // return account.balance
     acct_params_get AcctBalance
     assert // account funded
-    // contracts/ReferenceAccount/contract.algo.ts:13
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAccount/contract.algo.ts:13-14
+    // @readonly
+    // public getAccountBalance() {
     itob
     bytec_0 // 0x151f7c75
     swap
@@ -51,15 +52,17 @@ getAccountBalance:
 
 // contracts/ReferenceAccount/contract.algo.ts::ReferenceAccount.getAccountBalanceWithArgument[routing]() -> void:
 getAccountBalanceWithArgument:
-    // contracts/ReferenceAccount/contract.algo.ts:27
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAccount/contract.algo.ts:27-28
+    // @readonly
+    // public getAccountBalanceWithArgument(account: Account) {
     txna ApplicationArgs 1
     // contracts/ReferenceAccount/contract.algo.ts:29
     // return account.balance
     acct_params_get AcctBalance
     assert // account funded
-    // contracts/ReferenceAccount/contract.algo.ts:27
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAccount/contract.algo.ts:27-28
+    // @readonly
+    // public getAccountBalanceWithArgument(account: Account) {
     itob
     bytec_0 // 0x151f7c75
     swap

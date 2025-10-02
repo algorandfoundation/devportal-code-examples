@@ -1,4 +1,4 @@
-import { Contract, abimethod, GlobalState, Uint64 } from '@algorandfoundation/algorand-typescript'
+import { Contract, GlobalState, Uint64 } from '@algorandfoundation/algorand-typescript'
 import type { uint64 } from '@algorandfoundation/algorand-typescript'
 
 /**
@@ -11,7 +11,6 @@ export default class Counter extends Contract {
    * Increments the counter and returns the new value
    * @returns The new counter value
    */
-  @abimethod()
   public increment(): uint64 {
     this.counter.value = this.counter.value + 1
     return this.counter.value

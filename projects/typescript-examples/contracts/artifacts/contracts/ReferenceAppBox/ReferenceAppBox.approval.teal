@@ -84,8 +84,9 @@ main___algots__.defaultCreate@15:
 
 // contracts/ReferenceAppBox/contract.algo.ts::ReferenceAppBox.incrementBoxCounter[routing]() -> void:
 incrementBoxCounter:
-    // contracts/ReferenceAppBox/contract.algo.ts:49
-    // @abimethod()
+    // contracts/ReferenceAppBox/contract.algo.ts:49-50
+    // @readonly
+    // public incrementBoxCounter(payMbr: gtxn.PaymentTxn): uint64 {
     txn GroupIndex
     intc_0 // 1
     -
@@ -153,8 +154,9 @@ incrementBoxCounter:
     box_put
 
 incrementBoxCounter_after_inlined_contracts/ReferenceAppBox/contract.algo.ts::ReferenceAppBox.incrementBoxCounter@4:
-    // contracts/ReferenceAppBox/contract.algo.ts:49
-    // @abimethod()
+    // contracts/ReferenceAppBox/contract.algo.ts:49-50
+    // @readonly
+    // public incrementBoxCounter(payMbr: gtxn.PaymentTxn): uint64 {
     itob
     bytec_3 // 0x151f7c75
     swap
@@ -181,8 +183,9 @@ incrementBoxCounter_else_body@3:
     // contracts/ReferenceAppBox/contract.algo.ts:64
     // return Uint64(1)
     intc_0 // 1
-    // contracts/ReferenceAppBox/contract.algo.ts:49
-    // @abimethod()
+    // contracts/ReferenceAppBox/contract.algo.ts:49-50
+    // @readonly
+    // public incrementBoxCounter(payMbr: gtxn.PaymentTxn): uint64 {
     b incrementBoxCounter_after_inlined_contracts/ReferenceAppBox/contract.algo.ts::ReferenceAppBox.incrementBoxCounter@4
 
 
@@ -209,8 +212,9 @@ getBoxCounter:
     dup
 
 getBoxCounter_after_inlined_contracts/ReferenceAppBox/contract.algo.ts::ReferenceAppBox.getBoxCounter@4:
-    // contracts/ReferenceAppBox/contract.algo.ts:72
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAppBox/contract.algo.ts:72-73
+    // @readonly
+    // public getBoxCounter(): uint64 {
     itob
     bytec_3 // 0x151f7c75
     swap
@@ -223,8 +227,9 @@ getBoxCounter_after_if_else@3:
     // contracts/ReferenceAppBox/contract.algo.ts:80
     // return 0
     intc_1 // 0
-    // contracts/ReferenceAppBox/contract.algo.ts:72
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAppBox/contract.algo.ts:72-73
+    // @readonly
+    // public getBoxCounter(): uint64 {
     b getBoxCounter_after_inlined_contracts/ReferenceAppBox/contract.algo.ts::ReferenceAppBox.getBoxCounter@4
 
 
@@ -233,8 +238,9 @@ getBoxCounterForAccount:
     // contracts/ReferenceAppBox/contract.algo.ts:31
     // public accountBoxCounter = BoxMap<Account, uint64>({ keyPrefix: 'counter' })
     bytec_2 // "counter"
-    // contracts/ReferenceAppBox/contract.algo.ts:88
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAppBox/contract.algo.ts:88-89
+    // @readonly
+    // public getBoxCounterForAccount(account: Account): uint64 {
     txna ApplicationArgs 1
     // contracts/ReferenceAppBox/contract.algo.ts:31
     // public accountBoxCounter = BoxMap<Account, uint64>({ keyPrefix: 'counter' })
@@ -251,8 +257,9 @@ getBoxCounterForAccount:
     dup
 
 getBoxCounterForAccount_after_inlined_contracts/ReferenceAppBox/contract.algo.ts::ReferenceAppBox.getBoxCounterForAccount@4:
-    // contracts/ReferenceAppBox/contract.algo.ts:88
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAppBox/contract.algo.ts:88-89
+    // @readonly
+    // public getBoxCounterForAccount(account: Account): uint64 {
     itob
     bytec_3 // 0x151f7c75
     swap
@@ -265,8 +272,9 @@ getBoxCounterForAccount_after_if_else@3:
     // contracts/ReferenceAppBox/contract.algo.ts:96
     // return 0
     intc_1 // 0
-    // contracts/ReferenceAppBox/contract.algo.ts:88
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAppBox/contract.algo.ts:88-89
+    // @readonly
+    // public getBoxCounterForAccount(account: Account): uint64 {
     b getBoxCounterForAccount_after_inlined_contracts/ReferenceAppBox/contract.algo.ts::ReferenceAppBox.getBoxCounterForAccount@4
 
 
@@ -282,8 +290,9 @@ getBoxMbr:
     // return this.boxMbr.value
     app_global_get_ex
     assert // check GlobalState exists
-    // contracts/ReferenceAppBox/contract.algo.ts:103
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAppBox/contract.algo.ts:103-104
+    // @readonly
+    // public getBoxMbr(): uint64 {
     itob
     bytec_3 // 0x151f7c75
     swap
@@ -340,8 +349,9 @@ getBoxConfiguration:
     swap
     itob
     concat
-    // contracts/ReferenceAppBox/contract.algo.ts:112
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAppBox/contract.algo.ts:112-113
+    // @readonly
+    // public getBoxConfiguration(): [uint64, uint64, uint64, uint64] {
     bytec_3 // 0x151f7c75
     swap
     concat
@@ -352,8 +362,9 @@ getBoxConfiguration:
 
 // contracts/ReferenceAppBox/contract.algo.ts::ReferenceAppBox.updateBoxConfiguration[routing]() -> void:
 updateBoxConfiguration:
-    // contracts/ReferenceAppBox/contract.algo.ts:122
-    // @abimethod()
+    // contracts/ReferenceAppBox/contract.algo.ts:122-123
+    // @readonly
+    // public updateBoxConfiguration(newKeyLength: uint64, newValueLength: uint64): void {
     txna ApplicationArgs 1
     btoi
     txna ApplicationArgs 2
@@ -403,7 +414,8 @@ updateBoxConfiguration:
     // this.boxMbr.value = Uint64(2500) + this.boxSize.value * Uint64(400)
     swap
     app_global_put
-    // contracts/ReferenceAppBox/contract.algo.ts:122
-    // @abimethod()
+    // contracts/ReferenceAppBox/contract.algo.ts:122-123
+    // @readonly
+    // public updateBoxConfiguration(newKeyLength: uint64, newValueLength: uint64): void {
     intc_0 // 1
     return

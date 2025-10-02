@@ -107,7 +107,6 @@ export default class GlobalStorage extends Contract {
   }
 
   // example: DELETE_GLOBAL_STATE
-  @arc4.abimethod()
   public deleteGlobalState(): boolean {
     this.globalInt.delete()
     return true
