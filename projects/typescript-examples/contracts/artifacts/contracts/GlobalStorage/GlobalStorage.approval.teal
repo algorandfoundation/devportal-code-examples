@@ -1,4 +1,4 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
@@ -47,134 +47,30 @@ main_after_if_else@2:
     // @contract({ stateTotals: { globalBytes: 4, globalUints: 3 } })
     // export default class GlobalStorage extends Contract {
     txn NumAppArgs
-    bz main_bare_routing@12
+    bz main___algots__.defaultCreate@14
+    txn OnCompletion
+    !
+    assert // OnCompletion must be NoOp
+    txn ApplicationID
+    assert
     pushbytess 0xd38f6072 0x47b45cd1 0xba7953dc 0x4a4c6bf6 0x3c7b1f00 // method "readGlobalState()(uint64,uint64,byte[],string,bool,address)", method "hasGlobalState()(uint64,bool)", method "writeGlobalState(string,bool,address)void", method "writeDynamicGlobalState(string,string)string", method "deleteGlobalState()bool"
     txna ApplicationArgs 0
-    match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8 main_deleteGlobalState_route@9
-
-main_after_if_else@16:
+    match readGlobalState hasGlobalState writeGlobalState writeDynamicGlobalState deleteGlobalState
     err
 
-main_deleteGlobalState_route@9:
-    // contracts/GlobalStorage/contract.algo.ts:110
-    // @arc4.abimethod()
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    // contracts/GlobalStorage/contract.algo.ts:20
-    // public globalInt = GlobalState<uint64>({ initialValue: Uint64(50) }) // UInt64 with default value
-    bytec_2 // "globalInt"
-    // contracts/GlobalStorage/contract.algo.ts:112
-    // this.globalInt.delete()
-    app_global_del
-    // contracts/GlobalStorage/contract.algo.ts:110
-    // @arc4.abimethod()
-    pushbytes 0x151f7c7580
-    log
-    intc_1 // 1
-    return
-
-main_writeDynamicGlobalState_route@8:
-    // contracts/GlobalStorage/contract.algo.ts:99
-    // public writeDynamicGlobalState(key: string, value: string): string {
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    // contracts/GlobalStorage/contract.algo.ts:17-18
-    // @contract({ stateTotals: { globalBytes: 4, globalUints: 3 } })
-    // export default class GlobalStorage extends Contract {
-    txna ApplicationArgs 1
-    extract 2 0
-    txna ApplicationArgs 2
-    dup
-    extract 2 0
-    // contracts/GlobalStorage/contract.algo.ts:102
-    // globalDynamicAccess.value = value
-    uncover 2
-    swap
-    app_global_put
-    // contracts/GlobalStorage/contract.algo.ts:99
-    // public writeDynamicGlobalState(key: string, value: string): string {
-    bytec 5 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_1 // 1
-    return
-
-main_writeGlobalState_route@7:
-    // contracts/GlobalStorage/contract.algo.ts:82
-    // public writeGlobalState(valueString: string, valueBool: boolean, valueAccount: Account): void {
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    // contracts/GlobalStorage/contract.algo.ts:17-18
-    // @contract({ stateTotals: { globalBytes: 4, globalUints: 3 } })
-    // export default class GlobalStorage extends Contract {
-    txna ApplicationArgs 1
-    extract 2 0
-    txna ApplicationArgs 2
-    intc_0 // 0
-    getbit
-    txna ApplicationArgs 3
-    // contracts/GlobalStorage/contract.algo.ts:82
-    // public writeGlobalState(valueString: string, valueBool: boolean, valueAccount: Account): void {
-    callsub writeGlobalState
-    intc_1 // 1
-    return
-
-main_hasGlobalState_route@6:
-    // contracts/GlobalStorage/contract.algo.ts:65
-    // public hasGlobalState(): [uint64, boolean] {
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    callsub hasGlobalState
-    bytec 5 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_1 // 1
-    return
-
-main_readGlobalState_route@5:
-    // contracts/GlobalStorage/contract.algo.ts:44
-    // public readGlobalState(): [uint64, uint64, bytes, string, boolean, arc4.Address] {
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    callsub readGlobalState
-    bytec 5 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_1 // 1
-    return
-
-main_bare_routing@12:
+main___algots__.defaultCreate@14:
     // contracts/GlobalStorage/contract.algo.ts:17-18
     // @contract({ stateTotals: { globalBytes: 4, globalUints: 3 } })
     // export default class GlobalStorage extends Contract {
     txn OnCompletion
-    bnz main_after_if_else@16
+    !
     txn ApplicationID
     !
-    assert // can only call when creating
-    intc_1 // 1
-    return
+    &&
+    return // on error: OnCompletion must be NoOp && can only call when creating
 
 
-// contracts/GlobalStorage/contract.algo.ts::GlobalStorage.readGlobalState() -> bytes:
+// contracts/GlobalStorage/contract.algo.ts::GlobalStorage.readGlobalState[routing]() -> void:
 readGlobalState:
     // contracts/GlobalStorage/contract.algo.ts:46
     // const accountAddress = new arc4.Address(this.globalAccount.value)
@@ -286,10 +182,17 @@ readGlobalState:
     concat
     swap
     concat
-    retsub
+    // contracts/GlobalStorage/contract.algo.ts:44
+    // public readGlobalState(): [uint64, uint64, bytes, string, boolean, arc4.Address] {
+    bytec 5 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
 
 
-// contracts/GlobalStorage/contract.algo.ts::GlobalStorage.hasGlobalState() -> bytes:
+// contracts/GlobalStorage/contract.algo.ts::GlobalStorage.hasGlobalState[routing]() -> void:
 hasGlobalState:
     // contracts/GlobalStorage/contract.algo.ts:66
     // const hasValue = this.globalIntNoDefault.hasValue
@@ -313,34 +216,46 @@ hasGlobalState:
     uncover 3
     setbit
     concat
-    retsub
+    // contracts/GlobalStorage/contract.algo.ts:65
+    // public hasGlobalState(): [uint64, boolean] {
+    bytec 5 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
 
 
-// contracts/GlobalStorage/contract.algo.ts::GlobalStorage.writeGlobalState(valueString: bytes, valueBool: uint64, valueAccount: bytes) -> void:
+// contracts/GlobalStorage/contract.algo.ts::GlobalStorage.writeGlobalState[routing]() -> void:
 writeGlobalState:
     // contracts/GlobalStorage/contract.algo.ts:82
     // public writeGlobalState(valueString: string, valueBool: boolean, valueAccount: Account): void {
-    proto 3 0
+    txna ApplicationArgs 1
+    extract 2 0
+    txna ApplicationArgs 2
+    intc_0 // 0
+    getbit
+    txna ApplicationArgs 3
     // contracts/GlobalStorage/contract.algo.ts:23
     // public globalString = GlobalState<string>({ initialValue: 'Micali' }) // Bytes with default value
     bytec_0 // "globalString"
     // contracts/GlobalStorage/contract.algo.ts:83
     // this.globalString.value = valueString
-    frame_dig -3
+    dig 3
     app_global_put
     // contracts/GlobalStorage/contract.algo.ts:24
     // public globalBool = GlobalState({ initialValue: true }) // Bool with default value
     bytec_1 // "globalBool"
     // contracts/GlobalStorage/contract.algo.ts:84
     // this.globalBool.value = valueBool
-    frame_dig -2
+    dig 2
     app_global_put
     // contracts/GlobalStorage/contract.algo.ts:25
     // public globalAccount = GlobalState<Account>() // Address with no default value
     bytec 4 // "globalAccount"
     // contracts/GlobalStorage/contract.algo.ts:85
     // this.globalAccount.value = valueAccount
-    frame_dig -1
+    swap
     app_global_put
     // contracts/GlobalStorage/contract.algo.ts:87
     // assert(this.globalString.value === valueString)
@@ -352,7 +267,7 @@ writeGlobalState:
     // assert(this.globalString.value === valueString)
     app_global_get_ex
     assert // check GlobalState exists
-    frame_dig -3
+    uncover 2
     ==
     assert
     // contracts/GlobalStorage/contract.algo.ts:88
@@ -365,7 +280,52 @@ writeGlobalState:
     // assert(this.globalBool.value === valueBool)
     app_global_get_ex
     assert // check GlobalState exists
-    frame_dig -2
     ==
-    assert
-    retsub
+    // contracts/GlobalStorage/contract.algo.ts:82
+    // public writeGlobalState(valueString: string, valueBool: boolean, valueAccount: Account): void {
+    return
+
+
+// contracts/GlobalStorage/contract.algo.ts::GlobalStorage.writeDynamicGlobalState[routing]() -> void:
+writeDynamicGlobalState:
+    // contracts/GlobalStorage/contract.algo.ts:99
+    // public writeDynamicGlobalState(key: string, value: string): string {
+    txna ApplicationArgs 1
+    extract 2 0
+    txna ApplicationArgs 2
+    extract 2 0
+    // contracts/GlobalStorage/contract.algo.ts:102
+    // globalDynamicAccess.value = value
+    swap
+    dig 1
+    app_global_put
+    // contracts/GlobalStorage/contract.algo.ts:99
+    // public writeDynamicGlobalState(key: string, value: string): string {
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    bytec 5 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+
+// contracts/GlobalStorage/contract.algo.ts::GlobalStorage.deleteGlobalState[routing]() -> void:
+deleteGlobalState:
+    // contracts/GlobalStorage/contract.algo.ts:20
+    // public globalInt = GlobalState<uint64>({ initialValue: Uint64(50) }) // UInt64 with default value
+    bytec_2 // "globalInt"
+    // contracts/GlobalStorage/contract.algo.ts:112
+    // this.globalInt.delete()
+    app_global_del
+    // contracts/GlobalStorage/contract.algo.ts:110
+    // @arc4.abimethod()
+    pushbytes 0x151f7c7580
+    log
+    intc_1 // 1
+    return

@@ -3,7 +3,7 @@
   "sources": [
     "/Users/gabe.algo/Code/devportal-code-examples/projects/typescript-examples/contracts/ReferenceApp/contract.algo.ts"
   ],
-  "mappings": ";;;;;;;;;;;;;;;;;;;;AAgBS;AAAqD;AAA5D;AADF;;AAAA;;;AAAA;;;;;;AAAA;;;AAAA;;;;;AAOG;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;;AAPH;;AAAA;;;AAAA;;AAAA;AAAA;AAAA;;AASsC;AAR7B;AAQ6B;AAAA;AAAQ;AAArB;AARhB;AAQL;;AAAA;AACA",
+  "mappings": ";;;;;;;;;;;;;;;;;;;;AAgBS;AAAqD;AAA5D;AADF;;AAAA;;;AAAA;;;;;;AAAA;;;AAAA;;;;AAAA;AAOG;;AAAA;AAAA;;AAAA;AAAA;AAAA;;;AAPH;;AAAA;AAAA;;AAAA;AAAA;AAAA;AASsC;AAR7B;AAQ6B;AAAA;AAAQ;AAArB;AARhB;AAQL;;AAAA;AAFD;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA",
   "op_pc_offset": 0,
   "pc_events": {
     "1": {
@@ -11,7 +11,7 @@
       "params": {},
       "block": "main",
       "stack_in": [],
-      "op": "intcblock 1 0"
+      "op": "intcblock 0 1"
     },
     "5": {
       "op": "bytecblock \"counter\""
@@ -39,7 +39,7 @@
       ]
     },
     "21": {
-      "op": "intc_1 // 0",
+      "op": "intc_0 // 0",
       "defined_out": [
         "\"counter\"",
         "0"
@@ -65,7 +65,7 @@
       ]
     },
     "25": {
-      "op": "bz main_bare_routing@8",
+      "op": "bz main___algots__.defaultCreate@7",
       "stack_out": []
     },
     "28": {
@@ -93,10 +93,7 @@
       "stack_out": []
     },
     "41": {
-      "block": "main_after_if_else@12",
-      "stack_in": [],
-      "op": "err",
-      "defined_out": []
+      "op": "err"
     },
     "42": {
       "block": "main_increment_route@5",
@@ -119,144 +116,96 @@
       ]
     },
     "45": {
-      "error": "OnCompletion is not NoOp",
-      "op": "assert // OnCompletion is not NoOp",
-      "stack_out": []
-    },
-    "46": {
       "op": "txn ApplicationID",
       "defined_out": [
+        "tmp%4#0",
         "tmp%5#0"
       ],
       "stack_out": [
+        "tmp%4#0",
         "tmp%5#0"
+      ]
+    },
+    "47": {
+      "op": "&&",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%7#0"
       ]
     },
     "48": {
-      "error": "can only call when not creating",
-      "op": "assert // can only call when not creating",
+      "error": "OnCompletion must be NoOp && can only call when not creating",
+      "op": "assert // OnCompletion must be NoOp && can only call when not creating",
       "stack_out": []
     },
     "49": {
-      "callsub": "contracts/ReferenceApp/contract.algo.ts::Counter.increment",
-      "op": "callsub increment",
-      "defined_out": [
-        "tmp%7#0"
-      ],
-      "stack_out": [
-        "tmp%7#0"
-      ]
+      "op": "b increment"
     },
     "52": {
-      "op": "itob",
-      "defined_out": [
-        "aggregate%val_as_bytes%0#0"
-      ],
-      "stack_out": [
-        "aggregate%val_as_bytes%0#0"
-      ]
-    },
-    "53": {
-      "op": "pushbytes 0x151f7c75",
-      "defined_out": [
-        "0x151f7c75",
-        "aggregate%val_as_bytes%0#0"
-      ],
-      "stack_out": [
-        "aggregate%val_as_bytes%0#0",
-        "0x151f7c75"
-      ]
-    },
-    "59": {
-      "op": "swap",
-      "stack_out": [
-        "0x151f7c75",
-        "aggregate%val_as_bytes%0#0"
-      ]
-    },
-    "60": {
-      "op": "concat",
-      "defined_out": [
-        "tmp%9#0"
-      ],
-      "stack_out": [
-        "tmp%9#0"
-      ]
-    },
-    "61": {
-      "op": "log",
-      "stack_out": []
-    },
-    "62": {
-      "op": "intc_0 // 1",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
-    },
-    "63": {
-      "op": "return",
-      "stack_out": []
-    },
-    "64": {
-      "block": "main_bare_routing@8",
+      "block": "main___algots__.defaultCreate@7",
       "stack_in": [],
       "op": "txn OnCompletion",
       "defined_out": [
-        "tmp%10#0"
+        "tmp%8#0"
       ],
       "stack_out": [
-        "tmp%10#0"
+        "tmp%8#0"
       ]
     },
-    "66": {
-      "op": "bnz main_after_if_else@12",
-      "stack_out": []
-    },
-    "69": {
-      "op": "txn ApplicationID",
-      "defined_out": [
-        "tmp%11#0"
-      ],
-      "stack_out": [
-        "tmp%11#0"
-      ]
-    },
-    "71": {
+    "54": {
       "op": "!",
       "defined_out": [
-        "tmp%12#0"
+        "tmp%9#0"
       ],
       "stack_out": [
-        "tmp%12#0"
+        "tmp%9#0"
       ]
     },
-    "72": {
-      "error": "can only call when creating",
-      "op": "assert // can only call when creating",
-      "stack_out": []
-    },
-    "73": {
-      "op": "intc_0 // 1",
+    "55": {
+      "op": "txn ApplicationID",
       "defined_out": [
-        "tmp%0#0"
+        "tmp%10#0",
+        "tmp%9#0"
       ],
       "stack_out": [
-        "tmp%0#0"
+        "tmp%9#0",
+        "tmp%10#0"
       ]
     },
-    "74": {
-      "op": "return",
+    "57": {
+      "op": "!",
+      "defined_out": [
+        "tmp%11#0",
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%9#0",
+        "tmp%11#0"
+      ]
+    },
+    "58": {
+      "op": "&&",
+      "defined_out": [
+        "tmp%12#0"
+      ],
+      "stack_out": [
+        "tmp%12#0"
+      ]
+    },
+    "59": {
+      "error": "OnCompletion must be NoOp && can only call when creating",
+      "op": "return // on error: OnCompletion must be NoOp && can only call when creating",
+      "defined_out": [],
       "stack_out": []
     },
-    "75": {
-      "subroutine": "contracts/ReferenceApp/contract.algo.ts::Counter.increment",
+    "60": {
+      "subroutine": "contracts/ReferenceApp/contract.algo.ts::Counter.increment[routing]",
       "params": {},
       "block": "increment",
       "stack_in": [],
-      "op": "intc_1 // 0",
+      "op": "intc_0 // 0",
       "defined_out": [
         "0"
       ],
@@ -264,7 +213,7 @@
         "0"
       ]
     },
-    "76": {
+    "61": {
       "op": "bytec_0 // \"counter\"",
       "defined_out": [
         "\"counter\"",
@@ -275,7 +224,7 @@
         "\"counter\""
       ]
     },
-    "77": {
+    "62": {
       "op": "app_global_get_ex",
       "defined_out": [
         "maybe_exists%0#0",
@@ -286,15 +235,15 @@
         "maybe_exists%0#0"
       ]
     },
-    "78": {
+    "63": {
       "error": "check GlobalState exists",
       "op": "assert // check GlobalState exists",
       "stack_out": [
         "maybe_value%0#0"
       ]
     },
-    "79": {
-      "op": "intc_0 // 1",
+    "64": {
+      "op": "intc_1 // 1",
       "defined_out": [
         "1",
         "maybe_value%0#0"
@@ -304,44 +253,90 @@
         "1"
       ]
     },
-    "80": {
+    "65": {
       "op": "+",
       "defined_out": [
-        "tmp%0#0"
+        "tmp%0#1"
       ],
       "stack_out": [
-        "tmp%0#0"
+        "tmp%0#1"
       ]
     },
-    "81": {
+    "66": {
       "op": "bytec_0 // \"counter\"",
       "stack_out": [
-        "tmp%0#0",
+        "tmp%0#1",
         "\"counter\""
       ]
     },
-    "82": {
+    "67": {
       "op": "dig 1",
       "defined_out": [
         "\"counter\"",
-        "tmp%0#0",
-        "tmp%0#0 (copy)"
+        "tmp%0#1",
+        "tmp%0#1 (copy)"
       ],
       "stack_out": [
-        "tmp%0#0",
+        "tmp%0#1",
         "\"counter\"",
-        "tmp%0#0 (copy)"
+        "tmp%0#1 (copy)"
       ]
     },
-    "84": {
+    "69": {
       "op": "app_global_put",
       "stack_out": [
-        "tmp%0#0"
+        "tmp%0#1"
       ]
     },
-    "85": {
-      "retsub": true,
-      "op": "retsub"
+    "70": {
+      "op": "itob",
+      "defined_out": [
+        "aggregate%val_as_bytes%0#0"
+      ],
+      "stack_out": [
+        "aggregate%val_as_bytes%0#0"
+      ]
+    },
+    "71": {
+      "op": "pushbytes 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "aggregate%val_as_bytes%0#0"
+      ],
+      "stack_out": [
+        "aggregate%val_as_bytes%0#0",
+        "0x151f7c75"
+      ]
+    },
+    "77": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "aggregate%val_as_bytes%0#0"
+      ]
+    },
+    "78": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%2#0"
+      ]
+    },
+    "79": {
+      "op": "log",
+      "stack_out": []
+    },
+    "80": {
+      "op": "intc_1 // 1",
+      "stack_out": [
+        "1"
+      ]
+    },
+    "81": {
+      "op": "return",
+      "stack_out": []
     }
   }
 }

@@ -3,7 +3,7 @@
   "sources": [
     "/Users/gabe.algo/Code/devportal-code-examples/projects/typescript-examples/contracts/StructInBox/contract.algo.ts"
   ],
-  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAiBA;;AAAA;;;AAAA;;;;;;;;;;;;;;;;;;;;;;AAAA;;;AAAA;;;;;;;;;;;AAmCG;;AAAA;AAAA;AAAA;;AAAA;AAnCH;;;AAAA;AAmCG;;;AAAA;AAAA;AAAA;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;AALA;;AAAA;AAAA;AAAA;;AAAA;AA9BH;;;AAAA;AA8BG;;;AAAA;AAAA;AAAA;AAAA;AAAA;;AAbA;;AAAA;AAAA;AAAA;;AAAA;AAjBH;;;AAAA;AAAA;;;AAiBG;;;AAAA;AAAA;AAAA;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;AAdA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;AAAA;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;AAHH;;AAAA;;;AAAA;;AAAA;AAAA;AAAA;;AACmB;AAWf;;AAXe;AAWY;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAA3B;AAEO;AAAP;AAGF;;;AAEe;;AAAA;AAlBE;AAAA;AAAA;AAkBf;AAAA;;AAAA;AAAA;;AAAA;AAEA;AAAA;AAAA;AAAA;AAAA;AACY;;AAAA;AAAA;AADZ;AAAA;AAAA;;AAAA;AAAA;AAAA;AAEe;;AAAA;;AAAA;AAFf;AAAA;AAAA;AAAA;AAAA;AAMO;AAAP;AAGF;;;AAEsB;;AAAA;AA/BL;AAAA;AAAA;AA+BU;AAAA;AAAzB;AAGF;;;AAEsB;;AAAA;AApCL;AAAA;AAAA;AAoCU;AAAA;;AAAzB",
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAiBA;;AAAA;;;AAAA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;;;;;;;;;;;;;;;;;;;;AAAA;;;AAAA;;;;;;;;;;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;AAAA;AACmB;AAWf;;AAXe;AAWY;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAA3B;AATD;AAAA;AAAA;AAAA;AAcA;;;AAAA;AAAA;;;AAEc;AAAA;AAlBE;AAAA;AAAA;AAkBf;AAAA;;AAAA;AAAA;;AAAA;AAEA;AAAA;AAAA;AAAA;AAAA;AACY;;AAAA;AAAA;AADZ;AAAA;AAAA;AAAA;AAAA;AAAA;AAEe;;AAAA;AAAA;AAFf;AAAA;AAAA;AAAA;AAAA;AAJD;AAAA;AAAA;AAAA;AAaA;;;AAAA;AAEqB;AA/BL;AAAA;AAAA;AA+BU;AAAA;AAF1B;AAAA;AAAA;AAAA;AAAA;AAAA;AAKA;;;AAAA;AAEqB;AApCL;AAAA;AAAA;AAoCU;AAAA;;AAF1B;;;AAAA;;AAAA;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA",
   "op_pc_offset": 0,
   "pc_events": {
     "1": {
@@ -11,12 +11,12 @@
       "params": {},
       "block": "main",
       "stack_in": [],
-      "op": "intcblock 1 0 2 8"
+      "op": "intcblock 1 2 8 10"
     },
     "7": {
-      "op": "bytecblock 0x151f7c75 0x00 \"users\" 0x75736572730000000000000000"
+      "op": "bytecblock \"users\" 0x75736572730000000000000000 0x151f7c7580 0x151f7c75"
     },
-    "36": {
+    "40": {
       "op": "txn NumAppArgs",
       "defined_out": [
         "tmp%0#1"
@@ -25,11 +25,47 @@
         "tmp%0#1"
       ]
     },
-    "38": {
-      "op": "bz main_bare_routing@9",
+    "42": {
+      "op": "bz main___algots__.defaultCreate@11",
       "stack_out": []
     },
-    "41": {
+    "45": {
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%2#0"
+      ]
+    },
+    "47": {
+      "op": "!",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "48": {
+      "error": "OnCompletion must be NoOp",
+      "op": "assert // OnCompletion must be NoOp",
+      "stack_out": []
+    },
+    "49": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "51": {
+      "op": "assert",
+      "stack_out": []
+    },
+    "52": {
       "op": "pushbytess 0xf165cdd9 0x0f05f332 0x699eb0fe 0xd829d2a3 // method \"boxMapTest()bool\", method \"boxMapSet(uint64,(string,uint64,uint64))bool\", method \"boxMapGet(uint64)(string,uint64,uint64)\", method \"boxMapExists(uint64)bool\"",
       "defined_out": [
         "Method(boxMapExists(uint64)bool)",
@@ -44,650 +80,93 @@
         "Method(boxMapExists(uint64)bool)"
       ]
     },
-    "63": {
+    "74": {
       "op": "txna ApplicationArgs 0",
       "defined_out": [
         "Method(boxMapExists(uint64)bool)",
         "Method(boxMapGet(uint64)(string,uint64,uint64))",
         "Method(boxMapSet(uint64,(string,uint64,uint64))bool)",
         "Method(boxMapTest()bool)",
-        "tmp%2#0"
+        "tmp%6#0"
       ],
       "stack_out": [
         "Method(boxMapTest()bool)",
         "Method(boxMapSet(uint64,(string,uint64,uint64))bool)",
         "Method(boxMapGet(uint64)(string,uint64,uint64))",
         "Method(boxMapExists(uint64)bool)",
-        "tmp%2#0"
+        "tmp%6#0"
       ]
     },
-    "66": {
-      "op": "match main_boxMapTest_route@3 main_boxMapSet_route@4 main_boxMapGet_route@5 main_boxMapExists_route@6",
+    "77": {
+      "op": "match boxMapTest boxMapSet boxMapGet boxMapExists",
       "stack_out": []
     },
-    "76": {
-      "block": "main_after_if_else@13",
-      "stack_in": [],
-      "op": "err",
-      "defined_out": []
+    "87": {
+      "op": "err"
     },
-    "77": {
-      "block": "main_boxMapExists_route@6",
+    "88": {
+      "block": "main___algots__.defaultCreate@11",
       "stack_in": [],
       "op": "txn OnCompletion",
       "defined_out": [
-        "tmp%25#0"
+        "tmp%7#0"
       ],
       "stack_out": [
-        "tmp%25#0"
+        "tmp%7#0"
       ]
     },
-    "79": {
+    "90": {
       "op": "!",
       "defined_out": [
-        "tmp%26#0"
+        "tmp%8#0"
       ],
       "stack_out": [
-        "tmp%26#0"
-      ]
-    },
-    "80": {
-      "error": "OnCompletion is not NoOp",
-      "op": "assert // OnCompletion is not NoOp",
-      "stack_out": []
-    },
-    "81": {
-      "op": "txn ApplicationID",
-      "defined_out": [
-        "tmp%27#0"
-      ],
-      "stack_out": [
-        "tmp%27#0"
-      ]
-    },
-    "83": {
-      "error": "can only call when not creating",
-      "op": "assert // can only call when not creating",
-      "stack_out": []
-    },
-    "84": {
-      "op": "txna ApplicationArgs 1",
-      "defined_out": [
-        "reinterpret_Encoded(uint64)%2#0"
-      ],
-      "stack_out": [
-        "reinterpret_Encoded(uint64)%2#0"
-      ]
-    },
-    "87": {
-      "op": "btoi",
-      "defined_out": [
-        "tmp%29#0"
-      ],
-      "stack_out": [
-        "tmp%29#0"
-      ]
-    },
-    "88": {
-      "callsub": "contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapExists",
-      "op": "callsub boxMapExists",
-      "defined_out": [
-        "tmp%30#0"
-      ],
-      "stack_out": [
-        "tmp%30#0"
+        "tmp%8#0"
       ]
     },
     "91": {
-      "op": "bytec_1 // 0x00",
+      "op": "txn ApplicationID",
       "defined_out": [
-        "0x00",
-        "tmp%30#0"
+        "tmp%8#0",
+        "tmp%9#0"
       ],
       "stack_out": [
-        "tmp%30#0",
-        "0x00"
-      ]
-    },
-    "92": {
-      "op": "intc_1 // 0",
-      "defined_out": [
-        "0",
-        "0x00",
-        "tmp%30#0"
-      ],
-      "stack_out": [
-        "tmp%30#0",
-        "0x00",
-        "0"
+        "tmp%8#0",
+        "tmp%9#0"
       ]
     },
     "93": {
-      "op": "uncover 2",
+      "op": "!",
+      "defined_out": [
+        "tmp%10#0",
+        "tmp%8#0"
+      ],
       "stack_out": [
-        "0x00",
-        "0",
-        "tmp%30#0"
+        "tmp%8#0",
+        "tmp%10#0"
+      ]
+    },
+    "94": {
+      "op": "&&",
+      "defined_out": [
+        "tmp%11#0"
+      ],
+      "stack_out": [
+        "tmp%11#0"
       ]
     },
     "95": {
-      "op": "setbit",
-      "defined_out": [
-        "aggregate%encoded_bool%2#0"
-      ],
-      "stack_out": [
-        "aggregate%encoded_bool%2#0"
-      ]
+      "error": "OnCompletion must be NoOp && can only call when creating",
+      "op": "return // on error: OnCompletion must be NoOp && can only call when creating",
+      "defined_out": [],
+      "stack_out": []
     },
     "96": {
-      "op": "bytec_0 // 0x151f7c75",
-      "defined_out": [
-        "0x151f7c75",
-        "aggregate%encoded_bool%2#0"
-      ],
-      "stack_out": [
-        "aggregate%encoded_bool%2#0",
-        "0x151f7c75"
-      ]
-    },
-    "97": {
-      "op": "swap",
-      "stack_out": [
-        "0x151f7c75",
-        "aggregate%encoded_bool%2#0"
-      ]
-    },
-    "98": {
-      "op": "concat",
-      "defined_out": [
-        "tmp%32#0"
-      ],
-      "stack_out": [
-        "tmp%32#0"
-      ]
-    },
-    "99": {
-      "op": "log",
-      "stack_out": []
-    },
-    "100": {
-      "op": "intc_0 // 1",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
-    },
-    "101": {
-      "op": "return",
-      "stack_out": []
-    },
-    "102": {
-      "block": "main_boxMapGet_route@5",
-      "stack_in": [],
-      "op": "txn OnCompletion",
-      "defined_out": [
-        "tmp%18#0"
-      ],
-      "stack_out": [
-        "tmp%18#0"
-      ]
-    },
-    "104": {
-      "op": "!",
-      "defined_out": [
-        "tmp%19#0"
-      ],
-      "stack_out": [
-        "tmp%19#0"
-      ]
-    },
-    "105": {
-      "error": "OnCompletion is not NoOp",
-      "op": "assert // OnCompletion is not NoOp",
-      "stack_out": []
-    },
-    "106": {
-      "op": "txn ApplicationID",
-      "defined_out": [
-        "tmp%20#0"
-      ],
-      "stack_out": [
-        "tmp%20#0"
-      ]
-    },
-    "108": {
-      "error": "can only call when not creating",
-      "op": "assert // can only call when not creating",
-      "stack_out": []
-    },
-    "109": {
-      "op": "txna ApplicationArgs 1",
-      "defined_out": [
-        "reinterpret_Encoded(uint64)%1#0"
-      ],
-      "stack_out": [
-        "reinterpret_Encoded(uint64)%1#0"
-      ]
-    },
-    "112": {
-      "op": "btoi",
-      "defined_out": [
-        "tmp%22#0"
-      ],
-      "stack_out": [
-        "tmp%22#0"
-      ]
-    },
-    "113": {
-      "callsub": "contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapGet",
-      "op": "callsub boxMapGet",
-      "defined_out": [
-        "tmp%23#0"
-      ],
-      "stack_out": [
-        "tmp%23#0"
-      ]
-    },
-    "116": {
-      "op": "bytec_0 // 0x151f7c75",
-      "defined_out": [
-        "0x151f7c75",
-        "tmp%23#0"
-      ],
-      "stack_out": [
-        "tmp%23#0",
-        "0x151f7c75"
-      ]
-    },
-    "117": {
-      "op": "swap",
-      "stack_out": [
-        "0x151f7c75",
-        "tmp%23#0"
-      ]
-    },
-    "118": {
-      "op": "concat",
-      "defined_out": [
-        "tmp%24#0"
-      ],
-      "stack_out": [
-        "tmp%24#0"
-      ]
-    },
-    "119": {
-      "op": "log",
-      "stack_out": []
-    },
-    "120": {
-      "op": "intc_0 // 1",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
-    },
-    "121": {
-      "op": "return",
-      "stack_out": []
-    },
-    "122": {
-      "block": "main_boxMapSet_route@4",
-      "stack_in": [],
-      "op": "txn OnCompletion",
-      "defined_out": [
-        "tmp%10#0"
-      ],
-      "stack_out": [
-        "tmp%10#0"
-      ]
-    },
-    "124": {
-      "op": "!",
-      "defined_out": [
-        "tmp%11#0"
-      ],
-      "stack_out": [
-        "tmp%11#0"
-      ]
-    },
-    "125": {
-      "error": "OnCompletion is not NoOp",
-      "op": "assert // OnCompletion is not NoOp",
-      "stack_out": []
-    },
-    "126": {
-      "op": "txn ApplicationID",
-      "defined_out": [
-        "tmp%12#0"
-      ],
-      "stack_out": [
-        "tmp%12#0"
-      ]
-    },
-    "128": {
-      "error": "can only call when not creating",
-      "op": "assert // can only call when not creating",
-      "stack_out": []
-    },
-    "129": {
-      "op": "txna ApplicationArgs 1",
-      "defined_out": [
-        "reinterpret_Encoded(uint64)%0#0"
-      ],
-      "stack_out": [
-        "reinterpret_Encoded(uint64)%0#0"
-      ]
-    },
-    "132": {
-      "op": "btoi",
-      "defined_out": [
-        "tmp%14#0"
-      ],
-      "stack_out": [
-        "tmp%14#0"
-      ]
-    },
-    "133": {
-      "op": "txna ApplicationArgs 2",
-      "defined_out": [
-        "reinterpret_Encoded((len+utf8[]),uint64,uint64)%0#0",
-        "tmp%14#0"
-      ],
-      "stack_out": [
-        "tmp%14#0",
-        "reinterpret_Encoded((len+utf8[]),uint64,uint64)%0#0"
-      ]
-    },
-    "136": {
-      "callsub": "contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapSet",
-      "op": "callsub boxMapSet",
-      "defined_out": [
-        "tmp%15#0"
-      ],
-      "stack_out": [
-        "tmp%15#0"
-      ]
-    },
-    "139": {
-      "op": "bytec_1 // 0x00",
-      "defined_out": [
-        "0x00",
-        "tmp%15#0"
-      ],
-      "stack_out": [
-        "tmp%15#0",
-        "0x00"
-      ]
-    },
-    "140": {
-      "op": "intc_1 // 0",
-      "defined_out": [
-        "0",
-        "0x00",
-        "tmp%15#0"
-      ],
-      "stack_out": [
-        "tmp%15#0",
-        "0x00",
-        "0"
-      ]
-    },
-    "141": {
-      "op": "uncover 2",
-      "stack_out": [
-        "0x00",
-        "0",
-        "tmp%15#0"
-      ]
-    },
-    "143": {
-      "op": "setbit",
-      "defined_out": [
-        "aggregate%encoded_bool%1#0"
-      ],
-      "stack_out": [
-        "aggregate%encoded_bool%1#0"
-      ]
-    },
-    "144": {
-      "op": "bytec_0 // 0x151f7c75",
-      "defined_out": [
-        "0x151f7c75",
-        "aggregate%encoded_bool%1#0"
-      ],
-      "stack_out": [
-        "aggregate%encoded_bool%1#0",
-        "0x151f7c75"
-      ]
-    },
-    "145": {
-      "op": "swap",
-      "stack_out": [
-        "0x151f7c75",
-        "aggregate%encoded_bool%1#0"
-      ]
-    },
-    "146": {
-      "op": "concat",
-      "defined_out": [
-        "tmp%17#0"
-      ],
-      "stack_out": [
-        "tmp%17#0"
-      ]
-    },
-    "147": {
-      "op": "log",
-      "stack_out": []
-    },
-    "148": {
-      "op": "intc_0 // 1",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
-    },
-    "149": {
-      "op": "return",
-      "stack_out": []
-    },
-    "150": {
-      "block": "main_boxMapTest_route@3",
-      "stack_in": [],
-      "op": "txn OnCompletion",
-      "defined_out": [
-        "tmp%3#0"
-      ],
-      "stack_out": [
-        "tmp%3#0"
-      ]
-    },
-    "152": {
-      "op": "!",
-      "defined_out": [
-        "tmp%4#0"
-      ],
-      "stack_out": [
-        "tmp%4#0"
-      ]
-    },
-    "153": {
-      "error": "OnCompletion is not NoOp",
-      "op": "assert // OnCompletion is not NoOp",
-      "stack_out": []
-    },
-    "154": {
-      "op": "txn ApplicationID",
-      "defined_out": [
-        "tmp%5#0"
-      ],
-      "stack_out": [
-        "tmp%5#0"
-      ]
-    },
-    "156": {
-      "error": "can only call when not creating",
-      "op": "assert // can only call when not creating",
-      "stack_out": []
-    },
-    "157": {
-      "callsub": "contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapTest",
-      "op": "callsub boxMapTest",
-      "defined_out": [
-        "tmp%7#0"
-      ],
-      "stack_out": [
-        "tmp%7#0"
-      ]
-    },
-    "160": {
-      "op": "bytec_1 // 0x00",
-      "defined_out": [
-        "0x00",
-        "tmp%7#0"
-      ],
-      "stack_out": [
-        "tmp%7#0",
-        "0x00"
-      ]
-    },
-    "161": {
-      "op": "intc_1 // 0",
-      "defined_out": [
-        "0",
-        "0x00",
-        "tmp%7#0"
-      ],
-      "stack_out": [
-        "tmp%7#0",
-        "0x00",
-        "0"
-      ]
-    },
-    "162": {
-      "op": "uncover 2",
-      "stack_out": [
-        "0x00",
-        "0",
-        "tmp%7#0"
-      ]
-    },
-    "164": {
-      "op": "setbit",
-      "defined_out": [
-        "aggregate%encoded_bool%0#0"
-      ],
-      "stack_out": [
-        "aggregate%encoded_bool%0#0"
-      ]
-    },
-    "165": {
-      "op": "bytec_0 // 0x151f7c75",
-      "defined_out": [
-        "0x151f7c75",
-        "aggregate%encoded_bool%0#0"
-      ],
-      "stack_out": [
-        "aggregate%encoded_bool%0#0",
-        "0x151f7c75"
-      ]
-    },
-    "166": {
-      "op": "swap",
-      "stack_out": [
-        "0x151f7c75",
-        "aggregate%encoded_bool%0#0"
-      ]
-    },
-    "167": {
-      "op": "concat",
-      "defined_out": [
-        "tmp%9#0"
-      ],
-      "stack_out": [
-        "tmp%9#0"
-      ]
-    },
-    "168": {
-      "op": "log",
-      "stack_out": []
-    },
-    "169": {
-      "op": "intc_0 // 1",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
-    },
-    "170": {
-      "op": "return",
-      "stack_out": []
-    },
-    "171": {
-      "block": "main_bare_routing@9",
-      "stack_in": [],
-      "op": "txn OnCompletion",
-      "defined_out": [
-        "tmp%33#0"
-      ],
-      "stack_out": [
-        "tmp%33#0"
-      ]
-    },
-    "173": {
-      "op": "bnz main_after_if_else@13",
-      "stack_out": []
-    },
-    "176": {
-      "op": "txn ApplicationID",
-      "defined_out": [
-        "tmp%34#0"
-      ],
-      "stack_out": [
-        "tmp%34#0"
-      ]
-    },
-    "178": {
-      "op": "!",
-      "defined_out": [
-        "tmp%35#0"
-      ],
-      "stack_out": [
-        "tmp%35#0"
-      ]
-    },
-    "179": {
-      "error": "can only call when creating",
-      "op": "assert // can only call when creating",
-      "stack_out": []
-    },
-    "180": {
-      "op": "intc_0 // 1",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
-    },
-    "181": {
-      "op": "return",
-      "stack_out": []
-    },
-    "182": {
-      "subroutine": "contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapTest",
+      "subroutine": "contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapTest[routing]",
       "params": {},
       "block": "boxMapTest",
       "stack_in": [],
-      "op": "bytec_3 // 0x75736572730000000000000000",
+      "op": "bytec_1 // 0x75736572730000000000000000",
       "defined_out": [
         "0x75736572730000000000000000"
       ],
@@ -695,7 +174,7 @@
         "0x75736572730000000000000000"
       ]
     },
-    "183": {
+    "97": {
       "op": "box_del",
       "defined_out": [
         "{box_del}"
@@ -704,17 +183,17 @@
         "{box_del}"
       ]
     },
-    "184": {
+    "98": {
       "op": "pop",
       "stack_out": []
     },
-    "185": {
-      "op": "bytec_3 // 0x75736572730000000000000000",
+    "99": {
+      "op": "bytec_1 // 0x75736572730000000000000000",
       "stack_out": [
         "0x75736572730000000000000000"
       ]
     },
-    "186": {
+    "100": {
       "op": "pushbytes 0x0012000000000000004600000000000000020008746573744e616d65",
       "defined_out": [
         "0x0012000000000000004600000000000000020008746573744e616d65",
@@ -725,11 +204,24 @@
         "0x0012000000000000004600000000000000020008746573744e616d65"
       ]
     },
-    "216": {
+    "130": {
       "op": "box_put",
       "stack_out": []
     },
-    "217": {
+    "131": {
+      "op": "bytec_2 // 0x151f7c7580",
+      "defined_out": [
+        "0x151f7c7580"
+      ],
+      "stack_out": [
+        "0x151f7c7580"
+      ]
+    },
+    "132": {
+      "op": "log",
+      "stack_out": []
+    },
+    "133": {
       "op": "intc_0 // 1",
       "defined_out": [
         "1"
@@ -738,330 +230,390 @@
         "1"
       ]
     },
-    "218": {
-      "retsub": true,
-      "op": "retsub"
+    "134": {
+      "op": "return",
+      "stack_out": []
     },
-    "219": {
-      "subroutine": "contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapSet",
-      "params": {
-        "key#0": "uint64",
-        "value#0": "bytes"
-      },
+    "135": {
+      "subroutine": "contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapSet[routing]",
+      "params": {},
       "block": "boxMapSet",
       "stack_in": [],
-      "op": "proto 2 1"
-    },
-    "222": {
-      "op": "frame_dig -2",
+      "op": "txna ApplicationArgs 1",
       "defined_out": [
-        "key#0 (copy)"
+        "reinterpret_Encoded(uint64)%0#0"
       ],
       "stack_out": [
-        "key#0 (copy)"
+        "reinterpret_Encoded(uint64)%0#0"
       ]
     },
-    "224": {
+    "138": {
+      "op": "btoi",
+      "defined_out": [
+        "key#0"
+      ],
+      "stack_out": [
+        "key#0"
+      ]
+    },
+    "139": {
+      "op": "txna ApplicationArgs 2",
+      "defined_out": [
+        "key#0",
+        "value#0"
+      ],
+      "stack_out": [
+        "key#0",
+        "value#0"
+      ]
+    },
+    "142": {
+      "op": "swap",
+      "stack_out": [
+        "value#0",
+        "key#0"
+      ]
+    },
+    "143": {
       "op": "itob",
       "defined_out": [
-        "encoded_value%0#0"
+        "encoded_value%0#0",
+        "value#0"
       ],
       "stack_out": [
+        "value#0",
         "encoded_value%0#0"
       ]
     },
-    "225": {
-      "op": "bytec_2 // \"users\"",
+    "144": {
+      "op": "bytec_0 // \"users\"",
       "defined_out": [
         "\"users\"",
-        "encoded_value%0#0"
+        "encoded_value%0#0",
+        "value#0"
       ],
       "stack_out": [
+        "value#0",
         "encoded_value%0#0",
         "\"users\""
       ]
     },
-    "226": {
+    "145": {
       "op": "swap",
       "stack_out": [
+        "value#0",
         "\"users\"",
         "encoded_value%0#0"
       ]
     },
-    "227": {
+    "146": {
       "op": "concat",
       "defined_out": [
-        "box_prefixed_key%0#0"
+        "box_prefixed_key%0#0",
+        "value#0"
       ],
       "stack_out": [
+        "value#0",
         "box_prefixed_key%0#0"
       ]
     },
-    "228": {
+    "147": {
       "op": "dup",
       "defined_out": [
         "box_prefixed_key%0#0",
-        "box_prefixed_key%0#0 (copy)"
+        "box_prefixed_key%0#0 (copy)",
+        "value#0"
       ],
       "stack_out": [
+        "value#0",
         "box_prefixed_key%0#0",
         "box_prefixed_key%0#0 (copy)"
       ]
     },
-    "229": {
+    "148": {
       "op": "box_del",
       "defined_out": [
         "box_prefixed_key%0#0",
+        "value#0",
         "{box_del}"
       ],
       "stack_out": [
+        "value#0",
         "box_prefixed_key%0#0",
         "{box_del}"
       ]
     },
-    "230": {
+    "149": {
       "op": "pop",
       "stack_out": [
+        "value#0",
         "box_prefixed_key%0#0"
       ]
     },
-    "231": {
+    "150": {
       "op": "dup",
       "stack_out": [
+        "value#0",
         "box_prefixed_key%0#0",
         "box_prefixed_key%0#0 (copy)"
       ]
     },
-    "232": {
-      "op": "frame_dig -1",
+    "151": {
+      "op": "dig 2",
       "defined_out": [
         "box_prefixed_key%0#0",
         "box_prefixed_key%0#0 (copy)",
+        "value#0",
         "value#0 (copy)"
       ],
       "stack_out": [
+        "value#0",
         "box_prefixed_key%0#0",
         "box_prefixed_key%0#0 (copy)",
         "value#0 (copy)"
       ]
     },
-    "234": {
+    "153": {
       "op": "box_put",
       "stack_out": [
+        "value#0",
         "box_prefixed_key%0#0"
       ]
     },
-    "235": {
+    "154": {
       "op": "dup",
       "stack_out": [
+        "value#0",
         "box_prefixed_key%0#0",
         "box_prefixed_key%0#0 (copy)"
       ]
     },
-    "236": {
-      "op": "intc_2 // 2",
+    "155": {
+      "op": "intc_1 // 2",
       "defined_out": [
         "2",
         "box_prefixed_key%0#0",
-        "box_prefixed_key%0#0 (copy)"
+        "box_prefixed_key%0#0 (copy)",
+        "value#0"
       ],
       "stack_out": [
+        "value#0",
         "box_prefixed_key%0#0",
         "box_prefixed_key%0#0 (copy)",
         "2"
       ]
     },
-    "237": {
-      "op": "intc_3 // 8",
+    "156": {
+      "op": "intc_2 // 8",
       "defined_out": [
         "2",
         "8",
         "box_prefixed_key%0#0",
-        "box_prefixed_key%0#0 (copy)"
+        "box_prefixed_key%0#0 (copy)",
+        "value#0"
       ],
       "stack_out": [
+        "value#0",
         "box_prefixed_key%0#0",
         "box_prefixed_key%0#0 (copy)",
         "2",
         "8"
       ]
     },
-    "238": {
+    "157": {
       "op": "box_extract",
       "defined_out": [
         "box%box_extract%0#0",
-        "box_prefixed_key%0#0"
+        "box_prefixed_key%0#0",
+        "value#0"
       ],
       "stack_out": [
+        "value#0",
         "box_prefixed_key%0#0",
         "box%box_extract%0#0"
       ]
     },
-    "239": {
+    "158": {
       "op": "btoi",
       "defined_out": [
         "box_prefixed_key%0#0",
+        "value#0",
         "values%0#0"
       ],
       "stack_out": [
+        "value#0",
         "box_prefixed_key%0#0",
         "values%0#0"
       ]
     },
-    "240": {
-      "op": "frame_dig -1",
+    "159": {
+      "op": "dig 2",
       "stack_out": [
+        "value#0",
         "box_prefixed_key%0#0",
         "values%0#0",
         "value#0 (copy)"
       ]
     },
-    "242": {
-      "op": "intc_2 // 2",
+    "161": {
+      "op": "intc_1 // 2",
       "stack_out": [
+        "value#0",
         "box_prefixed_key%0#0",
         "values%0#0",
         "value#0 (copy)",
         "2"
       ]
     },
-    "243": {
+    "162": {
       "op": "extract_uint64",
       "defined_out": [
         "box_prefixed_key%0#0",
+        "value#0",
         "values%0#0",
         "values%1#0"
       ],
       "stack_out": [
+        "value#0",
         "box_prefixed_key%0#0",
         "values%0#0",
         "values%1#0"
       ]
     },
-    "244": {
+    "163": {
       "op": "==",
       "defined_out": [
         "box_prefixed_key%0#0",
-        "tmp%0#0"
+        "tmp%0#1",
+        "value#0"
       ],
       "stack_out": [
+        "value#0",
         "box_prefixed_key%0#0",
-        "tmp%0#0"
+        "tmp%0#1"
       ]
     },
-    "245": {
+    "164": {
       "op": "swap",
       "stack_out": [
-        "tmp%0#0",
+        "value#0",
+        "tmp%0#1",
         "box_prefixed_key%0#0"
       ]
     },
-    "246": {
-      "op": "pushint 10 // 10",
+    "165": {
+      "op": "intc_3 // 10",
       "defined_out": [
         "10",
         "box_prefixed_key%0#0",
-        "tmp%0#0"
+        "tmp%0#1",
+        "value#0"
       ],
       "stack_out": [
-        "tmp%0#0",
+        "value#0",
+        "tmp%0#1",
         "box_prefixed_key%0#0",
         "10"
       ]
     },
-    "248": {
-      "op": "intc_3 // 8",
+    "166": {
+      "op": "intc_2 // 8",
       "stack_out": [
-        "tmp%0#0",
+        "value#0",
+        "tmp%0#1",
         "box_prefixed_key%0#0",
         "10",
         "8"
       ]
     },
-    "249": {
+    "167": {
       "op": "box_extract",
       "defined_out": [
         "box%box_extract%1#0",
-        "tmp%0#0"
+        "tmp%0#1",
+        "value#0"
       ],
       "stack_out": [
-        "tmp%0#0",
+        "value#0",
+        "tmp%0#1",
         "box%box_extract%1#0"
       ]
     },
-    "250": {
+    "168": {
       "op": "btoi",
       "defined_out": [
-        "tmp%0#0",
+        "tmp%0#1",
+        "value#0",
         "values%2#0"
       ],
       "stack_out": [
-        "tmp%0#0",
+        "value#0",
+        "tmp%0#1",
         "values%2#0"
       ]
     },
-    "251": {
-      "op": "frame_dig -1",
+    "169": {
+      "op": "uncover 2",
       "stack_out": [
-        "tmp%0#0",
+        "tmp%0#1",
         "values%2#0",
-        "value#0 (copy)"
+        "value#0"
       ]
     },
-    "253": {
-      "op": "pushint 10 // 10",
+    "171": {
+      "op": "intc_3 // 10",
       "stack_out": [
-        "tmp%0#0",
+        "tmp%0#1",
         "values%2#0",
-        "value#0 (copy)",
+        "value#0",
         "10"
       ]
     },
-    "255": {
+    "172": {
       "op": "extract_uint64",
       "defined_out": [
-        "tmp%0#0",
+        "tmp%0#1",
         "values%2#0",
         "values%3#0"
       ],
       "stack_out": [
-        "tmp%0#0",
+        "tmp%0#1",
         "values%2#0",
         "values%3#0"
       ]
     },
-    "256": {
+    "173": {
       "op": "==",
       "defined_out": [
-        "tmp%0#0",
-        "tmp%1#0"
+        "tmp%0#1",
+        "tmp%1#1"
       ],
       "stack_out": [
-        "tmp%0#0",
-        "tmp%1#0"
+        "tmp%0#1",
+        "tmp%1#1"
       ]
     },
-    "257": {
+    "174": {
       "op": "&&",
       "defined_out": [
-        "tmp%2#0"
+        "tmp%2#1"
       ],
       "stack_out": [
-        "tmp%2#0"
+        "tmp%2#1"
       ]
     },
-    "258": {
+    "175": {
       "op": "intc_0 // 1",
       "defined_out": [
         "1",
-        "tmp%2#0"
+        "tmp%2#1"
       ],
       "stack_out": [
-        "tmp%2#0",
+        "tmp%2#1",
         "1"
       ]
     },
-    "259": {
+    "176": {
       "op": "&&",
       "defined_out": [
         "tmp%4#0"
@@ -1070,40 +622,57 @@
         "tmp%4#0"
       ]
     },
-    "260": {
+    "177": {
       "error": "assert target is match for conditions",
       "op": "assert // assert target is match for conditions",
       "stack_out": []
     },
-    "261": {
+    "178": {
+      "op": "bytec_2 // 0x151f7c7580",
+      "defined_out": [
+        "0x151f7c7580"
+      ],
+      "stack_out": [
+        "0x151f7c7580"
+      ]
+    },
+    "179": {
+      "op": "log",
+      "stack_out": []
+    },
+    "180": {
       "op": "intc_0 // 1",
       "stack_out": [
         "1"
       ]
     },
-    "262": {
-      "retsub": true,
-      "op": "retsub"
+    "181": {
+      "op": "return",
+      "stack_out": []
     },
-    "263": {
-      "subroutine": "contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapGet",
-      "params": {
-        "key#0": "uint64"
-      },
+    "182": {
+      "subroutine": "contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapGet[routing]",
+      "params": {},
       "block": "boxMapGet",
       "stack_in": [],
-      "op": "proto 1 1"
-    },
-    "266": {
-      "op": "frame_dig -1",
+      "op": "txna ApplicationArgs 1",
       "defined_out": [
-        "key#0 (copy)"
+        "reinterpret_Encoded(uint64)%0#0"
       ],
       "stack_out": [
-        "key#0 (copy)"
+        "reinterpret_Encoded(uint64)%0#0"
       ]
     },
-    "268": {
+    "185": {
+      "op": "btoi",
+      "defined_out": [
+        "key#0"
+      ],
+      "stack_out": [
+        "key#0"
+      ]
+    },
+    "186": {
       "op": "itob",
       "defined_out": [
         "encoded_value%0#0"
@@ -1112,8 +681,8 @@
         "encoded_value%0#0"
       ]
     },
-    "269": {
-      "op": "bytec_2 // \"users\"",
+    "187": {
+      "op": "bytec_0 // \"users\"",
       "defined_out": [
         "\"users\"",
         "encoded_value%0#0"
@@ -1123,14 +692,14 @@
         "\"users\""
       ]
     },
-    "270": {
+    "188": {
       "op": "swap",
       "stack_out": [
         "\"users\"",
         "encoded_value%0#0"
       ]
     },
-    "271": {
+    "189": {
       "op": "concat",
       "defined_out": [
         "box_prefixed_key%0#0"
@@ -1139,7 +708,7 @@
         "box_prefixed_key%0#0"
       ]
     },
-    "272": {
+    "190": {
       "op": "box_get",
       "defined_out": [
         "aggregate%box_get%0#0",
@@ -1150,36 +719,80 @@
         "aggregate%box_get%1#0"
       ]
     },
-    "273": {
+    "191": {
       "error": "Box must have value",
       "op": "assert // Box must have value",
       "stack_out": [
         "aggregate%box_get%0#0"
       ]
     },
-    "274": {
-      "retsub": true,
-      "op": "retsub"
-    },
-    "275": {
-      "subroutine": "contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapExists",
-      "params": {
-        "key#0": "uint64"
-      },
-      "block": "boxMapExists",
-      "stack_in": [],
-      "op": "proto 1 1"
-    },
-    "278": {
-      "op": "frame_dig -1",
+    "192": {
+      "op": "bytec_3 // 0x151f7c75",
       "defined_out": [
-        "key#0 (copy)"
+        "0x151f7c75",
+        "aggregate%box_get%0#0"
       ],
       "stack_out": [
-        "key#0 (copy)"
+        "aggregate%box_get%0#0",
+        "0x151f7c75"
       ]
     },
-    "280": {
+    "193": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "aggregate%box_get%0#0"
+      ]
+    },
+    "194": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%2#0"
+      ]
+    },
+    "195": {
+      "op": "log",
+      "stack_out": []
+    },
+    "196": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "197": {
+      "op": "return",
+      "stack_out": []
+    },
+    "198": {
+      "subroutine": "contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapExists[routing]",
+      "params": {},
+      "block": "boxMapExists",
+      "stack_in": [],
+      "op": "txna ApplicationArgs 1",
+      "defined_out": [
+        "reinterpret_Encoded(uint64)%0#0"
+      ],
+      "stack_out": [
+        "reinterpret_Encoded(uint64)%0#0"
+      ]
+    },
+    "201": {
+      "op": "btoi",
+      "defined_out": [
+        "key#0"
+      ],
+      "stack_out": [
+        "key#0"
+      ]
+    },
+    "202": {
       "op": "itob",
       "defined_out": [
         "encoded_value%0#0"
@@ -1188,8 +801,8 @@
         "encoded_value%0#0"
       ]
     },
-    "281": {
-      "op": "bytec_2 // \"users\"",
+    "203": {
+      "op": "bytec_0 // \"users\"",
       "defined_out": [
         "\"users\"",
         "encoded_value%0#0"
@@ -1199,14 +812,14 @@
         "\"users\""
       ]
     },
-    "282": {
+    "204": {
       "op": "swap",
       "stack_out": [
         "\"users\"",
         "encoded_value%0#0"
       ]
     },
-    "283": {
+    "205": {
       "op": "concat",
       "defined_out": [
         "box_prefixed_key%0#0"
@@ -1215,7 +828,7 @@
         "box_prefixed_key%0#0"
       ]
     },
-    "284": {
+    "206": {
       "op": "box_len",
       "defined_out": [
         "_%0#0",
@@ -1226,15 +839,96 @@
         "maybe_exists%0#0"
       ]
     },
-    "285": {
+    "207": {
       "op": "bury 1",
       "stack_out": [
         "maybe_exists%0#0"
       ]
     },
-    "287": {
-      "retsub": true,
-      "op": "retsub"
+    "209": {
+      "op": "pushbytes 0x00",
+      "defined_out": [
+        "0x00",
+        "maybe_exists%0#0"
+      ],
+      "stack_out": [
+        "maybe_exists%0#0",
+        "0x00"
+      ]
+    },
+    "212": {
+      "op": "pushint 0 // 0",
+      "defined_out": [
+        "0",
+        "0x00",
+        "maybe_exists%0#0"
+      ],
+      "stack_out": [
+        "maybe_exists%0#0",
+        "0x00",
+        "0"
+      ]
+    },
+    "214": {
+      "op": "uncover 2",
+      "stack_out": [
+        "0x00",
+        "0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "216": {
+      "op": "setbit",
+      "defined_out": [
+        "aggregate%encoded_bool%0#0"
+      ],
+      "stack_out": [
+        "aggregate%encoded_bool%0#0"
+      ]
+    },
+    "217": {
+      "op": "bytec_3 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "aggregate%encoded_bool%0#0"
+      ],
+      "stack_out": [
+        "aggregate%encoded_bool%0#0",
+        "0x151f7c75"
+      ]
+    },
+    "218": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "aggregate%encoded_bool%0#0"
+      ]
+    },
+    "219": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "220": {
+      "op": "log",
+      "stack_out": []
+    },
+    "221": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "222": {
+      "op": "return",
+      "stack_out": []
     }
   }
 }

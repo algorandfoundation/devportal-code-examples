@@ -1,4 +1,4 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 
@@ -7,63 +7,25 @@ main:
 
 
     txn NumAppArgs
-    bz main_bare_routing@7
+    bz main___algots__.defaultCreate@9
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
     pushbytess 0x1d90e1ba 0x390076ea
     txna ApplicationArgs 0
-    match main_getAssetTotalSupply_route@3 main_getAssetTotalSupplyWithArgument_route@4
-
-main_after_if_else@11:
+    match getAssetTotalSupply getAssetTotalSupplyWithArgument
     err
 
-main_getAssetTotalSupplyWithArgument_route@4:
+main___algots__.defaultCreate@9:
 
 
     txn OnCompletion
     !
-    assert
-    txn ApplicationID
-    assert
-
-
-    txna ApplicationArgs 1
-    btoi
-
-
-    callsub getAssetTotalSupplyWithArgument
-    itob
-    bytec_0
-    swap
-    concat
-    log
-    pushint 1
-    return
-
-main_getAssetTotalSupply_route@3:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-    callsub getAssetTotalSupply
-    itob
-    bytec_0
-    swap
-    concat
-    log
-    pushint 1
-    return
-
-main_bare_routing@7:
-
-
-    txn OnCompletion
-    bnz main_after_if_else@11
     txn ApplicationID
     !
-    assert
-    pushint 1
+    &&
     return
 
 
@@ -74,18 +36,33 @@ getAssetTotalSupply:
     pushint 1005
     asset_params_get AssetTotal
     assert
-    retsub
+
+
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    pushint 1
+    return
 
 
 
 getAssetTotalSupplyWithArgument:
 
 
+    txna ApplicationArgs 1
+    btoi
 
-    proto 1 1
 
-
-    frame_dig -1
     asset_params_get AssetTotal
     assert
-    retsub
+
+
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    pushint 1
+    return

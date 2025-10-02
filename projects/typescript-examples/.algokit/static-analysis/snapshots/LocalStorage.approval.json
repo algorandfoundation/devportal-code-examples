@@ -12,438 +12,423 @@
       "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 14 -> 18 -> 15",
+          "short": "0 -> 1 -> 2 -> 3 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
+              "12: bz main___algots__.defaultCreate@14"
             ],
             [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "13: pushbytes 0x01a3a3ff",
               "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
+              "15: match main_optInToApplication_route@3"
             ],
             [
-              "131: main_optInToApplication_route@3:",
-              "134: txn OnCompletion",
-              "135: intc_1",
-              "136: ==",
-              "137: assert",
-              "138: txn ApplicationID",
-              "139: assert",
-              "140: callsub optInToApplication"
-            ],
-            [
-              "158: optInToApplication:",
-              "161: txn Sender",
-              "164: bytec 4",
-              "167: pushint 100",
-              "168: app_local_put",
-              "171: txn Sender",
-              "174: bytec 5",
-              "177: pushint 200",
-              "178: app_local_put",
-              "181: txn Sender",
-              "184: bytec 6",
-              "187: pushbytes \"Silvio\"",
-              "188: app_local_put",
-              "191: txn Sender",
-              "194: bytec_0",
-              "197: pushbytes \"Micali\"",
-              "198: app_local_put",
-              "201: txn Sender",
-              "204: bytec_1",
-              "207: intc_1",
-              "208: app_local_put",
-              "211: txn Sender",
-              "214: bytec_2",
-              "217: txn Sender",
-              "218: app_local_put",
-              "219: retsub"
-            ],
-            [
-              "141: intc_1",
-              "142: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 12 -> 19 -> 13",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "115: main_readLocalState_route@4:",
-              "118: txn OnCompletion",
-              "119: !",
-              "120: assert",
-              "121: txn ApplicationID",
-              "122: assert",
-              "123: callsub readLocalState"
-            ],
-            [
-              "223: readLocalState:",
-              "226: txn Sender",
-              "229: dup",
-              "230: intc_0",
-              "233: bytec_2",
-              "236: app_local_get_ex",
-              "237: assert",
-              "240: dig 1",
-              "241: intc_0",
-              "244: bytec 4",
-              "247: app_local_get_ex",
-              "248: assert",
-              "251: dig 2",
-              "252: intc_0",
-              "255: bytec 5",
-              "258: app_local_get_ex",
-              "259: assert",
-              "262: dig 3",
-              "263: intc_0",
-              "266: bytec 6",
-              "269: app_local_get_ex",
-              "270: assert",
-              "273: dig 4",
-              "274: intc_0",
-              "277: bytec_0",
-              "280: app_local_get_ex",
-              "281: assert",
-              "284: uncover 5",
-              "285: intc_0",
-              "288: bytec_1",
-              "291: app_local_get_ex",
-              "292: assert",
-              "302: uncover 4",
-              "303: itob",
-              "304: uncover 4",
-              "305: itob",
-              "306: concat",
-              "307: dig 3",
-              "308: len",
-              "309: itob",
-              "310: extract 6 2",
-              "311: uncover 4",
-              "312: concat",
-              "313: swap",
-              "314: pushbytes 0x0035",
-              "315: concat",
-              "316: dig 1",
-              "317: len",
-              "318: pushint 53",
-              "319: +",
-              "320: dig 4",
-              "321: len",
-              "322: itob",
-              "323: extract 6 2",
-              "324: uncover 5",
-              "325: concat",
-              "326: swap",
-              "327: itob",
-              "328: extract 6 2",
-              "329: uncover 2",
-              "330: swap",
-              "331: concat",
-              "332: pushbytes 0x00",
-              "333: intc_0",
-              "334: uncover 5",
-              "335: setbit",
-              "336: concat",
-              "337: uncover 3",
-              "338: concat",
-              "339: uncover 2",
-              "340: concat",
-              "341: swap",
-              "342: concat",
-              "343: retsub"
-            ],
-            [
-              "124: bytec_3",
-              "125: swap",
-              "126: concat",
-              "127: log",
-              "128: intc_1",
-              "129: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 10 -> 20 -> 11",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "92: main_writeLocalState_route@5:",
-              "95: txn OnCompletion",
-              "96: !",
-              "97: assert",
-              "98: txn ApplicationID",
-              "99: assert",
-              "103: txna ApplicationArgs 1",
-              "104: extract 2 0",
-              "105: txna ApplicationArgs 2",
-              "106: intc_0",
-              "107: getbit",
-              "108: txna ApplicationArgs 3",
-              "111: callsub writeLocalState"
-            ],
-            [
-              "347: writeLocalState:",
-              "350: proto 3 0",
-              "353: txn Sender",
-              "356: dup",
-              "357: global CurrentApplicationID",
-              "358: app_opted_in",
-              "359: assert",
-              "362: dup",
-              "365: bytec_0",
-              "368: frame_dig -3",
-              "369: app_local_put",
-              "372: dup",
-              "375: bytec_1",
-              "378: frame_dig -2",
-              "379: app_local_put",
-              "382: dup",
-              "385: bytec_2",
-              "388: frame_dig -1",
-              "389: app_local_put",
-              "392: dup",
-              "393: intc_0",
-              "396: bytec_0",
-              "399: app_local_get_ex",
-              "400: assert",
-              "401: frame_dig -3",
-              "402: ==",
-              "403: assert",
-              "406: intc_0",
-              "409: bytec_1",
-              "412: app_local_get_ex",
-              "413: assert",
-              "414: frame_dig -2",
-              "415: ==",
-              "416: assert",
-              "417: retsub"
-            ],
-            [
-              "112: intc_1",
-              "113: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 8 -> 21 -> 9",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "61: main_writeDynamicLocalState_route@6:",
-              "64: txn OnCompletion",
-              "65: !",
-              "66: assert",
-              "67: txn ApplicationID",
-              "68: assert",
-              "72: txna ApplicationArgs 1",
-              "73: extract 2 0",
-              "74: txna ApplicationArgs 2",
-              "75: extract 2 0",
-              "78: callsub writeDynamicLocalState"
-            ],
-            [
-              "421: writeDynamicLocalState:",
-              "424: proto 2 1",
-              "427: txn Sender",
-              "430: dup",
-              "431: global CurrentApplicationID",
-              "432: app_opted_in",
-              "433: assert",
-              "436: frame_dig -2",
-              "437: frame_dig -1",
-              "438: app_local_put",
-              "441: frame_dig -1",
-              "442: retsub"
-            ],
-            [
-              "79: dup",
-              "80: len",
-              "81: itob",
-              "82: extract 6 2",
-              "83: swap",
-              "84: concat",
-              "85: bytec_3",
-              "86: swap",
-              "87: concat",
-              "88: log",
-              "89: intc_1",
-              "90: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 6 -> 22 -> 7",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "32: main_readDynamicLocalState_route@7:",
-              "35: txn OnCompletion",
-              "36: !",
-              "37: assert",
-              "38: txn ApplicationID",
-              "39: assert",
-              "43: txna ApplicationArgs 1",
-              "44: extract 2 0",
-              "47: callsub readDynamicLocalState"
-            ],
-            [
-              "446: readDynamicLocalState:",
-              "449: proto 1 1",
-              "452: txn Sender",
-              "455: dup",
-              "456: global CurrentApplicationID",
-              "457: app_opted_in",
-              "458: assert",
-              "461: intc_0",
-              "462: frame_dig -1",
-              "463: app_local_get_ex",
-              "464: assert",
-              "467: retsub"
-            ],
-            [
-              "48: dup",
-              "49: len",
-              "50: itob",
-              "51: extract 6 2",
-              "52: swap",
-              "53: concat",
-              "54: bytec_3",
-              "55: swap",
-              "56: concat",
-              "57: log",
-              "58: intc_1",
-              "59: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 4 -> 23 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "20: main_clearLocalState_route@8:",
-              "23: txn OnCompletion",
-              "24: !",
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
               "25: assert",
-              "26: txn ApplicationID",
-              "27: assert",
-              "28: callsub clearLocalState"
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
             ],
             [
-              "471: clearLocalState:",
-              "474: txn Sender",
-              "477: dup",
-              "478: global CurrentApplicationID",
-              "479: app_opted_in",
-              "480: assert",
-              "483: dup",
-              "486: bytec 4",
-              "489: app_local_del",
-              "492: dup",
-              "495: bytec 5",
-              "498: app_local_del",
-              "501: dup",
-              "504: bytec 6",
-              "507: app_local_del",
-              "510: dup",
-              "513: bytec_0",
-              "516: app_local_del",
-              "519: dup",
-              "522: bytec_1",
-              "525: app_local_del",
-              "528: bytec_2",
-              "531: app_local_del",
-              "532: retsub"
+              "123: readLocalState:",
+              "126: txn Sender",
+              "129: dup",
+              "130: intc_0",
+              "133: bytec_2",
+              "136: app_local_get_ex",
+              "137: assert",
+              "140: dig 1",
+              "141: intc_0",
+              "144: bytec_3",
+              "147: app_local_get_ex",
+              "148: assert",
+              "151: dig 2",
+              "152: intc_0",
+              "155: bytec 4",
+              "158: app_local_get_ex",
+              "159: assert",
+              "162: dig 3",
+              "163: intc_0",
+              "166: bytec 5",
+              "169: app_local_get_ex",
+              "170: assert",
+              "173: dig 4",
+              "174: intc_0",
+              "177: bytec_0",
+              "180: app_local_get_ex",
+              "181: assert",
+              "184: uncover 5",
+              "185: intc_0",
+              "188: bytec_1",
+              "191: app_local_get_ex",
+              "192: assert",
+              "202: uncover 4",
+              "203: itob",
+              "204: uncover 4",
+              "205: itob",
+              "206: concat",
+              "207: dig 3",
+              "208: len",
+              "209: itob",
+              "210: extract 6 2",
+              "211: uncover 4",
+              "212: concat",
+              "213: swap",
+              "214: pushbytes 0x0035",
+              "215: concat",
+              "216: dig 1",
+              "217: len",
+              "218: pushint 53",
+              "219: +",
+              "220: dig 4",
+              "221: len",
+              "222: itob",
+              "223: extract 6 2",
+              "224: uncover 5",
+              "225: concat",
+              "226: swap",
+              "227: itob",
+              "228: extract 6 2",
+              "229: uncover 2",
+              "230: swap",
+              "231: concat",
+              "232: pushbytes 0x00",
+              "233: intc_0",
+              "234: uncover 5",
+              "235: setbit",
+              "236: concat",
+              "237: uncover 3",
+              "238: concat",
+              "239: uncover 2",
+              "240: concat",
+              "241: swap",
+              "242: concat",
+              "245: bytec 6",
+              "246: swap",
+              "247: concat",
+              "248: log",
+              "249: intc_1",
+              "250: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
-              "29: intc_1",
-              "30: return"
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "254: writeLocalState:",
+              "257: txna ApplicationArgs 1",
+              "258: extract 2 0",
+              "259: txna ApplicationArgs 2",
+              "260: intc_0",
+              "261: getbit",
+              "262: txna ApplicationArgs 3",
+              "265: txn Sender",
+              "268: dup",
+              "269: global CurrentApplicationID",
+              "270: app_opted_in",
+              "271: assert",
+              "274: dup",
+              "277: bytec_0",
+              "280: dig 5",
+              "281: app_local_put",
+              "284: dup",
+              "287: bytec_1",
+              "290: dig 4",
+              "291: app_local_put",
+              "294: dup",
+              "297: bytec_2",
+              "300: uncover 3",
+              "301: app_local_put",
+              "304: dup",
+              "305: intc_0",
+              "308: bytec_0",
+              "311: app_local_get_ex",
+              "312: assert",
+              "313: uncover 3",
+              "314: ==",
+              "315: assert",
+              "318: intc_0",
+              "321: bytec_1",
+              "324: app_local_get_ex",
+              "325: assert",
+              "326: ==",
+              "329: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 10",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "333: writeDynamicLocalState:",
+              "336: txna ApplicationArgs 1",
+              "337: extract 2 0",
+              "338: txna ApplicationArgs 2",
+              "339: extract 2 0",
+              "342: txn Sender",
+              "345: dup",
+              "346: global CurrentApplicationID",
+              "347: app_opted_in",
+              "348: assert",
+              "351: uncover 2",
+              "352: dig 2",
+              "353: app_local_put",
+              "356: dup",
+              "357: len",
+              "358: itob",
+              "359: extract 6 2",
+              "360: swap",
+              "361: concat",
+              "362: bytec 6",
+              "363: swap",
+              "364: concat",
+              "365: log",
+              "366: intc_1",
+              "367: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "371: readDynamicLocalState:",
+              "374: txna ApplicationArgs 1",
+              "375: extract 2 0",
+              "378: txn Sender",
+              "381: dup",
+              "382: global CurrentApplicationID",
+              "383: app_opted_in",
+              "384: assert",
+              "387: intc_0",
+              "388: uncover 2",
+              "389: app_local_get_ex",
+              "390: assert",
+              "393: dup",
+              "394: len",
+              "395: itob",
+              "396: extract 6 2",
+              "397: swap",
+              "398: concat",
+              "399: bytec 6",
+              "400: swap",
+              "401: concat",
+              "402: log",
+              "403: intc_1",
+              "404: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 12",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "408: clearLocalState:",
+              "411: txn Sender",
+              "414: dup",
+              "415: global CurrentApplicationID",
+              "416: app_opted_in",
+              "417: assert",
+              "420: dup",
+              "423: bytec_3",
+              "426: app_local_del",
+              "429: dup",
+              "432: bytec 4",
+              "435: app_local_del",
+              "438: dup",
+              "441: bytec 5",
+              "444: app_local_del",
+              "447: dup",
+              "450: bytec_0",
+              "453: app_local_del",
+              "456: dup",
+              "459: bytec_1",
+              "462: app_local_del",
+              "465: bytec_2",
+              "468: app_local_del",
+              "471: intc_1",
+              "472: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 5 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "31: main_optInToApplication_route@3:",
+              "34: txn OnCompletion",
+              "35: intc_1",
+              "36: ==",
+              "37: txn ApplicationID",
+              "38: &&",
+              "39: assert",
+              "40: b optInToApplication"
+            ],
+            [
+              "55: optInToApplication:",
+              "58: txn Sender",
+              "61: bytec_3",
+              "64: pushint 100",
+              "65: app_local_put",
+              "68: txn Sender",
+              "71: bytec 4",
+              "74: pushint 200",
+              "75: app_local_put",
+              "78: txn Sender",
+              "81: bytec 5",
+              "84: pushbytes \"Silvio\"",
+              "85: app_local_put",
+              "88: txn Sender",
+              "91: bytec_0",
+              "94: pushbytes \"Micali\"",
+              "95: app_local_put",
+              "98: txn Sender",
+              "101: bytec_1",
+              "104: intc_1",
+              "105: app_local_put",
+              "108: txn Sender",
+              "111: bytec_2",
+              "114: txn Sender",
+              "115: app_local_put",
+              "118: intc_1",
+              "119: return"
             ]
           ]
         }
@@ -459,438 +444,423 @@
       "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 14 -> 18 -> 15",
+          "short": "0 -> 1 -> 2 -> 3 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
+              "12: bz main___algots__.defaultCreate@14"
             ],
             [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "13: pushbytes 0x01a3a3ff",
               "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
+              "15: match main_optInToApplication_route@3"
             ],
             [
-              "131: main_optInToApplication_route@3:",
-              "134: txn OnCompletion",
-              "135: intc_1",
-              "136: ==",
-              "137: assert",
-              "138: txn ApplicationID",
-              "139: assert",
-              "140: callsub optInToApplication"
-            ],
-            [
-              "158: optInToApplication:",
-              "161: txn Sender",
-              "164: bytec 4",
-              "167: pushint 100",
-              "168: app_local_put",
-              "171: txn Sender",
-              "174: bytec 5",
-              "177: pushint 200",
-              "178: app_local_put",
-              "181: txn Sender",
-              "184: bytec 6",
-              "187: pushbytes \"Silvio\"",
-              "188: app_local_put",
-              "191: txn Sender",
-              "194: bytec_0",
-              "197: pushbytes \"Micali\"",
-              "198: app_local_put",
-              "201: txn Sender",
-              "204: bytec_1",
-              "207: intc_1",
-              "208: app_local_put",
-              "211: txn Sender",
-              "214: bytec_2",
-              "217: txn Sender",
-              "218: app_local_put",
-              "219: retsub"
-            ],
-            [
-              "141: intc_1",
-              "142: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 12 -> 19 -> 13",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "115: main_readLocalState_route@4:",
-              "118: txn OnCompletion",
-              "119: !",
-              "120: assert",
-              "121: txn ApplicationID",
-              "122: assert",
-              "123: callsub readLocalState"
-            ],
-            [
-              "223: readLocalState:",
-              "226: txn Sender",
-              "229: dup",
-              "230: intc_0",
-              "233: bytec_2",
-              "236: app_local_get_ex",
-              "237: assert",
-              "240: dig 1",
-              "241: intc_0",
-              "244: bytec 4",
-              "247: app_local_get_ex",
-              "248: assert",
-              "251: dig 2",
-              "252: intc_0",
-              "255: bytec 5",
-              "258: app_local_get_ex",
-              "259: assert",
-              "262: dig 3",
-              "263: intc_0",
-              "266: bytec 6",
-              "269: app_local_get_ex",
-              "270: assert",
-              "273: dig 4",
-              "274: intc_0",
-              "277: bytec_0",
-              "280: app_local_get_ex",
-              "281: assert",
-              "284: uncover 5",
-              "285: intc_0",
-              "288: bytec_1",
-              "291: app_local_get_ex",
-              "292: assert",
-              "302: uncover 4",
-              "303: itob",
-              "304: uncover 4",
-              "305: itob",
-              "306: concat",
-              "307: dig 3",
-              "308: len",
-              "309: itob",
-              "310: extract 6 2",
-              "311: uncover 4",
-              "312: concat",
-              "313: swap",
-              "314: pushbytes 0x0035",
-              "315: concat",
-              "316: dig 1",
-              "317: len",
-              "318: pushint 53",
-              "319: +",
-              "320: dig 4",
-              "321: len",
-              "322: itob",
-              "323: extract 6 2",
-              "324: uncover 5",
-              "325: concat",
-              "326: swap",
-              "327: itob",
-              "328: extract 6 2",
-              "329: uncover 2",
-              "330: swap",
-              "331: concat",
-              "332: pushbytes 0x00",
-              "333: intc_0",
-              "334: uncover 5",
-              "335: setbit",
-              "336: concat",
-              "337: uncover 3",
-              "338: concat",
-              "339: uncover 2",
-              "340: concat",
-              "341: swap",
-              "342: concat",
-              "343: retsub"
-            ],
-            [
-              "124: bytec_3",
-              "125: swap",
-              "126: concat",
-              "127: log",
-              "128: intc_1",
-              "129: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 10 -> 20 -> 11",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "92: main_writeLocalState_route@5:",
-              "95: txn OnCompletion",
-              "96: !",
-              "97: assert",
-              "98: txn ApplicationID",
-              "99: assert",
-              "103: txna ApplicationArgs 1",
-              "104: extract 2 0",
-              "105: txna ApplicationArgs 2",
-              "106: intc_0",
-              "107: getbit",
-              "108: txna ApplicationArgs 3",
-              "111: callsub writeLocalState"
-            ],
-            [
-              "347: writeLocalState:",
-              "350: proto 3 0",
-              "353: txn Sender",
-              "356: dup",
-              "357: global CurrentApplicationID",
-              "358: app_opted_in",
-              "359: assert",
-              "362: dup",
-              "365: bytec_0",
-              "368: frame_dig -3",
-              "369: app_local_put",
-              "372: dup",
-              "375: bytec_1",
-              "378: frame_dig -2",
-              "379: app_local_put",
-              "382: dup",
-              "385: bytec_2",
-              "388: frame_dig -1",
-              "389: app_local_put",
-              "392: dup",
-              "393: intc_0",
-              "396: bytec_0",
-              "399: app_local_get_ex",
-              "400: assert",
-              "401: frame_dig -3",
-              "402: ==",
-              "403: assert",
-              "406: intc_0",
-              "409: bytec_1",
-              "412: app_local_get_ex",
-              "413: assert",
-              "414: frame_dig -2",
-              "415: ==",
-              "416: assert",
-              "417: retsub"
-            ],
-            [
-              "112: intc_1",
-              "113: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 8 -> 21 -> 9",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "61: main_writeDynamicLocalState_route@6:",
-              "64: txn OnCompletion",
-              "65: !",
-              "66: assert",
-              "67: txn ApplicationID",
-              "68: assert",
-              "72: txna ApplicationArgs 1",
-              "73: extract 2 0",
-              "74: txna ApplicationArgs 2",
-              "75: extract 2 0",
-              "78: callsub writeDynamicLocalState"
-            ],
-            [
-              "421: writeDynamicLocalState:",
-              "424: proto 2 1",
-              "427: txn Sender",
-              "430: dup",
-              "431: global CurrentApplicationID",
-              "432: app_opted_in",
-              "433: assert",
-              "436: frame_dig -2",
-              "437: frame_dig -1",
-              "438: app_local_put",
-              "441: frame_dig -1",
-              "442: retsub"
-            ],
-            [
-              "79: dup",
-              "80: len",
-              "81: itob",
-              "82: extract 6 2",
-              "83: swap",
-              "84: concat",
-              "85: bytec_3",
-              "86: swap",
-              "87: concat",
-              "88: log",
-              "89: intc_1",
-              "90: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 6 -> 22 -> 7",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "32: main_readDynamicLocalState_route@7:",
-              "35: txn OnCompletion",
-              "36: !",
-              "37: assert",
-              "38: txn ApplicationID",
-              "39: assert",
-              "43: txna ApplicationArgs 1",
-              "44: extract 2 0",
-              "47: callsub readDynamicLocalState"
-            ],
-            [
-              "446: readDynamicLocalState:",
-              "449: proto 1 1",
-              "452: txn Sender",
-              "455: dup",
-              "456: global CurrentApplicationID",
-              "457: app_opted_in",
-              "458: assert",
-              "461: intc_0",
-              "462: frame_dig -1",
-              "463: app_local_get_ex",
-              "464: assert",
-              "467: retsub"
-            ],
-            [
-              "48: dup",
-              "49: len",
-              "50: itob",
-              "51: extract 6 2",
-              "52: swap",
-              "53: concat",
-              "54: bytec_3",
-              "55: swap",
-              "56: concat",
-              "57: log",
-              "58: intc_1",
-              "59: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 4 -> 23 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "20: main_clearLocalState_route@8:",
-              "23: txn OnCompletion",
-              "24: !",
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
               "25: assert",
-              "26: txn ApplicationID",
-              "27: assert",
-              "28: callsub clearLocalState"
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
             ],
             [
-              "471: clearLocalState:",
-              "474: txn Sender",
-              "477: dup",
-              "478: global CurrentApplicationID",
-              "479: app_opted_in",
-              "480: assert",
-              "483: dup",
-              "486: bytec 4",
-              "489: app_local_del",
-              "492: dup",
-              "495: bytec 5",
-              "498: app_local_del",
-              "501: dup",
-              "504: bytec 6",
-              "507: app_local_del",
-              "510: dup",
-              "513: bytec_0",
-              "516: app_local_del",
-              "519: dup",
-              "522: bytec_1",
-              "525: app_local_del",
-              "528: bytec_2",
-              "531: app_local_del",
-              "532: retsub"
+              "123: readLocalState:",
+              "126: txn Sender",
+              "129: dup",
+              "130: intc_0",
+              "133: bytec_2",
+              "136: app_local_get_ex",
+              "137: assert",
+              "140: dig 1",
+              "141: intc_0",
+              "144: bytec_3",
+              "147: app_local_get_ex",
+              "148: assert",
+              "151: dig 2",
+              "152: intc_0",
+              "155: bytec 4",
+              "158: app_local_get_ex",
+              "159: assert",
+              "162: dig 3",
+              "163: intc_0",
+              "166: bytec 5",
+              "169: app_local_get_ex",
+              "170: assert",
+              "173: dig 4",
+              "174: intc_0",
+              "177: bytec_0",
+              "180: app_local_get_ex",
+              "181: assert",
+              "184: uncover 5",
+              "185: intc_0",
+              "188: bytec_1",
+              "191: app_local_get_ex",
+              "192: assert",
+              "202: uncover 4",
+              "203: itob",
+              "204: uncover 4",
+              "205: itob",
+              "206: concat",
+              "207: dig 3",
+              "208: len",
+              "209: itob",
+              "210: extract 6 2",
+              "211: uncover 4",
+              "212: concat",
+              "213: swap",
+              "214: pushbytes 0x0035",
+              "215: concat",
+              "216: dig 1",
+              "217: len",
+              "218: pushint 53",
+              "219: +",
+              "220: dig 4",
+              "221: len",
+              "222: itob",
+              "223: extract 6 2",
+              "224: uncover 5",
+              "225: concat",
+              "226: swap",
+              "227: itob",
+              "228: extract 6 2",
+              "229: uncover 2",
+              "230: swap",
+              "231: concat",
+              "232: pushbytes 0x00",
+              "233: intc_0",
+              "234: uncover 5",
+              "235: setbit",
+              "236: concat",
+              "237: uncover 3",
+              "238: concat",
+              "239: uncover 2",
+              "240: concat",
+              "241: swap",
+              "242: concat",
+              "245: bytec 6",
+              "246: swap",
+              "247: concat",
+              "248: log",
+              "249: intc_1",
+              "250: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
-              "29: intc_1",
-              "30: return"
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "254: writeLocalState:",
+              "257: txna ApplicationArgs 1",
+              "258: extract 2 0",
+              "259: txna ApplicationArgs 2",
+              "260: intc_0",
+              "261: getbit",
+              "262: txna ApplicationArgs 3",
+              "265: txn Sender",
+              "268: dup",
+              "269: global CurrentApplicationID",
+              "270: app_opted_in",
+              "271: assert",
+              "274: dup",
+              "277: bytec_0",
+              "280: dig 5",
+              "281: app_local_put",
+              "284: dup",
+              "287: bytec_1",
+              "290: dig 4",
+              "291: app_local_put",
+              "294: dup",
+              "297: bytec_2",
+              "300: uncover 3",
+              "301: app_local_put",
+              "304: dup",
+              "305: intc_0",
+              "308: bytec_0",
+              "311: app_local_get_ex",
+              "312: assert",
+              "313: uncover 3",
+              "314: ==",
+              "315: assert",
+              "318: intc_0",
+              "321: bytec_1",
+              "324: app_local_get_ex",
+              "325: assert",
+              "326: ==",
+              "329: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 10",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "333: writeDynamicLocalState:",
+              "336: txna ApplicationArgs 1",
+              "337: extract 2 0",
+              "338: txna ApplicationArgs 2",
+              "339: extract 2 0",
+              "342: txn Sender",
+              "345: dup",
+              "346: global CurrentApplicationID",
+              "347: app_opted_in",
+              "348: assert",
+              "351: uncover 2",
+              "352: dig 2",
+              "353: app_local_put",
+              "356: dup",
+              "357: len",
+              "358: itob",
+              "359: extract 6 2",
+              "360: swap",
+              "361: concat",
+              "362: bytec 6",
+              "363: swap",
+              "364: concat",
+              "365: log",
+              "366: intc_1",
+              "367: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "371: readDynamicLocalState:",
+              "374: txna ApplicationArgs 1",
+              "375: extract 2 0",
+              "378: txn Sender",
+              "381: dup",
+              "382: global CurrentApplicationID",
+              "383: app_opted_in",
+              "384: assert",
+              "387: intc_0",
+              "388: uncover 2",
+              "389: app_local_get_ex",
+              "390: assert",
+              "393: dup",
+              "394: len",
+              "395: itob",
+              "396: extract 6 2",
+              "397: swap",
+              "398: concat",
+              "399: bytec 6",
+              "400: swap",
+              "401: concat",
+              "402: log",
+              "403: intc_1",
+              "404: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 12",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "408: clearLocalState:",
+              "411: txn Sender",
+              "414: dup",
+              "415: global CurrentApplicationID",
+              "416: app_opted_in",
+              "417: assert",
+              "420: dup",
+              "423: bytec_3",
+              "426: app_local_del",
+              "429: dup",
+              "432: bytec 4",
+              "435: app_local_del",
+              "438: dup",
+              "441: bytec 5",
+              "444: app_local_del",
+              "447: dup",
+              "450: bytec_0",
+              "453: app_local_del",
+              "456: dup",
+              "459: bytec_1",
+              "462: app_local_del",
+              "465: bytec_2",
+              "468: app_local_del",
+              "471: intc_1",
+              "472: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 5 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "31: main_optInToApplication_route@3:",
+              "34: txn OnCompletion",
+              "35: intc_1",
+              "36: ==",
+              "37: txn ApplicationID",
+              "38: &&",
+              "39: assert",
+              "40: b optInToApplication"
+            ],
+            [
+              "55: optInToApplication:",
+              "58: txn Sender",
+              "61: bytec_3",
+              "64: pushint 100",
+              "65: app_local_put",
+              "68: txn Sender",
+              "71: bytec 4",
+              "74: pushint 200",
+              "75: app_local_put",
+              "78: txn Sender",
+              "81: bytec 5",
+              "84: pushbytes \"Silvio\"",
+              "85: app_local_put",
+              "88: txn Sender",
+              "91: bytec_0",
+              "94: pushbytes \"Micali\"",
+              "95: app_local_put",
+              "98: txn Sender",
+              "101: bytec_1",
+              "104: intc_1",
+              "105: app_local_put",
+              "108: txn Sender",
+              "111: bytec_2",
+              "114: txn Sender",
+              "115: app_local_put",
+              "118: intc_1",
+              "119: return"
             ]
           ]
         }
@@ -926,438 +896,423 @@
       "help": "Do not approve `DeleteApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 14 -> 18 -> 15",
+          "short": "0 -> 1 -> 2 -> 3 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
+              "12: bz main___algots__.defaultCreate@14"
             ],
             [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "13: pushbytes 0x01a3a3ff",
               "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
+              "15: match main_optInToApplication_route@3"
             ],
             [
-              "131: main_optInToApplication_route@3:",
-              "134: txn OnCompletion",
-              "135: intc_1",
-              "136: ==",
-              "137: assert",
-              "138: txn ApplicationID",
-              "139: assert",
-              "140: callsub optInToApplication"
-            ],
-            [
-              "158: optInToApplication:",
-              "161: txn Sender",
-              "164: bytec 4",
-              "167: pushint 100",
-              "168: app_local_put",
-              "171: txn Sender",
-              "174: bytec 5",
-              "177: pushint 200",
-              "178: app_local_put",
-              "181: txn Sender",
-              "184: bytec 6",
-              "187: pushbytes \"Silvio\"",
-              "188: app_local_put",
-              "191: txn Sender",
-              "194: bytec_0",
-              "197: pushbytes \"Micali\"",
-              "198: app_local_put",
-              "201: txn Sender",
-              "204: bytec_1",
-              "207: intc_1",
-              "208: app_local_put",
-              "211: txn Sender",
-              "214: bytec_2",
-              "217: txn Sender",
-              "218: app_local_put",
-              "219: retsub"
-            ],
-            [
-              "141: intc_1",
-              "142: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 12 -> 19 -> 13",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "115: main_readLocalState_route@4:",
-              "118: txn OnCompletion",
-              "119: !",
-              "120: assert",
-              "121: txn ApplicationID",
-              "122: assert",
-              "123: callsub readLocalState"
-            ],
-            [
-              "223: readLocalState:",
-              "226: txn Sender",
-              "229: dup",
-              "230: intc_0",
-              "233: bytec_2",
-              "236: app_local_get_ex",
-              "237: assert",
-              "240: dig 1",
-              "241: intc_0",
-              "244: bytec 4",
-              "247: app_local_get_ex",
-              "248: assert",
-              "251: dig 2",
-              "252: intc_0",
-              "255: bytec 5",
-              "258: app_local_get_ex",
-              "259: assert",
-              "262: dig 3",
-              "263: intc_0",
-              "266: bytec 6",
-              "269: app_local_get_ex",
-              "270: assert",
-              "273: dig 4",
-              "274: intc_0",
-              "277: bytec_0",
-              "280: app_local_get_ex",
-              "281: assert",
-              "284: uncover 5",
-              "285: intc_0",
-              "288: bytec_1",
-              "291: app_local_get_ex",
-              "292: assert",
-              "302: uncover 4",
-              "303: itob",
-              "304: uncover 4",
-              "305: itob",
-              "306: concat",
-              "307: dig 3",
-              "308: len",
-              "309: itob",
-              "310: extract 6 2",
-              "311: uncover 4",
-              "312: concat",
-              "313: swap",
-              "314: pushbytes 0x0035",
-              "315: concat",
-              "316: dig 1",
-              "317: len",
-              "318: pushint 53",
-              "319: +",
-              "320: dig 4",
-              "321: len",
-              "322: itob",
-              "323: extract 6 2",
-              "324: uncover 5",
-              "325: concat",
-              "326: swap",
-              "327: itob",
-              "328: extract 6 2",
-              "329: uncover 2",
-              "330: swap",
-              "331: concat",
-              "332: pushbytes 0x00",
-              "333: intc_0",
-              "334: uncover 5",
-              "335: setbit",
-              "336: concat",
-              "337: uncover 3",
-              "338: concat",
-              "339: uncover 2",
-              "340: concat",
-              "341: swap",
-              "342: concat",
-              "343: retsub"
-            ],
-            [
-              "124: bytec_3",
-              "125: swap",
-              "126: concat",
-              "127: log",
-              "128: intc_1",
-              "129: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 10 -> 20 -> 11",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "92: main_writeLocalState_route@5:",
-              "95: txn OnCompletion",
-              "96: !",
-              "97: assert",
-              "98: txn ApplicationID",
-              "99: assert",
-              "103: txna ApplicationArgs 1",
-              "104: extract 2 0",
-              "105: txna ApplicationArgs 2",
-              "106: intc_0",
-              "107: getbit",
-              "108: txna ApplicationArgs 3",
-              "111: callsub writeLocalState"
-            ],
-            [
-              "347: writeLocalState:",
-              "350: proto 3 0",
-              "353: txn Sender",
-              "356: dup",
-              "357: global CurrentApplicationID",
-              "358: app_opted_in",
-              "359: assert",
-              "362: dup",
-              "365: bytec_0",
-              "368: frame_dig -3",
-              "369: app_local_put",
-              "372: dup",
-              "375: bytec_1",
-              "378: frame_dig -2",
-              "379: app_local_put",
-              "382: dup",
-              "385: bytec_2",
-              "388: frame_dig -1",
-              "389: app_local_put",
-              "392: dup",
-              "393: intc_0",
-              "396: bytec_0",
-              "399: app_local_get_ex",
-              "400: assert",
-              "401: frame_dig -3",
-              "402: ==",
-              "403: assert",
-              "406: intc_0",
-              "409: bytec_1",
-              "412: app_local_get_ex",
-              "413: assert",
-              "414: frame_dig -2",
-              "415: ==",
-              "416: assert",
-              "417: retsub"
-            ],
-            [
-              "112: intc_1",
-              "113: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 8 -> 21 -> 9",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "61: main_writeDynamicLocalState_route@6:",
-              "64: txn OnCompletion",
-              "65: !",
-              "66: assert",
-              "67: txn ApplicationID",
-              "68: assert",
-              "72: txna ApplicationArgs 1",
-              "73: extract 2 0",
-              "74: txna ApplicationArgs 2",
-              "75: extract 2 0",
-              "78: callsub writeDynamicLocalState"
-            ],
-            [
-              "421: writeDynamicLocalState:",
-              "424: proto 2 1",
-              "427: txn Sender",
-              "430: dup",
-              "431: global CurrentApplicationID",
-              "432: app_opted_in",
-              "433: assert",
-              "436: frame_dig -2",
-              "437: frame_dig -1",
-              "438: app_local_put",
-              "441: frame_dig -1",
-              "442: retsub"
-            ],
-            [
-              "79: dup",
-              "80: len",
-              "81: itob",
-              "82: extract 6 2",
-              "83: swap",
-              "84: concat",
-              "85: bytec_3",
-              "86: swap",
-              "87: concat",
-              "88: log",
-              "89: intc_1",
-              "90: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 6 -> 22 -> 7",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "32: main_readDynamicLocalState_route@7:",
-              "35: txn OnCompletion",
-              "36: !",
-              "37: assert",
-              "38: txn ApplicationID",
-              "39: assert",
-              "43: txna ApplicationArgs 1",
-              "44: extract 2 0",
-              "47: callsub readDynamicLocalState"
-            ],
-            [
-              "446: readDynamicLocalState:",
-              "449: proto 1 1",
-              "452: txn Sender",
-              "455: dup",
-              "456: global CurrentApplicationID",
-              "457: app_opted_in",
-              "458: assert",
-              "461: intc_0",
-              "462: frame_dig -1",
-              "463: app_local_get_ex",
-              "464: assert",
-              "467: retsub"
-            ],
-            [
-              "48: dup",
-              "49: len",
-              "50: itob",
-              "51: extract 6 2",
-              "52: swap",
-              "53: concat",
-              "54: bytec_3",
-              "55: swap",
-              "56: concat",
-              "57: log",
-              "58: intc_1",
-              "59: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 4 -> 23 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "20: main_clearLocalState_route@8:",
-              "23: txn OnCompletion",
-              "24: !",
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
               "25: assert",
-              "26: txn ApplicationID",
-              "27: assert",
-              "28: callsub clearLocalState"
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
             ],
             [
-              "471: clearLocalState:",
-              "474: txn Sender",
-              "477: dup",
-              "478: global CurrentApplicationID",
-              "479: app_opted_in",
-              "480: assert",
-              "483: dup",
-              "486: bytec 4",
-              "489: app_local_del",
-              "492: dup",
-              "495: bytec 5",
-              "498: app_local_del",
-              "501: dup",
-              "504: bytec 6",
-              "507: app_local_del",
-              "510: dup",
-              "513: bytec_0",
-              "516: app_local_del",
-              "519: dup",
-              "522: bytec_1",
-              "525: app_local_del",
-              "528: bytec_2",
-              "531: app_local_del",
-              "532: retsub"
+              "123: readLocalState:",
+              "126: txn Sender",
+              "129: dup",
+              "130: intc_0",
+              "133: bytec_2",
+              "136: app_local_get_ex",
+              "137: assert",
+              "140: dig 1",
+              "141: intc_0",
+              "144: bytec_3",
+              "147: app_local_get_ex",
+              "148: assert",
+              "151: dig 2",
+              "152: intc_0",
+              "155: bytec 4",
+              "158: app_local_get_ex",
+              "159: assert",
+              "162: dig 3",
+              "163: intc_0",
+              "166: bytec 5",
+              "169: app_local_get_ex",
+              "170: assert",
+              "173: dig 4",
+              "174: intc_0",
+              "177: bytec_0",
+              "180: app_local_get_ex",
+              "181: assert",
+              "184: uncover 5",
+              "185: intc_0",
+              "188: bytec_1",
+              "191: app_local_get_ex",
+              "192: assert",
+              "202: uncover 4",
+              "203: itob",
+              "204: uncover 4",
+              "205: itob",
+              "206: concat",
+              "207: dig 3",
+              "208: len",
+              "209: itob",
+              "210: extract 6 2",
+              "211: uncover 4",
+              "212: concat",
+              "213: swap",
+              "214: pushbytes 0x0035",
+              "215: concat",
+              "216: dig 1",
+              "217: len",
+              "218: pushint 53",
+              "219: +",
+              "220: dig 4",
+              "221: len",
+              "222: itob",
+              "223: extract 6 2",
+              "224: uncover 5",
+              "225: concat",
+              "226: swap",
+              "227: itob",
+              "228: extract 6 2",
+              "229: uncover 2",
+              "230: swap",
+              "231: concat",
+              "232: pushbytes 0x00",
+              "233: intc_0",
+              "234: uncover 5",
+              "235: setbit",
+              "236: concat",
+              "237: uncover 3",
+              "238: concat",
+              "239: uncover 2",
+              "240: concat",
+              "241: swap",
+              "242: concat",
+              "245: bytec 6",
+              "246: swap",
+              "247: concat",
+              "248: log",
+              "249: intc_1",
+              "250: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
-              "29: intc_1",
-              "30: return"
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "254: writeLocalState:",
+              "257: txna ApplicationArgs 1",
+              "258: extract 2 0",
+              "259: txna ApplicationArgs 2",
+              "260: intc_0",
+              "261: getbit",
+              "262: txna ApplicationArgs 3",
+              "265: txn Sender",
+              "268: dup",
+              "269: global CurrentApplicationID",
+              "270: app_opted_in",
+              "271: assert",
+              "274: dup",
+              "277: bytec_0",
+              "280: dig 5",
+              "281: app_local_put",
+              "284: dup",
+              "287: bytec_1",
+              "290: dig 4",
+              "291: app_local_put",
+              "294: dup",
+              "297: bytec_2",
+              "300: uncover 3",
+              "301: app_local_put",
+              "304: dup",
+              "305: intc_0",
+              "308: bytec_0",
+              "311: app_local_get_ex",
+              "312: assert",
+              "313: uncover 3",
+              "314: ==",
+              "315: assert",
+              "318: intc_0",
+              "321: bytec_1",
+              "324: app_local_get_ex",
+              "325: assert",
+              "326: ==",
+              "329: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 10",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "333: writeDynamicLocalState:",
+              "336: txna ApplicationArgs 1",
+              "337: extract 2 0",
+              "338: txna ApplicationArgs 2",
+              "339: extract 2 0",
+              "342: txn Sender",
+              "345: dup",
+              "346: global CurrentApplicationID",
+              "347: app_opted_in",
+              "348: assert",
+              "351: uncover 2",
+              "352: dig 2",
+              "353: app_local_put",
+              "356: dup",
+              "357: len",
+              "358: itob",
+              "359: extract 6 2",
+              "360: swap",
+              "361: concat",
+              "362: bytec 6",
+              "363: swap",
+              "364: concat",
+              "365: log",
+              "366: intc_1",
+              "367: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "371: readDynamicLocalState:",
+              "374: txna ApplicationArgs 1",
+              "375: extract 2 0",
+              "378: txn Sender",
+              "381: dup",
+              "382: global CurrentApplicationID",
+              "383: app_opted_in",
+              "384: assert",
+              "387: intc_0",
+              "388: uncover 2",
+              "389: app_local_get_ex",
+              "390: assert",
+              "393: dup",
+              "394: len",
+              "395: itob",
+              "396: extract 6 2",
+              "397: swap",
+              "398: concat",
+              "399: bytec 6",
+              "400: swap",
+              "401: concat",
+              "402: log",
+              "403: intc_1",
+              "404: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 12",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "408: clearLocalState:",
+              "411: txn Sender",
+              "414: dup",
+              "415: global CurrentApplicationID",
+              "416: app_opted_in",
+              "417: assert",
+              "420: dup",
+              "423: bytec_3",
+              "426: app_local_del",
+              "429: dup",
+              "432: bytec 4",
+              "435: app_local_del",
+              "438: dup",
+              "441: bytec 5",
+              "444: app_local_del",
+              "447: dup",
+              "450: bytec_0",
+              "453: app_local_del",
+              "456: dup",
+              "459: bytec_1",
+              "462: app_local_del",
+              "465: bytec_2",
+              "468: app_local_del",
+              "471: intc_1",
+              "472: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 5 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "31: main_optInToApplication_route@3:",
+              "34: txn OnCompletion",
+              "35: intc_1",
+              "36: ==",
+              "37: txn ApplicationID",
+              "38: &&",
+              "39: assert",
+              "40: b optInToApplication"
+            ],
+            [
+              "55: optInToApplication:",
+              "58: txn Sender",
+              "61: bytec_3",
+              "64: pushint 100",
+              "65: app_local_put",
+              "68: txn Sender",
+              "71: bytec 4",
+              "74: pushint 200",
+              "75: app_local_put",
+              "78: txn Sender",
+              "81: bytec 5",
+              "84: pushbytes \"Silvio\"",
+              "85: app_local_put",
+              "88: txn Sender",
+              "91: bytec_0",
+              "94: pushbytes \"Micali\"",
+              "95: app_local_put",
+              "98: txn Sender",
+              "101: bytec_1",
+              "104: intc_1",
+              "105: app_local_put",
+              "108: txn Sender",
+              "111: bytec_2",
+              "114: txn Sender",
+              "115: app_local_put",
+              "118: intc_1",
+              "119: return"
             ]
           ]
         }
@@ -1373,438 +1328,423 @@
       "help": "Do not approve `UpdateApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 14 -> 18 -> 15",
+          "short": "0 -> 1 -> 2 -> 3 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
+              "12: bz main___algots__.defaultCreate@14"
             ],
             [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "13: pushbytes 0x01a3a3ff",
               "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
+              "15: match main_optInToApplication_route@3"
             ],
             [
-              "131: main_optInToApplication_route@3:",
-              "134: txn OnCompletion",
-              "135: intc_1",
-              "136: ==",
-              "137: assert",
-              "138: txn ApplicationID",
-              "139: assert",
-              "140: callsub optInToApplication"
-            ],
-            [
-              "158: optInToApplication:",
-              "161: txn Sender",
-              "164: bytec 4",
-              "167: pushint 100",
-              "168: app_local_put",
-              "171: txn Sender",
-              "174: bytec 5",
-              "177: pushint 200",
-              "178: app_local_put",
-              "181: txn Sender",
-              "184: bytec 6",
-              "187: pushbytes \"Silvio\"",
-              "188: app_local_put",
-              "191: txn Sender",
-              "194: bytec_0",
-              "197: pushbytes \"Micali\"",
-              "198: app_local_put",
-              "201: txn Sender",
-              "204: bytec_1",
-              "207: intc_1",
-              "208: app_local_put",
-              "211: txn Sender",
-              "214: bytec_2",
-              "217: txn Sender",
-              "218: app_local_put",
-              "219: retsub"
-            ],
-            [
-              "141: intc_1",
-              "142: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 12 -> 19 -> 13",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "115: main_readLocalState_route@4:",
-              "118: txn OnCompletion",
-              "119: !",
-              "120: assert",
-              "121: txn ApplicationID",
-              "122: assert",
-              "123: callsub readLocalState"
-            ],
-            [
-              "223: readLocalState:",
-              "226: txn Sender",
-              "229: dup",
-              "230: intc_0",
-              "233: bytec_2",
-              "236: app_local_get_ex",
-              "237: assert",
-              "240: dig 1",
-              "241: intc_0",
-              "244: bytec 4",
-              "247: app_local_get_ex",
-              "248: assert",
-              "251: dig 2",
-              "252: intc_0",
-              "255: bytec 5",
-              "258: app_local_get_ex",
-              "259: assert",
-              "262: dig 3",
-              "263: intc_0",
-              "266: bytec 6",
-              "269: app_local_get_ex",
-              "270: assert",
-              "273: dig 4",
-              "274: intc_0",
-              "277: bytec_0",
-              "280: app_local_get_ex",
-              "281: assert",
-              "284: uncover 5",
-              "285: intc_0",
-              "288: bytec_1",
-              "291: app_local_get_ex",
-              "292: assert",
-              "302: uncover 4",
-              "303: itob",
-              "304: uncover 4",
-              "305: itob",
-              "306: concat",
-              "307: dig 3",
-              "308: len",
-              "309: itob",
-              "310: extract 6 2",
-              "311: uncover 4",
-              "312: concat",
-              "313: swap",
-              "314: pushbytes 0x0035",
-              "315: concat",
-              "316: dig 1",
-              "317: len",
-              "318: pushint 53",
-              "319: +",
-              "320: dig 4",
-              "321: len",
-              "322: itob",
-              "323: extract 6 2",
-              "324: uncover 5",
-              "325: concat",
-              "326: swap",
-              "327: itob",
-              "328: extract 6 2",
-              "329: uncover 2",
-              "330: swap",
-              "331: concat",
-              "332: pushbytes 0x00",
-              "333: intc_0",
-              "334: uncover 5",
-              "335: setbit",
-              "336: concat",
-              "337: uncover 3",
-              "338: concat",
-              "339: uncover 2",
-              "340: concat",
-              "341: swap",
-              "342: concat",
-              "343: retsub"
-            ],
-            [
-              "124: bytec_3",
-              "125: swap",
-              "126: concat",
-              "127: log",
-              "128: intc_1",
-              "129: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 10 -> 20 -> 11",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "92: main_writeLocalState_route@5:",
-              "95: txn OnCompletion",
-              "96: !",
-              "97: assert",
-              "98: txn ApplicationID",
-              "99: assert",
-              "103: txna ApplicationArgs 1",
-              "104: extract 2 0",
-              "105: txna ApplicationArgs 2",
-              "106: intc_0",
-              "107: getbit",
-              "108: txna ApplicationArgs 3",
-              "111: callsub writeLocalState"
-            ],
-            [
-              "347: writeLocalState:",
-              "350: proto 3 0",
-              "353: txn Sender",
-              "356: dup",
-              "357: global CurrentApplicationID",
-              "358: app_opted_in",
-              "359: assert",
-              "362: dup",
-              "365: bytec_0",
-              "368: frame_dig -3",
-              "369: app_local_put",
-              "372: dup",
-              "375: bytec_1",
-              "378: frame_dig -2",
-              "379: app_local_put",
-              "382: dup",
-              "385: bytec_2",
-              "388: frame_dig -1",
-              "389: app_local_put",
-              "392: dup",
-              "393: intc_0",
-              "396: bytec_0",
-              "399: app_local_get_ex",
-              "400: assert",
-              "401: frame_dig -3",
-              "402: ==",
-              "403: assert",
-              "406: intc_0",
-              "409: bytec_1",
-              "412: app_local_get_ex",
-              "413: assert",
-              "414: frame_dig -2",
-              "415: ==",
-              "416: assert",
-              "417: retsub"
-            ],
-            [
-              "112: intc_1",
-              "113: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 8 -> 21 -> 9",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "61: main_writeDynamicLocalState_route@6:",
-              "64: txn OnCompletion",
-              "65: !",
-              "66: assert",
-              "67: txn ApplicationID",
-              "68: assert",
-              "72: txna ApplicationArgs 1",
-              "73: extract 2 0",
-              "74: txna ApplicationArgs 2",
-              "75: extract 2 0",
-              "78: callsub writeDynamicLocalState"
-            ],
-            [
-              "421: writeDynamicLocalState:",
-              "424: proto 2 1",
-              "427: txn Sender",
-              "430: dup",
-              "431: global CurrentApplicationID",
-              "432: app_opted_in",
-              "433: assert",
-              "436: frame_dig -2",
-              "437: frame_dig -1",
-              "438: app_local_put",
-              "441: frame_dig -1",
-              "442: retsub"
-            ],
-            [
-              "79: dup",
-              "80: len",
-              "81: itob",
-              "82: extract 6 2",
-              "83: swap",
-              "84: concat",
-              "85: bytec_3",
-              "86: swap",
-              "87: concat",
-              "88: log",
-              "89: intc_1",
-              "90: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 6 -> 22 -> 7",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "32: main_readDynamicLocalState_route@7:",
-              "35: txn OnCompletion",
-              "36: !",
-              "37: assert",
-              "38: txn ApplicationID",
-              "39: assert",
-              "43: txna ApplicationArgs 1",
-              "44: extract 2 0",
-              "47: callsub readDynamicLocalState"
-            ],
-            [
-              "446: readDynamicLocalState:",
-              "449: proto 1 1",
-              "452: txn Sender",
-              "455: dup",
-              "456: global CurrentApplicationID",
-              "457: app_opted_in",
-              "458: assert",
-              "461: intc_0",
-              "462: frame_dig -1",
-              "463: app_local_get_ex",
-              "464: assert",
-              "467: retsub"
-            ],
-            [
-              "48: dup",
-              "49: len",
-              "50: itob",
-              "51: extract 6 2",
-              "52: swap",
-              "53: concat",
-              "54: bytec_3",
-              "55: swap",
-              "56: concat",
-              "57: log",
-              "58: intc_1",
-              "59: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 4 -> 23 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "20: main_clearLocalState_route@8:",
-              "23: txn OnCompletion",
-              "24: !",
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
               "25: assert",
-              "26: txn ApplicationID",
-              "27: assert",
-              "28: callsub clearLocalState"
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
             ],
             [
-              "471: clearLocalState:",
-              "474: txn Sender",
-              "477: dup",
-              "478: global CurrentApplicationID",
-              "479: app_opted_in",
-              "480: assert",
-              "483: dup",
-              "486: bytec 4",
-              "489: app_local_del",
-              "492: dup",
-              "495: bytec 5",
-              "498: app_local_del",
-              "501: dup",
-              "504: bytec 6",
-              "507: app_local_del",
-              "510: dup",
-              "513: bytec_0",
-              "516: app_local_del",
-              "519: dup",
-              "522: bytec_1",
-              "525: app_local_del",
-              "528: bytec_2",
-              "531: app_local_del",
-              "532: retsub"
+              "123: readLocalState:",
+              "126: txn Sender",
+              "129: dup",
+              "130: intc_0",
+              "133: bytec_2",
+              "136: app_local_get_ex",
+              "137: assert",
+              "140: dig 1",
+              "141: intc_0",
+              "144: bytec_3",
+              "147: app_local_get_ex",
+              "148: assert",
+              "151: dig 2",
+              "152: intc_0",
+              "155: bytec 4",
+              "158: app_local_get_ex",
+              "159: assert",
+              "162: dig 3",
+              "163: intc_0",
+              "166: bytec 5",
+              "169: app_local_get_ex",
+              "170: assert",
+              "173: dig 4",
+              "174: intc_0",
+              "177: bytec_0",
+              "180: app_local_get_ex",
+              "181: assert",
+              "184: uncover 5",
+              "185: intc_0",
+              "188: bytec_1",
+              "191: app_local_get_ex",
+              "192: assert",
+              "202: uncover 4",
+              "203: itob",
+              "204: uncover 4",
+              "205: itob",
+              "206: concat",
+              "207: dig 3",
+              "208: len",
+              "209: itob",
+              "210: extract 6 2",
+              "211: uncover 4",
+              "212: concat",
+              "213: swap",
+              "214: pushbytes 0x0035",
+              "215: concat",
+              "216: dig 1",
+              "217: len",
+              "218: pushint 53",
+              "219: +",
+              "220: dig 4",
+              "221: len",
+              "222: itob",
+              "223: extract 6 2",
+              "224: uncover 5",
+              "225: concat",
+              "226: swap",
+              "227: itob",
+              "228: extract 6 2",
+              "229: uncover 2",
+              "230: swap",
+              "231: concat",
+              "232: pushbytes 0x00",
+              "233: intc_0",
+              "234: uncover 5",
+              "235: setbit",
+              "236: concat",
+              "237: uncover 3",
+              "238: concat",
+              "239: uncover 2",
+              "240: concat",
+              "241: swap",
+              "242: concat",
+              "245: bytec 6",
+              "246: swap",
+              "247: concat",
+              "248: log",
+              "249: intc_1",
+              "250: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 9",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
-              "29: intc_1",
-              "30: return"
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "254: writeLocalState:",
+              "257: txna ApplicationArgs 1",
+              "258: extract 2 0",
+              "259: txna ApplicationArgs 2",
+              "260: intc_0",
+              "261: getbit",
+              "262: txna ApplicationArgs 3",
+              "265: txn Sender",
+              "268: dup",
+              "269: global CurrentApplicationID",
+              "270: app_opted_in",
+              "271: assert",
+              "274: dup",
+              "277: bytec_0",
+              "280: dig 5",
+              "281: app_local_put",
+              "284: dup",
+              "287: bytec_1",
+              "290: dig 4",
+              "291: app_local_put",
+              "294: dup",
+              "297: bytec_2",
+              "300: uncover 3",
+              "301: app_local_put",
+              "304: dup",
+              "305: intc_0",
+              "308: bytec_0",
+              "311: app_local_get_ex",
+              "312: assert",
+              "313: uncover 3",
+              "314: ==",
+              "315: assert",
+              "318: intc_0",
+              "321: bytec_1",
+              "324: app_local_get_ex",
+              "325: assert",
+              "326: ==",
+              "329: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 10",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "333: writeDynamicLocalState:",
+              "336: txna ApplicationArgs 1",
+              "337: extract 2 0",
+              "338: txna ApplicationArgs 2",
+              "339: extract 2 0",
+              "342: txn Sender",
+              "345: dup",
+              "346: global CurrentApplicationID",
+              "347: app_opted_in",
+              "348: assert",
+              "351: uncover 2",
+              "352: dig 2",
+              "353: app_local_put",
+              "356: dup",
+              "357: len",
+              "358: itob",
+              "359: extract 6 2",
+              "360: swap",
+              "361: concat",
+              "362: bytec 6",
+              "363: swap",
+              "364: concat",
+              "365: log",
+              "366: intc_1",
+              "367: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "371: readDynamicLocalState:",
+              "374: txna ApplicationArgs 1",
+              "375: extract 2 0",
+              "378: txn Sender",
+              "381: dup",
+              "382: global CurrentApplicationID",
+              "383: app_opted_in",
+              "384: assert",
+              "387: intc_0",
+              "388: uncover 2",
+              "389: app_local_get_ex",
+              "390: assert",
+              "393: dup",
+              "394: len",
+              "395: itob",
+              "396: extract 6 2",
+              "397: swap",
+              "398: concat",
+              "399: bytec 6",
+              "400: swap",
+              "401: concat",
+              "402: log",
+              "403: intc_1",
+              "404: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 12",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "408: clearLocalState:",
+              "411: txn Sender",
+              "414: dup",
+              "415: global CurrentApplicationID",
+              "416: app_opted_in",
+              "417: assert",
+              "420: dup",
+              "423: bytec_3",
+              "426: app_local_del",
+              "429: dup",
+              "432: bytec 4",
+              "435: app_local_del",
+              "438: dup",
+              "441: bytec 5",
+              "444: app_local_del",
+              "447: dup",
+              "450: bytec_0",
+              "453: app_local_del",
+              "456: dup",
+              "459: bytec_1",
+              "462: app_local_del",
+              "465: bytec_2",
+              "468: app_local_del",
+              "471: intc_1",
+              "472: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 5 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "31: main_optInToApplication_route@3:",
+              "34: txn OnCompletion",
+              "35: intc_1",
+              "36: ==",
+              "37: txn ApplicationID",
+              "38: &&",
+              "39: assert",
+              "40: b optInToApplication"
+            ],
+            [
+              "55: optInToApplication:",
+              "58: txn Sender",
+              "61: bytec_3",
+              "64: pushint 100",
+              "65: app_local_put",
+              "68: txn Sender",
+              "71: bytec 4",
+              "74: pushint 200",
+              "75: app_local_put",
+              "78: txn Sender",
+              "81: bytec 5",
+              "84: pushbytes \"Silvio\"",
+              "85: app_local_put",
+              "88: txn Sender",
+              "91: bytec_0",
+              "94: pushbytes \"Micali\"",
+              "95: app_local_put",
+              "98: txn Sender",
+              "101: bytec_1",
+              "104: intc_1",
+              "105: app_local_put",
+              "108: txn Sender",
+              "111: bytec_2",
+              "114: txn Sender",
+              "115: app_local_put",
+              "118: intc_1",
+              "119: return"
             ]
           ]
         }
@@ -1820,466 +1760,448 @@
       "help": "Validate `Fee` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 14 -> 18 -> 15",
+          "short": "0 -> 1 -> 2 -> 3 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
+              "12: bz main___algots__.defaultCreate@14"
             ],
             [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "13: pushbytes 0x01a3a3ff",
               "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
+              "15: match main_optInToApplication_route@3"
             ],
             [
-              "131: main_optInToApplication_route@3:",
-              "134: txn OnCompletion",
-              "135: intc_1",
-              "136: ==",
-              "137: assert",
-              "138: txn ApplicationID",
-              "139: assert",
-              "140: callsub optInToApplication"
-            ],
-            [
-              "158: optInToApplication:",
-              "161: txn Sender",
-              "164: bytec 4",
-              "167: pushint 100",
-              "168: app_local_put",
-              "171: txn Sender",
-              "174: bytec 5",
-              "177: pushint 200",
-              "178: app_local_put",
-              "181: txn Sender",
-              "184: bytec 6",
-              "187: pushbytes \"Silvio\"",
-              "188: app_local_put",
-              "191: txn Sender",
-              "194: bytec_0",
-              "197: pushbytes \"Micali\"",
-              "198: app_local_put",
-              "201: txn Sender",
-              "204: bytec_1",
-              "207: intc_1",
-              "208: app_local_put",
-              "211: txn Sender",
-              "214: bytec_2",
-              "217: txn Sender",
-              "218: app_local_put",
-              "219: retsub"
-            ],
-            [
-              "141: intc_1",
-              "142: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 12 -> 19 -> 13",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "115: main_readLocalState_route@4:",
-              "118: txn OnCompletion",
-              "119: !",
-              "120: assert",
-              "121: txn ApplicationID",
-              "122: assert",
-              "123: callsub readLocalState"
-            ],
-            [
-              "223: readLocalState:",
-              "226: txn Sender",
-              "229: dup",
-              "230: intc_0",
-              "233: bytec_2",
-              "236: app_local_get_ex",
-              "237: assert",
-              "240: dig 1",
-              "241: intc_0",
-              "244: bytec 4",
-              "247: app_local_get_ex",
-              "248: assert",
-              "251: dig 2",
-              "252: intc_0",
-              "255: bytec 5",
-              "258: app_local_get_ex",
-              "259: assert",
-              "262: dig 3",
-              "263: intc_0",
-              "266: bytec 6",
-              "269: app_local_get_ex",
-              "270: assert",
-              "273: dig 4",
-              "274: intc_0",
-              "277: bytec_0",
-              "280: app_local_get_ex",
-              "281: assert",
-              "284: uncover 5",
-              "285: intc_0",
-              "288: bytec_1",
-              "291: app_local_get_ex",
-              "292: assert",
-              "302: uncover 4",
-              "303: itob",
-              "304: uncover 4",
-              "305: itob",
-              "306: concat",
-              "307: dig 3",
-              "308: len",
-              "309: itob",
-              "310: extract 6 2",
-              "311: uncover 4",
-              "312: concat",
-              "313: swap",
-              "314: pushbytes 0x0035",
-              "315: concat",
-              "316: dig 1",
-              "317: len",
-              "318: pushint 53",
-              "319: +",
-              "320: dig 4",
-              "321: len",
-              "322: itob",
-              "323: extract 6 2",
-              "324: uncover 5",
-              "325: concat",
-              "326: swap",
-              "327: itob",
-              "328: extract 6 2",
-              "329: uncover 2",
-              "330: swap",
-              "331: concat",
-              "332: pushbytes 0x00",
-              "333: intc_0",
-              "334: uncover 5",
-              "335: setbit",
-              "336: concat",
-              "337: uncover 3",
-              "338: concat",
-              "339: uncover 2",
-              "340: concat",
-              "341: swap",
-              "342: concat",
-              "343: retsub"
-            ],
-            [
-              "124: bytec_3",
-              "125: swap",
-              "126: concat",
-              "127: log",
-              "128: intc_1",
-              "129: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 10 -> 20 -> 11",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "92: main_writeLocalState_route@5:",
-              "95: txn OnCompletion",
-              "96: !",
-              "97: assert",
-              "98: txn ApplicationID",
-              "99: assert",
-              "103: txna ApplicationArgs 1",
-              "104: extract 2 0",
-              "105: txna ApplicationArgs 2",
-              "106: intc_0",
-              "107: getbit",
-              "108: txna ApplicationArgs 3",
-              "111: callsub writeLocalState"
-            ],
-            [
-              "347: writeLocalState:",
-              "350: proto 3 0",
-              "353: txn Sender",
-              "356: dup",
-              "357: global CurrentApplicationID",
-              "358: app_opted_in",
-              "359: assert",
-              "362: dup",
-              "365: bytec_0",
-              "368: frame_dig -3",
-              "369: app_local_put",
-              "372: dup",
-              "375: bytec_1",
-              "378: frame_dig -2",
-              "379: app_local_put",
-              "382: dup",
-              "385: bytec_2",
-              "388: frame_dig -1",
-              "389: app_local_put",
-              "392: dup",
-              "393: intc_0",
-              "396: bytec_0",
-              "399: app_local_get_ex",
-              "400: assert",
-              "401: frame_dig -3",
-              "402: ==",
-              "403: assert",
-              "406: intc_0",
-              "409: bytec_1",
-              "412: app_local_get_ex",
-              "413: assert",
-              "414: frame_dig -2",
-              "415: ==",
-              "416: assert",
-              "417: retsub"
-            ],
-            [
-              "112: intc_1",
-              "113: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 8 -> 21 -> 9",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "61: main_writeDynamicLocalState_route@6:",
-              "64: txn OnCompletion",
-              "65: !",
-              "66: assert",
-              "67: txn ApplicationID",
-              "68: assert",
-              "72: txna ApplicationArgs 1",
-              "73: extract 2 0",
-              "74: txna ApplicationArgs 2",
-              "75: extract 2 0",
-              "78: callsub writeDynamicLocalState"
-            ],
-            [
-              "421: writeDynamicLocalState:",
-              "424: proto 2 1",
-              "427: txn Sender",
-              "430: dup",
-              "431: global CurrentApplicationID",
-              "432: app_opted_in",
-              "433: assert",
-              "436: frame_dig -2",
-              "437: frame_dig -1",
-              "438: app_local_put",
-              "441: frame_dig -1",
-              "442: retsub"
-            ],
-            [
-              "79: dup",
-              "80: len",
-              "81: itob",
-              "82: extract 6 2",
-              "83: swap",
-              "84: concat",
-              "85: bytec_3",
-              "86: swap",
-              "87: concat",
-              "88: log",
-              "89: intc_1",
-              "90: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 6 -> 22 -> 7",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "32: main_readDynamicLocalState_route@7:",
-              "35: txn OnCompletion",
-              "36: !",
-              "37: assert",
-              "38: txn ApplicationID",
-              "39: assert",
-              "43: txna ApplicationArgs 1",
-              "44: extract 2 0",
-              "47: callsub readDynamicLocalState"
-            ],
-            [
-              "446: readDynamicLocalState:",
-              "449: proto 1 1",
-              "452: txn Sender",
-              "455: dup",
-              "456: global CurrentApplicationID",
-              "457: app_opted_in",
-              "458: assert",
-              "461: intc_0",
-              "462: frame_dig -1",
-              "463: app_local_get_ex",
-              "464: assert",
-              "467: retsub"
-            ],
-            [
-              "48: dup",
-              "49: len",
-              "50: itob",
-              "51: extract 6 2",
-              "52: swap",
-              "53: concat",
-              "54: bytec_3",
-              "55: swap",
-              "56: concat",
-              "57: log",
-              "58: intc_1",
-              "59: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 4 -> 23 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "20: main_clearLocalState_route@8:",
-              "23: txn OnCompletion",
-              "24: !",
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
               "25: assert",
-              "26: txn ApplicationID",
-              "27: assert",
-              "28: callsub clearLocalState"
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
             ],
             [
-              "471: clearLocalState:",
-              "474: txn Sender",
-              "477: dup",
-              "478: global CurrentApplicationID",
-              "479: app_opted_in",
-              "480: assert",
-              "483: dup",
-              "486: bytec 4",
-              "489: app_local_del",
-              "492: dup",
-              "495: bytec 5",
-              "498: app_local_del",
-              "501: dup",
-              "504: bytec 6",
-              "507: app_local_del",
-              "510: dup",
-              "513: bytec_0",
-              "516: app_local_del",
-              "519: dup",
-              "522: bytec_1",
-              "525: app_local_del",
-              "528: bytec_2",
-              "531: app_local_del",
-              "532: retsub"
-            ],
-            [
-              "29: intc_1",
-              "30: return"
+              "123: readLocalState:",
+              "126: txn Sender",
+              "129: dup",
+              "130: intc_0",
+              "133: bytec_2",
+              "136: app_local_get_ex",
+              "137: assert",
+              "140: dig 1",
+              "141: intc_0",
+              "144: bytec_3",
+              "147: app_local_get_ex",
+              "148: assert",
+              "151: dig 2",
+              "152: intc_0",
+              "155: bytec 4",
+              "158: app_local_get_ex",
+              "159: assert",
+              "162: dig 3",
+              "163: intc_0",
+              "166: bytec 5",
+              "169: app_local_get_ex",
+              "170: assert",
+              "173: dig 4",
+              "174: intc_0",
+              "177: bytec_0",
+              "180: app_local_get_ex",
+              "181: assert",
+              "184: uncover 5",
+              "185: intc_0",
+              "188: bytec_1",
+              "191: app_local_get_ex",
+              "192: assert",
+              "202: uncover 4",
+              "203: itob",
+              "204: uncover 4",
+              "205: itob",
+              "206: concat",
+              "207: dig 3",
+              "208: len",
+              "209: itob",
+              "210: extract 6 2",
+              "211: uncover 4",
+              "212: concat",
+              "213: swap",
+              "214: pushbytes 0x0035",
+              "215: concat",
+              "216: dig 1",
+              "217: len",
+              "218: pushint 53",
+              "219: +",
+              "220: dig 4",
+              "221: len",
+              "222: itob",
+              "223: extract 6 2",
+              "224: uncover 5",
+              "225: concat",
+              "226: swap",
+              "227: itob",
+              "228: extract 6 2",
+              "229: uncover 2",
+              "230: swap",
+              "231: concat",
+              "232: pushbytes 0x00",
+              "233: intc_0",
+              "234: uncover 5",
+              "235: setbit",
+              "236: concat",
+              "237: uncover 3",
+              "238: concat",
+              "239: uncover 2",
+              "240: concat",
+              "241: swap",
+              "242: concat",
+              "245: bytec 6",
+              "246: swap",
+              "247: concat",
+              "248: log",
+              "249: intc_1",
+              "250: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 16 -> 17",
+          "short": "0 -> 1 -> 2 -> 3 -> 9",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
+              "12: bz main___algots__.defaultCreate@14"
             ],
             [
-              "144: main_bare_routing@11:",
-              "148: txn OnCompletion",
-              "149: bnz main_after_if_else@15"
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
             ],
             [
-              "150: txn ApplicationID",
-              "151: !",
-              "152: assert",
-              "153: intc_1",
-              "154: return"
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "254: writeLocalState:",
+              "257: txna ApplicationArgs 1",
+              "258: extract 2 0",
+              "259: txna ApplicationArgs 2",
+              "260: intc_0",
+              "261: getbit",
+              "262: txna ApplicationArgs 3",
+              "265: txn Sender",
+              "268: dup",
+              "269: global CurrentApplicationID",
+              "270: app_opted_in",
+              "271: assert",
+              "274: dup",
+              "277: bytec_0",
+              "280: dig 5",
+              "281: app_local_put",
+              "284: dup",
+              "287: bytec_1",
+              "290: dig 4",
+              "291: app_local_put",
+              "294: dup",
+              "297: bytec_2",
+              "300: uncover 3",
+              "301: app_local_put",
+              "304: dup",
+              "305: intc_0",
+              "308: bytec_0",
+              "311: app_local_get_ex",
+              "312: assert",
+              "313: uncover 3",
+              "314: ==",
+              "315: assert",
+              "318: intc_0",
+              "321: bytec_1",
+              "324: app_local_get_ex",
+              "325: assert",
+              "326: ==",
+              "329: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 10",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "333: writeDynamicLocalState:",
+              "336: txna ApplicationArgs 1",
+              "337: extract 2 0",
+              "338: txna ApplicationArgs 2",
+              "339: extract 2 0",
+              "342: txn Sender",
+              "345: dup",
+              "346: global CurrentApplicationID",
+              "347: app_opted_in",
+              "348: assert",
+              "351: uncover 2",
+              "352: dig 2",
+              "353: app_local_put",
+              "356: dup",
+              "357: len",
+              "358: itob",
+              "359: extract 6 2",
+              "360: swap",
+              "361: concat",
+              "362: bytec 6",
+              "363: swap",
+              "364: concat",
+              "365: log",
+              "366: intc_1",
+              "367: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "371: readDynamicLocalState:",
+              "374: txna ApplicationArgs 1",
+              "375: extract 2 0",
+              "378: txn Sender",
+              "381: dup",
+              "382: global CurrentApplicationID",
+              "383: app_opted_in",
+              "384: assert",
+              "387: intc_0",
+              "388: uncover 2",
+              "389: app_local_get_ex",
+              "390: assert",
+              "393: dup",
+              "394: len",
+              "395: itob",
+              "396: extract 6 2",
+              "397: swap",
+              "398: concat",
+              "399: bytec 6",
+              "400: swap",
+              "401: concat",
+              "402: log",
+              "403: intc_1",
+              "404: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 12",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "408: clearLocalState:",
+              "411: txn Sender",
+              "414: dup",
+              "415: global CurrentApplicationID",
+              "416: app_opted_in",
+              "417: assert",
+              "420: dup",
+              "423: bytec_3",
+              "426: app_local_del",
+              "429: dup",
+              "432: bytec 4",
+              "435: app_local_del",
+              "438: dup",
+              "441: bytec 5",
+              "444: app_local_del",
+              "447: dup",
+              "450: bytec_0",
+              "453: app_local_del",
+              "456: dup",
+              "459: bytec_1",
+              "462: app_local_del",
+              "465: bytec_2",
+              "468: app_local_del",
+              "471: intc_1",
+              "472: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 5 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "31: main_optInToApplication_route@3:",
+              "34: txn OnCompletion",
+              "35: intc_1",
+              "36: ==",
+              "37: txn ApplicationID",
+              "38: &&",
+              "39: assert",
+              "40: b optInToApplication"
+            ],
+            [
+              "55: optInToApplication:",
+              "58: txn Sender",
+              "61: bytec_3",
+              "64: pushint 100",
+              "65: app_local_put",
+              "68: txn Sender",
+              "71: bytec 4",
+              "74: pushint 200",
+              "75: app_local_put",
+              "78: txn Sender",
+              "81: bytec 5",
+              "84: pushbytes \"Silvio\"",
+              "85: app_local_put",
+              "88: txn Sender",
+              "91: bytec_0",
+              "94: pushbytes \"Micali\"",
+              "95: app_local_put",
+              "98: txn Sender",
+              "101: bytec_1",
+              "104: intc_1",
+              "105: app_local_put",
+              "108: txn Sender",
+              "111: bytec_2",
+              "114: txn Sender",
+              "115: app_local_put",
+              "118: intc_1",
+              "119: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 6",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "42: main___algots__.defaultCreate@14:",
+              "46: txn OnCompletion",
+              "47: !",
+              "48: txn ApplicationID",
+              "49: !",
+              "50: &&",
+              "51: return"
             ]
           ]
         }
@@ -2305,466 +2227,448 @@
       "help": "Validate `RekeyTo` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 14 -> 18 -> 15",
+          "short": "0 -> 1 -> 2 -> 3 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
+              "12: bz main___algots__.defaultCreate@14"
             ],
             [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "13: pushbytes 0x01a3a3ff",
               "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
+              "15: match main_optInToApplication_route@3"
             ],
             [
-              "131: main_optInToApplication_route@3:",
-              "134: txn OnCompletion",
-              "135: intc_1",
-              "136: ==",
-              "137: assert",
-              "138: txn ApplicationID",
-              "139: assert",
-              "140: callsub optInToApplication"
-            ],
-            [
-              "158: optInToApplication:",
-              "161: txn Sender",
-              "164: bytec 4",
-              "167: pushint 100",
-              "168: app_local_put",
-              "171: txn Sender",
-              "174: bytec 5",
-              "177: pushint 200",
-              "178: app_local_put",
-              "181: txn Sender",
-              "184: bytec 6",
-              "187: pushbytes \"Silvio\"",
-              "188: app_local_put",
-              "191: txn Sender",
-              "194: bytec_0",
-              "197: pushbytes \"Micali\"",
-              "198: app_local_put",
-              "201: txn Sender",
-              "204: bytec_1",
-              "207: intc_1",
-              "208: app_local_put",
-              "211: txn Sender",
-              "214: bytec_2",
-              "217: txn Sender",
-              "218: app_local_put",
-              "219: retsub"
-            ],
-            [
-              "141: intc_1",
-              "142: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 12 -> 19 -> 13",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "115: main_readLocalState_route@4:",
-              "118: txn OnCompletion",
-              "119: !",
-              "120: assert",
-              "121: txn ApplicationID",
-              "122: assert",
-              "123: callsub readLocalState"
-            ],
-            [
-              "223: readLocalState:",
-              "226: txn Sender",
-              "229: dup",
-              "230: intc_0",
-              "233: bytec_2",
-              "236: app_local_get_ex",
-              "237: assert",
-              "240: dig 1",
-              "241: intc_0",
-              "244: bytec 4",
-              "247: app_local_get_ex",
-              "248: assert",
-              "251: dig 2",
-              "252: intc_0",
-              "255: bytec 5",
-              "258: app_local_get_ex",
-              "259: assert",
-              "262: dig 3",
-              "263: intc_0",
-              "266: bytec 6",
-              "269: app_local_get_ex",
-              "270: assert",
-              "273: dig 4",
-              "274: intc_0",
-              "277: bytec_0",
-              "280: app_local_get_ex",
-              "281: assert",
-              "284: uncover 5",
-              "285: intc_0",
-              "288: bytec_1",
-              "291: app_local_get_ex",
-              "292: assert",
-              "302: uncover 4",
-              "303: itob",
-              "304: uncover 4",
-              "305: itob",
-              "306: concat",
-              "307: dig 3",
-              "308: len",
-              "309: itob",
-              "310: extract 6 2",
-              "311: uncover 4",
-              "312: concat",
-              "313: swap",
-              "314: pushbytes 0x0035",
-              "315: concat",
-              "316: dig 1",
-              "317: len",
-              "318: pushint 53",
-              "319: +",
-              "320: dig 4",
-              "321: len",
-              "322: itob",
-              "323: extract 6 2",
-              "324: uncover 5",
-              "325: concat",
-              "326: swap",
-              "327: itob",
-              "328: extract 6 2",
-              "329: uncover 2",
-              "330: swap",
-              "331: concat",
-              "332: pushbytes 0x00",
-              "333: intc_0",
-              "334: uncover 5",
-              "335: setbit",
-              "336: concat",
-              "337: uncover 3",
-              "338: concat",
-              "339: uncover 2",
-              "340: concat",
-              "341: swap",
-              "342: concat",
-              "343: retsub"
-            ],
-            [
-              "124: bytec_3",
-              "125: swap",
-              "126: concat",
-              "127: log",
-              "128: intc_1",
-              "129: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 10 -> 20 -> 11",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "92: main_writeLocalState_route@5:",
-              "95: txn OnCompletion",
-              "96: !",
-              "97: assert",
-              "98: txn ApplicationID",
-              "99: assert",
-              "103: txna ApplicationArgs 1",
-              "104: extract 2 0",
-              "105: txna ApplicationArgs 2",
-              "106: intc_0",
-              "107: getbit",
-              "108: txna ApplicationArgs 3",
-              "111: callsub writeLocalState"
-            ],
-            [
-              "347: writeLocalState:",
-              "350: proto 3 0",
-              "353: txn Sender",
-              "356: dup",
-              "357: global CurrentApplicationID",
-              "358: app_opted_in",
-              "359: assert",
-              "362: dup",
-              "365: bytec_0",
-              "368: frame_dig -3",
-              "369: app_local_put",
-              "372: dup",
-              "375: bytec_1",
-              "378: frame_dig -2",
-              "379: app_local_put",
-              "382: dup",
-              "385: bytec_2",
-              "388: frame_dig -1",
-              "389: app_local_put",
-              "392: dup",
-              "393: intc_0",
-              "396: bytec_0",
-              "399: app_local_get_ex",
-              "400: assert",
-              "401: frame_dig -3",
-              "402: ==",
-              "403: assert",
-              "406: intc_0",
-              "409: bytec_1",
-              "412: app_local_get_ex",
-              "413: assert",
-              "414: frame_dig -2",
-              "415: ==",
-              "416: assert",
-              "417: retsub"
-            ],
-            [
-              "112: intc_1",
-              "113: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 8 -> 21 -> 9",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "61: main_writeDynamicLocalState_route@6:",
-              "64: txn OnCompletion",
-              "65: !",
-              "66: assert",
-              "67: txn ApplicationID",
-              "68: assert",
-              "72: txna ApplicationArgs 1",
-              "73: extract 2 0",
-              "74: txna ApplicationArgs 2",
-              "75: extract 2 0",
-              "78: callsub writeDynamicLocalState"
-            ],
-            [
-              "421: writeDynamicLocalState:",
-              "424: proto 2 1",
-              "427: txn Sender",
-              "430: dup",
-              "431: global CurrentApplicationID",
-              "432: app_opted_in",
-              "433: assert",
-              "436: frame_dig -2",
-              "437: frame_dig -1",
-              "438: app_local_put",
-              "441: frame_dig -1",
-              "442: retsub"
-            ],
-            [
-              "79: dup",
-              "80: len",
-              "81: itob",
-              "82: extract 6 2",
-              "83: swap",
-              "84: concat",
-              "85: bytec_3",
-              "86: swap",
-              "87: concat",
-              "88: log",
-              "89: intc_1",
-              "90: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 6 -> 22 -> 7",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "32: main_readDynamicLocalState_route@7:",
-              "35: txn OnCompletion",
-              "36: !",
-              "37: assert",
-              "38: txn ApplicationID",
-              "39: assert",
-              "43: txna ApplicationArgs 1",
-              "44: extract 2 0",
-              "47: callsub readDynamicLocalState"
-            ],
-            [
-              "446: readDynamicLocalState:",
-              "449: proto 1 1",
-              "452: txn Sender",
-              "455: dup",
-              "456: global CurrentApplicationID",
-              "457: app_opted_in",
-              "458: assert",
-              "461: intc_0",
-              "462: frame_dig -1",
-              "463: app_local_get_ex",
-              "464: assert",
-              "467: retsub"
-            ],
-            [
-              "48: dup",
-              "49: len",
-              "50: itob",
-              "51: extract 6 2",
-              "52: swap",
-              "53: concat",
-              "54: bytec_3",
-              "55: swap",
-              "56: concat",
-              "57: log",
-              "58: intc_1",
-              "59: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 4 -> 23 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
-              "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
-            ],
-            [
-              "13: pushbytess 0x01a3a3ff 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
-              "14: txna ApplicationArgs 0",
-              "15: match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8"
-            ],
-            [
-              "20: main_clearLocalState_route@8:",
-              "23: txn OnCompletion",
-              "24: !",
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
               "25: assert",
-              "26: txn ApplicationID",
-              "27: assert",
-              "28: callsub clearLocalState"
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
             ],
             [
-              "471: clearLocalState:",
-              "474: txn Sender",
-              "477: dup",
-              "478: global CurrentApplicationID",
-              "479: app_opted_in",
-              "480: assert",
-              "483: dup",
-              "486: bytec 4",
-              "489: app_local_del",
-              "492: dup",
-              "495: bytec 5",
-              "498: app_local_del",
-              "501: dup",
-              "504: bytec 6",
-              "507: app_local_del",
-              "510: dup",
-              "513: bytec_0",
-              "516: app_local_del",
-              "519: dup",
-              "522: bytec_1",
-              "525: app_local_del",
-              "528: bytec_2",
-              "531: app_local_del",
-              "532: retsub"
-            ],
-            [
-              "29: intc_1",
-              "30: return"
+              "123: readLocalState:",
+              "126: txn Sender",
+              "129: dup",
+              "130: intc_0",
+              "133: bytec_2",
+              "136: app_local_get_ex",
+              "137: assert",
+              "140: dig 1",
+              "141: intc_0",
+              "144: bytec_3",
+              "147: app_local_get_ex",
+              "148: assert",
+              "151: dig 2",
+              "152: intc_0",
+              "155: bytec 4",
+              "158: app_local_get_ex",
+              "159: assert",
+              "162: dig 3",
+              "163: intc_0",
+              "166: bytec 5",
+              "169: app_local_get_ex",
+              "170: assert",
+              "173: dig 4",
+              "174: intc_0",
+              "177: bytec_0",
+              "180: app_local_get_ex",
+              "181: assert",
+              "184: uncover 5",
+              "185: intc_0",
+              "188: bytec_1",
+              "191: app_local_get_ex",
+              "192: assert",
+              "202: uncover 4",
+              "203: itob",
+              "204: uncover 4",
+              "205: itob",
+              "206: concat",
+              "207: dig 3",
+              "208: len",
+              "209: itob",
+              "210: extract 6 2",
+              "211: uncover 4",
+              "212: concat",
+              "213: swap",
+              "214: pushbytes 0x0035",
+              "215: concat",
+              "216: dig 1",
+              "217: len",
+              "218: pushint 53",
+              "219: +",
+              "220: dig 4",
+              "221: len",
+              "222: itob",
+              "223: extract 6 2",
+              "224: uncover 5",
+              "225: concat",
+              "226: swap",
+              "227: itob",
+              "228: extract 6 2",
+              "229: uncover 2",
+              "230: swap",
+              "231: concat",
+              "232: pushbytes 0x00",
+              "233: intc_0",
+              "234: uncover 5",
+              "235: setbit",
+              "236: concat",
+              "237: uncover 3",
+              "238: concat",
+              "239: uncover 2",
+              "240: concat",
+              "241: swap",
+              "242: concat",
+              "245: bytec 6",
+              "246: swap",
+              "247: concat",
+              "248: log",
+              "249: intc_1",
+              "250: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 16 -> 17",
+          "short": "0 -> 1 -> 2 -> 3 -> 9",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 0 1",
-              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" 0x151f7c75 \"int\" \"localIntNoDefault\" \"localBytes\"",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@11"
+              "12: bz main___algots__.defaultCreate@14"
             ],
             [
-              "144: main_bare_routing@11:",
-              "148: txn OnCompletion",
-              "149: bnz main_after_if_else@15"
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
             ],
             [
-              "150: txn ApplicationID",
-              "151: !",
-              "152: assert",
-              "153: intc_1",
-              "154: return"
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "254: writeLocalState:",
+              "257: txna ApplicationArgs 1",
+              "258: extract 2 0",
+              "259: txna ApplicationArgs 2",
+              "260: intc_0",
+              "261: getbit",
+              "262: txna ApplicationArgs 3",
+              "265: txn Sender",
+              "268: dup",
+              "269: global CurrentApplicationID",
+              "270: app_opted_in",
+              "271: assert",
+              "274: dup",
+              "277: bytec_0",
+              "280: dig 5",
+              "281: app_local_put",
+              "284: dup",
+              "287: bytec_1",
+              "290: dig 4",
+              "291: app_local_put",
+              "294: dup",
+              "297: bytec_2",
+              "300: uncover 3",
+              "301: app_local_put",
+              "304: dup",
+              "305: intc_0",
+              "308: bytec_0",
+              "311: app_local_get_ex",
+              "312: assert",
+              "313: uncover 3",
+              "314: ==",
+              "315: assert",
+              "318: intc_0",
+              "321: bytec_1",
+              "324: app_local_get_ex",
+              "325: assert",
+              "326: ==",
+              "329: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 10",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "333: writeDynamicLocalState:",
+              "336: txna ApplicationArgs 1",
+              "337: extract 2 0",
+              "338: txna ApplicationArgs 2",
+              "339: extract 2 0",
+              "342: txn Sender",
+              "345: dup",
+              "346: global CurrentApplicationID",
+              "347: app_opted_in",
+              "348: assert",
+              "351: uncover 2",
+              "352: dig 2",
+              "353: app_local_put",
+              "356: dup",
+              "357: len",
+              "358: itob",
+              "359: extract 6 2",
+              "360: swap",
+              "361: concat",
+              "362: bytec 6",
+              "363: swap",
+              "364: concat",
+              "365: log",
+              "366: intc_1",
+              "367: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 11",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "371: readDynamicLocalState:",
+              "374: txna ApplicationArgs 1",
+              "375: extract 2 0",
+              "378: txn Sender",
+              "381: dup",
+              "382: global CurrentApplicationID",
+              "383: app_opted_in",
+              "384: assert",
+              "387: intc_0",
+              "388: uncover 2",
+              "389: app_local_get_ex",
+              "390: assert",
+              "393: dup",
+              "394: len",
+              "395: itob",
+              "396: extract 6 2",
+              "397: swap",
+              "398: concat",
+              "399: bytec 6",
+              "400: swap",
+              "401: concat",
+              "402: log",
+              "403: intc_1",
+              "404: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 3 -> 12",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "17: main_switch_case_next@4:",
+              "21: txn OnCompletion",
+              "22: !",
+              "23: assert",
+              "24: txn ApplicationID",
+              "25: assert",
+              "26: pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a",
+              "27: txna ApplicationArgs 0",
+              "28: match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState"
+            ],
+            [
+              "408: clearLocalState:",
+              "411: txn Sender",
+              "414: dup",
+              "415: global CurrentApplicationID",
+              "416: app_opted_in",
+              "417: assert",
+              "420: dup",
+              "423: bytec_3",
+              "426: app_local_del",
+              "429: dup",
+              "432: bytec 4",
+              "435: app_local_del",
+              "438: dup",
+              "441: bytec 5",
+              "444: app_local_del",
+              "447: dup",
+              "450: bytec_0",
+              "453: app_local_del",
+              "456: dup",
+              "459: bytec_1",
+              "462: app_local_del",
+              "465: bytec_2",
+              "468: app_local_del",
+              "471: intc_1",
+              "472: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 5 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "13: pushbytes 0x01a3a3ff",
+              "14: txna ApplicationArgs 0",
+              "15: match main_optInToApplication_route@3"
+            ],
+            [
+              "31: main_optInToApplication_route@3:",
+              "34: txn OnCompletion",
+              "35: intc_1",
+              "36: ==",
+              "37: txn ApplicationID",
+              "38: &&",
+              "39: assert",
+              "40: b optInToApplication"
+            ],
+            [
+              "55: optInToApplication:",
+              "58: txn Sender",
+              "61: bytec_3",
+              "64: pushint 100",
+              "65: app_local_put",
+              "68: txn Sender",
+              "71: bytec 4",
+              "74: pushint 200",
+              "75: app_local_put",
+              "78: txn Sender",
+              "81: bytec 5",
+              "84: pushbytes \"Silvio\"",
+              "85: app_local_put",
+              "88: txn Sender",
+              "91: bytec_0",
+              "94: pushbytes \"Micali\"",
+              "95: app_local_put",
+              "98: txn Sender",
+              "101: bytec_1",
+              "104: intc_1",
+              "105: app_local_put",
+              "108: txn Sender",
+              "111: bytec_2",
+              "114: txn Sender",
+              "115: app_local_put",
+              "118: intc_1",
+              "119: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 6",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 0 1",
+              "7: bytecblock \"localString\" \"localBool\" \"localAccount\" \"int\" \"localIntNoDefault\" \"localBytes\" 0x151f7c75",
+              "11: txn NumAppArgs",
+              "12: bz main___algots__.defaultCreate@14"
+            ],
+            [
+              "42: main___algots__.defaultCreate@14:",
+              "46: txn OnCompletion",
+              "47: !",
+              "48: txn ApplicationID",
+              "49: !",
+              "50: &&",
+              "51: return"
             ]
           ]
         }

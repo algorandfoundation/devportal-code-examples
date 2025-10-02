@@ -12,181 +12,147 @@
       "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 8 -> 12 -> 9",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "13: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
-              "14: txna ApplicationArgs 0",
-              "15: match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5"
+              "13: txn OnCompletion",
+              "14: !",
+              "15: assert",
+              "16: txn ApplicationID",
+              "17: assert",
+              "18: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
+              "19: txna ApplicationArgs 0",
+              "20: match demonstrateScratchStorage readFromGroupTransaction readBytesFromGroupTransaction"
             ],
             [
-              "77: main_demonstrateScratchStorage_route@3:",
-              "80: txn OnCompletion",
-              "81: !",
-              "82: assert",
-              "83: txn ApplicationID",
-              "84: assert",
-              "85: callsub demonstrateScratchStorage"
-            ],
-            [
-              "111: demonstrateScratchStorage:",
-              "114: intc_1",
-              "115: store 0",
-              "118: bytec_1",
-              "119: store 1",
-              "122: intc_2",
-              "123: store 2",
-              "126: intc_3",
-              "127: store 15",
-              "130: load 2",
-              "133: load 15",
-              "136: load 1",
-              "139: load 0",
-              "142: intc_1",
-              "143: ==",
-              "144: assert",
-              "147: bytec_1",
-              "148: ==",
-              "149: assert",
-              "152: swap",
-              "153: intc_2",
-              "154: ==",
-              "155: assert",
-              "158: intc_3",
-              "159: ==",
-              "160: assert",
-              "163: intc_0",
-              "164: retsub"
-            ],
-            [
-              "86: pushbytes 0x00",
-              "87: pushint 0",
-              "88: uncover 2",
-              "89: setbit",
-              "90: bytec_0",
-              "91: swap",
-              "92: concat",
-              "93: log",
-              "94: intc_0",
-              "95: return"
+              "36: demonstrateScratchStorage:",
+              "39: intc_1",
+              "40: store 0",
+              "43: bytec_0",
+              "44: store 1",
+              "47: intc_2",
+              "48: store 2",
+              "51: intc_3",
+              "52: store 15",
+              "55: load 2",
+              "58: load 15",
+              "61: load 1",
+              "64: load 0",
+              "67: intc_1",
+              "68: ==",
+              "69: assert",
+              "72: bytec_0",
+              "73: ==",
+              "74: assert",
+              "77: swap",
+              "78: intc_2",
+              "79: ==",
+              "80: assert",
+              "83: intc_3",
+              "84: ==",
+              "85: assert",
+              "88: pushbytes 0x151f7c7580",
+              "89: log",
+              "90: intc_0",
+              "91: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 13 -> 7",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "13: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
-              "14: txna ApplicationArgs 0",
-              "15: match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5"
+              "13: txn OnCompletion",
+              "14: !",
+              "15: assert",
+              "16: txn ApplicationID",
+              "17: assert",
+              "18: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
+              "19: txna ApplicationArgs 0",
+              "20: match demonstrateScratchStorage readFromGroupTransaction readBytesFromGroupTransaction"
             ],
             [
-              "51: main_readFromGroupTransaction_route@4:",
-              "54: txn OnCompletion",
-              "55: !",
-              "56: assert",
-              "57: txn ApplicationID",
-              "58: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "64: txna ApplicationArgs 2",
-              "65: btoi",
-              "68: callsub readFromGroupTransaction"
-            ],
-            [
-              "168: readFromGroupTransaction:",
-              "172: proto 2 1",
-              "175: frame_dig -2",
-              "176: frame_dig -1",
-              "177: gloadss",
-              "178: retsub"
-            ],
-            [
-              "69: itob",
-              "70: bytec_0",
-              "71: swap",
-              "72: concat",
-              "73: log",
-              "74: intc_0",
-              "75: return"
+              "95: readFromGroupTransaction:",
+              "98: txna ApplicationArgs 1",
+              "99: btoi",
+              "100: txna ApplicationArgs 2",
+              "101: btoi",
+              "104: gloadss",
+              "107: itob",
+              "108: bytec_1",
+              "109: swap",
+              "110: concat",
+              "111: log",
+              "112: intc_0",
+              "113: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 14 -> 5",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "13: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
-              "14: txna ApplicationArgs 0",
-              "15: match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5"
+              "13: txn OnCompletion",
+              "14: !",
+              "15: assert",
+              "16: txn ApplicationID",
+              "17: assert",
+              "18: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
+              "19: txna ApplicationArgs 0",
+              "20: match demonstrateScratchStorage readFromGroupTransaction readBytesFromGroupTransaction"
             ],
             [
-              "20: main_readBytesFromGroupTransaction_route@5:",
-              "23: txn OnCompletion",
-              "24: !",
-              "25: assert",
-              "26: txn ApplicationID",
-              "27: assert",
-              "31: txna ApplicationArgs 1",
-              "32: btoi",
-              "33: txna ApplicationArgs 2",
-              "34: btoi",
-              "37: callsub readBytesFromGroupTransaction"
-            ],
-            [
-              "182: readBytesFromGroupTransaction:",
-              "186: proto 2 1",
-              "189: frame_dig -2",
-              "190: frame_dig -1",
-              "191: gloadss",
-              "192: retsub"
-            ],
-            [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: bytec_0",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: intc_0",
-              "49: return"
+              "117: readBytesFromGroupTransaction:",
+              "120: txna ApplicationArgs 1",
+              "121: btoi",
+              "122: txna ApplicationArgs 2",
+              "123: btoi",
+              "126: gloadss",
+              "129: dup",
+              "130: len",
+              "131: itob",
+              "132: extract 6 2",
+              "133: swap",
+              "134: concat",
+              "135: bytec_1",
+              "136: swap",
+              "137: concat",
+              "138: log",
+              "139: intc_0",
+              "140: return"
             ]
           ]
         }
@@ -202,181 +168,147 @@
       "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 8 -> 12 -> 9",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "13: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
-              "14: txna ApplicationArgs 0",
-              "15: match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5"
+              "13: txn OnCompletion",
+              "14: !",
+              "15: assert",
+              "16: txn ApplicationID",
+              "17: assert",
+              "18: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
+              "19: txna ApplicationArgs 0",
+              "20: match demonstrateScratchStorage readFromGroupTransaction readBytesFromGroupTransaction"
             ],
             [
-              "77: main_demonstrateScratchStorage_route@3:",
-              "80: txn OnCompletion",
-              "81: !",
-              "82: assert",
-              "83: txn ApplicationID",
-              "84: assert",
-              "85: callsub demonstrateScratchStorage"
-            ],
-            [
-              "111: demonstrateScratchStorage:",
-              "114: intc_1",
-              "115: store 0",
-              "118: bytec_1",
-              "119: store 1",
-              "122: intc_2",
-              "123: store 2",
-              "126: intc_3",
-              "127: store 15",
-              "130: load 2",
-              "133: load 15",
-              "136: load 1",
-              "139: load 0",
-              "142: intc_1",
-              "143: ==",
-              "144: assert",
-              "147: bytec_1",
-              "148: ==",
-              "149: assert",
-              "152: swap",
-              "153: intc_2",
-              "154: ==",
-              "155: assert",
-              "158: intc_3",
-              "159: ==",
-              "160: assert",
-              "163: intc_0",
-              "164: retsub"
-            ],
-            [
-              "86: pushbytes 0x00",
-              "87: pushint 0",
-              "88: uncover 2",
-              "89: setbit",
-              "90: bytec_0",
-              "91: swap",
-              "92: concat",
-              "93: log",
-              "94: intc_0",
-              "95: return"
+              "36: demonstrateScratchStorage:",
+              "39: intc_1",
+              "40: store 0",
+              "43: bytec_0",
+              "44: store 1",
+              "47: intc_2",
+              "48: store 2",
+              "51: intc_3",
+              "52: store 15",
+              "55: load 2",
+              "58: load 15",
+              "61: load 1",
+              "64: load 0",
+              "67: intc_1",
+              "68: ==",
+              "69: assert",
+              "72: bytec_0",
+              "73: ==",
+              "74: assert",
+              "77: swap",
+              "78: intc_2",
+              "79: ==",
+              "80: assert",
+              "83: intc_3",
+              "84: ==",
+              "85: assert",
+              "88: pushbytes 0x151f7c7580",
+              "89: log",
+              "90: intc_0",
+              "91: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 13 -> 7",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "13: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
-              "14: txna ApplicationArgs 0",
-              "15: match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5"
+              "13: txn OnCompletion",
+              "14: !",
+              "15: assert",
+              "16: txn ApplicationID",
+              "17: assert",
+              "18: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
+              "19: txna ApplicationArgs 0",
+              "20: match demonstrateScratchStorage readFromGroupTransaction readBytesFromGroupTransaction"
             ],
             [
-              "51: main_readFromGroupTransaction_route@4:",
-              "54: txn OnCompletion",
-              "55: !",
-              "56: assert",
-              "57: txn ApplicationID",
-              "58: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "64: txna ApplicationArgs 2",
-              "65: btoi",
-              "68: callsub readFromGroupTransaction"
-            ],
-            [
-              "168: readFromGroupTransaction:",
-              "172: proto 2 1",
-              "175: frame_dig -2",
-              "176: frame_dig -1",
-              "177: gloadss",
-              "178: retsub"
-            ],
-            [
-              "69: itob",
-              "70: bytec_0",
-              "71: swap",
-              "72: concat",
-              "73: log",
-              "74: intc_0",
-              "75: return"
+              "95: readFromGroupTransaction:",
+              "98: txna ApplicationArgs 1",
+              "99: btoi",
+              "100: txna ApplicationArgs 2",
+              "101: btoi",
+              "104: gloadss",
+              "107: itob",
+              "108: bytec_1",
+              "109: swap",
+              "110: concat",
+              "111: log",
+              "112: intc_0",
+              "113: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 14 -> 5",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "13: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
-              "14: txna ApplicationArgs 0",
-              "15: match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5"
+              "13: txn OnCompletion",
+              "14: !",
+              "15: assert",
+              "16: txn ApplicationID",
+              "17: assert",
+              "18: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
+              "19: txna ApplicationArgs 0",
+              "20: match demonstrateScratchStorage readFromGroupTransaction readBytesFromGroupTransaction"
             ],
             [
-              "20: main_readBytesFromGroupTransaction_route@5:",
-              "23: txn OnCompletion",
-              "24: !",
-              "25: assert",
-              "26: txn ApplicationID",
-              "27: assert",
-              "31: txna ApplicationArgs 1",
-              "32: btoi",
-              "33: txna ApplicationArgs 2",
-              "34: btoi",
-              "37: callsub readBytesFromGroupTransaction"
-            ],
-            [
-              "182: readBytesFromGroupTransaction:",
-              "186: proto 2 1",
-              "189: frame_dig -2",
-              "190: frame_dig -1",
-              "191: gloadss",
-              "192: retsub"
-            ],
-            [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: bytec_0",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: intc_0",
-              "49: return"
+              "117: readBytesFromGroupTransaction:",
+              "120: txna ApplicationArgs 1",
+              "121: btoi",
+              "122: txna ApplicationArgs 2",
+              "123: btoi",
+              "126: gloadss",
+              "129: dup",
+              "130: len",
+              "131: itob",
+              "132: extract 6 2",
+              "133: swap",
+              "134: concat",
+              "135: bytec_1",
+              "136: swap",
+              "137: concat",
+              "138: log",
+              "139: intc_0",
+              "140: return"
             ]
           ]
         }
@@ -412,181 +344,147 @@
       "help": "Do not approve `DeleteApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 8 -> 12 -> 9",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "13: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
-              "14: txna ApplicationArgs 0",
-              "15: match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5"
+              "13: txn OnCompletion",
+              "14: !",
+              "15: assert",
+              "16: txn ApplicationID",
+              "17: assert",
+              "18: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
+              "19: txna ApplicationArgs 0",
+              "20: match demonstrateScratchStorage readFromGroupTransaction readBytesFromGroupTransaction"
             ],
             [
-              "77: main_demonstrateScratchStorage_route@3:",
-              "80: txn OnCompletion",
-              "81: !",
-              "82: assert",
-              "83: txn ApplicationID",
-              "84: assert",
-              "85: callsub demonstrateScratchStorage"
-            ],
-            [
-              "111: demonstrateScratchStorage:",
-              "114: intc_1",
-              "115: store 0",
-              "118: bytec_1",
-              "119: store 1",
-              "122: intc_2",
-              "123: store 2",
-              "126: intc_3",
-              "127: store 15",
-              "130: load 2",
-              "133: load 15",
-              "136: load 1",
-              "139: load 0",
-              "142: intc_1",
-              "143: ==",
-              "144: assert",
-              "147: bytec_1",
-              "148: ==",
-              "149: assert",
-              "152: swap",
-              "153: intc_2",
-              "154: ==",
-              "155: assert",
-              "158: intc_3",
-              "159: ==",
-              "160: assert",
-              "163: intc_0",
-              "164: retsub"
-            ],
-            [
-              "86: pushbytes 0x00",
-              "87: pushint 0",
-              "88: uncover 2",
-              "89: setbit",
-              "90: bytec_0",
-              "91: swap",
-              "92: concat",
-              "93: log",
-              "94: intc_0",
-              "95: return"
+              "36: demonstrateScratchStorage:",
+              "39: intc_1",
+              "40: store 0",
+              "43: bytec_0",
+              "44: store 1",
+              "47: intc_2",
+              "48: store 2",
+              "51: intc_3",
+              "52: store 15",
+              "55: load 2",
+              "58: load 15",
+              "61: load 1",
+              "64: load 0",
+              "67: intc_1",
+              "68: ==",
+              "69: assert",
+              "72: bytec_0",
+              "73: ==",
+              "74: assert",
+              "77: swap",
+              "78: intc_2",
+              "79: ==",
+              "80: assert",
+              "83: intc_3",
+              "84: ==",
+              "85: assert",
+              "88: pushbytes 0x151f7c7580",
+              "89: log",
+              "90: intc_0",
+              "91: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 13 -> 7",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "13: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
-              "14: txna ApplicationArgs 0",
-              "15: match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5"
+              "13: txn OnCompletion",
+              "14: !",
+              "15: assert",
+              "16: txn ApplicationID",
+              "17: assert",
+              "18: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
+              "19: txna ApplicationArgs 0",
+              "20: match demonstrateScratchStorage readFromGroupTransaction readBytesFromGroupTransaction"
             ],
             [
-              "51: main_readFromGroupTransaction_route@4:",
-              "54: txn OnCompletion",
-              "55: !",
-              "56: assert",
-              "57: txn ApplicationID",
-              "58: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "64: txna ApplicationArgs 2",
-              "65: btoi",
-              "68: callsub readFromGroupTransaction"
-            ],
-            [
-              "168: readFromGroupTransaction:",
-              "172: proto 2 1",
-              "175: frame_dig -2",
-              "176: frame_dig -1",
-              "177: gloadss",
-              "178: retsub"
-            ],
-            [
-              "69: itob",
-              "70: bytec_0",
-              "71: swap",
-              "72: concat",
-              "73: log",
-              "74: intc_0",
-              "75: return"
+              "95: readFromGroupTransaction:",
+              "98: txna ApplicationArgs 1",
+              "99: btoi",
+              "100: txna ApplicationArgs 2",
+              "101: btoi",
+              "104: gloadss",
+              "107: itob",
+              "108: bytec_1",
+              "109: swap",
+              "110: concat",
+              "111: log",
+              "112: intc_0",
+              "113: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 14 -> 5",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "13: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
-              "14: txna ApplicationArgs 0",
-              "15: match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5"
+              "13: txn OnCompletion",
+              "14: !",
+              "15: assert",
+              "16: txn ApplicationID",
+              "17: assert",
+              "18: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
+              "19: txna ApplicationArgs 0",
+              "20: match demonstrateScratchStorage readFromGroupTransaction readBytesFromGroupTransaction"
             ],
             [
-              "20: main_readBytesFromGroupTransaction_route@5:",
-              "23: txn OnCompletion",
-              "24: !",
-              "25: assert",
-              "26: txn ApplicationID",
-              "27: assert",
-              "31: txna ApplicationArgs 1",
-              "32: btoi",
-              "33: txna ApplicationArgs 2",
-              "34: btoi",
-              "37: callsub readBytesFromGroupTransaction"
-            ],
-            [
-              "182: readBytesFromGroupTransaction:",
-              "186: proto 2 1",
-              "189: frame_dig -2",
-              "190: frame_dig -1",
-              "191: gloadss",
-              "192: retsub"
-            ],
-            [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: bytec_0",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: intc_0",
-              "49: return"
+              "117: readBytesFromGroupTransaction:",
+              "120: txna ApplicationArgs 1",
+              "121: btoi",
+              "122: txna ApplicationArgs 2",
+              "123: btoi",
+              "126: gloadss",
+              "129: dup",
+              "130: len",
+              "131: itob",
+              "132: extract 6 2",
+              "133: swap",
+              "134: concat",
+              "135: bytec_1",
+              "136: swap",
+              "137: concat",
+              "138: log",
+              "139: intc_0",
+              "140: return"
             ]
           ]
         }
@@ -602,181 +500,147 @@
       "help": "Do not approve `UpdateApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 8 -> 12 -> 9",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "13: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
-              "14: txna ApplicationArgs 0",
-              "15: match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5"
+              "13: txn OnCompletion",
+              "14: !",
+              "15: assert",
+              "16: txn ApplicationID",
+              "17: assert",
+              "18: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
+              "19: txna ApplicationArgs 0",
+              "20: match demonstrateScratchStorage readFromGroupTransaction readBytesFromGroupTransaction"
             ],
             [
-              "77: main_demonstrateScratchStorage_route@3:",
-              "80: txn OnCompletion",
-              "81: !",
-              "82: assert",
-              "83: txn ApplicationID",
-              "84: assert",
-              "85: callsub demonstrateScratchStorage"
-            ],
-            [
-              "111: demonstrateScratchStorage:",
-              "114: intc_1",
-              "115: store 0",
-              "118: bytec_1",
-              "119: store 1",
-              "122: intc_2",
-              "123: store 2",
-              "126: intc_3",
-              "127: store 15",
-              "130: load 2",
-              "133: load 15",
-              "136: load 1",
-              "139: load 0",
-              "142: intc_1",
-              "143: ==",
-              "144: assert",
-              "147: bytec_1",
-              "148: ==",
-              "149: assert",
-              "152: swap",
-              "153: intc_2",
-              "154: ==",
-              "155: assert",
-              "158: intc_3",
-              "159: ==",
-              "160: assert",
-              "163: intc_0",
-              "164: retsub"
-            ],
-            [
-              "86: pushbytes 0x00",
-              "87: pushint 0",
-              "88: uncover 2",
-              "89: setbit",
-              "90: bytec_0",
-              "91: swap",
-              "92: concat",
-              "93: log",
-              "94: intc_0",
-              "95: return"
+              "36: demonstrateScratchStorage:",
+              "39: intc_1",
+              "40: store 0",
+              "43: bytec_0",
+              "44: store 1",
+              "47: intc_2",
+              "48: store 2",
+              "51: intc_3",
+              "52: store 15",
+              "55: load 2",
+              "58: load 15",
+              "61: load 1",
+              "64: load 0",
+              "67: intc_1",
+              "68: ==",
+              "69: assert",
+              "72: bytec_0",
+              "73: ==",
+              "74: assert",
+              "77: swap",
+              "78: intc_2",
+              "79: ==",
+              "80: assert",
+              "83: intc_3",
+              "84: ==",
+              "85: assert",
+              "88: pushbytes 0x151f7c7580",
+              "89: log",
+              "90: intc_0",
+              "91: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 13 -> 7",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "13: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
-              "14: txna ApplicationArgs 0",
-              "15: match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5"
+              "13: txn OnCompletion",
+              "14: !",
+              "15: assert",
+              "16: txn ApplicationID",
+              "17: assert",
+              "18: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
+              "19: txna ApplicationArgs 0",
+              "20: match demonstrateScratchStorage readFromGroupTransaction readBytesFromGroupTransaction"
             ],
             [
-              "51: main_readFromGroupTransaction_route@4:",
-              "54: txn OnCompletion",
-              "55: !",
-              "56: assert",
-              "57: txn ApplicationID",
-              "58: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "64: txna ApplicationArgs 2",
-              "65: btoi",
-              "68: callsub readFromGroupTransaction"
-            ],
-            [
-              "168: readFromGroupTransaction:",
-              "172: proto 2 1",
-              "175: frame_dig -2",
-              "176: frame_dig -1",
-              "177: gloadss",
-              "178: retsub"
-            ],
-            [
-              "69: itob",
-              "70: bytec_0",
-              "71: swap",
-              "72: concat",
-              "73: log",
-              "74: intc_0",
-              "75: return"
+              "95: readFromGroupTransaction:",
+              "98: txna ApplicationArgs 1",
+              "99: btoi",
+              "100: txna ApplicationArgs 2",
+              "101: btoi",
+              "104: gloadss",
+              "107: itob",
+              "108: bytec_1",
+              "109: swap",
+              "110: concat",
+              "111: log",
+              "112: intc_0",
+              "113: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 14 -> 5",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "13: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
-              "14: txna ApplicationArgs 0",
-              "15: match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5"
+              "13: txn OnCompletion",
+              "14: !",
+              "15: assert",
+              "16: txn ApplicationID",
+              "17: assert",
+              "18: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
+              "19: txna ApplicationArgs 0",
+              "20: match demonstrateScratchStorage readFromGroupTransaction readBytesFromGroupTransaction"
             ],
             [
-              "20: main_readBytesFromGroupTransaction_route@5:",
-              "23: txn OnCompletion",
-              "24: !",
-              "25: assert",
-              "26: txn ApplicationID",
-              "27: assert",
-              "31: txna ApplicationArgs 1",
-              "32: btoi",
-              "33: txna ApplicationArgs 2",
-              "34: btoi",
-              "37: callsub readBytesFromGroupTransaction"
-            ],
-            [
-              "182: readBytesFromGroupTransaction:",
-              "186: proto 2 1",
-              "189: frame_dig -2",
-              "190: frame_dig -1",
-              "191: gloadss",
-              "192: retsub"
-            ],
-            [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: bytec_0",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: intc_0",
-              "49: return"
+              "117: readBytesFromGroupTransaction:",
+              "120: txna ApplicationArgs 1",
+              "121: btoi",
+              "122: txna ApplicationArgs 2",
+              "123: btoi",
+              "126: gloadss",
+              "129: dup",
+              "130: len",
+              "131: itob",
+              "132: extract 6 2",
+              "133: swap",
+              "134: concat",
+              "135: bytec_1",
+              "136: swap",
+              "137: concat",
+              "138: log",
+              "139: intc_0",
+              "140: return"
             ]
           ]
         }
@@ -792,209 +656,172 @@
       "help": "Validate `Fee` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 8 -> 12 -> 9",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "13: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
-              "14: txna ApplicationArgs 0",
-              "15: match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5"
+              "13: txn OnCompletion",
+              "14: !",
+              "15: assert",
+              "16: txn ApplicationID",
+              "17: assert",
+              "18: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
+              "19: txna ApplicationArgs 0",
+              "20: match demonstrateScratchStorage readFromGroupTransaction readBytesFromGroupTransaction"
             ],
             [
-              "77: main_demonstrateScratchStorage_route@3:",
-              "80: txn OnCompletion",
-              "81: !",
-              "82: assert",
-              "83: txn ApplicationID",
-              "84: assert",
-              "85: callsub demonstrateScratchStorage"
-            ],
-            [
-              "111: demonstrateScratchStorage:",
-              "114: intc_1",
-              "115: store 0",
-              "118: bytec_1",
-              "119: store 1",
-              "122: intc_2",
-              "123: store 2",
-              "126: intc_3",
-              "127: store 15",
-              "130: load 2",
-              "133: load 15",
-              "136: load 1",
-              "139: load 0",
-              "142: intc_1",
-              "143: ==",
-              "144: assert",
-              "147: bytec_1",
-              "148: ==",
-              "149: assert",
-              "152: swap",
-              "153: intc_2",
-              "154: ==",
-              "155: assert",
-              "158: intc_3",
-              "159: ==",
-              "160: assert",
-              "163: intc_0",
-              "164: retsub"
-            ],
-            [
-              "86: pushbytes 0x00",
-              "87: pushint 0",
-              "88: uncover 2",
-              "89: setbit",
-              "90: bytec_0",
-              "91: swap",
-              "92: concat",
-              "93: log",
-              "94: intc_0",
-              "95: return"
+              "36: demonstrateScratchStorage:",
+              "39: intc_1",
+              "40: store 0",
+              "43: bytec_0",
+              "44: store 1",
+              "47: intc_2",
+              "48: store 2",
+              "51: intc_3",
+              "52: store 15",
+              "55: load 2",
+              "58: load 15",
+              "61: load 1",
+              "64: load 0",
+              "67: intc_1",
+              "68: ==",
+              "69: assert",
+              "72: bytec_0",
+              "73: ==",
+              "74: assert",
+              "77: swap",
+              "78: intc_2",
+              "79: ==",
+              "80: assert",
+              "83: intc_3",
+              "84: ==",
+              "85: assert",
+              "88: pushbytes 0x151f7c7580",
+              "89: log",
+              "90: intc_0",
+              "91: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 13 -> 7",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "13: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
-              "14: txna ApplicationArgs 0",
-              "15: match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5"
+              "13: txn OnCompletion",
+              "14: !",
+              "15: assert",
+              "16: txn ApplicationID",
+              "17: assert",
+              "18: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
+              "19: txna ApplicationArgs 0",
+              "20: match demonstrateScratchStorage readFromGroupTransaction readBytesFromGroupTransaction"
             ],
             [
-              "51: main_readFromGroupTransaction_route@4:",
-              "54: txn OnCompletion",
-              "55: !",
-              "56: assert",
-              "57: txn ApplicationID",
-              "58: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "64: txna ApplicationArgs 2",
-              "65: btoi",
-              "68: callsub readFromGroupTransaction"
-            ],
-            [
-              "168: readFromGroupTransaction:",
-              "172: proto 2 1",
-              "175: frame_dig -2",
-              "176: frame_dig -1",
-              "177: gloadss",
-              "178: retsub"
-            ],
-            [
-              "69: itob",
-              "70: bytec_0",
-              "71: swap",
-              "72: concat",
-              "73: log",
-              "74: intc_0",
-              "75: return"
+              "95: readFromGroupTransaction:",
+              "98: txna ApplicationArgs 1",
+              "99: btoi",
+              "100: txna ApplicationArgs 2",
+              "101: btoi",
+              "104: gloadss",
+              "107: itob",
+              "108: bytec_1",
+              "109: swap",
+              "110: concat",
+              "111: log",
+              "112: intc_0",
+              "113: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 14 -> 5",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "13: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
-              "14: txna ApplicationArgs 0",
-              "15: match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5"
+              "13: txn OnCompletion",
+              "14: !",
+              "15: assert",
+              "16: txn ApplicationID",
+              "17: assert",
+              "18: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
+              "19: txna ApplicationArgs 0",
+              "20: match demonstrateScratchStorage readFromGroupTransaction readBytesFromGroupTransaction"
             ],
             [
-              "20: main_readBytesFromGroupTransaction_route@5:",
-              "23: txn OnCompletion",
-              "24: !",
-              "25: assert",
-              "26: txn ApplicationID",
-              "27: assert",
-              "31: txna ApplicationArgs 1",
-              "32: btoi",
-              "33: txna ApplicationArgs 2",
-              "34: btoi",
-              "37: callsub readBytesFromGroupTransaction"
-            ],
-            [
-              "182: readBytesFromGroupTransaction:",
-              "186: proto 2 1",
-              "189: frame_dig -2",
-              "190: frame_dig -1",
-              "191: gloadss",
-              "192: retsub"
-            ],
-            [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: bytec_0",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: intc_0",
-              "49: return"
+              "117: readBytesFromGroupTransaction:",
+              "120: txna ApplicationArgs 1",
+              "121: btoi",
+              "122: txna ApplicationArgs 2",
+              "123: btoi",
+              "126: gloadss",
+              "129: dup",
+              "130: len",
+              "131: itob",
+              "132: extract 6 2",
+              "133: swap",
+              "134: concat",
+              "135: bytec_1",
+              "136: swap",
+              "137: concat",
+              "138: log",
+              "139: intc_0",
+              "140: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 10 -> 11",
+          "short": "0 -> 1 -> 4",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "97: main_bare_routing@8:",
-              "101: txn OnCompletion",
-              "102: bnz main_after_if_else@12"
-            ],
-            [
-              "103: txn ApplicationID",
-              "104: !",
-              "105: assert",
-              "106: intc_0",
-              "107: return"
+              "23: main___algots__.defaultCreate@10:",
+              "27: txn OnCompletion",
+              "28: !",
+              "29: txn ApplicationID",
+              "30: !",
+              "31: &&",
+              "32: return"
             ]
           ]
         }
@@ -1020,209 +847,172 @@
       "help": "Validate `RekeyTo` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 8 -> 12 -> 9",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "13: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
-              "14: txna ApplicationArgs 0",
-              "15: match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5"
+              "13: txn OnCompletion",
+              "14: !",
+              "15: assert",
+              "16: txn ApplicationID",
+              "17: assert",
+              "18: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
+              "19: txna ApplicationArgs 0",
+              "20: match demonstrateScratchStorage readFromGroupTransaction readBytesFromGroupTransaction"
             ],
             [
-              "77: main_demonstrateScratchStorage_route@3:",
-              "80: txn OnCompletion",
-              "81: !",
-              "82: assert",
-              "83: txn ApplicationID",
-              "84: assert",
-              "85: callsub demonstrateScratchStorage"
-            ],
-            [
-              "111: demonstrateScratchStorage:",
-              "114: intc_1",
-              "115: store 0",
-              "118: bytec_1",
-              "119: store 1",
-              "122: intc_2",
-              "123: store 2",
-              "126: intc_3",
-              "127: store 15",
-              "130: load 2",
-              "133: load 15",
-              "136: load 1",
-              "139: load 0",
-              "142: intc_1",
-              "143: ==",
-              "144: assert",
-              "147: bytec_1",
-              "148: ==",
-              "149: assert",
-              "152: swap",
-              "153: intc_2",
-              "154: ==",
-              "155: assert",
-              "158: intc_3",
-              "159: ==",
-              "160: assert",
-              "163: intc_0",
-              "164: retsub"
-            ],
-            [
-              "86: pushbytes 0x00",
-              "87: pushint 0",
-              "88: uncover 2",
-              "89: setbit",
-              "90: bytec_0",
-              "91: swap",
-              "92: concat",
-              "93: log",
-              "94: intc_0",
-              "95: return"
+              "36: demonstrateScratchStorage:",
+              "39: intc_1",
+              "40: store 0",
+              "43: bytec_0",
+              "44: store 1",
+              "47: intc_2",
+              "48: store 2",
+              "51: intc_3",
+              "52: store 15",
+              "55: load 2",
+              "58: load 15",
+              "61: load 1",
+              "64: load 0",
+              "67: intc_1",
+              "68: ==",
+              "69: assert",
+              "72: bytec_0",
+              "73: ==",
+              "74: assert",
+              "77: swap",
+              "78: intc_2",
+              "79: ==",
+              "80: assert",
+              "83: intc_3",
+              "84: ==",
+              "85: assert",
+              "88: pushbytes 0x151f7c7580",
+              "89: log",
+              "90: intc_0",
+              "91: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 13 -> 7",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "13: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
-              "14: txna ApplicationArgs 0",
-              "15: match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5"
+              "13: txn OnCompletion",
+              "14: !",
+              "15: assert",
+              "16: txn ApplicationID",
+              "17: assert",
+              "18: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
+              "19: txna ApplicationArgs 0",
+              "20: match demonstrateScratchStorage readFromGroupTransaction readBytesFromGroupTransaction"
             ],
             [
-              "51: main_readFromGroupTransaction_route@4:",
-              "54: txn OnCompletion",
-              "55: !",
-              "56: assert",
-              "57: txn ApplicationID",
-              "58: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "64: txna ApplicationArgs 2",
-              "65: btoi",
-              "68: callsub readFromGroupTransaction"
-            ],
-            [
-              "168: readFromGroupTransaction:",
-              "172: proto 2 1",
-              "175: frame_dig -2",
-              "176: frame_dig -1",
-              "177: gloadss",
-              "178: retsub"
-            ],
-            [
-              "69: itob",
-              "70: bytec_0",
-              "71: swap",
-              "72: concat",
-              "73: log",
-              "74: intc_0",
-              "75: return"
+              "95: readFromGroupTransaction:",
+              "98: txna ApplicationArgs 1",
+              "99: btoi",
+              "100: txna ApplicationArgs 2",
+              "101: btoi",
+              "104: gloadss",
+              "107: itob",
+              "108: bytec_1",
+              "109: swap",
+              "110: concat",
+              "111: log",
+              "112: intc_0",
+              "113: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 14 -> 5",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "13: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
-              "14: txna ApplicationArgs 0",
-              "15: match main_demonstrateScratchStorage_route@3 main_readFromGroupTransaction_route@4 main_readBytesFromGroupTransaction_route@5"
+              "13: txn OnCompletion",
+              "14: !",
+              "15: assert",
+              "16: txn ApplicationID",
+              "17: assert",
+              "18: pushbytess 0x01168c5c 0x0eec0bd9 0x10fb4a66",
+              "19: txna ApplicationArgs 0",
+              "20: match demonstrateScratchStorage readFromGroupTransaction readBytesFromGroupTransaction"
             ],
             [
-              "20: main_readBytesFromGroupTransaction_route@5:",
-              "23: txn OnCompletion",
-              "24: !",
-              "25: assert",
-              "26: txn ApplicationID",
-              "27: assert",
-              "31: txna ApplicationArgs 1",
-              "32: btoi",
-              "33: txna ApplicationArgs 2",
-              "34: btoi",
-              "37: callsub readBytesFromGroupTransaction"
-            ],
-            [
-              "182: readBytesFromGroupTransaction:",
-              "186: proto 2 1",
-              "189: frame_dig -2",
-              "190: frame_dig -1",
-              "191: gloadss",
-              "192: retsub"
-            ],
-            [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: bytec_0",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: intc_0",
-              "49: return"
+              "117: readBytesFromGroupTransaction:",
+              "120: txna ApplicationArgs 1",
+              "121: btoi",
+              "122: txna ApplicationArgs 2",
+              "123: btoi",
+              "126: gloadss",
+              "129: dup",
+              "130: len",
+              "131: itob",
+              "132: extract 6 2",
+              "133: swap",
+              "134: concat",
+              "135: bytec_1",
+              "136: swap",
+              "137: concat",
+              "138: log",
+              "139: intc_0",
+              "140: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 10 -> 11",
+          "short": "0 -> 1 -> 4",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: intcblock 1 42 100 999",
-              "7: bytecblock 0x151f7c75 \"Hello, Algorand!\"",
+              "7: bytecblock \"Hello, Algorand!\" 0x151f7c75",
               "11: txn NumAppArgs",
-              "12: bz main_bare_routing@8"
+              "12: bz main___algots__.defaultCreate@10"
             ],
             [
-              "97: main_bare_routing@8:",
-              "101: txn OnCompletion",
-              "102: bnz main_after_if_else@12"
-            ],
-            [
-              "103: txn ApplicationID",
-              "104: !",
-              "105: assert",
-              "106: intc_0",
-              "107: return"
+              "23: main___algots__.defaultCreate@10:",
+              "27: txn OnCompletion",
+              "28: !",
+              "29: txn ApplicationID",
+              "30: !",
+              "31: &&",
+              "32: return"
             ]
           ]
         }

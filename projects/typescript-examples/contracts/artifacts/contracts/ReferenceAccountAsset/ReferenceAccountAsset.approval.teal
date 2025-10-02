@@ -1,82 +1,43 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
 main:
-    intcblock 1 1472
-    bytecblock 0x151f7c75 base32(R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDA)
+    intcblock 1472 1
+    bytecblock base32(R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDA) 0x151f7c75
     // contracts/ReferenceAccountAsset/contract.algo.ts:9
     // export default class ReferenceAccountAsset extends Contract {
     txn NumAppArgs
-    bz main_bare_routing@7
+    bz main___algots__.defaultCreate@9
+    txn OnCompletion
+    !
+    assert // OnCompletion must be NoOp
+    txn ApplicationID
+    assert
     pushbytess 0x6d68e54d 0x6acd0ce2 // method "getAssetBalance()uint64", method "getAssetBalanceWithArg(address,uint64)uint64"
     txna ApplicationArgs 0
-    match main_getAssetBalance_route@3 main_getAssetBalanceWithArg_route@4
-
-main_after_if_else@11:
+    match getAssetBalance getAssetBalanceWithArg
     err
 
-main_getAssetBalanceWithArg_route@4:
-    // contracts/ReferenceAccountAsset/contract.algo.ts:32
-    // @abimethod({ readonly: true })
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    // contracts/ReferenceAccountAsset/contract.algo.ts:9
-    // export default class ReferenceAccountAsset extends Contract {
-    txna ApplicationArgs 1
-    txna ApplicationArgs 2
-    btoi
-    // contracts/ReferenceAccountAsset/contract.algo.ts:32
-    // @abimethod({ readonly: true })
-    callsub getAssetBalanceWithArg
-    itob
-    bytec_0 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_0 // 1
-    return
-
-main_getAssetBalance_route@3:
-    // contracts/ReferenceAccountAsset/contract.algo.ts:14
-    // @abimethod({ readonly: true })
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    callsub getAssetBalance
-    itob
-    bytec_0 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_0 // 1
-    return
-
-main_bare_routing@7:
+main___algots__.defaultCreate@9:
     // contracts/ReferenceAccountAsset/contract.algo.ts:9
     // export default class ReferenceAccountAsset extends Contract {
     txn OnCompletion
-    bnz main_after_if_else@11
+    !
     txn ApplicationID
     !
-    assert // can only call when creating
-    intc_0 // 1
-    return
+    &&
+    return // on error: OnCompletion must be NoOp && can only call when creating
 
 
-// contracts/ReferenceAccountAsset/contract.algo.ts::ReferenceAccountAsset.getAssetBalance() -> uint64:
+// contracts/ReferenceAccountAsset/contract.algo.ts::ReferenceAccountAsset.getAssetBalance[routing]() -> void:
 getAssetBalance:
     // contracts/ReferenceAccountAsset/contract.algo.ts:17
     // const addressBytes = address.bytes
-    bytec_1 // addr R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM
+    bytec_0 // addr R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM
     // contracts/ReferenceAccountAsset/contract.algo.ts:19
     // const asset = Asset(1472) // Replace with your asset ID
-    intc_1 // 1472
+    intc_0 // 1472
     // contracts/ReferenceAccountAsset/contract.algo.ts:21
     // assert(account.isOptedIn(asset), 'Account is not opted in to the asset')
     asset_holding_get AssetBalance
@@ -84,34 +45,48 @@ getAssetBalance:
     assert // Account is not opted in to the asset
     // contracts/ReferenceAccountAsset/contract.algo.ts:17
     // const addressBytes = address.bytes
-    bytec_1 // addr R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM
+    bytec_0 // addr R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM
     // contracts/ReferenceAccountAsset/contract.algo.ts:19
     // const asset = Asset(1472) // Replace with your asset ID
-    intc_1 // 1472
+    intc_0 // 1472
     // contracts/ReferenceAccountAsset/contract.algo.ts:23
     // return asset.balance(account)
     asset_holding_get AssetBalance
     assert // account opted into asset
-    retsub
-
-
-// contracts/ReferenceAccountAsset/contract.algo.ts::ReferenceAccountAsset.getAssetBalanceWithArg(account: bytes, asset: uint64) -> uint64:
-getAssetBalanceWithArg:
-    // contracts/ReferenceAccountAsset/contract.algo.ts:32-33
+    // contracts/ReferenceAccountAsset/contract.algo.ts:14
     // @abimethod({ readonly: true })
-    // public getAssetBalanceWithArg(account: Account, asset: Asset) {
-    proto 2 1
+    itob
+    bytec_1 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+
+// contracts/ReferenceAccountAsset/contract.algo.ts::ReferenceAccountAsset.getAssetBalanceWithArg[routing]() -> void:
+getAssetBalanceWithArg:
+    // contracts/ReferenceAccountAsset/contract.algo.ts:32
+    // @abimethod({ readonly: true })
+    txna ApplicationArgs 1
+    txna ApplicationArgs 2
+    btoi
     // contracts/ReferenceAccountAsset/contract.algo.ts:34
     // assert(account.isOptedIn(asset), 'Account is not opted in to the asset')
-    frame_dig -2
-    frame_dig -1
+    dup2
     asset_holding_get AssetBalance
     bury 1
     assert // Account is not opted in to the asset
     // contracts/ReferenceAccountAsset/contract.algo.ts:36
     // return asset.balance(account)
-    frame_dig -2
-    frame_dig -1
     asset_holding_get AssetBalance
     assert // account opted into asset
-    retsub
+    // contracts/ReferenceAccountAsset/contract.algo.ts:32
+    // @abimethod({ readonly: true })
+    itob
+    bytec_1 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return

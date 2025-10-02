@@ -1,4 +1,4 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
@@ -6,43 +6,29 @@ main:
     bytecblock "age"
     // contracts/CustomCreate/contract.algo.ts:4
     // export default class CustomCreate extends Contract {
-    txn NumAppArgs
-    bz main_after_if_else@8
-    pushbytess 0x483331ee 0xd26ce06c // method "custom_create(uint64)void", method "getAge()uint64"
+    txn OnCompletion
+    !
+    assert // OnCompletion must be NoOp
+    txn ApplicationID
+    bz main_create_NoOp@5
+    pushbytes 0xd26ce06c // method "getAge()uint64"
     txna ApplicationArgs 0
-    match main_custom_create_route@3 main_getAge_route@4
-
-main_after_if_else@8:
+    match getAge
     err
 
-main_getAge_route@4:
-    // contracts/CustomCreate/contract.algo.ts:12
-    // public getAge(): uint64 {
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    callsub getAge
-    itob
-    pushbytes 0x151f7c75
-    swap
-    concat
-    log
-    pushint 1 // 1
-    return
-
-main_custom_create_route@3:
-    // contracts/CustomCreate/contract.algo.ts:7
-    // @arc4.abimethod({ onCreate: 'require' })
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    !
-    assert // can only call when creating
+main_create_NoOp@5:
     // contracts/CustomCreate/contract.algo.ts:4
     // export default class CustomCreate extends Contract {
+    pushbytes 0x483331ee // method "custom_create(uint64)void"
+    txna ApplicationArgs 0
+    match custom_create
+    err
+
+
+// contracts/CustomCreate/contract.algo.ts::CustomCreate.custom_create[routing]() -> void:
+custom_create:
+    // contracts/CustomCreate/contract.algo.ts:7
+    // @arc4.abimethod({ onCreate: 'require' })
     txna ApplicationArgs 1
     btoi
     // contracts/CustomCreate/contract.algo.ts:5
@@ -58,7 +44,7 @@ main_custom_create_route@3:
     return
 
 
-// contracts/CustomCreate/contract.algo.ts::CustomCreate.getAge() -> uint64:
+// contracts/CustomCreate/contract.algo.ts::CustomCreate.getAge[routing]() -> void:
 getAge:
     // contracts/CustomCreate/contract.algo.ts:13
     // return this.age.value
@@ -70,4 +56,12 @@ getAge:
     // return this.age.value
     app_global_get_ex
     assert // check GlobalState exists
-    retsub
+    // contracts/CustomCreate/contract.algo.ts:12
+    // public getAge(): uint64 {
+    itob
+    pushbytes 0x151f7c75
+    swap
+    concat
+    log
+    pushint 1 // 1
+    return

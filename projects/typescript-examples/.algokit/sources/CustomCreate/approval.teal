@@ -1,4 +1,4 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 
@@ -6,41 +6,27 @@ main:
     bytecblock "age"
 
 
-    txn NumAppArgs
-    bz main_after_if_else@8
-    pushbytess 0x483331ee 0xd26ce06c
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    bz main_create_NoOp@5
+    pushbytes 0xd26ce06c
     txna ApplicationArgs 0
-    match main_custom_create_route@3 main_getAge_route@4
-
-main_after_if_else@8:
+    match getAge
     err
 
-main_getAge_route@4:
+main_create_NoOp@5:
 
 
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-    callsub getAge
-    itob
-    pushbytes 0x151f7c75
-    swap
-    concat
-    log
-    pushint 1
-    return
-
-main_custom_create_route@3:
+    pushbytes 0x483331ee
+    txna ApplicationArgs 0
+    match custom_create
+    err
 
 
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    !
-    assert
+
+custom_create:
 
 
     txna ApplicationArgs 1
@@ -70,4 +56,12 @@ getAge:
 
     app_global_get_ex
     assert
-    retsub
+
+
+    itob
+    pushbytes 0x151f7c75
+    swap
+    concat
+    log
+    pushint 1
+    return

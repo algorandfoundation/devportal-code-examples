@@ -1,4 +1,4 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 
@@ -47,130 +47,26 @@ main_after_if_else@2:
 
 
     txn NumAppArgs
-    bz main_bare_routing@12
+    bz main___algots__.defaultCreate@14
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
     pushbytess 0xd38f6072 0x47b45cd1 0xba7953dc 0x4a4c6bf6 0x3c7b1f00
     txna ApplicationArgs 0
-    match main_readGlobalState_route@5 main_hasGlobalState_route@6 main_writeGlobalState_route@7 main_writeDynamicGlobalState_route@8 main_deleteGlobalState_route@9
-
-main_after_if_else@16:
+    match readGlobalState hasGlobalState writeGlobalState writeDynamicGlobalState deleteGlobalState
     err
 
-main_deleteGlobalState_route@9:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-
-
-    bytec_2
-
-
-    app_global_del
-
-
-    pushbytes 0x151f7c7580
-    log
-    intc_1
-    return
-
-main_writeDynamicGlobalState_route@8:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-
-
-
-    txna ApplicationArgs 1
-    extract 2 0
-    txna ApplicationArgs 2
-    dup
-    extract 2 0
-
-
-    uncover 2
-    swap
-    app_global_put
-
-
-    bytec 5
-    swap
-    concat
-    log
-    intc_1
-    return
-
-main_writeGlobalState_route@7:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-
-
-
-    txna ApplicationArgs 1
-    extract 2 0
-    txna ApplicationArgs 2
-    intc_0
-    getbit
-    txna ApplicationArgs 3
-
-
-    callsub writeGlobalState
-    intc_1
-    return
-
-main_hasGlobalState_route@6:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-    callsub hasGlobalState
-    bytec 5
-    swap
-    concat
-    log
-    intc_1
-    return
-
-main_readGlobalState_route@5:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-    callsub readGlobalState
-    bytec 5
-    swap
-    concat
-    log
-    intc_1
-    return
-
-main_bare_routing@12:
+main___algots__.defaultCreate@14:
 
 
 
     txn OnCompletion
-    bnz main_after_if_else@16
+    !
     txn ApplicationID
     !
-    assert
-    intc_1
+    &&
     return
 
 
@@ -286,7 +182,14 @@ readGlobalState:
     concat
     swap
     concat
-    retsub
+
+
+    bytec 5
+    swap
+    concat
+    log
+    intc_1
+    return
 
 
 
@@ -313,34 +216,46 @@ hasGlobalState:
     uncover 3
     setbit
     concat
-    retsub
+
+
+    bytec 5
+    swap
+    concat
+    log
+    intc_1
+    return
 
 
 
 writeGlobalState:
 
 
-    proto 3 0
+    txna ApplicationArgs 1
+    extract 2 0
+    txna ApplicationArgs 2
+    intc_0
+    getbit
+    txna ApplicationArgs 3
 
 
     bytec_0
 
 
-    frame_dig -3
+    dig 3
     app_global_put
 
 
     bytec_1
 
 
-    frame_dig -2
+    dig 2
     app_global_put
 
 
     bytec 4
 
 
-    frame_dig -1
+    swap
     app_global_put
 
 
@@ -352,7 +267,7 @@ writeGlobalState:
 
     app_global_get_ex
     assert
-    frame_dig -3
+    uncover 2
     ==
     assert
 
@@ -365,7 +280,52 @@ writeGlobalState:
 
     app_global_get_ex
     assert
-    frame_dig -2
     ==
-    assert
-    retsub
+
+
+    return
+
+
+
+writeDynamicGlobalState:
+
+
+    txna ApplicationArgs 1
+    extract 2 0
+    txna ApplicationArgs 2
+    extract 2 0
+
+
+    swap
+    dig 1
+    app_global_put
+
+
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    bytec 5
+    swap
+    concat
+    log
+    intc_1
+    return
+
+
+
+deleteGlobalState:
+
+
+    bytec_2
+
+
+    app_global_del
+
+
+    pushbytes 0x151f7c7580
+    log
+    intc_1
+    return

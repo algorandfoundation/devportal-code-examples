@@ -1,74 +1,36 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
 main:
-    intcblock 1 6 0
+    intcblock 6 0 1
     bytecblock 0x151f7c75 0x4a325901
     // contracts/ReferenceApp/contract.algo.ts:33
     // export default class ReferenceApp extends Contract {
     txn NumAppArgs
-    bz main_bare_routing@7
+    bz main___algots__.defaultCreate@9
+    txn OnCompletion
+    !
+    assert // OnCompletion must be NoOp
+    txn ApplicationID
+    assert
     pushbytess 0x9407ae96 0xec904a91 // method "incrementViaInner()uint64", method "incrementViaInnerWithArg(uint64)uint64"
     txna ApplicationArgs 0
-    match main_incrementViaInner_route@3 main_incrementViaInnerWithArg_route@4
-
-main_after_if_else@11:
+    match incrementViaInner incrementViaInnerWithArg
     err
 
-main_incrementViaInnerWithArg_route@4:
-    // contracts/ReferenceApp/contract.algo.ts:62
-    // @abimethod()
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    // contracts/ReferenceApp/contract.algo.ts:33
-    // export default class ReferenceApp extends Contract {
-    txna ApplicationArgs 1
-    btoi
-    // contracts/ReferenceApp/contract.algo.ts:62
-    // @abimethod()
-    callsub incrementViaInnerWithArg
-    itob
-    bytec_0 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_0 // 1
-    return
-
-main_incrementViaInner_route@3:
-    // contracts/ReferenceApp/contract.algo.ts:38
-    // @abimethod()
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    callsub incrementViaInner
-    itob
-    bytec_0 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_0 // 1
-    return
-
-main_bare_routing@7:
+main___algots__.defaultCreate@9:
     // contracts/ReferenceApp/contract.algo.ts:33
     // export default class ReferenceApp extends Contract {
     txn OnCompletion
-    bnz main_after_if_else@11
+    !
     txn ApplicationID
     !
-    assert // can only call when creating
-    intc_0 // 1
-    return
+    &&
+    return // on error: OnCompletion must be NoOp && can only call when creating
 
 
-// contracts/ReferenceApp/contract.algo.ts::ReferenceApp.incrementViaInner() -> uint64:
+// contracts/ReferenceApp/contract.algo.ts::ReferenceApp.incrementViaInner[routing]() -> void:
 incrementViaInner:
     // contracts/ReferenceApp/contract.algo.ts:43-50
     // const appCallTxn = itxn
@@ -96,11 +58,11 @@ incrementViaInner:
     //     appArgs: [arc4.methodSelector('increment()uint64')],
     //     fee: 0,
     //   })
-    intc_1 // 6
+    intc_0 // 6
     itxn_field TypeEnum
     // contracts/ReferenceApp/contract.algo.ts:48
     // fee: 0,
-    intc_2 // 0
+    intc_1 // 0
     itxn_field Fee
     // contracts/ReferenceApp/contract.algo.ts:43-50
     // const appCallTxn = itxn
@@ -122,16 +84,22 @@ incrementViaInner:
     bytec_0 // 0x151f7c75
     ==
     assert // Bytes has valid prefix
-    btoi
-    retsub
-
-
-// contracts/ReferenceApp/contract.algo.ts::ReferenceApp.incrementViaInnerWithArg(app: uint64) -> uint64:
-incrementViaInnerWithArg:
-    // contracts/ReferenceApp/contract.algo.ts:62-63
+    // contracts/ReferenceApp/contract.algo.ts:38
     // @abimethod()
-    // public incrementViaInnerWithArg(app: Application): uint64 {
-    proto 1 1
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_2 // 1
+    return
+
+
+// contracts/ReferenceApp/contract.algo.ts::ReferenceApp.incrementViaInnerWithArg[routing]() -> void:
+incrementViaInnerWithArg:
+    // contracts/ReferenceApp/contract.algo.ts:62
+    // @abimethod()
+    txna ApplicationArgs 1
+    btoi
     // contracts/ReferenceApp/contract.algo.ts:65-72
     // const appCallTxn = itxn
     //   .applicationCall({
@@ -146,7 +114,6 @@ incrementViaInnerWithArg:
     // appArgs: [arc4.methodSelector('increment()uint64')],
     bytec_1 // method "increment()uint64"
     itxn_field ApplicationArgs
-    frame_dig -1
     itxn_field ApplicationID
     // contracts/ReferenceApp/contract.algo.ts:65-71
     // const appCallTxn = itxn
@@ -156,11 +123,11 @@ incrementViaInnerWithArg:
     //     appArgs: [arc4.methodSelector('increment()uint64')],
     //     fee: 0,
     //   })
-    intc_1 // 6
+    intc_0 // 6
     itxn_field TypeEnum
     // contracts/ReferenceApp/contract.algo.ts:70
     // fee: 0,
-    intc_2 // 0
+    intc_1 // 0
     itxn_field Fee
     // contracts/ReferenceApp/contract.algo.ts:65-72
     // const appCallTxn = itxn
@@ -182,5 +149,11 @@ incrementViaInnerWithArg:
     bytec_0 // 0x151f7c75
     ==
     assert // Bytes has valid prefix
-    btoi
-    retsub
+    // contracts/ReferenceApp/contract.algo.ts:62
+    // @abimethod()
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_2 // 1
+    return

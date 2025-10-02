@@ -1,10 +1,10 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 
 main:
     intcblock 1 0 8 400
-    bytecblock "keyLength" "boxMbr" 0x151f7c75 "counter" "valueLength" "boxSize"
+    bytecblock "keyLength" "boxMbr" "counter" 0x151f7c75 "valueLength" "boxSize"
     txn ApplicationID
     bnz main_after_if_else@2
 
@@ -59,117 +59,31 @@ main_after_if_else@2:
 
 
     txn NumAppArgs
-    bz main_bare_routing@13
+    bz main___algots__.defaultCreate@15
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
     pushbytess 0x040a235e 0x5425a145 0xe924e5e0 0xbbb5239e 0x1aefe7f5 0x0e385162
     txna ApplicationArgs 0
-    match main_incrementBoxCounter_route@5 main_getBoxCounter_route@6 main_getBoxCounterForAccount_route@7 main_getBoxMbr_route@8 main_getBoxConfiguration_route@9 main_updateBoxConfiguration_route@10
-
-main_after_if_else@17:
+    match incrementBoxCounter getBoxCounter getBoxCounterForAccount getBoxMbr getBoxConfiguration updateBoxConfiguration
     err
 
-main_updateBoxConfiguration_route@10:
+main___algots__.defaultCreate@15:
+
 
 
     txn OnCompletion
     !
-    assert
     txn ApplicationID
-    assert
-
-
-
-    txna ApplicationArgs 1
-    btoi
-    txna ApplicationArgs 2
-    btoi
-
-
-    callsub updateBoxConfiguration
-    intc_0
+    !
+    &&
     return
 
-main_getBoxConfiguration_route@9:
 
 
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-    callsub getBoxConfiguration
-    bytec_2
-    swap
-    concat
-    log
-    intc_0
-    return
-
-main_getBoxMbr_route@8:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-    callsub getBoxMbr
-    itob
-    bytec_2
-    swap
-    concat
-    log
-    intc_0
-    return
-
-main_getBoxCounterForAccount_route@7:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-
-
-
-    txna ApplicationArgs 1
-
-
-    callsub getBoxCounterForAccount
-    itob
-    bytec_2
-    swap
-    concat
-    log
-    intc_0
-    return
-
-main_getBoxCounter_route@6:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-    callsub getBoxCounter
-    itob
-    bytec_2
-    swap
-    concat
-    log
-    intc_0
-    return
-
-main_incrementBoxCounter_route@5:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-
+incrementBoxCounter:
 
 
     txn GroupIndex
@@ -182,37 +96,7 @@ main_incrementBoxCounter_route@5:
     assert
 
 
-    callsub incrementBoxCounter
-    itob
-    bytec_2
-    swap
-    concat
-    log
-    intc_0
-    return
-
-main_bare_routing@13:
-
-
-
-    txn OnCompletion
-    bnz main_after_if_else@17
-    txn ApplicationID
-    !
-    assert
-    intc_0
-    return
-
-
-
-incrementBoxCounter:
-
-
-
-    proto 1 1
-
-
-    frame_dig -1
+    dup
     gtxns Amount
     intc_1
 
@@ -226,14 +110,13 @@ incrementBoxCounter:
     assert
 
 
-    frame_dig -1
     gtxns Receiver
     global CurrentApplicationAddress
     ==
     assert
 
 
-    bytec_3
+    bytec_2
 
 
     txn Sender
@@ -248,15 +131,15 @@ incrementBoxCounter:
     swap
 
 
-    bz incrementBoxCounter_else_body@2
+    bz incrementBoxCounter_else_body@3
 
 
-    frame_dig 0
+    dup
     intc_0
     +
 
 
-    bytec_3
+    bytec_2
 
 
     txn Sender
@@ -269,14 +152,21 @@ incrementBoxCounter:
     itob
     box_put
 
-
-    swap
-    retsub
-
-incrementBoxCounter_else_body@2:
+incrementBoxCounter_after_inlined_contracts/ReferenceAppBox/contract.algo.ts::ReferenceAppBox.incrementBoxCounter@4:
 
 
+    itob
     bytec_3
+    swap
+    concat
+    log
+    intc_0
+    return
+
+incrementBoxCounter_else_body@3:
+
+
+    bytec_2
 
 
     txn Sender
@@ -291,19 +181,16 @@ incrementBoxCounter_else_body@2:
 
 
     intc_0
-    swap
-    retsub
+
+
+    b incrementBoxCounter_after_inlined_contracts/ReferenceAppBox/contract.algo.ts::ReferenceAppBox.incrementBoxCounter@4
 
 
 
 getBoxCounter:
 
 
-
-    proto 0 1
-
-
-    bytec_3
+    bytec_2
 
 
     txn Sender
@@ -318,31 +205,39 @@ getBoxCounter:
     swap
 
 
-    bz getBoxCounter_after_if_else@2
+    bz getBoxCounter_after_if_else@3
+    dup
+
+getBoxCounter_after_inlined_contracts/ReferenceAppBox/contract.algo.ts::ReferenceAppBox.getBoxCounter@4:
 
 
-    frame_dig 0
+    itob
+    bytec_3
     swap
-    retsub
+    concat
+    log
+    intc_0
+    return
 
-getBoxCounter_after_if_else@2:
+getBoxCounter_after_if_else@3:
 
 
     intc_1
-    swap
-    retsub
+
+
+    b getBoxCounter_after_inlined_contracts/ReferenceAppBox/contract.algo.ts::ReferenceAppBox.getBoxCounter@4
 
 
 
 getBoxCounterForAccount:
 
 
+    bytec_2
 
-    proto 1 1
+
+    txna ApplicationArgs 1
 
 
-    bytec_3
-    frame_dig -1
     concat
 
 
@@ -352,19 +247,27 @@ getBoxCounterForAccount:
     swap
 
 
-    bz getBoxCounterForAccount_after_if_else@2
+    bz getBoxCounterForAccount_after_if_else@3
+    dup
+
+getBoxCounterForAccount_after_inlined_contracts/ReferenceAppBox/contract.algo.ts::ReferenceAppBox.getBoxCounterForAccount@4:
 
 
-    frame_dig 0
+    itob
+    bytec_3
     swap
-    retsub
+    concat
+    log
+    intc_0
+    return
 
-getBoxCounterForAccount_after_if_else@2:
+getBoxCounterForAccount_after_if_else@3:
 
 
     intc_1
-    swap
-    retsub
+
+
+    b getBoxCounterForAccount_after_inlined_contracts/ReferenceAppBox/contract.algo.ts::ReferenceAppBox.getBoxCounterForAccount@4
 
 
 
@@ -379,7 +282,15 @@ getBoxMbr:
 
     app_global_get_ex
     assert
-    retsub
+
+
+    itob
+    bytec_3
+    swap
+    concat
+    log
+    intc_0
+    return
 
 
 
@@ -429,28 +340,37 @@ getBoxConfiguration:
     swap
     itob
     concat
-    retsub
+
+
+    bytec_3
+    swap
+    concat
+    log
+    intc_0
+    return
 
 
 
 updateBoxConfiguration:
 
 
-
-    proto 2 0
+    txna ApplicationArgs 1
+    btoi
+    txna ApplicationArgs 2
+    btoi
 
 
     bytec_0
 
 
-    frame_dig -2
+    uncover 2
     app_global_put
 
 
     bytec 4
 
 
-    frame_dig -1
+    dig 1
     app_global_put
 
 
@@ -462,7 +382,6 @@ updateBoxConfiguration:
 
     app_global_get_ex
     assert
-    frame_dig -1
     +
 
 
@@ -484,4 +403,7 @@ updateBoxConfiguration:
 
     swap
     app_global_put
-    retsub
+
+
+    intc_0
+    return
