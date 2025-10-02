@@ -73,7 +73,7 @@ describe('ResourceUsage contract', () => {
         accountReferences: [],
         populateAppCallResources: false,
       })
-    }).rejects.toThrow('invalid Account reference')
+    }).rejects.toThrow('unavailable Account')
   })
 
   test('get account balance with argument by passing account reference as argument', async () => {
