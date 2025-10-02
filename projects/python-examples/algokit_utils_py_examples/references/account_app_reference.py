@@ -29,7 +29,6 @@ def account_app_reference_example_method1() -> None:
 
 
 def account_app_reference_example_method2() -> None:
-
     # Setup the test environment
     env = setup_localnet_environment()
     reference_account_app_app_client = env.reference_account_app_app_client
@@ -49,7 +48,6 @@ def account_app_reference_example_method2() -> None:
 
 
 def account_app_reference_example_method3() -> None:
-
     # Setup the test environment
     env = setup_localnet_environment()
     reference_account_app_app_client = env.reference_account_app_app_client

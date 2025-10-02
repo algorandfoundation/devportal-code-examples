@@ -1,86 +1,72 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
-// smart_contracts.reference_account_app.contract.MyCounter.__algopy_entrypoint_with_init() -> uint64:
+// algopy.arc4.ARC4Contract.approval_program() -> uint64:
 main:
     intcblock 1 0
     bytecblock "my_counter"
     // smart_contracts/reference_account_app/contract.py:20
     // class MyCounter(ARC4Contract):
     txn NumAppArgs
-    bz main_bare_routing@7
+    bz main___algopy_default_create@8
     pushbytess 0x30c6d58a 0x856a1202 // method "opt_in()void", method "increment_my_counter()uint64"
     txna ApplicationArgs 0
     match main_opt_in_route@5 main_increment_my_counter_route@6
-
-main_after_if_else@9:
-    // smart_contracts/reference_account_app/contract.py:20
-    // class MyCounter(ARC4Contract):
-    intc_1 // 0
-    return
+    err
 
 main_increment_my_counter_route@6:
-    // smart_contracts/reference_account_app/contract.py:39
+    // smart_contracts/reference_account_app/contract.py:38
     // @abimethod
     txn OnCompletion
     !
-    assert // OnCompletion is not NoOp
     txn ApplicationID
-    assert // can only call when not creating
-    callsub increment_my_counter
-    itob
-    pushbytes 0x151f7c75
-    swap
-    concat
-    log
-    intc_0 // 1
-    return
+    &&
+    assert // OnCompletion must be NoOp && can only call when not creating
+    b increment_my_counter
 
 main_opt_in_route@5:
-    // smart_contracts/reference_account_app/contract.py:30
+    // smart_contracts/reference_account_app/contract.py:29
     // @abimethod(allow_actions=["OptIn"])
     txn OnCompletion
     intc_0 // OptIn
     ==
-    assert // OnCompletion is not OptIn
     txn ApplicationID
-    assert // can only call when not creating
-    callsub opt_in
-    intc_0 // 1
-    return
+    &&
+    assert // OnCompletion must be OptIn && can only call when not creating
+    b opt_in
 
-main_bare_routing@7:
-    // smart_contracts/reference_account_app/contract.py:20
-    // class MyCounter(ARC4Contract):
+main___algopy_default_create@8:
     txn OnCompletion
-    bnz main_after_if_else@9
+    !
     txn ApplicationID
     !
-    assert // can only call when creating
-    intc_0 // 1
-    return
+    &&
+    return // on error: OnCompletion must be NoOp && can only call when creating
 
 
-// smart_contracts.reference_account_app.contract.MyCounter.opt_in() -> void:
+// smart_contracts.reference_account_app.contract.MyCounter.opt_in[routing]() -> void:
 opt_in:
-    // smart_contracts/reference_account_app/contract.py:32
+    // smart_contracts/reference_account_app/contract.py:31
     // self.my_counter[Txn.sender] = UInt64(0)
     txn Sender
     bytec_0 // "my_counter"
     intc_1 // 0
     app_local_put
-    retsub
+    // smart_contracts/reference_account_app/contract.py:29
+    // @abimethod(allow_actions=["OptIn"])
+    intc_0 // 1
+    return
 
 
-// smart_contracts.reference_account_app.contract.MyCounter.increment_my_counter() -> uint64:
+// smart_contracts.reference_account_app.contract.MyCounter.increment_my_counter[routing]() -> void:
 increment_my_counter:
-    // smart_contracts/reference_account_app/contract.py:41
+    // smart_contracts/reference_account_app/contract.py:40
     // assert Txn.sender.is_opted_in(Global.current_application_id)
     txn Sender
     global CurrentApplicationID
     app_opted_in
     assert
-    // smart_contracts/reference_account_app/contract.py:43
+    // smart_contracts/reference_account_app/contract.py:42
     // self.my_counter[Txn.sender] += 1
     txn Sender
     dup
@@ -93,11 +79,19 @@ increment_my_counter:
     bytec_0 // "my_counter"
     swap
     app_local_put
-    // smart_contracts/reference_account_app/contract.py:44
+    // smart_contracts/reference_account_app/contract.py:43
     // return self.my_counter[Txn.sender]
     txn Sender
     intc_1 // 0
     bytec_0 // "my_counter"
     app_local_get_ex
     assert // check self.my_counter exists for account
-    retsub
+    // smart_contracts/reference_account_app/contract.py:38
+    // @abimethod
+    itob
+    pushbytes 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return

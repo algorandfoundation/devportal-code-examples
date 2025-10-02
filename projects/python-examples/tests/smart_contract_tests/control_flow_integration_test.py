@@ -165,7 +165,6 @@ def while_loop_app_client(
 def test_if_else(
     if_else_app_client: IfElseExampleClient,
 ) -> None:
-
     inputs = [
         (1001, "This account is rich!"),
         (101, "This account is doing well."),
@@ -192,7 +191,6 @@ def test_if_else(
 def test_for_loops(
     for_loop_app_client: ForLoopsExampleClient,
 ) -> None:
-
     txn_result = for_loop_app_client.send.for_loop()
     print(f"for_loop result: {txn_result.abi_return}")
 
@@ -203,7 +201,6 @@ def test_for_loops(
 def test_match_statements(
     match_statements_app_client: MatchStatementsClient,
 ) -> None:
-
     inputs = [
         (0, "Monday"),
         (1, "Tuesday"),
@@ -225,7 +222,6 @@ def test_match_statements(
 def test_while_loop(
     while_loop_app_client: WhileLoopExampleClient,
 ) -> None:
-
     txn_result = while_loop_app_client.send.loop()
     print(f"loop result: {txn_result.abi_return}")
 

@@ -4,7 +4,7 @@
   "result": [
     {
       "type": "ExecutionPaths",
-      "count": 4,
+      "count": 2,
       "description": "\nCheck: \"unprotected-deletable\", Impact: High, Confidence: High\nDescription: Unprotected Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-deletable-application\n",
       "check": "unprotected-deletable",
       "impact": "High",
@@ -12,10 +12,10 @@
       "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 3 -> 4 -> 5",
+          "short": "0 -> 1 -> 3 -> 4 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -28,25 +28,70 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
+              "27: txn OnCompletion",
+              "28: !",
+              "29: assert",
+              "30: txn ApplicationID",
+              "31: assert",
+              "32: pushbytess 0x7f68c13f 0x288dc75f",
+              "33: txna ApplicationArgs 0",
+              "34: match add_contact_info return_contact"
             ],
             [
-              "31: main_after_if_else@9:",
-              "34: intc_0",
-              "35: return"
+              "47: add_contact_info:",
+              "50: txna ApplicationArgs 1",
+              "53: dup",
+              "54: intc_0",
+              "55: extract_uint16",
+              "56: dig 1",
+              "57: pushint 2",
+              "58: extract_uint16",
+              "59: dig 2",
+              "60: uncover 2",
+              "61: dig 2",
+              "62: substring3",
+              "63: dig 2",
+              "64: len",
+              "65: dig 3",
+              "66: uncover 3",
+              "67: uncover 2",
+              "68: substring3",
+              "69: dig 2",
+              "70: extract 4 8",
+              "73: uncover 2",
+              "74: extract 2 0",
+              "75: pushbytes \"Alice\"",
+              "76: ==",
+              "77: assert",
+              "80: swap",
+              "81: extract 2 0",
+              "82: pushbytes \"alice@something.com\"",
+              "83: ==",
+              "84: assert",
+              "87: dup",
+              "88: pushbytes 0x00000000211d1ae3",
+              "89: b==",
+              "90: assert",
+              "93: bytec_0",
+              "94: uncover 2",
+              "95: app_global_put",
+              "98: bytec_1",
+              "99: swap",
+              "100: concat",
+              "101: log",
+              "102: intc_1",
+              "103: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 12 -> 9",
+          "short": "0 -> 1 -> 3 -> 4 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -59,155 +104,30 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
+              "27: txn OnCompletion",
+              "28: !",
+              "29: assert",
+              "30: txn ApplicationID",
+              "31: assert",
+              "32: pushbytess 0x7f68c13f 0x288dc75f",
+              "33: txna ApplicationArgs 0",
+              "34: match add_contact_info return_contact"
             ],
             [
-              "53: main_add_contact_info_route@5:",
-              "56: txn OnCompletion",
-              "57: !",
-              "58: assert",
-              "59: txn ApplicationID",
-              "60: assert",
-              "63: txna ApplicationArgs 1",
-              "66: callsub add_contact_info"
-            ],
-            [
-              "88: add_contact_info:",
-              "92: proto 1 1",
-              "95: frame_dig -1",
-              "96: intc_0",
-              "97: extract_uint16",
-              "98: frame_dig -1",
-              "99: pushint 2",
-              "100: extract_uint16",
-              "101: frame_dig -1",
-              "102: uncover 2",
-              "103: dig 2",
-              "104: substring3",
-              "105: frame_dig -1",
-              "106: len",
-              "107: frame_dig -1",
-              "108: uncover 3",
-              "109: uncover 2",
-              "110: substring3",
-              "111: frame_dig -1",
-              "112: extract 4 8",
-              "115: uncover 2",
-              "116: extract 2 0",
-              "117: pushbytes \"Alice\"",
-              "118: ==",
-              "119: assert",
-              "122: swap",
-              "123: extract 2 0",
-              "124: pushbytes \"alice@something.com\"",
-              "125: ==",
-              "126: assert",
-              "129: pushbytes 0x00000000211d1ae3",
-              "130: b==",
-              "131: assert",
-              "134: bytec_0",
-              "135: frame_dig -1",
-              "136: app_global_put",
-              "139: frame_dig -1",
-              "142: pushint 4",
-              "145: extract_uint64",
-              "146: retsub"
-            ],
-            [
-              "67: itob",
-              "68: bytec_1",
-              "69: swap",
-              "70: concat",
-              "71: log",
-              "72: intc_1",
-              "73: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3 -> 4 -> 6 -> 13 -> 7",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"contact_info\" 0x151f7c75",
-              "8: txn ApplicationID",
-              "9: bnz main_after_if_else@2"
-            ],
-            [
-              "22: main_after_if_else@2:",
-              "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
-            ],
-            [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
-            ],
-            [
-              "37: main_return_contact_route@6:",
-              "40: txn OnCompletion",
-              "41: !",
-              "42: assert",
-              "43: txn ApplicationID",
-              "44: assert",
-              "45: callsub return_contact"
-            ],
-            [
-              "150: return_contact:",
-              "153: intc_0",
-              "154: bytec_0",
-              "155: app_global_get_ex",
-              "156: assert",
-              "157: retsub"
-            ],
-            [
-              "46: bytec_1",
-              "47: swap",
-              "48: concat",
-              "49: log",
-              "50: intc_1",
-              "51: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3 -> 10 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"contact_info\" 0x151f7c75",
-              "8: txn ApplicationID",
-              "9: bnz main_after_if_else@2"
-            ],
-            [
-              "22: main_after_if_else@2:",
-              "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
-            ],
-            [
-              "75: main_bare_routing@7:",
-              "78: txn OnCompletion",
-              "79: bnz main_after_if_else@9"
-            ],
-            [
-              "31: main_after_if_else@9:",
-              "34: intc_0",
-              "35: return"
+              "107: return_contact:",
+              "110: intc_0",
+              "111: bytec_0",
+              "112: app_global_get_ex",
+              "113: assert",
+              "116: bytec_1",
+              "117: swap",
+              "118: concat",
+              "119: log",
+              "120: intc_1",
+              "121: return"
             ]
           ]
         }
@@ -215,7 +135,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 4,
+      "count": 2,
       "description": "\nCheck: \"unprotected-updatable\", Impact: High, Confidence: High\nDescription: Unprotected Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-updatable-application\n",
       "check": "unprotected-updatable",
       "impact": "High",
@@ -223,10 +143,10 @@
       "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 3 -> 4 -> 5",
+          "short": "0 -> 1 -> 3 -> 4 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -239,25 +159,70 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
+              "27: txn OnCompletion",
+              "28: !",
+              "29: assert",
+              "30: txn ApplicationID",
+              "31: assert",
+              "32: pushbytess 0x7f68c13f 0x288dc75f",
+              "33: txna ApplicationArgs 0",
+              "34: match add_contact_info return_contact"
             ],
             [
-              "31: main_after_if_else@9:",
-              "34: intc_0",
-              "35: return"
+              "47: add_contact_info:",
+              "50: txna ApplicationArgs 1",
+              "53: dup",
+              "54: intc_0",
+              "55: extract_uint16",
+              "56: dig 1",
+              "57: pushint 2",
+              "58: extract_uint16",
+              "59: dig 2",
+              "60: uncover 2",
+              "61: dig 2",
+              "62: substring3",
+              "63: dig 2",
+              "64: len",
+              "65: dig 3",
+              "66: uncover 3",
+              "67: uncover 2",
+              "68: substring3",
+              "69: dig 2",
+              "70: extract 4 8",
+              "73: uncover 2",
+              "74: extract 2 0",
+              "75: pushbytes \"Alice\"",
+              "76: ==",
+              "77: assert",
+              "80: swap",
+              "81: extract 2 0",
+              "82: pushbytes \"alice@something.com\"",
+              "83: ==",
+              "84: assert",
+              "87: dup",
+              "88: pushbytes 0x00000000211d1ae3",
+              "89: b==",
+              "90: assert",
+              "93: bytec_0",
+              "94: uncover 2",
+              "95: app_global_put",
+              "98: bytec_1",
+              "99: swap",
+              "100: concat",
+              "101: log",
+              "102: intc_1",
+              "103: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 12 -> 9",
+          "short": "0 -> 1 -> 3 -> 4 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -270,155 +235,30 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
+              "27: txn OnCompletion",
+              "28: !",
+              "29: assert",
+              "30: txn ApplicationID",
+              "31: assert",
+              "32: pushbytess 0x7f68c13f 0x288dc75f",
+              "33: txna ApplicationArgs 0",
+              "34: match add_contact_info return_contact"
             ],
             [
-              "53: main_add_contact_info_route@5:",
-              "56: txn OnCompletion",
-              "57: !",
-              "58: assert",
-              "59: txn ApplicationID",
-              "60: assert",
-              "63: txna ApplicationArgs 1",
-              "66: callsub add_contact_info"
-            ],
-            [
-              "88: add_contact_info:",
-              "92: proto 1 1",
-              "95: frame_dig -1",
-              "96: intc_0",
-              "97: extract_uint16",
-              "98: frame_dig -1",
-              "99: pushint 2",
-              "100: extract_uint16",
-              "101: frame_dig -1",
-              "102: uncover 2",
-              "103: dig 2",
-              "104: substring3",
-              "105: frame_dig -1",
-              "106: len",
-              "107: frame_dig -1",
-              "108: uncover 3",
-              "109: uncover 2",
-              "110: substring3",
-              "111: frame_dig -1",
-              "112: extract 4 8",
-              "115: uncover 2",
-              "116: extract 2 0",
-              "117: pushbytes \"Alice\"",
-              "118: ==",
-              "119: assert",
-              "122: swap",
-              "123: extract 2 0",
-              "124: pushbytes \"alice@something.com\"",
-              "125: ==",
-              "126: assert",
-              "129: pushbytes 0x00000000211d1ae3",
-              "130: b==",
-              "131: assert",
-              "134: bytec_0",
-              "135: frame_dig -1",
-              "136: app_global_put",
-              "139: frame_dig -1",
-              "142: pushint 4",
-              "145: extract_uint64",
-              "146: retsub"
-            ],
-            [
-              "67: itob",
-              "68: bytec_1",
-              "69: swap",
-              "70: concat",
-              "71: log",
-              "72: intc_1",
-              "73: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3 -> 4 -> 6 -> 13 -> 7",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"contact_info\" 0x151f7c75",
-              "8: txn ApplicationID",
-              "9: bnz main_after_if_else@2"
-            ],
-            [
-              "22: main_after_if_else@2:",
-              "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
-            ],
-            [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
-            ],
-            [
-              "37: main_return_contact_route@6:",
-              "40: txn OnCompletion",
-              "41: !",
-              "42: assert",
-              "43: txn ApplicationID",
-              "44: assert",
-              "45: callsub return_contact"
-            ],
-            [
-              "150: return_contact:",
-              "153: intc_0",
-              "154: bytec_0",
-              "155: app_global_get_ex",
-              "156: assert",
-              "157: retsub"
-            ],
-            [
-              "46: bytec_1",
-              "47: swap",
-              "48: concat",
-              "49: log",
-              "50: intc_1",
-              "51: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3 -> 10 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"contact_info\" 0x151f7c75",
-              "8: txn ApplicationID",
-              "9: bnz main_after_if_else@2"
-            ],
-            [
-              "22: main_after_if_else@2:",
-              "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
-            ],
-            [
-              "75: main_bare_routing@7:",
-              "78: txn OnCompletion",
-              "79: bnz main_after_if_else@9"
-            ],
-            [
-              "31: main_after_if_else@9:",
-              "34: intc_0",
-              "35: return"
+              "107: return_contact:",
+              "110: intc_0",
+              "111: bytec_0",
+              "112: app_global_get_ex",
+              "113: assert",
+              "116: bytec_1",
+              "117: swap",
+              "118: concat",
+              "119: log",
+              "120: intc_1",
+              "121: return"
             ]
           ]
         }
@@ -446,7 +286,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 4,
+      "count": 2,
       "description": "\nCheck: \"is-deletable\", Impact: High, Confidence: High\nDescription: Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#deletable-application\n",
       "check": "is-deletable",
       "impact": "High",
@@ -454,10 +294,10 @@
       "help": "Do not approve `DeleteApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 3 -> 4 -> 5",
+          "short": "0 -> 1 -> 3 -> 4 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -470,25 +310,70 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
+              "27: txn OnCompletion",
+              "28: !",
+              "29: assert",
+              "30: txn ApplicationID",
+              "31: assert",
+              "32: pushbytess 0x7f68c13f 0x288dc75f",
+              "33: txna ApplicationArgs 0",
+              "34: match add_contact_info return_contact"
             ],
             [
-              "31: main_after_if_else@9:",
-              "34: intc_0",
-              "35: return"
+              "47: add_contact_info:",
+              "50: txna ApplicationArgs 1",
+              "53: dup",
+              "54: intc_0",
+              "55: extract_uint16",
+              "56: dig 1",
+              "57: pushint 2",
+              "58: extract_uint16",
+              "59: dig 2",
+              "60: uncover 2",
+              "61: dig 2",
+              "62: substring3",
+              "63: dig 2",
+              "64: len",
+              "65: dig 3",
+              "66: uncover 3",
+              "67: uncover 2",
+              "68: substring3",
+              "69: dig 2",
+              "70: extract 4 8",
+              "73: uncover 2",
+              "74: extract 2 0",
+              "75: pushbytes \"Alice\"",
+              "76: ==",
+              "77: assert",
+              "80: swap",
+              "81: extract 2 0",
+              "82: pushbytes \"alice@something.com\"",
+              "83: ==",
+              "84: assert",
+              "87: dup",
+              "88: pushbytes 0x00000000211d1ae3",
+              "89: b==",
+              "90: assert",
+              "93: bytec_0",
+              "94: uncover 2",
+              "95: app_global_put",
+              "98: bytec_1",
+              "99: swap",
+              "100: concat",
+              "101: log",
+              "102: intc_1",
+              "103: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 12 -> 9",
+          "short": "0 -> 1 -> 3 -> 4 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -501,155 +386,30 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
+              "27: txn OnCompletion",
+              "28: !",
+              "29: assert",
+              "30: txn ApplicationID",
+              "31: assert",
+              "32: pushbytess 0x7f68c13f 0x288dc75f",
+              "33: txna ApplicationArgs 0",
+              "34: match add_contact_info return_contact"
             ],
             [
-              "53: main_add_contact_info_route@5:",
-              "56: txn OnCompletion",
-              "57: !",
-              "58: assert",
-              "59: txn ApplicationID",
-              "60: assert",
-              "63: txna ApplicationArgs 1",
-              "66: callsub add_contact_info"
-            ],
-            [
-              "88: add_contact_info:",
-              "92: proto 1 1",
-              "95: frame_dig -1",
-              "96: intc_0",
-              "97: extract_uint16",
-              "98: frame_dig -1",
-              "99: pushint 2",
-              "100: extract_uint16",
-              "101: frame_dig -1",
-              "102: uncover 2",
-              "103: dig 2",
-              "104: substring3",
-              "105: frame_dig -1",
-              "106: len",
-              "107: frame_dig -1",
-              "108: uncover 3",
-              "109: uncover 2",
-              "110: substring3",
-              "111: frame_dig -1",
-              "112: extract 4 8",
-              "115: uncover 2",
-              "116: extract 2 0",
-              "117: pushbytes \"Alice\"",
-              "118: ==",
-              "119: assert",
-              "122: swap",
-              "123: extract 2 0",
-              "124: pushbytes \"alice@something.com\"",
-              "125: ==",
-              "126: assert",
-              "129: pushbytes 0x00000000211d1ae3",
-              "130: b==",
-              "131: assert",
-              "134: bytec_0",
-              "135: frame_dig -1",
-              "136: app_global_put",
-              "139: frame_dig -1",
-              "142: pushint 4",
-              "145: extract_uint64",
-              "146: retsub"
-            ],
-            [
-              "67: itob",
-              "68: bytec_1",
-              "69: swap",
-              "70: concat",
-              "71: log",
-              "72: intc_1",
-              "73: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3 -> 4 -> 6 -> 13 -> 7",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"contact_info\" 0x151f7c75",
-              "8: txn ApplicationID",
-              "9: bnz main_after_if_else@2"
-            ],
-            [
-              "22: main_after_if_else@2:",
-              "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
-            ],
-            [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
-            ],
-            [
-              "37: main_return_contact_route@6:",
-              "40: txn OnCompletion",
-              "41: !",
-              "42: assert",
-              "43: txn ApplicationID",
-              "44: assert",
-              "45: callsub return_contact"
-            ],
-            [
-              "150: return_contact:",
-              "153: intc_0",
-              "154: bytec_0",
-              "155: app_global_get_ex",
-              "156: assert",
-              "157: retsub"
-            ],
-            [
-              "46: bytec_1",
-              "47: swap",
-              "48: concat",
-              "49: log",
-              "50: intc_1",
-              "51: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3 -> 10 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"contact_info\" 0x151f7c75",
-              "8: txn ApplicationID",
-              "9: bnz main_after_if_else@2"
-            ],
-            [
-              "22: main_after_if_else@2:",
-              "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
-            ],
-            [
-              "75: main_bare_routing@7:",
-              "78: txn OnCompletion",
-              "79: bnz main_after_if_else@9"
-            ],
-            [
-              "31: main_after_if_else@9:",
-              "34: intc_0",
-              "35: return"
+              "107: return_contact:",
+              "110: intc_0",
+              "111: bytec_0",
+              "112: app_global_get_ex",
+              "113: assert",
+              "116: bytec_1",
+              "117: swap",
+              "118: concat",
+              "119: log",
+              "120: intc_1",
+              "121: return"
             ]
           ]
         }
@@ -657,7 +417,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 4,
+      "count": 2,
       "description": "\nCheck: \"is-updatable\", Impact: High, Confidence: High\nDescription: Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#upgradable-application\n",
       "check": "is-updatable",
       "impact": "High",
@@ -665,10 +425,10 @@
       "help": "Do not approve `UpdateApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 3 -> 4 -> 5",
+          "short": "0 -> 1 -> 3 -> 4 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -681,25 +441,70 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
+              "27: txn OnCompletion",
+              "28: !",
+              "29: assert",
+              "30: txn ApplicationID",
+              "31: assert",
+              "32: pushbytess 0x7f68c13f 0x288dc75f",
+              "33: txna ApplicationArgs 0",
+              "34: match add_contact_info return_contact"
             ],
             [
-              "31: main_after_if_else@9:",
-              "34: intc_0",
-              "35: return"
+              "47: add_contact_info:",
+              "50: txna ApplicationArgs 1",
+              "53: dup",
+              "54: intc_0",
+              "55: extract_uint16",
+              "56: dig 1",
+              "57: pushint 2",
+              "58: extract_uint16",
+              "59: dig 2",
+              "60: uncover 2",
+              "61: dig 2",
+              "62: substring3",
+              "63: dig 2",
+              "64: len",
+              "65: dig 3",
+              "66: uncover 3",
+              "67: uncover 2",
+              "68: substring3",
+              "69: dig 2",
+              "70: extract 4 8",
+              "73: uncover 2",
+              "74: extract 2 0",
+              "75: pushbytes \"Alice\"",
+              "76: ==",
+              "77: assert",
+              "80: swap",
+              "81: extract 2 0",
+              "82: pushbytes \"alice@something.com\"",
+              "83: ==",
+              "84: assert",
+              "87: dup",
+              "88: pushbytes 0x00000000211d1ae3",
+              "89: b==",
+              "90: assert",
+              "93: bytec_0",
+              "94: uncover 2",
+              "95: app_global_put",
+              "98: bytec_1",
+              "99: swap",
+              "100: concat",
+              "101: log",
+              "102: intc_1",
+              "103: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 12 -> 9",
+          "short": "0 -> 1 -> 3 -> 4 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -712,155 +517,30 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
+              "27: txn OnCompletion",
+              "28: !",
+              "29: assert",
+              "30: txn ApplicationID",
+              "31: assert",
+              "32: pushbytess 0x7f68c13f 0x288dc75f",
+              "33: txna ApplicationArgs 0",
+              "34: match add_contact_info return_contact"
             ],
             [
-              "53: main_add_contact_info_route@5:",
-              "56: txn OnCompletion",
-              "57: !",
-              "58: assert",
-              "59: txn ApplicationID",
-              "60: assert",
-              "63: txna ApplicationArgs 1",
-              "66: callsub add_contact_info"
-            ],
-            [
-              "88: add_contact_info:",
-              "92: proto 1 1",
-              "95: frame_dig -1",
-              "96: intc_0",
-              "97: extract_uint16",
-              "98: frame_dig -1",
-              "99: pushint 2",
-              "100: extract_uint16",
-              "101: frame_dig -1",
-              "102: uncover 2",
-              "103: dig 2",
-              "104: substring3",
-              "105: frame_dig -1",
-              "106: len",
-              "107: frame_dig -1",
-              "108: uncover 3",
-              "109: uncover 2",
-              "110: substring3",
-              "111: frame_dig -1",
-              "112: extract 4 8",
-              "115: uncover 2",
-              "116: extract 2 0",
-              "117: pushbytes \"Alice\"",
-              "118: ==",
-              "119: assert",
-              "122: swap",
-              "123: extract 2 0",
-              "124: pushbytes \"alice@something.com\"",
-              "125: ==",
-              "126: assert",
-              "129: pushbytes 0x00000000211d1ae3",
-              "130: b==",
-              "131: assert",
-              "134: bytec_0",
-              "135: frame_dig -1",
-              "136: app_global_put",
-              "139: frame_dig -1",
-              "142: pushint 4",
-              "145: extract_uint64",
-              "146: retsub"
-            ],
-            [
-              "67: itob",
-              "68: bytec_1",
-              "69: swap",
-              "70: concat",
-              "71: log",
-              "72: intc_1",
-              "73: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3 -> 4 -> 6 -> 13 -> 7",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"contact_info\" 0x151f7c75",
-              "8: txn ApplicationID",
-              "9: bnz main_after_if_else@2"
-            ],
-            [
-              "22: main_after_if_else@2:",
-              "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
-            ],
-            [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
-            ],
-            [
-              "37: main_return_contact_route@6:",
-              "40: txn OnCompletion",
-              "41: !",
-              "42: assert",
-              "43: txn ApplicationID",
-              "44: assert",
-              "45: callsub return_contact"
-            ],
-            [
-              "150: return_contact:",
-              "153: intc_0",
-              "154: bytec_0",
-              "155: app_global_get_ex",
-              "156: assert",
-              "157: retsub"
-            ],
-            [
-              "46: bytec_1",
-              "47: swap",
-              "48: concat",
-              "49: log",
-              "50: intc_1",
-              "51: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3 -> 10 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"contact_info\" 0x151f7c75",
-              "8: txn ApplicationID",
-              "9: bnz main_after_if_else@2"
-            ],
-            [
-              "22: main_after_if_else@2:",
-              "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
-            ],
-            [
-              "75: main_bare_routing@7:",
-              "78: txn OnCompletion",
-              "79: bnz main_after_if_else@9"
-            ],
-            [
-              "31: main_after_if_else@9:",
-              "34: intc_0",
-              "35: return"
+              "107: return_contact:",
+              "110: intc_0",
+              "111: bytec_0",
+              "112: app_global_get_ex",
+              "113: assert",
+              "116: bytec_1",
+              "117: swap",
+              "118: concat",
+              "119: log",
+              "120: intc_1",
+              "121: return"
             ]
           ]
         }
@@ -868,7 +548,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 10,
+      "count": 6,
       "description": "\nCheck: \"missing-fee-check\", Impact: High, Confidence: High\nDescription: Missing Fee Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-fee-field-validation\n",
       "check": "missing-fee-check",
       "impact": "High",
@@ -876,10 +556,10 @@
       "help": "Validate `Fee` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 5",
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -897,25 +577,70 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
+              "27: txn OnCompletion",
+              "28: !",
+              "29: assert",
+              "30: txn ApplicationID",
+              "31: assert",
+              "32: pushbytess 0x7f68c13f 0x288dc75f",
+              "33: txna ApplicationArgs 0",
+              "34: match add_contact_info return_contact"
             ],
             [
-              "31: main_after_if_else@9:",
-              "34: intc_0",
-              "35: return"
+              "47: add_contact_info:",
+              "50: txna ApplicationArgs 1",
+              "53: dup",
+              "54: intc_0",
+              "55: extract_uint16",
+              "56: dig 1",
+              "57: pushint 2",
+              "58: extract_uint16",
+              "59: dig 2",
+              "60: uncover 2",
+              "61: dig 2",
+              "62: substring3",
+              "63: dig 2",
+              "64: len",
+              "65: dig 3",
+              "66: uncover 3",
+              "67: uncover 2",
+              "68: substring3",
+              "69: dig 2",
+              "70: extract 4 8",
+              "73: uncover 2",
+              "74: extract 2 0",
+              "75: pushbytes \"Alice\"",
+              "76: ==",
+              "77: assert",
+              "80: swap",
+              "81: extract 2 0",
+              "82: pushbytes \"alice@something.com\"",
+              "83: ==",
+              "84: assert",
+              "87: dup",
+              "88: pushbytes 0x00000000211d1ae3",
+              "89: b==",
+              "90: assert",
+              "93: bytec_0",
+              "94: uncover 2",
+              "95: app_global_put",
+              "98: bytec_1",
+              "99: swap",
+              "100: concat",
+              "101: log",
+              "102: intc_1",
+              "103: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 8 -> 12 -> 9",
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -933,81 +658,38 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
+              "27: txn OnCompletion",
+              "28: !",
+              "29: assert",
+              "30: txn ApplicationID",
+              "31: assert",
+              "32: pushbytess 0x7f68c13f 0x288dc75f",
+              "33: txna ApplicationArgs 0",
+              "34: match add_contact_info return_contact"
             ],
             [
-              "53: main_add_contact_info_route@5:",
-              "56: txn OnCompletion",
-              "57: !",
-              "58: assert",
-              "59: txn ApplicationID",
-              "60: assert",
-              "63: txna ApplicationArgs 1",
-              "66: callsub add_contact_info"
-            ],
-            [
-              "88: add_contact_info:",
-              "92: proto 1 1",
-              "95: frame_dig -1",
-              "96: intc_0",
-              "97: extract_uint16",
-              "98: frame_dig -1",
-              "99: pushint 2",
-              "100: extract_uint16",
-              "101: frame_dig -1",
-              "102: uncover 2",
-              "103: dig 2",
-              "104: substring3",
-              "105: frame_dig -1",
-              "106: len",
-              "107: frame_dig -1",
-              "108: uncover 3",
-              "109: uncover 2",
-              "110: substring3",
-              "111: frame_dig -1",
-              "112: extract 4 8",
-              "115: uncover 2",
-              "116: extract 2 0",
-              "117: pushbytes \"Alice\"",
-              "118: ==",
-              "119: assert",
-              "122: swap",
-              "123: extract 2 0",
-              "124: pushbytes \"alice@something.com\"",
-              "125: ==",
-              "126: assert",
-              "129: pushbytes 0x00000000211d1ae3",
-              "130: b==",
-              "131: assert",
-              "134: bytec_0",
-              "135: frame_dig -1",
-              "136: app_global_put",
-              "139: frame_dig -1",
-              "142: pushint 4",
-              "145: extract_uint64",
-              "146: retsub"
-            ],
-            [
-              "67: itob",
-              "68: bytec_1",
-              "69: swap",
-              "70: concat",
-              "71: log",
-              "72: intc_1",
-              "73: return"
+              "107: return_contact:",
+              "110: intc_0",
+              "111: bytec_0",
+              "112: app_global_get_ex",
+              "113: assert",
+              "116: bytec_1",
+              "117: swap",
+              "118: concat",
+              "119: log",
+              "120: intc_1",
+              "121: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 6 -> 13 -> 7",
+          "short": "0 -> 1 -> 2 -> 3 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -1025,119 +707,24 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
-            ],
-            [
-              "37: main_return_contact_route@6:",
-              "40: txn OnCompletion",
+              "37: main___algopy_default_create@11:",
+              "38: txn OnCompletion",
+              "39: !",
+              "40: txn ApplicationID",
               "41: !",
-              "42: assert",
-              "43: txn ApplicationID",
-              "44: assert",
-              "45: callsub return_contact"
-            ],
-            [
-              "150: return_contact:",
-              "153: intc_0",
-              "154: bytec_0",
-              "155: app_global_get_ex",
-              "156: assert",
-              "157: retsub"
-            ],
-            [
-              "46: bytec_1",
-              "47: swap",
-              "48: concat",
-              "49: log",
-              "50: intc_1",
-              "51: return"
+              "42: &&",
+              "43: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 3 -> 10 -> 11",
+          "short": "0 -> 1 -> 3 -> 4 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"contact_info\" 0x151f7c75",
-              "8: txn ApplicationID",
-              "9: bnz main_after_if_else@2"
-            ],
-            [
-              "12: bytec_0",
-              "15: pushbytes 0x000c000e000000000000000000000000",
-              "20: app_global_put"
-            ],
-            [
-              "22: main_after_if_else@2:",
-              "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
-            ],
-            [
-              "75: main_bare_routing@7:",
-              "78: txn OnCompletion",
-              "79: bnz main_after_if_else@9"
-            ],
-            [
-              "80: txn ApplicationID",
-              "81: !",
-              "82: assert",
-              "83: intc_1",
-              "84: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 3 -> 10 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"contact_info\" 0x151f7c75",
-              "8: txn ApplicationID",
-              "9: bnz main_after_if_else@2"
-            ],
-            [
-              "12: bytec_0",
-              "15: pushbytes 0x000c000e000000000000000000000000",
-              "20: app_global_put"
-            ],
-            [
-              "22: main_after_if_else@2:",
-              "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
-            ],
-            [
-              "75: main_bare_routing@7:",
-              "78: txn OnCompletion",
-              "79: bnz main_after_if_else@9"
-            ],
-            [
-              "31: main_after_if_else@9:",
-              "34: intc_0",
-              "35: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3 -> 4 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -1150,25 +737,70 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
+              "27: txn OnCompletion",
+              "28: !",
+              "29: assert",
+              "30: txn ApplicationID",
+              "31: assert",
+              "32: pushbytess 0x7f68c13f 0x288dc75f",
+              "33: txna ApplicationArgs 0",
+              "34: match add_contact_info return_contact"
             ],
             [
-              "31: main_after_if_else@9:",
-              "34: intc_0",
-              "35: return"
+              "47: add_contact_info:",
+              "50: txna ApplicationArgs 1",
+              "53: dup",
+              "54: intc_0",
+              "55: extract_uint16",
+              "56: dig 1",
+              "57: pushint 2",
+              "58: extract_uint16",
+              "59: dig 2",
+              "60: uncover 2",
+              "61: dig 2",
+              "62: substring3",
+              "63: dig 2",
+              "64: len",
+              "65: dig 3",
+              "66: uncover 3",
+              "67: uncover 2",
+              "68: substring3",
+              "69: dig 2",
+              "70: extract 4 8",
+              "73: uncover 2",
+              "74: extract 2 0",
+              "75: pushbytes \"Alice\"",
+              "76: ==",
+              "77: assert",
+              "80: swap",
+              "81: extract 2 0",
+              "82: pushbytes \"alice@something.com\"",
+              "83: ==",
+              "84: assert",
+              "87: dup",
+              "88: pushbytes 0x00000000211d1ae3",
+              "89: b==",
+              "90: assert",
+              "93: bytec_0",
+              "94: uncover 2",
+              "95: app_global_put",
+              "98: bytec_1",
+              "99: swap",
+              "100: concat",
+              "101: log",
+              "102: intc_1",
+              "103: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 12 -> 9",
+          "short": "0 -> 1 -> 3 -> 4 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -1181,81 +813,38 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
+              "27: txn OnCompletion",
+              "28: !",
+              "29: assert",
+              "30: txn ApplicationID",
+              "31: assert",
+              "32: pushbytess 0x7f68c13f 0x288dc75f",
+              "33: txna ApplicationArgs 0",
+              "34: match add_contact_info return_contact"
             ],
             [
-              "53: main_add_contact_info_route@5:",
-              "56: txn OnCompletion",
-              "57: !",
-              "58: assert",
-              "59: txn ApplicationID",
-              "60: assert",
-              "63: txna ApplicationArgs 1",
-              "66: callsub add_contact_info"
-            ],
-            [
-              "88: add_contact_info:",
-              "92: proto 1 1",
-              "95: frame_dig -1",
-              "96: intc_0",
-              "97: extract_uint16",
-              "98: frame_dig -1",
-              "99: pushint 2",
-              "100: extract_uint16",
-              "101: frame_dig -1",
-              "102: uncover 2",
-              "103: dig 2",
-              "104: substring3",
-              "105: frame_dig -1",
-              "106: len",
-              "107: frame_dig -1",
-              "108: uncover 3",
-              "109: uncover 2",
-              "110: substring3",
-              "111: frame_dig -1",
-              "112: extract 4 8",
-              "115: uncover 2",
-              "116: extract 2 0",
-              "117: pushbytes \"Alice\"",
-              "118: ==",
-              "119: assert",
-              "122: swap",
-              "123: extract 2 0",
-              "124: pushbytes \"alice@something.com\"",
-              "125: ==",
-              "126: assert",
-              "129: pushbytes 0x00000000211d1ae3",
-              "130: b==",
-              "131: assert",
-              "134: bytec_0",
-              "135: frame_dig -1",
-              "136: app_global_put",
-              "139: frame_dig -1",
-              "142: pushint 4",
-              "145: extract_uint64",
-              "146: retsub"
-            ],
-            [
-              "67: itob",
-              "68: bytec_1",
-              "69: swap",
-              "70: concat",
-              "71: log",
-              "72: intc_1",
-              "73: return"
+              "107: return_contact:",
+              "110: intc_0",
+              "111: bytec_0",
+              "112: app_global_get_ex",
+              "113: assert",
+              "116: bytec_1",
+              "117: swap",
+              "118: concat",
+              "119: log",
+              "120: intc_1",
+              "121: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 3 -> 4 -> 6 -> 13 -> 7",
+          "short": "0 -> 1 -> 3 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -1268,101 +857,16 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
-            ],
-            [
-              "37: main_return_contact_route@6:",
-              "40: txn OnCompletion",
+              "37: main___algopy_default_create@11:",
+              "38: txn OnCompletion",
+              "39: !",
+              "40: txn ApplicationID",
               "41: !",
-              "42: assert",
-              "43: txn ApplicationID",
-              "44: assert",
-              "45: callsub return_contact"
-            ],
-            [
-              "150: return_contact:",
-              "153: intc_0",
-              "154: bytec_0",
-              "155: app_global_get_ex",
-              "156: assert",
-              "157: retsub"
-            ],
-            [
-              "46: bytec_1",
-              "47: swap",
-              "48: concat",
-              "49: log",
-              "50: intc_1",
-              "51: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3 -> 10 -> 11",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"contact_info\" 0x151f7c75",
-              "8: txn ApplicationID",
-              "9: bnz main_after_if_else@2"
-            ],
-            [
-              "22: main_after_if_else@2:",
-              "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
-            ],
-            [
-              "75: main_bare_routing@7:",
-              "78: txn OnCompletion",
-              "79: bnz main_after_if_else@9"
-            ],
-            [
-              "80: txn ApplicationID",
-              "81: !",
-              "82: assert",
-              "83: intc_1",
-              "84: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3 -> 10 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"contact_info\" 0x151f7c75",
-              "8: txn ApplicationID",
-              "9: bnz main_after_if_else@2"
-            ],
-            [
-              "22: main_after_if_else@2:",
-              "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
-            ],
-            [
-              "75: main_bare_routing@7:",
-              "78: txn OnCompletion",
-              "79: bnz main_after_if_else@9"
-            ],
-            [
-              "31: main_after_if_else@9:",
-              "34: intc_0",
-              "35: return"
+              "42: &&",
+              "43: return"
             ]
           ]
         }
@@ -1380,7 +884,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 10,
+      "count": 6,
       "description": "\nCheck: \"rekey-to\", Impact: High, Confidence: High\nDescription: Rekeyable Logic Signatures\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#rekeyable-logicsig\n",
       "check": "rekey-to",
       "impact": "High",
@@ -1388,10 +892,10 @@
       "help": "Validate `RekeyTo` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 5",
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -1409,25 +913,70 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
+              "27: txn OnCompletion",
+              "28: !",
+              "29: assert",
+              "30: txn ApplicationID",
+              "31: assert",
+              "32: pushbytess 0x7f68c13f 0x288dc75f",
+              "33: txna ApplicationArgs 0",
+              "34: match add_contact_info return_contact"
             ],
             [
-              "31: main_after_if_else@9:",
-              "34: intc_0",
-              "35: return"
+              "47: add_contact_info:",
+              "50: txna ApplicationArgs 1",
+              "53: dup",
+              "54: intc_0",
+              "55: extract_uint16",
+              "56: dig 1",
+              "57: pushint 2",
+              "58: extract_uint16",
+              "59: dig 2",
+              "60: uncover 2",
+              "61: dig 2",
+              "62: substring3",
+              "63: dig 2",
+              "64: len",
+              "65: dig 3",
+              "66: uncover 3",
+              "67: uncover 2",
+              "68: substring3",
+              "69: dig 2",
+              "70: extract 4 8",
+              "73: uncover 2",
+              "74: extract 2 0",
+              "75: pushbytes \"Alice\"",
+              "76: ==",
+              "77: assert",
+              "80: swap",
+              "81: extract 2 0",
+              "82: pushbytes \"alice@something.com\"",
+              "83: ==",
+              "84: assert",
+              "87: dup",
+              "88: pushbytes 0x00000000211d1ae3",
+              "89: b==",
+              "90: assert",
+              "93: bytec_0",
+              "94: uncover 2",
+              "95: app_global_put",
+              "98: bytec_1",
+              "99: swap",
+              "100: concat",
+              "101: log",
+              "102: intc_1",
+              "103: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 8 -> 12 -> 9",
+          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -1445,81 +994,38 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
+              "27: txn OnCompletion",
+              "28: !",
+              "29: assert",
+              "30: txn ApplicationID",
+              "31: assert",
+              "32: pushbytess 0x7f68c13f 0x288dc75f",
+              "33: txna ApplicationArgs 0",
+              "34: match add_contact_info return_contact"
             ],
             [
-              "53: main_add_contact_info_route@5:",
-              "56: txn OnCompletion",
-              "57: !",
-              "58: assert",
-              "59: txn ApplicationID",
-              "60: assert",
-              "63: txna ApplicationArgs 1",
-              "66: callsub add_contact_info"
-            ],
-            [
-              "88: add_contact_info:",
-              "92: proto 1 1",
-              "95: frame_dig -1",
-              "96: intc_0",
-              "97: extract_uint16",
-              "98: frame_dig -1",
-              "99: pushint 2",
-              "100: extract_uint16",
-              "101: frame_dig -1",
-              "102: uncover 2",
-              "103: dig 2",
-              "104: substring3",
-              "105: frame_dig -1",
-              "106: len",
-              "107: frame_dig -1",
-              "108: uncover 3",
-              "109: uncover 2",
-              "110: substring3",
-              "111: frame_dig -1",
-              "112: extract 4 8",
-              "115: uncover 2",
-              "116: extract 2 0",
-              "117: pushbytes \"Alice\"",
-              "118: ==",
-              "119: assert",
-              "122: swap",
-              "123: extract 2 0",
-              "124: pushbytes \"alice@something.com\"",
-              "125: ==",
-              "126: assert",
-              "129: pushbytes 0x00000000211d1ae3",
-              "130: b==",
-              "131: assert",
-              "134: bytec_0",
-              "135: frame_dig -1",
-              "136: app_global_put",
-              "139: frame_dig -1",
-              "142: pushint 4",
-              "145: extract_uint64",
-              "146: retsub"
-            ],
-            [
-              "67: itob",
-              "68: bytec_1",
-              "69: swap",
-              "70: concat",
-              "71: log",
-              "72: intc_1",
-              "73: return"
+              "107: return_contact:",
+              "110: intc_0",
+              "111: bytec_0",
+              "112: app_global_get_ex",
+              "113: assert",
+              "116: bytec_1",
+              "117: swap",
+              "118: concat",
+              "119: log",
+              "120: intc_1",
+              "121: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 3 -> 4 -> 6 -> 13 -> 7",
+          "short": "0 -> 1 -> 2 -> 3 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -1537,119 +1043,24 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
-            ],
-            [
-              "37: main_return_contact_route@6:",
-              "40: txn OnCompletion",
+              "37: main___algopy_default_create@11:",
+              "38: txn OnCompletion",
+              "39: !",
+              "40: txn ApplicationID",
               "41: !",
-              "42: assert",
-              "43: txn ApplicationID",
-              "44: assert",
-              "45: callsub return_contact"
-            ],
-            [
-              "150: return_contact:",
-              "153: intc_0",
-              "154: bytec_0",
-              "155: app_global_get_ex",
-              "156: assert",
-              "157: retsub"
-            ],
-            [
-              "46: bytec_1",
-              "47: swap",
-              "48: concat",
-              "49: log",
-              "50: intc_1",
-              "51: return"
+              "42: &&",
+              "43: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 3 -> 10 -> 11",
+          "short": "0 -> 1 -> 3 -> 4 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"contact_info\" 0x151f7c75",
-              "8: txn ApplicationID",
-              "9: bnz main_after_if_else@2"
-            ],
-            [
-              "12: bytec_0",
-              "15: pushbytes 0x000c000e000000000000000000000000",
-              "20: app_global_put"
-            ],
-            [
-              "22: main_after_if_else@2:",
-              "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
-            ],
-            [
-              "75: main_bare_routing@7:",
-              "78: txn OnCompletion",
-              "79: bnz main_after_if_else@9"
-            ],
-            [
-              "80: txn ApplicationID",
-              "81: !",
-              "82: assert",
-              "83: intc_1",
-              "84: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 3 -> 10 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"contact_info\" 0x151f7c75",
-              "8: txn ApplicationID",
-              "9: bnz main_after_if_else@2"
-            ],
-            [
-              "12: bytec_0",
-              "15: pushbytes 0x000c000e000000000000000000000000",
-              "20: app_global_put"
-            ],
-            [
-              "22: main_after_if_else@2:",
-              "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
-            ],
-            [
-              "75: main_bare_routing@7:",
-              "78: txn OnCompletion",
-              "79: bnz main_after_if_else@9"
-            ],
-            [
-              "31: main_after_if_else@9:",
-              "34: intc_0",
-              "35: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3 -> 4 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -1662,25 +1073,70 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
+              "27: txn OnCompletion",
+              "28: !",
+              "29: assert",
+              "30: txn ApplicationID",
+              "31: assert",
+              "32: pushbytess 0x7f68c13f 0x288dc75f",
+              "33: txna ApplicationArgs 0",
+              "34: match add_contact_info return_contact"
             ],
             [
-              "31: main_after_if_else@9:",
-              "34: intc_0",
-              "35: return"
+              "47: add_contact_info:",
+              "50: txna ApplicationArgs 1",
+              "53: dup",
+              "54: intc_0",
+              "55: extract_uint16",
+              "56: dig 1",
+              "57: pushint 2",
+              "58: extract_uint16",
+              "59: dig 2",
+              "60: uncover 2",
+              "61: dig 2",
+              "62: substring3",
+              "63: dig 2",
+              "64: len",
+              "65: dig 3",
+              "66: uncover 3",
+              "67: uncover 2",
+              "68: substring3",
+              "69: dig 2",
+              "70: extract 4 8",
+              "73: uncover 2",
+              "74: extract 2 0",
+              "75: pushbytes \"Alice\"",
+              "76: ==",
+              "77: assert",
+              "80: swap",
+              "81: extract 2 0",
+              "82: pushbytes \"alice@something.com\"",
+              "83: ==",
+              "84: assert",
+              "87: dup",
+              "88: pushbytes 0x00000000211d1ae3",
+              "89: b==",
+              "90: assert",
+              "93: bytec_0",
+              "94: uncover 2",
+              "95: app_global_put",
+              "98: bytec_1",
+              "99: swap",
+              "100: concat",
+              "101: log",
+              "102: intc_1",
+              "103: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 3 -> 4 -> 8 -> 12 -> 9",
+          "short": "0 -> 1 -> 3 -> 4 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -1693,81 +1149,38 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
+              "27: txn OnCompletion",
+              "28: !",
+              "29: assert",
+              "30: txn ApplicationID",
+              "31: assert",
+              "32: pushbytess 0x7f68c13f 0x288dc75f",
+              "33: txna ApplicationArgs 0",
+              "34: match add_contact_info return_contact"
             ],
             [
-              "53: main_add_contact_info_route@5:",
-              "56: txn OnCompletion",
-              "57: !",
-              "58: assert",
-              "59: txn ApplicationID",
-              "60: assert",
-              "63: txna ApplicationArgs 1",
-              "66: callsub add_contact_info"
-            ],
-            [
-              "88: add_contact_info:",
-              "92: proto 1 1",
-              "95: frame_dig -1",
-              "96: intc_0",
-              "97: extract_uint16",
-              "98: frame_dig -1",
-              "99: pushint 2",
-              "100: extract_uint16",
-              "101: frame_dig -1",
-              "102: uncover 2",
-              "103: dig 2",
-              "104: substring3",
-              "105: frame_dig -1",
-              "106: len",
-              "107: frame_dig -1",
-              "108: uncover 3",
-              "109: uncover 2",
-              "110: substring3",
-              "111: frame_dig -1",
-              "112: extract 4 8",
-              "115: uncover 2",
-              "116: extract 2 0",
-              "117: pushbytes \"Alice\"",
-              "118: ==",
-              "119: assert",
-              "122: swap",
-              "123: extract 2 0",
-              "124: pushbytes \"alice@something.com\"",
-              "125: ==",
-              "126: assert",
-              "129: pushbytes 0x00000000211d1ae3",
-              "130: b==",
-              "131: assert",
-              "134: bytec_0",
-              "135: frame_dig -1",
-              "136: app_global_put",
-              "139: frame_dig -1",
-              "142: pushint 4",
-              "145: extract_uint64",
-              "146: retsub"
-            ],
-            [
-              "67: itob",
-              "68: bytec_1",
-              "69: swap",
-              "70: concat",
-              "71: log",
-              "72: intc_1",
-              "73: return"
+              "107: return_contact:",
+              "110: intc_0",
+              "111: bytec_0",
+              "112: app_global_get_ex",
+              "113: assert",
+              "116: bytec_1",
+              "117: swap",
+              "118: concat",
+              "119: log",
+              "120: intc_1",
+              "121: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 3 -> 4 -> 6 -> 13 -> 7",
+          "short": "0 -> 1 -> 3 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
@@ -1780,101 +1193,16 @@
             [
               "22: main_after_if_else@2:",
               "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
+              "26: bz main___algopy_default_create@11"
             ],
             [
-              "27: pushbytess 0x7f68c13f 0x288dc75f",
-              "28: txna ApplicationArgs 0",
-              "29: match main_add_contact_info_route@5 main_return_contact_route@6"
-            ],
-            [
-              "37: main_return_contact_route@6:",
-              "40: txn OnCompletion",
+              "37: main___algopy_default_create@11:",
+              "38: txn OnCompletion",
+              "39: !",
+              "40: txn ApplicationID",
               "41: !",
-              "42: assert",
-              "43: txn ApplicationID",
-              "44: assert",
-              "45: callsub return_contact"
-            ],
-            [
-              "150: return_contact:",
-              "153: intc_0",
-              "154: bytec_0",
-              "155: app_global_get_ex",
-              "156: assert",
-              "157: retsub"
-            ],
-            [
-              "46: bytec_1",
-              "47: swap",
-              "48: concat",
-              "49: log",
-              "50: intc_1",
-              "51: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3 -> 10 -> 11",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"contact_info\" 0x151f7c75",
-              "8: txn ApplicationID",
-              "9: bnz main_after_if_else@2"
-            ],
-            [
-              "22: main_after_if_else@2:",
-              "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
-            ],
-            [
-              "75: main_bare_routing@7:",
-              "78: txn OnCompletion",
-              "79: bnz main_after_if_else@9"
-            ],
-            [
-              "80: txn ApplicationID",
-              "81: !",
-              "82: assert",
-              "83: intc_1",
-              "84: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3 -> 10 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"contact_info\" 0x151f7c75",
-              "8: txn ApplicationID",
-              "9: bnz main_after_if_else@2"
-            ],
-            [
-              "22: main_after_if_else@2:",
-              "25: txn NumAppArgs",
-              "26: bz main_bare_routing@7"
-            ],
-            [
-              "75: main_bare_routing@7:",
-              "78: txn OnCompletion",
-              "79: bnz main_after_if_else@9"
-            ],
-            [
-              "31: main_after_if_else@9:",
-              "34: intc_0",
-              "35: return"
+              "42: &&",
+              "43: return"
             ]
           ]
         }

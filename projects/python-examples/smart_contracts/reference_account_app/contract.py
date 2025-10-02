@@ -18,7 +18,6 @@ Accounts must opt in to use the counter
 
 
 class MyCounter(ARC4Contract):
-
     def __init__(self) -> None:
         # Define a local state variable for the counter
         self.my_counter = LocalState(UInt64)

@@ -12,343 +12,304 @@
       "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 13 -> 17 -> 14",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "139: main_add_arc4_uint64_route@3:",
-              "143: txn OnCompletion",
-              "144: !",
-              "145: assert",
-              "146: txn ApplicationID",
-              "147: assert",
-              "150: txna ApplicationArgs 1",
-              "151: txna ApplicationArgs 2",
-              "155: callsub add_arc4_uint64"
-            ],
-            [
-              "176: add_arc4_uint64:",
-              "181: proto 2 1",
-              "185: frame_dig -2",
-              "186: btoi",
-              "187: frame_dig -1",
-              "188: btoi",
-              "189: +",
-              "193: itob",
-              "194: retsub"
-            ],
-            [
-              "156: bytec_0",
-              "157: swap",
-              "158: concat",
-              "159: log",
-              "160: intc_0",
-              "161: return"
+              "32: add_arc4_uint64:",
+              "36: txna ApplicationArgs 2",
+              "37: txna ApplicationArgs 1",
+              "41: btoi",
+              "42: swap",
+              "43: btoi",
+              "44: +",
+              "48: itob",
+              "52: bytec_0",
+              "53: swap",
+              "54: concat",
+              "55: log",
+              "56: intc_0",
+              "57: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 11 -> 18 -> 12",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "113: main_add_arc4_uint_n_route@4:",
-              "117: txn OnCompletion",
-              "118: !",
-              "119: assert",
-              "120: txn ApplicationID",
-              "121: assert",
-              "124: txna ApplicationArgs 1",
-              "125: txna ApplicationArgs 2",
-              "126: txna ApplicationArgs 3",
-              "127: txna ApplicationArgs 4",
-              "131: callsub add_arc4_uint_n"
-            ],
-            [
-              "198: add_arc4_uint_n:",
-              "205: proto 4 1",
-              "208: frame_dig -4",
-              "209: len",
-              "210: intc_0",
-              "211: ==",
-              "212: assert",
-              "215: frame_dig -3",
-              "216: len",
-              "217: pushint 2",
-              "218: ==",
-              "219: assert",
-              "222: frame_dig -2",
-              "223: len",
-              "224: pushint 4",
-              "225: ==",
-              "226: assert",
-              "229: frame_dig -1",
-              "230: len",
-              "231: pushint 8",
-              "232: ==",
-              "233: assert",
-              "236: frame_dig -4",
-              "237: btoi",
-              "238: frame_dig -3",
-              "239: btoi",
-              "240: +",
-              "241: frame_dig -2",
-              "242: btoi",
-              "243: +",
-              "244: frame_dig -1",
-              "245: btoi",
-              "246: +",
-              "249: itob",
-              "250: retsub"
-            ],
-            [
-              "132: bytec_0",
-              "133: swap",
-              "134: concat",
-              "135: log",
-              "136: intc_0",
-              "137: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 9 -> 19 -> 10",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 64",
-              "7: bytecblock 0x151f7c75",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
-            ],
-            [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
-            ],
-            [
-              "88: main_add_arc4_biguint_n_route@5:",
-              "92: txn OnCompletion",
-              "93: !",
-              "94: assert",
-              "95: txn ApplicationID",
+              "61: add_arc4_uint_n:",
+              "65: txna ApplicationArgs 1",
+              "66: txna ApplicationArgs 2",
+              "67: txna ApplicationArgs 3",
+              "68: txna ApplicationArgs 4",
+              "71: dig 3",
+              "72: len",
+              "73: intc_0",
+              "74: ==",
+              "75: assert",
+              "78: dig 2",
+              "79: len",
+              "80: pushint 2",
+              "81: ==",
+              "82: assert",
+              "85: dig 1",
+              "86: len",
+              "87: pushint 4",
+              "88: ==",
+              "89: assert",
+              "92: dup",
+              "93: len",
+              "94: intc_2",
+              "95: ==",
               "96: assert",
-              "99: txna ApplicationArgs 1",
-              "100: txna ApplicationArgs 2",
-              "101: txna ApplicationArgs 3",
-              "105: callsub add_arc4_biguint_n"
-            ],
-            [
-              "254: add_arc4_biguint_n:",
-              "261: proto 3 1",
-              "264: frame_dig -3",
-              "265: len",
-              "266: pushint 16",
-              "267: ==",
-              "268: assert",
-              "271: frame_dig -2",
-              "272: len",
-              "273: pushint 32",
-              "274: ==",
-              "275: assert",
-              "278: frame_dig -1",
-              "279: len",
-              "280: intc_1",
-              "281: ==",
-              "282: assert",
-              "285: frame_dig -3",
-              "286: frame_dig -2",
-              "287: b+",
-              "288: frame_dig -1",
-              "289: b+",
-              "292: dup",
-              "293: len",
-              "294: intc_1",
-              "295: <=",
-              "296: assert",
-              "297: intc_1",
-              "298: bzero",
-              "299: b|",
-              "300: retsub"
-            ],
-            [
-              "106: bytec_0",
+              "99: uncover 3",
+              "100: btoi",
+              "101: uncover 3",
+              "102: btoi",
+              "103: +",
+              "104: uncover 2",
+              "105: btoi",
+              "106: +",
               "107: swap",
-              "108: concat",
-              "109: log",
-              "110: intc_0",
-              "111: return"
+              "108: btoi",
+              "109: +",
+              "112: itob",
+              "116: bytec_0",
+              "117: swap",
+              "118: concat",
+              "119: log",
+              "120: intc_0",
+              "121: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 7 -> 20 -> 8",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "65: main_arc4_byte_route@6:",
-              "69: txn OnCompletion",
-              "70: !",
-              "71: assert",
-              "72: txn ApplicationID",
-              "73: assert",
-              "76: txna ApplicationArgs 1",
-              "80: callsub arc4_byte"
-            ],
-            [
-              "304: arc4_byte:",
-              "309: proto 1 1",
-              "312: frame_dig -1",
-              "313: btoi",
-              "314: intc_0",
-              "315: +",
-              "316: itob",
-              "317: extract 7 1",
-              "318: retsub"
-            ],
-            [
-              "81: bytec_0",
-              "82: swap",
-              "83: concat",
-              "84: log",
-              "85: intc_0",
-              "86: return"
+              "125: add_arc4_biguint_n:",
+              "129: txna ApplicationArgs 1",
+              "130: txna ApplicationArgs 2",
+              "131: txna ApplicationArgs 3",
+              "134: dig 2",
+              "135: len",
+              "136: pushint 16",
+              "137: ==",
+              "138: assert",
+              "141: dig 1",
+              "142: len",
+              "143: pushint 32",
+              "144: ==",
+              "145: assert",
+              "148: dup",
+              "149: len",
+              "150: intc_1",
+              "151: ==",
+              "152: assert",
+              "155: cover 2",
+              "156: b+",
+              "157: b+",
+              "160: dup",
+              "161: len",
+              "162: intc_1",
+              "163: <=",
+              "164: assert",
+              "165: intc_1",
+              "166: bzero",
+              "167: b|",
+              "171: bytec_0",
+              "172: swap",
+              "173: concat",
+              "174: log",
+              "175: intc_0",
+              "176: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 5 -> 21 -> 6",
+          "short": "0 -> 1 -> 2 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "41: main_arc4_address_properties_route@7:",
-              "45: txn OnCompletion",
-              "46: !",
-              "47: assert",
-              "48: txn ApplicationID",
-              "49: assert",
-              "52: txna ApplicationArgs 1",
-              "56: callsub arc4_address_properties"
-            ],
-            [
-              "322: arc4_address_properties:",
-              "327: proto 1 1",
-              "330: frame_dig -1",
-              "331: acct_params_get AcctBalance",
-              "332: assert",
-              "335: frame_dig -1",
-              "336: acct_params_get AcctTotalAssets",
-              "337: bury 1",
-              "338: assert",
-              "341: retsub"
-            ],
-            [
-              "57: itob",
-              "58: bytec_0",
-              "59: swap",
-              "60: concat",
-              "61: log",
-              "62: intc_0",
-              "63: return"
+              "180: arc4_byte:",
+              "184: txna ApplicationArgs 1",
+              "187: btoi",
+              "188: intc_0",
+              "189: +",
+              "190: itob",
+              "191: dup",
+              "192: bitlen",
+              "193: intc_2",
+              "194: <=",
+              "195: assert",
+              "196: extract 7 1",
+              "200: bytec_0",
+              "201: swap",
+              "202: concat",
+              "203: log",
+              "204: intc_0",
+              "205: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4",
+          "short": "0 -> 1 -> 2 -> 9",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "22: main_arc4_address_return_route@8:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "30: bytec_0",
-              "33: txna ApplicationArgs 1",
-              "36: concat",
-              "37: log",
-              "38: intc_0",
-              "39: return"
+              "209: arc4_address_properties:",
+              "213: txna ApplicationArgs 1",
+              "216: dup",
+              "217: acct_params_get AcctBalance",
+              "218: assert",
+              "221: swap",
+              "222: acct_params_get AcctTotalAssets",
+              "223: bury 1",
+              "224: assert",
+              "228: itob",
+              "229: bytec_0",
+              "230: swap",
+              "231: concat",
+              "232: log",
+              "233: intc_0",
+              "234: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 10",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 64 8",
+              "7: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@13"
+            ],
+            [
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
+            ],
+            [
+              "238: arc4_address_return:",
+              "241: bytec_0",
+              "242: txna ApplicationArgs 1",
+              "243: concat",
+              "244: log",
+              "245: intc_0",
+              "246: return"
             ]
           ]
         }
@@ -364,343 +325,304 @@
       "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 13 -> 17 -> 14",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "139: main_add_arc4_uint64_route@3:",
-              "143: txn OnCompletion",
-              "144: !",
-              "145: assert",
-              "146: txn ApplicationID",
-              "147: assert",
-              "150: txna ApplicationArgs 1",
-              "151: txna ApplicationArgs 2",
-              "155: callsub add_arc4_uint64"
-            ],
-            [
-              "176: add_arc4_uint64:",
-              "181: proto 2 1",
-              "185: frame_dig -2",
-              "186: btoi",
-              "187: frame_dig -1",
-              "188: btoi",
-              "189: +",
-              "193: itob",
-              "194: retsub"
-            ],
-            [
-              "156: bytec_0",
-              "157: swap",
-              "158: concat",
-              "159: log",
-              "160: intc_0",
-              "161: return"
+              "32: add_arc4_uint64:",
+              "36: txna ApplicationArgs 2",
+              "37: txna ApplicationArgs 1",
+              "41: btoi",
+              "42: swap",
+              "43: btoi",
+              "44: +",
+              "48: itob",
+              "52: bytec_0",
+              "53: swap",
+              "54: concat",
+              "55: log",
+              "56: intc_0",
+              "57: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 11 -> 18 -> 12",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "113: main_add_arc4_uint_n_route@4:",
-              "117: txn OnCompletion",
-              "118: !",
-              "119: assert",
-              "120: txn ApplicationID",
-              "121: assert",
-              "124: txna ApplicationArgs 1",
-              "125: txna ApplicationArgs 2",
-              "126: txna ApplicationArgs 3",
-              "127: txna ApplicationArgs 4",
-              "131: callsub add_arc4_uint_n"
-            ],
-            [
-              "198: add_arc4_uint_n:",
-              "205: proto 4 1",
-              "208: frame_dig -4",
-              "209: len",
-              "210: intc_0",
-              "211: ==",
-              "212: assert",
-              "215: frame_dig -3",
-              "216: len",
-              "217: pushint 2",
-              "218: ==",
-              "219: assert",
-              "222: frame_dig -2",
-              "223: len",
-              "224: pushint 4",
-              "225: ==",
-              "226: assert",
-              "229: frame_dig -1",
-              "230: len",
-              "231: pushint 8",
-              "232: ==",
-              "233: assert",
-              "236: frame_dig -4",
-              "237: btoi",
-              "238: frame_dig -3",
-              "239: btoi",
-              "240: +",
-              "241: frame_dig -2",
-              "242: btoi",
-              "243: +",
-              "244: frame_dig -1",
-              "245: btoi",
-              "246: +",
-              "249: itob",
-              "250: retsub"
-            ],
-            [
-              "132: bytec_0",
-              "133: swap",
-              "134: concat",
-              "135: log",
-              "136: intc_0",
-              "137: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 9 -> 19 -> 10",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 64",
-              "7: bytecblock 0x151f7c75",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
-            ],
-            [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
-            ],
-            [
-              "88: main_add_arc4_biguint_n_route@5:",
-              "92: txn OnCompletion",
-              "93: !",
-              "94: assert",
-              "95: txn ApplicationID",
+              "61: add_arc4_uint_n:",
+              "65: txna ApplicationArgs 1",
+              "66: txna ApplicationArgs 2",
+              "67: txna ApplicationArgs 3",
+              "68: txna ApplicationArgs 4",
+              "71: dig 3",
+              "72: len",
+              "73: intc_0",
+              "74: ==",
+              "75: assert",
+              "78: dig 2",
+              "79: len",
+              "80: pushint 2",
+              "81: ==",
+              "82: assert",
+              "85: dig 1",
+              "86: len",
+              "87: pushint 4",
+              "88: ==",
+              "89: assert",
+              "92: dup",
+              "93: len",
+              "94: intc_2",
+              "95: ==",
               "96: assert",
-              "99: txna ApplicationArgs 1",
-              "100: txna ApplicationArgs 2",
-              "101: txna ApplicationArgs 3",
-              "105: callsub add_arc4_biguint_n"
-            ],
-            [
-              "254: add_arc4_biguint_n:",
-              "261: proto 3 1",
-              "264: frame_dig -3",
-              "265: len",
-              "266: pushint 16",
-              "267: ==",
-              "268: assert",
-              "271: frame_dig -2",
-              "272: len",
-              "273: pushint 32",
-              "274: ==",
-              "275: assert",
-              "278: frame_dig -1",
-              "279: len",
-              "280: intc_1",
-              "281: ==",
-              "282: assert",
-              "285: frame_dig -3",
-              "286: frame_dig -2",
-              "287: b+",
-              "288: frame_dig -1",
-              "289: b+",
-              "292: dup",
-              "293: len",
-              "294: intc_1",
-              "295: <=",
-              "296: assert",
-              "297: intc_1",
-              "298: bzero",
-              "299: b|",
-              "300: retsub"
-            ],
-            [
-              "106: bytec_0",
+              "99: uncover 3",
+              "100: btoi",
+              "101: uncover 3",
+              "102: btoi",
+              "103: +",
+              "104: uncover 2",
+              "105: btoi",
+              "106: +",
               "107: swap",
-              "108: concat",
-              "109: log",
-              "110: intc_0",
-              "111: return"
+              "108: btoi",
+              "109: +",
+              "112: itob",
+              "116: bytec_0",
+              "117: swap",
+              "118: concat",
+              "119: log",
+              "120: intc_0",
+              "121: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 7 -> 20 -> 8",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "65: main_arc4_byte_route@6:",
-              "69: txn OnCompletion",
-              "70: !",
-              "71: assert",
-              "72: txn ApplicationID",
-              "73: assert",
-              "76: txna ApplicationArgs 1",
-              "80: callsub arc4_byte"
-            ],
-            [
-              "304: arc4_byte:",
-              "309: proto 1 1",
-              "312: frame_dig -1",
-              "313: btoi",
-              "314: intc_0",
-              "315: +",
-              "316: itob",
-              "317: extract 7 1",
-              "318: retsub"
-            ],
-            [
-              "81: bytec_0",
-              "82: swap",
-              "83: concat",
-              "84: log",
-              "85: intc_0",
-              "86: return"
+              "125: add_arc4_biguint_n:",
+              "129: txna ApplicationArgs 1",
+              "130: txna ApplicationArgs 2",
+              "131: txna ApplicationArgs 3",
+              "134: dig 2",
+              "135: len",
+              "136: pushint 16",
+              "137: ==",
+              "138: assert",
+              "141: dig 1",
+              "142: len",
+              "143: pushint 32",
+              "144: ==",
+              "145: assert",
+              "148: dup",
+              "149: len",
+              "150: intc_1",
+              "151: ==",
+              "152: assert",
+              "155: cover 2",
+              "156: b+",
+              "157: b+",
+              "160: dup",
+              "161: len",
+              "162: intc_1",
+              "163: <=",
+              "164: assert",
+              "165: intc_1",
+              "166: bzero",
+              "167: b|",
+              "171: bytec_0",
+              "172: swap",
+              "173: concat",
+              "174: log",
+              "175: intc_0",
+              "176: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 5 -> 21 -> 6",
+          "short": "0 -> 1 -> 2 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "41: main_arc4_address_properties_route@7:",
-              "45: txn OnCompletion",
-              "46: !",
-              "47: assert",
-              "48: txn ApplicationID",
-              "49: assert",
-              "52: txna ApplicationArgs 1",
-              "56: callsub arc4_address_properties"
-            ],
-            [
-              "322: arc4_address_properties:",
-              "327: proto 1 1",
-              "330: frame_dig -1",
-              "331: acct_params_get AcctBalance",
-              "332: assert",
-              "335: frame_dig -1",
-              "336: acct_params_get AcctTotalAssets",
-              "337: bury 1",
-              "338: assert",
-              "341: retsub"
-            ],
-            [
-              "57: itob",
-              "58: bytec_0",
-              "59: swap",
-              "60: concat",
-              "61: log",
-              "62: intc_0",
-              "63: return"
+              "180: arc4_byte:",
+              "184: txna ApplicationArgs 1",
+              "187: btoi",
+              "188: intc_0",
+              "189: +",
+              "190: itob",
+              "191: dup",
+              "192: bitlen",
+              "193: intc_2",
+              "194: <=",
+              "195: assert",
+              "196: extract 7 1",
+              "200: bytec_0",
+              "201: swap",
+              "202: concat",
+              "203: log",
+              "204: intc_0",
+              "205: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4",
+          "short": "0 -> 1 -> 2 -> 9",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "22: main_arc4_address_return_route@8:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "30: bytec_0",
-              "33: txna ApplicationArgs 1",
-              "36: concat",
-              "37: log",
-              "38: intc_0",
-              "39: return"
+              "209: arc4_address_properties:",
+              "213: txna ApplicationArgs 1",
+              "216: dup",
+              "217: acct_params_get AcctBalance",
+              "218: assert",
+              "221: swap",
+              "222: acct_params_get AcctTotalAssets",
+              "223: bury 1",
+              "224: assert",
+              "228: itob",
+              "229: bytec_0",
+              "230: swap",
+              "231: concat",
+              "232: log",
+              "233: intc_0",
+              "234: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 10",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 64 8",
+              "7: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@13"
+            ],
+            [
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
+            ],
+            [
+              "238: arc4_address_return:",
+              "241: bytec_0",
+              "242: txna ApplicationArgs 1",
+              "243: concat",
+              "244: log",
+              "245: intc_0",
+              "246: return"
             ]
           ]
         }
@@ -736,343 +658,304 @@
       "help": "Do not approve `DeleteApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 13 -> 17 -> 14",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "139: main_add_arc4_uint64_route@3:",
-              "143: txn OnCompletion",
-              "144: !",
-              "145: assert",
-              "146: txn ApplicationID",
-              "147: assert",
-              "150: txna ApplicationArgs 1",
-              "151: txna ApplicationArgs 2",
-              "155: callsub add_arc4_uint64"
-            ],
-            [
-              "176: add_arc4_uint64:",
-              "181: proto 2 1",
-              "185: frame_dig -2",
-              "186: btoi",
-              "187: frame_dig -1",
-              "188: btoi",
-              "189: +",
-              "193: itob",
-              "194: retsub"
-            ],
-            [
-              "156: bytec_0",
-              "157: swap",
-              "158: concat",
-              "159: log",
-              "160: intc_0",
-              "161: return"
+              "32: add_arc4_uint64:",
+              "36: txna ApplicationArgs 2",
+              "37: txna ApplicationArgs 1",
+              "41: btoi",
+              "42: swap",
+              "43: btoi",
+              "44: +",
+              "48: itob",
+              "52: bytec_0",
+              "53: swap",
+              "54: concat",
+              "55: log",
+              "56: intc_0",
+              "57: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 11 -> 18 -> 12",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "113: main_add_arc4_uint_n_route@4:",
-              "117: txn OnCompletion",
-              "118: !",
-              "119: assert",
-              "120: txn ApplicationID",
-              "121: assert",
-              "124: txna ApplicationArgs 1",
-              "125: txna ApplicationArgs 2",
-              "126: txna ApplicationArgs 3",
-              "127: txna ApplicationArgs 4",
-              "131: callsub add_arc4_uint_n"
-            ],
-            [
-              "198: add_arc4_uint_n:",
-              "205: proto 4 1",
-              "208: frame_dig -4",
-              "209: len",
-              "210: intc_0",
-              "211: ==",
-              "212: assert",
-              "215: frame_dig -3",
-              "216: len",
-              "217: pushint 2",
-              "218: ==",
-              "219: assert",
-              "222: frame_dig -2",
-              "223: len",
-              "224: pushint 4",
-              "225: ==",
-              "226: assert",
-              "229: frame_dig -1",
-              "230: len",
-              "231: pushint 8",
-              "232: ==",
-              "233: assert",
-              "236: frame_dig -4",
-              "237: btoi",
-              "238: frame_dig -3",
-              "239: btoi",
-              "240: +",
-              "241: frame_dig -2",
-              "242: btoi",
-              "243: +",
-              "244: frame_dig -1",
-              "245: btoi",
-              "246: +",
-              "249: itob",
-              "250: retsub"
-            ],
-            [
-              "132: bytec_0",
-              "133: swap",
-              "134: concat",
-              "135: log",
-              "136: intc_0",
-              "137: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 9 -> 19 -> 10",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 64",
-              "7: bytecblock 0x151f7c75",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
-            ],
-            [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
-            ],
-            [
-              "88: main_add_arc4_biguint_n_route@5:",
-              "92: txn OnCompletion",
-              "93: !",
-              "94: assert",
-              "95: txn ApplicationID",
+              "61: add_arc4_uint_n:",
+              "65: txna ApplicationArgs 1",
+              "66: txna ApplicationArgs 2",
+              "67: txna ApplicationArgs 3",
+              "68: txna ApplicationArgs 4",
+              "71: dig 3",
+              "72: len",
+              "73: intc_0",
+              "74: ==",
+              "75: assert",
+              "78: dig 2",
+              "79: len",
+              "80: pushint 2",
+              "81: ==",
+              "82: assert",
+              "85: dig 1",
+              "86: len",
+              "87: pushint 4",
+              "88: ==",
+              "89: assert",
+              "92: dup",
+              "93: len",
+              "94: intc_2",
+              "95: ==",
               "96: assert",
-              "99: txna ApplicationArgs 1",
-              "100: txna ApplicationArgs 2",
-              "101: txna ApplicationArgs 3",
-              "105: callsub add_arc4_biguint_n"
-            ],
-            [
-              "254: add_arc4_biguint_n:",
-              "261: proto 3 1",
-              "264: frame_dig -3",
-              "265: len",
-              "266: pushint 16",
-              "267: ==",
-              "268: assert",
-              "271: frame_dig -2",
-              "272: len",
-              "273: pushint 32",
-              "274: ==",
-              "275: assert",
-              "278: frame_dig -1",
-              "279: len",
-              "280: intc_1",
-              "281: ==",
-              "282: assert",
-              "285: frame_dig -3",
-              "286: frame_dig -2",
-              "287: b+",
-              "288: frame_dig -1",
-              "289: b+",
-              "292: dup",
-              "293: len",
-              "294: intc_1",
-              "295: <=",
-              "296: assert",
-              "297: intc_1",
-              "298: bzero",
-              "299: b|",
-              "300: retsub"
-            ],
-            [
-              "106: bytec_0",
+              "99: uncover 3",
+              "100: btoi",
+              "101: uncover 3",
+              "102: btoi",
+              "103: +",
+              "104: uncover 2",
+              "105: btoi",
+              "106: +",
               "107: swap",
-              "108: concat",
-              "109: log",
-              "110: intc_0",
-              "111: return"
+              "108: btoi",
+              "109: +",
+              "112: itob",
+              "116: bytec_0",
+              "117: swap",
+              "118: concat",
+              "119: log",
+              "120: intc_0",
+              "121: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 7 -> 20 -> 8",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "65: main_arc4_byte_route@6:",
-              "69: txn OnCompletion",
-              "70: !",
-              "71: assert",
-              "72: txn ApplicationID",
-              "73: assert",
-              "76: txna ApplicationArgs 1",
-              "80: callsub arc4_byte"
-            ],
-            [
-              "304: arc4_byte:",
-              "309: proto 1 1",
-              "312: frame_dig -1",
-              "313: btoi",
-              "314: intc_0",
-              "315: +",
-              "316: itob",
-              "317: extract 7 1",
-              "318: retsub"
-            ],
-            [
-              "81: bytec_0",
-              "82: swap",
-              "83: concat",
-              "84: log",
-              "85: intc_0",
-              "86: return"
+              "125: add_arc4_biguint_n:",
+              "129: txna ApplicationArgs 1",
+              "130: txna ApplicationArgs 2",
+              "131: txna ApplicationArgs 3",
+              "134: dig 2",
+              "135: len",
+              "136: pushint 16",
+              "137: ==",
+              "138: assert",
+              "141: dig 1",
+              "142: len",
+              "143: pushint 32",
+              "144: ==",
+              "145: assert",
+              "148: dup",
+              "149: len",
+              "150: intc_1",
+              "151: ==",
+              "152: assert",
+              "155: cover 2",
+              "156: b+",
+              "157: b+",
+              "160: dup",
+              "161: len",
+              "162: intc_1",
+              "163: <=",
+              "164: assert",
+              "165: intc_1",
+              "166: bzero",
+              "167: b|",
+              "171: bytec_0",
+              "172: swap",
+              "173: concat",
+              "174: log",
+              "175: intc_0",
+              "176: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 5 -> 21 -> 6",
+          "short": "0 -> 1 -> 2 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "41: main_arc4_address_properties_route@7:",
-              "45: txn OnCompletion",
-              "46: !",
-              "47: assert",
-              "48: txn ApplicationID",
-              "49: assert",
-              "52: txna ApplicationArgs 1",
-              "56: callsub arc4_address_properties"
-            ],
-            [
-              "322: arc4_address_properties:",
-              "327: proto 1 1",
-              "330: frame_dig -1",
-              "331: acct_params_get AcctBalance",
-              "332: assert",
-              "335: frame_dig -1",
-              "336: acct_params_get AcctTotalAssets",
-              "337: bury 1",
-              "338: assert",
-              "341: retsub"
-            ],
-            [
-              "57: itob",
-              "58: bytec_0",
-              "59: swap",
-              "60: concat",
-              "61: log",
-              "62: intc_0",
-              "63: return"
+              "180: arc4_byte:",
+              "184: txna ApplicationArgs 1",
+              "187: btoi",
+              "188: intc_0",
+              "189: +",
+              "190: itob",
+              "191: dup",
+              "192: bitlen",
+              "193: intc_2",
+              "194: <=",
+              "195: assert",
+              "196: extract 7 1",
+              "200: bytec_0",
+              "201: swap",
+              "202: concat",
+              "203: log",
+              "204: intc_0",
+              "205: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4",
+          "short": "0 -> 1 -> 2 -> 9",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "22: main_arc4_address_return_route@8:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "30: bytec_0",
-              "33: txna ApplicationArgs 1",
-              "36: concat",
-              "37: log",
-              "38: intc_0",
-              "39: return"
+              "209: arc4_address_properties:",
+              "213: txna ApplicationArgs 1",
+              "216: dup",
+              "217: acct_params_get AcctBalance",
+              "218: assert",
+              "221: swap",
+              "222: acct_params_get AcctTotalAssets",
+              "223: bury 1",
+              "224: assert",
+              "228: itob",
+              "229: bytec_0",
+              "230: swap",
+              "231: concat",
+              "232: log",
+              "233: intc_0",
+              "234: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 10",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 64 8",
+              "7: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@13"
+            ],
+            [
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
+            ],
+            [
+              "238: arc4_address_return:",
+              "241: bytec_0",
+              "242: txna ApplicationArgs 1",
+              "243: concat",
+              "244: log",
+              "245: intc_0",
+              "246: return"
             ]
           ]
         }
@@ -1088,343 +971,304 @@
       "help": "Do not approve `UpdateApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 13 -> 17 -> 14",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "139: main_add_arc4_uint64_route@3:",
-              "143: txn OnCompletion",
-              "144: !",
-              "145: assert",
-              "146: txn ApplicationID",
-              "147: assert",
-              "150: txna ApplicationArgs 1",
-              "151: txna ApplicationArgs 2",
-              "155: callsub add_arc4_uint64"
-            ],
-            [
-              "176: add_arc4_uint64:",
-              "181: proto 2 1",
-              "185: frame_dig -2",
-              "186: btoi",
-              "187: frame_dig -1",
-              "188: btoi",
-              "189: +",
-              "193: itob",
-              "194: retsub"
-            ],
-            [
-              "156: bytec_0",
-              "157: swap",
-              "158: concat",
-              "159: log",
-              "160: intc_0",
-              "161: return"
+              "32: add_arc4_uint64:",
+              "36: txna ApplicationArgs 2",
+              "37: txna ApplicationArgs 1",
+              "41: btoi",
+              "42: swap",
+              "43: btoi",
+              "44: +",
+              "48: itob",
+              "52: bytec_0",
+              "53: swap",
+              "54: concat",
+              "55: log",
+              "56: intc_0",
+              "57: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 11 -> 18 -> 12",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "113: main_add_arc4_uint_n_route@4:",
-              "117: txn OnCompletion",
-              "118: !",
-              "119: assert",
-              "120: txn ApplicationID",
-              "121: assert",
-              "124: txna ApplicationArgs 1",
-              "125: txna ApplicationArgs 2",
-              "126: txna ApplicationArgs 3",
-              "127: txna ApplicationArgs 4",
-              "131: callsub add_arc4_uint_n"
-            ],
-            [
-              "198: add_arc4_uint_n:",
-              "205: proto 4 1",
-              "208: frame_dig -4",
-              "209: len",
-              "210: intc_0",
-              "211: ==",
-              "212: assert",
-              "215: frame_dig -3",
-              "216: len",
-              "217: pushint 2",
-              "218: ==",
-              "219: assert",
-              "222: frame_dig -2",
-              "223: len",
-              "224: pushint 4",
-              "225: ==",
-              "226: assert",
-              "229: frame_dig -1",
-              "230: len",
-              "231: pushint 8",
-              "232: ==",
-              "233: assert",
-              "236: frame_dig -4",
-              "237: btoi",
-              "238: frame_dig -3",
-              "239: btoi",
-              "240: +",
-              "241: frame_dig -2",
-              "242: btoi",
-              "243: +",
-              "244: frame_dig -1",
-              "245: btoi",
-              "246: +",
-              "249: itob",
-              "250: retsub"
-            ],
-            [
-              "132: bytec_0",
-              "133: swap",
-              "134: concat",
-              "135: log",
-              "136: intc_0",
-              "137: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 9 -> 19 -> 10",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 64",
-              "7: bytecblock 0x151f7c75",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
-            ],
-            [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
-            ],
-            [
-              "88: main_add_arc4_biguint_n_route@5:",
-              "92: txn OnCompletion",
-              "93: !",
-              "94: assert",
-              "95: txn ApplicationID",
+              "61: add_arc4_uint_n:",
+              "65: txna ApplicationArgs 1",
+              "66: txna ApplicationArgs 2",
+              "67: txna ApplicationArgs 3",
+              "68: txna ApplicationArgs 4",
+              "71: dig 3",
+              "72: len",
+              "73: intc_0",
+              "74: ==",
+              "75: assert",
+              "78: dig 2",
+              "79: len",
+              "80: pushint 2",
+              "81: ==",
+              "82: assert",
+              "85: dig 1",
+              "86: len",
+              "87: pushint 4",
+              "88: ==",
+              "89: assert",
+              "92: dup",
+              "93: len",
+              "94: intc_2",
+              "95: ==",
               "96: assert",
-              "99: txna ApplicationArgs 1",
-              "100: txna ApplicationArgs 2",
-              "101: txna ApplicationArgs 3",
-              "105: callsub add_arc4_biguint_n"
-            ],
-            [
-              "254: add_arc4_biguint_n:",
-              "261: proto 3 1",
-              "264: frame_dig -3",
-              "265: len",
-              "266: pushint 16",
-              "267: ==",
-              "268: assert",
-              "271: frame_dig -2",
-              "272: len",
-              "273: pushint 32",
-              "274: ==",
-              "275: assert",
-              "278: frame_dig -1",
-              "279: len",
-              "280: intc_1",
-              "281: ==",
-              "282: assert",
-              "285: frame_dig -3",
-              "286: frame_dig -2",
-              "287: b+",
-              "288: frame_dig -1",
-              "289: b+",
-              "292: dup",
-              "293: len",
-              "294: intc_1",
-              "295: <=",
-              "296: assert",
-              "297: intc_1",
-              "298: bzero",
-              "299: b|",
-              "300: retsub"
-            ],
-            [
-              "106: bytec_0",
+              "99: uncover 3",
+              "100: btoi",
+              "101: uncover 3",
+              "102: btoi",
+              "103: +",
+              "104: uncover 2",
+              "105: btoi",
+              "106: +",
               "107: swap",
-              "108: concat",
-              "109: log",
-              "110: intc_0",
-              "111: return"
+              "108: btoi",
+              "109: +",
+              "112: itob",
+              "116: bytec_0",
+              "117: swap",
+              "118: concat",
+              "119: log",
+              "120: intc_0",
+              "121: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 7 -> 20 -> 8",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "65: main_arc4_byte_route@6:",
-              "69: txn OnCompletion",
-              "70: !",
-              "71: assert",
-              "72: txn ApplicationID",
-              "73: assert",
-              "76: txna ApplicationArgs 1",
-              "80: callsub arc4_byte"
-            ],
-            [
-              "304: arc4_byte:",
-              "309: proto 1 1",
-              "312: frame_dig -1",
-              "313: btoi",
-              "314: intc_0",
-              "315: +",
-              "316: itob",
-              "317: extract 7 1",
-              "318: retsub"
-            ],
-            [
-              "81: bytec_0",
-              "82: swap",
-              "83: concat",
-              "84: log",
-              "85: intc_0",
-              "86: return"
+              "125: add_arc4_biguint_n:",
+              "129: txna ApplicationArgs 1",
+              "130: txna ApplicationArgs 2",
+              "131: txna ApplicationArgs 3",
+              "134: dig 2",
+              "135: len",
+              "136: pushint 16",
+              "137: ==",
+              "138: assert",
+              "141: dig 1",
+              "142: len",
+              "143: pushint 32",
+              "144: ==",
+              "145: assert",
+              "148: dup",
+              "149: len",
+              "150: intc_1",
+              "151: ==",
+              "152: assert",
+              "155: cover 2",
+              "156: b+",
+              "157: b+",
+              "160: dup",
+              "161: len",
+              "162: intc_1",
+              "163: <=",
+              "164: assert",
+              "165: intc_1",
+              "166: bzero",
+              "167: b|",
+              "171: bytec_0",
+              "172: swap",
+              "173: concat",
+              "174: log",
+              "175: intc_0",
+              "176: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 5 -> 21 -> 6",
+          "short": "0 -> 1 -> 2 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "41: main_arc4_address_properties_route@7:",
-              "45: txn OnCompletion",
-              "46: !",
-              "47: assert",
-              "48: txn ApplicationID",
-              "49: assert",
-              "52: txna ApplicationArgs 1",
-              "56: callsub arc4_address_properties"
-            ],
-            [
-              "322: arc4_address_properties:",
-              "327: proto 1 1",
-              "330: frame_dig -1",
-              "331: acct_params_get AcctBalance",
-              "332: assert",
-              "335: frame_dig -1",
-              "336: acct_params_get AcctTotalAssets",
-              "337: bury 1",
-              "338: assert",
-              "341: retsub"
-            ],
-            [
-              "57: itob",
-              "58: bytec_0",
-              "59: swap",
-              "60: concat",
-              "61: log",
-              "62: intc_0",
-              "63: return"
+              "180: arc4_byte:",
+              "184: txna ApplicationArgs 1",
+              "187: btoi",
+              "188: intc_0",
+              "189: +",
+              "190: itob",
+              "191: dup",
+              "192: bitlen",
+              "193: intc_2",
+              "194: <=",
+              "195: assert",
+              "196: extract 7 1",
+              "200: bytec_0",
+              "201: swap",
+              "202: concat",
+              "203: log",
+              "204: intc_0",
+              "205: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4",
+          "short": "0 -> 1 -> 2 -> 9",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "22: main_arc4_address_return_route@8:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "30: bytec_0",
-              "33: txna ApplicationArgs 1",
-              "36: concat",
-              "37: log",
-              "38: intc_0",
-              "39: return"
+              "209: arc4_address_properties:",
+              "213: txna ApplicationArgs 1",
+              "216: dup",
+              "217: acct_params_get AcctBalance",
+              "218: assert",
+              "221: swap",
+              "222: acct_params_get AcctTotalAssets",
+              "223: bury 1",
+              "224: assert",
+              "228: itob",
+              "229: bytec_0",
+              "230: swap",
+              "231: concat",
+              "232: log",
+              "233: intc_0",
+              "234: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 10",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 64 8",
+              "7: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@13"
+            ],
+            [
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
+            ],
+            [
+              "238: arc4_address_return:",
+              "241: bytec_0",
+              "242: txna ApplicationArgs 1",
+              "243: concat",
+              "244: log",
+              "245: intc_0",
+              "246: return"
             ]
           ]
         }
@@ -1440,371 +1284,329 @@
       "help": "Validate `Fee` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 13 -> 17 -> 14",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "139: main_add_arc4_uint64_route@3:",
-              "143: txn OnCompletion",
-              "144: !",
-              "145: assert",
-              "146: txn ApplicationID",
-              "147: assert",
-              "150: txna ApplicationArgs 1",
-              "151: txna ApplicationArgs 2",
-              "155: callsub add_arc4_uint64"
-            ],
-            [
-              "176: add_arc4_uint64:",
-              "181: proto 2 1",
-              "185: frame_dig -2",
-              "186: btoi",
-              "187: frame_dig -1",
-              "188: btoi",
-              "189: +",
-              "193: itob",
-              "194: retsub"
-            ],
-            [
-              "156: bytec_0",
-              "157: swap",
-              "158: concat",
-              "159: log",
-              "160: intc_0",
-              "161: return"
+              "32: add_arc4_uint64:",
+              "36: txna ApplicationArgs 2",
+              "37: txna ApplicationArgs 1",
+              "41: btoi",
+              "42: swap",
+              "43: btoi",
+              "44: +",
+              "48: itob",
+              "52: bytec_0",
+              "53: swap",
+              "54: concat",
+              "55: log",
+              "56: intc_0",
+              "57: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 11 -> 18 -> 12",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "113: main_add_arc4_uint_n_route@4:",
-              "117: txn OnCompletion",
-              "118: !",
-              "119: assert",
-              "120: txn ApplicationID",
-              "121: assert",
-              "124: txna ApplicationArgs 1",
-              "125: txna ApplicationArgs 2",
-              "126: txna ApplicationArgs 3",
-              "127: txna ApplicationArgs 4",
-              "131: callsub add_arc4_uint_n"
-            ],
-            [
-              "198: add_arc4_uint_n:",
-              "205: proto 4 1",
-              "208: frame_dig -4",
-              "209: len",
-              "210: intc_0",
-              "211: ==",
-              "212: assert",
-              "215: frame_dig -3",
-              "216: len",
-              "217: pushint 2",
-              "218: ==",
-              "219: assert",
-              "222: frame_dig -2",
-              "223: len",
-              "224: pushint 4",
-              "225: ==",
-              "226: assert",
-              "229: frame_dig -1",
-              "230: len",
-              "231: pushint 8",
-              "232: ==",
-              "233: assert",
-              "236: frame_dig -4",
-              "237: btoi",
-              "238: frame_dig -3",
-              "239: btoi",
-              "240: +",
-              "241: frame_dig -2",
-              "242: btoi",
-              "243: +",
-              "244: frame_dig -1",
-              "245: btoi",
-              "246: +",
-              "249: itob",
-              "250: retsub"
-            ],
-            [
-              "132: bytec_0",
-              "133: swap",
-              "134: concat",
-              "135: log",
-              "136: intc_0",
-              "137: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 9 -> 19 -> 10",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 64",
-              "7: bytecblock 0x151f7c75",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
-            ],
-            [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
-            ],
-            [
-              "88: main_add_arc4_biguint_n_route@5:",
-              "92: txn OnCompletion",
-              "93: !",
-              "94: assert",
-              "95: txn ApplicationID",
+              "61: add_arc4_uint_n:",
+              "65: txna ApplicationArgs 1",
+              "66: txna ApplicationArgs 2",
+              "67: txna ApplicationArgs 3",
+              "68: txna ApplicationArgs 4",
+              "71: dig 3",
+              "72: len",
+              "73: intc_0",
+              "74: ==",
+              "75: assert",
+              "78: dig 2",
+              "79: len",
+              "80: pushint 2",
+              "81: ==",
+              "82: assert",
+              "85: dig 1",
+              "86: len",
+              "87: pushint 4",
+              "88: ==",
+              "89: assert",
+              "92: dup",
+              "93: len",
+              "94: intc_2",
+              "95: ==",
               "96: assert",
-              "99: txna ApplicationArgs 1",
-              "100: txna ApplicationArgs 2",
-              "101: txna ApplicationArgs 3",
-              "105: callsub add_arc4_biguint_n"
-            ],
-            [
-              "254: add_arc4_biguint_n:",
-              "261: proto 3 1",
-              "264: frame_dig -3",
-              "265: len",
-              "266: pushint 16",
-              "267: ==",
-              "268: assert",
-              "271: frame_dig -2",
-              "272: len",
-              "273: pushint 32",
-              "274: ==",
-              "275: assert",
-              "278: frame_dig -1",
-              "279: len",
-              "280: intc_1",
-              "281: ==",
-              "282: assert",
-              "285: frame_dig -3",
-              "286: frame_dig -2",
-              "287: b+",
-              "288: frame_dig -1",
-              "289: b+",
-              "292: dup",
-              "293: len",
-              "294: intc_1",
-              "295: <=",
-              "296: assert",
-              "297: intc_1",
-              "298: bzero",
-              "299: b|",
-              "300: retsub"
-            ],
-            [
-              "106: bytec_0",
+              "99: uncover 3",
+              "100: btoi",
+              "101: uncover 3",
+              "102: btoi",
+              "103: +",
+              "104: uncover 2",
+              "105: btoi",
+              "106: +",
               "107: swap",
-              "108: concat",
-              "109: log",
-              "110: intc_0",
-              "111: return"
+              "108: btoi",
+              "109: +",
+              "112: itob",
+              "116: bytec_0",
+              "117: swap",
+              "118: concat",
+              "119: log",
+              "120: intc_0",
+              "121: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 7 -> 20 -> 8",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "65: main_arc4_byte_route@6:",
-              "69: txn OnCompletion",
-              "70: !",
-              "71: assert",
-              "72: txn ApplicationID",
-              "73: assert",
-              "76: txna ApplicationArgs 1",
-              "80: callsub arc4_byte"
-            ],
-            [
-              "304: arc4_byte:",
-              "309: proto 1 1",
-              "312: frame_dig -1",
-              "313: btoi",
-              "314: intc_0",
-              "315: +",
-              "316: itob",
-              "317: extract 7 1",
-              "318: retsub"
-            ],
-            [
-              "81: bytec_0",
-              "82: swap",
-              "83: concat",
-              "84: log",
-              "85: intc_0",
-              "86: return"
+              "125: add_arc4_biguint_n:",
+              "129: txna ApplicationArgs 1",
+              "130: txna ApplicationArgs 2",
+              "131: txna ApplicationArgs 3",
+              "134: dig 2",
+              "135: len",
+              "136: pushint 16",
+              "137: ==",
+              "138: assert",
+              "141: dig 1",
+              "142: len",
+              "143: pushint 32",
+              "144: ==",
+              "145: assert",
+              "148: dup",
+              "149: len",
+              "150: intc_1",
+              "151: ==",
+              "152: assert",
+              "155: cover 2",
+              "156: b+",
+              "157: b+",
+              "160: dup",
+              "161: len",
+              "162: intc_1",
+              "163: <=",
+              "164: assert",
+              "165: intc_1",
+              "166: bzero",
+              "167: b|",
+              "171: bytec_0",
+              "172: swap",
+              "173: concat",
+              "174: log",
+              "175: intc_0",
+              "176: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 5 -> 21 -> 6",
+          "short": "0 -> 1 -> 2 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "41: main_arc4_address_properties_route@7:",
-              "45: txn OnCompletion",
-              "46: !",
-              "47: assert",
-              "48: txn ApplicationID",
-              "49: assert",
-              "52: txna ApplicationArgs 1",
-              "56: callsub arc4_address_properties"
-            ],
-            [
-              "322: arc4_address_properties:",
-              "327: proto 1 1",
-              "330: frame_dig -1",
-              "331: acct_params_get AcctBalance",
-              "332: assert",
-              "335: frame_dig -1",
-              "336: acct_params_get AcctTotalAssets",
-              "337: bury 1",
-              "338: assert",
-              "341: retsub"
-            ],
-            [
-              "57: itob",
-              "58: bytec_0",
-              "59: swap",
-              "60: concat",
-              "61: log",
-              "62: intc_0",
-              "63: return"
+              "180: arc4_byte:",
+              "184: txna ApplicationArgs 1",
+              "187: btoi",
+              "188: intc_0",
+              "189: +",
+              "190: itob",
+              "191: dup",
+              "192: bitlen",
+              "193: intc_2",
+              "194: <=",
+              "195: assert",
+              "196: extract 7 1",
+              "200: bytec_0",
+              "201: swap",
+              "202: concat",
+              "203: log",
+              "204: intc_0",
+              "205: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4",
+          "short": "0 -> 1 -> 2 -> 9",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "22: main_arc4_address_return_route@8:",
-              "25: txn OnCompletion",
+              "209: arc4_address_properties:",
+              "213: txna ApplicationArgs 1",
+              "216: dup",
+              "217: acct_params_get AcctBalance",
+              "218: assert",
+              "221: swap",
+              "222: acct_params_get AcctTotalAssets",
+              "223: bury 1",
+              "224: assert",
+              "228: itob",
+              "229: bytec_0",
+              "230: swap",
+              "231: concat",
+              "232: log",
+              "233: intc_0",
+              "234: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 10",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 64 8",
+              "7: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@13"
+            ],
+            [
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
+            ],
+            [
+              "238: arc4_address_return:",
+              "241: bytec_0",
+              "242: txna ApplicationArgs 1",
+              "243: concat",
+              "244: log",
+              "245: intc_0",
+              "246: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 64 8",
+              "7: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@13"
+            ],
+            [
+              "22: main___algopy_default_create@13:",
+              "23: txn OnCompletion",
+              "24: !",
+              "25: txn ApplicationID",
               "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "30: bytec_0",
-              "33: txna ApplicationArgs 1",
-              "36: concat",
-              "37: log",
-              "38: intc_0",
-              "39: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 15 -> 16",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 64",
-              "7: bytecblock 0x151f7c75",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
-            ],
-            [
-              "163: main_bare_routing@11:",
-              "166: txn OnCompletion",
-              "167: bnz main_after_if_else@15"
-            ],
-            [
-              "168: txn ApplicationID",
-              "169: !",
-              "170: assert",
-              "171: intc_0",
-              "172: return"
+              "27: &&",
+              "28: return"
             ]
           ]
         }
@@ -1830,371 +1632,329 @@
       "help": "Validate `RekeyTo` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 13 -> 17 -> 14",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "139: main_add_arc4_uint64_route@3:",
-              "143: txn OnCompletion",
-              "144: !",
-              "145: assert",
-              "146: txn ApplicationID",
-              "147: assert",
-              "150: txna ApplicationArgs 1",
-              "151: txna ApplicationArgs 2",
-              "155: callsub add_arc4_uint64"
-            ],
-            [
-              "176: add_arc4_uint64:",
-              "181: proto 2 1",
-              "185: frame_dig -2",
-              "186: btoi",
-              "187: frame_dig -1",
-              "188: btoi",
-              "189: +",
-              "193: itob",
-              "194: retsub"
-            ],
-            [
-              "156: bytec_0",
-              "157: swap",
-              "158: concat",
-              "159: log",
-              "160: intc_0",
-              "161: return"
+              "32: add_arc4_uint64:",
+              "36: txna ApplicationArgs 2",
+              "37: txna ApplicationArgs 1",
+              "41: btoi",
+              "42: swap",
+              "43: btoi",
+              "44: +",
+              "48: itob",
+              "52: bytec_0",
+              "53: swap",
+              "54: concat",
+              "55: log",
+              "56: intc_0",
+              "57: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 11 -> 18 -> 12",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "113: main_add_arc4_uint_n_route@4:",
-              "117: txn OnCompletion",
-              "118: !",
-              "119: assert",
-              "120: txn ApplicationID",
-              "121: assert",
-              "124: txna ApplicationArgs 1",
-              "125: txna ApplicationArgs 2",
-              "126: txna ApplicationArgs 3",
-              "127: txna ApplicationArgs 4",
-              "131: callsub add_arc4_uint_n"
-            ],
-            [
-              "198: add_arc4_uint_n:",
-              "205: proto 4 1",
-              "208: frame_dig -4",
-              "209: len",
-              "210: intc_0",
-              "211: ==",
-              "212: assert",
-              "215: frame_dig -3",
-              "216: len",
-              "217: pushint 2",
-              "218: ==",
-              "219: assert",
-              "222: frame_dig -2",
-              "223: len",
-              "224: pushint 4",
-              "225: ==",
-              "226: assert",
-              "229: frame_dig -1",
-              "230: len",
-              "231: pushint 8",
-              "232: ==",
-              "233: assert",
-              "236: frame_dig -4",
-              "237: btoi",
-              "238: frame_dig -3",
-              "239: btoi",
-              "240: +",
-              "241: frame_dig -2",
-              "242: btoi",
-              "243: +",
-              "244: frame_dig -1",
-              "245: btoi",
-              "246: +",
-              "249: itob",
-              "250: retsub"
-            ],
-            [
-              "132: bytec_0",
-              "133: swap",
-              "134: concat",
-              "135: log",
-              "136: intc_0",
-              "137: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 9 -> 19 -> 10",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 64",
-              "7: bytecblock 0x151f7c75",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
-            ],
-            [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
-            ],
-            [
-              "88: main_add_arc4_biguint_n_route@5:",
-              "92: txn OnCompletion",
-              "93: !",
-              "94: assert",
-              "95: txn ApplicationID",
+              "61: add_arc4_uint_n:",
+              "65: txna ApplicationArgs 1",
+              "66: txna ApplicationArgs 2",
+              "67: txna ApplicationArgs 3",
+              "68: txna ApplicationArgs 4",
+              "71: dig 3",
+              "72: len",
+              "73: intc_0",
+              "74: ==",
+              "75: assert",
+              "78: dig 2",
+              "79: len",
+              "80: pushint 2",
+              "81: ==",
+              "82: assert",
+              "85: dig 1",
+              "86: len",
+              "87: pushint 4",
+              "88: ==",
+              "89: assert",
+              "92: dup",
+              "93: len",
+              "94: intc_2",
+              "95: ==",
               "96: assert",
-              "99: txna ApplicationArgs 1",
-              "100: txna ApplicationArgs 2",
-              "101: txna ApplicationArgs 3",
-              "105: callsub add_arc4_biguint_n"
-            ],
-            [
-              "254: add_arc4_biguint_n:",
-              "261: proto 3 1",
-              "264: frame_dig -3",
-              "265: len",
-              "266: pushint 16",
-              "267: ==",
-              "268: assert",
-              "271: frame_dig -2",
-              "272: len",
-              "273: pushint 32",
-              "274: ==",
-              "275: assert",
-              "278: frame_dig -1",
-              "279: len",
-              "280: intc_1",
-              "281: ==",
-              "282: assert",
-              "285: frame_dig -3",
-              "286: frame_dig -2",
-              "287: b+",
-              "288: frame_dig -1",
-              "289: b+",
-              "292: dup",
-              "293: len",
-              "294: intc_1",
-              "295: <=",
-              "296: assert",
-              "297: intc_1",
-              "298: bzero",
-              "299: b|",
-              "300: retsub"
-            ],
-            [
-              "106: bytec_0",
+              "99: uncover 3",
+              "100: btoi",
+              "101: uncover 3",
+              "102: btoi",
+              "103: +",
+              "104: uncover 2",
+              "105: btoi",
+              "106: +",
               "107: swap",
-              "108: concat",
-              "109: log",
-              "110: intc_0",
-              "111: return"
+              "108: btoi",
+              "109: +",
+              "112: itob",
+              "116: bytec_0",
+              "117: swap",
+              "118: concat",
+              "119: log",
+              "120: intc_0",
+              "121: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 7 -> 20 -> 8",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "65: main_arc4_byte_route@6:",
-              "69: txn OnCompletion",
-              "70: !",
-              "71: assert",
-              "72: txn ApplicationID",
-              "73: assert",
-              "76: txna ApplicationArgs 1",
-              "80: callsub arc4_byte"
-            ],
-            [
-              "304: arc4_byte:",
-              "309: proto 1 1",
-              "312: frame_dig -1",
-              "313: btoi",
-              "314: intc_0",
-              "315: +",
-              "316: itob",
-              "317: extract 7 1",
-              "318: retsub"
-            ],
-            [
-              "81: bytec_0",
-              "82: swap",
-              "83: concat",
-              "84: log",
-              "85: intc_0",
-              "86: return"
+              "125: add_arc4_biguint_n:",
+              "129: txna ApplicationArgs 1",
+              "130: txna ApplicationArgs 2",
+              "131: txna ApplicationArgs 3",
+              "134: dig 2",
+              "135: len",
+              "136: pushint 16",
+              "137: ==",
+              "138: assert",
+              "141: dig 1",
+              "142: len",
+              "143: pushint 32",
+              "144: ==",
+              "145: assert",
+              "148: dup",
+              "149: len",
+              "150: intc_1",
+              "151: ==",
+              "152: assert",
+              "155: cover 2",
+              "156: b+",
+              "157: b+",
+              "160: dup",
+              "161: len",
+              "162: intc_1",
+              "163: <=",
+              "164: assert",
+              "165: intc_1",
+              "166: bzero",
+              "167: b|",
+              "171: bytec_0",
+              "172: swap",
+              "173: concat",
+              "174: log",
+              "175: intc_0",
+              "176: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 5 -> 21 -> 6",
+          "short": "0 -> 1 -> 2 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "41: main_arc4_address_properties_route@7:",
-              "45: txn OnCompletion",
-              "46: !",
-              "47: assert",
-              "48: txn ApplicationID",
-              "49: assert",
-              "52: txna ApplicationArgs 1",
-              "56: callsub arc4_address_properties"
-            ],
-            [
-              "322: arc4_address_properties:",
-              "327: proto 1 1",
-              "330: frame_dig -1",
-              "331: acct_params_get AcctBalance",
-              "332: assert",
-              "335: frame_dig -1",
-              "336: acct_params_get AcctTotalAssets",
-              "337: bury 1",
-              "338: assert",
-              "341: retsub"
-            ],
-            [
-              "57: itob",
-              "58: bytec_0",
-              "59: swap",
-              "60: concat",
-              "61: log",
-              "62: intc_0",
-              "63: return"
+              "180: arc4_byte:",
+              "184: txna ApplicationArgs 1",
+              "187: btoi",
+              "188: intc_0",
+              "189: +",
+              "190: itob",
+              "191: dup",
+              "192: bitlen",
+              "193: intc_2",
+              "194: <=",
+              "195: assert",
+              "196: extract 7 1",
+              "200: bytec_0",
+              "201: swap",
+              "202: concat",
+              "203: log",
+              "204: intc_0",
+              "205: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4",
+          "short": "0 -> 1 -> 2 -> 9",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 64",
+              "6: intcblock 1 64 8",
               "7: bytecblock 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
-              "13: txna ApplicationArgs 0",
-              "14: match main_add_arc4_uint64_route@3 main_add_arc4_uint_n_route@4 main_add_arc4_biguint_n_route@5 main_arc4_byte_route@6 main_arc4_address_properties_route@7 main_arc4_address_return_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
             ],
             [
-              "22: main_arc4_address_return_route@8:",
-              "25: txn OnCompletion",
+              "209: arc4_address_properties:",
+              "213: txna ApplicationArgs 1",
+              "216: dup",
+              "217: acct_params_get AcctBalance",
+              "218: assert",
+              "221: swap",
+              "222: acct_params_get AcctTotalAssets",
+              "223: bury 1",
+              "224: assert",
+              "228: itob",
+              "229: bytec_0",
+              "230: swap",
+              "231: concat",
+              "232: log",
+              "233: intc_0",
+              "234: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 10",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 64 8",
+              "7: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@13"
+            ],
+            [
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0x05943917 0x845b0685 0xead170cf 0xdcb6897f 0xfddcf44f 0xf2ec8e58",
+              "18: txna ApplicationArgs 0",
+              "19: match add_arc4_uint64 add_arc4_uint_n add_arc4_biguint_n arc4_byte arc4_address_properties arc4_address_return"
+            ],
+            [
+              "238: arc4_address_return:",
+              "241: bytec_0",
+              "242: txna ApplicationArgs 1",
+              "243: concat",
+              "244: log",
+              "245: intc_0",
+              "246: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1 64 8",
+              "7: bytecblock 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@13"
+            ],
+            [
+              "22: main___algopy_default_create@13:",
+              "23: txn OnCompletion",
+              "24: !",
+              "25: txn ApplicationID",
               "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "30: bytec_0",
-              "33: txna ApplicationArgs 1",
-              "36: concat",
-              "37: log",
-              "38: intc_0",
-              "39: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 15 -> 16",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 64",
-              "7: bytecblock 0x151f7c75",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@11"
-            ],
-            [
-              "163: main_bare_routing@11:",
-              "166: txn OnCompletion",
-              "167: bnz main_after_if_else@15"
-            ],
-            [
-              "168: txn ApplicationID",
-              "169: !",
-              "170: assert",
-              "171: intc_0",
-              "172: return"
+              "27: &&",
+              "28: return"
             ]
           ]
         }

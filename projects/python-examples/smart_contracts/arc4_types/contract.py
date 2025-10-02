@@ -13,7 +13,6 @@ from algopy.arc4 import abimethod
 
 
 class Arc4Types(ARC4Contract):
-
     # example: ARC4_UINT64
     @abimethod()
     def add_arc4_uint64(self, a: arc4.UInt64, b: arc4.UInt64) -> arc4.UInt64:
@@ -100,7 +99,6 @@ class Arc4Types(ARC4Contract):
 
     @abimethod()
     def arc4_address_return(self, address: arc4.Address) -> arc4.Address:
-
         account = (
             address.native
         )  # This will return the account type of the given address.
@@ -123,7 +121,6 @@ AliasedStaticArray: t.TypeAlias = arc4.StaticArray[arc4.UInt8, t.Literal[1]]
 
 
 class Arc4StaticArray(ARC4Contract):
-
     @abimethod()
     def arc4_static_array(self) -> None:
         """
@@ -166,7 +163,6 @@ goodbye: t.TypeAlias = arc4.DynamicArray[arc4.String]
 
 
 class Arc4DynamicArray(ARC4Contract):
-
     @abimethod
     def goodbye(self, name: arc4.String) -> goodbye:
         bye = goodbye(arc4.String("Good bye "), name)
@@ -206,7 +202,7 @@ class Arc4DynamicArray(ARC4Contract):
         # arc4.DynamicBytes can return the native bytearray instead of accessing every single index of the array.
         # This is only true for arc4.DynamicBytes because, as an example, an arc4.DynamicArray[arc4.UInt64]
         #  doesn't have a native equivalent.
-        native_dynamic_bytes = dynamic_bytes.native
+        # native_dynamic_bytes = dynamic_bytes.native
 
         dynamic_bytes[0] = arc4.Byte(0)
 
@@ -229,7 +225,6 @@ Todos: t.TypeAlias = arc4.DynamicArray[Todo]
 
 
 class Arc4Struct(ARC4Contract):
-
     def __init__(self) -> None:
         self.todos = Todos()
 
@@ -246,7 +241,6 @@ class Arc4Struct(ARC4Contract):
 
     @abimethod()
     def complete_todo(self, task: arc4.String) -> None:
-
         for index in urange(self.todos.length):
             if self.todos[index].task == task:
                 self.todos[index].completed = arc4.Bool(True)  # noqa: FBT003
@@ -258,7 +252,6 @@ class Arc4Struct(ARC4Contract):
 
         exist = False
         for index in urange(self.todos.length):
-
             if self.todos[index].task == task:
                 todo_to_return = self.todos[index].copy()
                 exist = True
@@ -277,7 +270,6 @@ contact_info_tuple = arc4.Tuple[
 
 
 class Arc4Tuple(ARC4Contract):
-
     def __init__(self) -> None:
         self.contact_info = GlobalState(
             contact_info_tuple((arc4.String(""), arc4.String(""), arc4.UInt64(0)))

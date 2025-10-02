@@ -28,7 +28,6 @@ def delegating_account(creator: SigningAccount) -> SigningAccount:
 def lsig_delegated_account(
     delegating_account: SigningAccount, lsig_template: str, algorand: AlgorandClient
 ) -> LogicSigAccount:
-
     sp = algorand.get_suggested_params()
     rendered = AppManager.replace_template_variables(
         lsig_template,
@@ -52,7 +51,6 @@ def test_self_payment(
     lsig_delegated_account: LogicSigAccount,
     algorand: AlgorandClient,
 ) -> None:
-
     # TODO: Learn how to construct logic sig transactions
     algorand.create_transaction.payment(
         PaymentParams(

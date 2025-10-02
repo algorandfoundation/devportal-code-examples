@@ -3,7 +3,7 @@
   "sources": [
     "../../control_flow/contract.py"
   ],
-  "mappings": ";AAqDA;;AAAA;;;AAAA;;;;;;AAAA;;;AAAA;;;;AAAA;;;AACK;;AAAA;AAAA;AAAA;;AAAA;AADL;;;AAAA;AACK;;;AAAA;AAAA;AAAA;AAAA;;;AAAA;AAAA;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;;;AADL;;AAAA;;;;;;;;;;AACA;;;AAEQ;;AAAA;;;;;;;;;;;;;;;;AAgBe;;;;;;;;;;;;;AAAP;AAFO;;;;;;;;AAAP;AAFO;;;;;;;;;;AAAP;AAFO;;;;;;;;AAAP;AAFO;;;;;;;;;;AAAP;AAFO;;;;;;;;;;;AAAP;AAFO;;;;;;;;;AAAP;AAFO;;;;;;;;AAAP",
+  "mappings": ";AAqDA;;AAAA;;;AAAA;;;;;;AAAA;;;AAAA;;;;AAAA;AACK;;AAAA;AAAA;;AAAA;AAAA;AAAA;;;;;;;;;;;AAAA;;;AAAA;AAEG;;;;;;;;;;;;;;;;AAgBe;;;;;;;;;;;;;AAlBlB;AAAA;AAAA;AAAA;;;AAAA;AAAA;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;;AAAA;AAgBkB;;;;;;;;AAhBlB;;;AAckB;;;;;;;;;;AAdlB;;;AAYkB;;;;;;;;AAZlB;;;AAUkB;;;;;;;;;;AAVlB;;;AAQkB;;;;;;;;;;;AARlB;;;AAMkB;;;;;;;;;AANlB;;;AAIkB;;;;;;;;AAJlB",
   "op_pc_offset": 0,
   "pc_events": {
     "1": {
@@ -20,7 +20,7 @@
       ]
     },
     "3": {
-      "op": "bz main_bare_routing@6",
+      "op": "bz main___algopy_default_create@5",
       "stack_out": []
     },
     "6": {
@@ -48,21 +48,9 @@
       "stack_out": []
     },
     "19": {
-      "block": "main_after_if_else@10",
-      "stack_in": [],
-      "op": "pushint 0 // 0",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
+      "op": "err"
     },
-    "21": {
-      "op": "return",
-      "stack_out": []
-    },
-    "22": {
+    "20": {
       "block": "main_get_day_route@3",
       "stack_in": [],
       "op": "txn OnCompletion",
@@ -73,356 +61,340 @@
         "tmp%3#0"
       ]
     },
-    "24": {
+    "22": {
       "op": "!",
       "defined_out": [
         "tmp%4#0"
       ],
       "stack_out": [
         "tmp%4#0"
+      ]
+    },
+    "23": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%4#0",
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%4#0",
+        "tmp%5#0"
       ]
     },
     "25": {
-      "error": "OnCompletion is not NoOp",
-      "op": "assert // OnCompletion is not NoOp",
-      "stack_out": []
+      "op": "&&",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%7#0"
+      ]
     },
     "26": {
-      "op": "txn ApplicationID",
-      "defined_out": [
-        "tmp%5#0"
-      ],
-      "stack_out": [
-        "tmp%5#0"
-      ]
-    },
-    "28": {
-      "error": "can only call when not creating",
-      "op": "assert // can only call when not creating",
+      "error": "OnCompletion must be NoOp && can only call when not creating",
+      "op": "assert // OnCompletion must be NoOp && can only call when not creating",
       "stack_out": []
     },
-    "29": {
-      "op": "txna ApplicationArgs 1",
-      "defined_out": [
-        "reinterpret_bytes[8]%0#0"
-      ],
-      "stack_out": [
-        "reinterpret_bytes[8]%0#0"
-      ]
+    "27": {
+      "op": "b get_day"
     },
-    "32": {
-      "op": "btoi",
-      "defined_out": [
-        "tmp%7#0"
-      ],
-      "stack_out": [
-        "tmp%7#0"
-      ]
-    },
-    "33": {
-      "callsub": "smart_contracts.control_flow.contract.MatchStatements.get_day",
-      "op": "callsub get_day",
-      "defined_out": [
-        "to_encode%0#0"
-      ],
-      "stack_out": [
-        "to_encode%0#0"
-      ]
-    },
-    "36": {
-      "op": "dup",
-      "defined_out": [
-        "to_encode%0#0",
-        "to_encode%0#0 (copy)"
-      ],
-      "stack_out": [
-        "to_encode%0#0",
-        "to_encode%0#0 (copy)"
-      ]
-    },
-    "37": {
-      "op": "len",
-      "defined_out": [
-        "length%0#0",
-        "to_encode%0#0"
-      ],
-      "stack_out": [
-        "to_encode%0#0",
-        "length%0#0"
-      ]
-    },
-    "38": {
-      "op": "itob",
-      "defined_out": [
-        "as_bytes%0#0",
-        "to_encode%0#0"
-      ],
-      "stack_out": [
-        "to_encode%0#0",
-        "as_bytes%0#0"
-      ]
-    },
-    "39": {
-      "op": "extract 6 2",
-      "defined_out": [
-        "length_uint16%0#0",
-        "to_encode%0#0"
-      ],
-      "stack_out": [
-        "to_encode%0#0",
-        "length_uint16%0#0"
-      ]
-    },
-    "42": {
-      "op": "swap",
-      "stack_out": [
-        "length_uint16%0#0",
-        "to_encode%0#0"
-      ]
-    },
-    "43": {
-      "op": "concat",
-      "defined_out": [
-        "encoded_value%0#0"
-      ],
-      "stack_out": [
-        "encoded_value%0#0"
-      ]
-    },
-    "44": {
-      "op": "pushbytes 0x151f7c75",
-      "defined_out": [
-        "0x151f7c75",
-        "encoded_value%0#0"
-      ],
-      "stack_out": [
-        "encoded_value%0#0",
-        "0x151f7c75"
-      ]
-    },
-    "50": {
-      "op": "swap",
-      "stack_out": [
-        "0x151f7c75",
-        "encoded_value%0#0"
-      ]
-    },
-    "51": {
-      "op": "concat",
-      "defined_out": [
-        "tmp%8#0"
-      ],
-      "stack_out": [
-        "tmp%8#0"
-      ]
-    },
-    "52": {
-      "op": "log",
-      "stack_out": []
-    },
-    "53": {
-      "op": "pushint 1 // 1",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
-    },
-    "55": {
-      "op": "return",
-      "stack_out": []
-    },
-    "56": {
-      "block": "main_bare_routing@6",
+    "30": {
+      "block": "main___algopy_default_create@5",
       "stack_in": [],
       "op": "txn OnCompletion",
       "defined_out": [
-        "tmp%9#0"
+        "tmp%8#0"
       ],
       "stack_out": [
-        "tmp%9#0"
+        "tmp%8#0"
       ]
     },
-    "58": {
-      "op": "bnz main_after_if_else@10",
-      "stack_out": []
-    },
-    "61": {
-      "op": "txn ApplicationID",
-      "defined_out": [
-        "tmp%10#0"
-      ],
-      "stack_out": [
-        "tmp%10#0"
-      ]
-    },
-    "63": {
+    "32": {
       "op": "!",
       "defined_out": [
-        "tmp%11#0"
+        "tmp%9#0"
       ],
       "stack_out": [
-        "tmp%11#0"
+        "tmp%9#0"
       ]
     },
-    "64": {
-      "error": "can only call when creating",
-      "op": "assert // can only call when creating",
-      "stack_out": []
-    },
-    "65": {
-      "op": "pushint 1 // 1",
+    "33": {
+      "op": "txn ApplicationID",
       "defined_out": [
-        "tmp%0#0"
+        "tmp%10#0",
+        "tmp%9#0"
       ],
       "stack_out": [
-        "tmp%0#0"
+        "tmp%9#0",
+        "tmp%10#0"
       ]
     },
-    "67": {
-      "op": "return",
+    "35": {
+      "op": "!",
+      "defined_out": [
+        "tmp%11#0",
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%9#0",
+        "tmp%11#0"
+      ]
+    },
+    "36": {
+      "op": "&&",
+      "defined_out": [
+        "tmp%12#0"
+      ],
+      "stack_out": [
+        "tmp%12#0"
+      ]
+    },
+    "37": {
+      "error": "OnCompletion must be NoOp && can only call when creating",
+      "op": "return // on error: OnCompletion must be NoOp && can only call when creating",
+      "defined_out": [],
       "stack_out": []
     },
-    "68": {
-      "subroutine": "smart_contracts.control_flow.contract.MatchStatements.get_day",
-      "params": {
-        "date#0": "uint64"
-      },
+    "38": {
+      "subroutine": "smart_contracts.control_flow.contract.MatchStatements.get_day[routing]",
+      "params": {},
       "block": "get_day",
       "stack_in": [],
-      "op": "proto 1 1"
-    },
-    "71": {
-      "op": "frame_dig -1",
+      "op": "txna ApplicationArgs 1",
       "defined_out": [
-        "date#0 (copy)"
+        "reinterpret_Encoded(uint64)%0#0"
       ],
       "stack_out": [
-        "date#0 (copy)"
+        "reinterpret_Encoded(uint64)%0#0"
+      ]
+    },
+    "41": {
+      "op": "btoi",
+      "defined_out": [
+        "date#0"
+      ],
+      "stack_out": [
+        "date#0"
+      ]
+    },
+    "42": {
+      "op": "switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8",
+      "stack_out": []
+    },
+    "58": {
+      "op": "pushbytes \"Invalid day\"",
+      "defined_out": [
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "71": {
+      "block": "get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10",
+      "stack_in": [
+        "tmp%1#0"
+      ],
+      "op": "dup",
+      "defined_out": [
+        "tmp%1#0",
+        "tmp%1#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "tmp%1#0 (copy)"
+      ]
+    },
+    "72": {
+      "op": "len",
+      "defined_out": [
+        "aggregate%length%0#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "aggregate%length%0#0"
       ]
     },
     "73": {
-      "op": "switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7",
-      "stack_out": []
-    },
-    "89": {
-      "op": "pushbytes \"Invalid day\"",
+      "op": "itob",
       "defined_out": [
-        "\"Invalid day\""
+        "aggregate%as_bytes%0#0",
+        "tmp%1#0"
       ],
       "stack_out": [
-        "\"Invalid day\""
+        "tmp%1#0",
+        "aggregate%as_bytes%0#0"
       ]
     },
-    "102": {
-      "retsub": true,
-      "op": "retsub"
+    "74": {
+      "op": "extract 6 2",
+      "defined_out": [
+        "aggregate%length_uint16%0#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "aggregate%length_uint16%0#0"
+      ]
     },
-    "103": {
-      "block": "get_day_switch_case_6@7",
+    "77": {
+      "op": "swap",
+      "stack_out": [
+        "aggregate%length_uint16%0#0",
+        "tmp%1#0"
+      ]
+    },
+    "78": {
+      "op": "concat",
+      "defined_out": [
+        "aggregate%encoded_value%0#0"
+      ],
+      "stack_out": [
+        "aggregate%encoded_value%0#0"
+      ]
+    },
+    "79": {
+      "op": "pushbytes 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "aggregate%encoded_value%0#0"
+      ],
+      "stack_out": [
+        "aggregate%encoded_value%0#0",
+        "0x151f7c75"
+      ]
+    },
+    "85": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "aggregate%encoded_value%0#0"
+      ]
+    },
+    "86": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "87": {
+      "op": "log",
+      "stack_out": []
+    },
+    "88": {
+      "op": "pushint 1 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "90": {
+      "op": "return",
+      "stack_out": []
+    },
+    "91": {
+      "block": "get_day_switch_case_6@8",
       "stack_in": [],
       "op": "pushbytes \"Sunday\"",
       "defined_out": [
-        "\"Sunday\""
+        "tmp%1#0"
       ],
       "stack_out": [
-        "\"Sunday\""
+        "tmp%1#0"
       ]
     },
-    "111": {
-      "retsub": true,
-      "op": "retsub"
+    "99": {
+      "op": "b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
     },
-    "112": {
-      "block": "get_day_switch_case_5@6",
+    "102": {
+      "block": "get_day_switch_case_5@7",
       "stack_in": [],
       "op": "pushbytes \"Saturday\"",
       "defined_out": [
-        "\"Saturday\""
+        "tmp%1#0"
       ],
       "stack_out": [
-        "\"Saturday\""
+        "tmp%1#0"
       ]
     },
-    "122": {
-      "retsub": true,
-      "op": "retsub"
+    "112": {
+      "op": "b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
     },
-    "123": {
-      "block": "get_day_switch_case_4@5",
+    "115": {
+      "block": "get_day_switch_case_4@6",
       "stack_in": [],
       "op": "pushbytes \"Friday\"",
       "defined_out": [
-        "\"Friday\""
+        "tmp%1#0"
       ],
       "stack_out": [
-        "\"Friday\""
+        "tmp%1#0"
       ]
     },
-    "131": {
-      "retsub": true,
-      "op": "retsub"
+    "123": {
+      "op": "b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
     },
-    "132": {
-      "block": "get_day_switch_case_3@4",
+    "126": {
+      "block": "get_day_switch_case_3@5",
       "stack_in": [],
       "op": "pushbytes \"Thursday\"",
       "defined_out": [
-        "\"Thursday\""
+        "tmp%1#0"
       ],
       "stack_out": [
-        "\"Thursday\""
+        "tmp%1#0"
       ]
     },
-    "142": {
-      "retsub": true,
-      "op": "retsub"
+    "136": {
+      "op": "b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
     },
-    "143": {
-      "block": "get_day_switch_case_2@3",
+    "139": {
+      "block": "get_day_switch_case_2@4",
       "stack_in": [],
       "op": "pushbytes \"Wednesday\"",
       "defined_out": [
-        "\"Wednesday\""
+        "tmp%1#0"
       ],
       "stack_out": [
-        "\"Wednesday\""
+        "tmp%1#0"
       ]
     },
-    "154": {
-      "retsub": true,
-      "op": "retsub"
+    "150": {
+      "op": "b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
     },
-    "155": {
-      "block": "get_day_switch_case_1@2",
+    "153": {
+      "block": "get_day_switch_case_1@3",
       "stack_in": [],
       "op": "pushbytes \"Tuesday\"",
       "defined_out": [
-        "\"Tuesday\""
+        "tmp%1#0"
       ],
       "stack_out": [
-        "\"Tuesday\""
+        "tmp%1#0"
       ]
     },
-    "164": {
-      "retsub": true,
-      "op": "retsub"
+    "162": {
+      "op": "b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
     },
     "165": {
-      "block": "get_day_switch_case_0@1",
+      "block": "get_day_switch_case_0@2",
       "stack_in": [],
       "op": "pushbytes \"Monday\"",
       "defined_out": [
-        "\"Monday\""
+        "tmp%1#0"
       ],
       "stack_out": [
-        "\"Monday\""
+        "tmp%1#0"
       ]
     },
     "173": {
-      "retsub": true,
-      "op": "retsub"
+      "op": "b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
     }
   }
 }

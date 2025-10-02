@@ -12,96 +12,79 @@
       "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x1a350779 0x46bfb4e4",
-              "12: txna ApplicationArgs 0",
-              "13: match main_get_asset_total_supply_route@3 main_get_asset_total_supply_with_arg_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x1a350779 0x59dcb8c9",
+              "17: txna ApplicationArgs 0",
+              "18: match get_asset_total_supply get_asset_total_supply_with_arg"
             ],
             [
-              "45: main_get_asset_total_supply_route@3:",
-              "48: txn OnCompletion",
-              "49: !",
-              "50: assert",
-              "51: txn ApplicationID",
-              "52: assert",
-              "53: callsub get_asset_total_supply"
-            ],
-            [
-              "75: get_asset_total_supply:",
-              "78: pushint 1185",
-              "79: asset_params_get AssetTotal",
-              "80: assert",
-              "81: retsub"
-            ],
-            [
-              "54: itob",
-              "55: bytec_0",
-              "56: swap",
-              "57: concat",
-              "58: log",
-              "59: pushint 1",
-              "60: return"
+              "31: get_asset_total_supply:",
+              "34: pushint 1185",
+              "35: asset_params_get AssetTotal",
+              "36: assert",
+              "39: itob",
+              "40: bytec_0",
+              "41: swap",
+              "42: concat",
+              "43: log",
+              "44: pushint 1",
+              "45: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x1a350779 0x46bfb4e4",
-              "12: txna ApplicationArgs 0",
-              "13: match main_get_asset_total_supply_route@3 main_get_asset_total_supply_with_arg_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x1a350779 0x59dcb8c9",
+              "17: txna ApplicationArgs 0",
+              "18: match get_asset_total_supply get_asset_total_supply_with_arg"
             ],
             [
-              "21: main_get_asset_total_supply_with_arg_route@4:",
-              "24: txn OnCompletion",
-              "25: !",
-              "26: assert",
-              "27: txn ApplicationID",
-              "28: assert",
-              "31: txna ApplicationArgs 1",
-              "32: btoi",
-              "33: txnas Assets",
-              "36: callsub get_asset_total_supply_with_arg"
-            ],
-            [
-              "85: get_asset_total_supply_with_arg:",
-              "89: proto 1 1",
-              "92: frame_dig -1",
-              "93: asset_params_get AssetTotal",
-              "94: assert",
-              "95: retsub"
-            ],
-            [
-              "37: itob",
-              "38: bytec_0",
-              "39: swap",
-              "40: concat",
-              "41: log",
-              "42: pushint 1",
-              "43: return"
+              "49: get_asset_total_supply_with_arg:",
+              "52: txna ApplicationArgs 1",
+              "53: btoi",
+              "56: asset_params_get AssetTotal",
+              "57: assert",
+              "60: itob",
+              "61: bytec_0",
+              "62: swap",
+              "63: concat",
+              "64: log",
+              "65: pushint 1",
+              "66: return"
             ]
           ]
         }
@@ -117,96 +100,79 @@
       "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x1a350779 0x46bfb4e4",
-              "12: txna ApplicationArgs 0",
-              "13: match main_get_asset_total_supply_route@3 main_get_asset_total_supply_with_arg_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x1a350779 0x59dcb8c9",
+              "17: txna ApplicationArgs 0",
+              "18: match get_asset_total_supply get_asset_total_supply_with_arg"
             ],
             [
-              "45: main_get_asset_total_supply_route@3:",
-              "48: txn OnCompletion",
-              "49: !",
-              "50: assert",
-              "51: txn ApplicationID",
-              "52: assert",
-              "53: callsub get_asset_total_supply"
-            ],
-            [
-              "75: get_asset_total_supply:",
-              "78: pushint 1185",
-              "79: asset_params_get AssetTotal",
-              "80: assert",
-              "81: retsub"
-            ],
-            [
-              "54: itob",
-              "55: bytec_0",
-              "56: swap",
-              "57: concat",
-              "58: log",
-              "59: pushint 1",
-              "60: return"
+              "31: get_asset_total_supply:",
+              "34: pushint 1185",
+              "35: asset_params_get AssetTotal",
+              "36: assert",
+              "39: itob",
+              "40: bytec_0",
+              "41: swap",
+              "42: concat",
+              "43: log",
+              "44: pushint 1",
+              "45: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x1a350779 0x46bfb4e4",
-              "12: txna ApplicationArgs 0",
-              "13: match main_get_asset_total_supply_route@3 main_get_asset_total_supply_with_arg_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x1a350779 0x59dcb8c9",
+              "17: txna ApplicationArgs 0",
+              "18: match get_asset_total_supply get_asset_total_supply_with_arg"
             ],
             [
-              "21: main_get_asset_total_supply_with_arg_route@4:",
-              "24: txn OnCompletion",
-              "25: !",
-              "26: assert",
-              "27: txn ApplicationID",
-              "28: assert",
-              "31: txna ApplicationArgs 1",
-              "32: btoi",
-              "33: txnas Assets",
-              "36: callsub get_asset_total_supply_with_arg"
-            ],
-            [
-              "85: get_asset_total_supply_with_arg:",
-              "89: proto 1 1",
-              "92: frame_dig -1",
-              "93: asset_params_get AssetTotal",
-              "94: assert",
-              "95: retsub"
-            ],
-            [
-              "37: itob",
-              "38: bytec_0",
-              "39: swap",
-              "40: concat",
-              "41: log",
-              "42: pushint 1",
-              "43: return"
+              "49: get_asset_total_supply_with_arg:",
+              "52: txna ApplicationArgs 1",
+              "53: btoi",
+              "56: asset_params_get AssetTotal",
+              "57: assert",
+              "60: itob",
+              "61: bytec_0",
+              "62: swap",
+              "63: concat",
+              "64: log",
+              "65: pushint 1",
+              "66: return"
             ]
           ]
         }
@@ -242,96 +208,79 @@
       "help": "Do not approve `DeleteApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x1a350779 0x46bfb4e4",
-              "12: txna ApplicationArgs 0",
-              "13: match main_get_asset_total_supply_route@3 main_get_asset_total_supply_with_arg_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x1a350779 0x59dcb8c9",
+              "17: txna ApplicationArgs 0",
+              "18: match get_asset_total_supply get_asset_total_supply_with_arg"
             ],
             [
-              "45: main_get_asset_total_supply_route@3:",
-              "48: txn OnCompletion",
-              "49: !",
-              "50: assert",
-              "51: txn ApplicationID",
-              "52: assert",
-              "53: callsub get_asset_total_supply"
-            ],
-            [
-              "75: get_asset_total_supply:",
-              "78: pushint 1185",
-              "79: asset_params_get AssetTotal",
-              "80: assert",
-              "81: retsub"
-            ],
-            [
-              "54: itob",
-              "55: bytec_0",
-              "56: swap",
-              "57: concat",
-              "58: log",
-              "59: pushint 1",
-              "60: return"
+              "31: get_asset_total_supply:",
+              "34: pushint 1185",
+              "35: asset_params_get AssetTotal",
+              "36: assert",
+              "39: itob",
+              "40: bytec_0",
+              "41: swap",
+              "42: concat",
+              "43: log",
+              "44: pushint 1",
+              "45: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x1a350779 0x46bfb4e4",
-              "12: txna ApplicationArgs 0",
-              "13: match main_get_asset_total_supply_route@3 main_get_asset_total_supply_with_arg_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x1a350779 0x59dcb8c9",
+              "17: txna ApplicationArgs 0",
+              "18: match get_asset_total_supply get_asset_total_supply_with_arg"
             ],
             [
-              "21: main_get_asset_total_supply_with_arg_route@4:",
-              "24: txn OnCompletion",
-              "25: !",
-              "26: assert",
-              "27: txn ApplicationID",
-              "28: assert",
-              "31: txna ApplicationArgs 1",
-              "32: btoi",
-              "33: txnas Assets",
-              "36: callsub get_asset_total_supply_with_arg"
-            ],
-            [
-              "85: get_asset_total_supply_with_arg:",
-              "89: proto 1 1",
-              "92: frame_dig -1",
-              "93: asset_params_get AssetTotal",
-              "94: assert",
-              "95: retsub"
-            ],
-            [
-              "37: itob",
-              "38: bytec_0",
-              "39: swap",
-              "40: concat",
-              "41: log",
-              "42: pushint 1",
-              "43: return"
+              "49: get_asset_total_supply_with_arg:",
+              "52: txna ApplicationArgs 1",
+              "53: btoi",
+              "56: asset_params_get AssetTotal",
+              "57: assert",
+              "60: itob",
+              "61: bytec_0",
+              "62: swap",
+              "63: concat",
+              "64: log",
+              "65: pushint 1",
+              "66: return"
             ]
           ]
         }
@@ -347,96 +296,79 @@
       "help": "Do not approve `UpdateApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x1a350779 0x46bfb4e4",
-              "12: txna ApplicationArgs 0",
-              "13: match main_get_asset_total_supply_route@3 main_get_asset_total_supply_with_arg_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x1a350779 0x59dcb8c9",
+              "17: txna ApplicationArgs 0",
+              "18: match get_asset_total_supply get_asset_total_supply_with_arg"
             ],
             [
-              "45: main_get_asset_total_supply_route@3:",
-              "48: txn OnCompletion",
-              "49: !",
-              "50: assert",
-              "51: txn ApplicationID",
-              "52: assert",
-              "53: callsub get_asset_total_supply"
-            ],
-            [
-              "75: get_asset_total_supply:",
-              "78: pushint 1185",
-              "79: asset_params_get AssetTotal",
-              "80: assert",
-              "81: retsub"
-            ],
-            [
-              "54: itob",
-              "55: bytec_0",
-              "56: swap",
-              "57: concat",
-              "58: log",
-              "59: pushint 1",
-              "60: return"
+              "31: get_asset_total_supply:",
+              "34: pushint 1185",
+              "35: asset_params_get AssetTotal",
+              "36: assert",
+              "39: itob",
+              "40: bytec_0",
+              "41: swap",
+              "42: concat",
+              "43: log",
+              "44: pushint 1",
+              "45: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x1a350779 0x46bfb4e4",
-              "12: txna ApplicationArgs 0",
-              "13: match main_get_asset_total_supply_route@3 main_get_asset_total_supply_with_arg_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x1a350779 0x59dcb8c9",
+              "17: txna ApplicationArgs 0",
+              "18: match get_asset_total_supply get_asset_total_supply_with_arg"
             ],
             [
-              "21: main_get_asset_total_supply_with_arg_route@4:",
-              "24: txn OnCompletion",
-              "25: !",
-              "26: assert",
-              "27: txn ApplicationID",
-              "28: assert",
-              "31: txna ApplicationArgs 1",
-              "32: btoi",
-              "33: txnas Assets",
-              "36: callsub get_asset_total_supply_with_arg"
-            ],
-            [
-              "85: get_asset_total_supply_with_arg:",
-              "89: proto 1 1",
-              "92: frame_dig -1",
-              "93: asset_params_get AssetTotal",
-              "94: assert",
-              "95: retsub"
-            ],
-            [
-              "37: itob",
-              "38: bytec_0",
-              "39: swap",
-              "40: concat",
-              "41: log",
-              "42: pushint 1",
-              "43: return"
+              "49: get_asset_total_supply_with_arg:",
+              "52: txna ApplicationArgs 1",
+              "53: btoi",
+              "56: asset_params_get AssetTotal",
+              "57: assert",
+              "60: itob",
+              "61: bytec_0",
+              "62: swap",
+              "63: concat",
+              "64: log",
+              "65: pushint 1",
+              "66: return"
             ]
           ]
         }
@@ -452,123 +384,103 @@
       "help": "Validate `Fee` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x1a350779 0x46bfb4e4",
-              "12: txna ApplicationArgs 0",
-              "13: match main_get_asset_total_supply_route@3 main_get_asset_total_supply_with_arg_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x1a350779 0x59dcb8c9",
+              "17: txna ApplicationArgs 0",
+              "18: match get_asset_total_supply get_asset_total_supply_with_arg"
             ],
             [
-              "45: main_get_asset_total_supply_route@3:",
-              "48: txn OnCompletion",
-              "49: !",
-              "50: assert",
-              "51: txn ApplicationID",
-              "52: assert",
-              "53: callsub get_asset_total_supply"
-            ],
-            [
-              "75: get_asset_total_supply:",
-              "78: pushint 1185",
-              "79: asset_params_get AssetTotal",
-              "80: assert",
-              "81: retsub"
-            ],
-            [
-              "54: itob",
-              "55: bytec_0",
-              "56: swap",
-              "57: concat",
-              "58: log",
-              "59: pushint 1",
-              "60: return"
+              "31: get_asset_total_supply:",
+              "34: pushint 1185",
+              "35: asset_params_get AssetTotal",
+              "36: assert",
+              "39: itob",
+              "40: bytec_0",
+              "41: swap",
+              "42: concat",
+              "43: log",
+              "44: pushint 1",
+              "45: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x1a350779 0x46bfb4e4",
-              "12: txna ApplicationArgs 0",
-              "13: match main_get_asset_total_supply_route@3 main_get_asset_total_supply_with_arg_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x1a350779 0x59dcb8c9",
+              "17: txna ApplicationArgs 0",
+              "18: match get_asset_total_supply get_asset_total_supply_with_arg"
             ],
             [
-              "21: main_get_asset_total_supply_with_arg_route@4:",
-              "24: txn OnCompletion",
+              "49: get_asset_total_supply_with_arg:",
+              "52: txna ApplicationArgs 1",
+              "53: btoi",
+              "56: asset_params_get AssetTotal",
+              "57: assert",
+              "60: itob",
+              "61: bytec_0",
+              "62: swap",
+              "63: concat",
+              "64: log",
+              "65: pushint 1",
+              "66: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "9: txn NumAppArgs",
+              "10: bz main___algopy_default_create@9"
+            ],
+            [
+              "21: main___algopy_default_create@9:",
+              "22: txn OnCompletion",
+              "23: !",
+              "24: txn ApplicationID",
               "25: !",
-              "26: assert",
-              "27: txn ApplicationID",
-              "28: assert",
-              "31: txna ApplicationArgs 1",
-              "32: btoi",
-              "33: txnas Assets",
-              "36: callsub get_asset_total_supply_with_arg"
-            ],
-            [
-              "85: get_asset_total_supply_with_arg:",
-              "89: proto 1 1",
-              "92: frame_dig -1",
-              "93: asset_params_get AssetTotal",
-              "94: assert",
-              "95: retsub"
-            ],
-            [
-              "37: itob",
-              "38: bytec_0",
-              "39: swap",
-              "40: concat",
-              "41: log",
-              "42: pushint 1",
-              "43: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 8 -> 9",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: bytecblock 0x151f7c75",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
-            ],
-            [
-              "62: main_bare_routing@7:",
-              "65: txn OnCompletion",
-              "66: bnz main_after_if_else@11"
-            ],
-            [
-              "67: txn ApplicationID",
-              "68: !",
-              "69: assert",
-              "70: pushint 1",
-              "71: return"
+              "26: &&",
+              "27: return"
             ]
           ]
         }
@@ -594,123 +506,103 @@
       "help": "Validate `RekeyTo` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x1a350779 0x46bfb4e4",
-              "12: txna ApplicationArgs 0",
-              "13: match main_get_asset_total_supply_route@3 main_get_asset_total_supply_with_arg_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x1a350779 0x59dcb8c9",
+              "17: txna ApplicationArgs 0",
+              "18: match get_asset_total_supply get_asset_total_supply_with_arg"
             ],
             [
-              "45: main_get_asset_total_supply_route@3:",
-              "48: txn OnCompletion",
-              "49: !",
-              "50: assert",
-              "51: txn ApplicationID",
-              "52: assert",
-              "53: callsub get_asset_total_supply"
-            ],
-            [
-              "75: get_asset_total_supply:",
-              "78: pushint 1185",
-              "79: asset_params_get AssetTotal",
-              "80: assert",
-              "81: retsub"
-            ],
-            [
-              "54: itob",
-              "55: bytec_0",
-              "56: swap",
-              "57: concat",
-              "58: log",
-              "59: pushint 1",
-              "60: return"
+              "31: get_asset_total_supply:",
+              "34: pushint 1185",
+              "35: asset_params_get AssetTotal",
+              "36: assert",
+              "39: itob",
+              "40: bytec_0",
+              "41: swap",
+              "42: concat",
+              "43: log",
+              "44: pushint 1",
+              "45: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x1a350779 0x46bfb4e4",
-              "12: txna ApplicationArgs 0",
-              "13: match main_get_asset_total_supply_route@3 main_get_asset_total_supply_with_arg_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x1a350779 0x59dcb8c9",
+              "17: txna ApplicationArgs 0",
+              "18: match get_asset_total_supply get_asset_total_supply_with_arg"
             ],
             [
-              "21: main_get_asset_total_supply_with_arg_route@4:",
-              "24: txn OnCompletion",
+              "49: get_asset_total_supply_with_arg:",
+              "52: txna ApplicationArgs 1",
+              "53: btoi",
+              "56: asset_params_get AssetTotal",
+              "57: assert",
+              "60: itob",
+              "61: bytec_0",
+              "62: swap",
+              "63: concat",
+              "64: log",
+              "65: pushint 1",
+              "66: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "9: txn NumAppArgs",
+              "10: bz main___algopy_default_create@9"
+            ],
+            [
+              "21: main___algopy_default_create@9:",
+              "22: txn OnCompletion",
+              "23: !",
+              "24: txn ApplicationID",
               "25: !",
-              "26: assert",
-              "27: txn ApplicationID",
-              "28: assert",
-              "31: txna ApplicationArgs 1",
-              "32: btoi",
-              "33: txnas Assets",
-              "36: callsub get_asset_total_supply_with_arg"
-            ],
-            [
-              "85: get_asset_total_supply_with_arg:",
-              "89: proto 1 1",
-              "92: frame_dig -1",
-              "93: asset_params_get AssetTotal",
-              "94: assert",
-              "95: retsub"
-            ],
-            [
-              "37: itob",
-              "38: bytec_0",
-              "39: swap",
-              "40: concat",
-              "41: log",
-              "42: pushint 1",
-              "43: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 8 -> 9",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: bytecblock 0x151f7c75",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
-            ],
-            [
-              "62: main_bare_routing@7:",
-              "65: txn OnCompletion",
-              "66: bnz main_after_if_else@11"
-            ],
-            [
-              "67: txn ApplicationID",
-              "68: !",
-              "69: assert",
-              "70: pushint 1",
-              "71: return"
+              "26: &&",
+              "27: return"
             ]
           ]
         }

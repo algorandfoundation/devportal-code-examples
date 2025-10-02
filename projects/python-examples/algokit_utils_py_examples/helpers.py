@@ -62,7 +62,10 @@ def bootstrap_reference_account_example(
 ) -> tuple[SigningAccount, ReferenceAccountClient]:
     # Create an account from mnemonic for reference examples
     reference_account = algorand.account.from_mnemonic(
-        mnemonic="rice broken rail solve mobile pill glue maximum speak mean stumble orbit mixed empower rent congress nest input peanut crush comfort spell swear abandon actual"
+        mnemonic=(
+            "rice broken rail solve mobile pill glue maximum speak mean stumble orbit "
+            "mixed empower rent congress nest input peanut crush comfort spell swear abandon actual"
+        )
     )
 
     factory = algorand.client.get_typed_app_factory(
@@ -133,7 +136,6 @@ def bootstrap_account_asset_reference_example(
 def bootstrap_reference_account_app_example(
     algorand: AlgorandClient, account: SigningAccount
 ) -> ReferenceAccountAppClient:
-
     counter_factory = algorand.client.get_typed_app_factory(
         MyCounterFactory,
         default_sender=account.address,

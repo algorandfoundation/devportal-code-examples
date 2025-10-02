@@ -1,4 +1,4 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 // smart_contracts.self_payment.contract.self_payment() -> uint64:
@@ -143,8 +143,7 @@ main:
     // smart_contracts/self_payment/contract.py:29
     // and Txn.lease == op.sha256(b"self-payment")
     txn Lease
-    pushbytes 0x73656c662d7061796d656e74
-    sha256
+    pushbytes 0xd751a814da6b1673556450ce8f7de3c5cc2eb93ac6c1e54339682c0a8f0af709
     ==
     // smart_contracts/self_payment/contract.py:20-29
     // Txn.type_enum == TransactionType.Payment

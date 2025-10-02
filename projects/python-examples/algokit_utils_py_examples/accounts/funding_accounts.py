@@ -47,7 +47,8 @@ def funding_accounts() -> None:
     # example: ENSURE_FUNDED
     """
     Funds a given account using a dispenser account as a funding source.
-    Ensures the given account has a certain amount of Algo free to spend (accounting for Algo locked in minimum balance requirement).
+    Ensures the given account has a certain amount of Algo free to spend
+    (accounting for Algo locked in minimum balance requirement).
     """
     algorand_client.account.ensure_funded(
         account_to_fund=random_account.address,
@@ -59,7 +60,9 @@ def funding_accounts() -> None:
     # example: ENSURE_FUNDED_FROM_ENV
     """
     Ensure an account is funded from a dispenser account configured in environment.
-    Uses a dispenser account retrieved from the environment, per the dispenser_from_environment method, as a funding source such that the given account has a certain amount of Algo free to spend (accounting for Algo locked in minimum balance requirement).
+    Uses a dispenser account retrieved from the environment, per the dispenser_from_environment method,
+    as a funding source such that the given account has a certain amount of Algo free to spend
+    (accounting for Algo locked in minimum balance requirement).
     """
     algorand_client.account.ensure_funded_from_environment(
         account_to_fund=random_account.address,
@@ -70,7 +73,9 @@ def funding_accounts() -> None:
     # example: ENSURE_FUNDED_TESTNET
     """
     Ensure an account is funded from a dispenser account retrieved from the testnet dispenser API.
-    Uses a dispenser account retrieved from the testnet dispenser API, per the ensure_funded_from_testnet_dispenser_api method, as a funding source such that the given account has a certain amount of Algo free to spend (accounting for Algo locked in minimum balance requirement).
+    Uses a dispenser account retrieved from the testnet dispenser API, per the
+    ensure_funded_from_testnet_dispenser_api method, as a funding source such that the given account
+    has a certain amount of Algo free to spend (accounting for Algo locked in minimum balance requirement).
     """
     testnet_dispenser = algorand_client.client.get_testnet_dispenser()
 

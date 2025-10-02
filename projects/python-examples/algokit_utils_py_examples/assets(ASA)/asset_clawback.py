@@ -7,7 +7,6 @@ from algokit_utils_py_examples.helpers import (
 
 
 def asset_clawback() -> None:
-
     env: LocalnetEnvironment = setup_localnet_environment()
     algorand_client = env.algorand_client
     manager = env.account_a  # Using account_a as the manager

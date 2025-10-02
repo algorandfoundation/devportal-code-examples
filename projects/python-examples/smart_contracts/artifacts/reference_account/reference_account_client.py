@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "get_account_balance", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "account", "name": "account"}], "name": "get_account_balance_with_argument", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}], "name": "ReferenceAccount", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CiYBBBUffHUxG0EAQoICBExbyiwEDJLy+zYaAI4CABsAA4EAQzEZFEQxGEQ2GgEXwByIAEwWKExQsIEBQzEZFEQxGESIABQWKExQsIEBQzEZQP/OMRgURIEBQ4Agsw5eFWlqsaC8qv4fXqB+dn66jDoPvZncgGLXpt+WTmJzAESJigEBi/9zAESJ", "clear": "CoEBQw=="}, "compilerInfo": {"compiler": "puya", "compilerVersion": {"major": 4, "minor": 5, "patch": 3}}, "desc": "\n    Returns the balance of the account\n    @returns The balance of the account\n    ", "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGJ5dGVjYmxvY2sgMHgxNTFmN2M3NQogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50L2NvbnRyYWN0LnB5OjEwCiAgICAvLyBjbGFzcyBSZWZlcmVuY2VBY2NvdW50KEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9iYXJlX3JvdXRpbmdANwogICAgcHVzaGJ5dGVzcyAweDRjNWJjYTJjIDB4MGM5MmYyZmIgLy8gbWV0aG9kICJnZXRfYWNjb3VudF9iYWxhbmNlKCl1aW50NjQiLCBtZXRob2QgImdldF9hY2NvdW50X2JhbGFuY2Vfd2l0aF9hcmd1bWVudChhY2NvdW50KXVpbnQ2NCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fZ2V0X2FjY291bnRfYmFsYW5jZV9yb3V0ZUAzIG1haW5fZ2V0X2FjY291bnRfYmFsYW5jZV93aXRoX2FyZ3VtZW50X3JvdXRlQDQKCm1haW5fYWZ0ZXJfaWZfZWxzZUAxMToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudC9jb250cmFjdC5weToxMAogICAgLy8gY2xhc3MgUmVmZXJlbmNlQWNjb3VudChBUkM0Q29udHJhY3QpOgogICAgcHVzaGludCAwIC8vIDAKICAgIHJldHVybgoKbWFpbl9nZXRfYWNjb3VudF9iYWxhbmNlX3dpdGhfYXJndW1lbnRfcm91dGVANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudC9jb250cmFjdC5weToyOAogICAgLy8gQGFiaW1ldGhvZAogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnQvY29udHJhY3QucHk6MTAKICAgIC8vIGNsYXNzIFJlZmVyZW5jZUFjY291bnQoQVJDNENvbnRyYWN0KToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGJ0b2kKICAgIHR4bmFzIEFjY291bnRzCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnQvY29udHJhY3QucHk6MjgKICAgIC8vIEBhYmltZXRob2QKICAgIGNhbGxzdWIgZ2V0X2FjY291bnRfYmFsYW5jZV93aXRoX2FyZ3VtZW50CiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCgptYWluX2dldF9hY2NvdW50X2JhbGFuY2Vfcm91dGVAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudC9jb250cmFjdC5weToxNgogICAgLy8gQGFiaW1ldGhvZAogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIGdldF9hY2NvdW50X2JhbGFuY2UKICAgIGl0b2IKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4KCm1haW5fYmFyZV9yb3V0aW5nQDc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnQvY29udHJhY3QucHk6MTAKICAgIC8vIGNsYXNzIFJlZmVyZW5jZUFjY291bnQoQVJDNENvbnRyYWN0KToKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMTEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLnJlZmVyZW5jZV9hY2NvdW50LmNvbnRyYWN0LlJlZmVyZW5jZUFjY291bnQuZ2V0X2FjY291bnRfYmFsYW5jZSgpIC0+IHVpbnQ2NDoKZ2V0X2FjY291bnRfYmFsYW5jZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudC9jb250cmFjdC5weToxOC0yMAogICAgLy8gcmV0dXJuIEFjY291bnQoCiAgICAvLyAgICAgIldNSEY0RkxKTktZMkJQRks3WVBWNUlENk9aN0xWREIyQjY2WlRYRUFNTEwyTlg0V0paUkpGVlg2Nk0iCiAgICAvLyApLmJhbGFuY2UgICMgUmVwbGFjZSB3aXRoIHlvdXIgYWNjb3VudCBhZGRyZXNzCiAgICBwdXNoYnl0ZXMgYmFzZTMyKFdNSEY0RkxKTktZMkJQRks3WVBWNUlENk9aN0xWREIyQjY2WlRYRUFNTEwyTlg0V0paUkEpIC8vIGFkZHIgV01IRjRGTEpOS1kyQlBGSzdZUFY1SUQ2T1o3TFZEQjJCNjZaVFhFQU1MTDJOWDRXSlpSSkZWWDY2TQogICAgYWNjdF9wYXJhbXNfZ2V0IEFjY3RCYWxhbmNlCiAgICBhc3NlcnQgLy8gYWNjb3VudCBmdW5kZWQKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5yZWZlcmVuY2VfYWNjb3VudC5jb250cmFjdC5SZWZlcmVuY2VBY2NvdW50LmdldF9hY2NvdW50X2JhbGFuY2Vfd2l0aF9hcmd1bWVudChhY2NvdW50OiBieXRlcykgLT4gdWludDY0OgpnZXRfYWNjb3VudF9iYWxhbmNlX3dpdGhfYXJndW1lbnQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnQvY29udHJhY3QucHk6MjgtMjkKICAgIC8vIEBhYmltZXRob2QKICAgIC8vIGRlZiBnZXRfYWNjb3VudF9iYWxhbmNlX3dpdGhfYXJndW1lbnQoc2VsZiwgYWNjb3VudDogQWNjb3VudCkgLT4gVUludDY0OgogICAgcHJvdG8gMSAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnQvY29udHJhY3QucHk6MzAKICAgIC8vIHJldHVybiBhY2NvdW50LmJhbGFuY2UKICAgIGZyYW1lX2RpZyAtMQogICAgYWNjdF9wYXJhbXNfZ2V0IEFjY3RCYWxhbmNlCiAgICBhc3NlcnQgLy8gYWNjb3VudCBmdW5kZWQKICAgIHJldHN1Ygo=", "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [40, 64], "errorMessage": "OnCompletion is not NoOp"}, {"pc": [127, 136], "errorMessage": "account funded"}, {"pc": [87], "errorMessage": "can only call when creating"}, {"pc": [43, 67], "errorMessage": "can only call when not creating"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "get_account_balance", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "account"}], "name": "get_account_balance_with_argument", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}], "name": "ReferenceAccount", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyYBBBUffHUxG0EAHTEZFEQxGESCAgRMW8osBNxWLrw2GgCOAgAJADYAMRkUMRgUEEOAILMOXhVparGgvKr+H16gfnZ+uow6D72Z3IBi16bflk5icwBEFihMULCBAUM2GgFzAEQWKExQsIEBQw==", "clear": "C4EBQw=="}, "desc": "\n    Returns the balance of the account\n    @returns The balance of the account\n    ", "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGJ5dGVjYmxvY2sgMHgxNTFmN2M3NQogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50L2NvbnRyYWN0LnB5OjEwCiAgICAvLyBjbGFzcyBSZWZlcmVuY2VBY2NvdW50KEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUA5CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweDRjNWJjYTJjIDB4ZGM1NjJlYmMgLy8gbWV0aG9kICJnZXRfYWNjb3VudF9iYWxhbmNlKCl1aW50NjQiLCBtZXRob2QgImdldF9hY2NvdW50X2JhbGFuY2Vfd2l0aF9hcmd1bWVudChhZGRyZXNzKXVpbnQ2NCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGdldF9hY2NvdW50X2JhbGFuY2UgZ2V0X2FjY291bnRfYmFsYW5jZV93aXRoX2FyZ3VtZW50CiAgICBlcnIKCm1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVAOToKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuIC8vIG9uIGVycm9yOiBPbkNvbXBsZXRpb24gbXVzdCBiZSBOb09wICYmIGNhbiBvbmx5IGNhbGwgd2hlbiBjcmVhdGluZwoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5yZWZlcmVuY2VfYWNjb3VudC5jb250cmFjdC5SZWZlcmVuY2VBY2NvdW50LmdldF9hY2NvdW50X2JhbGFuY2Vbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfYWNjb3VudF9iYWxhbmNlOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50L2NvbnRyYWN0LnB5OjE4LTIwCiAgICAvLyByZXR1cm4gQWNjb3VudCgKICAgIC8vICAgICAiV01IRjRGTEpOS1kyQlBGSzdZUFY1SUQ2T1o3TFZEQjJCNjZaVFhFQU1MTDJOWDRXSlpSSkZWWDY2TSIKICAgIC8vICkuYmFsYW5jZSAgIyBSZXBsYWNlIHdpdGggeW91ciBhY2NvdW50IGFkZHJlc3MKICAgIHB1c2hieXRlcyBiYXNlMzIoV01IRjRGTEpOS1kyQlBGSzdZUFY1SUQ2T1o3TFZEQjJCNjZaVFhFQU1MTDJOWDRXSlpSQSkgLy8gYWRkciBXTUhGNEZMSk5LWTJCUEZLN1lQVjVJRDZPWjdMVkRCMkI2NlpUWEVBTUxMMk5YNFdKWlJKRlZYNjZNCiAgICBhY2N0X3BhcmFtc19nZXQgQWNjdEJhbGFuY2UKICAgIGFzc2VydCAvLyBhY2NvdW50IGZ1bmRlZAogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50L2NvbnRyYWN0LnB5OjE2CiAgICAvLyBAYWJpbWV0aG9kCiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLnJlZmVyZW5jZV9hY2NvdW50LmNvbnRyYWN0LlJlZmVyZW5jZUFjY291bnQuZ2V0X2FjY291bnRfYmFsYW5jZV93aXRoX2FyZ3VtZW50W3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X2FjY291bnRfYmFsYW5jZV93aXRoX2FyZ3VtZW50OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50L2NvbnRyYWN0LnB5OjI4CiAgICAvLyBAYWJpbWV0aG9kCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnQvY29udHJhY3QucHk6MzAKICAgIC8vIHJldHVybiBhY2NvdW50LmJhbGFuY2UKICAgIGFjY3RfcGFyYW1zX2dldCBBY2N0QmFsYW5jZQogICAgYXNzZXJ0IC8vIGFjY291bnQgZnVuZGVkCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnQvY29udHJhY3QucHk6MjgKICAgIC8vIEBhYmltZXRob2QKICAgIGl0b2IKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [16], "errorMessage": "OnCompletion must be NoOp"}, {"pc": [49], "errorMessage": "OnCompletion must be NoOp && can only call when creating"}, {"pc": [86, 100], "errorMessage": "account funded"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -67,11 +67,11 @@ def _init_dataclass(cls: type, data: dict) -> object:
 @dataclasses.dataclass(frozen=True, kw_only=True)
 class GetAccountBalanceWithArgumentArgs:
     """Dataclass for get_account_balance_with_argument arguments"""
-    account: str | bytes
+    account: str
 
     @property
     def abi_method_signature(self) -> str:
-        return "get_account_balance_with_argument(account)uint64"
+        return "get_account_balance_with_argument(address)uint64"
 
 
 class ReferenceAccountParams:
@@ -91,14 +91,14 @@ class ReferenceAccountParams:
 
     def get_account_balance_with_argument(
         self,
-        args: tuple[str | bytes] | GetAccountBalanceWithArgumentArgs,
+        args: tuple[str] | GetAccountBalanceWithArgumentArgs,
         params: algokit_utils.CommonAppCallParams | None = None
     ) -> algokit_utils.AppCallMethodCallParams:
         method_args = _parse_abi_args(args)
         params = params or algokit_utils.CommonAppCallParams()
         return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "get_account_balance_with_argument(account)uint64",
+            "method": "get_account_balance_with_argument(address)uint64",
             "args": method_args,
         }))
 
@@ -130,14 +130,14 @@ class ReferenceAccountCreateTransactionParams:
 
     def get_account_balance_with_argument(
         self,
-        args: tuple[str | bytes] | GetAccountBalanceWithArgumentArgs,
+        args: tuple[str] | GetAccountBalanceWithArgumentArgs,
         params: algokit_utils.CommonAppCallParams | None = None
     ) -> algokit_utils.BuiltTransactions:
         method_args = _parse_abi_args(args)
         params = params or algokit_utils.CommonAppCallParams()
         return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "get_account_balance_with_argument(account)uint64",
+            "method": "get_account_balance_with_argument(address)uint64",
             "args": method_args,
         }))
 
@@ -172,7 +172,7 @@ class ReferenceAccountSend:
 
     def get_account_balance_with_argument(
         self,
-        args: tuple[str | bytes] | GetAccountBalanceWithArgumentArgs,
+        args: tuple[str] | GetAccountBalanceWithArgumentArgs,
         params: algokit_utils.CommonAppCallParams | None = None,
         send_params: algokit_utils.SendParams | None = None
     ) -> algokit_utils.SendAppTransactionResult[int]:
@@ -180,7 +180,7 @@ class ReferenceAccountSend:
         params = params or algokit_utils.CommonAppCallParams()
         response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "get_account_balance_with_argument(account)uint64",
+            "method": "get_account_balance_with_argument(address)uint64",
             "args": method_args,
         }), send_params=send_params)
         parsed_response = response
@@ -355,7 +355,7 @@ class ReferenceAccountClient:
     @typing.overload
     def decode_return_value(
         self,
-        method: typing.Literal["get_account_balance_with_argument(account)uint64"],
+        method: typing.Literal["get_account_balance_with_argument(address)uint64"],
         return_value: algokit_utils.ABIReturn | None
     ) -> int | None: ...
     @typing.overload
@@ -561,18 +561,18 @@ class ReferenceAccountFactoryCreateParams:
 
     def get_account_balance_with_argument(
         self,
-        args: tuple[str | bytes] | GetAccountBalanceWithArgumentArgs,
+        args: tuple[str] | GetAccountBalanceWithArgumentArgs,
         *,
         params: algokit_utils.CommonAppCallCreateParams | None = None,
         compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> algokit_utils.AppCreateMethodCallParams:
-        """Creates a new instance using the get_account_balance_with_argument(account)uint64 ABI method"""
+        """Creates a new instance using the get_account_balance_with_argument(address)uint64 ABI method"""
         params = params or algokit_utils.CommonAppCallCreateParams()
         return self.app_factory.params.create(
             algokit_utils.AppFactoryCreateMethodCallParams(
                 **{
                 **dataclasses.asdict(params),
-                "method": "get_account_balance_with_argument(account)uint64",
+                "method": "get_account_balance_with_argument(address)uint64",
                 "args": _parse_abi_args(args),
                 }
             ),
@@ -699,7 +699,7 @@ class ReferenceAccountComposer:
 
     def get_account_balance_with_argument(
         self,
-        args: tuple[str | bytes] | GetAccountBalanceWithArgumentArgs,
+        args: tuple[str] | GetAccountBalanceWithArgumentArgs,
         params: algokit_utils.CommonAppCallParams | None = None
     ) -> "ReferenceAccountComposer":
         self._composer.add_app_call_method_call(
@@ -710,7 +710,7 @@ class ReferenceAccountComposer:
         )
         self._result_mappers.append(
             lambda v: self.client.decode_return_value(
-                "get_account_balance_with_argument(account)uint64", v
+                "get_account_balance_with_argument(address)uint64", v
             )
         )
         return self

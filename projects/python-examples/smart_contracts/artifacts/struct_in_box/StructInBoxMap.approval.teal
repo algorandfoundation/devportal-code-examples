@@ -1,136 +1,41 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
-// smart_contracts.struct_in_box.contract.StructInBoxMap.__algopy_entrypoint_with_init() -> uint64:
+// algopy.arc4.ARC4Contract.approval_program() -> uint64:
 main:
-    intcblock 1 0 28
-    bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 "users"
+    intcblock 1
+    bytecblock 0x75736572730000000000000000 "users" 0x151f7c7580 0x151f7c75
     // smart_contracts/struct_in_box/contract.py:11
     // class StructInBoxMap(arc4.ARC4Contract):
     txn NumAppArgs
-    bz main_bare_routing@9
+    bz main___algopy_default_create@13
+    txn OnCompletion
+    !
+    assert // OnCompletion must be NoOp
+    txn ApplicationID
+    assert
     pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364 // method "box_map_test()bool", method "box_map_set(uint64,(string,uint64,uint64))bool", method "box_map_get(uint64)(string,uint64,uint64)", method "box_map_exists(uint64)bool"
     txna ApplicationArgs 0
-    match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8
+    match box_map_test box_map_set box_map_get box_map_exists
+    err
 
-main_after_if_else@11:
-    // smart_contracts/struct_in_box/contract.py:11
-    // class StructInBoxMap(arc4.ARC4Contract):
-    intc_1 // 0
-    return
-
-main_box_map_exists_route@8:
-    // smart_contracts/struct_in_box/contract.py:35
-    // @arc4.abimethod
+main___algopy_default_create@13:
     txn OnCompletion
     !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    // smart_contracts/struct_in_box/contract.py:11
-    // class StructInBoxMap(arc4.ARC4Contract):
-    txna ApplicationArgs 1
-    // smart_contracts/struct_in_box/contract.py:35
-    // @arc4.abimethod
-    callsub box_map_exists
-    bytec_2 // 0x00
-    intc_1 // 0
-    uncover 2
-    setbit
-    bytec_0 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_0 // 1
-    return
-
-main_box_map_get_route@7:
-    // smart_contracts/struct_in_box/contract.py:31
-    // @arc4.abimethod
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    // smart_contracts/struct_in_box/contract.py:11
-    // class StructInBoxMap(arc4.ARC4Contract):
-    txna ApplicationArgs 1
-    // smart_contracts/struct_in_box/contract.py:31
-    // @arc4.abimethod
-    callsub box_map_get
-    bytec_0 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_0 // 1
-    return
-
-main_box_map_set_route@6:
-    // smart_contracts/struct_in_box/contract.py:25
-    // @arc4.abimethod
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    // smart_contracts/struct_in_box/contract.py:11
-    // class StructInBoxMap(arc4.ARC4Contract):
-    txna ApplicationArgs 1
-    txna ApplicationArgs 2
-    // smart_contracts/struct_in_box/contract.py:25
-    // @arc4.abimethod
-    callsub box_map_set
-    bytec_2 // 0x00
-    intc_1 // 0
-    uncover 2
-    setbit
-    bytec_0 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_0 // 1
-    return
-
-main_box_map_test_route@5:
-    // smart_contracts/struct_in_box/contract.py:15
-    // @arc4.abimethod
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    callsub box_map_test
-    bytec_2 // 0x00
-    intc_1 // 0
-    uncover 2
-    setbit
-    bytec_0 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_0 // 1
-    return
-
-main_bare_routing@9:
-    // smart_contracts/struct_in_box/contract.py:11
-    // class StructInBoxMap(arc4.ARC4Contract):
-    txn OnCompletion
-    bnz main_after_if_else@11
     txn ApplicationID
     !
-    assert // can only call when creating
-    intc_0 // 1
-    return
+    &&
+    return // on error: OnCompletion must be NoOp && can only call when creating
 
 
-// smart_contracts.struct_in_box.contract.StructInBoxMap.box_map_test() -> uint64:
+// smart_contracts.struct_in_box.contract.StructInBoxMap.box_map_test[routing]() -> void:
 box_map_test:
     // smart_contracts/struct_in_box/contract.py:20
     // self.user_map[key_0] = value.copy()
-    bytec_1 // 0x75736572730000000000000000
+    bytec_0 // 0x75736572730000000000000000
     box_del
     pop
-    bytec_1 // 0x75736572730000000000000000
+    bytec_0 // 0x75736572730000000000000000
     // smart_contracts/struct_in_box/contract.py:18
     // value = UserStruct(arc4.String("testName"), arc4.UInt64(70), arc4.UInt64(2))
     pushbytes 0x0012000000000000004600000000000000020008746573744e616d65
@@ -139,83 +44,92 @@ box_map_test:
     box_put
     // smart_contracts/struct_in_box/contract.py:21
     // assert self.user_map[key_0].bytes.length == value.bytes.length
-    bytec_1 // 0x75736572730000000000000000
+    bytec_0 // 0x75736572730000000000000000
     box_len
-    assert // check self.user_map entry exists
-    intc_2 // 28
+    pop
+    pushint 28 // 28
     ==
     assert
-    // smart_contracts/struct_in_box/contract.py:22
-    // assert self.user_map.length(key_0) == value.bytes.length
-    bytec_1 // 0x75736572730000000000000000
-    box_len
-    assert // check self.user_map entry exists
-    intc_2 // 28
-    ==
-    assert
-    // smart_contracts/struct_in_box/contract.py:23
-    // return True
-    intc_0 // 1
-    retsub
-
-
-// smart_contracts.struct_in_box.contract.StructInBoxMap.box_map_set(key: bytes, value: bytes) -> uint64:
-box_map_set:
-    // smart_contracts/struct_in_box/contract.py:25-26
+    // smart_contracts/struct_in_box/contract.py:15
     // @arc4.abimethod
-    // def box_map_set(self, key: arc4.UInt64, value: UserStruct) -> bool:
-    proto 2 1
+    bytec_2 // 0x151f7c7580
+    log
+    intc_0 // 1
+    return
+
+
+// smart_contracts.struct_in_box.contract.StructInBoxMap.box_map_set[routing]() -> void:
+box_map_set:
+    // smart_contracts/struct_in_box/contract.py:25
+    // @arc4.abimethod
+    txna ApplicationArgs 2
     // smart_contracts/struct_in_box/contract.py:27
     // self.user_map[key] = value.copy()
-    bytec_3 // "users"
-    frame_dig -2
+    bytec_1 // "users"
+    // smart_contracts/struct_in_box/contract.py:25
+    // @arc4.abimethod
+    txna ApplicationArgs 1
+    // smart_contracts/struct_in_box/contract.py:27
+    // self.user_map[key] = value.copy()
     concat
     dup
     box_del
     pop
-    dup
-    frame_dig -1
+    swap
     box_put
-    // smart_contracts/struct_in_box/contract.py:28
-    // assert self.user_map[key] == value
-    box_get
-    assert // check self.user_map entry exists
-    frame_dig -1
-    ==
-    assert
-    // smart_contracts/struct_in_box/contract.py:29
-    // return True
-    intc_0 // 1
-    retsub
-
-
-// smart_contracts.struct_in_box.contract.StructInBoxMap.box_map_get(key: bytes) -> bytes:
-box_map_get:
-    // smart_contracts/struct_in_box/contract.py:31-32
+    // smart_contracts/struct_in_box/contract.py:25
     // @arc4.abimethod
-    // def box_map_get(self, key: arc4.UInt64) -> UserStruct:
-    proto 1 1
+    bytec_2 // 0x151f7c7580
+    log
+    intc_0 // 1
+    return
+
+
+// smart_contracts.struct_in_box.contract.StructInBoxMap.box_map_get[routing]() -> void:
+box_map_get:
     // smart_contracts/struct_in_box/contract.py:33
     // return self.user_map[key]
-    bytec_3 // "users"
-    frame_dig -1
+    bytec_1 // "users"
+    // smart_contracts/struct_in_box/contract.py:31
+    // @arc4.abimethod
+    txna ApplicationArgs 1
+    // smart_contracts/struct_in_box/contract.py:33
+    // return self.user_map[key]
     concat
     box_get
     assert // check self.user_map entry exists
-    retsub
-
-
-// smart_contracts.struct_in_box.contract.StructInBoxMap.box_map_exists(key: bytes) -> uint64:
-box_map_exists:
-    // smart_contracts/struct_in_box/contract.py:35-36
+    // smart_contracts/struct_in_box/contract.py:31
     // @arc4.abimethod
-    // def box_map_exists(self, key: arc4.UInt64) -> bool:
-    proto 1 1
+    bytec_3 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+
+// smart_contracts.struct_in_box.contract.StructInBoxMap.box_map_exists[routing]() -> void:
+box_map_exists:
     // smart_contracts/struct_in_box/contract.py:37
     // return key in self.user_map
-    bytec_3 // "users"
-    frame_dig -1
+    bytec_1 // "users"
+    // smart_contracts/struct_in_box/contract.py:35
+    // @arc4.abimethod
+    txna ApplicationArgs 1
+    // smart_contracts/struct_in_box/contract.py:37
+    // return key in self.user_map
     concat
     box_len
     bury 1
-    retsub
+    // smart_contracts/struct_in_box/contract.py:35
+    // @arc4.abimethod
+    pushbytes 0x00
+    pushint 0 // 0
+    uncover 2
+    setbit
+    bytec_3 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return

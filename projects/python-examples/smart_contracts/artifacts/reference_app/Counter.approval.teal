@@ -1,13 +1,13 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
-// smart_contracts.reference_app.contract.Counter.__algopy_entrypoint_with_init() -> uint64:
+// algopy.arc4.ARC4Contract.approval_program() -> uint64:
 main:
     intcblock 0 1
     bytecblock "counter"
     txn ApplicationID
     bnz main_after_if_else@2
-    // smart_contracts/reference_app/contract.py:14
+    // smart_contracts/reference_app/contract.py:13
     // self.counter = UInt64(0)
     bytec_0 // "counter"
     intc_0 // 0
@@ -17,49 +17,34 @@ main_after_if_else@2:
     // smart_contracts/reference_app/contract.py:11
     // class Counter(ARC4Contract):
     txn NumAppArgs
-    bz main_bare_routing@6
+    bz main___algopy_default_create@7
     pushbytes 0x4a325901 // method "increment()uint64"
     txna ApplicationArgs 0
     match main_increment_route@5
-
-main_after_if_else@8:
-    // smart_contracts/reference_app/contract.py:11
-    // class Counter(ARC4Contract):
-    intc_0 // 0
-    return
+    err
 
 main_increment_route@5:
-    // smart_contracts/reference_app/contract.py:21
+    // smart_contracts/reference_app/contract.py:20
     // @abimethod
     txn OnCompletion
     !
-    assert // OnCompletion is not NoOp
     txn ApplicationID
-    assert // can only call when not creating
-    callsub increment
-    itob
-    pushbytes 0x151f7c75
-    swap
-    concat
-    log
-    intc_1 // 1
-    return
+    &&
+    assert // OnCompletion must be NoOp && can only call when not creating
+    b increment
 
-main_bare_routing@6:
-    // smart_contracts/reference_app/contract.py:11
-    // class Counter(ARC4Contract):
+main___algopy_default_create@7:
     txn OnCompletion
-    bnz main_after_if_else@8
+    !
     txn ApplicationID
     !
-    assert // can only call when creating
-    intc_1 // 1
-    return
+    &&
+    return // on error: OnCompletion must be NoOp && can only call when creating
 
 
-// smart_contracts.reference_app.contract.Counter.increment() -> uint64:
+// smart_contracts.reference_app.contract.Counter.increment[routing]() -> void:
 increment:
-    // smart_contracts/reference_app/contract.py:23
+    // smart_contracts/reference_app/contract.py:22
     // self.counter += 1
     intc_0 // 0
     bytec_0 // "counter"
@@ -68,12 +53,14 @@ increment:
     intc_1 // 1
     +
     bytec_0 // "counter"
-    swap
+    dig 1
     app_global_put
-    // smart_contracts/reference_app/contract.py:24
-    // return self.counter
-    intc_0 // 0
-    bytec_0 // "counter"
-    app_global_get_ex
-    assert // check self.counter exists
-    retsub
+    // smart_contracts/reference_app/contract.py:20
+    // @abimethod
+    itob
+    pushbytes 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return

@@ -117,7 +117,6 @@ def test_asset_create(
     algorand: AlgorandClient,
     creator_inner_txn_app_client: InnerTransactionsClient,
 ) -> int:
-
     txn_result = creator_inner_txn_app_client.send.non_fungible_asset_create(
         params=CommonAppCallParams(extra_fee=AlgoAmount(micro_algo=1000))
     )
@@ -140,7 +139,6 @@ def test_fungible_asset_create(
     algorand: AlgorandClient,
     creator_inner_txn_app_client: InnerTransactionsClient,
 ) -> None:
-
     txn_result = creator_inner_txn_app_client.send.fungible_asset_create(
         params=CommonAppCallParams(extra_fee=AlgoAmount(micro_algo=1000))
     )
@@ -158,7 +156,6 @@ def test_payment(
     algorand: AlgorandClient,
     creator_inner_txn_app_client: InnerTransactionsClient,
 ) -> None:
-
     txn_result = creator_inner_txn_app_client.send.payment(
         params=CommonAppCallParams(extra_fee=AlgoAmount(micro_algo=1000))
     )
@@ -171,7 +168,6 @@ def test_asset_opt_in(
     creator_inner_txn_app_client: InnerTransactionsClient,
     optin_example_asset_id: int,
 ) -> None:
-
     creator_inner_txn_app_client.send.asset_opt_in(
         AssetOptInArgs(asset=optin_example_asset_id),
         params=CommonAppCallParams(extra_fee=AlgoAmount(micro_algo=1000)),
@@ -189,7 +185,6 @@ def test_asset_transfer(
     test_asset_create: int,
     alice: SigningAccount,
 ) -> None:
-
     algorand.send.asset_opt_in(
         AssetOptInParams(
             sender=alice.address,
@@ -214,7 +209,6 @@ def test_asset_freeze(
     test_asset_create: int,
     alice: SigningAccount,
 ) -> None:
-
     creator_inner_txn_app_client.send.asset_freeze(
         AssetFreezeArgs(acct_to_be_frozen=alice.address, asset=test_asset_create),
         params=CommonAppCallParams(extra_fee=AlgoAmount(micro_algo=1000)),
@@ -231,7 +225,6 @@ def test_asset_revoke(
     test_asset_create: int,
     alice: SigningAccount,
 ) -> None:
-
     creator_inner_txn_app_client.send.asset_revoke(
         AssetRevokeArgs(
             asset=test_asset_create, account_to_be_revoked=alice.address, amount=1
@@ -250,7 +243,6 @@ def test_asset_config(
     test_asset_create: int,
     creator: SigningAccount,
 ) -> None:
-
     creator_inner_txn_app_client.send.asset_config(
         AssetConfigArgs(asset=test_asset_create),
         params=CommonAppCallParams(extra_fee=AlgoAmount(micro_algo=1000)),
@@ -269,7 +261,6 @@ def test_asset_delete(
     creator_inner_txn_app_client: InnerTransactionsClient,
     test_asset_create: int,
 ) -> None:
-
     creator_inner_txn_app_client.send.asset_delete(
         AssetDeleteArgs(asset=test_asset_create),
         params=CommonAppCallParams(extra_fee=AlgoAmount(micro_algo=1000)),
@@ -287,7 +278,6 @@ def test_multi_inner_txns(
     creator_inner_txn_app_client: InnerTransactionsClient,
     hello_world_app_id: int,
 ) -> None:
-
     txn_result = creator_inner_txn_app_client.send.multi_inner_txns(
         MultiInnerTxnsArgs(app_id=hello_world_app_id),
         params=CommonAppCallParams(extra_fee=AlgoAmount(micro_algo=2000)),
@@ -302,7 +292,6 @@ def test_deploy_app(
     algorand: AlgorandClient,
     creator_inner_txn_app_client: InnerTransactionsClient,
 ) -> None:
-
     txn_result = creator_inner_txn_app_client.send.deploy_app(
         params=CommonAppCallParams(extra_fee=AlgoAmount(micro_algo=1000)),
     )
@@ -313,7 +302,6 @@ def test_no_op_app_calls(
     creator_inner_txn_app_client: InnerTransactionsClient,
     hello_world_app_id: int,
 ) -> None:
-
     txn_result = creator_inner_txn_app_client.send.noop_app_call(
         NoopAppCallArgs(app_id=hello_world_app_id),
         params=CommonAppCallParams(extra_fee=AlgoAmount(micro_algo=2000)),

@@ -9,7 +9,6 @@ A contract that increments a counter
 
 
 class Counter(ARC4Contract):
-
     def __init__(self) -> None:
         self.counter = UInt64(0)
 

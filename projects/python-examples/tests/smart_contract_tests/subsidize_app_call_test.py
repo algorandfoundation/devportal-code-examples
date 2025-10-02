@@ -34,7 +34,6 @@ def lsig_template() -> str:
 def hello_world_client(
     algorand: AlgorandClient, creator: SigningAccount
 ) -> HelloWorldClient:
-
     factory = algorand.client.get_typed_app_factory(
         HelloWorldFactory,
         default_sender=creator.address,
@@ -56,7 +55,6 @@ def contract_account(
     hello_world_client: HelloWorldClient,
     dispenser: SigningAccount,
 ) -> LogicSigAccount:
-
     sp = algorand.get_suggested_params()
     rendered = AppManager.replace_template_variables(
         lsig_template,
@@ -82,7 +80,6 @@ def test_subsidize_fee(
     hello_world_client: HelloWorldClient,
     algorand: AlgorandClient,
 ) -> None:
-
     # The LSIG provides fees for both transactions in the group. This does not need a digital signature.
     # It is the code associated with the Contract Account that validates the second transaction and
     #  allows it to be executed with the Contract Account as the sender.

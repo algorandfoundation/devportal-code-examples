@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "get_asset_total_supply", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "asset", "name": "asset"}], "name": "get_asset_total_supply_with_arg", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}], "name": "ReferenceAsset", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CiYBBBUffHUxG0EAQoICBBo1B3kERr+05DYaAI4CABsAA4EAQzEZFEQxGEQ2GgEXwDCIAC0WKExQsIEBQzEZFEQxGESIABQWKExQsIEBQzEZQP/OMRgURIEBQ4GhCXEARImKAQGL/3EARIk=", "clear": "CoEBQw=="}, "compilerInfo": {"compiler": "puya", "compilerVersion": {"major": 4, "minor": 5, "patch": 3}}, "desc": "\n    Returns the total supply of the asset\n    @returns The total supply of the asset\n    ", "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGJ5dGVjYmxvY2sgMHgxNTFmN2M3NQogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hc3NldC9jb250cmFjdC5weToxMQogICAgLy8gY2xhc3MgUmVmZXJlbmNlQXNzZXQoQVJDNENvbnRyYWN0KToKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX2JhcmVfcm91dGluZ0A3CiAgICBwdXNoYnl0ZXNzIDB4MWEzNTA3NzkgMHg0NmJmYjRlNCAvLyBtZXRob2QgImdldF9hc3NldF90b3RhbF9zdXBwbHkoKXVpbnQ2NCIsIG1ldGhvZCAiZ2V0X2Fzc2V0X3RvdGFsX3N1cHBseV93aXRoX2FyZyhhc3NldCl1aW50NjQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX2dldF9hc3NldF90b3RhbF9zdXBwbHlfcm91dGVAMyBtYWluX2dldF9hc3NldF90b3RhbF9zdXBwbHlfd2l0aF9hcmdfcm91dGVANAoKbWFpbl9hZnRlcl9pZl9lbHNlQDExOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hc3NldC9jb250cmFjdC5weToxMQogICAgLy8gY2xhc3MgUmVmZXJlbmNlQXNzZXQoQVJDNENvbnRyYWN0KToKICAgIHB1c2hpbnQgMCAvLyAwCiAgICByZXR1cm4KCm1haW5fZ2V0X2Fzc2V0X3RvdGFsX3N1cHBseV93aXRoX2FyZ19yb3V0ZUA0OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hc3NldC9jb250cmFjdC5weToyNwogICAgLy8gQGFiaW1ldGhvZAogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2Fzc2V0L2NvbnRyYWN0LnB5OjExCiAgICAvLyBjbGFzcyBSZWZlcmVuY2VBc3NldChBUkM0Q29udHJhY3QpOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgYnRvaQogICAgdHhuYXMgQXNzZXRzCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2Fzc2V0L2NvbnRyYWN0LnB5OjI3CiAgICAvLyBAYWJpbWV0aG9kCiAgICBjYWxsc3ViIGdldF9hc3NldF90b3RhbF9zdXBwbHlfd2l0aF9hcmcKICAgIGl0b2IKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0X2Fzc2V0X3RvdGFsX3N1cHBseV9yb3V0ZUAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hc3NldC9jb250cmFjdC5weToxNwogICAgLy8gQGFiaW1ldGhvZAogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIGdldF9hc3NldF90b3RhbF9zdXBwbHkKICAgIGl0b2IKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4KCm1haW5fYmFyZV9yb3V0aW5nQDc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2Fzc2V0L2NvbnRyYWN0LnB5OjExCiAgICAvLyBjbGFzcyBSZWZlcmVuY2VBc3NldChBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAxMQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMucmVmZXJlbmNlX2Fzc2V0LmNvbnRyYWN0LlJlZmVyZW5jZUFzc2V0LmdldF9hc3NldF90b3RhbF9zdXBwbHkoKSAtPiB1aW50NjQ6CmdldF9hc3NldF90b3RhbF9zdXBwbHk6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2Fzc2V0L2NvbnRyYWN0LnB5OjE5CiAgICAvLyByZXR1cm4gQXNzZXQoMTE4NSkudG90YWwgICMgUmVwbGFjZSB3aXRoIHlvdXIgYXNzZXQgaWQKICAgIHB1c2hpbnQgMTE4NSAvLyAxMTg1CiAgICBhc3NldF9wYXJhbXNfZ2V0IEFzc2V0VG90YWwKICAgIGFzc2VydCAvLyBhc3NldCBleGlzdHMKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5yZWZlcmVuY2VfYXNzZXQuY29udHJhY3QuUmVmZXJlbmNlQXNzZXQuZ2V0X2Fzc2V0X3RvdGFsX3N1cHBseV93aXRoX2FyZyhhc3NldDogdWludDY0KSAtPiB1aW50NjQ6CmdldF9hc3NldF90b3RhbF9zdXBwbHlfd2l0aF9hcmc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2Fzc2V0L2NvbnRyYWN0LnB5OjI3LTI4CiAgICAvLyBAYWJpbWV0aG9kCiAgICAvLyBkZWYgZ2V0X2Fzc2V0X3RvdGFsX3N1cHBseV93aXRoX2FyZyhzZWxmLCBhc3NldDogQXNzZXQpIC0+IFVJbnQ2NDoKICAgIHByb3RvIDEgMQogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hc3NldC9jb250cmFjdC5weToyOQogICAgLy8gcmV0dXJuIGFzc2V0LnRvdGFsCiAgICBmcmFtZV9kaWcgLTEKICAgIGFzc2V0X3BhcmFtc19nZXQgQXNzZXRUb3RhbAogICAgYXNzZXJ0IC8vIGFzc2V0IGV4aXN0cwogICAgcmV0c3ViCg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [40, 64], "errorMessage": "OnCompletion is not NoOp"}, {"pc": [96, 105], "errorMessage": "asset exists"}, {"pc": [87], "errorMessage": "can only call when creating"}, {"pc": [43, 67], "errorMessage": "can only call when not creating"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "get_asset_total_supply", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "asset"}], "name": "get_asset_total_supply_with_arg", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}], "name": "ReferenceAsset", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyYBBBUffHUxG0EAHTEZFEQxGESCAgQaNQd5BFncuMk2GgCOAgAJABcAMRkUMRgUEEOBoQlxAEQWKExQsIEBQzYaARdxAEQWKExQsIEBQw==", "clear": "C4EBQw=="}, "desc": "\n    Returns the total supply of the asset\n    @returns The total supply of the asset\n    ", "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGJ5dGVjYmxvY2sgMHgxNTFmN2M3NQogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hc3NldC9jb250cmFjdC5weToxMQogICAgLy8gY2xhc3MgUmVmZXJlbmNlQXNzZXQoQVJDNENvbnRyYWN0KToKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gbXVzdCBiZSBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4MWEzNTA3NzkgMHg1OWRjYjhjOSAvLyBtZXRob2QgImdldF9hc3NldF90b3RhbF9zdXBwbHkoKXVpbnQ2NCIsIG1ldGhvZCAiZ2V0X2Fzc2V0X3RvdGFsX3N1cHBseV93aXRoX2FyZyh1aW50NjQpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggZ2V0X2Fzc2V0X3RvdGFsX3N1cHBseSBnZXRfYXNzZXRfdG90YWxfc3VwcGx5X3dpdGhfYXJnCiAgICBlcnIKCm1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVAOToKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuIC8vIG9uIGVycm9yOiBPbkNvbXBsZXRpb24gbXVzdCBiZSBOb09wICYmIGNhbiBvbmx5IGNhbGwgd2hlbiBjcmVhdGluZwoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5yZWZlcmVuY2VfYXNzZXQuY29udHJhY3QuUmVmZXJlbmNlQXNzZXQuZ2V0X2Fzc2V0X3RvdGFsX3N1cHBseVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF9hc3NldF90b3RhbF9zdXBwbHk6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2Fzc2V0L2NvbnRyYWN0LnB5OjE5CiAgICAvLyByZXR1cm4gQXNzZXQoMTE4NSkudG90YWwgICMgUmVwbGFjZSB3aXRoIHlvdXIgYXNzZXQgaWQKICAgIHB1c2hpbnQgMTE4NSAvLyAxMTg1CiAgICBhc3NldF9wYXJhbXNfZ2V0IEFzc2V0VG90YWwKICAgIGFzc2VydCAvLyBhc3NldCBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYXNzZXQvY29udHJhY3QucHk6MTcKICAgIC8vIEBhYmltZXRob2QKICAgIGl0b2IKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMucmVmZXJlbmNlX2Fzc2V0LmNvbnRyYWN0LlJlZmVyZW5jZUFzc2V0LmdldF9hc3NldF90b3RhbF9zdXBwbHlfd2l0aF9hcmdbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfYXNzZXRfdG90YWxfc3VwcGx5X3dpdGhfYXJnOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hc3NldC9jb250cmFjdC5weToyNwogICAgLy8gQGFiaW1ldGhvZAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hc3NldC9jb250cmFjdC5weToyOQogICAgLy8gcmV0dXJuIGFzc2V0LnRvdGFsCiAgICBhc3NldF9wYXJhbXNfZ2V0IEFzc2V0VG90YWwKICAgIGFzc2VydCAvLyBhc3NldCBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYXNzZXQvY29udHJhY3QucHk6MjcKICAgIC8vIEBhYmltZXRob2QKICAgIGl0b2IKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [16], "errorMessage": "OnCompletion must be NoOp"}, {"pc": [49], "errorMessage": "OnCompletion must be NoOp && can only call when creating"}, {"pc": [55, 70], "errorMessage": "asset exists"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -71,7 +71,7 @@ class GetAssetTotalSupplyWithArgArgs:
 
     @property
     def abi_method_signature(self) -> str:
-        return "get_asset_total_supply_with_arg(asset)uint64"
+        return "get_asset_total_supply_with_arg(uint64)uint64"
 
 
 class ReferenceAssetParams:
@@ -98,7 +98,7 @@ class ReferenceAssetParams:
         params = params or algokit_utils.CommonAppCallParams()
         return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "get_asset_total_supply_with_arg(asset)uint64",
+            "method": "get_asset_total_supply_with_arg(uint64)uint64",
             "args": method_args,
         }))
 
@@ -137,7 +137,7 @@ class ReferenceAssetCreateTransactionParams:
         params = params or algokit_utils.CommonAppCallParams()
         return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "get_asset_total_supply_with_arg(asset)uint64",
+            "method": "get_asset_total_supply_with_arg(uint64)uint64",
             "args": method_args,
         }))
 
@@ -180,7 +180,7 @@ class ReferenceAssetSend:
         params = params or algokit_utils.CommonAppCallParams()
         response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "get_asset_total_supply_with_arg(asset)uint64",
+            "method": "get_asset_total_supply_with_arg(uint64)uint64",
             "args": method_args,
         }), send_params=send_params)
         parsed_response = response
@@ -355,7 +355,7 @@ class ReferenceAssetClient:
     @typing.overload
     def decode_return_value(
         self,
-        method: typing.Literal["get_asset_total_supply_with_arg(asset)uint64"],
+        method: typing.Literal["get_asset_total_supply_with_arg(uint64)uint64"],
         return_value: algokit_utils.ABIReturn | None
     ) -> int | None: ...
     @typing.overload
@@ -566,13 +566,13 @@ class ReferenceAssetFactoryCreateParams:
         params: algokit_utils.CommonAppCallCreateParams | None = None,
         compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> algokit_utils.AppCreateMethodCallParams:
-        """Creates a new instance using the get_asset_total_supply_with_arg(asset)uint64 ABI method"""
+        """Creates a new instance using the get_asset_total_supply_with_arg(uint64)uint64 ABI method"""
         params = params or algokit_utils.CommonAppCallCreateParams()
         return self.app_factory.params.create(
             algokit_utils.AppFactoryCreateMethodCallParams(
                 **{
                 **dataclasses.asdict(params),
-                "method": "get_asset_total_supply_with_arg(asset)uint64",
+                "method": "get_asset_total_supply_with_arg(uint64)uint64",
                 "args": _parse_abi_args(args),
                 }
             ),
@@ -710,7 +710,7 @@ class ReferenceAssetComposer:
         )
         self._result_mappers.append(
             lambda v: self.client.decode_return_value(
-                "get_asset_total_supply_with_arg(asset)uint64", v
+                "get_asset_total_supply_with_arg(uint64)uint64", v
             )
         )
         return self

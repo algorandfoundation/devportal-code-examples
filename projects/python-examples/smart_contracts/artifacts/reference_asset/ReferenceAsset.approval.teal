@@ -1,4 +1,4 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 // algopy.arc4.ARC4Contract.approval_program() -> uint64:
@@ -7,89 +7,60 @@ main:
     // smart_contracts/reference_asset/contract.py:11
     // class ReferenceAsset(ARC4Contract):
     txn NumAppArgs
-    bz main_bare_routing@7
-    pushbytess 0x1a350779 0x46bfb4e4 // method "get_asset_total_supply()uint64", method "get_asset_total_supply_with_arg(asset)uint64"
+    bz main___algopy_default_create@9
+    txn OnCompletion
+    !
+    assert // OnCompletion must be NoOp
+    txn ApplicationID
+    assert
+    pushbytess 0x1a350779 0x59dcb8c9 // method "get_asset_total_supply()uint64", method "get_asset_total_supply_with_arg(uint64)uint64"
     txna ApplicationArgs 0
-    match main_get_asset_total_supply_route@3 main_get_asset_total_supply_with_arg_route@4
+    match get_asset_total_supply get_asset_total_supply_with_arg
+    err
 
-main_after_if_else@11:
-    // smart_contracts/reference_asset/contract.py:11
-    // class ReferenceAsset(ARC4Contract):
-    pushint 0 // 0
-    return
-
-main_get_asset_total_supply_with_arg_route@4:
-    // smart_contracts/reference_asset/contract.py:27
-    // @abimethod
+main___algopy_default_create@9:
     txn OnCompletion
     !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    // smart_contracts/reference_asset/contract.py:11
-    // class ReferenceAsset(ARC4Contract):
-    txna ApplicationArgs 1
-    btoi
-    txnas Assets
-    // smart_contracts/reference_asset/contract.py:27
-    // @abimethod
-    callsub get_asset_total_supply_with_arg
-    itob
-    bytec_0 // 0x151f7c75
-    swap
-    concat
-    log
-    pushint 1 // 1
-    return
-
-main_get_asset_total_supply_route@3:
-    // smart_contracts/reference_asset/contract.py:17
-    // @abimethod
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    callsub get_asset_total_supply
-    itob
-    bytec_0 // 0x151f7c75
-    swap
-    concat
-    log
-    pushint 1 // 1
-    return
-
-main_bare_routing@7:
-    // smart_contracts/reference_asset/contract.py:11
-    // class ReferenceAsset(ARC4Contract):
-    txn OnCompletion
-    bnz main_after_if_else@11
     txn ApplicationID
     !
-    assert // can only call when creating
-    pushint 1 // 1
-    return
+    &&
+    return // on error: OnCompletion must be NoOp && can only call when creating
 
 
-// smart_contracts.reference_asset.contract.ReferenceAsset.get_asset_total_supply() -> uint64:
+// smart_contracts.reference_asset.contract.ReferenceAsset.get_asset_total_supply[routing]() -> void:
 get_asset_total_supply:
     // smart_contracts/reference_asset/contract.py:19
     // return Asset(1185).total  # Replace with your asset id
     pushint 1185 // 1185
     asset_params_get AssetTotal
     assert // asset exists
-    retsub
-
-
-// smart_contracts.reference_asset.contract.ReferenceAsset.get_asset_total_supply_with_arg(asset: uint64) -> uint64:
-get_asset_total_supply_with_arg:
-    // smart_contracts/reference_asset/contract.py:27-28
+    // smart_contracts/reference_asset/contract.py:17
     // @abimethod
-    // def get_asset_total_supply_with_arg(self, asset: Asset) -> UInt64:
-    proto 1 1
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    pushint 1 // 1
+    return
+
+
+// smart_contracts.reference_asset.contract.ReferenceAsset.get_asset_total_supply_with_arg[routing]() -> void:
+get_asset_total_supply_with_arg:
+    // smart_contracts/reference_asset/contract.py:27
+    // @abimethod
+    txna ApplicationArgs 1
+    btoi
     // smart_contracts/reference_asset/contract.py:29
     // return asset.total
-    frame_dig -1
     asset_params_get AssetTotal
     assert // asset exists
-    retsub
+    // smart_contracts/reference_asset/contract.py:27
+    // @abimethod
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    pushint 1 // 1
+    return

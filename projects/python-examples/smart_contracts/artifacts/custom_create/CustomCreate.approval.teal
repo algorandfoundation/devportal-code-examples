@@ -1,81 +1,61 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
-// smart_contracts.custom_create.contract.CustomCreate.__algopy_entrypoint_with_init() -> uint64:
+// algopy.arc4.ARC4Contract.approval_program() -> uint64:
 main:
-    intcblock 0 1
     bytecblock "age"
     // smart_contracts/custom_create/contract.py:6
     // class CustomCreate(ARC4Contract):
-    txn NumAppArgs
-    bz main_after_if_else@7
-    pushbytess 0x483331ee 0x5627b3cd // method "custom_create(uint64)void", method "get_age()uint64"
-    txna ApplicationArgs 0
-    match main_custom_create_route@5 main_get_age_route@6
-
-main_after_if_else@7:
-    // smart_contracts/custom_create/contract.py:6
-    // class CustomCreate(ARC4Contract):
-    intc_0 // 0
-    return
-
-main_get_age_route@6:
-    // smart_contracts/custom_create/contract.py:14
-    // @abimethod()
     txn OnCompletion
     !
-    assert // OnCompletion is not NoOp
+    assert // OnCompletion must be NoOp
     txn ApplicationID
-    assert // can only call when not creating
-    callsub get_age
+    bz main_create_NoOp@7
+    pushbytes 0x5627b3cd // method "get_age()uint64"
+    txna ApplicationArgs 0
+    match get_age
+    err
+
+main_create_NoOp@7:
+    // smart_contracts/custom_create/contract.py:6
+    // class CustomCreate(ARC4Contract):
+    pushbytes 0x483331ee // method "custom_create(uint64)void"
+    txna ApplicationArgs 0
+    match custom_create
+    err
+
+
+// smart_contracts.custom_create.contract.CustomCreate.custom_create[routing]() -> void:
+custom_create:
+    // smart_contracts/custom_create/contract.py:10
+    // @abimethod(create="require")
+    txna ApplicationArgs 1
+    btoi
+    // smart_contracts/custom_create/contract.py:12
+    // self.age.value = age
+    bytec_0 // "age"
+    swap
+    app_global_put
+    // smart_contracts/custom_create/contract.py:10
+    // @abimethod(create="require")
+    pushint 1 // 1
+    return
+
+
+// smart_contracts.custom_create.contract.CustomCreate.get_age[routing]() -> void:
+get_age:
+    // smart_contracts/custom_create/contract.py:16
+    // return self.age.value
+    pushint 0 // 0
+    bytec_0 // "age"
+    app_global_get_ex
+    assert // check self.age exists
+    // smart_contracts/custom_create/contract.py:14
+    // @abimethod()
     itob
     pushbytes 0x151f7c75
     swap
     concat
     log
-    intc_1 // 1
+    pushint 1 // 1
     return
-
-main_custom_create_route@5:
-    // smart_contracts/custom_create/contract.py:10
-    // @abimethod(create="require")
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    !
-    assert // can only call when creating
-    // smart_contracts/custom_create/contract.py:6
-    // class CustomCreate(ARC4Contract):
-    txna ApplicationArgs 1
-    btoi
-    // smart_contracts/custom_create/contract.py:10
-    // @abimethod(create="require")
-    callsub custom_create
-    intc_1 // 1
-    return
-
-
-// smart_contracts.custom_create.contract.CustomCreate.custom_create(age: uint64) -> void:
-custom_create:
-    // smart_contracts/custom_create/contract.py:10-11
-    // @abimethod(create="require")
-    // def custom_create(self, age: UInt64) -> None:
-    proto 1 0
-    // smart_contracts/custom_create/contract.py:12
-    // self.age.value = age
-    bytec_0 // "age"
-    frame_dig -1
-    app_global_put
-    retsub
-
-
-// smart_contracts.custom_create.contract.CustomCreate.get_age() -> uint64:
-get_age:
-    // smart_contracts/custom_create/contract.py:16
-    // return self.age.value
-    intc_0 // 0
-    bytec_0 // "age"
-    app_global_get_ex
-    assert // check self.age exists
-    retsub
