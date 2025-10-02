@@ -40,7 +40,9 @@ jobs:
         run: pipx install tealer
 
       - name: Start LocalNet
-        run: algokit localnet start
+        run: |
+          algokit localnet start
+          algokit localnet status
 
       - name: Bootstrap dependencies
         run: algokit project bootstrap all
