@@ -1,58 +1,44 @@
-import {
-  abimethod,
-  Contract,
-  uint64,
-  Uint64,
-  BoxMap,
-  clone,
-  assertMatch,
-} from '@algorandfoundation/algorand-typescript'
+import { Contract, uint64, BoxMap, clone, assertMatch } from '@algorandfoundation/algorand-typescript'
 
 // example: EXAMPLE_STRUCT_IN_BOX
 type User = {
-  name: string
   id: uint64
-  asset: uint64
+  name: string
+  age: uint64
 }
 
 export default class StructInBoxMap extends Contract {
-  public userMap = BoxMap<uint64, User>({ keyPrefix: 'users' })
+  public users = BoxMap<uint64, User>({ keyPrefix: 'users' })
 
-  @abimethod()
-  public boxMapTest(): boolean {
-    const key0 = Uint64(0)
-    const value = {
-      name: 'testName',
-      id: Uint64(70),
-      asset: Uint64(2),
-    } satisfies User
+  public createNewUser(id: uint64, user: User): boolean {
+    this.users(id).value = clone(user)
 
-    this.userMap(key0).value = clone(value)
-
-    return true
-  }
-
-  @abimethod()
-  public boxMapSet(key: uint64, value: User): boolean {
-    this.userMap(key).value = clone(value)
-
-    assertMatch(this.userMap(key).value, {
-      id: value.id,
-      asset: value.asset,
-      name: value.name,
+    assertMatch(this.users(id).value, {
+      name: user.name,
+      age: user.age,
     })
 
     return true
   }
 
-  @abimethod()
-  public boxMapGet(key: uint64): User {
-    return this.userMap(key).value
+  public getUser(id: uint64): User {
+    return this.users(id).value
   }
 
-  @abimethod()
-  public boxMapExists(key: uint64): boolean {
-    return this.userMap(key).exists
+  public checkUserExists(id: uint64): boolean {
+    return this.users(id).exists
+  }
+
+  public updateUserNameAndAge(id: uint64, name: string, age: uint64): boolean {
+    this.users(id).value.name = name
+    this.users(id).value.age = age
+
+    assertMatch(this.users(id).value, {
+      name,
+      age,
+    })
+
+    return true
   }
 }
 // example: EXAMPLE_STRUCT_IN_BOX

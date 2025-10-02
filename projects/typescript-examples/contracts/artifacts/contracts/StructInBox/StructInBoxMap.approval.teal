@@ -3,9 +3,9 @@
 
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
 main:
-    intcblock 1 2 8 10
-    bytecblock "users" 0x75736572730000000000000000 0x151f7c7580 0x151f7c75
-    // contracts/StructInBox/contract.algo.ts:18
+    intcblock 1 10 8 0
+    bytecblock "users" 0x151f7c7580 0x151f7c75
+    // contracts/StructInBox/contract.algo.ts:10
     // export default class StructInBoxMap extends Contract {
     txn NumAppArgs
     bz main___algots__.defaultCreate@11
@@ -14,13 +14,13 @@ main:
     assert // OnCompletion must be NoOp
     txn ApplicationID
     assert
-    pushbytess 0xf165cdd9 0x0f05f332 0x699eb0fe 0xd829d2a3 // method "boxMapTest()bool", method "boxMapSet(uint64,(string,uint64,uint64))bool", method "boxMapGet(uint64)(string,uint64,uint64)", method "boxMapExists(uint64)bool"
+    pushbytess 0x783dcc70 0x93143bd1 0x2bc4c11f 0x3a3551ce // method "createNewUser(uint64,(uint64,string,uint64))bool", method "getUser(uint64)(uint64,string,uint64)", method "checkUserExists(uint64)bool", method "updateUserNameAndAge(uint64,string,uint64)bool"
     txna ApplicationArgs 0
-    match boxMapTest boxMapSet boxMapGet boxMapExists
+    match createNewUser getUser checkUserExists updateUserNameAndAge
     err
 
 main___algots__.defaultCreate@11:
-    // contracts/StructInBox/contract.algo.ts:18
+    // contracts/StructInBox/contract.algo.ts:10
     // export default class StructInBoxMap extends Contract {
     txn OnCompletion
     !
@@ -30,127 +30,82 @@ main___algots__.defaultCreate@11:
     return // on error: OnCompletion must be NoOp && can only call when creating
 
 
-// contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapTest[routing]() -> void:
-boxMapTest:
-    // contracts/StructInBox/contract.algo.ts:19
-    // public userMap = BoxMap<uint64, User>({ keyPrefix: 'users' })
-    bytec_1 // 0x75736572730000000000000000
-    // contracts/StructInBox/contract.algo.ts:30
-    // this.userMap(key0).value = clone(value)
-    box_del
-    pop
-    // contracts/StructInBox/contract.algo.ts:19
-    // public userMap = BoxMap<uint64, User>({ keyPrefix: 'users' })
-    bytec_1 // 0x75736572730000000000000000
-    // contracts/StructInBox/contract.algo.ts:30
-    // this.userMap(key0).value = clone(value)
-    pushbytes 0x0012000000000000004600000000000000020008746573744e616d65
-    box_put
-    // contracts/StructInBox/contract.algo.ts:21
-    // @abimethod()
-    bytec_2 // 0x151f7c7580
-    log
-    intc_0 // 1
-    return
-
-
-// contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapSet[routing]() -> void:
-boxMapSet:
-    // contracts/StructInBox/contract.algo.ts:35
-    // @abimethod()
+// contracts/StructInBox/contract.algo.ts::StructInBoxMap.createNewUser[routing]() -> void:
+createNewUser:
+    // contracts/StructInBox/contract.algo.ts:13
+    // public createNewUser(id: uint64, user: User): boolean {
     txna ApplicationArgs 1
     btoi
     txna ApplicationArgs 2
-    // contracts/StructInBox/contract.algo.ts:37
-    // this.userMap(key).value = clone(value)
+    // contracts/StructInBox/contract.algo.ts:14
+    // this.users(id).value = clone(user)
     swap
     itob
-    // contracts/StructInBox/contract.algo.ts:19
-    // public userMap = BoxMap<uint64, User>({ keyPrefix: 'users' })
+    // contracts/StructInBox/contract.algo.ts:11
+    // public users = BoxMap<uint64, User>({ keyPrefix: 'users' })
     bytec_0 // "users"
     swap
     concat
-    // contracts/StructInBox/contract.algo.ts:37
-    // this.userMap(key).value = clone(value)
+    // contracts/StructInBox/contract.algo.ts:14
+    // this.users(id).value = clone(user)
     dup
     box_del
     pop
     dup
     dig 2
     box_put
-    // contracts/StructInBox/contract.algo.ts:39-43
-    // assertMatch(this.userMap(key).value, {
-    //   id: value.id,
-    //   asset: value.asset,
-    //   name: value.name,
+    // contracts/StructInBox/contract.algo.ts:16-19
+    // assertMatch(this.users(id).value, {
+    //   name: user.name,
+    //   age: user.age,
     // })
-    dup
-    intc_1 // 2
+    intc_1 // 10
     intc_2 // 8
     box_extract
     btoi
-    // contracts/StructInBox/contract.algo.ts:40
-    // id: value.id,
-    dig 2
-    intc_1 // 2
-    extract_uint64
-    // contracts/StructInBox/contract.algo.ts:39-43
-    // assertMatch(this.userMap(key).value, {
-    //   id: value.id,
-    //   asset: value.asset,
-    //   name: value.name,
-    // })
-    ==
+    // contracts/StructInBox/contract.algo.ts:18
+    // age: user.age,
     swap
-    intc_3 // 10
-    intc_2 // 8
-    box_extract
-    btoi
-    // contracts/StructInBox/contract.algo.ts:41
-    // asset: value.asset,
-    uncover 2
-    intc_3 // 10
+    intc_1 // 10
     extract_uint64
-    // contracts/StructInBox/contract.algo.ts:39-43
-    // assertMatch(this.userMap(key).value, {
-    //   id: value.id,
-    //   asset: value.asset,
-    //   name: value.name,
+    // contracts/StructInBox/contract.algo.ts:16-19
+    // assertMatch(this.users(id).value, {
+    //   name: user.name,
+    //   age: user.age,
     // })
     ==
-    &&
     intc_0 // 1
     &&
     assert // assert target is match for conditions
-    // contracts/StructInBox/contract.algo.ts:35
-    // @abimethod()
-    bytec_2 // 0x151f7c7580
+    // contracts/StructInBox/contract.algo.ts:13
+    // public createNewUser(id: uint64, user: User): boolean {
+    bytec_1 // 0x151f7c7580
     log
     intc_0 // 1
     return
 
 
-// contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapGet[routing]() -> void:
-boxMapGet:
-    // contracts/StructInBox/contract.algo.ts:48
-    // @abimethod()
+// contracts/StructInBox/contract.algo.ts::StructInBoxMap.getUser[routing]() -> void:
+getUser:
+    // contracts/StructInBox/contract.algo.ts:24
+    // public getUser(id: uint64): User {
     txna ApplicationArgs 1
     btoi
-    // contracts/StructInBox/contract.algo.ts:50
-    // return this.userMap(key).value
+    // contracts/StructInBox/contract.algo.ts:25
+    // return this.users(id).value
     itob
-    // contracts/StructInBox/contract.algo.ts:19
-    // public userMap = BoxMap<uint64, User>({ keyPrefix: 'users' })
+    // contracts/StructInBox/contract.algo.ts:11
+    // public users = BoxMap<uint64, User>({ keyPrefix: 'users' })
     bytec_0 // "users"
     swap
     concat
-    // contracts/StructInBox/contract.algo.ts:50
-    // return this.userMap(key).value
+    // contracts/StructInBox/contract.algo.ts:25
+    // return this.users(id).value
     box_get
     assert // Box must have value
-    // contracts/StructInBox/contract.algo.ts:48
-    // @abimethod()
-    bytec_3 // 0x151f7c75
+    // contracts/StructInBox/contract.algo.ts:24
+    // public getUser(id: uint64): User {
+    bytec_2 // 0x151f7c75
     swap
     concat
     log
@@ -158,33 +113,115 @@ boxMapGet:
     return
 
 
-// contracts/StructInBox/contract.algo.ts::StructInBoxMap.boxMapExists[routing]() -> void:
-boxMapExists:
-    // contracts/StructInBox/contract.algo.ts:53
-    // @abimethod()
+// contracts/StructInBox/contract.algo.ts::StructInBoxMap.checkUserExists[routing]() -> void:
+checkUserExists:
+    // contracts/StructInBox/contract.algo.ts:28
+    // public checkUserExists(id: uint64): boolean {
     txna ApplicationArgs 1
     btoi
-    // contracts/StructInBox/contract.algo.ts:55
-    // return this.userMap(key).exists
+    // contracts/StructInBox/contract.algo.ts:29
+    // return this.users(id).exists
     itob
-    // contracts/StructInBox/contract.algo.ts:19
-    // public userMap = BoxMap<uint64, User>({ keyPrefix: 'users' })
+    // contracts/StructInBox/contract.algo.ts:11
+    // public users = BoxMap<uint64, User>({ keyPrefix: 'users' })
     bytec_0 // "users"
     swap
     concat
-    // contracts/StructInBox/contract.algo.ts:55
-    // return this.userMap(key).exists
+    // contracts/StructInBox/contract.algo.ts:29
+    // return this.users(id).exists
     box_len
     bury 1
-    // contracts/StructInBox/contract.algo.ts:53
-    // @abimethod()
+    // contracts/StructInBox/contract.algo.ts:28
+    // public checkUserExists(id: uint64): boolean {
     pushbytes 0x00
-    pushint 0 // 0
+    intc_3 // 0
     uncover 2
     setbit
-    bytec_3 // 0x151f7c75
+    bytec_2 // 0x151f7c75
     swap
     concat
+    log
+    intc_0 // 1
+    return
+
+
+// contracts/StructInBox/contract.algo.ts::StructInBoxMap.updateUserNameAndAge[routing]() -> void:
+updateUserNameAndAge:
+    // contracts/StructInBox/contract.algo.ts:32
+    // public updateUserNameAndAge(id: uint64, name: string, age: uint64): boolean {
+    txna ApplicationArgs 1
+    btoi
+    txna ApplicationArgs 2
+    dup
+    extract 2 0
+    txna ApplicationArgs 3
+    dup
+    btoi
+    // contracts/StructInBox/contract.algo.ts:33
+    // this.users(id).value.name = name
+    uncover 4
+    itob
+    // contracts/StructInBox/contract.algo.ts:11
+    // public users = BoxMap<uint64, User>({ keyPrefix: 'users' })
+    bytec_0 // "users"
+    swap
+    concat
+    // contracts/StructInBox/contract.algo.ts:33
+    // this.users(id).value.name = name
+    dup
+    box_get
+    assert // Box must have value
+    dup
+    intc_2 // 8
+    extract_uint16
+    intc_3 // 0
+    swap
+    extract3
+    uncover 5
+    concat
+    dig 1
+    box_del
+    pop
+    dig 1
+    swap
+    box_put
+    // contracts/StructInBox/contract.algo.ts:34
+    // this.users(id).value.age = age
+    dup
+    intc_1 // 10
+    uncover 4
+    box_replace
+    // contracts/StructInBox/contract.algo.ts:36
+    // assertMatch(this.users(id).value, {
+    dup
+    box_get
+    pop
+    // contracts/StructInBox/contract.algo.ts:36-39
+    // assertMatch(this.users(id).value, {
+    //   name,
+    //   age,
+    // })
+    dup
+    intc_2 // 8
+    extract_uint16
+    dig 1
+    len
+    substring3
+    extract 2 0
+    uncover 3
+    ==
+    swap
+    intc_1 // 10
+    intc_2 // 8
+    box_extract
+    btoi
+    uncover 2
+    ==
+    &&
+    assert // assert target is match for conditions
+    // contracts/StructInBox/contract.algo.ts:32
+    // public updateUserNameAndAge(id: uint64, name: string, age: uint64): boolean {
+    bytec_1 // 0x151f7c7580
     log
     intc_0 // 1
     return

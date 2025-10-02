@@ -3,8 +3,8 @@
 
 
 main:
-    intcblock 1 2 8 10
-    bytecblock "users" 0x75736572730000000000000000 0x151f7c7580 0x151f7c75
+    intcblock 1 10 8 0
+    bytecblock "users" 0x151f7c7580 0x151f7c75
 
 
     txn NumAppArgs
@@ -14,9 +14,9 @@ main:
     assert
     txn ApplicationID
     assert
-    pushbytess 0xf165cdd9 0x0f05f332 0x699eb0fe 0xd829d2a3
+    pushbytess 0x783dcc70 0x93143bd1 0x2bc4c11f 0x3a3551ce
     txna ApplicationArgs 0
-    match boxMapTest boxMapSet boxMapGet boxMapExists
+    match createNewUser getUser checkUserExists updateUserNameAndAge
     err
 
 main___algots__.defaultCreate@11:
@@ -31,31 +31,7 @@ main___algots__.defaultCreate@11:
 
 
 
-boxMapTest:
-
-
-    bytec_1
-
-
-    box_del
-    pop
-
-
-    bytec_1
-
-
-    pushbytes 0x0012000000000000004600000000000000020008746573744e616d65
-    box_put
-
-
-    bytec_2
-    log
-    intc_0
-    return
-
-
-
-boxMapSet:
+createNewUser:
 
 
     txna ApplicationArgs 1
@@ -83,55 +59,34 @@ boxMapSet:
 
 
 
-
-    dup
     intc_1
     intc_2
     box_extract
     btoi
 
 
-    dig 2
-    intc_1
-    extract_uint64
-
-
-
-
-
-
-    ==
     swap
-    intc_3
-    intc_2
-    box_extract
-    btoi
-
-
-    uncover 2
-    intc_3
+    intc_1
     extract_uint64
 
 
 
 
 
-
     ==
-    &&
     intc_0
     &&
     assert
 
 
-    bytec_2
+    bytec_1
     log
     intc_0
     return
 
 
 
-boxMapGet:
+getUser:
 
 
     txna ApplicationArgs 1
@@ -150,7 +105,7 @@ boxMapGet:
     assert
 
 
-    bytec_3
+    bytec_2
     swap
     concat
     log
@@ -159,7 +114,7 @@ boxMapGet:
 
 
 
-boxMapExists:
+checkUserExists:
 
 
     txna ApplicationArgs 1
@@ -179,12 +134,94 @@ boxMapExists:
 
 
     pushbytes 0x00
-    pushint 0
+    intc_3
     uncover 2
     setbit
-    bytec_3
+    bytec_2
     swap
     concat
+    log
+    intc_0
+    return
+
+
+
+updateUserNameAndAge:
+
+
+    txna ApplicationArgs 1
+    btoi
+    txna ApplicationArgs 2
+    dup
+    extract 2 0
+    txna ApplicationArgs 3
+    dup
+    btoi
+
+
+    uncover 4
+    itob
+
+
+    bytec_0
+    swap
+    concat
+
+
+    dup
+    box_get
+    assert
+    dup
+    intc_2
+    extract_uint16
+    intc_3
+    swap
+    extract3
+    uncover 5
+    concat
+    dig 1
+    box_del
+    pop
+    dig 1
+    swap
+    box_put
+
+
+    dup
+    intc_1
+    uncover 4
+    box_replace
+
+
+    dup
+    box_get
+    pop
+
+
+
+
+
+    dup
+    intc_2
+    extract_uint16
+    dig 1
+    len
+    substring3
+    extract 2 0
+    uncover 3
+    ==
+    swap
+    intc_1
+    intc_2
+    box_extract
+    btoi
+    uncover 2
+    ==
+    &&
+    assert
+
+
+    bytec_1
     log
     intc_0
     return
