@@ -130,57 +130,16 @@ describe('BoxStorage contract', () => {
     })
   })
 
-  describe('BoxRef Operations', () => {
-    it('should get and set boxRef values', () => {
-      const contract = ctx.contract.create(BoxStorage)
-      const result = contract.getBoxRef()
-      expect(result.bytes).toEqual(ctx.defaultSender.bytes)
-    })
-
-    it('should set boxRef with custom key', () => {
-      const contract = ctx.contract.create(BoxStorage)
-      const key = 'customKey'
-
-      contract.setBoxRef(key)
-      const [, exists] = contract.maybeBoxRef(key)
-      expect(exists).toBe(true)
-    })
-
-    it('should delete boxRef', () => {
-      const contract = ctx.contract.create(BoxStorage)
-      const key = 'customKey'
-
-      contract.setBoxRef(key)
-      contract.deleteBoxRef(key)
-      const [, exists] = contract.maybeBoxRef(key)
-      expect(exists).toBe(false)
-    })
-
-    it('should get boxRef length', () => {
-      const contract = ctx.contract.create(BoxStorage)
-      const key = 'customKey'
-
-      expect(contract.lengthBoxRef(key).valueOf()).toBe(32)
-    })
-
-    it('should extract boxRef values', () => {
-      const contract = ctx.contract.create(BoxStorage)
-      const key = 'customKey'
-
-      expect(() => contract.extractBoxRef(key)).not.toThrow()
-    })
-  })
-
   describe('Special Operations', () => {
     it('should create and manipulate arc4 static array box', () => {
       const contract = ctx.contract.create(BoxStorage)
       const key = 'staticArrayBox'
 
       const result = contract.arc4Box(key)
-      expect(result[0].native.valueOf()).toBe(0n)
-      expect(result[1].native.valueOf()).toBe(1n)
-      expect(result[2].native.valueOf()).toBe(2n)
-      expect(result[3].native.valueOf()).toBe(3n)
+      expect(result[0].asUint64().valueOf()).toBe(0n)
+      expect(result[1].asUint64().valueOf()).toBe(1n)
+      expect(result[2].asUint64().valueOf()).toBe(2n)
+      expect(result[3].asUint64().valueOf()).toBe(3n)
     })
   })
 })

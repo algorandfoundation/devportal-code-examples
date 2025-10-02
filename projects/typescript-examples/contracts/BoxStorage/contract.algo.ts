@@ -8,11 +8,9 @@ import {
   uint64,
   Uint64,
   BoxMap,
-  BoxRef,
   Global,
   Txn,
   clone,
-  Account,
   FixedArray,
 } from '@algorandfoundation/algorand-typescript'
 import { assert, assertMatch } from '@algorandfoundation/algorand-typescript'
@@ -46,7 +44,6 @@ export default class BoxStorage extends Contract {
   public boxInt = Box<uint64>({ key: 'boxInt' })
   public boxBytes = Box<bytes>({ key: 'boxBytes' })
   public boxDynamicBytes = Box<arc4.DynamicBytes>({ key: 'boxDynamicBytes' })
-  public boxRef = BoxRef({ key: 'boxRef' })
   public boxMap = BoxMap<uint64, string>({ keyPrefix: 'boxMap' })
   public boxMapObject = BoxMap<uint64, User>({ keyPrefix: 'users' })
   // example: INIT_BOX_STORAGE
@@ -120,19 +117,6 @@ export default class BoxStorage extends Contract {
   }
 
   /**
-   * Retrieves the value stored in the boxRef box
-   * @returns The value stored in the boxRef box
-   */
-  public getBoxRef(): Account {
-    this.boxRef.create({ size: 32 })
-    const senderBytes = Txn.sender.bytes
-    this.boxRef.put(Txn.sender.bytes)
-    const value = this.boxRef.get({ default: senderBytes })
-    assert(value === senderBytes, 'boxRef value mismatch')
-    return Account(value)
-  }
-
-  /**
    * Checks if the boxMap box exists
    * @param key The key to check for
    * @returns true if the box exists, false otherwise
@@ -140,17 +124,6 @@ export default class BoxStorage extends Contract {
   @abimethod({ readonly: true })
   public boxMapExists(key: uint64): boolean {
     return this.boxMap(key).exists
-  }
-
-  /**
-   * Retrieves the value stored in the boxRef box and checks if it exists
-   * @returns A tuple containing the value and a boolean indicating if the box exists
-   */
-  @abimethod({ readonly: true })
-  public maybeBoxRef(key: string): [bytes, boolean] {
-    const boxRef = BoxRef({ key })
-    const [value, exists] = boxRef.maybe()
-    return [value, exists]
   }
   // example: GET_BOX_STORAGE
 
@@ -187,17 +160,6 @@ export default class BoxStorage extends Contract {
   public setBoxMap(key: uint64, value: string): void {
     this.boxMap(key).value = value
   }
-
-  /**
-   * Creates a box ref with the given key and sets its value to the sender's address
-   * @param key The key to use for the box ref
-   */
-  public setBoxRef(key: string): void {
-    const boxRef = BoxRef({ key })
-    boxRef.create({ size: 32 })
-    const senderBytes = Txn.sender.bytes
-    boxRef.put(senderBytes)
-  }
   // example: SET_BOX_STORAGE
 
   // example: LENGTH_BOX_STORAGE
@@ -213,17 +175,6 @@ export default class BoxStorage extends Contract {
     }
 
     return this.boxMap(key).length
-  }
-
-  /**
-   * Retrieves the length of the boxRef box
-   * @param key The key to get the length for
-   * @returns The length of the boxRef box
-   */
-  public lengthBoxRef(key: string): uint64 {
-    const boxRef = BoxRef({ key })
-    assert(boxRef.create({ size: 32 }), 'boxRef creation failed')
-    return boxRef.length
   }
   // example: LENGTH_BOX_STORAGE
 
@@ -248,16 +199,6 @@ export default class BoxStorage extends Contract {
   public deleteBoxMap(key: uint64): void {
     this.boxMap(key).delete()
   }
-
-  /**
-   * Deletes the value of the boxRef box
-   * @param key The key to delete the value from
-   */
-  public deleteBoxRef(key: string): void {
-    const boxRef = BoxRef({ key })
-    boxRef.delete()
-    assertMatch(boxRef.maybe(), [Bytes(''), false])
-  }
   // example: DELETE_BOX_STORAGE
 
   // example: EXTRACT_BOX_STORAGE
@@ -265,20 +206,19 @@ export default class BoxStorage extends Contract {
    * Extracts a value from the boxRef box
    * @param key The key to extract from
    */
-  public extractBoxRef(key: string): void {
+  public extractBox(key: string): void {
     const senderBytes = Txn.sender.bytes
     const appAddress = Global.currentApplicationAddress.bytes
-
     const totalSize = Uint64(appAddress.length + senderBytes.length)
+    const box = Box<bytes>({ key })
 
-    const boxRef = BoxRef({ key })
-    assert(boxRef.create({ size: totalSize }), 'boxRef creation failed')
+    assert(box.create({ size: totalSize }), 'box creation failed')
 
-    boxRef.replace(0, senderBytes)
-    boxRef.splice(0, 0, appAddress)
+    box.replace(0, senderBytes)
+    box.splice(0, 0, appAddress)
 
-    const part1 = boxRef.extract(0, 32)
-    const part2 = boxRef.extract(32, 32)
+    const part1 = box.extract(0, 32)
+    const part2 = box.extract(32, 32)
 
     assert(part1.equals(appAddress), 'First part should match app address')
     assert(part2.equals(senderBytes), 'Second part should match sender bytes')
@@ -354,10 +294,10 @@ export default class BoxStorage extends Contract {
 
     staticIntBox.value = new FixedArray<arc4.Uint8, 4>(new Uint8(0), new Uint8(1), new Uint8(2), new Uint8(3))
 
-    assert(staticIntBox.value[0].native === 0)
-    assert(staticIntBox.value[1].native === 1)
-    assert(staticIntBox.value[2].native === 2)
-    assert(staticIntBox.value[3].native === 3)
+    assert(staticIntBox.value[0].asUint64() === 0)
+    assert(staticIntBox.value[1].asUint64() === 1)
+    assert(staticIntBox.value[2].asUint64() === 2)
+    assert(staticIntBox.value[3].asUint64() === 3)
 
     return staticIntBox.value
   }

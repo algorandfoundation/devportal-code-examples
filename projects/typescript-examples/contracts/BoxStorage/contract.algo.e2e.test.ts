@@ -91,20 +91,6 @@ describe('BoxStorage contract', () => {
     expect(boxValue).toBe('default')
   })
 
-  test('set and read box ref value', async () => {
-    const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount)
-
-    await fundContract(testAccount, client.appAddress)
-
-    const { returns } = await client.send.getBoxRef({
-      args: {},
-      boxReferences: [(client.appId, 'boxRef')],
-    })
-
-    expect(returns?.[0]?.returnValue).toBe(testAccount.addr.toString())
-  })
-
   test('maybe box returns correct value and existence', async () => {
     const { testAccount } = localnet.context
     const { client } = await deploy(testAccount)
@@ -152,44 +138,6 @@ describe('BoxStorage contract', () => {
 
     expect(existsAfterSet).toBe(true)
     expect(value).toBe(testString)
-  })
-
-  test('maybe box ref returns correct value and existence', async () => {
-    const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount)
-
-    await fundContract(testAccount, client.appAddress)
-
-    const { returns: beforeCreateReturns } = await client.send.maybeBoxRef({
-      args: {
-        key: 'maybeBoxRef',
-      },
-      boxReferences: [(client.appId, 'maybeBoxRef')],
-    })
-
-    const [valueBeforeCreate, existsBeforeCreate] = beforeCreateReturns?.[0]?.returnValue as [Uint8Array, boolean]
-
-    expect(existsBeforeCreate).toBe(false)
-    expect(valueBeforeCreate).toStrictEqual(new Uint8Array())
-    expect(valueBeforeCreate.length).toBe(0)
-
-    const { returns: afterCreateReturns } = await client
-      .newGroup()
-      .setBoxRef({
-        args: { key: 'maybeBoxRef' },
-        boxReferences: [(client.appId, 'maybeBoxRef')],
-      })
-      .maybeBoxRef({
-        args: { key: 'maybeBoxRef' },
-        boxReferences: [(client.appId, 'maybeBoxRef')],
-      })
-      .send()
-
-    const [valueAfterCreate, existsAfterCreate] = afterCreateReturns?.[1] as [Uint8Array, boolean]
-
-    expect(existsAfterCreate).toBe(true)
-    expect(valueAfterCreate).toBeDefined()
-    expect(valueAfterCreate.length).toBe(32)
   })
 
   test('set and read box map struct value', async () => {
@@ -268,42 +216,6 @@ describe('BoxStorage contract', () => {
     ])
   })
 
-  test('delete box ref and verify deletion', async () => {
-    const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount)
-
-    await fundContract(testAccount, client.appAddress)
-
-    await client.send.setBoxRef({
-      args: {
-        key: 'boxTobeDeleted',
-      },
-      boxReferences: [(client.appId, 'boxTobeDeleted')],
-    })
-
-    await client
-      .newGroup()
-      .deleteBoxRef({
-        args: {
-          key: 'boxTobeDeleted',
-        },
-        boxReferences: [(client.appId, 'boxTobeDeleted')],
-      })
-      .send()
-
-    const { returns } = await client.send.maybeBoxRef({
-      args: {
-        key: 'boxTobeDeleted',
-      },
-      boxReferences: [(client.appId, 'boxTobeDeleted')],
-    })
-
-    const [value, exists] = returns?.[0]?.returnValue as [Uint8Array, boolean]
-    expect(exists).toBe(false)
-    expect(value).toBeDefined()
-    expect(value.length).toBe(0)
-  })
-
   test('verify app budget consumption is reasonable', async () => {
     const { testAccount } = localnet.context
     const { client } = await deploy(testAccount)
@@ -371,21 +283,6 @@ describe('BoxStorage contract', () => {
 
     const lengthAfterSet = await client.boxMapLength({ args: { key: 0n } })
     expect(lengthAfterSet).toBe(BigInt('Test String'.length))
-  })
-
-  test('length box ref returns correct value', async () => {
-    const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount)
-
-    await fundContract(testAccount, client.appAddress)
-
-    const { returns } = await client.send.lengthBoxRef({
-      args: { key: 'blob' },
-      boxReferences: [(client.appId, 'blob')],
-    })
-
-    const length = returns?.[0]?.returnValue as bigint
-    expect(length).toBe(32n)
   })
 
   test('box map exists returns correct value', async () => {
@@ -508,13 +405,13 @@ describe('BoxStorage contract', () => {
     expect(result[3]).toBe(3)
   })
 
-  test('extract box ref handles data correctly', async () => {
+  test('extract box handles data correctly', async () => {
     const { testAccount } = localnet.context
     const { client } = await deploy(testAccount)
 
     await fundContract(testAccount, client.appAddress)
 
-    await client.send.extractBoxRef({
+    await client.send.extractBox({
       args: { key: 'extractTest' },
       boxReferences: [(client.appId, 'extractTest')],
     })
