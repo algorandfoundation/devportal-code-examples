@@ -4,7 +4,7 @@
   "result": [
     {
       "type": "ExecutionPaths",
-      "count": 3,
+      "count": 1,
       "description": "\nCheck: \"unprotected-deletable\", Impact: High, Confidence: High\nDescription: Unprotected Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-deletable-application\n",
       "check": "unprotected-deletable",
       "impact": "High",
@@ -12,106 +12,49 @@
       "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 7 -> 9",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "8: txn NumAppArgs",
+              "9: bz main___algopy_default_create@5"
             ],
             [
-              "11: pushbytes 0x0a28e7b6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_arc4_static_array_route@3"
+              "10: pushbytes 0x0a28e7b6",
+              "11: txna ApplicationArgs 0",
+              "12: match main_arc4_static_array_route@3"
             ],
             [
-              "15: main_after_if_else@10:",
-              "18: intc_1",
-              "19: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 11 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
+              "15: main_arc4_static_array_route@3:",
+              "18: txn OnCompletion",
+              "19: !",
+              "20: txn ApplicationID",
+              "21: &&",
+              "22: assert",
+              "23: b arc4_static_array"
             ],
             [
-              "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "35: arc4_static_array:",
+              "38: pushint 0",
+              "39: dup"
             ],
             [
-              "11: pushbytes 0x0a28e7b6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_arc4_static_array_route@3"
+              "41: arc4_static_array_for_header@2:",
+              "44: dup",
+              "45: pushint 4",
+              "46: <",
+              "47: bz arc4_static_array_after_for@5"
             ],
             [
-              "21: main_arc4_static_array_route@3:",
-              "24: txn OnCompletion",
-              "25: !",
-              "26: assert",
-              "27: txn ApplicationID",
-              "28: assert",
-              "29: callsub arc4_static_array"
-            ],
-            [
-              "46: arc4_static_array:",
-              "50: proto 0 0",
-              "53: intc_1",
-              "54: dup"
-            ],
-            [
-              "56: arc4_static_array_for_header@1:",
-              "59: frame_dig 1",
-              "60: intc_2",
-              "61: <",
-              "62: bz arc4_static_array_after_for@4"
-            ],
-            [
-              "84: arc4_static_array_after_for@4:",
-              "87: frame_dig 0",
-              "88: pushint 394",
-              "89: ==",
-              "90: assert",
-              "91: retsub"
-            ],
-            [
-              "30: intc_0",
-              "31: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 6 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
-            ],
-            [
-              "33: main_bare_routing@6:",
-              "36: txn OnCompletion",
-              "37: bnz main_after_if_else@10"
-            ],
-            [
-              "15: main_after_if_else@10:",
-              "18: intc_1",
-              "19: return"
+              "68: arc4_static_array_after_for@5:",
+              "71: dig 1",
+              "72: pushint 394",
+              "73: ==",
+              "76: return"
             ]
           ]
         }
@@ -119,7 +62,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 3,
+      "count": 1,
       "description": "\nCheck: \"unprotected-updatable\", Impact: High, Confidence: High\nDescription: Unprotected Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-updatable-application\n",
       "check": "unprotected-updatable",
       "impact": "High",
@@ -127,106 +70,49 @@
       "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 7 -> 9",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "8: txn NumAppArgs",
+              "9: bz main___algopy_default_create@5"
             ],
             [
-              "11: pushbytes 0x0a28e7b6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_arc4_static_array_route@3"
+              "10: pushbytes 0x0a28e7b6",
+              "11: txna ApplicationArgs 0",
+              "12: match main_arc4_static_array_route@3"
             ],
             [
-              "15: main_after_if_else@10:",
-              "18: intc_1",
-              "19: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 11 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
+              "15: main_arc4_static_array_route@3:",
+              "18: txn OnCompletion",
+              "19: !",
+              "20: txn ApplicationID",
+              "21: &&",
+              "22: assert",
+              "23: b arc4_static_array"
             ],
             [
-              "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "35: arc4_static_array:",
+              "38: pushint 0",
+              "39: dup"
             ],
             [
-              "11: pushbytes 0x0a28e7b6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_arc4_static_array_route@3"
+              "41: arc4_static_array_for_header@2:",
+              "44: dup",
+              "45: pushint 4",
+              "46: <",
+              "47: bz arc4_static_array_after_for@5"
             ],
             [
-              "21: main_arc4_static_array_route@3:",
-              "24: txn OnCompletion",
-              "25: !",
-              "26: assert",
-              "27: txn ApplicationID",
-              "28: assert",
-              "29: callsub arc4_static_array"
-            ],
-            [
-              "46: arc4_static_array:",
-              "50: proto 0 0",
-              "53: intc_1",
-              "54: dup"
-            ],
-            [
-              "56: arc4_static_array_for_header@1:",
-              "59: frame_dig 1",
-              "60: intc_2",
-              "61: <",
-              "62: bz arc4_static_array_after_for@4"
-            ],
-            [
-              "84: arc4_static_array_after_for@4:",
-              "87: frame_dig 0",
-              "88: pushint 394",
-              "89: ==",
-              "90: assert",
-              "91: retsub"
-            ],
-            [
-              "30: intc_0",
-              "31: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 6 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
-            ],
-            [
-              "33: main_bare_routing@6:",
-              "36: txn OnCompletion",
-              "37: bnz main_after_if_else@10"
-            ],
-            [
-              "15: main_after_if_else@10:",
-              "18: intc_1",
-              "19: return"
+              "68: arc4_static_array_after_for@5:",
+              "71: dig 1",
+              "72: pushint 394",
+              "73: ==",
+              "76: return"
             ]
           ]
         }
@@ -234,129 +120,27 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 2,
+      "count": 0,
       "description": "\nCheck: \"can-close-account\", Impact: High, Confidence: High\nDescription: Missing CloseRemainderTo field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-closeremainderto-field-validation\n",
       "check": "can-close-account",
       "impact": "High",
       "confidence": "High",
       "help": "Validate `CloseRemainderTo` field in the LogicSig.",
-      "paths": [
-        {
-          "short": "0 -> 1 -> 2 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
-            ],
-            [
-              "11: pushbytes 0x0a28e7b6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_arc4_static_array_route@3"
-            ],
-            [
-              "15: main_after_if_else@10:",
-              "18: intc_1",
-              "19: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 6 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
-            ],
-            [
-              "33: main_bare_routing@6:",
-              "36: txn OnCompletion",
-              "37: bnz main_after_if_else@10"
-            ],
-            [
-              "15: main_after_if_else@10:",
-              "18: intc_1",
-              "19: return"
-            ]
-          ]
-        }
-      ]
+      "paths": []
     },
     {
       "type": "ExecutionPaths",
-      "count": 2,
+      "count": 0,
       "description": "\nCheck: \"can-close-asset\", Impact: High, Confidence: High\nDescription: Missing AssetCloseTo Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-assetcloseto-field-validation\n",
       "check": "can-close-asset",
       "impact": "High",
       "confidence": "High",
       "help": "Validate `AssetCloseTo` field in the LogicSig.",
-      "paths": [
-        {
-          "short": "0 -> 1 -> 2 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
-            ],
-            [
-              "11: pushbytes 0x0a28e7b6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_arc4_static_array_route@3"
-            ],
-            [
-              "15: main_after_if_else@10:",
-              "18: intc_1",
-              "19: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 6 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
-            ],
-            [
-              "33: main_bare_routing@6:",
-              "36: txn OnCompletion",
-              "37: bnz main_after_if_else@10"
-            ],
-            [
-              "15: main_after_if_else@10:",
-              "18: intc_1",
-              "19: return"
-            ]
-          ]
-        }
-      ]
+      "paths": []
     },
     {
       "type": "ExecutionPaths",
-      "count": 3,
+      "count": 1,
       "description": "\nCheck: \"is-deletable\", Impact: High, Confidence: High\nDescription: Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#deletable-application\n",
       "check": "is-deletable",
       "impact": "High",
@@ -364,106 +148,49 @@
       "help": "Do not approve `DeleteApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 7 -> 9",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "8: txn NumAppArgs",
+              "9: bz main___algopy_default_create@5"
             ],
             [
-              "11: pushbytes 0x0a28e7b6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_arc4_static_array_route@3"
+              "10: pushbytes 0x0a28e7b6",
+              "11: txna ApplicationArgs 0",
+              "12: match main_arc4_static_array_route@3"
             ],
             [
-              "15: main_after_if_else@10:",
-              "18: intc_1",
-              "19: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 11 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
+              "15: main_arc4_static_array_route@3:",
+              "18: txn OnCompletion",
+              "19: !",
+              "20: txn ApplicationID",
+              "21: &&",
+              "22: assert",
+              "23: b arc4_static_array"
             ],
             [
-              "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "35: arc4_static_array:",
+              "38: pushint 0",
+              "39: dup"
             ],
             [
-              "11: pushbytes 0x0a28e7b6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_arc4_static_array_route@3"
+              "41: arc4_static_array_for_header@2:",
+              "44: dup",
+              "45: pushint 4",
+              "46: <",
+              "47: bz arc4_static_array_after_for@5"
             ],
             [
-              "21: main_arc4_static_array_route@3:",
-              "24: txn OnCompletion",
-              "25: !",
-              "26: assert",
-              "27: txn ApplicationID",
-              "28: assert",
-              "29: callsub arc4_static_array"
-            ],
-            [
-              "46: arc4_static_array:",
-              "50: proto 0 0",
-              "53: intc_1",
-              "54: dup"
-            ],
-            [
-              "56: arc4_static_array_for_header@1:",
-              "59: frame_dig 1",
-              "60: intc_2",
-              "61: <",
-              "62: bz arc4_static_array_after_for@4"
-            ],
-            [
-              "84: arc4_static_array_after_for@4:",
-              "87: frame_dig 0",
-              "88: pushint 394",
-              "89: ==",
-              "90: assert",
-              "91: retsub"
-            ],
-            [
-              "30: intc_0",
-              "31: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 6 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
-            ],
-            [
-              "33: main_bare_routing@6:",
-              "36: txn OnCompletion",
-              "37: bnz main_after_if_else@10"
-            ],
-            [
-              "15: main_after_if_else@10:",
-              "18: intc_1",
-              "19: return"
+              "68: arc4_static_array_after_for@5:",
+              "71: dig 1",
+              "72: pushint 394",
+              "73: ==",
+              "76: return"
             ]
           ]
         }
@@ -471,7 +198,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 3,
+      "count": 1,
       "description": "\nCheck: \"is-updatable\", Impact: High, Confidence: High\nDescription: Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#upgradable-application\n",
       "check": "is-updatable",
       "impact": "High",
@@ -479,106 +206,49 @@
       "help": "Do not approve `UpdateApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 7 -> 9",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "8: txn NumAppArgs",
+              "9: bz main___algopy_default_create@5"
             ],
             [
-              "11: pushbytes 0x0a28e7b6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_arc4_static_array_route@3"
+              "10: pushbytes 0x0a28e7b6",
+              "11: txna ApplicationArgs 0",
+              "12: match main_arc4_static_array_route@3"
             ],
             [
-              "15: main_after_if_else@10:",
-              "18: intc_1",
-              "19: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 11 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
+              "15: main_arc4_static_array_route@3:",
+              "18: txn OnCompletion",
+              "19: !",
+              "20: txn ApplicationID",
+              "21: &&",
+              "22: assert",
+              "23: b arc4_static_array"
             ],
             [
-              "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "35: arc4_static_array:",
+              "38: pushint 0",
+              "39: dup"
             ],
             [
-              "11: pushbytes 0x0a28e7b6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_arc4_static_array_route@3"
+              "41: arc4_static_array_for_header@2:",
+              "44: dup",
+              "45: pushint 4",
+              "46: <",
+              "47: bz arc4_static_array_after_for@5"
             ],
             [
-              "21: main_arc4_static_array_route@3:",
-              "24: txn OnCompletion",
-              "25: !",
-              "26: assert",
-              "27: txn ApplicationID",
-              "28: assert",
-              "29: callsub arc4_static_array"
-            ],
-            [
-              "46: arc4_static_array:",
-              "50: proto 0 0",
-              "53: intc_1",
-              "54: dup"
-            ],
-            [
-              "56: arc4_static_array_for_header@1:",
-              "59: frame_dig 1",
-              "60: intc_2",
-              "61: <",
-              "62: bz arc4_static_array_after_for@4"
-            ],
-            [
-              "84: arc4_static_array_after_for@4:",
-              "87: frame_dig 0",
-              "88: pushint 394",
-              "89: ==",
-              "90: assert",
-              "91: retsub"
-            ],
-            [
-              "30: intc_0",
-              "31: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 6 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
-            ],
-            [
-              "33: main_bare_routing@6:",
-              "36: txn OnCompletion",
-              "37: bnz main_after_if_else@10"
-            ],
-            [
-              "15: main_after_if_else@10:",
-              "18: intc_1",
-              "19: return"
+              "68: arc4_static_array_after_for@5:",
+              "71: dig 1",
+              "72: pushint 394",
+              "73: ==",
+              "76: return"
             ]
           ]
         }
@@ -586,7 +256,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 4,
+      "count": 2,
       "description": "\nCheck: \"missing-fee-check\", Impact: High, Confidence: High\nDescription: Missing Fee Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-fee-field-validation\n",
       "check": "missing-fee-check",
       "impact": "High",
@@ -594,133 +264,72 @@
       "help": "Validate `Fee` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 7 -> 9",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "8: txn NumAppArgs",
+              "9: bz main___algopy_default_create@5"
             ],
             [
-              "11: pushbytes 0x0a28e7b6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_arc4_static_array_route@3"
+              "10: pushbytes 0x0a28e7b6",
+              "11: txna ApplicationArgs 0",
+              "12: match main_arc4_static_array_route@3"
             ],
             [
-              "15: main_after_if_else@10:",
-              "18: intc_1",
-              "19: return"
+              "15: main_arc4_static_array_route@3:",
+              "18: txn OnCompletion",
+              "19: !",
+              "20: txn ApplicationID",
+              "21: &&",
+              "22: assert",
+              "23: b arc4_static_array"
+            ],
+            [
+              "35: arc4_static_array:",
+              "38: pushint 0",
+              "39: dup"
+            ],
+            [
+              "41: arc4_static_array_for_header@2:",
+              "44: dup",
+              "45: pushint 4",
+              "46: <",
+              "47: bz arc4_static_array_after_for@5"
+            ],
+            [
+              "68: arc4_static_array_after_for@5:",
+              "71: dig 1",
+              "72: pushint 394",
+              "73: ==",
+              "76: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 11 -> 5",
+          "short": "0 -> 1 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "8: txn NumAppArgs",
+              "9: bz main___algopy_default_create@5"
             ],
             [
-              "11: pushbytes 0x0a28e7b6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_arc4_static_array_route@3"
-            ],
-            [
-              "21: main_arc4_static_array_route@3:",
-              "24: txn OnCompletion",
-              "25: !",
-              "26: assert",
-              "27: txn ApplicationID",
-              "28: assert",
-              "29: callsub arc4_static_array"
-            ],
-            [
-              "46: arc4_static_array:",
-              "50: proto 0 0",
-              "53: intc_1",
-              "54: dup"
-            ],
-            [
-              "56: arc4_static_array_for_header@1:",
-              "59: frame_dig 1",
-              "60: intc_2",
-              "61: <",
-              "62: bz arc4_static_array_after_for@4"
-            ],
-            [
-              "84: arc4_static_array_after_for@4:",
-              "87: frame_dig 0",
-              "88: pushint 394",
-              "89: ==",
-              "90: assert",
-              "91: retsub"
-            ],
-            [
-              "30: intc_0",
+              "25: main___algopy_default_create@5:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: txn ApplicationID",
+              "29: !",
+              "30: &&",
               "31: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 6 -> 7",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
-            ],
-            [
-              "33: main_bare_routing@6:",
-              "36: txn OnCompletion",
-              "37: bnz main_after_if_else@10"
-            ],
-            [
-              "38: txn ApplicationID",
-              "39: !",
-              "40: assert",
-              "41: intc_0",
-              "42: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 6 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
-            ],
-            [
-              "33: main_bare_routing@6:",
-              "36: txn OnCompletion",
-              "37: bnz main_after_if_else@10"
-            ],
-            [
-              "15: main_after_if_else@10:",
-              "18: intc_1",
-              "19: return"
             ]
           ]
         }
@@ -738,7 +347,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 4,
+      "count": 2,
       "description": "\nCheck: \"rekey-to\", Impact: High, Confidence: High\nDescription: Rekeyable Logic Signatures\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#rekeyable-logicsig\n",
       "check": "rekey-to",
       "impact": "High",
@@ -746,133 +355,72 @@
       "help": "Validate `RekeyTo` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 7 -> 9",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "8: txn NumAppArgs",
+              "9: bz main___algopy_default_create@5"
             ],
             [
-              "11: pushbytes 0x0a28e7b6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_arc4_static_array_route@3"
+              "10: pushbytes 0x0a28e7b6",
+              "11: txna ApplicationArgs 0",
+              "12: match main_arc4_static_array_route@3"
             ],
             [
-              "15: main_after_if_else@10:",
-              "18: intc_1",
-              "19: return"
+              "15: main_arc4_static_array_route@3:",
+              "18: txn OnCompletion",
+              "19: !",
+              "20: txn ApplicationID",
+              "21: &&",
+              "22: assert",
+              "23: b arc4_static_array"
+            ],
+            [
+              "35: arc4_static_array:",
+              "38: pushint 0",
+              "39: dup"
+            ],
+            [
+              "41: arc4_static_array_for_header@2:",
+              "44: dup",
+              "45: pushint 4",
+              "46: <",
+              "47: bz arc4_static_array_after_for@5"
+            ],
+            [
+              "68: arc4_static_array_after_for@5:",
+              "71: dig 1",
+              "72: pushint 394",
+              "73: ==",
+              "76: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 11 -> 5",
+          "short": "0 -> 1 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "8: txn NumAppArgs",
+              "9: bz main___algopy_default_create@5"
             ],
             [
-              "11: pushbytes 0x0a28e7b6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_arc4_static_array_route@3"
-            ],
-            [
-              "21: main_arc4_static_array_route@3:",
-              "24: txn OnCompletion",
-              "25: !",
-              "26: assert",
-              "27: txn ApplicationID",
-              "28: assert",
-              "29: callsub arc4_static_array"
-            ],
-            [
-              "46: arc4_static_array:",
-              "50: proto 0 0",
-              "53: intc_1",
-              "54: dup"
-            ],
-            [
-              "56: arc4_static_array_for_header@1:",
-              "59: frame_dig 1",
-              "60: intc_2",
-              "61: <",
-              "62: bz arc4_static_array_after_for@4"
-            ],
-            [
-              "84: arc4_static_array_after_for@4:",
-              "87: frame_dig 0",
-              "88: pushint 394",
-              "89: ==",
-              "90: assert",
-              "91: retsub"
-            ],
-            [
-              "30: intc_0",
+              "25: main___algopy_default_create@5:",
+              "26: txn OnCompletion",
+              "27: !",
+              "28: txn ApplicationID",
+              "29: !",
+              "30: &&",
               "31: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 6 -> 7",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
-            ],
-            [
-              "33: main_bare_routing@6:",
-              "36: txn OnCompletion",
-              "37: bnz main_after_if_else@10"
-            ],
-            [
-              "38: txn ApplicationID",
-              "39: !",
-              "40: assert",
-              "41: intc_0",
-              "42: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 6 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 4",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
-            ],
-            [
-              "33: main_bare_routing@6:",
-              "36: txn OnCompletion",
-              "37: bnz main_after_if_else@10"
-            ],
-            [
-              "15: main_after_if_else@10:",
-              "18: intc_1",
-              "19: return"
             ]
           ]
         }

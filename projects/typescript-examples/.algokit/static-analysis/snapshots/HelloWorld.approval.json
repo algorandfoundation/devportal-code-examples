@@ -12,60 +12,52 @@
       "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 5 -> 9 -> 6",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "8: txn NumAppArgs",
-              "9: bz main_bare_routing@7"
+              "9: bz main___algots__.defaultCreate@9"
             ],
             [
-              "10: pushbytess 0x3aad6d86 0x3d25ae31",
-              "11: txna ApplicationArgs 0",
-              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+              "10: txn OnCompletion",
+              "11: !",
+              "12: assert",
+              "13: txn ApplicationID",
+              "14: assert",
+              "15: pushbytess 0x3aad6d86 0x3d25ae31",
+              "16: txna ApplicationArgs 0",
+              "17: match sayHello main_sayBananas_route@5"
             ],
             [
-              "33: main_sayHello_route@3:",
-              "36: txn OnCompletion",
-              "37: !",
-              "38: assert",
-              "39: txn ApplicationID",
-              "40: assert",
+              "40: sayHello:",
               "43: txna ApplicationArgs 1",
               "44: extract 2 0",
               "45: txna ApplicationArgs 2",
               "46: extract 2 0",
-              "49: callsub sayHello"
-            ],
-            [
-              "76: sayHello:",
-              "79: proto 2 1",
-              "82: pushbytes \"Hello \"",
-              "83: frame_dig -2",
-              "84: concat",
-              "85: pushbytes \" \"",
-              "86: concat",
-              "87: frame_dig -1",
-              "88: concat",
-              "91: retsub"
-            ],
-            [
-              "50: dup",
-              "51: len",
-              "52: itob",
-              "53: extract 6 2",
+              "49: pushbytes \"Hello \"",
+              "50: uncover 2",
+              "51: concat",
+              "52: pushbytes \" \"",
+              "53: concat",
               "54: swap",
               "55: concat",
-              "56: pushbytes 0x151f7c75",
-              "57: swap",
-              "58: concat",
-              "59: log",
-              "60: pushint 1",
-              "61: return"
+              "58: dup",
+              "59: len",
+              "60: itob",
+              "61: extract 6 2",
+              "62: swap",
+              "63: concat",
+              "64: pushbytes 0x151f7c75",
+              "65: swap",
+              "66: concat",
+              "67: log",
+              "68: pushint 1",
+              "69: return"
             ]
           ]
         },
@@ -73,30 +65,30 @@
           "short": "0 -> 1 -> 2 -> 4",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "8: txn NumAppArgs",
-              "9: bz main_bare_routing@7"
+              "9: bz main___algots__.defaultCreate@9"
             ],
             [
-              "10: pushbytess 0x3aad6d86 0x3d25ae31",
-              "11: txna ApplicationArgs 0",
-              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+              "10: txn OnCompletion",
+              "11: !",
+              "12: assert",
+              "13: txn ApplicationID",
+              "14: assert",
+              "15: pushbytess 0x3aad6d86 0x3d25ae31",
+              "16: txna ApplicationArgs 0",
+              "17: match sayHello main_sayBananas_route@5"
             ],
             [
-              "20: main_sayBananas_route@4:",
-              "23: txn OnCompletion",
-              "24: !",
-              "25: assert",
-              "26: txn ApplicationID",
-              "27: assert",
-              "28: pushbytes 0x151f7c75000742616e616e6173",
-              "29: log",
-              "30: pushint 1",
-              "31: return"
+              "20: main_sayBananas_route@5:",
+              "23: pushbytes 0x151f7c75000742616e616e6173",
+              "24: log",
+              "25: pushint 1",
+              "26: return"
             ]
           ]
         }
@@ -112,60 +104,52 @@
       "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 5 -> 9 -> 6",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "8: txn NumAppArgs",
-              "9: bz main_bare_routing@7"
+              "9: bz main___algots__.defaultCreate@9"
             ],
             [
-              "10: pushbytess 0x3aad6d86 0x3d25ae31",
-              "11: txna ApplicationArgs 0",
-              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+              "10: txn OnCompletion",
+              "11: !",
+              "12: assert",
+              "13: txn ApplicationID",
+              "14: assert",
+              "15: pushbytess 0x3aad6d86 0x3d25ae31",
+              "16: txna ApplicationArgs 0",
+              "17: match sayHello main_sayBananas_route@5"
             ],
             [
-              "33: main_sayHello_route@3:",
-              "36: txn OnCompletion",
-              "37: !",
-              "38: assert",
-              "39: txn ApplicationID",
-              "40: assert",
+              "40: sayHello:",
               "43: txna ApplicationArgs 1",
               "44: extract 2 0",
               "45: txna ApplicationArgs 2",
               "46: extract 2 0",
-              "49: callsub sayHello"
-            ],
-            [
-              "76: sayHello:",
-              "79: proto 2 1",
-              "82: pushbytes \"Hello \"",
-              "83: frame_dig -2",
-              "84: concat",
-              "85: pushbytes \" \"",
-              "86: concat",
-              "87: frame_dig -1",
-              "88: concat",
-              "91: retsub"
-            ],
-            [
-              "50: dup",
-              "51: len",
-              "52: itob",
-              "53: extract 6 2",
+              "49: pushbytes \"Hello \"",
+              "50: uncover 2",
+              "51: concat",
+              "52: pushbytes \" \"",
+              "53: concat",
               "54: swap",
               "55: concat",
-              "56: pushbytes 0x151f7c75",
-              "57: swap",
-              "58: concat",
-              "59: log",
-              "60: pushint 1",
-              "61: return"
+              "58: dup",
+              "59: len",
+              "60: itob",
+              "61: extract 6 2",
+              "62: swap",
+              "63: concat",
+              "64: pushbytes 0x151f7c75",
+              "65: swap",
+              "66: concat",
+              "67: log",
+              "68: pushint 1",
+              "69: return"
             ]
           ]
         },
@@ -173,30 +157,30 @@
           "short": "0 -> 1 -> 2 -> 4",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "8: txn NumAppArgs",
-              "9: bz main_bare_routing@7"
+              "9: bz main___algots__.defaultCreate@9"
             ],
             [
-              "10: pushbytess 0x3aad6d86 0x3d25ae31",
-              "11: txna ApplicationArgs 0",
-              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+              "10: txn OnCompletion",
+              "11: !",
+              "12: assert",
+              "13: txn ApplicationID",
+              "14: assert",
+              "15: pushbytess 0x3aad6d86 0x3d25ae31",
+              "16: txna ApplicationArgs 0",
+              "17: match sayHello main_sayBananas_route@5"
             ],
             [
-              "20: main_sayBananas_route@4:",
-              "23: txn OnCompletion",
-              "24: !",
-              "25: assert",
-              "26: txn ApplicationID",
-              "27: assert",
-              "28: pushbytes 0x151f7c75000742616e616e6173",
-              "29: log",
-              "30: pushint 1",
-              "31: return"
+              "20: main_sayBananas_route@5:",
+              "23: pushbytes 0x151f7c75000742616e616e6173",
+              "24: log",
+              "25: pushint 1",
+              "26: return"
             ]
           ]
         }
@@ -232,60 +216,52 @@
       "help": "Do not approve `DeleteApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 5 -> 9 -> 6",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "8: txn NumAppArgs",
-              "9: bz main_bare_routing@7"
+              "9: bz main___algots__.defaultCreate@9"
             ],
             [
-              "10: pushbytess 0x3aad6d86 0x3d25ae31",
-              "11: txna ApplicationArgs 0",
-              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+              "10: txn OnCompletion",
+              "11: !",
+              "12: assert",
+              "13: txn ApplicationID",
+              "14: assert",
+              "15: pushbytess 0x3aad6d86 0x3d25ae31",
+              "16: txna ApplicationArgs 0",
+              "17: match sayHello main_sayBananas_route@5"
             ],
             [
-              "33: main_sayHello_route@3:",
-              "36: txn OnCompletion",
-              "37: !",
-              "38: assert",
-              "39: txn ApplicationID",
-              "40: assert",
+              "40: sayHello:",
               "43: txna ApplicationArgs 1",
               "44: extract 2 0",
               "45: txna ApplicationArgs 2",
               "46: extract 2 0",
-              "49: callsub sayHello"
-            ],
-            [
-              "76: sayHello:",
-              "79: proto 2 1",
-              "82: pushbytes \"Hello \"",
-              "83: frame_dig -2",
-              "84: concat",
-              "85: pushbytes \" \"",
-              "86: concat",
-              "87: frame_dig -1",
-              "88: concat",
-              "91: retsub"
-            ],
-            [
-              "50: dup",
-              "51: len",
-              "52: itob",
-              "53: extract 6 2",
+              "49: pushbytes \"Hello \"",
+              "50: uncover 2",
+              "51: concat",
+              "52: pushbytes \" \"",
+              "53: concat",
               "54: swap",
               "55: concat",
-              "56: pushbytes 0x151f7c75",
-              "57: swap",
-              "58: concat",
-              "59: log",
-              "60: pushint 1",
-              "61: return"
+              "58: dup",
+              "59: len",
+              "60: itob",
+              "61: extract 6 2",
+              "62: swap",
+              "63: concat",
+              "64: pushbytes 0x151f7c75",
+              "65: swap",
+              "66: concat",
+              "67: log",
+              "68: pushint 1",
+              "69: return"
             ]
           ]
         },
@@ -293,30 +269,30 @@
           "short": "0 -> 1 -> 2 -> 4",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "8: txn NumAppArgs",
-              "9: bz main_bare_routing@7"
+              "9: bz main___algots__.defaultCreate@9"
             ],
             [
-              "10: pushbytess 0x3aad6d86 0x3d25ae31",
-              "11: txna ApplicationArgs 0",
-              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+              "10: txn OnCompletion",
+              "11: !",
+              "12: assert",
+              "13: txn ApplicationID",
+              "14: assert",
+              "15: pushbytess 0x3aad6d86 0x3d25ae31",
+              "16: txna ApplicationArgs 0",
+              "17: match sayHello main_sayBananas_route@5"
             ],
             [
-              "20: main_sayBananas_route@4:",
-              "23: txn OnCompletion",
-              "24: !",
-              "25: assert",
-              "26: txn ApplicationID",
-              "27: assert",
-              "28: pushbytes 0x151f7c75000742616e616e6173",
-              "29: log",
-              "30: pushint 1",
-              "31: return"
+              "20: main_sayBananas_route@5:",
+              "23: pushbytes 0x151f7c75000742616e616e6173",
+              "24: log",
+              "25: pushint 1",
+              "26: return"
             ]
           ]
         }
@@ -332,60 +308,52 @@
       "help": "Do not approve `UpdateApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 5 -> 9 -> 6",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "8: txn NumAppArgs",
-              "9: bz main_bare_routing@7"
+              "9: bz main___algots__.defaultCreate@9"
             ],
             [
-              "10: pushbytess 0x3aad6d86 0x3d25ae31",
-              "11: txna ApplicationArgs 0",
-              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+              "10: txn OnCompletion",
+              "11: !",
+              "12: assert",
+              "13: txn ApplicationID",
+              "14: assert",
+              "15: pushbytess 0x3aad6d86 0x3d25ae31",
+              "16: txna ApplicationArgs 0",
+              "17: match sayHello main_sayBananas_route@5"
             ],
             [
-              "33: main_sayHello_route@3:",
-              "36: txn OnCompletion",
-              "37: !",
-              "38: assert",
-              "39: txn ApplicationID",
-              "40: assert",
+              "40: sayHello:",
               "43: txna ApplicationArgs 1",
               "44: extract 2 0",
               "45: txna ApplicationArgs 2",
               "46: extract 2 0",
-              "49: callsub sayHello"
-            ],
-            [
-              "76: sayHello:",
-              "79: proto 2 1",
-              "82: pushbytes \"Hello \"",
-              "83: frame_dig -2",
-              "84: concat",
-              "85: pushbytes \" \"",
-              "86: concat",
-              "87: frame_dig -1",
-              "88: concat",
-              "91: retsub"
-            ],
-            [
-              "50: dup",
-              "51: len",
-              "52: itob",
-              "53: extract 6 2",
+              "49: pushbytes \"Hello \"",
+              "50: uncover 2",
+              "51: concat",
+              "52: pushbytes \" \"",
+              "53: concat",
               "54: swap",
               "55: concat",
-              "56: pushbytes 0x151f7c75",
-              "57: swap",
-              "58: concat",
-              "59: log",
-              "60: pushint 1",
-              "61: return"
+              "58: dup",
+              "59: len",
+              "60: itob",
+              "61: extract 6 2",
+              "62: swap",
+              "63: concat",
+              "64: pushbytes 0x151f7c75",
+              "65: swap",
+              "66: concat",
+              "67: log",
+              "68: pushint 1",
+              "69: return"
             ]
           ]
         },
@@ -393,30 +361,30 @@
           "short": "0 -> 1 -> 2 -> 4",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "8: txn NumAppArgs",
-              "9: bz main_bare_routing@7"
+              "9: bz main___algots__.defaultCreate@9"
             ],
             [
-              "10: pushbytess 0x3aad6d86 0x3d25ae31",
-              "11: txna ApplicationArgs 0",
-              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+              "10: txn OnCompletion",
+              "11: !",
+              "12: assert",
+              "13: txn ApplicationID",
+              "14: assert",
+              "15: pushbytess 0x3aad6d86 0x3d25ae31",
+              "16: txna ApplicationArgs 0",
+              "17: match sayHello main_sayBananas_route@5"
             ],
             [
-              "20: main_sayBananas_route@4:",
-              "23: txn OnCompletion",
-              "24: !",
-              "25: assert",
-              "26: txn ApplicationID",
-              "27: assert",
-              "28: pushbytes 0x151f7c75000742616e616e6173",
-              "29: log",
-              "30: pushint 1",
-              "31: return"
+              "20: main_sayBananas_route@5:",
+              "23: pushbytes 0x151f7c75000742616e616e6173",
+              "24: log",
+              "25: pushint 1",
+              "26: return"
             ]
           ]
         }
@@ -432,60 +400,52 @@
       "help": "Validate `Fee` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 5 -> 9 -> 6",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "8: txn NumAppArgs",
-              "9: bz main_bare_routing@7"
+              "9: bz main___algots__.defaultCreate@9"
             ],
             [
-              "10: pushbytess 0x3aad6d86 0x3d25ae31",
-              "11: txna ApplicationArgs 0",
-              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+              "10: txn OnCompletion",
+              "11: !",
+              "12: assert",
+              "13: txn ApplicationID",
+              "14: assert",
+              "15: pushbytess 0x3aad6d86 0x3d25ae31",
+              "16: txna ApplicationArgs 0",
+              "17: match sayHello main_sayBananas_route@5"
             ],
             [
-              "33: main_sayHello_route@3:",
-              "36: txn OnCompletion",
-              "37: !",
-              "38: assert",
-              "39: txn ApplicationID",
-              "40: assert",
+              "40: sayHello:",
               "43: txna ApplicationArgs 1",
               "44: extract 2 0",
               "45: txna ApplicationArgs 2",
               "46: extract 2 0",
-              "49: callsub sayHello"
-            ],
-            [
-              "76: sayHello:",
-              "79: proto 2 1",
-              "82: pushbytes \"Hello \"",
-              "83: frame_dig -2",
-              "84: concat",
-              "85: pushbytes \" \"",
-              "86: concat",
-              "87: frame_dig -1",
-              "88: concat",
-              "91: retsub"
-            ],
-            [
-              "50: dup",
-              "51: len",
-              "52: itob",
-              "53: extract 6 2",
+              "49: pushbytes \"Hello \"",
+              "50: uncover 2",
+              "51: concat",
+              "52: pushbytes \" \"",
+              "53: concat",
               "54: swap",
               "55: concat",
-              "56: pushbytes 0x151f7c75",
-              "57: swap",
-              "58: concat",
-              "59: log",
-              "60: pushint 1",
-              "61: return"
+              "58: dup",
+              "59: len",
+              "60: itob",
+              "61: extract 6 2",
+              "62: swap",
+              "63: concat",
+              "64: pushbytes 0x151f7c75",
+              "65: swap",
+              "66: concat",
+              "67: log",
+              "68: pushint 1",
+              "69: return"
             ]
           ]
         },
@@ -493,56 +453,53 @@
           "short": "0 -> 1 -> 2 -> 4",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "8: txn NumAppArgs",
-              "9: bz main_bare_routing@7"
+              "9: bz main___algots__.defaultCreate@9"
             ],
             [
-              "10: pushbytess 0x3aad6d86 0x3d25ae31",
-              "11: txna ApplicationArgs 0",
-              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+              "10: txn OnCompletion",
+              "11: !",
+              "12: assert",
+              "13: txn ApplicationID",
+              "14: assert",
+              "15: pushbytess 0x3aad6d86 0x3d25ae31",
+              "16: txna ApplicationArgs 0",
+              "17: match sayHello main_sayBananas_route@5"
             ],
             [
-              "20: main_sayBananas_route@4:",
-              "23: txn OnCompletion",
-              "24: !",
-              "25: assert",
-              "26: txn ApplicationID",
-              "27: assert",
-              "28: pushbytes 0x151f7c75000742616e616e6173",
-              "29: log",
-              "30: pushint 1",
-              "31: return"
+              "20: main_sayBananas_route@5:",
+              "23: pushbytes 0x151f7c75000742616e616e6173",
+              "24: log",
+              "25: pushint 1",
+              "26: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 7 -> 8",
+          "short": "0 -> 1 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "8: txn NumAppArgs",
-              "9: bz main_bare_routing@7"
+              "9: bz main___algots__.defaultCreate@9"
             ],
             [
-              "63: main_bare_routing@7:",
-              "66: txn OnCompletion",
-              "67: bnz main_after_if_else@11"
-            ],
-            [
-              "68: txn ApplicationID",
-              "69: !",
-              "70: assert",
-              "71: pushint 1",
-              "72: return"
+              "28: main___algots__.defaultCreate@9:",
+              "31: txn OnCompletion",
+              "32: !",
+              "33: txn ApplicationID",
+              "34: !",
+              "35: &&",
+              "36: return"
             ]
           ]
         }
@@ -568,60 +525,52 @@
       "help": "Validate `RekeyTo` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 5 -> 9 -> 6",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "8: txn NumAppArgs",
-              "9: bz main_bare_routing@7"
+              "9: bz main___algots__.defaultCreate@9"
             ],
             [
-              "10: pushbytess 0x3aad6d86 0x3d25ae31",
-              "11: txna ApplicationArgs 0",
-              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+              "10: txn OnCompletion",
+              "11: !",
+              "12: assert",
+              "13: txn ApplicationID",
+              "14: assert",
+              "15: pushbytess 0x3aad6d86 0x3d25ae31",
+              "16: txna ApplicationArgs 0",
+              "17: match sayHello main_sayBananas_route@5"
             ],
             [
-              "33: main_sayHello_route@3:",
-              "36: txn OnCompletion",
-              "37: !",
-              "38: assert",
-              "39: txn ApplicationID",
-              "40: assert",
+              "40: sayHello:",
               "43: txna ApplicationArgs 1",
               "44: extract 2 0",
               "45: txna ApplicationArgs 2",
               "46: extract 2 0",
-              "49: callsub sayHello"
-            ],
-            [
-              "76: sayHello:",
-              "79: proto 2 1",
-              "82: pushbytes \"Hello \"",
-              "83: frame_dig -2",
-              "84: concat",
-              "85: pushbytes \" \"",
-              "86: concat",
-              "87: frame_dig -1",
-              "88: concat",
-              "91: retsub"
-            ],
-            [
-              "50: dup",
-              "51: len",
-              "52: itob",
-              "53: extract 6 2",
+              "49: pushbytes \"Hello \"",
+              "50: uncover 2",
+              "51: concat",
+              "52: pushbytes \" \"",
+              "53: concat",
               "54: swap",
               "55: concat",
-              "56: pushbytes 0x151f7c75",
-              "57: swap",
-              "58: concat",
-              "59: log",
-              "60: pushint 1",
-              "61: return"
+              "58: dup",
+              "59: len",
+              "60: itob",
+              "61: extract 6 2",
+              "62: swap",
+              "63: concat",
+              "64: pushbytes 0x151f7c75",
+              "65: swap",
+              "66: concat",
+              "67: log",
+              "68: pushint 1",
+              "69: return"
             ]
           ]
         },
@@ -629,56 +578,53 @@
           "short": "0 -> 1 -> 2 -> 4",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "8: txn NumAppArgs",
-              "9: bz main_bare_routing@7"
+              "9: bz main___algots__.defaultCreate@9"
             ],
             [
-              "10: pushbytess 0x3aad6d86 0x3d25ae31",
-              "11: txna ApplicationArgs 0",
-              "12: match main_sayHello_route@3 main_sayBananas_route@4"
+              "10: txn OnCompletion",
+              "11: !",
+              "12: assert",
+              "13: txn ApplicationID",
+              "14: assert",
+              "15: pushbytess 0x3aad6d86 0x3d25ae31",
+              "16: txna ApplicationArgs 0",
+              "17: match sayHello main_sayBananas_route@5"
             ],
             [
-              "20: main_sayBananas_route@4:",
-              "23: txn OnCompletion",
-              "24: !",
-              "25: assert",
-              "26: txn ApplicationID",
-              "27: assert",
-              "28: pushbytes 0x151f7c75000742616e616e6173",
-              "29: log",
-              "30: pushint 1",
-              "31: return"
+              "20: main_sayBananas_route@5:",
+              "23: pushbytes 0x151f7c75000742616e616e6173",
+              "24: log",
+              "25: pushint 1",
+              "26: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 7 -> 8",
+          "short": "0 -> 1 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "8: txn NumAppArgs",
-              "9: bz main_bare_routing@7"
+              "9: bz main___algots__.defaultCreate@9"
             ],
             [
-              "63: main_bare_routing@7:",
-              "66: txn OnCompletion",
-              "67: bnz main_after_if_else@11"
-            ],
-            [
-              "68: txn ApplicationID",
-              "69: !",
-              "70: assert",
-              "71: pushint 1",
-              "72: return"
+              "28: main___algots__.defaultCreate@9:",
+              "31: txn OnCompletion",
+              "32: !",
+              "33: txn ApplicationID",
+              "34: !",
+              "35: &&",
+              "36: return"
             ]
           ]
         }

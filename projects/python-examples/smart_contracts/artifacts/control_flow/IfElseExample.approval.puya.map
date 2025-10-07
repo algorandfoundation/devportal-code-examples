@@ -3,7 +3,7 @@
   "sources": [
     "../../control_flow/contract.py"
   ],
-  "mappings": ";;;;;;;;AAKA;;AAAA;;;AAAA;;;;;;;;;;;;AAAA;;;AAAA;;;;;;AAAA;;;AAcK;;AAAA;AAAA;AAAA;;AAAA;AAdL;;;AAAA;AAcK;;;AAAA;AAAA;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;;AAZA;;AAAA;AAAA;AAAA;;AAAA;AAFL;;;AAAA;AAEK;;;AAAA;AAAA;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;;AAFL;;AAAA;;;;;;;;;;AAEA;;;AAEW;;AAAkB;;;AAAlB;AAAX;;;AACmB;;;;;;;;;;;;;;;;;;;;;;;AAAP;AACC;;AAAkB;;AAAlB;AAAb;;;AACmB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAP;AAEO;;;;;;;;;;;;;;;;;;;;;;;;;AAAP;AAKZ;;;AAEiC;;AAAS;;AAAT;AAAlB;;;AAAA;;;;;;AAAP;AAA8C;;;;;AAA9C",
+  "mappings": ";;;;;;;;AAKA;;AAAA;;;AAAA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;;;;;;;;;;AAAA;;;AAAA;;;;;;AAAA;;;;;;;;;AAEK;;;AAAA;AAAA;AAEwB;;;AAAlB;AAAX;;;AACmB;;;;;;;;;;;;;;;;;;;;;;;AAHd;AAAA;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;AAAA;AAIQ;AAAkB;;AAAlB;AAAb;;;AACmB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AALd;;;AAOc;;;;;;;;;;;;;;;;;;;;;;;;;AAPd;;;AAYA;;;AAAA;AAEqC;;AAAT;AAAlB;;;AAAA;;;;;;AAFV;AAAA;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;AAAA;AAEiD;;;;;",
   "op_pc_offset": 0,
   "pc_events": {
     "1": {
@@ -23,10 +23,46 @@
       ]
     },
     "10": {
-      "op": "bz main_bare_routing@7",
+      "op": "bz main___algopy_default_create@9",
       "stack_out": []
     },
     "13": {
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%2#0"
+      ]
+    },
+    "15": {
+      "op": "!",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "16": {
+      "error": "OnCompletion must be NoOp",
+      "op": "assert // OnCompletion must be NoOp",
+      "stack_out": []
+    },
+    "17": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "19": {
+      "op": "assert",
+      "stack_out": []
+    },
+    "20": {
       "op": "pushbytess 0x37c01090 0x6632c2d6 // method \"is_rich(uint64)string\", method \"is_even(uint64)string\"",
       "defined_out": [
         "Method(is_even(uint64)string)",
@@ -37,592 +73,399 @@
         "Method(is_even(uint64)string)"
       ]
     },
-    "25": {
+    "32": {
       "op": "txna ApplicationArgs 0",
       "defined_out": [
         "Method(is_even(uint64)string)",
         "Method(is_rich(uint64)string)",
-        "tmp%2#0"
+        "tmp%6#0"
       ],
       "stack_out": [
         "Method(is_rich(uint64)string)",
         "Method(is_even(uint64)string)",
-        "tmp%2#0"
+        "tmp%6#0"
       ]
     },
-    "28": {
-      "op": "match main_is_rich_route@3 main_is_even_route@4",
-      "stack_out": []
-    },
-    "34": {
-      "block": "main_after_if_else@11",
-      "stack_in": [],
-      "op": "pushint 0 // 0",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
-    },
-    "36": {
-      "op": "return",
-      "stack_out": []
-    },
-    "37": {
-      "block": "main_is_even_route@4",
-      "stack_in": [],
-      "op": "txn OnCompletion",
-      "defined_out": [
-        "tmp%9#0"
-      ],
-      "stack_out": [
-        "tmp%9#0"
-      ]
-    },
-    "39": {
-      "op": "!",
-      "defined_out": [
-        "tmp%10#0"
-      ],
-      "stack_out": [
-        "tmp%10#0"
-      ]
-    },
-    "40": {
-      "error": "OnCompletion is not NoOp",
-      "op": "assert // OnCompletion is not NoOp",
+    "35": {
+      "op": "match is_rich is_even",
       "stack_out": []
     },
     "41": {
-      "op": "txn ApplicationID",
+      "op": "err"
+    },
+    "42": {
+      "block": "main___algopy_default_create@9",
+      "stack_in": [],
+      "op": "txn OnCompletion",
       "defined_out": [
-        "tmp%11#0"
+        "tmp%7#0"
       ],
       "stack_out": [
-        "tmp%11#0"
+        "tmp%7#0"
       ]
     },
-    "43": {
-      "error": "can only call when not creating",
-      "op": "assert // can only call when not creating",
-      "stack_out": []
-    },
     "44": {
-      "op": "txna ApplicationArgs 1",
+      "op": "!",
       "defined_out": [
-        "reinterpret_bytes[8]%1#0"
+        "tmp%8#0"
       ],
       "stack_out": [
-        "reinterpret_bytes[8]%1#0"
+        "tmp%8#0"
+      ]
+    },
+    "45": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%8#0",
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%8#0",
+        "tmp%9#0"
       ]
     },
     "47": {
-      "op": "btoi",
+      "op": "!",
       "defined_out": [
-        "tmp%13#0"
+        "tmp%10#0",
+        "tmp%8#0"
       ],
       "stack_out": [
-        "tmp%13#0"
+        "tmp%8#0",
+        "tmp%10#0"
       ]
     },
     "48": {
-      "callsub": "smart_contracts.control_flow.contract.IfElseExample.is_even",
-      "op": "callsub is_even",
+      "op": "&&",
       "defined_out": [
-        "to_encode%1#0"
+        "tmp%11#0"
       ],
       "stack_out": [
-        "to_encode%1#0"
+        "tmp%11#0"
       ]
     },
-    "51": {
-      "op": "dup",
-      "defined_out": [
-        "to_encode%1#0",
-        "to_encode%1#0 (copy)"
-      ],
-      "stack_out": [
-        "to_encode%1#0",
-        "to_encode%1#0 (copy)"
-      ]
+    "49": {
+      "error": "OnCompletion must be NoOp && can only call when creating",
+      "op": "return // on error: OnCompletion must be NoOp && can only call when creating",
+      "defined_out": [],
+      "stack_out": []
     },
-    "52": {
-      "op": "len",
+    "50": {
+      "subroutine": "smart_contracts.control_flow.contract.IfElseExample.is_rich[routing]",
+      "params": {},
+      "block": "is_rich",
+      "stack_in": [],
+      "op": "txna ApplicationArgs 1",
       "defined_out": [
-        "length%1#0",
-        "to_encode%1#0"
+        "reinterpret_Encoded(uint64)%0#0"
       ],
       "stack_out": [
-        "to_encode%1#0",
-        "length%1#0"
+        "reinterpret_Encoded(uint64)%0#0"
       ]
     },
     "53": {
-      "op": "itob",
+      "op": "btoi",
       "defined_out": [
-        "as_bytes%1#0",
-        "to_encode%1#0"
+        "account_balance#0"
       ],
       "stack_out": [
-        "to_encode%1#0",
-        "as_bytes%1#0"
+        "account_balance#0"
       ]
     },
     "54": {
-      "op": "extract 6 2",
-      "defined_out": [
-        "length_uint16%1#0",
-        "to_encode%1#0"
-      ],
-      "stack_out": [
-        "to_encode%1#0",
-        "length_uint16%1#0"
-      ]
-    },
-    "57": {
-      "op": "swap",
-      "stack_out": [
-        "length_uint16%1#0",
-        "to_encode%1#0"
-      ]
-    },
-    "58": {
-      "op": "concat",
-      "defined_out": [
-        "encoded_value%1#0"
-      ],
-      "stack_out": [
-        "encoded_value%1#0"
-      ]
-    },
-    "59": {
-      "op": "bytec_0 // 0x151f7c75",
-      "defined_out": [
-        "0x151f7c75",
-        "encoded_value%1#0"
-      ],
-      "stack_out": [
-        "encoded_value%1#0",
-        "0x151f7c75"
-      ]
-    },
-    "60": {
-      "op": "swap",
-      "stack_out": [
-        "0x151f7c75",
-        "encoded_value%1#0"
-      ]
-    },
-    "61": {
-      "op": "concat",
-      "defined_out": [
-        "tmp%14#0"
-      ],
-      "stack_out": [
-        "tmp%14#0"
-      ]
-    },
-    "62": {
-      "op": "log",
-      "stack_out": []
-    },
-    "63": {
-      "op": "pushint 1 // 1",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
-    },
-    "65": {
-      "op": "return",
-      "stack_out": []
-    },
-    "66": {
-      "block": "main_is_rich_route@3",
-      "stack_in": [],
-      "op": "txn OnCompletion",
-      "defined_out": [
-        "tmp%3#0"
-      ],
-      "stack_out": [
-        "tmp%3#0"
-      ]
-    },
-    "68": {
-      "op": "!",
-      "defined_out": [
-        "tmp%4#0"
-      ],
-      "stack_out": [
-        "tmp%4#0"
-      ]
-    },
-    "69": {
-      "error": "OnCompletion is not NoOp",
-      "op": "assert // OnCompletion is not NoOp",
-      "stack_out": []
-    },
-    "70": {
-      "op": "txn ApplicationID",
-      "defined_out": [
-        "tmp%5#0"
-      ],
-      "stack_out": [
-        "tmp%5#0"
-      ]
-    },
-    "72": {
-      "error": "can only call when not creating",
-      "op": "assert // can only call when not creating",
-      "stack_out": []
-    },
-    "73": {
-      "op": "txna ApplicationArgs 1",
-      "defined_out": [
-        "reinterpret_bytes[8]%0#0"
-      ],
-      "stack_out": [
-        "reinterpret_bytes[8]%0#0"
-      ]
-    },
-    "76": {
-      "op": "btoi",
-      "defined_out": [
-        "tmp%7#0"
-      ],
-      "stack_out": [
-        "tmp%7#0"
-      ]
-    },
-    "77": {
-      "callsub": "smart_contracts.control_flow.contract.IfElseExample.is_rich",
-      "op": "callsub is_rich",
-      "defined_out": [
-        "to_encode%0#0"
-      ],
-      "stack_out": [
-        "to_encode%0#0"
-      ]
-    },
-    "80": {
       "op": "dup",
       "defined_out": [
-        "to_encode%0#0",
-        "to_encode%0#0 (copy)"
+        "account_balance#0"
       ],
       "stack_out": [
-        "to_encode%0#0",
-        "to_encode%0#0 (copy)"
+        "account_balance#0",
+        "account_balance#0"
       ]
     },
-    "81": {
-      "op": "len",
-      "defined_out": [
-        "length%0#0",
-        "to_encode%0#0"
-      ],
-      "stack_out": [
-        "to_encode%0#0",
-        "length%0#0"
-      ]
-    },
-    "82": {
-      "op": "itob",
-      "defined_out": [
-        "as_bytes%0#0",
-        "to_encode%0#0"
-      ],
-      "stack_out": [
-        "to_encode%0#0",
-        "as_bytes%0#0"
-      ]
-    },
-    "83": {
-      "op": "extract 6 2",
-      "defined_out": [
-        "length_uint16%0#0",
-        "to_encode%0#0"
-      ],
-      "stack_out": [
-        "to_encode%0#0",
-        "length_uint16%0#0"
-      ]
-    },
-    "86": {
-      "op": "swap",
-      "stack_out": [
-        "length_uint16%0#0",
-        "to_encode%0#0"
-      ]
-    },
-    "87": {
-      "op": "concat",
-      "defined_out": [
-        "encoded_value%0#0"
-      ],
-      "stack_out": [
-        "encoded_value%0#0"
-      ]
-    },
-    "88": {
-      "op": "bytec_0 // 0x151f7c75",
-      "defined_out": [
-        "0x151f7c75",
-        "encoded_value%0#0"
-      ],
-      "stack_out": [
-        "encoded_value%0#0",
-        "0x151f7c75"
-      ]
-    },
-    "89": {
-      "op": "swap",
-      "stack_out": [
-        "0x151f7c75",
-        "encoded_value%0#0"
-      ]
-    },
-    "90": {
-      "op": "concat",
-      "defined_out": [
-        "tmp%8#0"
-      ],
-      "stack_out": [
-        "tmp%8#0"
-      ]
-    },
-    "91": {
-      "op": "log",
-      "stack_out": []
-    },
-    "92": {
-      "op": "pushint 1 // 1",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
-    },
-    "94": {
-      "op": "return",
-      "stack_out": []
-    },
-    "95": {
-      "block": "main_bare_routing@7",
-      "stack_in": [],
-      "op": "txn OnCompletion",
-      "defined_out": [
-        "tmp%15#0"
-      ],
-      "stack_out": [
-        "tmp%15#0"
-      ]
-    },
-    "97": {
-      "op": "bnz main_after_if_else@11",
-      "stack_out": []
-    },
-    "100": {
-      "op": "txn ApplicationID",
-      "defined_out": [
-        "tmp%16#0"
-      ],
-      "stack_out": [
-        "tmp%16#0"
-      ]
-    },
-    "102": {
-      "op": "!",
-      "defined_out": [
-        "tmp%17#0"
-      ],
-      "stack_out": [
-        "tmp%17#0"
-      ]
-    },
-    "103": {
-      "error": "can only call when creating",
-      "op": "assert // can only call when creating",
-      "stack_out": []
-    },
-    "104": {
-      "op": "pushint 1 // 1",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
-    },
-    "106": {
-      "op": "return",
-      "stack_out": []
-    },
-    "107": {
-      "subroutine": "smart_contracts.control_flow.contract.IfElseExample.is_rich",
-      "params": {
-        "account_balance#0": "uint64"
-      },
-      "block": "is_rich",
-      "stack_in": [],
-      "op": "proto 1 1"
-    },
-    "110": {
-      "op": "frame_dig -1",
-      "defined_out": [
-        "account_balance#0 (copy)"
-      ],
-      "stack_out": [
-        "account_balance#0 (copy)"
-      ]
-    },
-    "112": {
+    "55": {
       "op": "pushint 1000 // 1000",
       "defined_out": [
         "1000",
-        "account_balance#0 (copy)"
+        "account_balance#0"
       ],
       "stack_out": [
-        "account_balance#0 (copy)",
+        "account_balance#0",
+        "account_balance#0",
         "1000"
       ]
     },
-    "115": {
+    "58": {
       "op": ">",
       "defined_out": [
-        "tmp%0#0"
+        "account_balance#0",
+        "tmp%0#1"
       ],
       "stack_out": [
-        "tmp%0#0"
+        "account_balance#0",
+        "tmp%0#1"
       ]
     },
-    "116": {
-      "op": "bz is_rich_else_body@2",
-      "stack_out": []
+    "59": {
+      "op": "bz is_rich_else_body@3",
+      "stack_out": [
+        "account_balance#0"
+      ]
     },
-    "119": {
+    "62": {
       "op": "pushbytes \"This account is rich!\"",
       "defined_out": [
-        "\"This account is rich!\""
+        "account_balance#0",
+        "tmp%1#0"
       ],
       "stack_out": [
-        "\"This account is rich!\""
+        "account_balance#0",
+        "tmp%1#0"
       ]
     },
-    "142": {
-      "retsub": true,
-      "op": "retsub"
-    },
-    "143": {
-      "block": "is_rich_else_body@2",
-      "stack_in": [],
-      "op": "frame_dig -1",
+    "85": {
+      "block": "is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6",
+      "stack_in": [
+        "account_balance#0",
+        "tmp%1#0"
+      ],
+      "op": "dup",
       "defined_out": [
-        "account_balance#0 (copy)"
+        "tmp%1#0",
+        "tmp%1#0 (copy)"
       ],
       "stack_out": [
-        "account_balance#0 (copy)"
+        "account_balance#0",
+        "tmp%1#0",
+        "tmp%1#0 (copy)"
       ]
     },
-    "145": {
+    "86": {
+      "op": "len",
+      "defined_out": [
+        "aggregate%length%0#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "account_balance#0",
+        "tmp%1#0",
+        "aggregate%length%0#0"
+      ]
+    },
+    "87": {
+      "op": "itob",
+      "defined_out": [
+        "aggregate%as_bytes%0#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "account_balance#0",
+        "tmp%1#0",
+        "aggregate%as_bytes%0#0"
+      ]
+    },
+    "88": {
+      "op": "extract 6 2",
+      "defined_out": [
+        "aggregate%length_uint16%0#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "account_balance#0",
+        "tmp%1#0",
+        "aggregate%length_uint16%0#0"
+      ]
+    },
+    "91": {
+      "op": "swap",
+      "stack_out": [
+        "account_balance#0",
+        "aggregate%length_uint16%0#0",
+        "tmp%1#0"
+      ]
+    },
+    "92": {
+      "op": "concat",
+      "defined_out": [
+        "aggregate%encoded_value%0#0"
+      ],
+      "stack_out": [
+        "account_balance#0",
+        "aggregate%encoded_value%0#0"
+      ]
+    },
+    "93": {
+      "op": "bytec_0 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "aggregate%encoded_value%0#0"
+      ],
+      "stack_out": [
+        "account_balance#0",
+        "aggregate%encoded_value%0#0",
+        "0x151f7c75"
+      ]
+    },
+    "94": {
+      "op": "swap",
+      "stack_out": [
+        "account_balance#0",
+        "0x151f7c75",
+        "aggregate%encoded_value%0#0"
+      ]
+    },
+    "95": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "account_balance#0",
+        "tmp%3#0"
+      ]
+    },
+    "96": {
+      "op": "log",
+      "stack_out": [
+        "account_balance#0"
+      ]
+    },
+    "97": {
+      "op": "pushint 1 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "account_balance#0",
+        "1"
+      ]
+    },
+    "99": {
+      "op": "return",
+      "stack_out": [
+        "account_balance#0"
+      ]
+    },
+    "100": {
+      "block": "is_rich_else_body@3",
+      "stack_in": [
+        "account_balance#0"
+      ],
+      "op": "dup",
+      "defined_out": [
+        "account_balance#0"
+      ],
+      "stack_out": [
+        "account_balance#0",
+        "account_balance#0"
+      ]
+    },
+    "101": {
       "op": "pushint 100 // 100",
       "defined_out": [
         "100",
-        "account_balance#0 (copy)"
+        "account_balance#0"
       ],
       "stack_out": [
-        "account_balance#0 (copy)",
+        "account_balance#0",
+        "account_balance#0",
         "100"
       ]
     },
-    "147": {
+    "103": {
       "op": ">",
       "defined_out": [
-        "tmp%1#0"
+        "account_balance#0",
+        "tmp%1#1"
       ],
       "stack_out": [
-        "tmp%1#0"
+        "account_balance#0",
+        "tmp%1#1"
       ]
     },
-    "148": {
-      "op": "bz is_rich_else_body@4",
-      "stack_out": []
+    "104": {
+      "op": "bz is_rich_else_body@5",
+      "stack_out": [
+        "account_balance#0"
+      ]
     },
-    "151": {
+    "107": {
       "op": "pushbytes \"This account is doing well.\"",
       "defined_out": [
-        "\"This account is doing well.\""
+        "account_balance#0",
+        "tmp%1#0"
       ],
       "stack_out": [
-        "\"This account is doing well.\""
+        "account_balance#0",
+        "tmp%1#0"
       ]
     },
-    "180": {
-      "retsub": true,
-      "op": "retsub"
+    "136": {
+      "op": "b is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6"
     },
-    "181": {
-      "block": "is_rich_else_body@4",
-      "stack_in": [],
+    "139": {
+      "block": "is_rich_else_body@5",
+      "stack_in": [
+        "account_balance#0"
+      ],
       "op": "pushbytes \"This account is poor :(\"",
       "defined_out": [
-        "\"This account is poor :(\""
+        "tmp%1#0"
       ],
       "stack_out": [
-        "\"This account is poor :(\""
+        "account_balance#0",
+        "tmp%1#0"
       ]
     },
-    "206": {
-      "retsub": true,
-      "op": "retsub"
+    "164": {
+      "op": "b is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6"
     },
-    "207": {
-      "subroutine": "smart_contracts.control_flow.contract.IfElseExample.is_even",
-      "params": {
-        "number#0": "uint64"
-      },
+    "167": {
+      "subroutine": "smart_contracts.control_flow.contract.IfElseExample.is_even[routing]",
+      "params": {},
       "block": "is_even",
       "stack_in": [],
-      "op": "proto 1 1"
-    },
-    "210": {
-      "op": "frame_dig -1",
+      "op": "txna ApplicationArgs 1",
       "defined_out": [
-        "number#0 (copy)"
+        "reinterpret_Encoded(uint64)%0#0"
       ],
       "stack_out": [
-        "number#0 (copy)"
+        "reinterpret_Encoded(uint64)%0#0"
       ]
     },
-    "212": {
+    "170": {
+      "op": "btoi",
+      "defined_out": [
+        "number#0"
+      ],
+      "stack_out": [
+        "number#0"
+      ]
+    },
+    "171": {
       "op": "pushint 2 // 2",
       "defined_out": [
         "2",
-        "number#0 (copy)"
+        "number#0"
       ],
       "stack_out": [
-        "number#0 (copy)",
+        "number#0",
         "2"
       ]
     },
-    "214": {
+    "173": {
       "op": "%",
       "defined_out": [
-        "tmp%0#0"
+        "tmp%0#1"
       ],
       "stack_out": [
-        "tmp%0#0"
+        "tmp%0#1"
       ]
     },
-    "215": {
-      "op": "bnz is_even_ternary_false@2",
+    "174": {
+      "op": "bnz is_even_ternary_false@3",
       "stack_out": []
     },
-    "218": {
+    "177": {
       "op": "pushbytes \"Even\"",
       "defined_out": [
         "ternary_result%0#0"
@@ -631,12 +474,116 @@
         "ternary_result%0#0"
       ]
     },
-    "224": {
-      "retsub": true,
-      "op": "retsub"
+    "183": {
+      "block": "is_even_ternary_merge@4",
+      "stack_in": [
+        "ternary_result%0#0"
+      ],
+      "op": "dup",
+      "defined_out": [
+        "ternary_result%0#0",
+        "ternary_result%0#0 (copy)"
+      ],
+      "stack_out": [
+        "ternary_result%0#0",
+        "ternary_result%0#0 (copy)"
+      ]
     },
-    "225": {
-      "block": "is_even_ternary_false@2",
+    "184": {
+      "op": "len",
+      "defined_out": [
+        "aggregate%length%0#0",
+        "ternary_result%0#0"
+      ],
+      "stack_out": [
+        "ternary_result%0#0",
+        "aggregate%length%0#0"
+      ]
+    },
+    "185": {
+      "op": "itob",
+      "defined_out": [
+        "aggregate%as_bytes%0#0",
+        "ternary_result%0#0"
+      ],
+      "stack_out": [
+        "ternary_result%0#0",
+        "aggregate%as_bytes%0#0"
+      ]
+    },
+    "186": {
+      "op": "extract 6 2",
+      "defined_out": [
+        "aggregate%length_uint16%0#0",
+        "ternary_result%0#0"
+      ],
+      "stack_out": [
+        "ternary_result%0#0",
+        "aggregate%length_uint16%0#0"
+      ]
+    },
+    "189": {
+      "op": "swap",
+      "stack_out": [
+        "aggregate%length_uint16%0#0",
+        "ternary_result%0#0"
+      ]
+    },
+    "190": {
+      "op": "concat",
+      "defined_out": [
+        "aggregate%encoded_value%0#0"
+      ],
+      "stack_out": [
+        "aggregate%encoded_value%0#0"
+      ]
+    },
+    "191": {
+      "op": "bytec_0 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "aggregate%encoded_value%0#0"
+      ],
+      "stack_out": [
+        "aggregate%encoded_value%0#0",
+        "0x151f7c75"
+      ]
+    },
+    "192": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "aggregate%encoded_value%0#0"
+      ]
+    },
+    "193": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "194": {
+      "op": "log",
+      "stack_out": []
+    },
+    "195": {
+      "op": "pushint 1 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "197": {
+      "op": "return",
+      "stack_out": []
+    },
+    "198": {
+      "block": "is_even_ternary_false@3",
       "stack_in": [],
       "op": "pushbytes \"Odd\"",
       "defined_out": [
@@ -646,9 +593,8 @@
         "ternary_result%0#0"
       ]
     },
-    "230": {
-      "retsub": true,
-      "op": "retsub"
+    "203": {
+      "op": "b is_even_ternary_merge@4"
     }
   }
 }

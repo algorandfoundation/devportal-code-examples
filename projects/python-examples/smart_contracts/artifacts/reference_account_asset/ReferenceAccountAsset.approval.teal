@@ -1,90 +1,43 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 // algopy.arc4.ARC4Contract.approval_program() -> uint64:
 main:
-    intcblock 1 1185
-    bytecblock 0x151f7c75 base32(WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRA)
+    intcblock 1185 1
+    bytecblock base32(WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRA) 0x151f7c75
     // smart_contracts/reference_account_asset/contract.py:10
     // class ReferenceAccountAsset(ARC4Contract):
     txn NumAppArgs
-    bz main_bare_routing@7
-    pushbytess 0xa65e7b96 0x3313495a // method "get_asset_balance()uint64", method "get_asset_balance_with_arg(account,asset)uint64"
+    bz main___algopy_default_create@9
+    txn OnCompletion
+    !
+    assert // OnCompletion must be NoOp
+    txn ApplicationID
+    assert
+    pushbytess 0xa65e7b96 0x0b6cfe5d // method "get_asset_balance()uint64", method "get_asset_balance_with_arg(address,uint64)uint64"
     txna ApplicationArgs 0
-    match main_get_asset_balance_route@3 main_get_asset_balance_with_arg_route@4
+    match get_asset_balance get_asset_balance_with_arg
+    err
 
-main_after_if_else@11:
-    // smart_contracts/reference_account_asset/contract.py:10
-    // class ReferenceAccountAsset(ARC4Contract):
-    pushint 0 // 0
-    return
-
-main_get_asset_balance_with_arg_route@4:
-    // smart_contracts/reference_account_asset/contract.py:34
-    // @abimethod
+main___algopy_default_create@9:
     txn OnCompletion
     !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    // smart_contracts/reference_account_asset/contract.py:10
-    // class ReferenceAccountAsset(ARC4Contract):
-    txna ApplicationArgs 1
-    btoi
-    txnas Accounts
-    txna ApplicationArgs 2
-    btoi
-    txnas Assets
-    // smart_contracts/reference_account_asset/contract.py:34
-    // @abimethod
-    callsub get_asset_balance_with_arg
-    itob
-    bytec_0 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_0 // 1
-    return
-
-main_get_asset_balance_route@3:
-    // smart_contracts/reference_account_asset/contract.py:16
-    // @abimethod
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    callsub get_asset_balance
-    itob
-    bytec_0 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_0 // 1
-    return
-
-main_bare_routing@7:
-    // smart_contracts/reference_account_asset/contract.py:10
-    // class ReferenceAccountAsset(ARC4Contract):
-    txn OnCompletion
-    bnz main_after_if_else@11
     txn ApplicationID
     !
-    assert // can only call when creating
-    intc_0 // 1
-    return
+    &&
+    return // on error: OnCompletion must be NoOp && can only call when creating
 
 
-// smart_contracts.reference_account_asset.contract.ReferenceAccountAsset.get_asset_balance() -> uint64:
+// smart_contracts.reference_account_asset.contract.ReferenceAccountAsset.get_asset_balance[routing]() -> void:
 get_asset_balance:
     // smart_contracts/reference_account_asset/contract.py:18-20
     // acct = Account(
     //     "WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M"
     // )  # Replace with your account address
-    bytec_1 // addr WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M
+    bytec_0 // addr WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M
     // smart_contracts/reference_account_asset/contract.py:21
     // asset = Asset(1185)  # Replace with your asset id
-    intc_1 // 1185
+    intc_0 // 1185
     // smart_contracts/reference_account_asset/contract.py:23
     // assert acct.is_opted_in(asset), "Account is not opted in to the asset"
     asset_holding_get AssetBalance
@@ -94,35 +47,49 @@ get_asset_balance:
     // acct = Account(
     //     "WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M"
     // )  # Replace with your account address
-    bytec_1 // addr WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M
+    bytec_0 // addr WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M
     // smart_contracts/reference_account_asset/contract.py:21
     // asset = Asset(1185)  # Replace with your asset id
-    intc_1 // 1185
+    intc_0 // 1185
     // smart_contracts/reference_account_asset/contract.py:25
     // return asset.balance(acct)
     asset_holding_get AssetBalance
     assert // account opted into asset
-    retsub
-
-
-// smart_contracts.reference_account_asset.contract.ReferenceAccountAsset.get_asset_balance_with_arg(acct: bytes, asset: uint64) -> uint64:
-get_asset_balance_with_arg:
-    // smart_contracts/reference_account_asset/contract.py:34-35
+    // smart_contracts/reference_account_asset/contract.py:16
     // @abimethod
-    // def get_asset_balance_with_arg(self, acct: Account, asset: Asset) -> UInt64:
-    proto 2 1
+    itob
+    bytec_1 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+
+// smart_contracts.reference_account_asset.contract.ReferenceAccountAsset.get_asset_balance_with_arg[routing]() -> void:
+get_asset_balance_with_arg:
+    // smart_contracts/reference_account_asset/contract.py:34
+    // @abimethod
+    txna ApplicationArgs 1
+    txna ApplicationArgs 2
+    btoi
     // smart_contracts/reference_account_asset/contract.py:36
     // assert acct.is_opted_in(asset), "Account is not opted in to the asset"
-    frame_dig -2
-    frame_dig -1
+    dup2
     asset_holding_get AssetBalance
     bury 1
     assert // Account is not opted in to the asset
     // smart_contracts/reference_account_asset/contract.py:37-38
     // # Get the asset balance
     // return asset.balance(acct)
-    frame_dig -2
-    frame_dig -1
     asset_holding_get AssetBalance
     assert // account opted into asset
-    retsub
+    // smart_contracts/reference_account_asset/contract.py:34
+    // @abimethod
+    itob
+    bytec_1 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return

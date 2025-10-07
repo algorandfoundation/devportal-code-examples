@@ -4,7 +4,7 @@
   "result": [
     {
       "type": "ExecutionPaths",
-      "count": 6,
+      "count": 4,
       "description": "\nCheck: \"unprotected-deletable\", Impact: High, Confidence: High\nDescription: Unprotected Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-deletable-application\n",
       "check": "unprotected-deletable",
       "impact": "High",
@@ -12,285 +12,173 @@
       "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
             ],
             [
-              "16: main_after_if_else@11:",
-              "19: intc_1",
-              "20: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 10 -> 14 -> 11",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "94: main_box_map_test_route@5:",
-              "97: txn OnCompletion",
-              "98: !",
-              "99: assert",
-              "100: txn ApplicationID",
-              "101: assert",
-              "102: callsub box_map_test"
-            ],
-            [
-              "127: box_map_test:",
-              "130: bytec_1",
-              "131: box_del",
-              "132: pop",
-              "133: bytec_1",
-              "136: pushbytes 0x0012000000000000004600000000000000020008746573744e616d65",
-              "139: box_put",
-              "142: bytec_1",
-              "143: box_len",
-              "144: assert",
-              "145: intc_2",
-              "146: ==",
-              "147: assert",
-              "150: bytec_1",
-              "151: box_len",
-              "152: assert",
-              "153: intc_2",
-              "154: ==",
-              "155: assert",
-              "158: intc_0",
-              "159: retsub"
-            ],
-            [
-              "103: bytec_2",
-              "104: intc_1",
-              "105: uncover 2",
-              "106: setbit",
-              "107: bytec_0",
-              "108: swap",
-              "109: concat",
-              "110: log",
-              "111: intc_0",
-              "112: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 8 -> 15 -> 9",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "68: main_box_map_set_route@6:",
-              "71: txn OnCompletion",
-              "72: !",
-              "73: assert",
-              "74: txn ApplicationID",
-              "75: assert",
-              "78: txna ApplicationArgs 1",
-              "79: txna ApplicationArgs 2",
-              "82: callsub box_map_set"
-            ],
-            [
-              "163: box_map_set:",
-              "167: proto 2 1",
-              "170: bytec_3",
-              "171: frame_dig -2",
-              "172: concat",
-              "173: dup",
-              "174: box_del",
-              "175: pop",
-              "176: dup",
-              "177: frame_dig -1",
-              "178: box_put",
-              "181: box_get",
-              "182: assert",
-              "183: frame_dig -1",
-              "184: ==",
-              "185: assert",
-              "188: intc_0",
-              "189: retsub"
-            ],
-            [
-              "83: bytec_2",
-              "84: intc_1",
-              "85: uncover 2",
-              "86: setbit",
-              "87: bytec_0",
-              "88: swap",
-              "89: concat",
-              "90: log",
-              "91: intc_0",
-              "92: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 6 -> 16 -> 7",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "47: main_box_map_get_route@7:",
-              "50: txn OnCompletion",
-              "51: !",
+              "32: box_map_test:",
+              "35: bytec_0",
+              "36: box_del",
+              "37: pop",
+              "38: bytec_0",
+              "41: pushbytes 0x0012000000000000004600000000000000020008746573744e616d65",
+              "44: box_put",
+              "47: bytec_0",
+              "48: box_len",
+              "49: pop",
+              "50: pushint 28",
+              "51: ==",
               "52: assert",
-              "53: txn ApplicationID",
-              "54: assert",
-              "57: txna ApplicationArgs 1",
-              "60: callsub box_map_get"
-            ],
-            [
-              "193: box_map_get:",
-              "197: proto 1 1",
-              "200: bytec_3",
-              "201: frame_dig -1",
-              "202: concat",
-              "203: box_get",
-              "204: assert",
-              "205: retsub"
-            ],
-            [
-              "61: bytec_0",
-              "62: swap",
-              "63: concat",
-              "64: log",
-              "65: intc_0",
-              "66: return"
+              "55: bytec_2",
+              "56: log",
+              "57: intc_0",
+              "58: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 17 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
             ],
             [
-              "22: main_box_map_exists_route@8:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "35: callsub box_map_exists"
-            ],
-            [
-              "209: box_map_exists:",
-              "213: proto 1 1",
-              "216: bytec_3",
-              "217: frame_dig -1",
-              "218: concat",
-              "219: box_len",
-              "220: bury 1",
-              "221: retsub"
-            ],
-            [
-              "36: bytec_2",
-              "37: intc_1",
-              "38: uncover 2",
-              "39: setbit",
-              "40: bytec_0",
-              "41: swap",
-              "42: concat",
-              "43: log",
-              "44: intc_0",
-              "45: return"
+              "62: box_map_set:",
+              "65: txna ApplicationArgs 2",
+              "68: bytec_1",
+              "71: txna ApplicationArgs 1",
+              "74: concat",
+              "75: dup",
+              "76: box_del",
+              "77: pop",
+              "78: swap",
+              "79: box_put",
+              "82: bytec_2",
+              "83: log",
+              "84: intc_0",
+              "85: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 12 -> 3",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "114: main_bare_routing@9:",
-              "117: txn OnCompletion",
-              "118: bnz main_after_if_else@11"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
             ],
             [
-              "16: main_after_if_else@11:",
-              "19: intc_1",
-              "20: return"
+              "89: box_map_get:",
+              "92: bytec_1",
+              "95: txna ApplicationArgs 1",
+              "98: concat",
+              "99: box_get",
+              "100: assert",
+              "103: bytec_3",
+              "104: swap",
+              "105: concat",
+              "106: log",
+              "107: intc_0",
+              "108: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 8",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@13"
+            ],
+            [
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
+            ],
+            [
+              "112: box_map_exists:",
+              "115: bytec_1",
+              "118: txna ApplicationArgs 1",
+              "121: concat",
+              "122: box_len",
+              "123: bury 1",
+              "126: pushbytes 0x00",
+              "127: pushint 0",
+              "128: uncover 2",
+              "129: setbit",
+              "130: bytec_3",
+              "131: swap",
+              "132: concat",
+              "133: log",
+              "134: intc_0",
+              "135: return"
             ]
           ]
         }
@@ -298,7 +186,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 6,
+      "count": 4,
       "description": "\nCheck: \"unprotected-updatable\", Impact: High, Confidence: High\nDescription: Unprotected Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-updatable-application\n",
       "check": "unprotected-updatable",
       "impact": "High",
@@ -306,285 +194,173 @@
       "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
             ],
             [
-              "16: main_after_if_else@11:",
-              "19: intc_1",
-              "20: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 10 -> 14 -> 11",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "94: main_box_map_test_route@5:",
-              "97: txn OnCompletion",
-              "98: !",
-              "99: assert",
-              "100: txn ApplicationID",
-              "101: assert",
-              "102: callsub box_map_test"
-            ],
-            [
-              "127: box_map_test:",
-              "130: bytec_1",
-              "131: box_del",
-              "132: pop",
-              "133: bytec_1",
-              "136: pushbytes 0x0012000000000000004600000000000000020008746573744e616d65",
-              "139: box_put",
-              "142: bytec_1",
-              "143: box_len",
-              "144: assert",
-              "145: intc_2",
-              "146: ==",
-              "147: assert",
-              "150: bytec_1",
-              "151: box_len",
-              "152: assert",
-              "153: intc_2",
-              "154: ==",
-              "155: assert",
-              "158: intc_0",
-              "159: retsub"
-            ],
-            [
-              "103: bytec_2",
-              "104: intc_1",
-              "105: uncover 2",
-              "106: setbit",
-              "107: bytec_0",
-              "108: swap",
-              "109: concat",
-              "110: log",
-              "111: intc_0",
-              "112: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 8 -> 15 -> 9",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "68: main_box_map_set_route@6:",
-              "71: txn OnCompletion",
-              "72: !",
-              "73: assert",
-              "74: txn ApplicationID",
-              "75: assert",
-              "78: txna ApplicationArgs 1",
-              "79: txna ApplicationArgs 2",
-              "82: callsub box_map_set"
-            ],
-            [
-              "163: box_map_set:",
-              "167: proto 2 1",
-              "170: bytec_3",
-              "171: frame_dig -2",
-              "172: concat",
-              "173: dup",
-              "174: box_del",
-              "175: pop",
-              "176: dup",
-              "177: frame_dig -1",
-              "178: box_put",
-              "181: box_get",
-              "182: assert",
-              "183: frame_dig -1",
-              "184: ==",
-              "185: assert",
-              "188: intc_0",
-              "189: retsub"
-            ],
-            [
-              "83: bytec_2",
-              "84: intc_1",
-              "85: uncover 2",
-              "86: setbit",
-              "87: bytec_0",
-              "88: swap",
-              "89: concat",
-              "90: log",
-              "91: intc_0",
-              "92: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 6 -> 16 -> 7",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "47: main_box_map_get_route@7:",
-              "50: txn OnCompletion",
-              "51: !",
+              "32: box_map_test:",
+              "35: bytec_0",
+              "36: box_del",
+              "37: pop",
+              "38: bytec_0",
+              "41: pushbytes 0x0012000000000000004600000000000000020008746573744e616d65",
+              "44: box_put",
+              "47: bytec_0",
+              "48: box_len",
+              "49: pop",
+              "50: pushint 28",
+              "51: ==",
               "52: assert",
-              "53: txn ApplicationID",
-              "54: assert",
-              "57: txna ApplicationArgs 1",
-              "60: callsub box_map_get"
-            ],
-            [
-              "193: box_map_get:",
-              "197: proto 1 1",
-              "200: bytec_3",
-              "201: frame_dig -1",
-              "202: concat",
-              "203: box_get",
-              "204: assert",
-              "205: retsub"
-            ],
-            [
-              "61: bytec_0",
-              "62: swap",
-              "63: concat",
-              "64: log",
-              "65: intc_0",
-              "66: return"
+              "55: bytec_2",
+              "56: log",
+              "57: intc_0",
+              "58: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 17 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
             ],
             [
-              "22: main_box_map_exists_route@8:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "35: callsub box_map_exists"
-            ],
-            [
-              "209: box_map_exists:",
-              "213: proto 1 1",
-              "216: bytec_3",
-              "217: frame_dig -1",
-              "218: concat",
-              "219: box_len",
-              "220: bury 1",
-              "221: retsub"
-            ],
-            [
-              "36: bytec_2",
-              "37: intc_1",
-              "38: uncover 2",
-              "39: setbit",
-              "40: bytec_0",
-              "41: swap",
-              "42: concat",
-              "43: log",
-              "44: intc_0",
-              "45: return"
+              "62: box_map_set:",
+              "65: txna ApplicationArgs 2",
+              "68: bytec_1",
+              "71: txna ApplicationArgs 1",
+              "74: concat",
+              "75: dup",
+              "76: box_del",
+              "77: pop",
+              "78: swap",
+              "79: box_put",
+              "82: bytec_2",
+              "83: log",
+              "84: intc_0",
+              "85: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 12 -> 3",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "114: main_bare_routing@9:",
-              "117: txn OnCompletion",
-              "118: bnz main_after_if_else@11"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
             ],
             [
-              "16: main_after_if_else@11:",
-              "19: intc_1",
-              "20: return"
+              "89: box_map_get:",
+              "92: bytec_1",
+              "95: txna ApplicationArgs 1",
+              "98: concat",
+              "99: box_get",
+              "100: assert",
+              "103: bytec_3",
+              "104: swap",
+              "105: concat",
+              "106: log",
+              "107: intc_0",
+              "108: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 8",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@13"
+            ],
+            [
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
+            ],
+            [
+              "112: box_map_exists:",
+              "115: bytec_1",
+              "118: txna ApplicationArgs 1",
+              "121: concat",
+              "122: box_len",
+              "123: bury 1",
+              "126: pushbytes 0x00",
+              "127: pushint 0",
+              "128: uncover 2",
+              "129: setbit",
+              "130: bytec_3",
+              "131: swap",
+              "132: concat",
+              "133: log",
+              "134: intc_0",
+              "135: return"
             ]
           ]
         }
@@ -592,133 +368,27 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 2,
+      "count": 0,
       "description": "\nCheck: \"can-close-account\", Impact: High, Confidence: High\nDescription: Missing CloseRemainderTo field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-closeremainderto-field-validation\n",
       "check": "can-close-account",
       "impact": "High",
       "confidence": "High",
       "help": "Validate `CloseRemainderTo` field in the LogicSig.",
-      "paths": [
-        {
-          "short": "0 -> 1 -> 2 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_1",
-              "20: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 12 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "114: main_bare_routing@9:",
-              "117: txn OnCompletion",
-              "118: bnz main_after_if_else@11"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_1",
-              "20: return"
-            ]
-          ]
-        }
-      ]
+      "paths": []
     },
     {
       "type": "ExecutionPaths",
-      "count": 2,
+      "count": 0,
       "description": "\nCheck: \"can-close-asset\", Impact: High, Confidence: High\nDescription: Missing AssetCloseTo Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-assetcloseto-field-validation\n",
       "check": "can-close-asset",
       "impact": "High",
       "confidence": "High",
       "help": "Validate `AssetCloseTo` field in the LogicSig.",
-      "paths": [
-        {
-          "short": "0 -> 1 -> 2 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_1",
-              "20: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 12 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "114: main_bare_routing@9:",
-              "117: txn OnCompletion",
-              "118: bnz main_after_if_else@11"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_1",
-              "20: return"
-            ]
-          ]
-        }
-      ]
+      "paths": []
     },
     {
       "type": "ExecutionPaths",
-      "count": 6,
+      "count": 4,
       "description": "\nCheck: \"is-deletable\", Impact: High, Confidence: High\nDescription: Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#deletable-application\n",
       "check": "is-deletable",
       "impact": "High",
@@ -726,285 +396,173 @@
       "help": "Do not approve `DeleteApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
             ],
             [
-              "16: main_after_if_else@11:",
-              "19: intc_1",
-              "20: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 10 -> 14 -> 11",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "94: main_box_map_test_route@5:",
-              "97: txn OnCompletion",
-              "98: !",
-              "99: assert",
-              "100: txn ApplicationID",
-              "101: assert",
-              "102: callsub box_map_test"
-            ],
-            [
-              "127: box_map_test:",
-              "130: bytec_1",
-              "131: box_del",
-              "132: pop",
-              "133: bytec_1",
-              "136: pushbytes 0x0012000000000000004600000000000000020008746573744e616d65",
-              "139: box_put",
-              "142: bytec_1",
-              "143: box_len",
-              "144: assert",
-              "145: intc_2",
-              "146: ==",
-              "147: assert",
-              "150: bytec_1",
-              "151: box_len",
-              "152: assert",
-              "153: intc_2",
-              "154: ==",
-              "155: assert",
-              "158: intc_0",
-              "159: retsub"
-            ],
-            [
-              "103: bytec_2",
-              "104: intc_1",
-              "105: uncover 2",
-              "106: setbit",
-              "107: bytec_0",
-              "108: swap",
-              "109: concat",
-              "110: log",
-              "111: intc_0",
-              "112: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 8 -> 15 -> 9",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "68: main_box_map_set_route@6:",
-              "71: txn OnCompletion",
-              "72: !",
-              "73: assert",
-              "74: txn ApplicationID",
-              "75: assert",
-              "78: txna ApplicationArgs 1",
-              "79: txna ApplicationArgs 2",
-              "82: callsub box_map_set"
-            ],
-            [
-              "163: box_map_set:",
-              "167: proto 2 1",
-              "170: bytec_3",
-              "171: frame_dig -2",
-              "172: concat",
-              "173: dup",
-              "174: box_del",
-              "175: pop",
-              "176: dup",
-              "177: frame_dig -1",
-              "178: box_put",
-              "181: box_get",
-              "182: assert",
-              "183: frame_dig -1",
-              "184: ==",
-              "185: assert",
-              "188: intc_0",
-              "189: retsub"
-            ],
-            [
-              "83: bytec_2",
-              "84: intc_1",
-              "85: uncover 2",
-              "86: setbit",
-              "87: bytec_0",
-              "88: swap",
-              "89: concat",
-              "90: log",
-              "91: intc_0",
-              "92: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 6 -> 16 -> 7",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "47: main_box_map_get_route@7:",
-              "50: txn OnCompletion",
-              "51: !",
+              "32: box_map_test:",
+              "35: bytec_0",
+              "36: box_del",
+              "37: pop",
+              "38: bytec_0",
+              "41: pushbytes 0x0012000000000000004600000000000000020008746573744e616d65",
+              "44: box_put",
+              "47: bytec_0",
+              "48: box_len",
+              "49: pop",
+              "50: pushint 28",
+              "51: ==",
               "52: assert",
-              "53: txn ApplicationID",
-              "54: assert",
-              "57: txna ApplicationArgs 1",
-              "60: callsub box_map_get"
-            ],
-            [
-              "193: box_map_get:",
-              "197: proto 1 1",
-              "200: bytec_3",
-              "201: frame_dig -1",
-              "202: concat",
-              "203: box_get",
-              "204: assert",
-              "205: retsub"
-            ],
-            [
-              "61: bytec_0",
-              "62: swap",
-              "63: concat",
-              "64: log",
-              "65: intc_0",
-              "66: return"
+              "55: bytec_2",
+              "56: log",
+              "57: intc_0",
+              "58: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 17 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
             ],
             [
-              "22: main_box_map_exists_route@8:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "35: callsub box_map_exists"
-            ],
-            [
-              "209: box_map_exists:",
-              "213: proto 1 1",
-              "216: bytec_3",
-              "217: frame_dig -1",
-              "218: concat",
-              "219: box_len",
-              "220: bury 1",
-              "221: retsub"
-            ],
-            [
-              "36: bytec_2",
-              "37: intc_1",
-              "38: uncover 2",
-              "39: setbit",
-              "40: bytec_0",
-              "41: swap",
-              "42: concat",
-              "43: log",
-              "44: intc_0",
-              "45: return"
+              "62: box_map_set:",
+              "65: txna ApplicationArgs 2",
+              "68: bytec_1",
+              "71: txna ApplicationArgs 1",
+              "74: concat",
+              "75: dup",
+              "76: box_del",
+              "77: pop",
+              "78: swap",
+              "79: box_put",
+              "82: bytec_2",
+              "83: log",
+              "84: intc_0",
+              "85: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 12 -> 3",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "114: main_bare_routing@9:",
-              "117: txn OnCompletion",
-              "118: bnz main_after_if_else@11"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
             ],
             [
-              "16: main_after_if_else@11:",
-              "19: intc_1",
-              "20: return"
+              "89: box_map_get:",
+              "92: bytec_1",
+              "95: txna ApplicationArgs 1",
+              "98: concat",
+              "99: box_get",
+              "100: assert",
+              "103: bytec_3",
+              "104: swap",
+              "105: concat",
+              "106: log",
+              "107: intc_0",
+              "108: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 8",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@13"
+            ],
+            [
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
+            ],
+            [
+              "112: box_map_exists:",
+              "115: bytec_1",
+              "118: txna ApplicationArgs 1",
+              "121: concat",
+              "122: box_len",
+              "123: bury 1",
+              "126: pushbytes 0x00",
+              "127: pushint 0",
+              "128: uncover 2",
+              "129: setbit",
+              "130: bytec_3",
+              "131: swap",
+              "132: concat",
+              "133: log",
+              "134: intc_0",
+              "135: return"
             ]
           ]
         }
@@ -1012,7 +570,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 6,
+      "count": 4,
       "description": "\nCheck: \"is-updatable\", Impact: High, Confidence: High\nDescription: Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#upgradable-application\n",
       "check": "is-updatable",
       "impact": "High",
@@ -1020,285 +578,173 @@
       "help": "Do not approve `UpdateApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
             ],
             [
-              "16: main_after_if_else@11:",
-              "19: intc_1",
-              "20: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 10 -> 14 -> 11",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "94: main_box_map_test_route@5:",
-              "97: txn OnCompletion",
-              "98: !",
-              "99: assert",
-              "100: txn ApplicationID",
-              "101: assert",
-              "102: callsub box_map_test"
-            ],
-            [
-              "127: box_map_test:",
-              "130: bytec_1",
-              "131: box_del",
-              "132: pop",
-              "133: bytec_1",
-              "136: pushbytes 0x0012000000000000004600000000000000020008746573744e616d65",
-              "139: box_put",
-              "142: bytec_1",
-              "143: box_len",
-              "144: assert",
-              "145: intc_2",
-              "146: ==",
-              "147: assert",
-              "150: bytec_1",
-              "151: box_len",
-              "152: assert",
-              "153: intc_2",
-              "154: ==",
-              "155: assert",
-              "158: intc_0",
-              "159: retsub"
-            ],
-            [
-              "103: bytec_2",
-              "104: intc_1",
-              "105: uncover 2",
-              "106: setbit",
-              "107: bytec_0",
-              "108: swap",
-              "109: concat",
-              "110: log",
-              "111: intc_0",
-              "112: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 8 -> 15 -> 9",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "68: main_box_map_set_route@6:",
-              "71: txn OnCompletion",
-              "72: !",
-              "73: assert",
-              "74: txn ApplicationID",
-              "75: assert",
-              "78: txna ApplicationArgs 1",
-              "79: txna ApplicationArgs 2",
-              "82: callsub box_map_set"
-            ],
-            [
-              "163: box_map_set:",
-              "167: proto 2 1",
-              "170: bytec_3",
-              "171: frame_dig -2",
-              "172: concat",
-              "173: dup",
-              "174: box_del",
-              "175: pop",
-              "176: dup",
-              "177: frame_dig -1",
-              "178: box_put",
-              "181: box_get",
-              "182: assert",
-              "183: frame_dig -1",
-              "184: ==",
-              "185: assert",
-              "188: intc_0",
-              "189: retsub"
-            ],
-            [
-              "83: bytec_2",
-              "84: intc_1",
-              "85: uncover 2",
-              "86: setbit",
-              "87: bytec_0",
-              "88: swap",
-              "89: concat",
-              "90: log",
-              "91: intc_0",
-              "92: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 6 -> 16 -> 7",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "47: main_box_map_get_route@7:",
-              "50: txn OnCompletion",
-              "51: !",
+              "32: box_map_test:",
+              "35: bytec_0",
+              "36: box_del",
+              "37: pop",
+              "38: bytec_0",
+              "41: pushbytes 0x0012000000000000004600000000000000020008746573744e616d65",
+              "44: box_put",
+              "47: bytec_0",
+              "48: box_len",
+              "49: pop",
+              "50: pushint 28",
+              "51: ==",
               "52: assert",
-              "53: txn ApplicationID",
-              "54: assert",
-              "57: txna ApplicationArgs 1",
-              "60: callsub box_map_get"
-            ],
-            [
-              "193: box_map_get:",
-              "197: proto 1 1",
-              "200: bytec_3",
-              "201: frame_dig -1",
-              "202: concat",
-              "203: box_get",
-              "204: assert",
-              "205: retsub"
-            ],
-            [
-              "61: bytec_0",
-              "62: swap",
-              "63: concat",
-              "64: log",
-              "65: intc_0",
-              "66: return"
+              "55: bytec_2",
+              "56: log",
+              "57: intc_0",
+              "58: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 17 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
             ],
             [
-              "22: main_box_map_exists_route@8:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "35: callsub box_map_exists"
-            ],
-            [
-              "209: box_map_exists:",
-              "213: proto 1 1",
-              "216: bytec_3",
-              "217: frame_dig -1",
-              "218: concat",
-              "219: box_len",
-              "220: bury 1",
-              "221: retsub"
-            ],
-            [
-              "36: bytec_2",
-              "37: intc_1",
-              "38: uncover 2",
-              "39: setbit",
-              "40: bytec_0",
-              "41: swap",
-              "42: concat",
-              "43: log",
-              "44: intc_0",
-              "45: return"
+              "62: box_map_set:",
+              "65: txna ApplicationArgs 2",
+              "68: bytec_1",
+              "71: txna ApplicationArgs 1",
+              "74: concat",
+              "75: dup",
+              "76: box_del",
+              "77: pop",
+              "78: swap",
+              "79: box_put",
+              "82: bytec_2",
+              "83: log",
+              "84: intc_0",
+              "85: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 12 -> 3",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "114: main_bare_routing@9:",
-              "117: txn OnCompletion",
-              "118: bnz main_after_if_else@11"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
             ],
             [
-              "16: main_after_if_else@11:",
-              "19: intc_1",
-              "20: return"
+              "89: box_map_get:",
+              "92: bytec_1",
+              "95: txna ApplicationArgs 1",
+              "98: concat",
+              "99: box_get",
+              "100: assert",
+              "103: bytec_3",
+              "104: swap",
+              "105: concat",
+              "106: log",
+              "107: intc_0",
+              "108: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 8",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@13"
+            ],
+            [
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
+            ],
+            [
+              "112: box_map_exists:",
+              "115: bytec_1",
+              "118: txna ApplicationArgs 1",
+              "121: concat",
+              "122: box_len",
+              "123: bury 1",
+              "126: pushbytes 0x00",
+              "127: pushint 0",
+              "128: uncover 2",
+              "129: setbit",
+              "130: bytec_3",
+              "131: swap",
+              "132: concat",
+              "133: log",
+              "134: intc_0",
+              "135: return"
             ]
           ]
         }
@@ -1306,7 +752,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 7,
+      "count": 5,
       "description": "\nCheck: \"missing-fee-check\", Impact: High, Confidence: High\nDescription: Missing Fee Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-fee-field-validation\n",
       "check": "missing-fee-check",
       "impact": "High",
@@ -1314,313 +760,198 @@
       "help": "Validate `Fee` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
             ],
             [
-              "16: main_after_if_else@11:",
-              "19: intc_1",
-              "20: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 10 -> 14 -> 11",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "94: main_box_map_test_route@5:",
-              "97: txn OnCompletion",
-              "98: !",
-              "99: assert",
-              "100: txn ApplicationID",
-              "101: assert",
-              "102: callsub box_map_test"
-            ],
-            [
-              "127: box_map_test:",
-              "130: bytec_1",
-              "131: box_del",
-              "132: pop",
-              "133: bytec_1",
-              "136: pushbytes 0x0012000000000000004600000000000000020008746573744e616d65",
-              "139: box_put",
-              "142: bytec_1",
-              "143: box_len",
-              "144: assert",
-              "145: intc_2",
-              "146: ==",
-              "147: assert",
-              "150: bytec_1",
-              "151: box_len",
-              "152: assert",
-              "153: intc_2",
-              "154: ==",
-              "155: assert",
-              "158: intc_0",
-              "159: retsub"
-            ],
-            [
-              "103: bytec_2",
-              "104: intc_1",
-              "105: uncover 2",
-              "106: setbit",
-              "107: bytec_0",
-              "108: swap",
-              "109: concat",
-              "110: log",
-              "111: intc_0",
-              "112: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 8 -> 15 -> 9",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "68: main_box_map_set_route@6:",
-              "71: txn OnCompletion",
-              "72: !",
-              "73: assert",
-              "74: txn ApplicationID",
-              "75: assert",
-              "78: txna ApplicationArgs 1",
-              "79: txna ApplicationArgs 2",
-              "82: callsub box_map_set"
-            ],
-            [
-              "163: box_map_set:",
-              "167: proto 2 1",
-              "170: bytec_3",
-              "171: frame_dig -2",
-              "172: concat",
-              "173: dup",
-              "174: box_del",
-              "175: pop",
-              "176: dup",
-              "177: frame_dig -1",
-              "178: box_put",
-              "181: box_get",
-              "182: assert",
-              "183: frame_dig -1",
-              "184: ==",
-              "185: assert",
-              "188: intc_0",
-              "189: retsub"
-            ],
-            [
-              "83: bytec_2",
-              "84: intc_1",
-              "85: uncover 2",
-              "86: setbit",
-              "87: bytec_0",
-              "88: swap",
-              "89: concat",
-              "90: log",
-              "91: intc_0",
-              "92: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 6 -> 16 -> 7",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "47: main_box_map_get_route@7:",
-              "50: txn OnCompletion",
-              "51: !",
+              "32: box_map_test:",
+              "35: bytec_0",
+              "36: box_del",
+              "37: pop",
+              "38: bytec_0",
+              "41: pushbytes 0x0012000000000000004600000000000000020008746573744e616d65",
+              "44: box_put",
+              "47: bytec_0",
+              "48: box_len",
+              "49: pop",
+              "50: pushint 28",
+              "51: ==",
               "52: assert",
-              "53: txn ApplicationID",
-              "54: assert",
-              "57: txna ApplicationArgs 1",
-              "60: callsub box_map_get"
-            ],
-            [
-              "193: box_map_get:",
-              "197: proto 1 1",
-              "200: bytec_3",
-              "201: frame_dig -1",
-              "202: concat",
-              "203: box_get",
-              "204: assert",
-              "205: retsub"
-            ],
-            [
-              "61: bytec_0",
-              "62: swap",
-              "63: concat",
-              "64: log",
-              "65: intc_0",
-              "66: return"
+              "55: bytec_2",
+              "56: log",
+              "57: intc_0",
+              "58: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 17 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
             ],
             [
-              "22: main_box_map_exists_route@8:",
-              "25: txn OnCompletion",
+              "62: box_map_set:",
+              "65: txna ApplicationArgs 2",
+              "68: bytec_1",
+              "71: txna ApplicationArgs 1",
+              "74: concat",
+              "75: dup",
+              "76: box_del",
+              "77: pop",
+              "78: swap",
+              "79: box_put",
+              "82: bytec_2",
+              "83: log",
+              "84: intc_0",
+              "85: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@13"
+            ],
+            [
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
+            ],
+            [
+              "89: box_map_get:",
+              "92: bytec_1",
+              "95: txna ApplicationArgs 1",
+              "98: concat",
+              "99: box_get",
+              "100: assert",
+              "103: bytec_3",
+              "104: swap",
+              "105: concat",
+              "106: log",
+              "107: intc_0",
+              "108: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 8",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@13"
+            ],
+            [
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
+            ],
+            [
+              "112: box_map_exists:",
+              "115: bytec_1",
+              "118: txna ApplicationArgs 1",
+              "121: concat",
+              "122: box_len",
+              "123: bury 1",
+              "126: pushbytes 0x00",
+              "127: pushint 0",
+              "128: uncover 2",
+              "129: setbit",
+              "130: bytec_3",
+              "131: swap",
+              "132: concat",
+              "133: log",
+              "134: intc_0",
+              "135: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@13"
+            ],
+            [
+              "22: main___algopy_default_create@13:",
+              "23: txn OnCompletion",
+              "24: !",
+              "25: txn ApplicationID",
               "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "35: callsub box_map_exists"
-            ],
-            [
-              "209: box_map_exists:",
-              "213: proto 1 1",
-              "216: bytec_3",
-              "217: frame_dig -1",
-              "218: concat",
-              "219: box_len",
-              "220: bury 1",
-              "221: retsub"
-            ],
-            [
-              "36: bytec_2",
-              "37: intc_1",
-              "38: uncover 2",
-              "39: setbit",
-              "40: bytec_0",
-              "41: swap",
-              "42: concat",
-              "43: log",
-              "44: intc_0",
-              "45: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 12 -> 13",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "114: main_bare_routing@9:",
-              "117: txn OnCompletion",
-              "118: bnz main_after_if_else@11"
-            ],
-            [
-              "119: txn ApplicationID",
-              "120: !",
-              "121: assert",
-              "122: intc_0",
-              "123: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 12 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "114: main_bare_routing@9:",
-              "117: txn OnCompletion",
-              "118: bnz main_after_if_else@11"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_1",
-              "20: return"
+              "27: &&",
+              "28: return"
             ]
           ]
         }
@@ -1638,7 +969,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 7,
+      "count": 5,
       "description": "\nCheck: \"rekey-to\", Impact: High, Confidence: High\nDescription: Rekeyable Logic Signatures\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#rekeyable-logicsig\n",
       "check": "rekey-to",
       "impact": "High",
@@ -1646,313 +977,198 @@
       "help": "Validate `RekeyTo` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
             ],
             [
-              "16: main_after_if_else@11:",
-              "19: intc_1",
-              "20: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 10 -> 14 -> 11",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "94: main_box_map_test_route@5:",
-              "97: txn OnCompletion",
-              "98: !",
-              "99: assert",
-              "100: txn ApplicationID",
-              "101: assert",
-              "102: callsub box_map_test"
-            ],
-            [
-              "127: box_map_test:",
-              "130: bytec_1",
-              "131: box_del",
-              "132: pop",
-              "133: bytec_1",
-              "136: pushbytes 0x0012000000000000004600000000000000020008746573744e616d65",
-              "139: box_put",
-              "142: bytec_1",
-              "143: box_len",
-              "144: assert",
-              "145: intc_2",
-              "146: ==",
-              "147: assert",
-              "150: bytec_1",
-              "151: box_len",
-              "152: assert",
-              "153: intc_2",
-              "154: ==",
-              "155: assert",
-              "158: intc_0",
-              "159: retsub"
-            ],
-            [
-              "103: bytec_2",
-              "104: intc_1",
-              "105: uncover 2",
-              "106: setbit",
-              "107: bytec_0",
-              "108: swap",
-              "109: concat",
-              "110: log",
-              "111: intc_0",
-              "112: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 8 -> 15 -> 9",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "68: main_box_map_set_route@6:",
-              "71: txn OnCompletion",
-              "72: !",
-              "73: assert",
-              "74: txn ApplicationID",
-              "75: assert",
-              "78: txna ApplicationArgs 1",
-              "79: txna ApplicationArgs 2",
-              "82: callsub box_map_set"
-            ],
-            [
-              "163: box_map_set:",
-              "167: proto 2 1",
-              "170: bytec_3",
-              "171: frame_dig -2",
-              "172: concat",
-              "173: dup",
-              "174: box_del",
-              "175: pop",
-              "176: dup",
-              "177: frame_dig -1",
-              "178: box_put",
-              "181: box_get",
-              "182: assert",
-              "183: frame_dig -1",
-              "184: ==",
-              "185: assert",
-              "188: intc_0",
-              "189: retsub"
-            ],
-            [
-              "83: bytec_2",
-              "84: intc_1",
-              "85: uncover 2",
-              "86: setbit",
-              "87: bytec_0",
-              "88: swap",
-              "89: concat",
-              "90: log",
-              "91: intc_0",
-              "92: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 6 -> 16 -> 7",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
-            ],
-            [
-              "47: main_box_map_get_route@7:",
-              "50: txn OnCompletion",
-              "51: !",
+              "32: box_map_test:",
+              "35: bytec_0",
+              "36: box_del",
+              "37: pop",
+              "38: bytec_0",
+              "41: pushbytes 0x0012000000000000004600000000000000020008746573744e616d65",
+              "44: box_put",
+              "47: bytec_0",
+              "48: box_len",
+              "49: pop",
+              "50: pushint 28",
+              "51: ==",
               "52: assert",
-              "53: txn ApplicationID",
-              "54: assert",
-              "57: txna ApplicationArgs 1",
-              "60: callsub box_map_get"
-            ],
-            [
-              "193: box_map_get:",
-              "197: proto 1 1",
-              "200: bytec_3",
-              "201: frame_dig -1",
-              "202: concat",
-              "203: box_get",
-              "204: assert",
-              "205: retsub"
-            ],
-            [
-              "61: bytec_0",
-              "62: swap",
-              "63: concat",
-              "64: log",
-              "65: intc_0",
-              "66: return"
+              "55: bytec_2",
+              "56: log",
+              "57: intc_0",
+              "58: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 17 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
+              "11: bz main___algopy_default_create@13"
             ],
             [
-              "12: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
-              "13: txna ApplicationArgs 0",
-              "14: match main_box_map_test_route@5 main_box_map_set_route@6 main_box_map_get_route@7 main_box_map_exists_route@8"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
             ],
             [
-              "22: main_box_map_exists_route@8:",
-              "25: txn OnCompletion",
+              "62: box_map_set:",
+              "65: txna ApplicationArgs 2",
+              "68: bytec_1",
+              "71: txna ApplicationArgs 1",
+              "74: concat",
+              "75: dup",
+              "76: box_del",
+              "77: pop",
+              "78: swap",
+              "79: box_put",
+              "82: bytec_2",
+              "83: log",
+              "84: intc_0",
+              "85: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 7",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@13"
+            ],
+            [
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
+            ],
+            [
+              "89: box_map_get:",
+              "92: bytec_1",
+              "95: txna ApplicationArgs 1",
+              "98: concat",
+              "99: box_get",
+              "100: assert",
+              "103: bytec_3",
+              "104: swap",
+              "105: concat",
+              "106: log",
+              "107: intc_0",
+              "108: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 2 -> 8",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@13"
+            ],
+            [
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xcaad1623 0x079c27bd 0x6a02b350 0x8ee2c364",
+              "18: txna ApplicationArgs 0",
+              "19: match box_map_test box_map_set box_map_get box_map_exists"
+            ],
+            [
+              "112: box_map_exists:",
+              "115: bytec_1",
+              "118: txna ApplicationArgs 1",
+              "121: concat",
+              "122: box_len",
+              "123: bury 1",
+              "126: pushbytes 0x00",
+              "127: pushint 0",
+              "128: uncover 2",
+              "129: setbit",
+              "130: bytec_3",
+              "131: swap",
+              "132: concat",
+              "133: log",
+              "134: intc_0",
+              "135: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1",
+              "7: bytecblock 0x75736572730000000000000000 \"users\" 0x151f7c7580 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@13"
+            ],
+            [
+              "22: main___algopy_default_create@13:",
+              "23: txn OnCompletion",
+              "24: !",
+              "25: txn ApplicationID",
               "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "35: callsub box_map_exists"
-            ],
-            [
-              "209: box_map_exists:",
-              "213: proto 1 1",
-              "216: bytec_3",
-              "217: frame_dig -1",
-              "218: concat",
-              "219: box_len",
-              "220: bury 1",
-              "221: retsub"
-            ],
-            [
-              "36: bytec_2",
-              "37: intc_1",
-              "38: uncover 2",
-              "39: setbit",
-              "40: bytec_0",
-              "41: swap",
-              "42: concat",
-              "43: log",
-              "44: intc_0",
-              "45: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 12 -> 13",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "114: main_bare_routing@9:",
-              "117: txn OnCompletion",
-              "118: bnz main_after_if_else@11"
-            ],
-            [
-              "119: txn ApplicationID",
-              "120: !",
-              "121: assert",
-              "122: intc_0",
-              "123: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 12 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 0 28",
-              "7: bytecblock 0x151f7c75 0x75736572730000000000000000 0x00 \"users\"",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@9"
-            ],
-            [
-              "114: main_bare_routing@9:",
-              "117: txn OnCompletion",
-              "118: bnz main_after_if_else@11"
-            ],
-            [
-              "16: main_after_if_else@11:",
-              "19: intc_1",
-              "20: return"
+              "27: &&",
+              "28: return"
             ]
           ]
         }

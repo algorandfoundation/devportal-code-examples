@@ -12,16 +12,16 @@
       "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 7 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -29,53 +29,51 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "92: pushbytes \"Invalid day\"",
-              "93: retsub"
+              "62: pushbytes \"Invalid day\""
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 16 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 15 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -83,54 +81,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "131: get_day_switch_case_0@1:",
-              "134: pushbytes \"Monday\"",
-              "135: retsub"
+              "128: get_day_switch_case_0@2:",
+              "131: pushbytes \"Monday\"",
+              "134: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 15 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 14 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -138,54 +135,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "125: get_day_switch_case_1@2:",
-              "128: pushbytes \"Tuesday\"",
-              "129: retsub"
+              "120: get_day_switch_case_1@3:",
+              "123: pushbytes \"Tuesday\"",
+              "126: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 14 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 13 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -193,54 +189,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "119: get_day_switch_case_2@3:",
-              "122: pushbytes \"Wednesday\"",
-              "123: retsub"
+              "112: get_day_switch_case_2@4:",
+              "115: pushbytes \"Wednesday\"",
+              "118: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 13 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 12 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -248,54 +243,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "113: get_day_switch_case_3@4:",
-              "116: pushbytes \"Thursday\"",
-              "117: retsub"
+              "104: get_day_switch_case_3@5:",
+              "107: pushbytes \"Thursday\"",
+              "110: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 12 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 11 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -303,54 +297,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "107: get_day_switch_case_4@5:",
-              "110: pushbytes \"Friday\"",
-              "111: retsub"
+              "96: get_day_switch_case_4@6:",
+              "99: pushbytes \"Friday\"",
+              "102: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 10 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -358,54 +351,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "101: get_day_switch_case_5@6:",
-              "104: pushbytes \"Saturday\"",
-              "105: retsub"
+              "88: get_day_switch_case_5@7:",
+              "91: pushbytes \"Saturday\"",
+              "94: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 10 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 9 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -413,40 +405,39 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "95: get_day_switch_case_6@7:",
-              "98: pushbytes \"Sunday\"",
-              "99: retsub"
+              "80: get_day_switch_case_6@8:",
+              "83: pushbytes \"Sunday\"",
+              "86: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         }
@@ -462,16 +453,16 @@
       "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 7 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -479,53 +470,51 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "92: pushbytes \"Invalid day\"",
-              "93: retsub"
+              "62: pushbytes \"Invalid day\""
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 16 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 15 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -533,54 +522,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "131: get_day_switch_case_0@1:",
-              "134: pushbytes \"Monday\"",
-              "135: retsub"
+              "128: get_day_switch_case_0@2:",
+              "131: pushbytes \"Monday\"",
+              "134: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 15 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 14 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -588,54 +576,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "125: get_day_switch_case_1@2:",
-              "128: pushbytes \"Tuesday\"",
-              "129: retsub"
+              "120: get_day_switch_case_1@3:",
+              "123: pushbytes \"Tuesday\"",
+              "126: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 14 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 13 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -643,54 +630,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "119: get_day_switch_case_2@3:",
-              "122: pushbytes \"Wednesday\"",
-              "123: retsub"
+              "112: get_day_switch_case_2@4:",
+              "115: pushbytes \"Wednesday\"",
+              "118: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 13 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 12 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -698,54 +684,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "113: get_day_switch_case_3@4:",
-              "116: pushbytes \"Thursday\"",
-              "117: retsub"
+              "104: get_day_switch_case_3@5:",
+              "107: pushbytes \"Thursday\"",
+              "110: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 12 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 11 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -753,54 +738,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "107: get_day_switch_case_4@5:",
-              "110: pushbytes \"Friday\"",
-              "111: retsub"
+              "96: get_day_switch_case_4@6:",
+              "99: pushbytes \"Friday\"",
+              "102: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 10 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -808,54 +792,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "101: get_day_switch_case_5@6:",
-              "104: pushbytes \"Saturday\"",
-              "105: retsub"
+              "88: get_day_switch_case_5@7:",
+              "91: pushbytes \"Saturday\"",
+              "94: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 10 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 9 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -863,40 +846,39 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "95: get_day_switch_case_6@7:",
-              "98: pushbytes \"Sunday\"",
-              "99: retsub"
+              "80: get_day_switch_case_6@8:",
+              "83: pushbytes \"Sunday\"",
+              "86: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         }
@@ -932,16 +914,16 @@
       "help": "Do not approve `DeleteApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 7 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -949,53 +931,51 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "92: pushbytes \"Invalid day\"",
-              "93: retsub"
+              "62: pushbytes \"Invalid day\""
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 16 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 15 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -1003,54 +983,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "131: get_day_switch_case_0@1:",
-              "134: pushbytes \"Monday\"",
-              "135: retsub"
+              "128: get_day_switch_case_0@2:",
+              "131: pushbytes \"Monday\"",
+              "134: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 15 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 14 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -1058,54 +1037,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "125: get_day_switch_case_1@2:",
-              "128: pushbytes \"Tuesday\"",
-              "129: retsub"
+              "120: get_day_switch_case_1@3:",
+              "123: pushbytes \"Tuesday\"",
+              "126: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 14 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 13 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -1113,54 +1091,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "119: get_day_switch_case_2@3:",
-              "122: pushbytes \"Wednesday\"",
-              "123: retsub"
+              "112: get_day_switch_case_2@4:",
+              "115: pushbytes \"Wednesday\"",
+              "118: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 13 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 12 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -1168,54 +1145,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "113: get_day_switch_case_3@4:",
-              "116: pushbytes \"Thursday\"",
-              "117: retsub"
+              "104: get_day_switch_case_3@5:",
+              "107: pushbytes \"Thursday\"",
+              "110: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 12 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 11 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -1223,54 +1199,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "107: get_day_switch_case_4@5:",
-              "110: pushbytes \"Friday\"",
-              "111: retsub"
+              "96: get_day_switch_case_4@6:",
+              "99: pushbytes \"Friday\"",
+              "102: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 10 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -1278,54 +1253,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "101: get_day_switch_case_5@6:",
-              "104: pushbytes \"Saturday\"",
-              "105: retsub"
+              "88: get_day_switch_case_5@7:",
+              "91: pushbytes \"Saturday\"",
+              "94: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 10 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 9 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -1333,40 +1307,39 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "95: get_day_switch_case_6@7:",
-              "98: pushbytes \"Sunday\"",
-              "99: retsub"
+              "80: get_day_switch_case_6@8:",
+              "83: pushbytes \"Sunday\"",
+              "86: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         }
@@ -1382,16 +1355,16 @@
       "help": "Do not approve `UpdateApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 7 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -1399,53 +1372,51 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "92: pushbytes \"Invalid day\"",
-              "93: retsub"
+              "62: pushbytes \"Invalid day\""
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 16 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 15 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -1453,54 +1424,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "131: get_day_switch_case_0@1:",
-              "134: pushbytes \"Monday\"",
-              "135: retsub"
+              "128: get_day_switch_case_0@2:",
+              "131: pushbytes \"Monday\"",
+              "134: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 15 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 14 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -1508,54 +1478,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "125: get_day_switch_case_1@2:",
-              "128: pushbytes \"Tuesday\"",
-              "129: retsub"
+              "120: get_day_switch_case_1@3:",
+              "123: pushbytes \"Tuesday\"",
+              "126: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 14 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 13 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -1563,54 +1532,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "119: get_day_switch_case_2@3:",
-              "122: pushbytes \"Wednesday\"",
-              "123: retsub"
+              "112: get_day_switch_case_2@4:",
+              "115: pushbytes \"Wednesday\"",
+              "118: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 13 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 12 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -1618,54 +1586,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "113: get_day_switch_case_3@4:",
-              "116: pushbytes \"Thursday\"",
-              "117: retsub"
+              "104: get_day_switch_case_3@5:",
+              "107: pushbytes \"Thursday\"",
+              "110: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 12 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 11 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -1673,54 +1640,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "107: get_day_switch_case_4@5:",
-              "110: pushbytes \"Friday\"",
-              "111: retsub"
+              "96: get_day_switch_case_4@6:",
+              "99: pushbytes \"Friday\"",
+              "102: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 10 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -1728,54 +1694,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "101: get_day_switch_case_5@6:",
-              "104: pushbytes \"Saturday\"",
-              "105: retsub"
+              "88: get_day_switch_case_5@7:",
+              "91: pushbytes \"Saturday\"",
+              "94: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 10 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 9 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -1783,40 +1748,39 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "95: get_day_switch_case_6@7:",
-              "98: pushbytes \"Sunday\"",
-              "99: retsub"
+              "80: get_day_switch_case_6@8:",
+              "83: pushbytes \"Sunday\"",
+              "86: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         }
@@ -1832,16 +1796,16 @@
       "help": "Validate `Fee` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 7 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -1849,53 +1813,51 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "92: pushbytes \"Invalid day\"",
-              "93: retsub"
+              "62: pushbytes \"Invalid day\""
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 16 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 15 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -1903,54 +1865,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "131: get_day_switch_case_0@1:",
-              "134: pushbytes \"Monday\"",
-              "135: retsub"
+              "128: get_day_switch_case_0@2:",
+              "131: pushbytes \"Monday\"",
+              "134: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 15 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 14 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -1958,54 +1919,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "125: get_day_switch_case_1@2:",
-              "128: pushbytes \"Tuesday\"",
-              "129: retsub"
+              "120: get_day_switch_case_1@3:",
+              "123: pushbytes \"Tuesday\"",
+              "126: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 14 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 13 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -2013,54 +1973,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "119: get_day_switch_case_2@3:",
-              "122: pushbytes \"Wednesday\"",
-              "123: retsub"
+              "112: get_day_switch_case_2@4:",
+              "115: pushbytes \"Wednesday\"",
+              "118: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 13 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 12 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -2068,54 +2027,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "113: get_day_switch_case_3@4:",
-              "116: pushbytes \"Thursday\"",
-              "117: retsub"
+              "104: get_day_switch_case_3@5:",
+              "107: pushbytes \"Thursday\"",
+              "110: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 12 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 11 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -2123,54 +2081,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "107: get_day_switch_case_4@5:",
-              "110: pushbytes \"Friday\"",
-              "111: retsub"
+              "96: get_day_switch_case_4@6:",
+              "99: pushbytes \"Friday\"",
+              "102: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 10 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -2178,54 +2135,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "101: get_day_switch_case_5@6:",
-              "104: pushbytes \"Saturday\"",
-              "105: retsub"
+              "88: get_day_switch_case_5@7:",
+              "91: pushbytes \"Saturday\"",
+              "94: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 10 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 9 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -2233,66 +2189,62 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "95: get_day_switch_case_6@7:",
-              "98: pushbytes \"Sunday\"",
-              "99: retsub"
+              "80: get_day_switch_case_6@8:",
+              "83: pushbytes \"Sunday\"",
+              "86: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 6 -> 7",
+          "short": "0 -> 1 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
-              "51: main_bare_routing@6:",
-              "55: txn OnCompletion",
-              "56: bnz main_after_if_else@10"
-            ],
-            [
-              "57: txn ApplicationID",
-              "58: !",
-              "59: assert",
-              "60: pushint 1",
-              "61: return"
+              "26: main___algopy_default_create@5:",
+              "27: txn OnCompletion",
+              "28: !",
+              "29: txn ApplicationID",
+              "30: !",
+              "31: &&",
+              "32: return"
             ]
           ]
         }
@@ -2318,16 +2270,16 @@
       "help": "Validate `RekeyTo` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 9 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 7 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -2335,53 +2287,51 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "92: pushbytes \"Invalid day\"",
-              "93: retsub"
+              "62: pushbytes \"Invalid day\""
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 16 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 15 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -2389,54 +2339,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "131: get_day_switch_case_0@1:",
-              "134: pushbytes \"Monday\"",
-              "135: retsub"
+              "128: get_day_switch_case_0@2:",
+              "131: pushbytes \"Monday\"",
+              "134: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 15 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 14 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -2444,54 +2393,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "125: get_day_switch_case_1@2:",
-              "128: pushbytes \"Tuesday\"",
-              "129: retsub"
+              "120: get_day_switch_case_1@3:",
+              "123: pushbytes \"Tuesday\"",
+              "126: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 14 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 13 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -2499,54 +2447,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "119: get_day_switch_case_2@3:",
-              "122: pushbytes \"Wednesday\"",
-              "123: retsub"
+              "112: get_day_switch_case_2@4:",
+              "115: pushbytes \"Wednesday\"",
+              "118: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 13 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 12 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -2554,54 +2501,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "113: get_day_switch_case_3@4:",
-              "116: pushbytes \"Thursday\"",
-              "117: retsub"
+              "104: get_day_switch_case_3@5:",
+              "107: pushbytes \"Thursday\"",
+              "110: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 12 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 11 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -2609,54 +2555,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "107: get_day_switch_case_4@5:",
-              "110: pushbytes \"Friday\"",
-              "111: retsub"
+              "96: get_day_switch_case_4@6:",
+              "99: pushbytes \"Friday\"",
+              "102: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 10 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -2664,54 +2609,53 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "101: get_day_switch_case_5@6:",
-              "104: pushbytes \"Saturday\"",
-              "105: retsub"
+              "88: get_day_switch_case_5@7:",
+              "91: pushbytes \"Saturday\"",
+              "94: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 8 -> 10 -> 5",
+          "short": "0 -> 1 -> 2 -> 4 -> 6 -> 9 -> 8",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
               "11: pushbytes 0xe5a4ea52",
@@ -2719,66 +2663,62 @@
               "13: match main_get_day_route@3"
             ],
             [
-              "22: main_get_day_route@3:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "33: txna ApplicationArgs 1",
-              "34: btoi",
-              "37: callsub get_day"
+              "16: main_get_day_route@3:",
+              "19: txn OnCompletion",
+              "20: !",
+              "21: txn ApplicationID",
+              "22: &&",
+              "23: assert",
+              "24: b get_day"
             ],
             [
-              "65: get_day:",
-              "69: proto 1 1",
-              "88: frame_dig -1",
-              "89: switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7"
+              "36: get_day:",
+              "39: txna ApplicationArgs 1",
+              "40: btoi",
+              "59: switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8"
             ],
             [
-              "95: get_day_switch_case_6@7:",
-              "98: pushbytes \"Sunday\"",
-              "99: retsub"
+              "80: get_day_switch_case_6@8:",
+              "83: pushbytes \"Sunday\"",
+              "86: b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10"
             ],
             [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: pushbytes 0x151f7c75",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "64: get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:",
+              "67: dup",
+              "68: len",
+              "69: itob",
+              "70: extract 6 2",
+              "71: swap",
+              "72: concat",
+              "73: pushbytes 0x151f7c75",
+              "74: swap",
+              "75: concat",
+              "76: log",
+              "77: pushint 1",
+              "78: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 6 -> 7",
+          "short": "0 -> 1 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@6"
+              "10: bz main___algopy_default_create@5"
             ],
             [
-              "51: main_bare_routing@6:",
-              "55: txn OnCompletion",
-              "56: bnz main_after_if_else@10"
-            ],
-            [
-              "57: txn ApplicationID",
-              "58: !",
-              "59: assert",
-              "60: pushint 1",
-              "61: return"
+              "26: main___algopy_default_create@5:",
+              "27: txn OnCompletion",
+              "28: !",
+              "29: txn ApplicationID",
+              "30: !",
+              "31: &&",
+              "32: return"
             ]
           ]
         }

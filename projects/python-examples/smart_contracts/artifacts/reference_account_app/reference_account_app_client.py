@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "get_my_counter", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "account", "name": "acct"}, {"type": "application", "name": "app"}], "name": "get_my_counter_with_arg", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}], "name": "ReferenceAccountApp", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CiACAAEmAgQVH3x1Cm15X2NvdW50ZXIxG0EARYICBJ9ds6cEYiQMVTYaAI4CAB8AAiJDMRkURDEYRDYaARfAHDYaAhfAMogAVxYoTFCwI0MxGRREMRhEiAASFihMULAjQzEZQP/LMRgURCNDigABgCCzDl4VaWqxoLyq/h9eoH52frqMOg+9mdyAYtem35ZOYoG1DSljQAADIkyJiwBMiYoCAYv+i/8pY0AAAyJMiYsATIk=", "clear": "CoEBQw=="}, "compilerInfo": {"compiler": "puya", "compilerVersion": {"major": 4, "minor": 5, "patch": 3}}, "desc": "\n    Get the counter value from another account's local state with hardcoded values\n    @returns The counter value or 0 if it doesn't exist\n    ", "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEKICAgIGJ5dGVjYmxvY2sgMHgxNTFmN2M3NSAweDZkNzk1ZjYzNmY3NTZlNzQ2NTcyCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnRfYXBwL2NvbnRyYWN0LnB5OjUzCiAgICAvLyBjbGFzcyBSZWZlcmVuY2VBY2NvdW50QXBwKEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9iYXJlX3JvdXRpbmdANwogICAgcHVzaGJ5dGVzcyAweDlmNWRiM2E3IDB4NjIyNDBjNTUgLy8gbWV0aG9kICJnZXRfbXlfY291bnRlcigpdWludDY0IiwgbWV0aG9kICJnZXRfbXlfY291bnRlcl93aXRoX2FyZyhhY2NvdW50LGFwcGxpY2F0aW9uKXVpbnQ2NCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fZ2V0X215X2NvdW50ZXJfcm91dGVAMyBtYWluX2dldF9teV9jb3VudGVyX3dpdGhfYXJnX3JvdXRlQDQKCm1haW5fYWZ0ZXJfaWZfZWxzZUAxMToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hcHAvY29udHJhY3QucHk6NTMKICAgIC8vIGNsYXNzIFJlZmVyZW5jZUFjY291bnRBcHAoQVJDNENvbnRyYWN0KToKICAgIGludGNfMCAvLyAwCiAgICByZXR1cm4KCm1haW5fZ2V0X215X2NvdW50ZXJfd2l0aF9hcmdfcm91dGVANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hcHAvY29udHJhY3QucHk6NzkKICAgIC8vIEBhYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTo1MwogICAgLy8gY2xhc3MgUmVmZXJlbmNlQWNjb3VudEFwcChBUkM0Q29udHJhY3QpOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgYnRvaQogICAgdHhuYXMgQWNjb3VudHMKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGJ0b2kKICAgIHR4bmFzIEFwcGxpY2F0aW9ucwogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTo3OQogICAgLy8gQGFiaW1ldGhvZAogICAgY2FsbHN1YiBnZXRfbXlfY291bnRlcl93aXRoX2FyZwogICAgaXRvYgogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRfbXlfY291bnRlcl9yb3V0ZUAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTo1OQogICAgLy8gQGFiaW1ldGhvZAogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIGdldF9teV9jb3VudGVyCiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2JhcmVfcm91dGluZ0A3OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTo1MwogICAgLy8gY2xhc3MgUmVmZXJlbmNlQWNjb3VudEFwcChBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAxMQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMucmVmZXJlbmNlX2FjY291bnRfYXBwLmNvbnRyYWN0LlJlZmVyZW5jZUFjY291bnRBcHAuZ2V0X215X2NvdW50ZXIoKSAtPiB1aW50NjQ6CmdldF9teV9jb3VudGVyOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTo1OS02MAogICAgLy8gQGFiaW1ldGhvZAogICAgLy8gZGVmIGdldF9teV9jb3VudGVyKHNlbGYpIC0+IFVJbnQ2NDoKICAgIHByb3RvIDAgMQogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTo2MS02MwogICAgLy8gYWNjdCA9IEFjY291bnQoCiAgICAvLyAgICAgIldNSEY0RkxKTktZMkJQRks3WVBWNUlENk9aN0xWREIyQjY2WlRYRUFNTEwyTlg0V0paUkpGVlg2Nk0iCiAgICAvLyApICAjIFJlcGxhY2Ugd2l0aCB5b3VyIGFjY291bnQgYWRkcmVzcwogICAgcHVzaGJ5dGVzIGJhc2UzMihXTUhGNEZMSk5LWTJCUEZLN1lQVjVJRDZPWjdMVkRCMkI2NlpUWEVBTUxMMk5YNFdKWlJBKSAvLyBhZGRyIFdNSEY0RkxKTktZMkJQRks3WVBWNUlENk9aN0xWREIyQjY2WlRYRUFNTEwyTlg0V0paUkpGVlg2Nk0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hcHAvY29udHJhY3QucHk6NjQKICAgIC8vIGFwcCA9IEFwcGxpY2F0aW9uKDE3MTcpICAjIFJlcGxhY2Ugd2l0aCB5b3VyIGFwcGxpY2F0aW9uIGlkCiAgICBwdXNoaW50IDE3MTcgLy8gMTcxNwogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTo2Ni02NwogICAgLy8gIyBDaGVjayBpZiB0aGUgY291bnRlciB2YWx1ZSBleGlzdHMgaW4gdGhlIGFjY291bnQncyBsb2NhbCBzdGF0ZSBmb3IgdGhlIHNwZWNpZmllZCBhcHAKICAgIC8vIG15X2NvdW50LCBleGlzdCA9IG9wLkFwcExvY2FsLmdldF9leF91aW50NjQoYWNjdCwgYXBwLCBiIm15X2NvdW50ZXIiKQogICAgYnl0ZWNfMSAvLyAweDZkNzk1ZjYzNmY3NTZlNzQ2NTcyCiAgICBhcHBfbG9jYWxfZ2V0X2V4CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnRfYXBwL2NvbnRyYWN0LnB5OjY4CiAgICAvLyBpZiBub3QgZXhpc3Q6CiAgICBibnogZ2V0X215X2NvdW50ZXJfYWZ0ZXJfaWZfZWxzZUAyCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnRfYXBwL2NvbnRyYWN0LnB5OjY5CiAgICAvLyByZXR1cm4gVUludDY0KDApCiAgICBpbnRjXzAgLy8gMAogICAgc3dhcAogICAgcmV0c3ViCgpnZXRfbXlfY291bnRlcl9hZnRlcl9pZl9lbHNlQDI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnRfYXBwL2NvbnRyYWN0LnB5OjcwCiAgICAvLyByZXR1cm4gbXlfY291bnQKICAgIGZyYW1lX2RpZyAwCiAgICBzd2FwCiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMucmVmZXJlbmNlX2FjY291bnRfYXBwLmNvbnRyYWN0LlJlZmVyZW5jZUFjY291bnRBcHAuZ2V0X215X2NvdW50ZXJfd2l0aF9hcmcoYWNjdDogYnl0ZXMsIGFwcDogdWludDY0KSAtPiB1aW50NjQ6CmdldF9teV9jb3VudGVyX3dpdGhfYXJnOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTo3OS04MAogICAgLy8gQGFiaW1ldGhvZAogICAgLy8gZGVmIGdldF9teV9jb3VudGVyX3dpdGhfYXJnKHNlbGYsIGFjY3Q6IEFjY291bnQsIGFwcDogQXBwbGljYXRpb24pIC0+IFVJbnQ2NDoKICAgIHByb3RvIDIgMQogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTo4MS04MgogICAgLy8gIyBDaGVjayBpZiB0aGUgY291bnRlciB2YWx1ZSBleGlzdHMgaW4gdGhlIGFjY291bnQncyBsb2NhbCBzdGF0ZSBmb3IgdGhlIHNwZWNpZmllZCBhcHAKICAgIC8vIG15X2NvdW50LCBleGlzdCA9IG9wLkFwcExvY2FsLmdldF9leF91aW50NjQoYWNjdCwgYXBwLCBiIm15X2NvdW50ZXIiKQogICAgZnJhbWVfZGlnIC0yCiAgICBmcmFtZV9kaWcgLTEKICAgIGJ5dGVjXzEgLy8gMHg2ZDc5NWY2MzZmNzU2ZTc0NjU3MgogICAgYXBwX2xvY2FsX2dldF9leAogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTo4MwogICAgLy8gaWYgbm90IGV4aXN0OgogICAgYm56IGdldF9teV9jb3VudGVyX3dpdGhfYXJnX2FmdGVyX2lmX2Vsc2VAMgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTo4NAogICAgLy8gcmV0dXJuIFVJbnQ2NCgwKQogICAgaW50Y18wIC8vIDAKICAgIHN3YXAKICAgIHJldHN1YgoKZ2V0X215X2NvdW50ZXJfd2l0aF9hcmdfYWZ0ZXJfaWZfZWxzZUAyOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTo4NQogICAgLy8gcmV0dXJuIG15X2NvdW50CiAgICBmcmFtZV9kaWcgMAogICAgc3dhcAogICAgcmV0c3ViCg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [54, 83], "errorMessage": "OnCompletion is not NoOp"}, {"pc": [105], "errorMessage": "can only call when creating"}, {"pc": [57, 86], "errorMessage": "can only call when not creating"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "get_my_counter", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "acct"}, {"type": "uint64", "name": "app"}], "name": "get_my_counter_with_arg", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}], "name": "ReferenceAccountApp", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyACAAEmAgpteV9jb3VudGVyBBUffHUxG0EAHTEZFEQxGESCAgSfXbOnBNJWiD42GgCOAgAJAD8AMRkUMRgUEEOAILMOXhVparGgvKr+H16gfnZ+uow6D72Z3IBi16bflk5igbUNKGNAAAgiFilMULAjQ0lC//U2GgE2GgIXKGNAAAgiFilMULAjQ0lC//U=", "clear": "C4EBQw=="}, "desc": "\n    Get the counter value from another account's local state with hardcoded values\n    @returns The counter value or 0 if it doesn't exist\n    ", "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEKICAgIGJ5dGVjYmxvY2sgMHg2ZDc5NWY2MzZmNzU2ZTc0NjU3MiAweDE1MWY3Yzc1CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnRfYXBwL2NvbnRyYWN0LnB5OjUyCiAgICAvLyBjbGFzcyBSZWZlcmVuY2VBY2NvdW50QXBwKEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUA5CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweDlmNWRiM2E3IDB4ZDI1Njg4M2UgLy8gbWV0aG9kICJnZXRfbXlfY291bnRlcigpdWludDY0IiwgbWV0aG9kICJnZXRfbXlfY291bnRlcl93aXRoX2FyZyhhZGRyZXNzLHVpbnQ2NCl1aW50NjQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBnZXRfbXlfY291bnRlciBnZXRfbXlfY291bnRlcl93aXRoX2FyZwogICAgZXJyCgptYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDk6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybiAvLyBvbiBlcnJvcjogT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcCAmJiBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKCgovLyBzbWFydF9jb250cmFjdHMucmVmZXJlbmNlX2FjY291bnRfYXBwLmNvbnRyYWN0LlJlZmVyZW5jZUFjY291bnRBcHAuZ2V0X215X2NvdW50ZXJbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfbXlfY291bnRlcjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hcHAvY29udHJhY3QucHk6NjAtNjIKICAgIC8vIGFjY3QgPSBBY2NvdW50KAogICAgLy8gICAgICJXTUhGNEZMSk5LWTJCUEZLN1lQVjVJRDZPWjdMVkRCMkI2NlpUWEVBTUxMMk5YNFdKWlJKRlZYNjZNIgogICAgLy8gKSAgIyBSZXBsYWNlIHdpdGggeW91ciBhY2NvdW50IGFkZHJlc3MKICAgIHB1c2hieXRlcyBiYXNlMzIoV01IRjRGTEpOS1kyQlBGSzdZUFY1SUQ2T1o3TFZEQjJCNjZaVFhFQU1MTDJOWDRXSlpSQSkgLy8gYWRkciBXTUhGNEZMSk5LWTJCUEZLN1lQVjVJRDZPWjdMVkRCMkI2NlpUWEVBTUxMMk5YNFdKWlJKRlZYNjZNCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnRfYXBwL2NvbnRyYWN0LnB5OjYzCiAgICAvLyBhcHAgPSBBcHBsaWNhdGlvbigxNzE3KSAgIyBSZXBsYWNlIHdpdGggeW91ciBhcHBsaWNhdGlvbiBpZAogICAgcHVzaGludCAxNzE3IC8vIDE3MTcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hcHAvY29udHJhY3QucHk6NjUtNjYKICAgIC8vICMgQ2hlY2sgaWYgdGhlIGNvdW50ZXIgdmFsdWUgZXhpc3RzIGluIHRoZSBhY2NvdW50J3MgbG9jYWwgc3RhdGUgZm9yIHRoZSBzcGVjaWZpZWQgYXBwCiAgICAvLyBteV9jb3VudCwgZXhpc3QgPSBvcC5BcHBMb2NhbC5nZXRfZXhfdWludDY0KGFjY3QsIGFwcCwgYiJteV9jb3VudGVyIikKICAgIGJ5dGVjXzAgLy8gMHg2ZDc5NWY2MzZmNzU2ZTc0NjU3MgogICAgYXBwX2xvY2FsX2dldF9leAogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTo2NwogICAgLy8gaWYgbm90IGV4aXN0OgogICAgYm56IGdldF9teV9jb3VudGVyX2FmdGVyX2lmX2Vsc2VAMwogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTo2OAogICAgLy8gcmV0dXJuIFVJbnQ2NCgwKQogICAgaW50Y18wIC8vIDAKCmdldF9teV9jb3VudGVyX2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzLnJlZmVyZW5jZV9hY2NvdW50X2FwcC5jb250cmFjdC5SZWZlcmVuY2VBY2NvdW50QXBwLmdldF9teV9jb3VudGVyQDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnRfYXBwL2NvbnRyYWN0LnB5OjU4CiAgICAvLyBAYWJpbWV0aG9kCiAgICBpdG9iCiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgpnZXRfbXlfY291bnRlcl9hZnRlcl9pZl9lbHNlQDM6CiAgICBkdXAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hcHAvY29udHJhY3QucHk6NTgKICAgIC8vIEBhYmltZXRob2QKICAgIGIgZ2V0X215X2NvdW50ZXJfYWZ0ZXJfaW5saW5lZF9zbWFydF9jb250cmFjdHMucmVmZXJlbmNlX2FjY291bnRfYXBwLmNvbnRyYWN0LlJlZmVyZW5jZUFjY291bnRBcHAuZ2V0X215X2NvdW50ZXJANAoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5yZWZlcmVuY2VfYWNjb3VudF9hcHAuY29udHJhY3QuUmVmZXJlbmNlQWNjb3VudEFwcC5nZXRfbXlfY291bnRlcl93aXRoX2FyZ1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF9teV9jb3VudGVyX3dpdGhfYXJnOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTo3OAogICAgLy8gQGFiaW1ldGhvZAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTo4MC04MQogICAgLy8gIyBDaGVjayBpZiB0aGUgY291bnRlciB2YWx1ZSBleGlzdHMgaW4gdGhlIGFjY291bnQncyBsb2NhbCBzdGF0ZSBmb3IgdGhlIHNwZWNpZmllZCBhcHAKICAgIC8vIG15X2NvdW50LCBleGlzdCA9IG9wLkFwcExvY2FsLmdldF9leF91aW50NjQoYWNjdCwgYXBwLCBiIm15X2NvdW50ZXIiKQogICAgYnl0ZWNfMCAvLyAweDZkNzk1ZjYzNmY3NTZlNzQ2NTcyCiAgICBhcHBfbG9jYWxfZ2V0X2V4CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnRfYXBwL2NvbnRyYWN0LnB5OjgyCiAgICAvLyBpZiBub3QgZXhpc3Q6CiAgICBibnogZ2V0X215X2NvdW50ZXJfd2l0aF9hcmdfYWZ0ZXJfaWZfZWxzZUAzCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnRfYXBwL2NvbnRyYWN0LnB5OjgzCiAgICAvLyByZXR1cm4gVUludDY0KDApCiAgICBpbnRjXzAgLy8gMAoKZ2V0X215X2NvdW50ZXJfd2l0aF9hcmdfYWZ0ZXJfaW5saW5lZF9zbWFydF9jb250cmFjdHMucmVmZXJlbmNlX2FjY291bnRfYXBwLmNvbnRyYWN0LlJlZmVyZW5jZUFjY291bnRBcHAuZ2V0X215X2NvdW50ZXJfd2l0aF9hcmdANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hcHAvY29udHJhY3QucHk6NzgKICAgIC8vIEBhYmltZXRob2QKICAgIGl0b2IKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCmdldF9teV9jb3VudGVyX3dpdGhfYXJnX2FmdGVyX2lmX2Vsc2VAMzoKICAgIGR1cAogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTo3OAogICAgLy8gQGFiaW1ldGhvZAogICAgYiBnZXRfbXlfY291bnRlcl93aXRoX2FyZ19hZnRlcl9pbmxpbmVkX3NtYXJ0X2NvbnRyYWN0cy5yZWZlcmVuY2VfYWNjb3VudF9hcHAuY29udHJhY3QuUmVmZXJlbmNlQWNjb3VudEFwcC5nZXRfbXlfY291bnRlcl93aXRoX2FyZ0A0Cg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [31], "errorMessage": "OnCompletion must be NoOp"}, {"pc": [64], "errorMessage": "OnCompletion must be NoOp && can only call when creating"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -67,12 +67,12 @@ def _init_dataclass(cls: type, data: dict) -> object:
 @dataclasses.dataclass(frozen=True, kw_only=True)
 class GetMyCounterWithArgArgs:
     """Dataclass for get_my_counter_with_arg arguments"""
-    acct: str | bytes
+    acct: str
     app: int
 
     @property
     def abi_method_signature(self) -> str:
-        return "get_my_counter_with_arg(account,application)uint64"
+        return "get_my_counter_with_arg(address,uint64)uint64"
 
 
 class ReferenceAccountAppParams:
@@ -92,14 +92,14 @@ class ReferenceAccountAppParams:
 
     def get_my_counter_with_arg(
         self,
-        args: tuple[str | bytes, int] | GetMyCounterWithArgArgs,
+        args: tuple[str, int] | GetMyCounterWithArgArgs,
         params: algokit_utils.CommonAppCallParams | None = None
     ) -> algokit_utils.AppCallMethodCallParams:
         method_args = _parse_abi_args(args)
         params = params or algokit_utils.CommonAppCallParams()
         return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "get_my_counter_with_arg(account,application)uint64",
+            "method": "get_my_counter_with_arg(address,uint64)uint64",
             "args": method_args,
         }))
 
@@ -131,14 +131,14 @@ class ReferenceAccountAppCreateTransactionParams:
 
     def get_my_counter_with_arg(
         self,
-        args: tuple[str | bytes, int] | GetMyCounterWithArgArgs,
+        args: tuple[str, int] | GetMyCounterWithArgArgs,
         params: algokit_utils.CommonAppCallParams | None = None
     ) -> algokit_utils.BuiltTransactions:
         method_args = _parse_abi_args(args)
         params = params or algokit_utils.CommonAppCallParams()
         return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "get_my_counter_with_arg(account,application)uint64",
+            "method": "get_my_counter_with_arg(address,uint64)uint64",
             "args": method_args,
         }))
 
@@ -173,7 +173,7 @@ class ReferenceAccountAppSend:
 
     def get_my_counter_with_arg(
         self,
-        args: tuple[str | bytes, int] | GetMyCounterWithArgArgs,
+        args: tuple[str, int] | GetMyCounterWithArgArgs,
         params: algokit_utils.CommonAppCallParams | None = None,
         send_params: algokit_utils.SendParams | None = None
     ) -> algokit_utils.SendAppTransactionResult[int]:
@@ -181,7 +181,7 @@ class ReferenceAccountAppSend:
         params = params or algokit_utils.CommonAppCallParams()
         response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "get_my_counter_with_arg(account,application)uint64",
+            "method": "get_my_counter_with_arg(address,uint64)uint64",
             "args": method_args,
         }), send_params=send_params)
         parsed_response = response
@@ -356,7 +356,7 @@ class ReferenceAccountAppClient:
     @typing.overload
     def decode_return_value(
         self,
-        method: typing.Literal["get_my_counter_with_arg(account,application)uint64"],
+        method: typing.Literal["get_my_counter_with_arg(address,uint64)uint64"],
         return_value: algokit_utils.ABIReturn | None
     ) -> int | None: ...
     @typing.overload
@@ -562,18 +562,18 @@ class ReferenceAccountAppFactoryCreateParams:
 
     def get_my_counter_with_arg(
         self,
-        args: tuple[str | bytes, int] | GetMyCounterWithArgArgs,
+        args: tuple[str, int] | GetMyCounterWithArgArgs,
         *,
         params: algokit_utils.CommonAppCallCreateParams | None = None,
         compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> algokit_utils.AppCreateMethodCallParams:
-        """Creates a new instance using the get_my_counter_with_arg(account,application)uint64 ABI method"""
+        """Creates a new instance using the get_my_counter_with_arg(address,uint64)uint64 ABI method"""
         params = params or algokit_utils.CommonAppCallCreateParams()
         return self.app_factory.params.create(
             algokit_utils.AppFactoryCreateMethodCallParams(
                 **{
                 **dataclasses.asdict(params),
-                "method": "get_my_counter_with_arg(account,application)uint64",
+                "method": "get_my_counter_with_arg(address,uint64)uint64",
                 "args": _parse_abi_args(args),
                 }
             ),
@@ -700,7 +700,7 @@ class ReferenceAccountAppComposer:
 
     def get_my_counter_with_arg(
         self,
-        args: tuple[str | bytes, int] | GetMyCounterWithArgArgs,
+        args: tuple[str, int] | GetMyCounterWithArgArgs,
         params: algokit_utils.CommonAppCallParams | None = None
     ) -> "ReferenceAccountAppComposer":
         self._composer.add_app_call_method_call(
@@ -711,7 +711,7 @@ class ReferenceAccountAppComposer:
         )
         self._result_mappers.append(
             lambda v: self.client.decode_return_value(
-                "get_my_counter_with_arg(account,application)uint64", v
+                "get_my_counter_with_arg(address,uint64)uint64", v
             )
         )
         return self

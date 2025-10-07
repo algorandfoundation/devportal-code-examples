@@ -1,141 +1,105 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 // algopy.arc4.ARC4Contract.approval_program() -> uint64:
 main:
     intcblock 0 1
-    bytecblock 0x151f7c75 0x6d795f636f756e746572
-    // smart_contracts/reference_account_app/contract.py:53
+    bytecblock 0x6d795f636f756e746572 0x151f7c75
+    // smart_contracts/reference_account_app/contract.py:52
     // class ReferenceAccountApp(ARC4Contract):
     txn NumAppArgs
-    bz main_bare_routing@7
-    pushbytess 0x9f5db3a7 0x62240c55 // method "get_my_counter()uint64", method "get_my_counter_with_arg(account,application)uint64"
+    bz main___algopy_default_create@9
+    txn OnCompletion
+    !
+    assert // OnCompletion must be NoOp
+    txn ApplicationID
+    assert
+    pushbytess 0x9f5db3a7 0xd256883e // method "get_my_counter()uint64", method "get_my_counter_with_arg(address,uint64)uint64"
     txna ApplicationArgs 0
-    match main_get_my_counter_route@3 main_get_my_counter_with_arg_route@4
+    match get_my_counter get_my_counter_with_arg
+    err
 
-main_after_if_else@11:
-    // smart_contracts/reference_account_app/contract.py:53
-    // class ReferenceAccountApp(ARC4Contract):
-    intc_0 // 0
-    return
-
-main_get_my_counter_with_arg_route@4:
-    // smart_contracts/reference_account_app/contract.py:79
-    // @abimethod
+main___algopy_default_create@9:
     txn OnCompletion
     !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    // smart_contracts/reference_account_app/contract.py:53
-    // class ReferenceAccountApp(ARC4Contract):
-    txna ApplicationArgs 1
-    btoi
-    txnas Accounts
-    txna ApplicationArgs 2
-    btoi
-    txnas Applications
-    // smart_contracts/reference_account_app/contract.py:79
-    // @abimethod
-    callsub get_my_counter_with_arg
-    itob
-    bytec_0 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_1 // 1
-    return
-
-main_get_my_counter_route@3:
-    // smart_contracts/reference_account_app/contract.py:59
-    // @abimethod
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    callsub get_my_counter
-    itob
-    bytec_0 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_1 // 1
-    return
-
-main_bare_routing@7:
-    // smart_contracts/reference_account_app/contract.py:53
-    // class ReferenceAccountApp(ARC4Contract):
-    txn OnCompletion
-    bnz main_after_if_else@11
     txn ApplicationID
     !
-    assert // can only call when creating
-    intc_1 // 1
-    return
+    &&
+    return // on error: OnCompletion must be NoOp && can only call when creating
 
 
-// smart_contracts.reference_account_app.contract.ReferenceAccountApp.get_my_counter() -> uint64:
+// smart_contracts.reference_account_app.contract.ReferenceAccountApp.get_my_counter[routing]() -> void:
 get_my_counter:
-    // smart_contracts/reference_account_app/contract.py:59-60
-    // @abimethod
-    // def get_my_counter(self) -> UInt64:
-    proto 0 1
-    // smart_contracts/reference_account_app/contract.py:61-63
+    // smart_contracts/reference_account_app/contract.py:60-62
     // acct = Account(
     //     "WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M"
     // )  # Replace with your account address
     pushbytes base32(WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRA) // addr WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M
-    // smart_contracts/reference_account_app/contract.py:64
+    // smart_contracts/reference_account_app/contract.py:63
     // app = Application(1717)  # Replace with your application id
     pushint 1717 // 1717
-    // smart_contracts/reference_account_app/contract.py:66-67
+    // smart_contracts/reference_account_app/contract.py:65-66
     // # Check if the counter value exists in the account's local state for the specified app
     // my_count, exist = op.AppLocal.get_ex_uint64(acct, app, b"my_counter")
-    bytec_1 // 0x6d795f636f756e746572
+    bytec_0 // 0x6d795f636f756e746572
     app_local_get_ex
+    // smart_contracts/reference_account_app/contract.py:67
+    // if not exist:
+    bnz get_my_counter_after_if_else@3
     // smart_contracts/reference_account_app/contract.py:68
-    // if not exist:
-    bnz get_my_counter_after_if_else@2
-    // smart_contracts/reference_account_app/contract.py:69
     // return UInt64(0)
     intc_0 // 0
-    swap
-    retsub
 
-get_my_counter_after_if_else@2:
-    // smart_contracts/reference_account_app/contract.py:70
-    // return my_count
-    frame_dig 0
-    swap
-    retsub
-
-
-// smart_contracts.reference_account_app.contract.ReferenceAccountApp.get_my_counter_with_arg(acct: bytes, app: uint64) -> uint64:
-get_my_counter_with_arg:
-    // smart_contracts/reference_account_app/contract.py:79-80
+get_my_counter_after_inlined_smart_contracts.reference_account_app.contract.ReferenceAccountApp.get_my_counter@4:
+    // smart_contracts/reference_account_app/contract.py:58
     // @abimethod
-    // def get_my_counter_with_arg(self, acct: Account, app: Application) -> UInt64:
-    proto 2 1
-    // smart_contracts/reference_account_app/contract.py:81-82
+    itob
+    bytec_1 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+get_my_counter_after_if_else@3:
+    dup
+    // smart_contracts/reference_account_app/contract.py:58
+    // @abimethod
+    b get_my_counter_after_inlined_smart_contracts.reference_account_app.contract.ReferenceAccountApp.get_my_counter@4
+
+
+// smart_contracts.reference_account_app.contract.ReferenceAccountApp.get_my_counter_with_arg[routing]() -> void:
+get_my_counter_with_arg:
+    // smart_contracts/reference_account_app/contract.py:78
+    // @abimethod
+    txna ApplicationArgs 1
+    txna ApplicationArgs 2
+    btoi
+    // smart_contracts/reference_account_app/contract.py:80-81
     // # Check if the counter value exists in the account's local state for the specified app
     // my_count, exist = op.AppLocal.get_ex_uint64(acct, app, b"my_counter")
-    frame_dig -2
-    frame_dig -1
-    bytec_1 // 0x6d795f636f756e746572
+    bytec_0 // 0x6d795f636f756e746572
     app_local_get_ex
-    // smart_contracts/reference_account_app/contract.py:83
+    // smart_contracts/reference_account_app/contract.py:82
     // if not exist:
-    bnz get_my_counter_with_arg_after_if_else@2
-    // smart_contracts/reference_account_app/contract.py:84
+    bnz get_my_counter_with_arg_after_if_else@3
+    // smart_contracts/reference_account_app/contract.py:83
     // return UInt64(0)
     intc_0 // 0
-    swap
-    retsub
 
-get_my_counter_with_arg_after_if_else@2:
-    // smart_contracts/reference_account_app/contract.py:85
-    // return my_count
-    frame_dig 0
+get_my_counter_with_arg_after_inlined_smart_contracts.reference_account_app.contract.ReferenceAccountApp.get_my_counter_with_arg@4:
+    // smart_contracts/reference_account_app/contract.py:78
+    // @abimethod
+    itob
+    bytec_1 // 0x151f7c75
     swap
-    retsub
+    concat
+    log
+    intc_1 // 1
+    return
+
+get_my_counter_with_arg_after_if_else@3:
+    dup
+    // smart_contracts/reference_account_app/contract.py:78
+    // @abimethod
+    b get_my_counter_with_arg_after_inlined_smart_contracts.reference_account_app.contract.ReferenceAccountApp.get_my_counter_with_arg@4

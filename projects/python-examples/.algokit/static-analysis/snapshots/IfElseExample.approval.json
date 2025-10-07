@@ -12,303 +12,279 @@
       "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 11 -> 7",
+          "short": "0 -> 1 -> 2 -> 5 -> 6 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "51: main_is_rich_route@3:",
-              "55: txn OnCompletion",
-              "56: !",
-              "57: assert",
-              "58: txn ApplicationID",
-              "59: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "67: callsub is_rich"
+              "31: is_rich:",
+              "35: txna ApplicationArgs 1",
+              "36: btoi",
+              "37: dup",
+              "40: pushint 1000",
+              "41: >",
+              "42: bz is_rich_else_body@3"
             ],
             [
-              "94: is_rich:",
-              "99: proto 1 1",
-              "102: frame_dig -1",
-              "103: pushint 1000",
-              "104: >",
-              "105: bz is_rich_else_body@2"
+              "45: pushbytes \"This account is rich!\""
             ],
             [
-              "108: pushbytes \"This account is rich!\"",
-              "109: retsub"
-            ],
-            [
-              "68: dup",
-              "69: len",
-              "70: itob",
-              "71: extract 6 2",
-              "72: swap",
-              "73: concat",
-              "74: bytec_0",
-              "75: swap",
-              "76: concat",
-              "77: log",
-              "78: pushint 1",
-              "79: return"
+              "47: is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6:",
+              "51: dup",
+              "52: len",
+              "53: itob",
+              "54: extract 6 2",
+              "55: swap",
+              "56: concat",
+              "57: bytec_0",
+              "58: swap",
+              "59: concat",
+              "60: log",
+              "61: pushint 1",
+              "62: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 13 -> 7",
+          "short": "0 -> 1 -> 2 -> 5 -> 8 -> 9 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "51: main_is_rich_route@3:",
-              "55: txn OnCompletion",
-              "56: !",
-              "57: assert",
-              "58: txn ApplicationID",
-              "59: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "67: callsub is_rich"
+              "31: is_rich:",
+              "35: txna ApplicationArgs 1",
+              "36: btoi",
+              "37: dup",
+              "40: pushint 1000",
+              "41: >",
+              "42: bz is_rich_else_body@3"
             ],
             [
-              "94: is_rich:",
-              "99: proto 1 1",
-              "102: frame_dig -1",
-              "103: pushint 1000",
-              "104: >",
-              "105: bz is_rich_else_body@2"
+              "64: is_rich_else_body@3:",
+              "67: dup",
+              "68: pushint 100",
+              "69: >",
+              "70: bz is_rich_else_body@5"
             ],
             [
-              "111: is_rich_else_body@2:",
-              "114: frame_dig -1",
-              "115: pushint 100",
-              "116: >",
-              "117: bz is_rich_else_body@4"
+              "73: pushbytes \"This account is doing well.\"",
+              "77: b is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6"
             ],
             [
-              "120: pushbytes \"This account is doing well.\"",
-              "121: retsub"
-            ],
-            [
-              "68: dup",
-              "69: len",
-              "70: itob",
-              "71: extract 6 2",
-              "72: swap",
-              "73: concat",
-              "74: bytec_0",
-              "75: swap",
-              "76: concat",
-              "77: log",
-              "78: pushint 1",
-              "79: return"
+              "47: is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6:",
+              "51: dup",
+              "52: len",
+              "53: itob",
+              "54: extract 6 2",
+              "55: swap",
+              "56: concat",
+              "57: bytec_0",
+              "58: swap",
+              "59: concat",
+              "60: log",
+              "61: pushint 1",
+              "62: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 14 -> 7",
+          "short": "0 -> 1 -> 2 -> 5 -> 8 -> 10 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "51: main_is_rich_route@3:",
-              "55: txn OnCompletion",
-              "56: !",
-              "57: assert",
-              "58: txn ApplicationID",
-              "59: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "67: callsub is_rich"
+              "31: is_rich:",
+              "35: txna ApplicationArgs 1",
+              "36: btoi",
+              "37: dup",
+              "40: pushint 1000",
+              "41: >",
+              "42: bz is_rich_else_body@3"
             ],
             [
-              "94: is_rich:",
-              "99: proto 1 1",
-              "102: frame_dig -1",
-              "103: pushint 1000",
-              "104: >",
-              "105: bz is_rich_else_body@2"
+              "64: is_rich_else_body@3:",
+              "67: dup",
+              "68: pushint 100",
+              "69: >",
+              "70: bz is_rich_else_body@5"
             ],
             [
-              "111: is_rich_else_body@2:",
-              "114: frame_dig -1",
-              "115: pushint 100",
-              "116: >",
-              "117: bz is_rich_else_body@4"
+              "79: is_rich_else_body@5:",
+              "82: pushbytes \"This account is poor :(\"",
+              "86: b is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6"
             ],
             [
-              "123: is_rich_else_body@4:",
-              "126: pushbytes \"This account is poor :(\"",
-              "127: retsub"
-            ],
-            [
-              "68: dup",
-              "69: len",
-              "70: itob",
-              "71: extract 6 2",
-              "72: swap",
-              "73: concat",
-              "74: bytec_0",
-              "75: swap",
-              "76: concat",
-              "77: log",
-              "78: pushint 1",
-              "79: return"
+              "47: is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6:",
+              "51: dup",
+              "52: len",
+              "53: itob",
+              "54: extract 6 2",
+              "55: swap",
+              "56: concat",
+              "57: bytec_0",
+              "58: swap",
+              "59: concat",
+              "60: log",
+              "61: pushint 1",
+              "62: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 16 -> 5",
+          "short": "0 -> 1 -> 2 -> 11 -> 12 -> 13",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "21: main_is_even_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "37: callsub is_even"
+              "90: is_even:",
+              "94: txna ApplicationArgs 1",
+              "95: btoi",
+              "98: pushint 2",
+              "99: %",
+              "100: bnz is_even_ternary_false@3"
             ],
             [
-              "131: is_even:",
-              "136: proto 1 1",
-              "139: frame_dig -1",
-              "140: pushint 2",
-              "141: %",
-              "142: bnz is_even_ternary_false@2"
+              "101: pushbytes \"Even\""
             ],
             [
-              "143: pushbytes \"Even\"",
-              "144: retsub"
-            ],
-            [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: bytec_0",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "103: is_even_ternary_merge@4:",
+              "107: dup",
+              "108: len",
+              "109: itob",
+              "110: extract 6 2",
+              "111: swap",
+              "112: concat",
+              "113: bytec_0",
+              "114: swap",
+              "115: concat",
+              "116: log",
+              "117: pushint 1",
+              "118: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 17 -> 5",
+          "short": "0 -> 1 -> 2 -> 11 -> 14 -> 13",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "21: main_is_even_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "37: callsub is_even"
+              "90: is_even:",
+              "94: txna ApplicationArgs 1",
+              "95: btoi",
+              "98: pushint 2",
+              "99: %",
+              "100: bnz is_even_ternary_false@3"
             ],
             [
-              "131: is_even:",
-              "136: proto 1 1",
-              "139: frame_dig -1",
-              "140: pushint 2",
-              "141: %",
-              "142: bnz is_even_ternary_false@2"
+              "120: is_even_ternary_false@3:",
+              "123: pushbytes \"Odd\"",
+              "124: b is_even_ternary_merge@4"
             ],
             [
-              "146: is_even_ternary_false@2:",
-              "149: pushbytes \"Odd\"",
-              "150: retsub"
-            ],
-            [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: bytec_0",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "103: is_even_ternary_merge@4:",
+              "107: dup",
+              "108: len",
+              "109: itob",
+              "110: extract 6 2",
+              "111: swap",
+              "112: concat",
+              "113: bytec_0",
+              "114: swap",
+              "115: concat",
+              "116: log",
+              "117: pushint 1",
+              "118: return"
             ]
           ]
         }
@@ -324,303 +300,279 @@
       "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 11 -> 7",
+          "short": "0 -> 1 -> 2 -> 5 -> 6 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "51: main_is_rich_route@3:",
-              "55: txn OnCompletion",
-              "56: !",
-              "57: assert",
-              "58: txn ApplicationID",
-              "59: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "67: callsub is_rich"
+              "31: is_rich:",
+              "35: txna ApplicationArgs 1",
+              "36: btoi",
+              "37: dup",
+              "40: pushint 1000",
+              "41: >",
+              "42: bz is_rich_else_body@3"
             ],
             [
-              "94: is_rich:",
-              "99: proto 1 1",
-              "102: frame_dig -1",
-              "103: pushint 1000",
-              "104: >",
-              "105: bz is_rich_else_body@2"
+              "45: pushbytes \"This account is rich!\""
             ],
             [
-              "108: pushbytes \"This account is rich!\"",
-              "109: retsub"
-            ],
-            [
-              "68: dup",
-              "69: len",
-              "70: itob",
-              "71: extract 6 2",
-              "72: swap",
-              "73: concat",
-              "74: bytec_0",
-              "75: swap",
-              "76: concat",
-              "77: log",
-              "78: pushint 1",
-              "79: return"
+              "47: is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6:",
+              "51: dup",
+              "52: len",
+              "53: itob",
+              "54: extract 6 2",
+              "55: swap",
+              "56: concat",
+              "57: bytec_0",
+              "58: swap",
+              "59: concat",
+              "60: log",
+              "61: pushint 1",
+              "62: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 13 -> 7",
+          "short": "0 -> 1 -> 2 -> 5 -> 8 -> 9 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "51: main_is_rich_route@3:",
-              "55: txn OnCompletion",
-              "56: !",
-              "57: assert",
-              "58: txn ApplicationID",
-              "59: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "67: callsub is_rich"
+              "31: is_rich:",
+              "35: txna ApplicationArgs 1",
+              "36: btoi",
+              "37: dup",
+              "40: pushint 1000",
+              "41: >",
+              "42: bz is_rich_else_body@3"
             ],
             [
-              "94: is_rich:",
-              "99: proto 1 1",
-              "102: frame_dig -1",
-              "103: pushint 1000",
-              "104: >",
-              "105: bz is_rich_else_body@2"
+              "64: is_rich_else_body@3:",
+              "67: dup",
+              "68: pushint 100",
+              "69: >",
+              "70: bz is_rich_else_body@5"
             ],
             [
-              "111: is_rich_else_body@2:",
-              "114: frame_dig -1",
-              "115: pushint 100",
-              "116: >",
-              "117: bz is_rich_else_body@4"
+              "73: pushbytes \"This account is doing well.\"",
+              "77: b is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6"
             ],
             [
-              "120: pushbytes \"This account is doing well.\"",
-              "121: retsub"
-            ],
-            [
-              "68: dup",
-              "69: len",
-              "70: itob",
-              "71: extract 6 2",
-              "72: swap",
-              "73: concat",
-              "74: bytec_0",
-              "75: swap",
-              "76: concat",
-              "77: log",
-              "78: pushint 1",
-              "79: return"
+              "47: is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6:",
+              "51: dup",
+              "52: len",
+              "53: itob",
+              "54: extract 6 2",
+              "55: swap",
+              "56: concat",
+              "57: bytec_0",
+              "58: swap",
+              "59: concat",
+              "60: log",
+              "61: pushint 1",
+              "62: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 14 -> 7",
+          "short": "0 -> 1 -> 2 -> 5 -> 8 -> 10 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "51: main_is_rich_route@3:",
-              "55: txn OnCompletion",
-              "56: !",
-              "57: assert",
-              "58: txn ApplicationID",
-              "59: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "67: callsub is_rich"
+              "31: is_rich:",
+              "35: txna ApplicationArgs 1",
+              "36: btoi",
+              "37: dup",
+              "40: pushint 1000",
+              "41: >",
+              "42: bz is_rich_else_body@3"
             ],
             [
-              "94: is_rich:",
-              "99: proto 1 1",
-              "102: frame_dig -1",
-              "103: pushint 1000",
-              "104: >",
-              "105: bz is_rich_else_body@2"
+              "64: is_rich_else_body@3:",
+              "67: dup",
+              "68: pushint 100",
+              "69: >",
+              "70: bz is_rich_else_body@5"
             ],
             [
-              "111: is_rich_else_body@2:",
-              "114: frame_dig -1",
-              "115: pushint 100",
-              "116: >",
-              "117: bz is_rich_else_body@4"
+              "79: is_rich_else_body@5:",
+              "82: pushbytes \"This account is poor :(\"",
+              "86: b is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6"
             ],
             [
-              "123: is_rich_else_body@4:",
-              "126: pushbytes \"This account is poor :(\"",
-              "127: retsub"
-            ],
-            [
-              "68: dup",
-              "69: len",
-              "70: itob",
-              "71: extract 6 2",
-              "72: swap",
-              "73: concat",
-              "74: bytec_0",
-              "75: swap",
-              "76: concat",
-              "77: log",
-              "78: pushint 1",
-              "79: return"
+              "47: is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6:",
+              "51: dup",
+              "52: len",
+              "53: itob",
+              "54: extract 6 2",
+              "55: swap",
+              "56: concat",
+              "57: bytec_0",
+              "58: swap",
+              "59: concat",
+              "60: log",
+              "61: pushint 1",
+              "62: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 16 -> 5",
+          "short": "0 -> 1 -> 2 -> 11 -> 12 -> 13",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "21: main_is_even_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "37: callsub is_even"
+              "90: is_even:",
+              "94: txna ApplicationArgs 1",
+              "95: btoi",
+              "98: pushint 2",
+              "99: %",
+              "100: bnz is_even_ternary_false@3"
             ],
             [
-              "131: is_even:",
-              "136: proto 1 1",
-              "139: frame_dig -1",
-              "140: pushint 2",
-              "141: %",
-              "142: bnz is_even_ternary_false@2"
+              "101: pushbytes \"Even\""
             ],
             [
-              "143: pushbytes \"Even\"",
-              "144: retsub"
-            ],
-            [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: bytec_0",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "103: is_even_ternary_merge@4:",
+              "107: dup",
+              "108: len",
+              "109: itob",
+              "110: extract 6 2",
+              "111: swap",
+              "112: concat",
+              "113: bytec_0",
+              "114: swap",
+              "115: concat",
+              "116: log",
+              "117: pushint 1",
+              "118: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 17 -> 5",
+          "short": "0 -> 1 -> 2 -> 11 -> 14 -> 13",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "21: main_is_even_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "37: callsub is_even"
+              "90: is_even:",
+              "94: txna ApplicationArgs 1",
+              "95: btoi",
+              "98: pushint 2",
+              "99: %",
+              "100: bnz is_even_ternary_false@3"
             ],
             [
-              "131: is_even:",
-              "136: proto 1 1",
-              "139: frame_dig -1",
-              "140: pushint 2",
-              "141: %",
-              "142: bnz is_even_ternary_false@2"
+              "120: is_even_ternary_false@3:",
+              "123: pushbytes \"Odd\"",
+              "124: b is_even_ternary_merge@4"
             ],
             [
-              "146: is_even_ternary_false@2:",
-              "149: pushbytes \"Odd\"",
-              "150: retsub"
-            ],
-            [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: bytec_0",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "103: is_even_ternary_merge@4:",
+              "107: dup",
+              "108: len",
+              "109: itob",
+              "110: extract 6 2",
+              "111: swap",
+              "112: concat",
+              "113: bytec_0",
+              "114: swap",
+              "115: concat",
+              "116: log",
+              "117: pushint 1",
+              "118: return"
             ]
           ]
         }
@@ -656,303 +608,279 @@
       "help": "Do not approve `DeleteApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 11 -> 7",
+          "short": "0 -> 1 -> 2 -> 5 -> 6 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "51: main_is_rich_route@3:",
-              "55: txn OnCompletion",
-              "56: !",
-              "57: assert",
-              "58: txn ApplicationID",
-              "59: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "67: callsub is_rich"
+              "31: is_rich:",
+              "35: txna ApplicationArgs 1",
+              "36: btoi",
+              "37: dup",
+              "40: pushint 1000",
+              "41: >",
+              "42: bz is_rich_else_body@3"
             ],
             [
-              "94: is_rich:",
-              "99: proto 1 1",
-              "102: frame_dig -1",
-              "103: pushint 1000",
-              "104: >",
-              "105: bz is_rich_else_body@2"
+              "45: pushbytes \"This account is rich!\""
             ],
             [
-              "108: pushbytes \"This account is rich!\"",
-              "109: retsub"
-            ],
-            [
-              "68: dup",
-              "69: len",
-              "70: itob",
-              "71: extract 6 2",
-              "72: swap",
-              "73: concat",
-              "74: bytec_0",
-              "75: swap",
-              "76: concat",
-              "77: log",
-              "78: pushint 1",
-              "79: return"
+              "47: is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6:",
+              "51: dup",
+              "52: len",
+              "53: itob",
+              "54: extract 6 2",
+              "55: swap",
+              "56: concat",
+              "57: bytec_0",
+              "58: swap",
+              "59: concat",
+              "60: log",
+              "61: pushint 1",
+              "62: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 13 -> 7",
+          "short": "0 -> 1 -> 2 -> 5 -> 8 -> 9 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "51: main_is_rich_route@3:",
-              "55: txn OnCompletion",
-              "56: !",
-              "57: assert",
-              "58: txn ApplicationID",
-              "59: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "67: callsub is_rich"
+              "31: is_rich:",
+              "35: txna ApplicationArgs 1",
+              "36: btoi",
+              "37: dup",
+              "40: pushint 1000",
+              "41: >",
+              "42: bz is_rich_else_body@3"
             ],
             [
-              "94: is_rich:",
-              "99: proto 1 1",
-              "102: frame_dig -1",
-              "103: pushint 1000",
-              "104: >",
-              "105: bz is_rich_else_body@2"
+              "64: is_rich_else_body@3:",
+              "67: dup",
+              "68: pushint 100",
+              "69: >",
+              "70: bz is_rich_else_body@5"
             ],
             [
-              "111: is_rich_else_body@2:",
-              "114: frame_dig -1",
-              "115: pushint 100",
-              "116: >",
-              "117: bz is_rich_else_body@4"
+              "73: pushbytes \"This account is doing well.\"",
+              "77: b is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6"
             ],
             [
-              "120: pushbytes \"This account is doing well.\"",
-              "121: retsub"
-            ],
-            [
-              "68: dup",
-              "69: len",
-              "70: itob",
-              "71: extract 6 2",
-              "72: swap",
-              "73: concat",
-              "74: bytec_0",
-              "75: swap",
-              "76: concat",
-              "77: log",
-              "78: pushint 1",
-              "79: return"
+              "47: is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6:",
+              "51: dup",
+              "52: len",
+              "53: itob",
+              "54: extract 6 2",
+              "55: swap",
+              "56: concat",
+              "57: bytec_0",
+              "58: swap",
+              "59: concat",
+              "60: log",
+              "61: pushint 1",
+              "62: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 14 -> 7",
+          "short": "0 -> 1 -> 2 -> 5 -> 8 -> 10 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "51: main_is_rich_route@3:",
-              "55: txn OnCompletion",
-              "56: !",
-              "57: assert",
-              "58: txn ApplicationID",
-              "59: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "67: callsub is_rich"
+              "31: is_rich:",
+              "35: txna ApplicationArgs 1",
+              "36: btoi",
+              "37: dup",
+              "40: pushint 1000",
+              "41: >",
+              "42: bz is_rich_else_body@3"
             ],
             [
-              "94: is_rich:",
-              "99: proto 1 1",
-              "102: frame_dig -1",
-              "103: pushint 1000",
-              "104: >",
-              "105: bz is_rich_else_body@2"
+              "64: is_rich_else_body@3:",
+              "67: dup",
+              "68: pushint 100",
+              "69: >",
+              "70: bz is_rich_else_body@5"
             ],
             [
-              "111: is_rich_else_body@2:",
-              "114: frame_dig -1",
-              "115: pushint 100",
-              "116: >",
-              "117: bz is_rich_else_body@4"
+              "79: is_rich_else_body@5:",
+              "82: pushbytes \"This account is poor :(\"",
+              "86: b is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6"
             ],
             [
-              "123: is_rich_else_body@4:",
-              "126: pushbytes \"This account is poor :(\"",
-              "127: retsub"
-            ],
-            [
-              "68: dup",
-              "69: len",
-              "70: itob",
-              "71: extract 6 2",
-              "72: swap",
-              "73: concat",
-              "74: bytec_0",
-              "75: swap",
-              "76: concat",
-              "77: log",
-              "78: pushint 1",
-              "79: return"
+              "47: is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6:",
+              "51: dup",
+              "52: len",
+              "53: itob",
+              "54: extract 6 2",
+              "55: swap",
+              "56: concat",
+              "57: bytec_0",
+              "58: swap",
+              "59: concat",
+              "60: log",
+              "61: pushint 1",
+              "62: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 16 -> 5",
+          "short": "0 -> 1 -> 2 -> 11 -> 12 -> 13",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "21: main_is_even_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "37: callsub is_even"
+              "90: is_even:",
+              "94: txna ApplicationArgs 1",
+              "95: btoi",
+              "98: pushint 2",
+              "99: %",
+              "100: bnz is_even_ternary_false@3"
             ],
             [
-              "131: is_even:",
-              "136: proto 1 1",
-              "139: frame_dig -1",
-              "140: pushint 2",
-              "141: %",
-              "142: bnz is_even_ternary_false@2"
+              "101: pushbytes \"Even\""
             ],
             [
-              "143: pushbytes \"Even\"",
-              "144: retsub"
-            ],
-            [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: bytec_0",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "103: is_even_ternary_merge@4:",
+              "107: dup",
+              "108: len",
+              "109: itob",
+              "110: extract 6 2",
+              "111: swap",
+              "112: concat",
+              "113: bytec_0",
+              "114: swap",
+              "115: concat",
+              "116: log",
+              "117: pushint 1",
+              "118: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 17 -> 5",
+          "short": "0 -> 1 -> 2 -> 11 -> 14 -> 13",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "21: main_is_even_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "37: callsub is_even"
+              "90: is_even:",
+              "94: txna ApplicationArgs 1",
+              "95: btoi",
+              "98: pushint 2",
+              "99: %",
+              "100: bnz is_even_ternary_false@3"
             ],
             [
-              "131: is_even:",
-              "136: proto 1 1",
-              "139: frame_dig -1",
-              "140: pushint 2",
-              "141: %",
-              "142: bnz is_even_ternary_false@2"
+              "120: is_even_ternary_false@3:",
+              "123: pushbytes \"Odd\"",
+              "124: b is_even_ternary_merge@4"
             ],
             [
-              "146: is_even_ternary_false@2:",
-              "149: pushbytes \"Odd\"",
-              "150: retsub"
-            ],
-            [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: bytec_0",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "103: is_even_ternary_merge@4:",
+              "107: dup",
+              "108: len",
+              "109: itob",
+              "110: extract 6 2",
+              "111: swap",
+              "112: concat",
+              "113: bytec_0",
+              "114: swap",
+              "115: concat",
+              "116: log",
+              "117: pushint 1",
+              "118: return"
             ]
           ]
         }
@@ -968,303 +896,279 @@
       "help": "Do not approve `UpdateApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 11 -> 7",
+          "short": "0 -> 1 -> 2 -> 5 -> 6 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "51: main_is_rich_route@3:",
-              "55: txn OnCompletion",
-              "56: !",
-              "57: assert",
-              "58: txn ApplicationID",
-              "59: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "67: callsub is_rich"
+              "31: is_rich:",
+              "35: txna ApplicationArgs 1",
+              "36: btoi",
+              "37: dup",
+              "40: pushint 1000",
+              "41: >",
+              "42: bz is_rich_else_body@3"
             ],
             [
-              "94: is_rich:",
-              "99: proto 1 1",
-              "102: frame_dig -1",
-              "103: pushint 1000",
-              "104: >",
-              "105: bz is_rich_else_body@2"
+              "45: pushbytes \"This account is rich!\""
             ],
             [
-              "108: pushbytes \"This account is rich!\"",
-              "109: retsub"
-            ],
-            [
-              "68: dup",
-              "69: len",
-              "70: itob",
-              "71: extract 6 2",
-              "72: swap",
-              "73: concat",
-              "74: bytec_0",
-              "75: swap",
-              "76: concat",
-              "77: log",
-              "78: pushint 1",
-              "79: return"
+              "47: is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6:",
+              "51: dup",
+              "52: len",
+              "53: itob",
+              "54: extract 6 2",
+              "55: swap",
+              "56: concat",
+              "57: bytec_0",
+              "58: swap",
+              "59: concat",
+              "60: log",
+              "61: pushint 1",
+              "62: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 13 -> 7",
+          "short": "0 -> 1 -> 2 -> 5 -> 8 -> 9 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "51: main_is_rich_route@3:",
-              "55: txn OnCompletion",
-              "56: !",
-              "57: assert",
-              "58: txn ApplicationID",
-              "59: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "67: callsub is_rich"
+              "31: is_rich:",
+              "35: txna ApplicationArgs 1",
+              "36: btoi",
+              "37: dup",
+              "40: pushint 1000",
+              "41: >",
+              "42: bz is_rich_else_body@3"
             ],
             [
-              "94: is_rich:",
-              "99: proto 1 1",
-              "102: frame_dig -1",
-              "103: pushint 1000",
-              "104: >",
-              "105: bz is_rich_else_body@2"
+              "64: is_rich_else_body@3:",
+              "67: dup",
+              "68: pushint 100",
+              "69: >",
+              "70: bz is_rich_else_body@5"
             ],
             [
-              "111: is_rich_else_body@2:",
-              "114: frame_dig -1",
-              "115: pushint 100",
-              "116: >",
-              "117: bz is_rich_else_body@4"
+              "73: pushbytes \"This account is doing well.\"",
+              "77: b is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6"
             ],
             [
-              "120: pushbytes \"This account is doing well.\"",
-              "121: retsub"
-            ],
-            [
-              "68: dup",
-              "69: len",
-              "70: itob",
-              "71: extract 6 2",
-              "72: swap",
-              "73: concat",
-              "74: bytec_0",
-              "75: swap",
-              "76: concat",
-              "77: log",
-              "78: pushint 1",
-              "79: return"
+              "47: is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6:",
+              "51: dup",
+              "52: len",
+              "53: itob",
+              "54: extract 6 2",
+              "55: swap",
+              "56: concat",
+              "57: bytec_0",
+              "58: swap",
+              "59: concat",
+              "60: log",
+              "61: pushint 1",
+              "62: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 14 -> 7",
+          "short": "0 -> 1 -> 2 -> 5 -> 8 -> 10 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "51: main_is_rich_route@3:",
-              "55: txn OnCompletion",
-              "56: !",
-              "57: assert",
-              "58: txn ApplicationID",
-              "59: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "67: callsub is_rich"
+              "31: is_rich:",
+              "35: txna ApplicationArgs 1",
+              "36: btoi",
+              "37: dup",
+              "40: pushint 1000",
+              "41: >",
+              "42: bz is_rich_else_body@3"
             ],
             [
-              "94: is_rich:",
-              "99: proto 1 1",
-              "102: frame_dig -1",
-              "103: pushint 1000",
-              "104: >",
-              "105: bz is_rich_else_body@2"
+              "64: is_rich_else_body@3:",
+              "67: dup",
+              "68: pushint 100",
+              "69: >",
+              "70: bz is_rich_else_body@5"
             ],
             [
-              "111: is_rich_else_body@2:",
-              "114: frame_dig -1",
-              "115: pushint 100",
-              "116: >",
-              "117: bz is_rich_else_body@4"
+              "79: is_rich_else_body@5:",
+              "82: pushbytes \"This account is poor :(\"",
+              "86: b is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6"
             ],
             [
-              "123: is_rich_else_body@4:",
-              "126: pushbytes \"This account is poor :(\"",
-              "127: retsub"
-            ],
-            [
-              "68: dup",
-              "69: len",
-              "70: itob",
-              "71: extract 6 2",
-              "72: swap",
-              "73: concat",
-              "74: bytec_0",
-              "75: swap",
-              "76: concat",
-              "77: log",
-              "78: pushint 1",
-              "79: return"
+              "47: is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6:",
+              "51: dup",
+              "52: len",
+              "53: itob",
+              "54: extract 6 2",
+              "55: swap",
+              "56: concat",
+              "57: bytec_0",
+              "58: swap",
+              "59: concat",
+              "60: log",
+              "61: pushint 1",
+              "62: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 16 -> 5",
+          "short": "0 -> 1 -> 2 -> 11 -> 12 -> 13",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "21: main_is_even_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "37: callsub is_even"
+              "90: is_even:",
+              "94: txna ApplicationArgs 1",
+              "95: btoi",
+              "98: pushint 2",
+              "99: %",
+              "100: bnz is_even_ternary_false@3"
             ],
             [
-              "131: is_even:",
-              "136: proto 1 1",
-              "139: frame_dig -1",
-              "140: pushint 2",
-              "141: %",
-              "142: bnz is_even_ternary_false@2"
+              "101: pushbytes \"Even\""
             ],
             [
-              "143: pushbytes \"Even\"",
-              "144: retsub"
-            ],
-            [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: bytec_0",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "103: is_even_ternary_merge@4:",
+              "107: dup",
+              "108: len",
+              "109: itob",
+              "110: extract 6 2",
+              "111: swap",
+              "112: concat",
+              "113: bytec_0",
+              "114: swap",
+              "115: concat",
+              "116: log",
+              "117: pushint 1",
+              "118: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 17 -> 5",
+          "short": "0 -> 1 -> 2 -> 11 -> 14 -> 13",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "21: main_is_even_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "37: callsub is_even"
+              "90: is_even:",
+              "94: txna ApplicationArgs 1",
+              "95: btoi",
+              "98: pushint 2",
+              "99: %",
+              "100: bnz is_even_ternary_false@3"
             ],
             [
-              "131: is_even:",
-              "136: proto 1 1",
-              "139: frame_dig -1",
-              "140: pushint 2",
-              "141: %",
-              "142: bnz is_even_ternary_false@2"
+              "120: is_even_ternary_false@3:",
+              "123: pushbytes \"Odd\"",
+              "124: b is_even_ternary_merge@4"
             ],
             [
-              "146: is_even_ternary_false@2:",
-              "149: pushbytes \"Odd\"",
-              "150: retsub"
-            ],
-            [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: bytec_0",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "103: is_even_ternary_merge@4:",
+              "107: dup",
+              "108: len",
+              "109: itob",
+              "110: extract 6 2",
+              "111: swap",
+              "112: concat",
+              "113: bytec_0",
+              "114: swap",
+              "115: concat",
+              "116: log",
+              "117: pushint 1",
+              "118: return"
             ]
           ]
         }
@@ -1280,330 +1184,303 @@
       "help": "Validate `Fee` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 11 -> 7",
+          "short": "0 -> 1 -> 2 -> 5 -> 6 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "51: main_is_rich_route@3:",
-              "55: txn OnCompletion",
-              "56: !",
-              "57: assert",
-              "58: txn ApplicationID",
-              "59: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "67: callsub is_rich"
+              "31: is_rich:",
+              "35: txna ApplicationArgs 1",
+              "36: btoi",
+              "37: dup",
+              "40: pushint 1000",
+              "41: >",
+              "42: bz is_rich_else_body@3"
             ],
             [
-              "94: is_rich:",
-              "99: proto 1 1",
-              "102: frame_dig -1",
-              "103: pushint 1000",
-              "104: >",
-              "105: bz is_rich_else_body@2"
+              "45: pushbytes \"This account is rich!\""
             ],
             [
-              "108: pushbytes \"This account is rich!\"",
-              "109: retsub"
-            ],
-            [
-              "68: dup",
-              "69: len",
-              "70: itob",
-              "71: extract 6 2",
-              "72: swap",
-              "73: concat",
-              "74: bytec_0",
-              "75: swap",
-              "76: concat",
-              "77: log",
-              "78: pushint 1",
-              "79: return"
+              "47: is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6:",
+              "51: dup",
+              "52: len",
+              "53: itob",
+              "54: extract 6 2",
+              "55: swap",
+              "56: concat",
+              "57: bytec_0",
+              "58: swap",
+              "59: concat",
+              "60: log",
+              "61: pushint 1",
+              "62: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 13 -> 7",
+          "short": "0 -> 1 -> 2 -> 5 -> 8 -> 9 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "51: main_is_rich_route@3:",
-              "55: txn OnCompletion",
-              "56: !",
-              "57: assert",
-              "58: txn ApplicationID",
-              "59: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "67: callsub is_rich"
+              "31: is_rich:",
+              "35: txna ApplicationArgs 1",
+              "36: btoi",
+              "37: dup",
+              "40: pushint 1000",
+              "41: >",
+              "42: bz is_rich_else_body@3"
             ],
             [
-              "94: is_rich:",
-              "99: proto 1 1",
-              "102: frame_dig -1",
-              "103: pushint 1000",
-              "104: >",
-              "105: bz is_rich_else_body@2"
+              "64: is_rich_else_body@3:",
+              "67: dup",
+              "68: pushint 100",
+              "69: >",
+              "70: bz is_rich_else_body@5"
             ],
             [
-              "111: is_rich_else_body@2:",
-              "114: frame_dig -1",
-              "115: pushint 100",
-              "116: >",
-              "117: bz is_rich_else_body@4"
+              "73: pushbytes \"This account is doing well.\"",
+              "77: b is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6"
             ],
             [
-              "120: pushbytes \"This account is doing well.\"",
-              "121: retsub"
-            ],
-            [
-              "68: dup",
-              "69: len",
-              "70: itob",
-              "71: extract 6 2",
-              "72: swap",
-              "73: concat",
-              "74: bytec_0",
-              "75: swap",
-              "76: concat",
-              "77: log",
-              "78: pushint 1",
-              "79: return"
+              "47: is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6:",
+              "51: dup",
+              "52: len",
+              "53: itob",
+              "54: extract 6 2",
+              "55: swap",
+              "56: concat",
+              "57: bytec_0",
+              "58: swap",
+              "59: concat",
+              "60: log",
+              "61: pushint 1",
+              "62: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 14 -> 7",
+          "short": "0 -> 1 -> 2 -> 5 -> 8 -> 10 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "51: main_is_rich_route@3:",
-              "55: txn OnCompletion",
-              "56: !",
-              "57: assert",
-              "58: txn ApplicationID",
-              "59: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "67: callsub is_rich"
+              "31: is_rich:",
+              "35: txna ApplicationArgs 1",
+              "36: btoi",
+              "37: dup",
+              "40: pushint 1000",
+              "41: >",
+              "42: bz is_rich_else_body@3"
             ],
             [
-              "94: is_rich:",
-              "99: proto 1 1",
-              "102: frame_dig -1",
-              "103: pushint 1000",
-              "104: >",
-              "105: bz is_rich_else_body@2"
+              "64: is_rich_else_body@3:",
+              "67: dup",
+              "68: pushint 100",
+              "69: >",
+              "70: bz is_rich_else_body@5"
             ],
             [
-              "111: is_rich_else_body@2:",
-              "114: frame_dig -1",
-              "115: pushint 100",
-              "116: >",
-              "117: bz is_rich_else_body@4"
+              "79: is_rich_else_body@5:",
+              "82: pushbytes \"This account is poor :(\"",
+              "86: b is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6"
             ],
             [
-              "123: is_rich_else_body@4:",
-              "126: pushbytes \"This account is poor :(\"",
-              "127: retsub"
-            ],
-            [
-              "68: dup",
-              "69: len",
-              "70: itob",
-              "71: extract 6 2",
-              "72: swap",
-              "73: concat",
-              "74: bytec_0",
-              "75: swap",
-              "76: concat",
-              "77: log",
-              "78: pushint 1",
-              "79: return"
+              "47: is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6:",
+              "51: dup",
+              "52: len",
+              "53: itob",
+              "54: extract 6 2",
+              "55: swap",
+              "56: concat",
+              "57: bytec_0",
+              "58: swap",
+              "59: concat",
+              "60: log",
+              "61: pushint 1",
+              "62: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 16 -> 5",
+          "short": "0 -> 1 -> 2 -> 11 -> 12 -> 13",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "21: main_is_even_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "37: callsub is_even"
+              "90: is_even:",
+              "94: txna ApplicationArgs 1",
+              "95: btoi",
+              "98: pushint 2",
+              "99: %",
+              "100: bnz is_even_ternary_false@3"
             ],
             [
-              "131: is_even:",
-              "136: proto 1 1",
-              "139: frame_dig -1",
-              "140: pushint 2",
-              "141: %",
-              "142: bnz is_even_ternary_false@2"
+              "101: pushbytes \"Even\""
             ],
             [
-              "143: pushbytes \"Even\"",
-              "144: retsub"
-            ],
-            [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: bytec_0",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "103: is_even_ternary_merge@4:",
+              "107: dup",
+              "108: len",
+              "109: itob",
+              "110: extract 6 2",
+              "111: swap",
+              "112: concat",
+              "113: bytec_0",
+              "114: swap",
+              "115: concat",
+              "116: log",
+              "117: pushint 1",
+              "118: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 17 -> 5",
+          "short": "0 -> 1 -> 2 -> 11 -> 14 -> 13",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "21: main_is_even_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "37: callsub is_even"
+              "90: is_even:",
+              "94: txna ApplicationArgs 1",
+              "95: btoi",
+              "98: pushint 2",
+              "99: %",
+              "100: bnz is_even_ternary_false@3"
             ],
             [
-              "131: is_even:",
-              "136: proto 1 1",
-              "139: frame_dig -1",
-              "140: pushint 2",
-              "141: %",
-              "142: bnz is_even_ternary_false@2"
+              "120: is_even_ternary_false@3:",
+              "123: pushbytes \"Odd\"",
+              "124: b is_even_ternary_merge@4"
             ],
             [
-              "146: is_even_ternary_false@2:",
-              "149: pushbytes \"Odd\"",
-              "150: retsub"
-            ],
-            [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: bytec_0",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "103: is_even_ternary_merge@4:",
+              "107: dup",
+              "108: len",
+              "109: itob",
+              "110: extract 6 2",
+              "111: swap",
+              "112: concat",
+              "113: bytec_0",
+              "114: swap",
+              "115: concat",
+              "116: log",
+              "117: pushint 1",
+              "118: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 8 -> 9",
+          "short": "0 -> 1 -> 4",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "81: main_bare_routing@7:",
-              "84: txn OnCompletion",
-              "85: bnz main_after_if_else@11"
-            ],
-            [
-              "86: txn ApplicationID",
-              "87: !",
-              "88: assert",
-              "89: pushint 1",
-              "90: return"
+              "21: main___algopy_default_create@9:",
+              "22: txn OnCompletion",
+              "23: !",
+              "24: txn ApplicationID",
+              "25: !",
+              "26: &&",
+              "27: return"
             ]
           ]
         }
@@ -1629,330 +1506,303 @@
       "help": "Validate `RekeyTo` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 11 -> 7",
+          "short": "0 -> 1 -> 2 -> 5 -> 6 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "51: main_is_rich_route@3:",
-              "55: txn OnCompletion",
-              "56: !",
-              "57: assert",
-              "58: txn ApplicationID",
-              "59: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "67: callsub is_rich"
+              "31: is_rich:",
+              "35: txna ApplicationArgs 1",
+              "36: btoi",
+              "37: dup",
+              "40: pushint 1000",
+              "41: >",
+              "42: bz is_rich_else_body@3"
             ],
             [
-              "94: is_rich:",
-              "99: proto 1 1",
-              "102: frame_dig -1",
-              "103: pushint 1000",
-              "104: >",
-              "105: bz is_rich_else_body@2"
+              "45: pushbytes \"This account is rich!\""
             ],
             [
-              "108: pushbytes \"This account is rich!\"",
-              "109: retsub"
-            ],
-            [
-              "68: dup",
-              "69: len",
-              "70: itob",
-              "71: extract 6 2",
-              "72: swap",
-              "73: concat",
-              "74: bytec_0",
-              "75: swap",
-              "76: concat",
-              "77: log",
-              "78: pushint 1",
-              "79: return"
+              "47: is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6:",
+              "51: dup",
+              "52: len",
+              "53: itob",
+              "54: extract 6 2",
+              "55: swap",
+              "56: concat",
+              "57: bytec_0",
+              "58: swap",
+              "59: concat",
+              "60: log",
+              "61: pushint 1",
+              "62: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 13 -> 7",
+          "short": "0 -> 1 -> 2 -> 5 -> 8 -> 9 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "51: main_is_rich_route@3:",
-              "55: txn OnCompletion",
-              "56: !",
-              "57: assert",
-              "58: txn ApplicationID",
-              "59: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "67: callsub is_rich"
+              "31: is_rich:",
+              "35: txna ApplicationArgs 1",
+              "36: btoi",
+              "37: dup",
+              "40: pushint 1000",
+              "41: >",
+              "42: bz is_rich_else_body@3"
             ],
             [
-              "94: is_rich:",
-              "99: proto 1 1",
-              "102: frame_dig -1",
-              "103: pushint 1000",
-              "104: >",
-              "105: bz is_rich_else_body@2"
+              "64: is_rich_else_body@3:",
+              "67: dup",
+              "68: pushint 100",
+              "69: >",
+              "70: bz is_rich_else_body@5"
             ],
             [
-              "111: is_rich_else_body@2:",
-              "114: frame_dig -1",
-              "115: pushint 100",
-              "116: >",
-              "117: bz is_rich_else_body@4"
+              "73: pushbytes \"This account is doing well.\"",
+              "77: b is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6"
             ],
             [
-              "120: pushbytes \"This account is doing well.\"",
-              "121: retsub"
-            ],
-            [
-              "68: dup",
-              "69: len",
-              "70: itob",
-              "71: extract 6 2",
-              "72: swap",
-              "73: concat",
-              "74: bytec_0",
-              "75: swap",
-              "76: concat",
-              "77: log",
-              "78: pushint 1",
-              "79: return"
+              "47: is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6:",
+              "51: dup",
+              "52: len",
+              "53: itob",
+              "54: extract 6 2",
+              "55: swap",
+              "56: concat",
+              "57: bytec_0",
+              "58: swap",
+              "59: concat",
+              "60: log",
+              "61: pushint 1",
+              "62: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 12 -> 14 -> 7",
+          "short": "0 -> 1 -> 2 -> 5 -> 8 -> 10 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "51: main_is_rich_route@3:",
-              "55: txn OnCompletion",
-              "56: !",
-              "57: assert",
-              "58: txn ApplicationID",
-              "59: assert",
-              "62: txna ApplicationArgs 1",
-              "63: btoi",
-              "67: callsub is_rich"
+              "31: is_rich:",
+              "35: txna ApplicationArgs 1",
+              "36: btoi",
+              "37: dup",
+              "40: pushint 1000",
+              "41: >",
+              "42: bz is_rich_else_body@3"
             ],
             [
-              "94: is_rich:",
-              "99: proto 1 1",
-              "102: frame_dig -1",
-              "103: pushint 1000",
-              "104: >",
-              "105: bz is_rich_else_body@2"
+              "64: is_rich_else_body@3:",
+              "67: dup",
+              "68: pushint 100",
+              "69: >",
+              "70: bz is_rich_else_body@5"
             ],
             [
-              "111: is_rich_else_body@2:",
-              "114: frame_dig -1",
-              "115: pushint 100",
-              "116: >",
-              "117: bz is_rich_else_body@4"
+              "79: is_rich_else_body@5:",
+              "82: pushbytes \"This account is poor :(\"",
+              "86: b is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6"
             ],
             [
-              "123: is_rich_else_body@4:",
-              "126: pushbytes \"This account is poor :(\"",
-              "127: retsub"
-            ],
-            [
-              "68: dup",
-              "69: len",
-              "70: itob",
-              "71: extract 6 2",
-              "72: swap",
-              "73: concat",
-              "74: bytec_0",
-              "75: swap",
-              "76: concat",
-              "77: log",
-              "78: pushint 1",
-              "79: return"
+              "47: is_rich_after_inlined_smart_contracts.control_flow.contract.IfElseExample.is_rich@6:",
+              "51: dup",
+              "52: len",
+              "53: itob",
+              "54: extract 6 2",
+              "55: swap",
+              "56: concat",
+              "57: bytec_0",
+              "58: swap",
+              "59: concat",
+              "60: log",
+              "61: pushint 1",
+              "62: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 16 -> 5",
+          "short": "0 -> 1 -> 2 -> 11 -> 12 -> 13",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "21: main_is_even_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "37: callsub is_even"
+              "90: is_even:",
+              "94: txna ApplicationArgs 1",
+              "95: btoi",
+              "98: pushint 2",
+              "99: %",
+              "100: bnz is_even_ternary_false@3"
             ],
             [
-              "131: is_even:",
-              "136: proto 1 1",
-              "139: frame_dig -1",
-              "140: pushint 2",
-              "141: %",
-              "142: bnz is_even_ternary_false@2"
+              "101: pushbytes \"Even\""
             ],
             [
-              "143: pushbytes \"Even\"",
-              "144: retsub"
-            ],
-            [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: bytec_0",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "103: is_even_ternary_merge@4:",
+              "107: dup",
+              "108: len",
+              "109: itob",
+              "110: extract 6 2",
+              "111: swap",
+              "112: concat",
+              "113: bytec_0",
+              "114: swap",
+              "115: concat",
+              "116: log",
+              "117: pushint 1",
+              "118: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 15 -> 17 -> 5",
+          "short": "0 -> 1 -> 2 -> 11 -> 14 -> 13",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "11: pushbytess 0x37c01090 0x6632c2d6",
-              "12: txna ApplicationArgs 0",
-              "13: match main_is_rich_route@3 main_is_even_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x37c01090 0x6632c2d6",
+              "17: txna ApplicationArgs 0",
+              "18: match is_rich is_even"
             ],
             [
-              "21: main_is_even_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "37: callsub is_even"
+              "90: is_even:",
+              "94: txna ApplicationArgs 1",
+              "95: btoi",
+              "98: pushint 2",
+              "99: %",
+              "100: bnz is_even_ternary_false@3"
             ],
             [
-              "131: is_even:",
-              "136: proto 1 1",
-              "139: frame_dig -1",
-              "140: pushint 2",
-              "141: %",
-              "142: bnz is_even_ternary_false@2"
+              "120: is_even_ternary_false@3:",
+              "123: pushbytes \"Odd\"",
+              "124: b is_even_ternary_merge@4"
             ],
             [
-              "146: is_even_ternary_false@2:",
-              "149: pushbytes \"Odd\"",
-              "150: retsub"
-            ],
-            [
-              "38: dup",
-              "39: len",
-              "40: itob",
-              "41: extract 6 2",
-              "42: swap",
-              "43: concat",
-              "44: bytec_0",
-              "45: swap",
-              "46: concat",
-              "47: log",
-              "48: pushint 1",
-              "49: return"
+              "103: is_even_ternary_merge@4:",
+              "107: dup",
+              "108: len",
+              "109: itob",
+              "110: extract 6 2",
+              "111: swap",
+              "112: concat",
+              "113: bytec_0",
+              "114: swap",
+              "115: concat",
+              "116: log",
+              "117: pushint 1",
+              "118: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 8 -> 9",
+          "short": "0 -> 1 -> 4",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algopy_default_create@9"
             ],
             [
-              "81: main_bare_routing@7:",
-              "84: txn OnCompletion",
-              "85: bnz main_after_if_else@11"
-            ],
-            [
-              "86: txn ApplicationID",
-              "87: !",
-              "88: assert",
-              "89: pushint 1",
-              "90: return"
+              "21: main___algopy_default_create@9:",
+              "22: txn OnCompletion",
+              "23: !",
+              "24: txn ApplicationID",
+              "25: !",
+              "26: &&",
+              "27: return"
             ]
           ]
         }

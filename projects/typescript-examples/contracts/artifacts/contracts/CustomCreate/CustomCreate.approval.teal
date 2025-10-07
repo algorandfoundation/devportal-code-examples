@@ -1,85 +1,67 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
 main:
-    intcblock 0 1
     bytecblock "age"
     // contracts/CustomCreate/contract.algo.ts:4
     // export default class CustomCreate extends Contract {
-    txn NumAppArgs
-    bz main_after_if_else@8
-    pushbytess 0x483331ee 0xd26ce06c // method "custom_create(uint64)void", method "getAge()uint64"
+    txn OnCompletion
+    !
+    assert // OnCompletion must be NoOp
+    txn ApplicationID
+    bz main_create_NoOp@5
+    pushbytes 0xd26ce06c // method "getAge()uint64"
     txna ApplicationArgs 0
-    match main_custom_create_route@3 main_getAge_route@4
+    match getAge
+    err
 
-main_after_if_else@8:
+main_create_NoOp@5:
     // contracts/CustomCreate/contract.algo.ts:4
     // export default class CustomCreate extends Contract {
-    intc_0 // 0
-    return
+    pushbytes 0x483331ee // method "custom_create(uint64)void"
+    txna ApplicationArgs 0
+    match custom_create
+    err
 
-main_getAge_route@4:
-    // contracts/CustomCreate/contract.algo.ts:12
-    // public getAge(): uint64 {
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    callsub getAge
-    itob
-    pushbytes 0x151f7c75
-    swap
-    concat
-    log
-    intc_1 // 1
-    return
 
-main_custom_create_route@3:
+// contracts/CustomCreate/contract.algo.ts::CustomCreate.custom_create[routing]() -> void:
+custom_create:
     // contracts/CustomCreate/contract.algo.ts:7
-    // @arc4.abimethod({ onCreate: 'require' })
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    !
-    assert // can only call when creating
-    // contracts/CustomCreate/contract.algo.ts:4
-    // export default class CustomCreate extends Contract {
+    // @abimethod({ onCreate: 'require' })
     txna ApplicationArgs 1
     btoi
-    // contracts/CustomCreate/contract.algo.ts:7
-    // @arc4.abimethod({ onCreate: 'require' })
-    callsub custom_create
-    intc_1 // 1
-    return
-
-
-// contracts/CustomCreate/contract.algo.ts::CustomCreate.custom_create(age: uint64) -> void:
-custom_create:
-    // contracts/CustomCreate/contract.algo.ts:7-8
-    // @arc4.abimethod({ onCreate: 'require' })
-    // public custom_create(age: uint64): void {
-    proto 1 0
     // contracts/CustomCreate/contract.algo.ts:5
     // public age = GlobalState<uint64>() // UInt64 with no default value
     bytec_0 // "age"
     // contracts/CustomCreate/contract.algo.ts:9
     // this.age.value = Uint64(age)
-    frame_dig -1
+    swap
     app_global_put
-    retsub
+    // contracts/CustomCreate/contract.algo.ts:7
+    // @abimethod({ onCreate: 'require' })
+    pushint 1 // 1
+    return
 
 
-// contracts/CustomCreate/contract.algo.ts::CustomCreate.getAge() -> uint64:
+// contracts/CustomCreate/contract.algo.ts::CustomCreate.getAge[routing]() -> void:
 getAge:
-    // contracts/CustomCreate/contract.algo.ts:5
-    // public age = GlobalState<uint64>() // UInt64 with no default value
-    intc_0 // 0
-    bytec_0 // "age"
-    app_global_get_ex
-    assert // check GlobalState exists
     // contracts/CustomCreate/contract.algo.ts:13
     // return this.age.value
-    retsub
+    pushint 0 // 0
+    // contracts/CustomCreate/contract.algo.ts:5
+    // public age = GlobalState<uint64>() // UInt64 with no default value
+    bytec_0 // "age"
+    // contracts/CustomCreate/contract.algo.ts:13
+    // return this.age.value
+    app_global_get_ex
+    assert // check GlobalState exists
+    // contracts/CustomCreate/contract.algo.ts:12
+    // public getAge(): uint64 {
+    itob
+    pushbytes 0x151f7c75
+    swap
+    concat
+    log
+    pushint 1 // 1
+    return

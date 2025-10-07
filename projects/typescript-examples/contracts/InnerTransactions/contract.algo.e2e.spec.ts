@@ -129,7 +129,7 @@ describe('InnerTransactions contract', () => {
     // Now freeze the asset for the test account
     await client.send.assetFreeze({
       args: {
-        acctToBeFrozen: testAccount.addr.publicKey,
+        acctToBeFrozen: testAccount.addr.toString(),
         asset: assetId!,
       },
       extraFee: microAlgo(1000),

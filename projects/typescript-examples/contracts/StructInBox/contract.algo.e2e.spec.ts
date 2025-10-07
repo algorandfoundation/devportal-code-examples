@@ -35,7 +35,8 @@ describe('StructInBox contract', () => {
   function createBoxReference(appId: bigint, prefix: string, key: bigint) {
     const uint64Type = new ABIUintType(64)
     const encodedKey = uint64Type.encode(key)
-    const boxName = new Uint8Array([...new TextEncoder().encode(prefix), ...encodedKey])
+    const encodedPrefix = new TextEncoder().encode(prefix)
+    const boxName = new Uint8Array([...encodedPrefix, ...encodedKey])
 
     return {
       appId,
@@ -43,83 +44,112 @@ describe('StructInBox contract', () => {
     }
   }
 
-  test('box map test creates and verifies struct', async () => {
+  test('create and get user struct', async () => {
     const { testAccount } = localnet.context
     const { client } = await deploy(testAccount)
 
     await fundContract(testAccount, client.appAddress)
 
-    const { returns } = await client.send.boxMapTest({
-      args: {},
-      boxReferences: [createBoxReference(client.appId, 'users', 0n)],
-    })
-
-    expect(returns?.[0]?.returnValue).toBe(true)
-  })
-
-  test('set and get box map struct', async () => {
-    const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount)
-
-    await fundContract(testAccount, client.appAddress)
-
-    const testStruct = {
+    const testUser = {
+      id: 1n,
       name: 'TestUser',
-      id: 123n,
-      asset: 456n,
+      age: 25n,
     }
 
-    await client.send.boxMapSet({
+    await client.send.createNewUser({
       args: {
-        key: 1n,
-        value: testStruct,
+        id: 1n,
+        user: testUser,
       },
       boxReferences: [createBoxReference(client.appId, 'users', 1n)],
     })
 
-    const { returns } = await client.send.boxMapGet({
-      args: { key: 1n },
+    const { returns } = await client.send.getUser({
+      args: { id: 1n },
       boxReferences: [createBoxReference(client.appId, 'users', 1n)],
     })
 
-    const [name, id, asset] = returns?.[0]?.returnValue as [string, bigint, bigint]
-    expect(name).toBe(testStruct.name)
-    expect(id).toBe(testStruct.id)
-    expect(asset).toBe(testStruct.asset)
+    const [id, name, age] = returns?.[0]?.returnValue as [bigint, string, bigint]
+    expect(id).toBe(testUser.id)
+    expect(name).toBe(testUser.name)
+    expect(age).toBe(testUser.age)
   })
 
-  test('box map exists returns correct value', async () => {
+  test('check user exists returns correct value', async () => {
     const { testAccount } = localnet.context
     const { client } = await deploy(testAccount)
 
     await fundContract(testAccount, client.appAddress)
 
-    const { returns: initialReturns } = await client.send.boxMapExists({
-      args: { key: 1n },
+    const { returns: initialReturns } = await client.send.checkUserExists({
+      args: { id: 1n },
       boxReferences: [createBoxReference(client.appId, 'users', 1n)],
     })
 
     expect(initialReturns?.[0]?.returnValue).toBe(false)
 
-    const testStruct = {
+    const testUser = {
+      id: 1n,
       name: 'TestUser',
-      id: 123n,
-      asset: 456n,
+      age: 25n,
     }
 
-    await client.send.boxMapSet({
+    await client.send.createNewUser({
       args: {
-        key: 1n,
-        value: testStruct,
+        id: 1n,
+        user: testUser,
       },
       boxReferences: [createBoxReference(client.appId, 'users', 1n)],
     })
 
-    const { returns: existsReturns } = await client.send.boxMapExists({
-      args: { key: 1n },
+    const { returns: existsReturns } = await client.send.checkUserExists({
+      args: { id: 1n },
       boxReferences: [createBoxReference(client.appId, 'users', 1n)],
     })
 
     expect(existsReturns?.[0]?.returnValue).toBe(true)
+  })
+
+  test('update user name and age', async () => {
+    const { testAccount } = localnet.context
+    const { client } = await deploy(testAccount)
+
+    await fundContract(testAccount, client.appAddress)
+
+    const testUser = {
+      id: 1n,
+      name: 'TestUser',
+      age: 25n,
+    }
+
+    // Create user first
+    await client.send.createNewUser({
+      args: {
+        id: 1n,
+        user: testUser,
+      },
+      boxReferences: [createBoxReference(client.appId, 'users', 1n)],
+    })
+
+    // Update user
+    await client.send.updateUserNameAndAge({
+      args: {
+        id: 1n,
+        name: 'UpdatedUser',
+        age: 30n,
+      },
+      boxReferences: [createBoxReference(client.appId, 'users', 1n)],
+    })
+
+    // Verify the update
+    const { returns } = await client.send.getUser({
+      args: { id: 1n },
+      boxReferences: [createBoxReference(client.appId, 'users', 1n)],
+    })
+
+    const [id, name, age] = returns?.[0]?.returnValue as [bigint, string, bigint]
+    expect(id).toBe(testUser.id)
+    expect(name).toBe('UpdatedUser')
+    expect(age).toBe(30n)
   })
 })

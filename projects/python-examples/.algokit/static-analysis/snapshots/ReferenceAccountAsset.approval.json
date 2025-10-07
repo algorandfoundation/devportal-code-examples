@@ -12,113 +12,92 @@
       "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 1185",
-              "7: bytecblock 0x151f7c75 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "6: intcblock 1185 1",
+              "7: bytecblock 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
+              "11: bz main___algopy_default_create@9"
             ],
             [
-              "12: pushbytess 0xa65e7b96 0x3313495a",
-              "13: txna ApplicationArgs 0",
-              "14: match main_get_asset_balance_route@3 main_get_asset_balance_with_arg_route@4"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xa65e7b96 0x0b6cfe5d",
+              "18: txna ApplicationArgs 0",
+              "19: match get_asset_balance get_asset_balance_with_arg"
             ],
             [
-              "49: main_get_asset_balance_route@3:",
-              "52: txn OnCompletion",
-              "53: !",
-              "54: assert",
-              "55: txn ApplicationID",
-              "56: assert",
-              "57: callsub get_asset_balance"
-            ],
-            [
-              "79: get_asset_balance:",
-              "84: bytec_1",
-              "87: intc_1",
-              "90: asset_holding_get AssetBalance",
-              "91: bury 1",
-              "92: assert",
-              "97: bytec_1",
-              "100: intc_1",
-              "103: asset_holding_get AssetBalance",
-              "104: assert",
-              "105: retsub"
-            ],
-            [
-              "58: itob",
-              "59: bytec_0",
-              "60: swap",
-              "61: concat",
-              "62: log",
-              "63: intc_0",
-              "64: return"
+              "32: get_asset_balance:",
+              "37: bytec_0",
+              "40: intc_0",
+              "43: asset_holding_get AssetBalance",
+              "44: bury 1",
+              "45: assert",
+              "50: bytec_0",
+              "53: intc_0",
+              "56: asset_holding_get AssetBalance",
+              "57: assert",
+              "60: itob",
+              "61: bytec_1",
+              "62: swap",
+              "63: concat",
+              "64: log",
+              "65: intc_1",
+              "66: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 1185",
-              "7: bytecblock 0x151f7c75 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "6: intcblock 1185 1",
+              "7: bytecblock 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
+              "11: bz main___algopy_default_create@9"
             ],
             [
-              "12: pushbytess 0xa65e7b96 0x3313495a",
-              "13: txna ApplicationArgs 0",
-              "14: match main_get_asset_balance_route@3 main_get_asset_balance_with_arg_route@4"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xa65e7b96 0x0b6cfe5d",
+              "18: txna ApplicationArgs 0",
+              "19: match get_asset_balance get_asset_balance_with_arg"
             ],
             [
-              "22: main_get_asset_balance_with_arg_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "34: txnas Accounts",
-              "35: txna ApplicationArgs 2",
-              "36: btoi",
-              "37: txnas Assets",
-              "40: callsub get_asset_balance_with_arg"
-            ],
-            [
-              "109: get_asset_balance_with_arg:",
-              "113: proto 2 1",
-              "116: frame_dig -2",
-              "117: frame_dig -1",
-              "118: asset_holding_get AssetBalance",
-              "119: bury 1",
-              "120: assert",
-              "124: frame_dig -2",
-              "125: frame_dig -1",
-              "126: asset_holding_get AssetBalance",
-              "127: assert",
-              "128: retsub"
-            ],
-            [
-              "41: itob",
-              "42: bytec_0",
-              "43: swap",
-              "44: concat",
-              "45: log",
-              "46: intc_0",
-              "47: return"
+              "70: get_asset_balance_with_arg:",
+              "73: txna ApplicationArgs 1",
+              "74: txna ApplicationArgs 2",
+              "75: btoi",
+              "78: dup2",
+              "79: asset_holding_get AssetBalance",
+              "80: bury 1",
+              "81: assert",
+              "85: asset_holding_get AssetBalance",
+              "86: assert",
+              "89: itob",
+              "90: bytec_1",
+              "91: swap",
+              "92: concat",
+              "93: log",
+              "94: intc_1",
+              "95: return"
             ]
           ]
         }
@@ -134,113 +113,92 @@
       "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 1185",
-              "7: bytecblock 0x151f7c75 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "6: intcblock 1185 1",
+              "7: bytecblock 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
+              "11: bz main___algopy_default_create@9"
             ],
             [
-              "12: pushbytess 0xa65e7b96 0x3313495a",
-              "13: txna ApplicationArgs 0",
-              "14: match main_get_asset_balance_route@3 main_get_asset_balance_with_arg_route@4"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xa65e7b96 0x0b6cfe5d",
+              "18: txna ApplicationArgs 0",
+              "19: match get_asset_balance get_asset_balance_with_arg"
             ],
             [
-              "49: main_get_asset_balance_route@3:",
-              "52: txn OnCompletion",
-              "53: !",
-              "54: assert",
-              "55: txn ApplicationID",
-              "56: assert",
-              "57: callsub get_asset_balance"
-            ],
-            [
-              "79: get_asset_balance:",
-              "84: bytec_1",
-              "87: intc_1",
-              "90: asset_holding_get AssetBalance",
-              "91: bury 1",
-              "92: assert",
-              "97: bytec_1",
-              "100: intc_1",
-              "103: asset_holding_get AssetBalance",
-              "104: assert",
-              "105: retsub"
-            ],
-            [
-              "58: itob",
-              "59: bytec_0",
-              "60: swap",
-              "61: concat",
-              "62: log",
-              "63: intc_0",
-              "64: return"
+              "32: get_asset_balance:",
+              "37: bytec_0",
+              "40: intc_0",
+              "43: asset_holding_get AssetBalance",
+              "44: bury 1",
+              "45: assert",
+              "50: bytec_0",
+              "53: intc_0",
+              "56: asset_holding_get AssetBalance",
+              "57: assert",
+              "60: itob",
+              "61: bytec_1",
+              "62: swap",
+              "63: concat",
+              "64: log",
+              "65: intc_1",
+              "66: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 1185",
-              "7: bytecblock 0x151f7c75 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "6: intcblock 1185 1",
+              "7: bytecblock 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
+              "11: bz main___algopy_default_create@9"
             ],
             [
-              "12: pushbytess 0xa65e7b96 0x3313495a",
-              "13: txna ApplicationArgs 0",
-              "14: match main_get_asset_balance_route@3 main_get_asset_balance_with_arg_route@4"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xa65e7b96 0x0b6cfe5d",
+              "18: txna ApplicationArgs 0",
+              "19: match get_asset_balance get_asset_balance_with_arg"
             ],
             [
-              "22: main_get_asset_balance_with_arg_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "34: txnas Accounts",
-              "35: txna ApplicationArgs 2",
-              "36: btoi",
-              "37: txnas Assets",
-              "40: callsub get_asset_balance_with_arg"
-            ],
-            [
-              "109: get_asset_balance_with_arg:",
-              "113: proto 2 1",
-              "116: frame_dig -2",
-              "117: frame_dig -1",
-              "118: asset_holding_get AssetBalance",
-              "119: bury 1",
-              "120: assert",
-              "124: frame_dig -2",
-              "125: frame_dig -1",
-              "126: asset_holding_get AssetBalance",
-              "127: assert",
-              "128: retsub"
-            ],
-            [
-              "41: itob",
-              "42: bytec_0",
-              "43: swap",
-              "44: concat",
-              "45: log",
-              "46: intc_0",
-              "47: return"
+              "70: get_asset_balance_with_arg:",
+              "73: txna ApplicationArgs 1",
+              "74: txna ApplicationArgs 2",
+              "75: btoi",
+              "78: dup2",
+              "79: asset_holding_get AssetBalance",
+              "80: bury 1",
+              "81: assert",
+              "85: asset_holding_get AssetBalance",
+              "86: assert",
+              "89: itob",
+              "90: bytec_1",
+              "91: swap",
+              "92: concat",
+              "93: log",
+              "94: intc_1",
+              "95: return"
             ]
           ]
         }
@@ -276,113 +234,92 @@
       "help": "Do not approve `DeleteApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 1185",
-              "7: bytecblock 0x151f7c75 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "6: intcblock 1185 1",
+              "7: bytecblock 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
+              "11: bz main___algopy_default_create@9"
             ],
             [
-              "12: pushbytess 0xa65e7b96 0x3313495a",
-              "13: txna ApplicationArgs 0",
-              "14: match main_get_asset_balance_route@3 main_get_asset_balance_with_arg_route@4"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xa65e7b96 0x0b6cfe5d",
+              "18: txna ApplicationArgs 0",
+              "19: match get_asset_balance get_asset_balance_with_arg"
             ],
             [
-              "49: main_get_asset_balance_route@3:",
-              "52: txn OnCompletion",
-              "53: !",
-              "54: assert",
-              "55: txn ApplicationID",
-              "56: assert",
-              "57: callsub get_asset_balance"
-            ],
-            [
-              "79: get_asset_balance:",
-              "84: bytec_1",
-              "87: intc_1",
-              "90: asset_holding_get AssetBalance",
-              "91: bury 1",
-              "92: assert",
-              "97: bytec_1",
-              "100: intc_1",
-              "103: asset_holding_get AssetBalance",
-              "104: assert",
-              "105: retsub"
-            ],
-            [
-              "58: itob",
-              "59: bytec_0",
-              "60: swap",
-              "61: concat",
-              "62: log",
-              "63: intc_0",
-              "64: return"
+              "32: get_asset_balance:",
+              "37: bytec_0",
+              "40: intc_0",
+              "43: asset_holding_get AssetBalance",
+              "44: bury 1",
+              "45: assert",
+              "50: bytec_0",
+              "53: intc_0",
+              "56: asset_holding_get AssetBalance",
+              "57: assert",
+              "60: itob",
+              "61: bytec_1",
+              "62: swap",
+              "63: concat",
+              "64: log",
+              "65: intc_1",
+              "66: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 1185",
-              "7: bytecblock 0x151f7c75 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "6: intcblock 1185 1",
+              "7: bytecblock 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
+              "11: bz main___algopy_default_create@9"
             ],
             [
-              "12: pushbytess 0xa65e7b96 0x3313495a",
-              "13: txna ApplicationArgs 0",
-              "14: match main_get_asset_balance_route@3 main_get_asset_balance_with_arg_route@4"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xa65e7b96 0x0b6cfe5d",
+              "18: txna ApplicationArgs 0",
+              "19: match get_asset_balance get_asset_balance_with_arg"
             ],
             [
-              "22: main_get_asset_balance_with_arg_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "34: txnas Accounts",
-              "35: txna ApplicationArgs 2",
-              "36: btoi",
-              "37: txnas Assets",
-              "40: callsub get_asset_balance_with_arg"
-            ],
-            [
-              "109: get_asset_balance_with_arg:",
-              "113: proto 2 1",
-              "116: frame_dig -2",
-              "117: frame_dig -1",
-              "118: asset_holding_get AssetBalance",
-              "119: bury 1",
-              "120: assert",
-              "124: frame_dig -2",
-              "125: frame_dig -1",
-              "126: asset_holding_get AssetBalance",
-              "127: assert",
-              "128: retsub"
-            ],
-            [
-              "41: itob",
-              "42: bytec_0",
-              "43: swap",
-              "44: concat",
-              "45: log",
-              "46: intc_0",
-              "47: return"
+              "70: get_asset_balance_with_arg:",
+              "73: txna ApplicationArgs 1",
+              "74: txna ApplicationArgs 2",
+              "75: btoi",
+              "78: dup2",
+              "79: asset_holding_get AssetBalance",
+              "80: bury 1",
+              "81: assert",
+              "85: asset_holding_get AssetBalance",
+              "86: assert",
+              "89: itob",
+              "90: bytec_1",
+              "91: swap",
+              "92: concat",
+              "93: log",
+              "94: intc_1",
+              "95: return"
             ]
           ]
         }
@@ -398,113 +335,92 @@
       "help": "Do not approve `UpdateApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 1185",
-              "7: bytecblock 0x151f7c75 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "6: intcblock 1185 1",
+              "7: bytecblock 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
+              "11: bz main___algopy_default_create@9"
             ],
             [
-              "12: pushbytess 0xa65e7b96 0x3313495a",
-              "13: txna ApplicationArgs 0",
-              "14: match main_get_asset_balance_route@3 main_get_asset_balance_with_arg_route@4"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xa65e7b96 0x0b6cfe5d",
+              "18: txna ApplicationArgs 0",
+              "19: match get_asset_balance get_asset_balance_with_arg"
             ],
             [
-              "49: main_get_asset_balance_route@3:",
-              "52: txn OnCompletion",
-              "53: !",
-              "54: assert",
-              "55: txn ApplicationID",
-              "56: assert",
-              "57: callsub get_asset_balance"
-            ],
-            [
-              "79: get_asset_balance:",
-              "84: bytec_1",
-              "87: intc_1",
-              "90: asset_holding_get AssetBalance",
-              "91: bury 1",
-              "92: assert",
-              "97: bytec_1",
-              "100: intc_1",
-              "103: asset_holding_get AssetBalance",
-              "104: assert",
-              "105: retsub"
-            ],
-            [
-              "58: itob",
-              "59: bytec_0",
-              "60: swap",
-              "61: concat",
-              "62: log",
-              "63: intc_0",
-              "64: return"
+              "32: get_asset_balance:",
+              "37: bytec_0",
+              "40: intc_0",
+              "43: asset_holding_get AssetBalance",
+              "44: bury 1",
+              "45: assert",
+              "50: bytec_0",
+              "53: intc_0",
+              "56: asset_holding_get AssetBalance",
+              "57: assert",
+              "60: itob",
+              "61: bytec_1",
+              "62: swap",
+              "63: concat",
+              "64: log",
+              "65: intc_1",
+              "66: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 1185",
-              "7: bytecblock 0x151f7c75 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "6: intcblock 1185 1",
+              "7: bytecblock 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
+              "11: bz main___algopy_default_create@9"
             ],
             [
-              "12: pushbytess 0xa65e7b96 0x3313495a",
-              "13: txna ApplicationArgs 0",
-              "14: match main_get_asset_balance_route@3 main_get_asset_balance_with_arg_route@4"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xa65e7b96 0x0b6cfe5d",
+              "18: txna ApplicationArgs 0",
+              "19: match get_asset_balance get_asset_balance_with_arg"
             ],
             [
-              "22: main_get_asset_balance_with_arg_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "34: txnas Accounts",
-              "35: txna ApplicationArgs 2",
-              "36: btoi",
-              "37: txnas Assets",
-              "40: callsub get_asset_balance_with_arg"
-            ],
-            [
-              "109: get_asset_balance_with_arg:",
-              "113: proto 2 1",
-              "116: frame_dig -2",
-              "117: frame_dig -1",
-              "118: asset_holding_get AssetBalance",
-              "119: bury 1",
-              "120: assert",
-              "124: frame_dig -2",
-              "125: frame_dig -1",
-              "126: asset_holding_get AssetBalance",
-              "127: assert",
-              "128: retsub"
-            ],
-            [
-              "41: itob",
-              "42: bytec_0",
-              "43: swap",
-              "44: concat",
-              "45: log",
-              "46: intc_0",
-              "47: return"
+              "70: get_asset_balance_with_arg:",
+              "73: txna ApplicationArgs 1",
+              "74: txna ApplicationArgs 2",
+              "75: btoi",
+              "78: dup2",
+              "79: asset_holding_get AssetBalance",
+              "80: bury 1",
+              "81: assert",
+              "85: asset_holding_get AssetBalance",
+              "86: assert",
+              "89: itob",
+              "90: bytec_1",
+              "91: swap",
+              "92: concat",
+              "93: log",
+              "94: intc_1",
+              "95: return"
             ]
           ]
         }
@@ -520,141 +436,117 @@
       "help": "Validate `Fee` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 1185",
-              "7: bytecblock 0x151f7c75 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "6: intcblock 1185 1",
+              "7: bytecblock 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
+              "11: bz main___algopy_default_create@9"
             ],
             [
-              "12: pushbytess 0xa65e7b96 0x3313495a",
-              "13: txna ApplicationArgs 0",
-              "14: match main_get_asset_balance_route@3 main_get_asset_balance_with_arg_route@4"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xa65e7b96 0x0b6cfe5d",
+              "18: txna ApplicationArgs 0",
+              "19: match get_asset_balance get_asset_balance_with_arg"
             ],
             [
-              "49: main_get_asset_balance_route@3:",
-              "52: txn OnCompletion",
-              "53: !",
-              "54: assert",
-              "55: txn ApplicationID",
-              "56: assert",
-              "57: callsub get_asset_balance"
-            ],
-            [
-              "79: get_asset_balance:",
-              "84: bytec_1",
-              "87: intc_1",
-              "90: asset_holding_get AssetBalance",
-              "91: bury 1",
-              "92: assert",
-              "97: bytec_1",
-              "100: intc_1",
-              "103: asset_holding_get AssetBalance",
-              "104: assert",
-              "105: retsub"
-            ],
-            [
-              "58: itob",
-              "59: bytec_0",
-              "60: swap",
-              "61: concat",
-              "62: log",
-              "63: intc_0",
-              "64: return"
+              "32: get_asset_balance:",
+              "37: bytec_0",
+              "40: intc_0",
+              "43: asset_holding_get AssetBalance",
+              "44: bury 1",
+              "45: assert",
+              "50: bytec_0",
+              "53: intc_0",
+              "56: asset_holding_get AssetBalance",
+              "57: assert",
+              "60: itob",
+              "61: bytec_1",
+              "62: swap",
+              "63: concat",
+              "64: log",
+              "65: intc_1",
+              "66: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 1185",
-              "7: bytecblock 0x151f7c75 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "6: intcblock 1185 1",
+              "7: bytecblock 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
+              "11: bz main___algopy_default_create@9"
             ],
             [
-              "12: pushbytess 0xa65e7b96 0x3313495a",
-              "13: txna ApplicationArgs 0",
-              "14: match main_get_asset_balance_route@3 main_get_asset_balance_with_arg_route@4"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xa65e7b96 0x0b6cfe5d",
+              "18: txna ApplicationArgs 0",
+              "19: match get_asset_balance get_asset_balance_with_arg"
             ],
             [
-              "22: main_get_asset_balance_with_arg_route@4:",
-              "25: txn OnCompletion",
+              "70: get_asset_balance_with_arg:",
+              "73: txna ApplicationArgs 1",
+              "74: txna ApplicationArgs 2",
+              "75: btoi",
+              "78: dup2",
+              "79: asset_holding_get AssetBalance",
+              "80: bury 1",
+              "81: assert",
+              "85: asset_holding_get AssetBalance",
+              "86: assert",
+              "89: itob",
+              "90: bytec_1",
+              "91: swap",
+              "92: concat",
+              "93: log",
+              "94: intc_1",
+              "95: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1185 1",
+              "7: bytecblock 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@9"
+            ],
+            [
+              "22: main___algopy_default_create@9:",
+              "23: txn OnCompletion",
+              "24: !",
+              "25: txn ApplicationID",
               "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "34: txnas Accounts",
-              "35: txna ApplicationArgs 2",
-              "36: btoi",
-              "37: txnas Assets",
-              "40: callsub get_asset_balance_with_arg"
-            ],
-            [
-              "109: get_asset_balance_with_arg:",
-              "113: proto 2 1",
-              "116: frame_dig -2",
-              "117: frame_dig -1",
-              "118: asset_holding_get AssetBalance",
-              "119: bury 1",
-              "120: assert",
-              "124: frame_dig -2",
-              "125: frame_dig -1",
-              "126: asset_holding_get AssetBalance",
-              "127: assert",
-              "128: retsub"
-            ],
-            [
-              "41: itob",
-              "42: bytec_0",
-              "43: swap",
-              "44: concat",
-              "45: log",
-              "46: intc_0",
-              "47: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 8 -> 9",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 1185",
-              "7: bytecblock 0x151f7c75 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
-            ],
-            [
-              "66: main_bare_routing@7:",
-              "69: txn OnCompletion",
-              "70: bnz main_after_if_else@11"
-            ],
-            [
-              "71: txn ApplicationID",
-              "72: !",
-              "73: assert",
-              "74: intc_0",
-              "75: return"
+              "27: &&",
+              "28: return"
             ]
           ]
         }
@@ -680,141 +572,117 @@
       "help": "Validate `RekeyTo` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 1185",
-              "7: bytecblock 0x151f7c75 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "6: intcblock 1185 1",
+              "7: bytecblock 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
+              "11: bz main___algopy_default_create@9"
             ],
             [
-              "12: pushbytess 0xa65e7b96 0x3313495a",
-              "13: txna ApplicationArgs 0",
-              "14: match main_get_asset_balance_route@3 main_get_asset_balance_with_arg_route@4"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xa65e7b96 0x0b6cfe5d",
+              "18: txna ApplicationArgs 0",
+              "19: match get_asset_balance get_asset_balance_with_arg"
             ],
             [
-              "49: main_get_asset_balance_route@3:",
-              "52: txn OnCompletion",
-              "53: !",
-              "54: assert",
-              "55: txn ApplicationID",
-              "56: assert",
-              "57: callsub get_asset_balance"
-            ],
-            [
-              "79: get_asset_balance:",
-              "84: bytec_1",
-              "87: intc_1",
-              "90: asset_holding_get AssetBalance",
-              "91: bury 1",
-              "92: assert",
-              "97: bytec_1",
-              "100: intc_1",
-              "103: asset_holding_get AssetBalance",
-              "104: assert",
-              "105: retsub"
-            ],
-            [
-              "58: itob",
-              "59: bytec_0",
-              "60: swap",
-              "61: concat",
-              "62: log",
-              "63: intc_0",
-              "64: return"
+              "32: get_asset_balance:",
+              "37: bytec_0",
+              "40: intc_0",
+              "43: asset_holding_get AssetBalance",
+              "44: bury 1",
+              "45: assert",
+              "50: bytec_0",
+              "53: intc_0",
+              "56: asset_holding_get AssetBalance",
+              "57: assert",
+              "60: itob",
+              "61: bytec_1",
+              "62: swap",
+              "63: concat",
+              "64: log",
+              "65: intc_1",
+              "66: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 1 1185",
-              "7: bytecblock 0x151f7c75 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
+              "6: intcblock 1185 1",
+              "7: bytecblock 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62 0x151f7c75",
               "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
+              "11: bz main___algopy_default_create@9"
             ],
             [
-              "12: pushbytess 0xa65e7b96 0x3313495a",
-              "13: txna ApplicationArgs 0",
-              "14: match main_get_asset_balance_route@3 main_get_asset_balance_with_arg_route@4"
+              "12: txn OnCompletion",
+              "13: !",
+              "14: assert",
+              "15: txn ApplicationID",
+              "16: assert",
+              "17: pushbytess 0xa65e7b96 0x0b6cfe5d",
+              "18: txna ApplicationArgs 0",
+              "19: match get_asset_balance get_asset_balance_with_arg"
             ],
             [
-              "22: main_get_asset_balance_with_arg_route@4:",
-              "25: txn OnCompletion",
+              "70: get_asset_balance_with_arg:",
+              "73: txna ApplicationArgs 1",
+              "74: txna ApplicationArgs 2",
+              "75: btoi",
+              "78: dup2",
+              "79: asset_holding_get AssetBalance",
+              "80: bury 1",
+              "81: assert",
+              "85: asset_holding_get AssetBalance",
+              "86: assert",
+              "89: itob",
+              "90: bytec_1",
+              "91: swap",
+              "92: concat",
+              "93: log",
+              "94: intc_1",
+              "95: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: intcblock 1185 1",
+              "7: bytecblock 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62 0x151f7c75",
+              "10: txn NumAppArgs",
+              "11: bz main___algopy_default_create@9"
+            ],
+            [
+              "22: main___algopy_default_create@9:",
+              "23: txn OnCompletion",
+              "24: !",
+              "25: txn ApplicationID",
               "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "32: txna ApplicationArgs 1",
-              "33: btoi",
-              "34: txnas Accounts",
-              "35: txna ApplicationArgs 2",
-              "36: btoi",
-              "37: txnas Assets",
-              "40: callsub get_asset_balance_with_arg"
-            ],
-            [
-              "109: get_asset_balance_with_arg:",
-              "113: proto 2 1",
-              "116: frame_dig -2",
-              "117: frame_dig -1",
-              "118: asset_holding_get AssetBalance",
-              "119: bury 1",
-              "120: assert",
-              "124: frame_dig -2",
-              "125: frame_dig -1",
-              "126: asset_holding_get AssetBalance",
-              "127: assert",
-              "128: retsub"
-            ],
-            [
-              "41: itob",
-              "42: bytec_0",
-              "43: swap",
-              "44: concat",
-              "45: log",
-              "46: intc_0",
-              "47: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 8 -> 9",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 1 1185",
-              "7: bytecblock 0x151f7c75 0xb30e5e15696ab1a0bcaafe1f5ea07e767eba8c3a0fbd99dc8062d7a6df964e62",
-              "10: txn NumAppArgs",
-              "11: bz main_bare_routing@7"
-            ],
-            [
-              "66: main_bare_routing@7:",
-              "69: txn OnCompletion",
-              "70: bnz main_after_if_else@11"
-            ],
-            [
-              "71: txn ApplicationID",
-              "72: !",
-              "73: assert",
-              "74: intc_0",
-              "75: return"
+              "27: &&",
+              "28: return"
             ]
           ]
         }

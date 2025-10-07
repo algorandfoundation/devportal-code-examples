@@ -7,7 +7,6 @@ from algokit_utils_py_examples.helpers import (
 
 
 def leases() -> None:
-
     env: LocalnetEnvironment = setup_localnet_environment()
     algorand_client = env.algorand_client
     account_a = env.account_a
@@ -48,7 +47,7 @@ def leases() -> None:
                 suppress_log=True,
             ),
         )
-    except Exception as e:
+    except Exception:
         print("Transaction rejected due to active lease")
 
     """

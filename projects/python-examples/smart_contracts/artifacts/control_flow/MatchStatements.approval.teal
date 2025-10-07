@@ -1,4 +1,4 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 // algopy.arc4.ARC4Contract.approval_program() -> uint64:
@@ -7,66 +7,37 @@ main:
     // # example: MATCH
     // class MatchStatements(ARC4Contract):
     txn NumAppArgs
-    bz main_bare_routing@6
+    bz main___algopy_default_create@5
     pushbytes 0xe5a4ea52 // method "get_day(uint64)string"
     txna ApplicationArgs 0
     match main_get_day_route@3
-
-main_after_if_else@10:
-    // smart_contracts/control_flow/contract.py:53-54
-    // # example: MATCH
-    // class MatchStatements(ARC4Contract):
-    pushint 0 // 0
-    return
+    err
 
 main_get_day_route@3:
     // smart_contracts/control_flow/contract.py:55
     // @arc4.abimethod
     txn OnCompletion
     !
-    assert // OnCompletion is not NoOp
     txn ApplicationID
-    assert // can only call when not creating
-    // smart_contracts/control_flow/contract.py:53-54
-    // # example: MATCH
-    // class MatchStatements(ARC4Contract):
-    txna ApplicationArgs 1
-    btoi
-    // smart_contracts/control_flow/contract.py:55
-    // @arc4.abimethod
-    callsub get_day
-    dup
-    len
-    itob
-    extract 6 2
-    swap
-    concat
-    pushbytes 0x151f7c75
-    swap
-    concat
-    log
-    pushint 1 // 1
-    return
+    &&
+    assert // OnCompletion must be NoOp && can only call when not creating
+    b get_day
 
-main_bare_routing@6:
-    // smart_contracts/control_flow/contract.py:53-54
-    // # example: MATCH
-    // class MatchStatements(ARC4Contract):
+main___algopy_default_create@5:
     txn OnCompletion
-    bnz main_after_if_else@10
+    !
     txn ApplicationID
     !
-    assert // can only call when creating
-    pushint 1 // 1
-    return
+    &&
+    return // on error: OnCompletion must be NoOp && can only call when creating
 
 
-// smart_contracts.control_flow.contract.MatchStatements.get_day(date: uint64) -> bytes:
+// smart_contracts.control_flow.contract.MatchStatements.get_day[routing]() -> void:
 get_day:
-    // smart_contracts/control_flow/contract.py:55-56
+    // smart_contracts/control_flow/contract.py:55
     // @arc4.abimethod
-    // def get_day(self, date: UInt64) -> String:
-    proto 1 1
+    txna ApplicationArgs 1
+    btoi
     // smart_contracts/control_flow/contract.py:57-73
     // match date:
     //     case UInt64(0):
@@ -85,51 +56,79 @@ get_day:
     //         return String("Sunday")
     //     case _:
     //         return String("Invalid day")
-    frame_dig -1
-    switch get_day_switch_case_0@1 get_day_switch_case_1@2 get_day_switch_case_2@3 get_day_switch_case_3@4 get_day_switch_case_4@5 get_day_switch_case_5@6 get_day_switch_case_6@7
+    switch get_day_switch_case_0@2 get_day_switch_case_1@3 get_day_switch_case_2@4 get_day_switch_case_3@5 get_day_switch_case_4@6 get_day_switch_case_5@7 get_day_switch_case_6@8
     // smart_contracts/control_flow/contract.py:73
     // return String("Invalid day")
     pushbytes "Invalid day"
-    retsub
 
-get_day_switch_case_6@7:
+get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10:
+    // smart_contracts/control_flow/contract.py:55
+    // @arc4.abimethod
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    pushbytes 0x151f7c75
+    swap
+    concat
+    log
+    pushint 1 // 1
+    return
+
+get_day_switch_case_6@8:
     // smart_contracts/control_flow/contract.py:71
     // return String("Sunday")
     pushbytes "Sunday"
-    retsub
+    // smart_contracts/control_flow/contract.py:55
+    // @arc4.abimethod
+    b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10
 
-get_day_switch_case_5@6:
+get_day_switch_case_5@7:
     // smart_contracts/control_flow/contract.py:69
     // return String("Saturday")
     pushbytes "Saturday"
-    retsub
+    // smart_contracts/control_flow/contract.py:55
+    // @arc4.abimethod
+    b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10
 
-get_day_switch_case_4@5:
+get_day_switch_case_4@6:
     // smart_contracts/control_flow/contract.py:67
     // return String("Friday")
     pushbytes "Friday"
-    retsub
+    // smart_contracts/control_flow/contract.py:55
+    // @arc4.abimethod
+    b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10
 
-get_day_switch_case_3@4:
+get_day_switch_case_3@5:
     // smart_contracts/control_flow/contract.py:65
     // return String("Thursday")
     pushbytes "Thursday"
-    retsub
+    // smart_contracts/control_flow/contract.py:55
+    // @arc4.abimethod
+    b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10
 
-get_day_switch_case_2@3:
+get_day_switch_case_2@4:
     // smart_contracts/control_flow/contract.py:63
     // return String("Wednesday")
     pushbytes "Wednesday"
-    retsub
+    // smart_contracts/control_flow/contract.py:55
+    // @arc4.abimethod
+    b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10
 
-get_day_switch_case_1@2:
+get_day_switch_case_1@3:
     // smart_contracts/control_flow/contract.py:61
     // return String("Tuesday")
     pushbytes "Tuesday"
-    retsub
+    // smart_contracts/control_flow/contract.py:55
+    // @arc4.abimethod
+    b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10
 
-get_day_switch_case_0@1:
+get_day_switch_case_0@2:
     // smart_contracts/control_flow/contract.py:59
     // return String("Monday")
     pushbytes "Monday"
-    retsub
+    // smart_contracts/control_flow/contract.py:55
+    // @arc4.abimethod
+    b get_day_after_inlined_smart_contracts.control_flow.contract.MatchStatements.get_day@10

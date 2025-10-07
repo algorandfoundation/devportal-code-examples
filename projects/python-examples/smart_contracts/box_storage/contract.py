@@ -4,7 +4,6 @@ from algopy import (
     ARC4Contract,
     Box,
     BoxMap,
-    BoxRef,
     Bytes,
     Global,
     String,
@@ -32,7 +31,6 @@ class BoxStorage(ARC4Contract):
         self.box_map = BoxMap(
             UInt64, String, key_prefix=""
         )  # Box map with uint as key and string as value
-        self.box_ref = BoxRef()  # Box reference
         self.box_map_struct = BoxMap(arc4.UInt64, UserStruct, key_prefix="users")
 
     # example: INIT_BOX_STORAGE
@@ -52,16 +50,6 @@ class BoxStorage(ARC4Contract):
         return self.box_map.get(key_1, default=String("default"))
 
     @arc4.abimethod
-    def get_box_ref(self) -> None:
-        box_ref = BoxRef(key=String("blob"))
-        assert box_ref.create(size=32)
-        sender_bytes = Txn.sender.bytes
-
-        assert box_ref.delete()
-        assert box_ref.key == b"blob"
-        assert box_ref.get(default=sender_bytes) == sender_bytes
-
-    @arc4.abimethod
     def maybe_box(self) -> tuple[UInt64, bool]:
         box_int_value, box_int_exists = self.box_int.maybe()
         return box_int_value, box_int_exists
@@ -72,16 +60,6 @@ class BoxStorage(ARC4Contract):
         value, exists = self.box_map.maybe(key_1)
         if not exists:
             value = String("")
-        return value, exists
-
-    @arc4.abimethod
-    def maybe_box_ref(self) -> tuple[Bytes, bool]:
-        box_ref = BoxRef(key=String("blob"))
-        assert box_ref.create(size=32)
-
-        value, exists = box_ref.maybe()
-        if not exists:
-            value = Bytes(b"")
         return value, exists
 
     # example: GET_BOX_STORAGE
@@ -179,17 +157,6 @@ class BoxStorage(ARC4Contract):
     def delete_box_map(self, key: UInt64) -> None:
         del self.box_map[key]
 
-    @arc4.abimethod
-    def delete_box_ref(self) -> None:
-        box_ref = BoxRef(key=String("blob"))
-        self.box_ref.create(size=UInt64(32))
-        assert self.box_ref, "has data"
-
-        self.box_ref.delete()
-        value, exists = box_ref.maybe()
-        assert not exists
-        assert value == b""
-
     # example: DELETE_BOX_STORAGE
 
     # example: LENGTH_BOX_STORAGE
@@ -199,12 +166,6 @@ class BoxStorage(ARC4Contract):
         if key_0 not in self.box_map:
             return UInt64(0)
         return self.box_map.length(key_0)
-
-    @arc4.abimethod
-    def length_box_ref(self) -> UInt64:
-        box_ref = BoxRef(key=String("blob"))
-        assert box_ref.create(size=32)
-        return box_ref.length
 
     @arc4.abimethod
     def box_map_struct_length(self) -> bool:
@@ -227,68 +188,24 @@ class BoxStorage(ARC4Contract):
         assert self.box_map[key_0].bytes.length == value.bytes.length
         assert self.box_map.length(key_0) == value.bytes.length
 
-    @arc4.abimethod
-    def length_box_ref_example(self) -> None:
-        box_ref = BoxRef(key="blob")
-        assert box_ref.create(size=32)
-        assert box_ref.length == 64
-
-        box_ref = BoxRef(key=b"blob")
-        assert box_ref.create(size=32)
-        assert box_ref.length == 64
-
-        box_ref = BoxRef(key=Bytes(b"blob"))
-        assert box_ref.create(size=32)
-        assert box_ref.length == 64
-
-        box_ref = BoxRef(key=String("blob"))
-        assert box_ref.create(size=32)
-        assert box_ref.length == 64
-
     # example: LENGTH_BOX_STORAGE_EXAMPLES
 
-    # example: EXTRACT_BOX_REF
+    # example: EXTRACT_BOX
     @arc4.abimethod
-    def extract_box_ref(self) -> None:
-        box_ref = BoxRef(key=String("blob"))
-        assert box_ref.create(size=32)
+    def extract_box(self) -> None:
+        box = Box(Bytes, key=String("blob"))
+        assert box.create(size=UInt64(32))
 
         sender_bytes = Txn.sender.bytes
         app_address = Global.current_application_address.bytes
         value_3 = Bytes(b"hello")
-        box_ref.replace(0, sender_bytes)
-        box_ref.splice(0, 0, app_address)
-        box_ref.replace(64, value_3)
-        prefix = box_ref.extract(0, 32 * 2 + value_3.length)
+        box.replace(0, sender_bytes)
+        box.splice(0, 0, app_address)
+        box.replace(64, value_3)
+        prefix = box.extract(0, 32 * 2 + value_3.length)
         assert prefix == app_address + sender_bytes + value_3
 
-    # example: EXTRACT_BOX_REF
-
-    # example: OTHER_OPS_BOX_REF
-    @arc4.abimethod
-    def manipulate_box_ref(self) -> None:
-        box_ref = BoxRef(key=String("blob"))
-        assert box_ref.create(size=32)
-        assert box_ref, "has data"
-
-        # manipulate data
-        sender_bytes = Txn.sender.bytes
-        app_address = Global.current_application_address.bytes
-        value_3 = Bytes(b"hello")
-        box_ref.replace(0, sender_bytes)
-        box_ref.splice(0, 0, app_address)
-        box_ref.replace(64, value_3)
-        prefix = box_ref.extract(0, 32 * 2 + value_3.length)
-        assert prefix == app_address + sender_bytes + value_3
-
-        assert box_ref.delete()
-        assert box_ref.key == b"blob"
-
-        box_ref.put(sender_bytes + app_address)
-        assert box_ref, "Blob exists"
-        assert box_ref.length == 64
-
-    # example: OTHER_OPS_BOX_REF
+    # example: EXTRACT_BOX
 
     # example: OTHER_OPS_BOX
     @arc4.abimethod

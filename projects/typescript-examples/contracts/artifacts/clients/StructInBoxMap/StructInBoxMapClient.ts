@@ -23,7 +23,7 @@ import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgumen
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"StructInBoxMap","structs":{"UserStruct":[{"name":"name","type":"string"},{"name":"id","type":"uint64"},{"name":"asset","type":"uint64"}]},"methods":[{"name":"boxMapTest","args":[],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"boxMapSet","args":[{"type":"uint64","name":"key"},{"type":"(string,uint64,uint64)","struct":"UserStruct","name":"value"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"boxMapGet","args":[{"type":"uint64","name":"key"}],"returns":{"type":"(string,uint64,uint64)","struct":"UserStruct"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"boxMapExists","args":[{"type":"uint64","name":"key"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"userMap":{"keyType":"uint64","valueType":"UserStruct","prefix":"dXNlcnM="}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[219,225,248,265],"errorMessage":"Box must have value"},{"pc":[222,228],"errorMessage":"Length mismatch"},{"pc":[80,105,125,153],"errorMessage":"OnCompletion is not NoOp"},{"pc":[252],"errorMessage":"Value mismatch"},{"pc":[179],"errorMessage":"can only call when creating"},{"pc":[83,108,128,156],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwIDI4CiAgICBieXRlY2Jsb2NrIDB4MTUxZjdjNzUgMHg3NTczNjU3MjczMDAwMDAwMDAwMDAwMDAwMCAweDAwICJ1c2VycyIKICAgIC8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjExCiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBTdHJ1Y3RJbkJveE1hcCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX2JhcmVfcm91dGluZ0A5CiAgICBwdXNoYnl0ZXNzIDB4ZjE2NWNkZDkgMHgwZjA1ZjMzMiAweDY5OWViMGZlIDB4ZDgyOWQyYTMgLy8gbWV0aG9kICJib3hNYXBUZXN0KClib29sIiwgbWV0aG9kICJib3hNYXBTZXQodWludDY0LChzdHJpbmcsdWludDY0LHVpbnQ2NCkpYm9vbCIsIG1ldGhvZCAiYm94TWFwR2V0KHVpbnQ2NCkoc3RyaW5nLHVpbnQ2NCx1aW50NjQpIiwgbWV0aG9kICJib3hNYXBFeGlzdHModWludDY0KWJvb2wiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX2JveE1hcFRlc3Rfcm91dGVAMyBtYWluX2JveE1hcFNldF9yb3V0ZUA0IG1haW5fYm94TWFwR2V0X3JvdXRlQDUgbWFpbl9ib3hNYXBFeGlzdHNfcm91dGVANgoKbWFpbl9hZnRlcl9pZl9lbHNlQDEzOgogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MTEKICAgIC8vIGV4cG9ydCBkZWZhdWx0IGNsYXNzIFN0cnVjdEluQm94TWFwIGV4dGVuZHMgQ29udHJhY3QgewogICAgaW50Y18xIC8vIDAKICAgIHJldHVybgoKbWFpbl9ib3hNYXBFeGlzdHNfcm91dGVANjoKICAgIC8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjQxCiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MTEKICAgIC8vIGV4cG9ydCBkZWZhdWx0IGNsYXNzIFN0cnVjdEluQm94TWFwIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgYnRvaQogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6NDEKICAgIC8vIEBhYmltZXRob2QoKQogICAgY2FsbHN1YiBib3hNYXBFeGlzdHMKICAgIGJ5dGVjXzIgLy8gMHgwMAogICAgaW50Y18xIC8vIDAKICAgIHVuY292ZXIgMgogICAgc2V0Yml0CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2JveE1hcEdldF9yb3V0ZUA1OgogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MzYKICAgIC8vIEBhYmltZXRob2QoKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czoxMQogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgU3RydWN0SW5Cb3hNYXAgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czozNgogICAgLy8gQGFiaW1ldGhvZCgpCiAgICBjYWxsc3ViIGJveE1hcEdldAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9ib3hNYXBTZXRfcm91dGVANDoKICAgIC8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjI5CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MTEKICAgIC8vIGV4cG9ydCBkZWZhdWx0IGNsYXNzIFN0cnVjdEluQm94TWFwIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MjkKICAgIC8vIEBhYmltZXRob2QoKQogICAgY2FsbHN1YiBib3hNYXBTZXQKICAgIGJ5dGVjXzIgLy8gMHgwMAogICAgaW50Y18xIC8vIDAKICAgIHVuY292ZXIgMgogICAgc2V0Yml0CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2JveE1hcFRlc3Rfcm91dGVAMzoKICAgIC8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjE0CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgY2FsbHN1YiBib3hNYXBUZXN0CiAgICBieXRlY18yIC8vIDB4MDAKICAgIGludGNfMSAvLyAwCiAgICB1bmNvdmVyIDIKICAgIHNldGJpdAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9iYXJlX3JvdXRpbmdAOToKICAgIC8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjExCiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBTdHJ1Y3RJbkJveE1hcCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMTMKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6OlN0cnVjdEluQm94TWFwLmJveE1hcFRlc3QoKSAtPiB1aW50NjQ6CmJveE1hcFRlc3Q6CiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czoxMgogICAgLy8gcHVibGljIHVzZXJNYXAgPSBCb3hNYXA8dWludDY0LCBVc2VyU3RydWN0Pih7IGtleVByZWZpeDogJ3VzZXJzJyB9KQogICAgYnl0ZWNfMSAvLyAweDc1NzM2NTcyNzMwMDAwMDAwMDAwMDAwMDAwCiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czoyMwogICAgLy8gdGhpcy51c2VyTWFwKGtleTApLnZhbHVlID0gdmFsdWUuY29weSgpCiAgICBib3hfZGVsCiAgICBwb3AKICAgIC8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjEyCiAgICAvLyBwdWJsaWMgdXNlck1hcCA9IEJveE1hcDx1aW50NjQsIFVzZXJTdHJ1Y3Q+KHsga2V5UHJlZml4OiAndXNlcnMnIH0pCiAgICBieXRlY18xIC8vIDB4NzU3MzY1NzI3MzAwMDAwMDAwMDAwMDAwMDAKICAgIC8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjE3LTIxCiAgICAvLyBjb25zdCB2YWx1ZSA9IG5ldyBVc2VyU3RydWN0KHsKICAgIC8vICAgbmFtZTogbmV3IGFyYzQuU3RyKCd0ZXN0TmFtZScpLAogICAgLy8gICBpZDogbmV3IGFyYzQuVWludE42NCg3MCksCiAgICAvLyAgIGFzc2V0OiBuZXcgYXJjNC5VaW50TjY0KDIpLAogICAgLy8gfSkKICAgIHB1c2hieXRlcyAweDAwMTIwMDAwMDAwMDAwMDAwMDQ2MDAwMDAwMDAwMDAwMDAwMjAwMDg3NDY1NzM3NDRlNjE2ZDY1CiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czoyMwogICAgLy8gdGhpcy51c2VyTWFwKGtleTApLnZhbHVlID0gdmFsdWUuY29weSgpCiAgICBib3hfcHV0CiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czoxMgogICAgLy8gcHVibGljIHVzZXJNYXAgPSBCb3hNYXA8dWludDY0LCBVc2VyU3RydWN0Pih7IGtleVByZWZpeDogJ3VzZXJzJyB9KQogICAgYnl0ZWNfMSAvLyAweDc1NzM2NTcyNzMwMDAwMDAwMDAwMDAwMDAwCiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czoyNAogICAgLy8gYXNzZXJ0KHRoaXMudXNlck1hcChrZXkwKS5sZW5ndGggPT09IHZhbHVlLmJ5dGVzLmxlbmd0aCwgJ0xlbmd0aCBtaXNtYXRjaCcpCiAgICBib3hfbGVuCiAgICBhc3NlcnQgLy8gQm94IG11c3QgaGF2ZSB2YWx1ZQogICAgaW50Y18yIC8vIDI4CiAgICA9PQogICAgYXNzZXJ0IC8vIExlbmd0aCBtaXNtYXRjaAogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MTIKICAgIC8vIHB1YmxpYyB1c2VyTWFwID0gQm94TWFwPHVpbnQ2NCwgVXNlclN0cnVjdD4oeyBrZXlQcmVmaXg6ICd1c2VycycgfSkKICAgIGJ5dGVjXzEgLy8gMHg3NTczNjU3MjczMDAwMDAwMDAwMDAwMDAwMAogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MjUKICAgIC8vIGFzc2VydCh0aGlzLnVzZXJNYXAoa2V5MCkubGVuZ3RoID09PSB2YWx1ZS5ieXRlcy5sZW5ndGgsICdMZW5ndGggbWlzbWF0Y2gnKQogICAgYm94X2xlbgogICAgYXNzZXJ0IC8vIEJveCBtdXN0IGhhdmUgdmFsdWUKICAgIGludGNfMiAvLyAyOAogICAgPT0KICAgIGFzc2VydCAvLyBMZW5ndGggbWlzbWF0Y2gKICAgIC8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjI2CiAgICAvLyByZXR1cm4gdHJ1ZQogICAgaW50Y18wIC8vIDEKICAgIHJldHN1YgoKCi8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjpTdHJ1Y3RJbkJveE1hcC5ib3hNYXBTZXQoa2V5OiB1aW50NjQsIHZhbHVlOiBieXRlcykgLT4gdWludDY0Ogpib3hNYXBTZXQ6CiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czoyOS0zMAogICAgLy8gQGFiaW1ldGhvZCgpCiAgICAvLyBwdWJsaWMgYm94TWFwU2V0KGtleTogdWludDY0LCB2YWx1ZTogVXNlclN0cnVjdCk6IGJvb2xlYW4gewogICAgcHJvdG8gMiAxCiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czozMQogICAgLy8gdGhpcy51c2VyTWFwKGtleSkudmFsdWUgPSB2YWx1ZS5jb3B5KCkKICAgIGZyYW1lX2RpZyAtMgogICAgaXRvYgogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MTIKICAgIC8vIHB1YmxpYyB1c2VyTWFwID0gQm94TWFwPHVpbnQ2NCwgVXNlclN0cnVjdD4oeyBrZXlQcmVmaXg6ICd1c2VycycgfSkKICAgIGJ5dGVjXzMgLy8gInVzZXJzIgogICAgc3dhcAogICAgY29uY2F0CiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czozMQogICAgLy8gdGhpcy51c2VyTWFwKGtleSkudmFsdWUgPSB2YWx1ZS5jb3B5KCkKICAgIGR1cAogICAgYm94X2RlbAogICAgcG9wCiAgICBkdXAKICAgIGZyYW1lX2RpZyAtMQogICAgYm94X3B1dAogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MzIKICAgIC8vIGFzc2VydCh0aGlzLnVzZXJNYXAoa2V5KS52YWx1ZSA9PT0gdmFsdWUuY29weSgpLCAnVmFsdWUgbWlzbWF0Y2gnKQogICAgYm94X2dldAogICAgYXNzZXJ0IC8vIEJveCBtdXN0IGhhdmUgdmFsdWUKICAgIGZyYW1lX2RpZyAtMQogICAgPT0KICAgIGFzc2VydCAvLyBWYWx1ZSBtaXNtYXRjaAogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MzMKICAgIC8vIHJldHVybiB0cnVlCiAgICBpbnRjXzAgLy8gMQogICAgcmV0c3ViCgoKLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6OlN0cnVjdEluQm94TWFwLmJveE1hcEdldChrZXk6IHVpbnQ2NCkgLT4gYnl0ZXM6CmJveE1hcEdldDoKICAgIC8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjM2LTM3CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIC8vIHB1YmxpYyBib3hNYXBHZXQoa2V5OiB1aW50NjQpOiBVc2VyU3RydWN0IHsKICAgIHByb3RvIDEgMQogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MzgKICAgIC8vIHJldHVybiB0aGlzLnVzZXJNYXAoa2V5KS52YWx1ZQogICAgZnJhbWVfZGlnIC0xCiAgICBpdG9iCiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czoxMgogICAgLy8gcHVibGljIHVzZXJNYXAgPSBCb3hNYXA8dWludDY0LCBVc2VyU3RydWN0Pih7IGtleVByZWZpeDogJ3VzZXJzJyB9KQogICAgYnl0ZWNfMyAvLyAidXNlcnMiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIC8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjM4CiAgICAvLyByZXR1cm4gdGhpcy51c2VyTWFwKGtleSkudmFsdWUKICAgIGJveF9nZXQKICAgIGFzc2VydCAvLyBCb3ggbXVzdCBoYXZlIHZhbHVlCiAgICByZXRzdWIKCgovLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czo6U3RydWN0SW5Cb3hNYXAuYm94TWFwRXhpc3RzKGtleTogdWludDY0KSAtPiB1aW50NjQ6CmJveE1hcEV4aXN0czoKICAgIC8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjQxLTQyCiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIC8vIHB1YmxpYyBib3hNYXBFeGlzdHMoa2V5OiB1aW50NjQpOiBib29sZWFuIHsKICAgIHByb3RvIDEgMQogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6NDMKICAgIC8vIHJldHVybiB0aGlzLnVzZXJNYXAoa2V5KS5leGlzdHMKICAgIGZyYW1lX2RpZyAtMQogICAgaXRvYgogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MTIKICAgIC8vIHB1YmxpYyB1c2VyTWFwID0gQm94TWFwPHVpbnQ2NCwgVXNlclN0cnVjdD4oeyBrZXlQcmVmaXg6ICd1c2VycycgfSkKICAgIGJ5dGVjXzMgLy8gInVzZXJzIgogICAgc3dhcAogICAgY29uY2F0CiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czo0MwogICAgLy8gcmV0dXJuIHRoaXMudXNlck1hcChrZXkpLmV4aXN0cwogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICByZXRzdWIK","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiADAQAcJgQEFR98dQ11c2VycwAAAAAAAAAAAQAFdXNlcnMxG0EAg4IEBPFlzdkEDwXzMgRpnrD+BNgp0qM2GgCOBABLAC8AGwACI0MxGRREMRhENhoBF4gAsCojTwJUKExQsCJDMRkURDEYRDYaAReIAIsoTFCwIkMxGRREMRhENhoBFzYaAogAXCojTwJUKExQsCJDMRkURDEYRIgAFiojTwJUKExQsCJDMRlA/5sxGBREIkMpvEgpgBwAEgAAAAAAAABGAAAAAAAAAAIACHRlc3ROYW1lvym9RCQSRCm9RCQSRCKJigIBi/4WK0xQSbxISYv/v75Ei/8SRCKJigEBi/8WK0xQvkSJigEBi/8WK0xQvUUBiQ==","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"StructInBoxMap","structs":{"User":[{"name":"id","type":"uint64"},{"name":"name","type":"string"},{"name":"age","type":"uint64"}]},"methods":[{"name":"createNewUser","args":[{"type":"uint64","name":"id"},{"type":"(uint64,string,uint64)","struct":"User","name":"user"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"getUser","args":[{"type":"uint64","name":"id"}],"returns":{"type":"(uint64,string,uint64)","struct":"User"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"checkUserExists","args":[{"type":"uint64","name":"id"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"updateUserNameAndAge","args":[{"type":"uint64","name":"id"},{"type":"string","name":"name"},{"type":"uint64","name":"age"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"users":{"keyType":"uint64","valueType":"User","prefix":"dXNlcnM="}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[125,180],"errorMessage":"Box must have value"},{"pc":[34],"errorMessage":"OnCompletion must be NoOp"},{"pc":[81],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[111,228],"errorMessage":"assert target is match for conditions"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAxMCA4IDAKICAgIGJ5dGVjYmxvY2sgInVzZXJzIiAweDE1MWY3Yzc1ODAgMHgxNTFmN2M3NQogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MTAKICAgIC8vIGV4cG9ydCBkZWZhdWx0IGNsYXNzIFN0cnVjdEluQm94TWFwIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDExCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweDc4M2RjYzcwIDB4OTMxNDNiZDEgMHgyYmM0YzExZiAweDNhMzU1MWNlIC8vIG1ldGhvZCAiY3JlYXRlTmV3VXNlcih1aW50NjQsKHVpbnQ2NCxzdHJpbmcsdWludDY0KSlib29sIiwgbWV0aG9kICJnZXRVc2VyKHVpbnQ2NCkodWludDY0LHN0cmluZyx1aW50NjQpIiwgbWV0aG9kICJjaGVja1VzZXJFeGlzdHModWludDY0KWJvb2wiLCBtZXRob2QgInVwZGF0ZVVzZXJOYW1lQW5kQWdlKHVpbnQ2NCxzdHJpbmcsdWludDY0KWJvb2wiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBjcmVhdGVOZXdVc2VyIGdldFVzZXIgY2hlY2tVc2VyRXhpc3RzIHVwZGF0ZVVzZXJOYW1lQW5kQWdlCiAgICBlcnIKCm1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDExOgogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MTAKICAgIC8vIGV4cG9ydCBkZWZhdWx0IGNsYXNzIFN0cnVjdEluQm94TWFwIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4gLy8gb24gZXJyb3I6IE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AgJiYgY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCgoKLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6OlN0cnVjdEluQm94TWFwLmNyZWF0ZU5ld1VzZXJbcm91dGluZ10oKSAtPiB2b2lkOgpjcmVhdGVOZXdVc2VyOgogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MTMKICAgIC8vIHB1YmxpYyBjcmVhdGVOZXdVc2VyKGlkOiB1aW50NjQsIHVzZXI6IFVzZXIpOiBib29sZWFuIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIC8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjE0CiAgICAvLyB0aGlzLnVzZXJzKGlkKS52YWx1ZSA9IGNsb25lKHVzZXIpCiAgICBzd2FwCiAgICBpdG9iCiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czoxMQogICAgLy8gcHVibGljIHVzZXJzID0gQm94TWFwPHVpbnQ2NCwgVXNlcj4oeyBrZXlQcmVmaXg6ICd1c2VycycgfSkKICAgIGJ5dGVjXzAgLy8gInVzZXJzIgogICAgc3dhcAogICAgY29uY2F0CiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czoxNAogICAgLy8gdGhpcy51c2VycyhpZCkudmFsdWUgPSBjbG9uZSh1c2VyKQogICAgZHVwCiAgICBib3hfZGVsCiAgICBwb3AKICAgIGR1cAogICAgZGlnIDIKICAgIGJveF9wdXQKICAgIC8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjE2LTE5CiAgICAvLyBhc3NlcnRNYXRjaCh0aGlzLnVzZXJzKGlkKS52YWx1ZSwgewogICAgLy8gICBuYW1lOiB1c2VyLm5hbWUsCiAgICAvLyAgIGFnZTogdXNlci5hZ2UsCiAgICAvLyB9KQogICAgaW50Y18xIC8vIDEwCiAgICBpbnRjXzIgLy8gOAogICAgYm94X2V4dHJhY3QKICAgIGJ0b2kKICAgIC8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjE4CiAgICAvLyBhZ2U6IHVzZXIuYWdlLAogICAgc3dhcAogICAgaW50Y18xIC8vIDEwCiAgICBleHRyYWN0X3VpbnQ2NAogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MTYtMTkKICAgIC8vIGFzc2VydE1hdGNoKHRoaXMudXNlcnMoaWQpLnZhbHVlLCB7CiAgICAvLyAgIG5hbWU6IHVzZXIubmFtZSwKICAgIC8vICAgYWdlOiB1c2VyLmFnZSwKICAgIC8vIH0pCiAgICA9PQogICAgaW50Y18wIC8vIDEKICAgICYmCiAgICBhc3NlcnQgLy8gYXNzZXJ0IHRhcmdldCBpcyBtYXRjaCBmb3IgY29uZGl0aW9ucwogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MTMKICAgIC8vIHB1YmxpYyBjcmVhdGVOZXdVc2VyKGlkOiB1aW50NjQsIHVzZXI6IFVzZXIpOiBib29sZWFuIHsKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NTgwCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czo6U3RydWN0SW5Cb3hNYXAuZ2V0VXNlcltyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldFVzZXI6CiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czoyNC0yNQogICAgLy8gQHJlYWRvbmx5CiAgICAvLyBwdWJsaWMgZ2V0VXNlcihpZDogdWludDY0KTogVXNlciB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czoyNgogICAgLy8gcmV0dXJuIHRoaXMudXNlcnMoaWQpLnZhbHVlCiAgICBpdG9iCiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czoxMQogICAgLy8gcHVibGljIHVzZXJzID0gQm94TWFwPHVpbnQ2NCwgVXNlcj4oeyBrZXlQcmVmaXg6ICd1c2VycycgfSkKICAgIGJ5dGVjXzAgLy8gInVzZXJzIgogICAgc3dhcAogICAgY29uY2F0CiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czoyNgogICAgLy8gcmV0dXJuIHRoaXMudXNlcnMoaWQpLnZhbHVlCiAgICBib3hfZ2V0CiAgICBhc3NlcnQgLy8gQm94IG11c3QgaGF2ZSB2YWx1ZQogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MjQtMjUKICAgIC8vIEByZWFkb25seQogICAgLy8gcHVibGljIGdldFVzZXIoaWQ6IHVpbnQ2NCk6IFVzZXIgewogICAgYnl0ZWNfMiAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjpTdHJ1Y3RJbkJveE1hcC5jaGVja1VzZXJFeGlzdHNbcm91dGluZ10oKSAtPiB2b2lkOgpjaGVja1VzZXJFeGlzdHM6CiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czoyOS0zMAogICAgLy8gQHJlYWRvbmx5CiAgICAvLyBwdWJsaWMgY2hlY2tVc2VyRXhpc3RzKGlkOiB1aW50NjQpOiBib29sZWFuIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGJ0b2kKICAgIC8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjMxCiAgICAvLyByZXR1cm4gdGhpcy51c2VycyhpZCkuZXhpc3RzCiAgICBpdG9iCiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czoxMQogICAgLy8gcHVibGljIHVzZXJzID0gQm94TWFwPHVpbnQ2NCwgVXNlcj4oeyBrZXlQcmVmaXg6ICd1c2VycycgfSkKICAgIGJ5dGVjXzAgLy8gInVzZXJzIgogICAgc3dhcAogICAgY29uY2F0CiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czozMQogICAgLy8gcmV0dXJuIHRoaXMudXNlcnMoaWQpLmV4aXN0cwogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czoyOS0zMAogICAgLy8gQHJlYWRvbmx5CiAgICAvLyBwdWJsaWMgY2hlY2tVc2VyRXhpc3RzKGlkOiB1aW50NjQpOiBib29sZWFuIHsKICAgIHB1c2hieXRlcyAweDAwCiAgICBpbnRjXzMgLy8gMAogICAgdW5jb3ZlciAyCiAgICBzZXRiaXQKICAgIGJ5dGVjXzIgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czo6U3RydWN0SW5Cb3hNYXAudXBkYXRlVXNlck5hbWVBbmRBZ2Vbcm91dGluZ10oKSAtPiB2b2lkOgp1cGRhdGVVc2VyTmFtZUFuZEFnZToKICAgIC8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjM0CiAgICAvLyBwdWJsaWMgdXBkYXRlVXNlck5hbWVBbmRBZ2UoaWQ6IHVpbnQ2NCwgbmFtZTogc3RyaW5nLCBhZ2U6IHVpbnQ2NCk6IGJvb2xlYW4gewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBidG9pCiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czozNQogICAgLy8gdGhpcy51c2VycyhpZCkudmFsdWUubmFtZSA9IG5hbWUKICAgIHVuY292ZXIgNAogICAgaXRvYgogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MTEKICAgIC8vIHB1YmxpYyB1c2VycyA9IEJveE1hcDx1aW50NjQsIFVzZXI+KHsga2V5UHJlZml4OiAndXNlcnMnIH0pCiAgICBieXRlY18wIC8vICJ1c2VycyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MzUKICAgIC8vIHRoaXMudXNlcnMoaWQpLnZhbHVlLm5hbWUgPSBuYW1lCiAgICBkdXAKICAgIGJveF9nZXQKICAgIGFzc2VydCAvLyBCb3ggbXVzdCBoYXZlIHZhbHVlCiAgICBkdXAKICAgIGludGNfMiAvLyA4CiAgICBleHRyYWN0X3VpbnQxNgogICAgaW50Y18zIC8vIDAKICAgIHN3YXAKICAgIGV4dHJhY3QzCiAgICB1bmNvdmVyIDUKICAgIGNvbmNhdAogICAgZGlnIDEKICAgIGJveF9kZWwKICAgIHBvcAogICAgZGlnIDEKICAgIHN3YXAKICAgIGJveF9wdXQKICAgIC8vIGNvbnRyYWN0cy9TdHJ1Y3RJbkJveC9jb250cmFjdC5hbGdvLnRzOjM2CiAgICAvLyB0aGlzLnVzZXJzKGlkKS52YWx1ZS5hZ2UgPSBhZ2UKICAgIGR1cAogICAgaW50Y18xIC8vIDEwCiAgICB1bmNvdmVyIDQKICAgIGJveF9yZXBsYWNlCiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czozOAogICAgLy8gYXNzZXJ0TWF0Y2godGhpcy51c2VycyhpZCkudmFsdWUsIHsKICAgIGR1cAogICAgYm94X2dldAogICAgcG9wCiAgICAvLyBjb250cmFjdHMvU3RydWN0SW5Cb3gvY29udHJhY3QuYWxnby50czozOC00MQogICAgLy8gYXNzZXJ0TWF0Y2godGhpcy51c2VycyhpZCkudmFsdWUsIHsKICAgIC8vICAgbmFtZSwKICAgIC8vICAgYWdlLAogICAgLy8gfSkKICAgIGR1cAogICAgaW50Y18yIC8vIDgKICAgIGV4dHJhY3RfdWludDE2CiAgICBkaWcgMQogICAgbGVuCiAgICBzdWJzdHJpbmczCiAgICBleHRyYWN0IDIgMAogICAgdW5jb3ZlciAzCiAgICA9PQogICAgc3dhcAogICAgaW50Y18xIC8vIDEwCiAgICBpbnRjXzIgLy8gOAogICAgYm94X2V4dHJhY3QKICAgIGJ0b2kKICAgIHVuY292ZXIgMgogICAgPT0KICAgICYmCiAgICBhc3NlcnQgLy8gYXNzZXJ0IHRhcmdldCBpcyBtYXRjaCBmb3IgY29uZGl0aW9ucwogICAgLy8gY29udHJhY3RzL1N0cnVjdEluQm94L2NvbnRyYWN0LmFsZ28udHM6MzQKICAgIC8vIHB1YmxpYyB1cGRhdGVVc2VyTmFtZUFuZEFnZShpZDogdWludDY0LCBuYW1lOiBzdHJpbmcsIGFnZTogdWludDY0KTogYm9vbGVhbiB7CiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzU4MAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyAEAQoIACYDBXVzZXJzBRUffHWABBUffHUxG0EAKzEZFEQxGESCBAR4PcxwBJMUO9EEK8TBHwQ6NVHONhoAjgQACQArADsAUwAxGRQxGBQQQzYaARc2GgJMFihMUEm8SElLAr8jJLoXTCNbEiIQRCmwIkM2GgEXFihMUL5EKkxQsCJDNhoBFxYoTFC9RQGAAQAlTwJUKkxQsCJDNhoBFzYaAklXAgA2GgNJF08EFihMUEm+REkkWSVMWE8FUEsBvEhLAUy/SSNPBLtJvkhJJFlLARVSVwIATwMSTCMkuhdPAhIQRCmwIkM=","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -64,18 +64,18 @@ export type Expand<T> = T extends (...args: infer A) => infer R
 
 // Type definitions for ARC-56 structs
 
-export type UserStruct = {
-  name: string,
+export type User = {
   id: bigint,
-  asset: bigint
+  name: string,
+  age: bigint
 }
 
 
 /**
- * Converts the ABI tuple representation of a UserStruct to the struct representation
+ * Converts the ABI tuple representation of a User to the struct representation
  */
-export function UserStructFromTuple(abiTuple: [string, bigint, bigint]) {
-  return getABIStructFromABITuple(abiTuple, APP_SPEC.structs.UserStruct, APP_SPEC.structs) as UserStruct
+export function UserFromTuple(abiTuple: [bigint, string, bigint]) {
+  return getABIStructFromABITuple(abiTuple, APP_SPEC.structs.User, APP_SPEC.structs) as User
 }
 
 /**
@@ -86,26 +86,30 @@ export type StructInBoxMapArgs = {
    * The object representation of the arguments for each method
    */
   obj: {
-    'boxMapTest()bool': Record<string, never>
-    'boxMapSet(uint64,(string,uint64,uint64))bool': {
-      key: bigint | number
-      value: UserStruct
+    'createNewUser(uint64,(uint64,string,uint64))bool': {
+      id: bigint | number
+      user: User
     }
-    'boxMapGet(uint64)(string,uint64,uint64)': {
-      key: bigint | number
+    'getUser(uint64)(uint64,string,uint64)': {
+      id: bigint | number
     }
-    'boxMapExists(uint64)bool': {
-      key: bigint | number
+    'checkUserExists(uint64)bool': {
+      id: bigint | number
+    }
+    'updateUserNameAndAge(uint64,string,uint64)bool': {
+      id: bigint | number
+      name: string
+      age: bigint | number
     }
   }
   /**
    * The tuple representation of the arguments for each method
    */
   tuple: {
-    'boxMapTest()bool': []
-    'boxMapSet(uint64,(string,uint64,uint64))bool': [key: bigint | number, value: UserStruct]
-    'boxMapGet(uint64)(string,uint64,uint64)': [key: bigint | number]
-    'boxMapExists(uint64)bool': [key: bigint | number]
+    'createNewUser(uint64,(uint64,string,uint64))bool': [id: bigint | number, user: User]
+    'getUser(uint64)(uint64,string,uint64)': [id: bigint | number]
+    'checkUserExists(uint64)bool': [id: bigint | number]
+    'updateUserNameAndAge(uint64,string,uint64)bool': [id: bigint | number, name: string, age: bigint | number]
   }
 }
 
@@ -113,10 +117,10 @@ export type StructInBoxMapArgs = {
  * The return type for each method
  */
 export type StructInBoxMapReturns = {
-  'boxMapTest()bool': boolean
-  'boxMapSet(uint64,(string,uint64,uint64))bool': boolean
-  'boxMapGet(uint64)(string,uint64,uint64)': UserStruct
-  'boxMapExists(uint64)bool': boolean
+  'createNewUser(uint64,(uint64,string,uint64))bool': boolean
+  'getUser(uint64)(uint64,string,uint64)': User
+  'checkUserExists(uint64)bool': boolean
+  'updateUserNameAndAge(uint64,string,uint64)bool': boolean
 }
 
 /**
@@ -127,25 +131,25 @@ export type StructInBoxMapTypes = {
    * Maps method signatures / names to their argument and return types.
    */
   methods:
-    & Record<'boxMapTest()bool' | 'boxMapTest', {
-      argsObj: StructInBoxMapArgs['obj']['boxMapTest()bool']
-      argsTuple: StructInBoxMapArgs['tuple']['boxMapTest()bool']
-      returns: StructInBoxMapReturns['boxMapTest()bool']
+    & Record<'createNewUser(uint64,(uint64,string,uint64))bool' | 'createNewUser', {
+      argsObj: StructInBoxMapArgs['obj']['createNewUser(uint64,(uint64,string,uint64))bool']
+      argsTuple: StructInBoxMapArgs['tuple']['createNewUser(uint64,(uint64,string,uint64))bool']
+      returns: StructInBoxMapReturns['createNewUser(uint64,(uint64,string,uint64))bool']
     }>
-    & Record<'boxMapSet(uint64,(string,uint64,uint64))bool' | 'boxMapSet', {
-      argsObj: StructInBoxMapArgs['obj']['boxMapSet(uint64,(string,uint64,uint64))bool']
-      argsTuple: StructInBoxMapArgs['tuple']['boxMapSet(uint64,(string,uint64,uint64))bool']
-      returns: StructInBoxMapReturns['boxMapSet(uint64,(string,uint64,uint64))bool']
+    & Record<'getUser(uint64)(uint64,string,uint64)' | 'getUser', {
+      argsObj: StructInBoxMapArgs['obj']['getUser(uint64)(uint64,string,uint64)']
+      argsTuple: StructInBoxMapArgs['tuple']['getUser(uint64)(uint64,string,uint64)']
+      returns: StructInBoxMapReturns['getUser(uint64)(uint64,string,uint64)']
     }>
-    & Record<'boxMapGet(uint64)(string,uint64,uint64)' | 'boxMapGet', {
-      argsObj: StructInBoxMapArgs['obj']['boxMapGet(uint64)(string,uint64,uint64)']
-      argsTuple: StructInBoxMapArgs['tuple']['boxMapGet(uint64)(string,uint64,uint64)']
-      returns: StructInBoxMapReturns['boxMapGet(uint64)(string,uint64,uint64)']
+    & Record<'checkUserExists(uint64)bool' | 'checkUserExists', {
+      argsObj: StructInBoxMapArgs['obj']['checkUserExists(uint64)bool']
+      argsTuple: StructInBoxMapArgs['tuple']['checkUserExists(uint64)bool']
+      returns: StructInBoxMapReturns['checkUserExists(uint64)bool']
     }>
-    & Record<'boxMapExists(uint64)bool' | 'boxMapExists', {
-      argsObj: StructInBoxMapArgs['obj']['boxMapExists(uint64)bool']
-      argsTuple: StructInBoxMapArgs['tuple']['boxMapExists(uint64)bool']
-      returns: StructInBoxMapReturns['boxMapExists(uint64)bool']
+    & Record<'updateUserNameAndAge(uint64,string,uint64)bool' | 'updateUserNameAndAge', {
+      argsObj: StructInBoxMapArgs['obj']['updateUserNameAndAge(uint64,string,uint64)bool']
+      argsTuple: StructInBoxMapArgs['tuple']['updateUserNameAndAge(uint64,string,uint64)bool']
+      returns: StructInBoxMapReturns['updateUserNameAndAge(uint64,string,uint64)bool']
     }>
   /**
    * Defines the shape of the state of the application.
@@ -154,7 +158,7 @@ export type StructInBoxMapTypes = {
     box: {
       keys: {}
       maps: {
-        userMap: Map<bigint | number, UserStruct>
+        users: Map<bigint | number, User>
       }
     }
   }
@@ -214,55 +218,55 @@ export type StructInBoxMapDeployParams = Expand<Omit<AppFactoryDeployParams, 'cr
  */
 export abstract class StructInBoxMapParamsFactory {
   /**
-   * Constructs a no op call for the boxMapTest()bool ABI method
+   * Constructs a no op call for the createNewUser(uint64,(uint64,string,uint64))bool ABI method
    *
    * @param params Parameters for the call
    * @returns An `AppClientMethodCallParams` object for the call
    */
-  static boxMapTest(params: CallParams<StructInBoxMapArgs['obj']['boxMapTest()bool'] | StructInBoxMapArgs['tuple']['boxMapTest()bool']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
+  static createNewUser(params: CallParams<StructInBoxMapArgs['obj']['createNewUser(uint64,(uint64,string,uint64))bool'] | StructInBoxMapArgs['tuple']['createNewUser(uint64,(uint64,string,uint64))bool']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
     return {
       ...params,
-      method: 'boxMapTest()bool' as const,
-      args: Array.isArray(params.args) ? params.args : [],
+      method: 'createNewUser(uint64,(uint64,string,uint64))bool' as const,
+      args: Array.isArray(params.args) ? params.args : [params.args.id, params.args.user],
     }
   }
   /**
-   * Constructs a no op call for the boxMapSet(uint64,(string,uint64,uint64))bool ABI method
+   * Constructs a no op call for the getUser(uint64)(uint64,string,uint64) ABI method
    *
    * @param params Parameters for the call
    * @returns An `AppClientMethodCallParams` object for the call
    */
-  static boxMapSet(params: CallParams<StructInBoxMapArgs['obj']['boxMapSet(uint64,(string,uint64,uint64))bool'] | StructInBoxMapArgs['tuple']['boxMapSet(uint64,(string,uint64,uint64))bool']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
+  static getUser(params: CallParams<StructInBoxMapArgs['obj']['getUser(uint64)(uint64,string,uint64)'] | StructInBoxMapArgs['tuple']['getUser(uint64)(uint64,string,uint64)']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
     return {
       ...params,
-      method: 'boxMapSet(uint64,(string,uint64,uint64))bool' as const,
-      args: Array.isArray(params.args) ? params.args : [params.args.key, params.args.value],
+      method: 'getUser(uint64)(uint64,string,uint64)' as const,
+      args: Array.isArray(params.args) ? params.args : [params.args.id],
     }
   }
   /**
-   * Constructs a no op call for the boxMapGet(uint64)(string,uint64,uint64) ABI method
+   * Constructs a no op call for the checkUserExists(uint64)bool ABI method
    *
    * @param params Parameters for the call
    * @returns An `AppClientMethodCallParams` object for the call
    */
-  static boxMapGet(params: CallParams<StructInBoxMapArgs['obj']['boxMapGet(uint64)(string,uint64,uint64)'] | StructInBoxMapArgs['tuple']['boxMapGet(uint64)(string,uint64,uint64)']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
+  static checkUserExists(params: CallParams<StructInBoxMapArgs['obj']['checkUserExists(uint64)bool'] | StructInBoxMapArgs['tuple']['checkUserExists(uint64)bool']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
     return {
       ...params,
-      method: 'boxMapGet(uint64)(string,uint64,uint64)' as const,
-      args: Array.isArray(params.args) ? params.args : [params.args.key],
+      method: 'checkUserExists(uint64)bool' as const,
+      args: Array.isArray(params.args) ? params.args : [params.args.id],
     }
   }
   /**
-   * Constructs a no op call for the boxMapExists(uint64)bool ABI method
+   * Constructs a no op call for the updateUserNameAndAge(uint64,string,uint64)bool ABI method
    *
    * @param params Parameters for the call
    * @returns An `AppClientMethodCallParams` object for the call
    */
-  static boxMapExists(params: CallParams<StructInBoxMapArgs['obj']['boxMapExists(uint64)bool'] | StructInBoxMapArgs['tuple']['boxMapExists(uint64)bool']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
+  static updateUserNameAndAge(params: CallParams<StructInBoxMapArgs['obj']['updateUserNameAndAge(uint64,string,uint64)bool'] | StructInBoxMapArgs['tuple']['updateUserNameAndAge(uint64,string,uint64)bool']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
     return {
       ...params,
-      method: 'boxMapExists(uint64)bool' as const,
-      args: Array.isArray(params.args) ? params.args : [params.args.key],
+      method: 'updateUserNameAndAge(uint64,string,uint64)bool' as const,
+      args: Array.isArray(params.args) ? params.args : [params.args.id, params.args.name, params.args.age],
     }
   }
 }
@@ -435,7 +439,7 @@ export class StructInBoxMapClient {
       appSpec: APP_SPEC,
     })
   }
-  
+
   /**
    * Checks for decode errors on the given return value and maps the return value to the return type for the given method
    * @returns The typed return value or undefined if there was no value
@@ -443,7 +447,7 @@ export class StructInBoxMapClient {
   decodeReturnValue<TSignature extends StructInBoxMapNonVoidMethodSignatures>(method: TSignature, returnValue: ABIReturn | undefined) {
     return returnValue !== undefined ? getArc56ReturnValue<MethodReturn<TSignature>>(returnValue, this.appClient.getABIMethod(method), APP_SPEC.structs) : undefined
   }
-  
+
   /**
    * Returns a new `StructInBoxMapClient` client, resolving the app by creator address and name
    * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
@@ -506,43 +510,47 @@ export class StructInBoxMapClient {
     },
 
     /**
-     * Makes a call to the StructInBoxMap smart contract using the `boxMapTest()bool` ABI method.
+     * Makes a call to the StructInBoxMap smart contract using the `createNewUser(uint64,(uint64,string,uint64))bool` ABI method.
      *
      * @param params The params for the smart contract call
      * @returns The call params
      */
-    boxMapTest: (params: CallParams<StructInBoxMapArgs['obj']['boxMapTest()bool'] | StructInBoxMapArgs['tuple']['boxMapTest()bool']> & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
-      return this.appClient.params.call(StructInBoxMapParamsFactory.boxMapTest(params))
+    createNewUser: (params: CallParams<StructInBoxMapArgs['obj']['createNewUser(uint64,(uint64,string,uint64))bool'] | StructInBoxMapArgs['tuple']['createNewUser(uint64,(uint64,string,uint64))bool']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+      return this.appClient.params.call(StructInBoxMapParamsFactory.createNewUser(params))
     },
 
     /**
-     * Makes a call to the StructInBoxMap smart contract using the `boxMapSet(uint64,(string,uint64,uint64))bool` ABI method.
+     * Makes a call to the StructInBoxMap smart contract using the `getUser(uint64)(uint64,string,uint64)` ABI method.
+     * 
+     * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
      * @param params The params for the smart contract call
      * @returns The call params
      */
-    boxMapSet: (params: CallParams<StructInBoxMapArgs['obj']['boxMapSet(uint64,(string,uint64,uint64))bool'] | StructInBoxMapArgs['tuple']['boxMapSet(uint64,(string,uint64,uint64))bool']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
-      return this.appClient.params.call(StructInBoxMapParamsFactory.boxMapSet(params))
+    getUser: (params: CallParams<StructInBoxMapArgs['obj']['getUser(uint64)(uint64,string,uint64)'] | StructInBoxMapArgs['tuple']['getUser(uint64)(uint64,string,uint64)']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+      return this.appClient.params.call(StructInBoxMapParamsFactory.getUser(params))
     },
 
     /**
-     * Makes a call to the StructInBoxMap smart contract using the `boxMapGet(uint64)(string,uint64,uint64)` ABI method.
+     * Makes a call to the StructInBoxMap smart contract using the `checkUserExists(uint64)bool` ABI method.
+     * 
+     * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
      * @param params The params for the smart contract call
      * @returns The call params
      */
-    boxMapGet: (params: CallParams<StructInBoxMapArgs['obj']['boxMapGet(uint64)(string,uint64,uint64)'] | StructInBoxMapArgs['tuple']['boxMapGet(uint64)(string,uint64,uint64)']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
-      return this.appClient.params.call(StructInBoxMapParamsFactory.boxMapGet(params))
+    checkUserExists: (params: CallParams<StructInBoxMapArgs['obj']['checkUserExists(uint64)bool'] | StructInBoxMapArgs['tuple']['checkUserExists(uint64)bool']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+      return this.appClient.params.call(StructInBoxMapParamsFactory.checkUserExists(params))
     },
 
     /**
-     * Makes a call to the StructInBoxMap smart contract using the `boxMapExists(uint64)bool` ABI method.
+     * Makes a call to the StructInBoxMap smart contract using the `updateUserNameAndAge(uint64,string,uint64)bool` ABI method.
      *
      * @param params The params for the smart contract call
      * @returns The call params
      */
-    boxMapExists: (params: CallParams<StructInBoxMapArgs['obj']['boxMapExists(uint64)bool'] | StructInBoxMapArgs['tuple']['boxMapExists(uint64)bool']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
-      return this.appClient.params.call(StructInBoxMapParamsFactory.boxMapExists(params))
+    updateUserNameAndAge: (params: CallParams<StructInBoxMapArgs['obj']['updateUserNameAndAge(uint64,string,uint64)bool'] | StructInBoxMapArgs['tuple']['updateUserNameAndAge(uint64,string,uint64)bool']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+      return this.appClient.params.call(StructInBoxMapParamsFactory.updateUserNameAndAge(params))
     },
 
   }
@@ -562,43 +570,47 @@ export class StructInBoxMapClient {
     },
 
     /**
-     * Makes a call to the StructInBoxMap smart contract using the `boxMapTest()bool` ABI method.
+     * Makes a call to the StructInBoxMap smart contract using the `createNewUser(uint64,(uint64,string,uint64))bool` ABI method.
      *
      * @param params The params for the smart contract call
      * @returns The call transaction
      */
-    boxMapTest: (params: CallParams<StructInBoxMapArgs['obj']['boxMapTest()bool'] | StructInBoxMapArgs['tuple']['boxMapTest()bool']> & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
-      return this.appClient.createTransaction.call(StructInBoxMapParamsFactory.boxMapTest(params))
+    createNewUser: (params: CallParams<StructInBoxMapArgs['obj']['createNewUser(uint64,(uint64,string,uint64))bool'] | StructInBoxMapArgs['tuple']['createNewUser(uint64,(uint64,string,uint64))bool']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+      return this.appClient.createTransaction.call(StructInBoxMapParamsFactory.createNewUser(params))
     },
 
     /**
-     * Makes a call to the StructInBoxMap smart contract using the `boxMapSet(uint64,(string,uint64,uint64))bool` ABI method.
+     * Makes a call to the StructInBoxMap smart contract using the `getUser(uint64)(uint64,string,uint64)` ABI method.
+     * 
+     * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
      * @param params The params for the smart contract call
      * @returns The call transaction
      */
-    boxMapSet: (params: CallParams<StructInBoxMapArgs['obj']['boxMapSet(uint64,(string,uint64,uint64))bool'] | StructInBoxMapArgs['tuple']['boxMapSet(uint64,(string,uint64,uint64))bool']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
-      return this.appClient.createTransaction.call(StructInBoxMapParamsFactory.boxMapSet(params))
+    getUser: (params: CallParams<StructInBoxMapArgs['obj']['getUser(uint64)(uint64,string,uint64)'] | StructInBoxMapArgs['tuple']['getUser(uint64)(uint64,string,uint64)']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+      return this.appClient.createTransaction.call(StructInBoxMapParamsFactory.getUser(params))
     },
 
     /**
-     * Makes a call to the StructInBoxMap smart contract using the `boxMapGet(uint64)(string,uint64,uint64)` ABI method.
+     * Makes a call to the StructInBoxMap smart contract using the `checkUserExists(uint64)bool` ABI method.
+     * 
+     * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
      * @param params The params for the smart contract call
      * @returns The call transaction
      */
-    boxMapGet: (params: CallParams<StructInBoxMapArgs['obj']['boxMapGet(uint64)(string,uint64,uint64)'] | StructInBoxMapArgs['tuple']['boxMapGet(uint64)(string,uint64,uint64)']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
-      return this.appClient.createTransaction.call(StructInBoxMapParamsFactory.boxMapGet(params))
+    checkUserExists: (params: CallParams<StructInBoxMapArgs['obj']['checkUserExists(uint64)bool'] | StructInBoxMapArgs['tuple']['checkUserExists(uint64)bool']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+      return this.appClient.createTransaction.call(StructInBoxMapParamsFactory.checkUserExists(params))
     },
 
     /**
-     * Makes a call to the StructInBoxMap smart contract using the `boxMapExists(uint64)bool` ABI method.
+     * Makes a call to the StructInBoxMap smart contract using the `updateUserNameAndAge(uint64,string,uint64)bool` ABI method.
      *
      * @param params The params for the smart contract call
      * @returns The call transaction
      */
-    boxMapExists: (params: CallParams<StructInBoxMapArgs['obj']['boxMapExists(uint64)bool'] | StructInBoxMapArgs['tuple']['boxMapExists(uint64)bool']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
-      return this.appClient.createTransaction.call(StructInBoxMapParamsFactory.boxMapExists(params))
+    updateUserNameAndAge: (params: CallParams<StructInBoxMapArgs['obj']['updateUserNameAndAge(uint64,string,uint64)bool'] | StructInBoxMapArgs['tuple']['updateUserNameAndAge(uint64,string,uint64)bool']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+      return this.appClient.createTransaction.call(StructInBoxMapParamsFactory.updateUserNameAndAge(params))
     },
 
   }
@@ -618,47 +630,51 @@ export class StructInBoxMapClient {
     },
 
     /**
-     * Makes a call to the StructInBoxMap smart contract using the `boxMapTest()bool` ABI method.
+     * Makes a call to the StructInBoxMap smart contract using the `createNewUser(uint64,(uint64,string,uint64))bool` ABI method.
      *
      * @param params The params for the smart contract call
      * @returns The call result
      */
-    boxMapTest: async (params: CallParams<StructInBoxMapArgs['obj']['boxMapTest()bool'] | StructInBoxMapArgs['tuple']['boxMapTest()bool']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
-      const result = await this.appClient.send.call(StructInBoxMapParamsFactory.boxMapTest(params))
-      return {...result, return: result.return as unknown as (undefined | StructInBoxMapReturns['boxMapTest()bool'])}
+    createNewUser: async (params: CallParams<StructInBoxMapArgs['obj']['createNewUser(uint64,(uint64,string,uint64))bool'] | StructInBoxMapArgs['tuple']['createNewUser(uint64,(uint64,string,uint64))bool']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+      const result = await this.appClient.send.call(StructInBoxMapParamsFactory.createNewUser(params))
+      return {...result, return: result.return as unknown as (undefined | StructInBoxMapReturns['createNewUser(uint64,(uint64,string,uint64))bool'])}
     },
 
     /**
-     * Makes a call to the StructInBoxMap smart contract using the `boxMapSet(uint64,(string,uint64,uint64))bool` ABI method.
+     * Makes a call to the StructInBoxMap smart contract using the `getUser(uint64)(uint64,string,uint64)` ABI method.
+     * 
+     * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
      * @param params The params for the smart contract call
      * @returns The call result
      */
-    boxMapSet: async (params: CallParams<StructInBoxMapArgs['obj']['boxMapSet(uint64,(string,uint64,uint64))bool'] | StructInBoxMapArgs['tuple']['boxMapSet(uint64,(string,uint64,uint64))bool']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
-      const result = await this.appClient.send.call(StructInBoxMapParamsFactory.boxMapSet(params))
-      return {...result, return: result.return as unknown as (undefined | StructInBoxMapReturns['boxMapSet(uint64,(string,uint64,uint64))bool'])}
+    getUser: async (params: CallParams<StructInBoxMapArgs['obj']['getUser(uint64)(uint64,string,uint64)'] | StructInBoxMapArgs['tuple']['getUser(uint64)(uint64,string,uint64)']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+      const result = await this.appClient.send.call(StructInBoxMapParamsFactory.getUser(params))
+      return {...result, return: result.return as unknown as (undefined | StructInBoxMapReturns['getUser(uint64)(uint64,string,uint64)'])}
     },
 
     /**
-     * Makes a call to the StructInBoxMap smart contract using the `boxMapGet(uint64)(string,uint64,uint64)` ABI method.
+     * Makes a call to the StructInBoxMap smart contract using the `checkUserExists(uint64)bool` ABI method.
+     * 
+     * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
      * @param params The params for the smart contract call
      * @returns The call result
      */
-    boxMapGet: async (params: CallParams<StructInBoxMapArgs['obj']['boxMapGet(uint64)(string,uint64,uint64)'] | StructInBoxMapArgs['tuple']['boxMapGet(uint64)(string,uint64,uint64)']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
-      const result = await this.appClient.send.call(StructInBoxMapParamsFactory.boxMapGet(params))
-      return {...result, return: result.return as unknown as (undefined | StructInBoxMapReturns['boxMapGet(uint64)(string,uint64,uint64)'])}
+    checkUserExists: async (params: CallParams<StructInBoxMapArgs['obj']['checkUserExists(uint64)bool'] | StructInBoxMapArgs['tuple']['checkUserExists(uint64)bool']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+      const result = await this.appClient.send.call(StructInBoxMapParamsFactory.checkUserExists(params))
+      return {...result, return: result.return as unknown as (undefined | StructInBoxMapReturns['checkUserExists(uint64)bool'])}
     },
 
     /**
-     * Makes a call to the StructInBoxMap smart contract using the `boxMapExists(uint64)bool` ABI method.
+     * Makes a call to the StructInBoxMap smart contract using the `updateUserNameAndAge(uint64,string,uint64)bool` ABI method.
      *
      * @param params The params for the smart contract call
      * @returns The call result
      */
-    boxMapExists: async (params: CallParams<StructInBoxMapArgs['obj']['boxMapExists(uint64)bool'] | StructInBoxMapArgs['tuple']['boxMapExists(uint64)bool']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
-      const result = await this.appClient.send.call(StructInBoxMapParamsFactory.boxMapExists(params))
-      return {...result, return: result.return as unknown as (undefined | StructInBoxMapReturns['boxMapExists(uint64)bool'])}
+    updateUserNameAndAge: async (params: CallParams<StructInBoxMapArgs['obj']['updateUserNameAndAge(uint64,string,uint64)bool'] | StructInBoxMapArgs['tuple']['updateUserNameAndAge(uint64,string,uint64)bool']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+      const result = await this.appClient.send.call(StructInBoxMapParamsFactory.updateUserNameAndAge(params))
+      return {...result, return: result.return as unknown as (undefined | StructInBoxMapReturns['updateUserNameAndAge(uint64,string,uint64)bool'])}
     },
 
   }
@@ -671,6 +687,32 @@ export class StructInBoxMapClient {
    */
   public clone(params: CloneAppClientParams) {
     return new StructInBoxMapClient(this.appClient.clone(params))
+  }
+
+  /**
+   * Makes a readonly (simulated) call to the StructInBoxMap smart contract using the `getUser(uint64)(uint64,string,uint64)` ABI method.
+   * 
+   * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
+   *
+   * @param params The params for the smart contract call
+   * @returns The call result
+   */
+  async getUser(params: CallParams<StructInBoxMapArgs['obj']['getUser(uint64)(uint64,string,uint64)'] | StructInBoxMapArgs['tuple']['getUser(uint64)(uint64,string,uint64)']>) {
+    const result = await this.appClient.send.call(StructInBoxMapParamsFactory.getUser(params))
+    return result.return as unknown as StructInBoxMapReturns['getUser(uint64)(uint64,string,uint64)']
+  }
+
+  /**
+   * Makes a readonly (simulated) call to the StructInBoxMap smart contract using the `checkUserExists(uint64)bool` ABI method.
+   * 
+   * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
+   *
+   * @param params The params for the smart contract call
+   * @returns The call result
+   */
+  async checkUserExists(params: CallParams<StructInBoxMapArgs['obj']['checkUserExists(uint64)bool'] | StructInBoxMapArgs['tuple']['checkUserExists(uint64)bool']>) {
+    const result = await this.appClient.send.call(StructInBoxMapParamsFactory.checkUserExists(params))
+    return result.return as unknown as StructInBoxMapReturns['checkUserExists(uint64)bool']
   }
 
   /**
@@ -690,17 +732,17 @@ export class StructInBoxMapClient {
         }
       },
       /**
-       * Get values from the userMap map in box state
+       * Get values from the users map in box state
        */
-      userMap: {
+      users: {
         /**
-         * Get all current values of the userMap map in box state
+         * Get all current values of the users map in box state
          */
-        getMap: async (): Promise<Map<bigint, UserStruct>> => { return (await this.appClient.state.box.getMap("userMap")) as Map<bigint, UserStruct> },
+        getMap: async (): Promise<Map<bigint, User>> => { return (await this.appClient.state.box.getMap("users")) as Map<bigint, User> },
         /**
-         * Get a current value of the userMap map by key from box state
+         * Get a current value of the users map by key from box state
          */
-        value: async (key: bigint | number): Promise<UserStruct | undefined> => { return await this.appClient.state.box.getMapValue("userMap", key) as UserStruct | undefined },
+        value: async (key: bigint | number): Promise<User | undefined> => { return await this.appClient.state.box.getMapValue("users", key) as User | undefined },
       },
     },
   }
@@ -712,35 +754,35 @@ export class StructInBoxMapClient {
     const resultMappers: Array<undefined | ((x: ABIReturn | undefined) => any)> = []
     return {
       /**
-       * Add a boxMapTest()bool method call against the StructInBoxMap contract
+       * Add a createNewUser(uint64,(uint64,string,uint64))bool method call against the StructInBoxMap contract
        */
-      boxMapTest(params: CallParams<StructInBoxMapArgs['obj']['boxMapTest()bool'] | StructInBoxMapArgs['tuple']['boxMapTest()bool']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
-        promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.boxMapTest(params)))
-        resultMappers.push((v) => client.decodeReturnValue('boxMapTest()bool', v))
+      createNewUser(params: CallParams<StructInBoxMapArgs['obj']['createNewUser(uint64,(uint64,string,uint64))bool'] | StructInBoxMapArgs['tuple']['createNewUser(uint64,(uint64,string,uint64))bool']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
+        promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.createNewUser(params)))
+        resultMappers.push((v) => client.decodeReturnValue('createNewUser(uint64,(uint64,string,uint64))bool', v))
         return this
       },
       /**
-       * Add a boxMapSet(uint64,(string,uint64,uint64))bool method call against the StructInBoxMap contract
+       * Add a getUser(uint64)(uint64,string,uint64) method call against the StructInBoxMap contract
        */
-      boxMapSet(params: CallParams<StructInBoxMapArgs['obj']['boxMapSet(uint64,(string,uint64,uint64))bool'] | StructInBoxMapArgs['tuple']['boxMapSet(uint64,(string,uint64,uint64))bool']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
-        promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.boxMapSet(params)))
-        resultMappers.push((v) => client.decodeReturnValue('boxMapSet(uint64,(string,uint64,uint64))bool', v))
+      getUser(params: CallParams<StructInBoxMapArgs['obj']['getUser(uint64)(uint64,string,uint64)'] | StructInBoxMapArgs['tuple']['getUser(uint64)(uint64,string,uint64)']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
+        promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.getUser(params)))
+        resultMappers.push((v) => client.decodeReturnValue('getUser(uint64)(uint64,string,uint64)', v))
         return this
       },
       /**
-       * Add a boxMapGet(uint64)(string,uint64,uint64) method call against the StructInBoxMap contract
+       * Add a checkUserExists(uint64)bool method call against the StructInBoxMap contract
        */
-      boxMapGet(params: CallParams<StructInBoxMapArgs['obj']['boxMapGet(uint64)(string,uint64,uint64)'] | StructInBoxMapArgs['tuple']['boxMapGet(uint64)(string,uint64,uint64)']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
-        promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.boxMapGet(params)))
-        resultMappers.push((v) => client.decodeReturnValue('boxMapGet(uint64)(string,uint64,uint64)', v))
+      checkUserExists(params: CallParams<StructInBoxMapArgs['obj']['checkUserExists(uint64)bool'] | StructInBoxMapArgs['tuple']['checkUserExists(uint64)bool']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
+        promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.checkUserExists(params)))
+        resultMappers.push((v) => client.decodeReturnValue('checkUserExists(uint64)bool', v))
         return this
       },
       /**
-       * Add a boxMapExists(uint64)bool method call against the StructInBoxMap contract
+       * Add a updateUserNameAndAge(uint64,string,uint64)bool method call against the StructInBoxMap contract
        */
-      boxMapExists(params: CallParams<StructInBoxMapArgs['obj']['boxMapExists(uint64)bool'] | StructInBoxMapArgs['tuple']['boxMapExists(uint64)bool']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
-        promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.boxMapExists(params)))
-        resultMappers.push((v) => client.decodeReturnValue('boxMapExists(uint64)bool', v))
+      updateUserNameAndAge(params: CallParams<StructInBoxMapArgs['obj']['updateUserNameAndAge(uint64,string,uint64)bool'] | StructInBoxMapArgs['tuple']['updateUserNameAndAge(uint64,string,uint64)bool']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
+        promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.updateUserNameAndAge(params)))
+        resultMappers.push((v) => client.decodeReturnValue('updateUserNameAndAge(uint64,string,uint64)bool', v))
         return this
       },
       /**
@@ -779,40 +821,40 @@ export class StructInBoxMapClient {
 }
 export type StructInBoxMapComposer<TReturns extends [...any[]] = []> = {
   /**
-   * Calls the boxMapTest()bool ABI method.
+   * Calls the createNewUser(uint64,(uint64,string,uint64))bool ABI method.
    *
    * @param args The arguments for the contract call
    * @param params Any additional parameters for the call
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
-  boxMapTest(params?: CallParams<StructInBoxMapArgs['obj']['boxMapTest()bool'] | StructInBoxMapArgs['tuple']['boxMapTest()bool']>): StructInBoxMapComposer<[...TReturns, StructInBoxMapReturns['boxMapTest()bool'] | undefined]>
+  createNewUser(params?: CallParams<StructInBoxMapArgs['obj']['createNewUser(uint64,(uint64,string,uint64))bool'] | StructInBoxMapArgs['tuple']['createNewUser(uint64,(uint64,string,uint64))bool']>): StructInBoxMapComposer<[...TReturns, StructInBoxMapReturns['createNewUser(uint64,(uint64,string,uint64))bool'] | undefined]>
 
   /**
-   * Calls the boxMapSet(uint64,(string,uint64,uint64))bool ABI method.
+   * Calls the getUser(uint64)(uint64,string,uint64) ABI method.
    *
    * @param args The arguments for the contract call
    * @param params Any additional parameters for the call
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
-  boxMapSet(params?: CallParams<StructInBoxMapArgs['obj']['boxMapSet(uint64,(string,uint64,uint64))bool'] | StructInBoxMapArgs['tuple']['boxMapSet(uint64,(string,uint64,uint64))bool']>): StructInBoxMapComposer<[...TReturns, StructInBoxMapReturns['boxMapSet(uint64,(string,uint64,uint64))bool'] | undefined]>
+  getUser(params?: CallParams<StructInBoxMapArgs['obj']['getUser(uint64)(uint64,string,uint64)'] | StructInBoxMapArgs['tuple']['getUser(uint64)(uint64,string,uint64)']>): StructInBoxMapComposer<[...TReturns, StructInBoxMapReturns['getUser(uint64)(uint64,string,uint64)'] | undefined]>
 
   /**
-   * Calls the boxMapGet(uint64)(string,uint64,uint64) ABI method.
+   * Calls the checkUserExists(uint64)bool ABI method.
    *
    * @param args The arguments for the contract call
    * @param params Any additional parameters for the call
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
-  boxMapGet(params?: CallParams<StructInBoxMapArgs['obj']['boxMapGet(uint64)(string,uint64,uint64)'] | StructInBoxMapArgs['tuple']['boxMapGet(uint64)(string,uint64,uint64)']>): StructInBoxMapComposer<[...TReturns, StructInBoxMapReturns['boxMapGet(uint64)(string,uint64,uint64)'] | undefined]>
+  checkUserExists(params?: CallParams<StructInBoxMapArgs['obj']['checkUserExists(uint64)bool'] | StructInBoxMapArgs['tuple']['checkUserExists(uint64)bool']>): StructInBoxMapComposer<[...TReturns, StructInBoxMapReturns['checkUserExists(uint64)bool'] | undefined]>
 
   /**
-   * Calls the boxMapExists(uint64)bool ABI method.
+   * Calls the updateUserNameAndAge(uint64,string,uint64)bool ABI method.
    *
    * @param args The arguments for the contract call
    * @param params Any additional parameters for the call
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
-  boxMapExists(params?: CallParams<StructInBoxMapArgs['obj']['boxMapExists(uint64)bool'] | StructInBoxMapArgs['tuple']['boxMapExists(uint64)bool']>): StructInBoxMapComposer<[...TReturns, StructInBoxMapReturns['boxMapExists(uint64)bool'] | undefined]>
+  updateUserNameAndAge(params?: CallParams<StructInBoxMapArgs['obj']['updateUserNameAndAge(uint64,string,uint64)bool'] | StructInBoxMapArgs['tuple']['updateUserNameAndAge(uint64,string,uint64)bool']>): StructInBoxMapComposer<[...TReturns, StructInBoxMapReturns['updateUserNameAndAge(uint64,string,uint64)bool'] | undefined]>
 
   /**
    * Makes a clear_state call to an existing instance of the StructInBoxMap smart contract.

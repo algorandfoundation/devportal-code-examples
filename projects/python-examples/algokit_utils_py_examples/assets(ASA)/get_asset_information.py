@@ -5,7 +5,6 @@ from algokit_utils_py_examples.helpers import (
 
 
 def get_asset_information() -> None:
-
     env: LocalnetEnvironment = setup_localnet_environment()
     algorand_client = env.algorand_client
 

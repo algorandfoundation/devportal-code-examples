@@ -3,9 +3,9 @@ import { registerDebugEventHandlers } from '@algorandfoundation/algokit-utils-de
 import { algorandFixture } from '@algorandfoundation/algokit-utils/testing'
 import { Address } from 'algosdk'
 import { beforeAll, beforeEach, describe, expect, test } from 'vitest'
-import { LocalStorageFactory } from '../artifacts/clients/LocalStorage/LocalStorageClient'
+import { GlobalStorageFactory } from '../artifacts/clients/GlobalStorage/GlobalStorageClient'
 
-describe('LocalStorage contract', () => {
+describe('GlobalStorage contract', () => {
   const localnet = algorandFixture()
   beforeAll(() => {
     Config.configure({
@@ -16,7 +16,7 @@ describe('LocalStorage contract', () => {
   beforeEach(localnet.newScope)
 
   const deploy = async (account: Address) => {
-    const factory = localnet.algorand.client.getTypedAppFactory(LocalStorageFactory, {
+    const factory = localnet.algorand.client.getTypedAppFactory(GlobalStorageFactory, {
       defaultSender: account,
     })
 
@@ -24,85 +24,77 @@ describe('LocalStorage contract', () => {
     return { client: appClient }
   }
 
-  test('opt in and read local state values', async () => {
+  test('read initial global state values', async () => {
     const { testAccount } = localnet.context
     const { client } = await deploy(testAccount)
 
-    await client.newGroup().optIn.optInToApplication().send()
-
-    const result = await client.newGroup().readLocalState().simulate()
+    const result = await client.newGroup().readGlobalState().simulate()
 
     expect(result.returns).toBeDefined()
     expect(result.returns![0]).toBeDefined()
 
     const returns = result.returns![0]
 
-    expect(returns![0]).toBe(100n)
-    expect(returns![1]).toBe(200n)
+    expect(returns![0]).toBe(50n)
+    expect(returns![1]).toBe(0n)
     expect(String.fromCharCode(...returns![2])).toBe('Silvio')
     expect(returns![3]).toBe('Micali')
-    expect(returns![4]).toBe(true)
-    expect(returns![5]).toBe(testAccount.addr.toString())
+    expect(returns?.[4]).toBe(true)
+    expect(returns?.[5]).toBe(testAccount.addr.toString())
   })
 
-  test('write and verify local state values', async () => {
+  test('check global state existence', async () => {
     const { testAccount } = localnet.context
     const { client } = await deploy(testAccount)
 
-    await client.newGroup().optIn.optInToApplication().send()
+    const result = await client.newGroup().hasGlobalState().simulate()
+
+    expect(result.returns).toBeDefined()
+    expect(result.returns![0]).toBeDefined()
+    expect(result.returns?.[0]?.[0]).toBe(0n)
+    expect(result.returns?.[0]?.[1]).toBe(true)
+  })
+
+  test('write and verify global state values', async () => {
+    const { testAccount } = localnet.context
+    const { client } = await deploy(testAccount)
+
     await client
       .newGroup()
-      .writeLocalState({
+      .writeGlobalState({
         args: {
           valueString: 'New String',
           valueBool: false,
-          valueAccount: testAccount.publicKey,
+          valueAccount: testAccount.addr.toString(),
         },
       })
       .send()
 
-    const result = await client.newGroup().readLocalState().simulate()
-    const returns = result.returns![0]
+    const state = await client.state.global.getAll()
 
-    expect(returns![3]).toBe('New String')
-    expect(returns![4]).toBe(false)
-    expect(returns![5]).toBe(testAccount.addr.toString())
+    expect(state.globalInt).toBe(50n)
+    expect(state.globalIntNoDefault).toBe(0n)
+    expect(state.globalBytes ? state.globalBytes.asString() : '').toBe('Silvio')
+    expect(state.globalString).toBe('New String')
+    expect(state.globalBool).toBe(0n)
+    expect(state.globalAccount).toEqual(testAccount.addr.toString())
   })
 
-  test('write and read dynamic local state', async () => {
+  test('write and read dynamic global state', async () => {
     const { testAccount } = localnet.context
     const { client } = await deploy(testAccount)
 
-    await client.newGroup().optIn.optInToApplication().send()
-
-    const writeResult = await client
+    const result = await client
       .newGroup()
-      .writeDynamicLocalState({
+      .writeDynamicGlobalState({
         args: {
           key: 'testKey',
           value: 'testValue',
         },
       })
-      .send()
-
-    expect(writeResult.returns[0]).toBe('testValue')
-
-    const readResult = await client
-      .newGroup()
-      .readDynamicLocalState({ args: { key: 'testKey' } })
       .simulate()
 
-    expect(readResult.returns[0]).toBe('testValue')
-  })
-
-  test('clear local state', async () => {
-    const { testAccount } = localnet.context
-    const { client } = await deploy(testAccount)
-
-    await client.newGroup().optIn.optInToApplication().send()
-    await client.newGroup().clearLocalState().send()
-
-    await expect(client.newGroup().readLocalState().simulate()).rejects.toThrow('check LocalState exists')
+    expect(result.returns[0]).toBe('testValue')
   })
 
   test('verify app budget consumption is reasonable', async () => {
@@ -111,13 +103,12 @@ describe('LocalStorage contract', () => {
 
     const result = await client
       .newGroup()
-      .optIn.optInToApplication()
-      .readLocalState()
-      .writeLocalState({
+      .readGlobalState()
+      .writeGlobalState({
         args: {
           valueString: 'Test',
           valueBool: true,
-          valueAccount: testAccount.publicKey,
+          valueAccount: testAccount.addr.toString(),
         },
       })
       .simulate()

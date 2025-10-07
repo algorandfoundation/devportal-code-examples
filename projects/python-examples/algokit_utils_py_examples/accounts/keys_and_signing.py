@@ -20,7 +20,8 @@ def keys_and_signing() -> None:
     # example: DEFAULT_SIGNER
     """
     Sets the default signer to use if no other signer is specified.
-    If this isn't set and a transaction needs signing for a given sender then an error will be thrown from get_signer / get_account.
+    If this isn't set and a transaction needs signing for a given sender then an error
+    will be thrown from get_signer / get_account.
     """
     algorand_client.account.set_default_signer(account_a.signer)
 

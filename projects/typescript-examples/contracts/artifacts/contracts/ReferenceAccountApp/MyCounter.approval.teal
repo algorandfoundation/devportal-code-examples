@@ -1,4 +1,4 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
@@ -8,33 +8,21 @@ main:
     // contracts/ReferenceAccountApp/contract.algo.ts:21
     // export class MyCounter extends Contract {
     txn NumAppArgs
-    bz main_bare_routing@7
+    bz main___algots__.defaultCreate@6
     pushbytess 0x29314d95 0xe6dbed7f // method "optIn()void", method "incrementMyCounter()uint64"
     txna ApplicationArgs 0
     match main_optIn_route@3 main_incrementMyCounter_route@4
-
-main_after_if_else@11:
-    // contracts/ReferenceAccountApp/contract.algo.ts:21
-    // export class MyCounter extends Contract {
-    intc_1 // 0
-    return
+    err
 
 main_incrementMyCounter_route@4:
     // contracts/ReferenceAccountApp/contract.algo.ts:37
-    // @abimethod()
+    // public incrementMyCounter(): uint64 {
     txn OnCompletion
     !
-    assert // OnCompletion is not NoOp
     txn ApplicationID
-    assert // can only call when not creating
-    callsub incrementMyCounter
-    itob
-    pushbytes 0x151f7c75
-    swap
-    concat
-    log
-    intc_0 // 1
-    return
+    &&
+    assert // OnCompletion must be NoOp && can only call when not creating
+    b incrementMyCounter
 
 main_optIn_route@3:
     // contracts/ReferenceAccountApp/contract.algo.ts:28
@@ -42,26 +30,23 @@ main_optIn_route@3:
     txn OnCompletion
     intc_0 // OptIn
     ==
-    assert // OnCompletion is not OptIn
     txn ApplicationID
-    assert // can only call when not creating
-    callsub optIn
-    intc_0 // 1
-    return
+    &&
+    assert // OnCompletion must be OptIn && can only call when not creating
+    b optIn
 
-main_bare_routing@7:
+main___algots__.defaultCreate@6:
     // contracts/ReferenceAccountApp/contract.algo.ts:21
     // export class MyCounter extends Contract {
     txn OnCompletion
-    bnz main_after_if_else@11
+    !
     txn ApplicationID
     !
-    assert // can only call when creating
-    intc_0 // 1
-    return
+    &&
+    return // on error: OnCompletion must be NoOp && can only call when creating
 
 
-// contracts/ReferenceAccountApp/contract.algo.ts::MyCounter.optIn() -> void:
+// contracts/ReferenceAccountApp/contract.algo.ts::MyCounter.optIn[routing]() -> void:
 optIn:
     // contracts/ReferenceAccountApp/contract.algo.ts:30
     // this.myCounter(Txn.sender).value = 0
@@ -73,48 +58,58 @@ optIn:
     // this.myCounter(Txn.sender).value = 0
     intc_1 // 0
     app_local_put
-    retsub
+    // contracts/ReferenceAccountApp/contract.algo.ts:28
+    // @abimethod({ allowActions: 'OptIn' })
+    intc_0 // 1
+    return
 
 
-// contracts/ReferenceAccountApp/contract.algo.ts::MyCounter.incrementMyCounter() -> uint64:
+// contracts/ReferenceAccountApp/contract.algo.ts::MyCounter.incrementMyCounter[routing]() -> void:
 incrementMyCounter:
-    // contracts/ReferenceAccountApp/contract.algo.ts:39
+    // contracts/ReferenceAccountApp/contract.algo.ts:38
     // assert(Txn.sender.isOptedIn(Global.currentApplicationId), 'Account must opt in to contract first')
     txn Sender
     global CurrentApplicationID
     app_opted_in
     assert // Account must opt in to contract first
-    // contracts/ReferenceAccountApp/contract.algo.ts:41
+    // contracts/ReferenceAccountApp/contract.algo.ts:40
     // this.myCounter(Txn.sender).value = this.myCounter(Txn.sender).value + 1
     txn Sender
     intc_1 // 0
     // contracts/ReferenceAccountApp/contract.algo.ts:23
     // public myCounter = LocalState<uint64>({ key: 'my_counter' })
     bytec_0 // "my_counter"
-    // contracts/ReferenceAccountApp/contract.algo.ts:41
+    // contracts/ReferenceAccountApp/contract.algo.ts:40
     // this.myCounter(Txn.sender).value = this.myCounter(Txn.sender).value + 1
     app_local_get_ex
     assert // check LocalState exists
-    txn Sender
-    swap
     intc_0 // 1
     +
+    txn Sender
     // contracts/ReferenceAccountApp/contract.algo.ts:23
     // public myCounter = LocalState<uint64>({ key: 'my_counter' })
     bytec_0 // "my_counter"
-    // contracts/ReferenceAccountApp/contract.algo.ts:41
+    // contracts/ReferenceAccountApp/contract.algo.ts:40
     // this.myCounter(Txn.sender).value = this.myCounter(Txn.sender).value + 1
-    swap
+    uncover 2
     app_local_put
-    // contracts/ReferenceAccountApp/contract.algo.ts:43
+    // contracts/ReferenceAccountApp/contract.algo.ts:42
     // return this.myCounter(Txn.sender).value
     txn Sender
     intc_1 // 0
     // contracts/ReferenceAccountApp/contract.algo.ts:23
     // public myCounter = LocalState<uint64>({ key: 'my_counter' })
     bytec_0 // "my_counter"
-    // contracts/ReferenceAccountApp/contract.algo.ts:43
+    // contracts/ReferenceAccountApp/contract.algo.ts:42
     // return this.myCounter(Txn.sender).value
     app_local_get_ex
     assert // check LocalState exists
-    retsub
+    // contracts/ReferenceAccountApp/contract.algo.ts:37
+    // public incrementMyCounter(): uint64 {
+    itob
+    pushbytes 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return

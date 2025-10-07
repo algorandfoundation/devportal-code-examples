@@ -23,7 +23,7 @@ import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgumen
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ReferenceAsset","structs":{},"methods":[{"name":"getAssetTotalSupply","args":[],"returns":{"type":"uint64","desc":"The total supply of the asset"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Returns the total supply of the asset","events":[],"recommendations":{}},{"name":"getAssetTotalSupplyWithArgument","args":[{"type":"asset","name":"asset","desc":"The asset to get the total supply of"}],"returns":{"type":"uint64","desc":"The total supply of the asset"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Returns the total supply of the asset","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"A contract that demonstrates how to use resource usage in a contract using an asset reference","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[40,64],"errorMessage":"OnCompletion is not NoOp"},{"pc":[96,105],"errorMessage":"asset exists"},{"pc":[87],"errorMessage":"can only call when creating"},{"pc":[43,67],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBieXRlY2Jsb2NrIDB4MTUxZjdjNzUKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBc3NldC9jb250cmFjdC5hbGdvLnRzOjcKICAgIC8vIGV4cG9ydCBkZWZhdWx0IGNsYXNzIFJlZmVyZW5jZUFzc2V0IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fYmFyZV9yb3V0aW5nQDcKICAgIHB1c2hieXRlc3MgMHgxZDkwZTFiYSAweDk1ZmU0MjBhIC8vIG1ldGhvZCAiZ2V0QXNzZXRUb3RhbFN1cHBseSgpdWludDY0IiwgbWV0aG9kICJnZXRBc3NldFRvdGFsU3VwcGx5V2l0aEFyZ3VtZW50KGFzc2V0KXVpbnQ2NCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fZ2V0QXNzZXRUb3RhbFN1cHBseV9yb3V0ZUAzIG1haW5fZ2V0QXNzZXRUb3RhbFN1cHBseVdpdGhBcmd1bWVudF9yb3V0ZUA0CgptYWluX2FmdGVyX2lmX2Vsc2VAMTE6CiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQXNzZXQvY29udHJhY3QuYWxnby50czo3CiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBSZWZlcmVuY2VBc3NldCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHB1c2hpbnQgMCAvLyAwCiAgICByZXR1cm4KCm1haW5fZ2V0QXNzZXRUb3RhbFN1cHBseVdpdGhBcmd1bWVudF9yb3V0ZUA0OgogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFzc2V0L2NvbnRyYWN0LmFsZ28udHM6MjIKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQXNzZXQvY29udHJhY3QuYWxnby50czo3CiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBSZWZlcmVuY2VBc3NldCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGJ0b2kKICAgIHR4bmFzIEFzc2V0cwogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFzc2V0L2NvbnRyYWN0LmFsZ28udHM6MjIKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgY2FsbHN1YiBnZXRBc3NldFRvdGFsU3VwcGx5V2l0aEFyZ3VtZW50CiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCgptYWluX2dldEFzc2V0VG90YWxTdXBwbHlfcm91dGVAMzoKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBc3NldC9jb250cmFjdC5hbGdvLnRzOjEyCiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgY2FsbHN1YiBnZXRBc3NldFRvdGFsU3VwcGx5CiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCgptYWluX2JhcmVfcm91dGluZ0A3OgogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFzc2V0L2NvbnRyYWN0LmFsZ28udHM6NwogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgUmVmZXJlbmNlQXNzZXQgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDExCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBjcmVhdGluZwogICAgcHVzaGludCAxIC8vIDEKICAgIHJldHVybgoKCi8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBc3NldC9jb250cmFjdC5hbGdvLnRzOjpSZWZlcmVuY2VBc3NldC5nZXRBc3NldFRvdGFsU3VwcGx5KCkgLT4gdWludDY0OgpnZXRBc3NldFRvdGFsU3VwcGx5OgogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFzc2V0L2NvbnRyYWN0LmFsZ28udHM6MTQKICAgIC8vIHJldHVybiBBc3NldCgxMDA1KS50b3RhbCAvLyBSZXBsYWNlIHdpdGggeW91ciBhc3NldCBpZAogICAgcHVzaGludCAxMDA1IC8vIDEwMDUKICAgIGFzc2V0X3BhcmFtc19nZXQgQXNzZXRUb3RhbAogICAgYXNzZXJ0IC8vIGFzc2V0IGV4aXN0cwogICAgcmV0c3ViCgoKLy8gY29udHJhY3RzL1JlZmVyZW5jZUFzc2V0L2NvbnRyYWN0LmFsZ28udHM6OlJlZmVyZW5jZUFzc2V0LmdldEFzc2V0VG90YWxTdXBwbHlXaXRoQXJndW1lbnQoYXNzZXQ6IHVpbnQ2NCkgLT4gdWludDY0OgpnZXRBc3NldFRvdGFsU3VwcGx5V2l0aEFyZ3VtZW50OgogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFzc2V0L2NvbnRyYWN0LmFsZ28udHM6MjItMjMKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgLy8gcHVibGljIGdldEFzc2V0VG90YWxTdXBwbHlXaXRoQXJndW1lbnQoYXNzZXQ6IEFzc2V0KSB7CiAgICBwcm90byAxIDEKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBc3NldC9jb250cmFjdC5hbGdvLnRzOjI0CiAgICAvLyByZXR1cm4gYXNzZXQudG90YWwKICAgIGZyYW1lX2RpZyAtMQogICAgYXNzZXRfcGFyYW1zX2dldCBBc3NldFRvdGFsCiAgICBhc3NlcnQgLy8gYXNzZXQgZXhpc3RzCiAgICByZXRzdWIK","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiYBBBUffHUxG0EAQoICBB2Q4boElf5CCjYaAI4CABsAA4EAQzEZFEQxGEQ2GgEXwDCIAC0WKExQsIEBQzEZFEQxGESIABQWKExQsIEBQzEZQP/OMRgURIEBQ4HtB3EARImKAQGL/3EARIk=","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ReferenceAsset","structs":{},"methods":[{"name":"getAssetTotalSupply","args":[],"returns":{"type":"uint64","desc":"The total supply of the asset"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Returns the total supply of the asset","events":[],"recommendations":{}},{"name":"getAssetTotalSupplyWithArgument","args":[{"type":"uint64","name":"asset","desc":"The asset to get the total supply of"}],"returns":{"type":"uint64","desc":"The total supply of the asset"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Returns the total supply of the asset","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"A contract that demonstrates how to use resource usage in a contract using an asset reference","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[16],"errorMessage":"OnCompletion must be NoOp"},{"pc":[49],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[55,70],"errorMessage":"asset exists"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBieXRlY2Jsb2NrIDB4MTUxZjdjNzUKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBc3NldC9jb250cmFjdC5hbGdvLnRzOjcKICAgIC8vIGV4cG9ydCBkZWZhdWx0IGNsYXNzIFJlZmVyZW5jZUFzc2V0IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gbXVzdCBiZSBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4MWQ5MGUxYmEgMHgzOTAwNzZlYSAvLyBtZXRob2QgImdldEFzc2V0VG90YWxTdXBwbHkoKXVpbnQ2NCIsIG1ldGhvZCAiZ2V0QXNzZXRUb3RhbFN1cHBseVdpdGhBcmd1bWVudCh1aW50NjQpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggZ2V0QXNzZXRUb3RhbFN1cHBseSBnZXRBc3NldFRvdGFsU3VwcGx5V2l0aEFyZ3VtZW50CiAgICBlcnIKCm1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDk6CiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQXNzZXQvY29udHJhY3QuYWxnby50czo3CiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBSZWZlcmVuY2VBc3NldCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuIC8vIG9uIGVycm9yOiBPbkNvbXBsZXRpb24gbXVzdCBiZSBOb09wICYmIGNhbiBvbmx5IGNhbGwgd2hlbiBjcmVhdGluZwoKCi8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBc3NldC9jb250cmFjdC5hbGdvLnRzOjpSZWZlcmVuY2VBc3NldC5nZXRBc3NldFRvdGFsU3VwcGx5W3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0QXNzZXRUb3RhbFN1cHBseToKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBc3NldC9jb250cmFjdC5hbGdvLnRzOjE0CiAgICAvLyByZXR1cm4gQXNzZXQoMTAwNSkudG90YWwgLy8gUmVwbGFjZSB3aXRoIHlvdXIgYXNzZXQgaWQKICAgIHB1c2hpbnQgMTAwNSAvLyAxMDA1CiAgICBhc3NldF9wYXJhbXNfZ2V0IEFzc2V0VG90YWwKICAgIGFzc2VydCAvLyBhc3NldCBleGlzdHMKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBc3NldC9jb250cmFjdC5hbGdvLnRzOjEyLTEzCiAgICAvLyBAcmVhZG9ubHkKICAgIC8vIHB1YmxpYyBnZXRBc3NldFRvdGFsU3VwcGx5KCkgewogICAgaXRvYgogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgcHVzaGludCAxIC8vIDEKICAgIHJldHVybgoKCi8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBc3NldC9jb250cmFjdC5hbGdvLnRzOjpSZWZlcmVuY2VBc3NldC5nZXRBc3NldFRvdGFsU3VwcGx5V2l0aEFyZ3VtZW50W3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0QXNzZXRUb3RhbFN1cHBseVdpdGhBcmd1bWVudDoKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBc3NldC9jb250cmFjdC5hbGdvLnRzOjIyLTIzCiAgICAvLyBAcmVhZG9ubHkKICAgIC8vIHB1YmxpYyBnZXRBc3NldFRvdGFsU3VwcGx5V2l0aEFyZ3VtZW50KGFzc2V0OiBBc3NldCkgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgYnRvaQogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFzc2V0L2NvbnRyYWN0LmFsZ28udHM6MjQKICAgIC8vIHJldHVybiBhc3NldC50b3RhbAogICAgYXNzZXRfcGFyYW1zX2dldCBBc3NldFRvdGFsCiAgICBhc3NlcnQgLy8gYXNzZXQgZXhpc3RzCiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQXNzZXQvY29udHJhY3QuYWxnby50czoyMi0yMwogICAgLy8gQHJlYWRvbmx5CiAgICAvLyBwdWJsaWMgZ2V0QXNzZXRUb3RhbFN1cHBseVdpdGhBcmd1bWVudChhc3NldDogQXNzZXQpIHsKICAgIGl0b2IKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyYBBBUffHUxG0EAHTEZFEQxGESCAgQdkOG6BDkAduo2GgCOAgAJABcAMRkUMRgUEEOB7QdxAEQWKExQsIEBQzYaARdxAEQWKExQsIEBQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -71,11 +71,11 @@ export type ReferenceAssetArgs = {
    */
   obj: {
     'getAssetTotalSupply()uint64': Record<string, never>
-    'getAssetTotalSupplyWithArgument(asset)uint64': {
+    'getAssetTotalSupplyWithArgument(uint64)uint64': {
       /**
        * The asset to get the total supply of
        */
-      asset: bigint
+      asset: bigint | number
     }
   }
   /**
@@ -83,7 +83,7 @@ export type ReferenceAssetArgs = {
    */
   tuple: {
     'getAssetTotalSupply()uint64': []
-    'getAssetTotalSupplyWithArgument(asset)uint64': [asset: bigint]
+    'getAssetTotalSupplyWithArgument(uint64)uint64': [asset: bigint | number]
   }
 }
 
@@ -92,7 +92,7 @@ export type ReferenceAssetArgs = {
  */
 export type ReferenceAssetReturns = {
   'getAssetTotalSupply()uint64': bigint
-  'getAssetTotalSupplyWithArgument(asset)uint64': bigint
+  'getAssetTotalSupplyWithArgument(uint64)uint64': bigint
 }
 
 /**
@@ -111,13 +111,13 @@ export type ReferenceAssetTypes = {
        */
       returns: ReferenceAssetReturns['getAssetTotalSupply()uint64']
     }>
-    & Record<'getAssetTotalSupplyWithArgument(asset)uint64' | 'getAssetTotalSupplyWithArgument', {
-      argsObj: ReferenceAssetArgs['obj']['getAssetTotalSupplyWithArgument(asset)uint64']
-      argsTuple: ReferenceAssetArgs['tuple']['getAssetTotalSupplyWithArgument(asset)uint64']
+    & Record<'getAssetTotalSupplyWithArgument(uint64)uint64' | 'getAssetTotalSupplyWithArgument', {
+      argsObj: ReferenceAssetArgs['obj']['getAssetTotalSupplyWithArgument(uint64)uint64']
+      argsTuple: ReferenceAssetArgs['tuple']['getAssetTotalSupplyWithArgument(uint64)uint64']
       /**
        * The total supply of the asset
        */
-      returns: ReferenceAssetReturns['getAssetTotalSupplyWithArgument(asset)uint64']
+      returns: ReferenceAssetReturns['getAssetTotalSupplyWithArgument(uint64)uint64']
     }>
 }
 
@@ -185,17 +185,17 @@ export abstract class ReferenceAssetParamsFactory {
     }
   }
   /**
-   * Constructs a no op call for the getAssetTotalSupplyWithArgument(asset)uint64 ABI method
+   * Constructs a no op call for the getAssetTotalSupplyWithArgument(uint64)uint64 ABI method
    *
    * Returns the total supply of the asset
    *
    * @param params Parameters for the call
    * @returns An `AppClientMethodCallParams` object for the call
    */
-  static getAssetTotalSupplyWithArgument(params: CallParams<ReferenceAssetArgs['obj']['getAssetTotalSupplyWithArgument(asset)uint64'] | ReferenceAssetArgs['tuple']['getAssetTotalSupplyWithArgument(asset)uint64']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
+  static getAssetTotalSupplyWithArgument(params: CallParams<ReferenceAssetArgs['obj']['getAssetTotalSupplyWithArgument(uint64)uint64'] | ReferenceAssetArgs['tuple']['getAssetTotalSupplyWithArgument(uint64)uint64']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
     return {
       ...params,
-      method: 'getAssetTotalSupplyWithArgument(asset)uint64' as const,
+      method: 'getAssetTotalSupplyWithArgument(uint64)uint64' as const,
       args: Array.isArray(params.args) ? params.args : [params.args.asset],
     }
   }
@@ -369,7 +369,7 @@ export class ReferenceAssetClient {
       appSpec: APP_SPEC,
     })
   }
-  
+
   /**
    * Checks for decode errors on the given return value and maps the return value to the return type for the given method
    * @returns The typed return value or undefined if there was no value
@@ -377,7 +377,7 @@ export class ReferenceAssetClient {
   decodeReturnValue<TSignature extends ReferenceAssetNonVoidMethodSignatures>(method: TSignature, returnValue: ABIReturn | undefined) {
     return returnValue !== undefined ? getArc56ReturnValue<MethodReturn<TSignature>>(returnValue, this.appClient.getABIMethod(method), APP_SPEC.structs) : undefined
   }
-  
+
   /**
    * Returns a new `ReferenceAssetClient` client, resolving the app by creator address and name
    * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
@@ -454,7 +454,7 @@ export class ReferenceAssetClient {
     },
 
     /**
-     * Makes a call to the ReferenceAsset smart contract using the `getAssetTotalSupplyWithArgument(asset)uint64` ABI method.
+     * Makes a call to the ReferenceAsset smart contract using the `getAssetTotalSupplyWithArgument(uint64)uint64` ABI method.
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
@@ -463,7 +463,7 @@ export class ReferenceAssetClient {
      * @param params The params for the smart contract call
      * @returns The call params: The total supply of the asset
      */
-    getAssetTotalSupplyWithArgument: (params: CallParams<ReferenceAssetArgs['obj']['getAssetTotalSupplyWithArgument(asset)uint64'] | ReferenceAssetArgs['tuple']['getAssetTotalSupplyWithArgument(asset)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+    getAssetTotalSupplyWithArgument: (params: CallParams<ReferenceAssetArgs['obj']['getAssetTotalSupplyWithArgument(uint64)uint64'] | ReferenceAssetArgs['tuple']['getAssetTotalSupplyWithArgument(uint64)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       return this.appClient.params.call(ReferenceAssetParamsFactory.getAssetTotalSupplyWithArgument(params))
     },
 
@@ -498,7 +498,7 @@ export class ReferenceAssetClient {
     },
 
     /**
-     * Makes a call to the ReferenceAsset smart contract using the `getAssetTotalSupplyWithArgument(asset)uint64` ABI method.
+     * Makes a call to the ReferenceAsset smart contract using the `getAssetTotalSupplyWithArgument(uint64)uint64` ABI method.
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
@@ -507,7 +507,7 @@ export class ReferenceAssetClient {
      * @param params The params for the smart contract call
      * @returns The call transaction: The total supply of the asset
      */
-    getAssetTotalSupplyWithArgument: (params: CallParams<ReferenceAssetArgs['obj']['getAssetTotalSupplyWithArgument(asset)uint64'] | ReferenceAssetArgs['tuple']['getAssetTotalSupplyWithArgument(asset)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+    getAssetTotalSupplyWithArgument: (params: CallParams<ReferenceAssetArgs['obj']['getAssetTotalSupplyWithArgument(uint64)uint64'] | ReferenceAssetArgs['tuple']['getAssetTotalSupplyWithArgument(uint64)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       return this.appClient.createTransaction.call(ReferenceAssetParamsFactory.getAssetTotalSupplyWithArgument(params))
     },
 
@@ -543,7 +543,7 @@ export class ReferenceAssetClient {
     },
 
     /**
-     * Makes a call to the ReferenceAsset smart contract using the `getAssetTotalSupplyWithArgument(asset)uint64` ABI method.
+     * Makes a call to the ReferenceAsset smart contract using the `getAssetTotalSupplyWithArgument(uint64)uint64` ABI method.
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
@@ -552,9 +552,9 @@ export class ReferenceAssetClient {
      * @param params The params for the smart contract call
      * @returns The call result: The total supply of the asset
      */
-    getAssetTotalSupplyWithArgument: async (params: CallParams<ReferenceAssetArgs['obj']['getAssetTotalSupplyWithArgument(asset)uint64'] | ReferenceAssetArgs['tuple']['getAssetTotalSupplyWithArgument(asset)uint64']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+    getAssetTotalSupplyWithArgument: async (params: CallParams<ReferenceAssetArgs['obj']['getAssetTotalSupplyWithArgument(uint64)uint64'] | ReferenceAssetArgs['tuple']['getAssetTotalSupplyWithArgument(uint64)uint64']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       const result = await this.appClient.send.call(ReferenceAssetParamsFactory.getAssetTotalSupplyWithArgument(params))
-      return {...result, return: result.return as unknown as (undefined | ReferenceAssetReturns['getAssetTotalSupplyWithArgument(asset)uint64'])}
+      return {...result, return: result.return as unknown as (undefined | ReferenceAssetReturns['getAssetTotalSupplyWithArgument(uint64)uint64'])}
     },
 
   }
@@ -585,7 +585,7 @@ export class ReferenceAssetClient {
   }
 
   /**
-   * Makes a readonly (simulated) call to the ReferenceAsset smart contract using the `getAssetTotalSupplyWithArgument(asset)uint64` ABI method.
+   * Makes a readonly (simulated) call to the ReferenceAsset smart contract using the `getAssetTotalSupplyWithArgument(uint64)uint64` ABI method.
    * 
    * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
    *
@@ -594,9 +594,9 @@ export class ReferenceAssetClient {
    * @param params The params for the smart contract call
    * @returns The call result: The total supply of the asset
    */
-  async getAssetTotalSupplyWithArgument(params: CallParams<ReferenceAssetArgs['obj']['getAssetTotalSupplyWithArgument(asset)uint64'] | ReferenceAssetArgs['tuple']['getAssetTotalSupplyWithArgument(asset)uint64']>) {
+  async getAssetTotalSupplyWithArgument(params: CallParams<ReferenceAssetArgs['obj']['getAssetTotalSupplyWithArgument(uint64)uint64'] | ReferenceAssetArgs['tuple']['getAssetTotalSupplyWithArgument(uint64)uint64']>) {
     const result = await this.appClient.send.call(ReferenceAssetParamsFactory.getAssetTotalSupplyWithArgument(params))
-    return result.return as unknown as ReferenceAssetReturns['getAssetTotalSupplyWithArgument(asset)uint64']
+    return result.return as unknown as ReferenceAssetReturns['getAssetTotalSupplyWithArgument(uint64)uint64']
   }
 
   /**
@@ -620,11 +620,11 @@ export class ReferenceAssetClient {
         return this
       },
       /**
-       * Add a getAssetTotalSupplyWithArgument(asset)uint64 method call against the ReferenceAsset contract
+       * Add a getAssetTotalSupplyWithArgument(uint64)uint64 method call against the ReferenceAsset contract
        */
-      getAssetTotalSupplyWithArgument(params: CallParams<ReferenceAssetArgs['obj']['getAssetTotalSupplyWithArgument(asset)uint64'] | ReferenceAssetArgs['tuple']['getAssetTotalSupplyWithArgument(asset)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
+      getAssetTotalSupplyWithArgument(params: CallParams<ReferenceAssetArgs['obj']['getAssetTotalSupplyWithArgument(uint64)uint64'] | ReferenceAssetArgs['tuple']['getAssetTotalSupplyWithArgument(uint64)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
         promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.getAssetTotalSupplyWithArgument(params)))
-        resultMappers.push((v) => client.decodeReturnValue('getAssetTotalSupplyWithArgument(asset)uint64', v))
+        resultMappers.push((v) => client.decodeReturnValue('getAssetTotalSupplyWithArgument(uint64)uint64', v))
         return this
       },
       /**
@@ -674,7 +674,7 @@ export type ReferenceAssetComposer<TReturns extends [...any[]] = []> = {
   getAssetTotalSupply(params?: CallParams<ReferenceAssetArgs['obj']['getAssetTotalSupply()uint64'] | ReferenceAssetArgs['tuple']['getAssetTotalSupply()uint64']>): ReferenceAssetComposer<[...TReturns, ReferenceAssetReturns['getAssetTotalSupply()uint64'] | undefined]>
 
   /**
-   * Calls the getAssetTotalSupplyWithArgument(asset)uint64 ABI method.
+   * Calls the getAssetTotalSupplyWithArgument(uint64)uint64 ABI method.
    *
    * Returns the total supply of the asset
    *
@@ -682,7 +682,7 @@ export type ReferenceAssetComposer<TReturns extends [...any[]] = []> = {
    * @param params Any additional parameters for the call
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
-  getAssetTotalSupplyWithArgument(params?: CallParams<ReferenceAssetArgs['obj']['getAssetTotalSupplyWithArgument(asset)uint64'] | ReferenceAssetArgs['tuple']['getAssetTotalSupplyWithArgument(asset)uint64']>): ReferenceAssetComposer<[...TReturns, ReferenceAssetReturns['getAssetTotalSupplyWithArgument(asset)uint64'] | undefined]>
+  getAssetTotalSupplyWithArgument(params?: CallParams<ReferenceAssetArgs['obj']['getAssetTotalSupplyWithArgument(uint64)uint64'] | ReferenceAssetArgs['tuple']['getAssetTotalSupplyWithArgument(uint64)uint64']>): ReferenceAssetComposer<[...TReturns, ReferenceAssetReturns['getAssetTotalSupplyWithArgument(uint64)uint64'] | undefined]>
 
   /**
    * Makes a clear_state call to an existing instance of the ReferenceAsset smart contract.

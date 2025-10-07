@@ -1,4 +1,4 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
@@ -6,47 +6,55 @@ main:
     // contracts/HelloWorld/contract.algo.ts:19
     // export default class HelloWorld extends Intermediate {
     txn NumAppArgs
-    bz main_bare_routing@7
-    pushbytess 0x3aad6d86 0x3d25ae31 // method "sayHello(string,string)string", method "sayBananas()string"
-    txna ApplicationArgs 0
-    match main_sayHello_route@3 main_sayBananas_route@4
-
-main_after_if_else@11:
-    // contracts/HelloWorld/contract.algo.ts:19
-    // export default class HelloWorld extends Intermediate {
-    pushint 0 // 0
-    return
-
-main_sayBananas_route@4:
-    // contracts/HelloWorld/contract.algo.ts:11
-    // public sayBananas(): string {
+    bz main___algots__.defaultCreate@9
     txn OnCompletion
     !
-    assert // OnCompletion is not NoOp
+    assert // OnCompletion must be NoOp
     txn ApplicationID
-    assert // can only call when not creating
+    assert
+    pushbytess 0x3aad6d86 0x3d25ae31 // method "sayHello(string,string)string", method "sayBananas()string"
+    txna ApplicationArgs 0
+    match sayHello main_sayBananas_route@5
+    err
+
+main_sayBananas_route@5:
+    // contracts/HelloWorld/contract.algo.ts:11
+    // public sayBananas(): string {
     pushbytes 0x151f7c75000742616e616e6173
     log
     pushint 1 // 1
     return
 
-main_sayHello_route@3:
-    // contracts/HelloWorld/contract.algo.ts:26
-    // public sayHello(firstName: string, lastName: string): string {
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
+main___algots__.defaultCreate@9:
     // contracts/HelloWorld/contract.algo.ts:19
     // export default class HelloWorld extends Intermediate {
+    txn OnCompletion
+    !
+    txn ApplicationID
+    !
+    &&
+    return // on error: OnCompletion must be NoOp && can only call when creating
+
+
+// contracts/HelloWorld/contract.algo.ts::HelloWorld.sayHello[routing]() -> void:
+sayHello:
+    // contracts/HelloWorld/contract.algo.ts:26
+    // public sayHello(firstName: string, lastName: string): string {
     txna ApplicationArgs 1
     extract 2 0
     txna ApplicationArgs 2
     extract 2 0
+    // contracts/HelloWorld/contract.algo.ts:27
+    // const result = `Hello ${firstName} ${lastName}`
+    pushbytes "Hello "
+    uncover 2
+    concat
+    pushbytes " "
+    concat
+    swap
+    concat
     // contracts/HelloWorld/contract.algo.ts:26
     // public sayHello(firstName: string, lastName: string): string {
-    callsub sayHello
     dup
     len
     itob
@@ -59,33 +67,3 @@ main_sayHello_route@3:
     log
     pushint 1 // 1
     return
-
-main_bare_routing@7:
-    // contracts/HelloWorld/contract.algo.ts:19
-    // export default class HelloWorld extends Intermediate {
-    txn OnCompletion
-    bnz main_after_if_else@11
-    txn ApplicationID
-    !
-    assert // can only call when creating
-    pushint 1 // 1
-    return
-
-
-// contracts/HelloWorld/contract.algo.ts::HelloWorld.sayHello(firstName: bytes, lastName: bytes) -> bytes:
-sayHello:
-    // contracts/HelloWorld/contract.algo.ts:26
-    // public sayHello(firstName: string, lastName: string): string {
-    proto 2 1
-    // contracts/HelloWorld/contract.algo.ts:27
-    // const result = `Hello ${firstName} ${lastName}`
-    pushbytes "Hello "
-    frame_dig -2
-    concat
-    pushbytes " "
-    concat
-    frame_dig -1
-    concat
-    // contracts/HelloWorld/contract.algo.ts:28
-    // return result
-    retsub

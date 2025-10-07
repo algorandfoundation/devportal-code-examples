@@ -1,336 +1,171 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 // algopy.arc4.ARC4Contract.approval_program() -> uint64:
 main:
-    intcblock 2 0 1
-    bytecblock 0x151f7c75 0x0002
-    // smart_contracts/arc4_types/contract.py:168
+    intcblock 2 1 0
+    // smart_contracts/arc4_types/contract.py:165
     // class Arc4DynamicArray(ARC4Contract):
     txn NumAppArgs
-    bz main_bare_routing@8
+    bz main___algopy_default_create@10
+    txn OnCompletion
+    !
+    assert // OnCompletion must be NoOp
+    txn ApplicationID
+    assert
     pushbytess 0x8ad12a2b 0x02bece11 0x95d64116 // method "goodbye(string)string[]", method "hello(string)string", method "arc4_dynamic_bytes()byte[]"
     txna ApplicationArgs 0
-    match main_goodbye_route@3 main_hello_route@4 main_arc4_dynamic_bytes_route@5
+    match goodbye hello main_arc4_dynamic_bytes_route@6
+    err
 
-main_after_if_else@12:
-    // smart_contracts/arc4_types/contract.py:168
-    // class Arc4DynamicArray(ARC4Contract):
-    intc_1 // 0
-    return
-
-main_arc4_dynamic_bytes_route@5:
-    // smart_contracts/arc4_types/contract.py:200-201
+main_arc4_dynamic_bytes_route@6:
+    // smart_contracts/arc4_types/contract.py:196-197
     // # example: ARC4_DYNAMIC_BYTES
     // @abimethod()
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
     pushbytes 0x151f7c75000600ffffaabbff
     log
-    intc_2 // 1
+    intc_1 // 1
     return
 
-main_hello_route@4:
-    // smart_contracts/arc4_types/contract.py:176
-    // @abimethod()
+main___algopy_default_create@10:
     txn OnCompletion
     !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    // smart_contracts/arc4_types/contract.py:168
-    // class Arc4DynamicArray(ARC4Contract):
-    txna ApplicationArgs 1
-    // smart_contracts/arc4_types/contract.py:176
-    // @abimethod()
-    callsub hello
-    dup
-    len
-    itob
-    extract 6 2
-    swap
-    concat
-    bytec_0 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_2 // 1
-    return
-
-main_goodbye_route@3:
-    // smart_contracts/arc4_types/contract.py:170
-    // @abimethod
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    // smart_contracts/arc4_types/contract.py:168
-    // class Arc4DynamicArray(ARC4Contract):
-    txna ApplicationArgs 1
-    // smart_contracts/arc4_types/contract.py:170
-    // @abimethod
-    callsub goodbye
-    bytec_0 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_2 // 1
-    return
-
-main_bare_routing@8:
-    // smart_contracts/arc4_types/contract.py:168
-    // class Arc4DynamicArray(ARC4Contract):
-    txn OnCompletion
-    bnz main_after_if_else@12
     txn ApplicationID
     !
-    assert // can only call when creating
-    intc_2 // 1
-    return
+    &&
+    return // on error: OnCompletion must be NoOp && can only call when creating
 
 
-// _puya_lib.arc4.dynamic_array_pop_byte_length_head(array: bytes) -> bytes, bytes:
-dynamic_array_pop_byte_length_head:
-    proto 1 2
-    frame_dig -1
-    intc_1 // 0
-    extract_uint16
-    intc_2 // 1
-    -
-    dup
-    intc_0 // 2
-    *
-    frame_dig -1
-    extract 2 0
-    dup
-    dig 2
-    extract_uint16
-    dig 1
-    len
-    dig 2
-    dig 2
-    uncover 2
-    substring3
-    dig 2
-    intc_1 // 0
-    dig 5
-    substring3
-    uncover 4
-    intc_0 // 2
-    +
-    uncover 4
-    swap
-    uncover 4
-    substring3
-    concat
-    dig 2
-    itob
-    extract 6 2
-    swap
-    uncover 3
-    intc_1 // 0
-    callsub recalculate_head_for_elements_with_byte_length_head
-    concat
-    retsub
-
-
-// _puya_lib.arc4.dynamic_array_concat_byte_length_head(array: bytes, new_items_bytes: bytes, new_items_count: uint64) -> bytes:
-dynamic_array_concat_byte_length_head:
-    proto 3 1
-    frame_dig -3
-    intc_1 // 0
-    extract_uint16
-    dup
-    frame_dig -1
-    +
-    swap
-    intc_0 // 2
-    *
-    intc_0 // 2
-    +
-    dig 1
-    itob
-    extract 6 2
-    frame_dig -3
-    intc_0 // 2
-    dig 3
-    substring3
-    frame_dig -1
-    intc_0 // 2
-    *
-    bzero
-    concat
-    frame_dig -3
-    len
-    frame_dig -3
-    uncover 4
-    uncover 2
-    substring3
-    concat
-    frame_dig -2
-    concat
-    uncover 2
-    intc_1 // 0
-    callsub recalculate_head_for_elements_with_byte_length_head
-    concat
-    retsub
-
-
-// _puya_lib.arc4.recalculate_head_for_elements_with_byte_length_head(array_head_and_tail: bytes, length: uint64, start_at_index: uint64) -> bytes:
-recalculate_head_for_elements_with_byte_length_head:
-    proto 3 1
-    frame_dig -2
-    intc_0 // 2
-    *
-    dup
-    frame_dig -1
-    intc_0 // 2
-    *
-    dup
-    cover 2
-    frame_dig -3
-    swap
-    extract_uint16
-    frame_dig -1
-    select
-
-recalculate_head_for_elements_with_byte_length_head_for_header@1:
-    frame_dig 1
-    frame_dig 0
-    <
-    bz recalculate_head_for_elements_with_byte_length_head_after_for@4
-    frame_dig 2
-    dup
-    itob
-    extract 6 2
-    frame_dig -3
-    frame_dig 1
-    dup
-    cover 4
-    uncover 2
-    replace3
-    dup
-    frame_bury -3
-    dig 1
-    extract_uint16
-    intc_0 // 2
-    +
-    +
-    frame_bury 2
-    intc_0 // 2
-    +
-    frame_bury 1
-    b recalculate_head_for_elements_with_byte_length_head_for_header@1
-
-recalculate_head_for_elements_with_byte_length_head_after_for@4:
-    frame_dig -3
-    frame_bury 0
-    retsub
-
-
-// smart_contracts.arc4_types.contract.Arc4DynamicArray.goodbye(name: bytes) -> bytes:
+// smart_contracts.arc4_types.contract.Arc4DynamicArray.goodbye[routing]() -> void:
 goodbye:
-    // smart_contracts/arc4_types/contract.py:170-171
+    // smart_contracts/arc4_types/contract.py:166
     // @abimethod
-    // def goodbye(self, name: arc4.String) -> goodbye:
-    proto 1 1
-    // smart_contracts/arc4_types/contract.py:172
-    // bye = goodbye(arc4.String("Good bye "), name)
-    pushbytes 0x0004000f0009476f6f642062796520
-    frame_dig -1
+    pushbytes 0x151f7c7500020004000f0009476f6f642062796520
+    txna ApplicationArgs 1
     concat
-    bytec_1 // 0x0002
-    swap
-    concat
-    // smart_contracts/arc4_types/contract.py:174
-    // return bye
-    retsub
+    log
+    intc_1 // 1
+    return
 
 
-// smart_contracts.arc4_types.contract.Arc4DynamicArray.hello(name: bytes) -> bytes:
+// smart_contracts.arc4_types.contract.Arc4DynamicArray.hello[routing]() -> void:
 hello:
-    // smart_contracts/arc4_types/contract.py:176-177
+    intc_2 // 0
+    dup
+    pushbytes ""
+    dup
+    // smart_contracts/arc4_types/contract.py:172
     // @abimethod()
-    // def hello(self, name: arc4.String) -> String:
-    proto 1 1
-    // smart_contracts/arc4_types/contract.py:184
+    txna ApplicationArgs 1
+    // smart_contracts/arc4_types/contract.py:180
     // extension = arc4.DynamicArray[arc4.String](name, arc4.String("!"))
-    frame_dig -1
+    dup
     len
     pushint 4 // 4
     +
     itob
     extract 6 2
-    pushbytes 0x0004
+    pushbytes 0x00020004
     swap
     concat
-    frame_dig -1
+    swap
     concat
     pushbytes 0x000121
     concat
-    bytec_1 // 0x0002
-    swap
-    concat
-    // smart_contracts/arc4_types/contract.py:185
+    // smart_contracts/arc4_types/contract.py:181
     // dynamic_string_array.extend(extension)
     dup
-    intc_1 // 0
-    extract_uint16
-    swap
     extract 2 0
-    dig 1
+    swap
+    intc_2 // 0
+    extract_uint16
+    dup
     intc_0 // 2
     *
-    dig 1
+    dig 2
     len
-    substring3
-    // smart_contracts/arc4_types/contract.py:182
-    // dynamic_string_array = arc4.DynamicArray[arc4.String](arc4.String("Hello "))
-    pushbytes 0x00010002000648656c6c6f20
-    // smart_contracts/arc4_types/contract.py:185
-    // dynamic_string_array.extend(extension)
-    swap
+    uncover 3
+    dig 2
     uncover 2
-    callsub dynamic_array_concat_byte_length_head
-    dupn 2
+    substring3
+    intc_1 // 1
+    uncover 3
+    +
+    dup
+    itob
+    extract 6 2
+    cover 3
+    uncover 2
+    bzero
+    pushbytes 0x0002
+    swap
+    concat
+    pushbytes 0x000648656c6c6f20
+    concat
+    uncover 2
+    concat
+    swap
+    intc_0 // 2
+    *
+    dup
+    intc_2 // 0
+
+hello_for_header@7:
+    dup
+    dig 3
+    <
+    bz hello_after_for@9
+    dig 1
+    dup
+    itob
+    extract 6 2
+    dig 5
+    dig 3
+    dup
+    cover 4
+    uncover 2
+    replace3
+    dup
+    bury 7
+    dig 1
+    extract_uint16
+    intc_0 // 2
+    +
+    +
+    bury 3
+    intc_0 // 2
+    +
+    bury 1
+    b hello_for_header@7
+
+hello_after_for@9:
+    dig 4
+    dig 4
+    concat
+    dup
+    bury 10
     // smart_contracts/arc4_types/contract.py:188
-    // copied_dynamic_string_array.pop()
-    callsub dynamic_array_pop_byte_length_head
-    bury 1
-    // smart_contracts/arc4_types/contract.py:189
-    // copied_dynamic_string_array.pop()
-    callsub dynamic_array_pop_byte_length_head
-    bury 1
-    // smart_contracts/arc4_types/contract.py:190
-    // copied_dynamic_string_array.append(arc4.String("world!"))
-    pushbytes 0x0006776f726c6421
-    intc_2 // 1
-    callsub dynamic_array_concat_byte_length_head
-    pop
-    // smart_contracts/arc4_types/contract.py:192
     // greeting = String()
     pushbytes ""
-    swap
-    // smart_contracts/arc4_types/contract.py:193
+    bury 9
+    // smart_contracts/arc4_types/contract.py:189
     // for x in dynamic_string_array:
-    intc_1 // 0
+    intc_2 // 0
     extract_uint16
-    intc_1 // 0
+    bury 7
+    intc_2 // 0
+    bury 6
 
-hello_for_header@1:
-    // smart_contracts/arc4_types/contract.py:193
+hello_for_header@2:
+    // smart_contracts/arc4_types/contract.py:189
     // for x in dynamic_string_array:
-    frame_dig 3
-    frame_dig 2
+    dig 5
+    dig 7
     <
-    bz hello_after_for@4
-    frame_dig 0
+    bz hello_after_for@5
+    dig 8
     extract 2 0
-    frame_dig 3
+    dig 6
     dup
     cover 2
     intc_0 // 2
@@ -343,21 +178,31 @@ hello_for_header@1:
     intc_0 // 2
     +
     extract3
-    // smart_contracts/arc4_types/contract.py:194
+    // smart_contracts/arc4_types/contract.py:190
     // greeting += x.native
     extract 2 0
-    frame_dig 1
+    dig 9
     swap
     concat
-    frame_bury 1
-    intc_2 // 1
+    bury 9
+    intc_1 // 1
     +
-    frame_bury 3
-    b hello_for_header@1
+    bury 6
+    b hello_for_header@2
 
-hello_after_for@4:
-    // smart_contracts/arc4_types/contract.py:196
-    // return greeting
-    frame_dig 1
-    frame_bury 0
-    retsub
+hello_after_for@5:
+    // smart_contracts/arc4_types/contract.py:172
+    // @abimethod()
+    dig 7
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    pushbytes 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return

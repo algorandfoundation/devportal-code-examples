@@ -3,12 +3,6 @@ import { TestExecutionContext } from '@algorandfoundation/algorand-typescript-te
 import { describe, expect, it } from 'vitest'
 import BoxStorage from './contract.algo'
 
-// class UserStruct extends arc4.Struct<{
-//   name: arc4.Str
-//   id: arc4.UintN64
-//   asset: arc4.UintN64
-// }> {}
-
 describe('BoxStorage contract', () => {
   const ctx = new TestExecutionContext()
 
@@ -99,83 +93,40 @@ describe('BoxStorage contract', () => {
   })
 
   describe('BoxMapStruct Operations', () => {
-    /** @TODO figure out how to test this */
-    // it('should set and get boxMapStruct values', () => {
-    //   const contract = ctx.contract.create(BoxStorage)
-    //   const key = Uint64(1)
-    //   const value = new UserStruct({
-    //     name: new arc4.Str('testName'),
-    //     id: new arc4.UintN64(70),
-    //     asset: new arc4.UintN64(1234),
-    //   })
+    it('should set and get boxMapStruct values', () => {
+      const contract = ctx.contract.create(BoxStorage)
+      const key = Uint64(1)
+      const value = {
+        name: 'testName',
+        id: Uint64(70),
+        asset: Uint64(1234),
+      }
 
-    //   expect(contract.setBoxMapStruct(key, value)).toBe(true)
-    //   const result = contract.getBoxMapStruct(key)
-    //   expect(result.name).toBe('testName')
-    //   expect(result.id.valueOf()).toBe(70n)
-    //   expect(result.asset.valueOf()).toBe(1234n)
-    // })
+      expect(contract.setBoxMapObject(key, value)).toBe(true)
+      const result = contract.getBoxMapObject(key)
+      expect(result.name).toBe('testName')
+      expect(result.id.valueOf()).toBe(70n)
+      expect(result.asset.valueOf()).toBe(1234n)
+    })
 
-    it('should check boxMapStruct length', () => {
+    it('should check boxMapObject length', () => {
       const contract = ctx.contract.create(BoxStorage)
       const key = Uint64(1)
 
-      expect(contract.boxMapStructLength(key)).toBe(true)
+      expect(contract.boxMapObjectLength(key)).toBe(28)
     })
 
-    /** @TODO figure out how to test this */
-    // it('should check boxMapStruct existence', () => {
-    //   const contract = ctx.contract.create(BoxStorage)
-    //   const key = Uint64(1)
-    //   const value = new UserStruct({
-    //     name: new arc4.Str('testName'),
-    //     id: new arc4.UintN64(70),
-    //     asset: new arc4.UintN64(1234),
-    //   })
-
-    //   contract.setBoxMapStruct(key, value)
-    //   expect(contract.boxMapStructExists(key)).toBe(true)
-    // })
-  })
-
-  describe('BoxRef Operations', () => {
-    it('should get and set boxRef values', () => {
+    it('should check boxMapStruct existence', () => {
       const contract = ctx.contract.create(BoxStorage)
-      const result = contract.getBoxRef()
-      expect(result.bytes).toEqual(ctx.defaultSender.bytes)
-    })
+      const key = Uint64(1)
+      const value = {
+        name: 'testName',
+        id: Uint64(70),
+        asset: Uint64(1234),
+      }
 
-    it('should set boxRef with custom key', () => {
-      const contract = ctx.contract.create(BoxStorage)
-      const key = 'customKey'
-
-      contract.setBoxRef(key)
-      const [, exists] = contract.maybeBoxRef(key)
-      expect(exists).toBe(true)
-    })
-
-    it('should delete boxRef', () => {
-      const contract = ctx.contract.create(BoxStorage)
-      const key = 'customKey'
-
-      contract.setBoxRef(key)
-      contract.deleteBoxRef(key)
-      const [, exists] = contract.maybeBoxRef(key)
-      expect(exists).toBe(false)
-    })
-
-    it('should get boxRef length', () => {
-      const contract = ctx.contract.create(BoxStorage)
-      const key = 'customKey'
-
-      expect(contract.lengthBoxRef(key).valueOf()).toBe(32)
-    })
-
-    it('should extract boxRef values', () => {
-      const contract = ctx.contract.create(BoxStorage)
-      const key = 'customKey'
-
-      expect(() => contract.extractBoxRef(key)).not.toThrow()
+      contract.setBoxMapObject(key, value)
+      expect(contract.boxMapObjectExists(key)).toBe(true)
     })
   })
 
@@ -185,10 +136,10 @@ describe('BoxStorage contract', () => {
       const key = 'staticArrayBox'
 
       const result = contract.arc4Box(key)
-      expect(result[0].native.valueOf()).toBe(0n)
-      expect(result[1].native.valueOf()).toBe(1n)
-      expect(result[2].native.valueOf()).toBe(2n)
-      expect(result[3].native.valueOf()).toBe(3n)
+      expect(result[0].asUint64().valueOf()).toBe(0n)
+      expect(result[1].asUint64().valueOf()).toBe(1n)
+      expect(result[2].asUint64().valueOf()).toBe(2n)
+      expect(result[3].asUint64().valueOf()).toBe(3n)
     })
   })
 })

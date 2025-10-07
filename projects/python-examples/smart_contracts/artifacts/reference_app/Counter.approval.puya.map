@@ -3,11 +3,11 @@
   "sources": [
     "../../reference_app/contract.py"
   ],
-  "mappings": ";;;;;;;;;;;;;;;;;;;;AAaQ;AAAe;AAAf;AAHR;;AAAA;;;AAAA;;;;;;AAAA;;;AAAA;;;;AAAA;;AAUK;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;;AAVL;;AAAA;;;;;;;;;AAYQ;AAAA;AAAA;AAAA;AAAgB;AAAhB;AAAA;AAAA;AAAA;AACO;AAAA;AAAA;AAAA;AAAP",
+  "mappings": ";;;;;;;;;;;;;;;;;;;;AAYQ;AAAe;AAAf;AAFR;;AAAA;;;AAAA;;;;;;AAAA;;;AAAA;;;;AAAA;AASK;;AAAA;AAAA;;AAAA;AAAA;AAAA;;;;;;;;;;;AAEG;AAAA;AAAA;AAAA;AAAgB;AAAhB;AAAA;AAAA;;AAAA;AAFH;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA",
   "op_pc_offset": 0,
   "pc_events": {
     "1": {
-      "subroutine": "smart_contracts.reference_app.contract.Counter.__algopy_entrypoint_with_init",
+      "subroutine": "algopy.arc4.ARC4Contract.approval_program",
       "params": {},
       "block": "main",
       "stack_in": [],
@@ -58,14 +58,14 @@
       "stack_in": [],
       "op": "txn NumAppArgs",
       "defined_out": [
-        "tmp%0#2"
+        "tmp%0#1"
       ],
       "stack_out": [
-        "tmp%0#2"
+        "tmp%0#1"
       ]
     },
     "25": {
-      "op": "bz main_bare_routing@6",
+      "op": "bz main___algopy_default_create@7",
       "stack_out": []
     },
     "28": {
@@ -93,21 +93,9 @@
       "stack_out": []
     },
     "41": {
-      "block": "main_after_if_else@8",
-      "stack_in": [],
-      "op": "intc_0 // 0",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
+      "op": "err"
     },
     "42": {
-      "op": "return",
-      "stack_out": []
-    },
-    "43": {
       "block": "main_increment_route@5",
       "stack_in": [],
       "op": "txn OnCompletion",
@@ -118,7 +106,7 @@
         "tmp%3#0"
       ]
     },
-    "45": {
+    "44": {
       "op": "!",
       "defined_out": [
         "tmp%4#0"
@@ -127,90 +115,36 @@
         "tmp%4#0"
       ]
     },
-    "46": {
-      "error": "OnCompletion is not NoOp",
-      "op": "assert // OnCompletion is not NoOp",
-      "stack_out": []
-    },
-    "47": {
+    "45": {
       "op": "txn ApplicationID",
       "defined_out": [
+        "tmp%4#0",
         "tmp%5#0"
       ],
       "stack_out": [
+        "tmp%4#0",
         "tmp%5#0"
       ]
+    },
+    "47": {
+      "op": "&&",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%7#0"
+      ]
+    },
+    "48": {
+      "error": "OnCompletion must be NoOp && can only call when not creating",
+      "op": "assert // OnCompletion must be NoOp && can only call when not creating",
+      "stack_out": []
     },
     "49": {
-      "error": "can only call when not creating",
-      "op": "assert // can only call when not creating",
-      "stack_out": []
+      "op": "b increment"
     },
-    "50": {
-      "callsub": "smart_contracts.reference_app.contract.Counter.increment",
-      "op": "callsub increment",
-      "defined_out": [
-        "to_encode%0#0"
-      ],
-      "stack_out": [
-        "to_encode%0#0"
-      ]
-    },
-    "53": {
-      "op": "itob",
-      "defined_out": [
-        "val_as_bytes%0#0"
-      ],
-      "stack_out": [
-        "val_as_bytes%0#0"
-      ]
-    },
-    "54": {
-      "op": "pushbytes 0x151f7c75",
-      "defined_out": [
-        "0x151f7c75",
-        "val_as_bytes%0#0"
-      ],
-      "stack_out": [
-        "val_as_bytes%0#0",
-        "0x151f7c75"
-      ]
-    },
-    "60": {
-      "op": "swap",
-      "stack_out": [
-        "0x151f7c75",
-        "val_as_bytes%0#0"
-      ]
-    },
-    "61": {
-      "op": "concat",
-      "defined_out": [
-        "tmp%7#0"
-      ],
-      "stack_out": [
-        "tmp%7#0"
-      ]
-    },
-    "62": {
-      "op": "log",
-      "stack_out": []
-    },
-    "63": {
-      "op": "intc_1 // 1",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
-    },
-    "64": {
-      "op": "return",
-      "stack_out": []
-    },
-    "65": {
-      "block": "main_bare_routing@6",
+    "52": {
+      "block": "main___algopy_default_create@7",
       "stack_in": [],
       "op": "txn OnCompletion",
       "defined_out": [
@@ -220,48 +154,54 @@
         "tmp%8#0"
       ]
     },
-    "67": {
-      "op": "bnz main_after_if_else@8",
-      "stack_out": []
-    },
-    "70": {
-      "op": "txn ApplicationID",
-      "defined_out": [
-        "tmp%9#0"
-      ],
-      "stack_out": [
-        "tmp%9#0"
-      ]
-    },
-    "72": {
+    "54": {
       "op": "!",
       "defined_out": [
-        "tmp%10#0"
+        "tmp%9#0"
       ],
       "stack_out": [
-        "tmp%10#0"
+        "tmp%9#0"
       ]
     },
-    "73": {
-      "error": "can only call when creating",
-      "op": "assert // can only call when creating",
-      "stack_out": []
-    },
-    "74": {
-      "op": "intc_1 // 1",
+    "55": {
+      "op": "txn ApplicationID",
       "defined_out": [
-        "tmp%0#0"
+        "tmp%10#0",
+        "tmp%9#0"
       ],
       "stack_out": [
-        "tmp%0#0"
+        "tmp%9#0",
+        "tmp%10#0"
       ]
     },
-    "75": {
-      "op": "return",
+    "57": {
+      "op": "!",
+      "defined_out": [
+        "tmp%11#0",
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%9#0",
+        "tmp%11#0"
+      ]
+    },
+    "58": {
+      "op": "&&",
+      "defined_out": [
+        "tmp%12#0"
+      ],
+      "stack_out": [
+        "tmp%12#0"
+      ]
+    },
+    "59": {
+      "error": "OnCompletion must be NoOp && can only call when creating",
+      "op": "return // on error: OnCompletion must be NoOp && can only call when creating",
+      "defined_out": [],
       "stack_out": []
     },
-    "76": {
-      "subroutine": "smart_contracts.reference_app.contract.Counter.increment",
+    "60": {
+      "subroutine": "smart_contracts.reference_app.contract.Counter.increment[routing]",
       "params": {},
       "block": "increment",
       "stack_in": [],
@@ -273,7 +213,7 @@
         "0"
       ]
     },
-    "77": {
+    "61": {
       "op": "bytec_0 // \"counter\"",
       "defined_out": [
         "\"counter\"",
@@ -284,7 +224,7 @@
         "\"counter\""
       ]
     },
-    "78": {
+    "62": {
       "op": "app_global_get_ex",
       "defined_out": [
         "maybe_exists%0#0",
@@ -295,14 +235,14 @@
         "maybe_exists%0#0"
       ]
     },
-    "79": {
+    "63": {
       "error": "check self.counter exists",
       "op": "assert // check self.counter exists",
       "stack_out": [
         "maybe_value%0#0"
       ]
     },
-    "80": {
+    "64": {
       "op": "intc_1 // 1",
       "defined_out": [
         "1",
@@ -313,67 +253,90 @@
         "1"
       ]
     },
-    "81": {
+    "65": {
       "op": "+",
       "defined_out": [
-        "new_state_value%0#0"
+        "tmp%0#1"
       ],
       "stack_out": [
-        "new_state_value%0#0"
+        "tmp%0#1"
       ]
     },
-    "82": {
+    "66": {
       "op": "bytec_0 // \"counter\"",
       "stack_out": [
-        "new_state_value%0#0",
+        "tmp%0#1",
         "\"counter\""
       ]
     },
-    "83": {
+    "67": {
+      "op": "dig 1",
+      "defined_out": [
+        "\"counter\"",
+        "tmp%0#1",
+        "tmp%0#1 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#1",
+        "\"counter\"",
+        "tmp%0#1 (copy)"
+      ]
+    },
+    "69": {
+      "op": "app_global_put",
+      "stack_out": [
+        "tmp%0#1"
+      ]
+    },
+    "70": {
+      "op": "itob",
+      "defined_out": [
+        "aggregate%val_as_bytes%0#0"
+      ],
+      "stack_out": [
+        "aggregate%val_as_bytes%0#0"
+      ]
+    },
+    "71": {
+      "op": "pushbytes 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "aggregate%val_as_bytes%0#0"
+      ],
+      "stack_out": [
+        "aggregate%val_as_bytes%0#0",
+        "0x151f7c75"
+      ]
+    },
+    "77": {
       "op": "swap",
       "stack_out": [
-        "\"counter\"",
-        "new_state_value%0#0"
+        "0x151f7c75",
+        "aggregate%val_as_bytes%0#0"
       ]
     },
-    "84": {
-      "op": "app_global_put",
-      "stack_out": []
-    },
-    "85": {
-      "op": "intc_0 // 0",
-      "stack_out": [
-        "0"
-      ]
-    },
-    "86": {
-      "op": "bytec_0 // \"counter\"",
-      "stack_out": [
-        "0",
-        "\"counter\""
-      ]
-    },
-    "87": {
-      "op": "app_global_get_ex",
+    "78": {
+      "op": "concat",
       "defined_out": [
-        "maybe_exists%1#0",
-        "maybe_value%1#0"
+        "tmp%2#0"
       ],
       "stack_out": [
-        "maybe_value%1#0",
-        "maybe_exists%1#0"
+        "tmp%2#0"
       ]
     },
-    "88": {
-      "error": "check self.counter exists",
-      "op": "assert // check self.counter exists",
+    "79": {
+      "op": "log",
+      "stack_out": []
+    },
+    "80": {
+      "op": "intc_1 // 1",
       "stack_out": [
-        "maybe_value%1#0"
+        "1"
       ]
     },
-    "89": {
-      "retsub": true,
-      "op": "retsub"
+    "81": {
+      "op": "return",
+      "stack_out": []
     }
   }
 }

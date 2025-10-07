@@ -7,7 +7,6 @@ from algokit_utils_py_examples.helpers import (
 
 
 def asset_create() -> None:
-
     env: LocalnetEnvironment = setup_localnet_environment()
     algorand_client = env.algorand_client
     account_a = env.account_a

@@ -1,4 +1,4 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 
@@ -8,299 +8,33 @@ main:
 
 
     txn NumAppArgs
-    bz main_bare_routing@18
-    pushbytess 0x23950027 0x0207f77d 0xd2249284 0x66a063bf 0x12563767 0xcfb12db1 0x7b58e236 0xd0864ff4 0x5351d7be 0x5727ecae 0xda20a87e 0x38ecc014 0x9aeec159
+    bz main___algots__.defaultCreate@20
+    txn OnCompletion
+    !
+    assert
+    txn ApplicationID
+    assert
+    pushbytess 0x23950027 0x0207f77d 0xd2249284 0x30bdb31f 0xc99afc61 0xbbf24873 0x550affff 0xd136e328 0x889299d8 0xce3ff2f5 0xda20a87e 0x38ecc014 0x46408ea5
     txna ApplicationArgs 0
-    match main_payment_route@3 main_fungibleAssetCreate_route@4 main_nonFungibleAssetCreate_route@5 main_assetOptIn_route@6 main_assetTransfer_route@7 main_assetFreeze_route@8 main_assetRevoke_route@9 main_assetConfig_route@10 main_assetDelete_route@11 main_multiInnerTxns_route@12 main_deployApp_route@13 main_arc4DeployApp_route@14 main_noopAppCall_route@15
+    match payment fungibleAssetCreate nonFungibleAssetCreate assetOptIn assetTransfer assetFreeze assetRevoke assetConfig assetDelete multiInnerTxns deployApp main_arc4DeployApp_route@15 noopAppCall
+    err
 
-main_after_if_else@22:
-
-
-    intc_1
-    return
-
-main_noopAppCall_route@15:
+main_arc4DeployApp_route@15:
 
 
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-
-
-    txna ApplicationArgs 1
-    btoi
-    txnas Applications
-
-
-    callsub noopAppCall
-    dup
-    len
-    itob
-    extract 6 2
-    swap
-    concat
-    bytec_0
-    swap
-    concat
-    log
-    intc_0
-    return
-
-main_arc4DeployApp_route@14:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
     pushbytes 0x151f7c7500000000000004d2
     log
     intc_0
     return
 
-main_deployApp_route@13:
+main___algots__.defaultCreate@20:
 
 
     txn OnCompletion
     !
-    assert
-    txn ApplicationID
-    assert
-    callsub deployApp
-    itob
-    bytec_0
-    swap
-    concat
-    log
-    intc_0
-    return
-
-main_multiInnerTxns_route@12:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-
-
-    txna ApplicationArgs 1
-    btoi
-    txnas Applications
-
-
-    callsub multiInnerTxns
-    swap
-    itob
-    dig 1
-    len
-    itob
-    extract 6 2
-    uncover 2
-    concat
-    swap
-    pushbytes 0x000a
-    concat
-    swap
-    concat
-    bytec_0
-    swap
-    concat
-    log
-    intc_0
-    return
-
-main_assetDelete_route@11:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-
-
-    txna ApplicationArgs 1
-    btoi
-    txnas Assets
-
-
-    callsub assetDelete
-    intc_0
-    return
-
-main_assetConfig_route@10:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-
-
-    txna ApplicationArgs 1
-    btoi
-    txnas Assets
-
-
-    callsub assetConfig
-    intc_0
-    return
-
-main_assetRevoke_route@9:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-
-
-    txna ApplicationArgs 1
-    btoi
-    txnas Assets
-    txna ApplicationArgs 2
-    btoi
-    txnas Accounts
-    txna ApplicationArgs 3
-    btoi
-
-
-    callsub assetRevoke
-    intc_0
-    return
-
-main_assetFreeze_route@8:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-
-
-    txna ApplicationArgs 1
-    btoi
-    txnas Accounts
-    txna ApplicationArgs 2
-    btoi
-    txnas Assets
-
-
-    callsub assetFreeze
-    intc_0
-    return
-
-main_assetTransfer_route@7:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-
-
-    txna ApplicationArgs 1
-    btoi
-    txnas Assets
-    txna ApplicationArgs 2
-    btoi
-    txnas Accounts
-    txna ApplicationArgs 3
-    btoi
-
-
-    callsub assetTransfer
-    intc_0
-    return
-
-main_assetOptIn_route@6:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-
-
-    txna ApplicationArgs 1
-    btoi
-    txnas Assets
-
-
-    callsub assetOptIn
-    intc_0
-    return
-
-main_nonFungibleAssetCreate_route@5:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-    callsub nonFungibleAssetCreate
-    itob
-    bytec_0
-    swap
-    concat
-    log
-    intc_0
-    return
-
-main_fungibleAssetCreate_route@4:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-    callsub fungibleAssetCreate
-    itob
-    bytec_0
-    swap
-    concat
-    log
-    intc_0
-    return
-
-main_payment_route@3:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-    callsub payment
-    itob
-    bytec_0
-    swap
-    concat
-    log
-    intc_0
-    return
-
-main_bare_routing@18:
-
-
-    txn OnCompletion
-    bnz main_after_if_else@22
     txn ApplicationID
     !
-    assert
-    intc_0
+    &&
     return
 
 
@@ -348,7 +82,13 @@ payment:
     itxn Amount
 
 
-    retsub
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
 
 
 
@@ -404,7 +144,13 @@ fungibleAssetCreate:
     itxn CreatedAssetID
 
 
-    retsub
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
 
 
 
@@ -496,15 +242,21 @@ nonFungibleAssetCreate:
     itxn CreatedAssetID
 
 
-    retsub
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
 
 
 
 assetOptIn:
 
 
-
-    proto 1 0
+    txna ApplicationArgs 1
+    btoi
 
 
 
@@ -522,9 +274,8 @@ assetOptIn:
 
     intc_1
     itxn_field AssetAmount
-    frame_dig -1
-    itxn_field XferAsset
     itxn_field AssetReceiver
+    itxn_field XferAsset
 
 
 
@@ -549,15 +300,21 @@ assetOptIn:
 
 
     itxn_submit
-    retsub
+
+
+    intc_0
+    return
 
 
 
 assetTransfer:
 
 
-
-    proto 3 0
+    txna ApplicationArgs 1
+    btoi
+    txna ApplicationArgs 2
+    txna ApplicationArgs 3
+    btoi
 
 
 
@@ -568,12 +325,9 @@ assetTransfer:
 
 
     itxn_begin
-    frame_dig -1
     itxn_field AssetAmount
-    frame_dig -3
-    itxn_field XferAsset
-    frame_dig -2
     itxn_field AssetReceiver
+    itxn_field XferAsset
 
 
 
@@ -598,15 +352,19 @@ assetTransfer:
 
 
     itxn_submit
-    retsub
+
+
+    intc_0
+    return
 
 
 
 assetFreeze:
 
 
-
-    proto 2 0
+    txna ApplicationArgs 1
+    txna ApplicationArgs 2
+    btoi
 
 
 
@@ -621,9 +379,7 @@ assetFreeze:
 
     intc_0
     itxn_field FreezeAssetFrozen
-    frame_dig -1
     itxn_field FreezeAsset
-    frame_dig -2
     itxn_field FreezeAssetAccount
 
 
@@ -649,15 +405,21 @@ assetFreeze:
 
 
     itxn_submit
-    retsub
+
+
+    intc_0
+    return
 
 
 
 assetRevoke:
 
 
-
-    proto 3 0
+    txna ApplicationArgs 1
+    btoi
+    txna ApplicationArgs 2
+    txna ApplicationArgs 3
+    btoi
 
 
 
@@ -672,13 +434,10 @@ assetRevoke:
 
 
     global CurrentApplicationAddress
-    frame_dig -1
-    itxn_field AssetAmount
-    frame_dig -2
-    itxn_field AssetSender
-    frame_dig -3
-    itxn_field XferAsset
     itxn_field AssetReceiver
+    itxn_field AssetAmount
+    itxn_field AssetSender
+    itxn_field XferAsset
 
 
 
@@ -705,15 +464,18 @@ assetRevoke:
 
 
     itxn_submit
-    retsub
+
+
+    intc_0
+    return
 
 
 
 assetConfig:
 
 
-
-    proto 1 0
+    txna ApplicationArgs 1
+    btoi
 
 
 
@@ -742,7 +504,6 @@ assetConfig:
     itxn_field ConfigAssetFreeze
     itxn_field ConfigAssetReserve
     itxn_field ConfigAssetManager
-    frame_dig -1
     itxn_field ConfigAsset
 
 
@@ -772,15 +533,18 @@ assetConfig:
 
 
     itxn_submit
-    retsub
+
+
+    intc_0
+    return
 
 
 
 assetDelete:
 
 
-
-    proto 1 0
+    txna ApplicationArgs 1
+    btoi
 
 
 
@@ -789,7 +553,6 @@ assetDelete:
 
 
     itxn_begin
-    frame_dig -1
     itxn_field ConfigAsset
 
 
@@ -811,15 +574,18 @@ assetDelete:
 
 
     itxn_submit
-    retsub
+
+
+    intc_0
+    return
 
 
 
 multiInnerTxns:
 
 
-
-    proto 1 2
+    txna ApplicationArgs 1
+    btoi
 
 
 
@@ -877,7 +643,7 @@ multiInnerTxns:
     itxn_field ApplicationArgs
     bytec_2
     itxn_field ApplicationArgs
-    frame_dig -1
+    swap
     itxn_field ApplicationID
 
 
@@ -912,7 +678,27 @@ multiInnerTxns:
     extract 6 0
 
 
-    retsub
+    swap
+    itob
+    dig 1
+    len
+    itob
+    extract 6 2
+    uncover 2
+    concat
+    swap
+    pushbytes 0x000a
+    concat
+    swap
+    concat
+
+
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
 
 
 
@@ -959,15 +745,21 @@ deployApp:
     itxn CreatedApplicationID
 
 
-    retsub
+    itob
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return
 
 
 
 noopAppCall:
 
 
-
-    proto 1 1
+    txna ApplicationArgs 1
+    btoi
 
 
 
@@ -984,7 +776,6 @@ noopAppCall:
     itxn_field ApplicationArgs
     bytec_2
     itxn_field ApplicationArgs
-    frame_dig -1
     itxn_field ApplicationID
 
 
@@ -1008,9 +799,17 @@ noopAppCall:
 
 
     dup
+    extract 4 0
+    swap
     extract 0 4
     bytec_0
     ==
     assert
-    extract 6 0
-    retsub
+
+
+    bytec_0
+    swap
+    concat
+    log
+    intc_0
+    return

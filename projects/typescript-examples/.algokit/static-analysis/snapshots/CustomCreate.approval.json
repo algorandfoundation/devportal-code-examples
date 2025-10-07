@@ -4,7 +4,7 @@
   "result": [
     {
       "type": "ExecutionPaths",
-      "count": 3,
+      "count": 1,
       "description": "\nCheck: \"unprotected-deletable\", Impact: High, Confidence: High\nDescription: Unprotected Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-deletable-application\n",
       "check": "unprotected-deletable",
       "impact": "High",
@@ -12,96 +12,39 @@
       "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
+              "6: bytecblock \"age\"",
+              "9: txn OnCompletion",
+              "10: !",
+              "11: assert",
+              "12: txn ApplicationID",
+              "13: bz main_create_NoOp@5"
             ],
             [
-              "12: pushbytess 0x483331ee 0xd26ce06c",
-              "13: txna ApplicationArgs 0",
-              "14: match main_custom_create_route@3 main_getAge_route@4"
+              "14: pushbytes 0xd26ce06c",
+              "15: txna ApplicationArgs 0",
+              "16: match getAge"
             ],
             [
-              "16: main_after_if_else@8:",
-              "19: intc_0",
-              "20: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 4 -> 9 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
-            ],
-            [
-              "12: pushbytess 0x483331ee 0xd26ce06c",
-              "13: txna ApplicationArgs 0",
-              "14: match main_custom_create_route@3 main_getAge_route@4"
-            ],
-            [
-              "22: main_getAge_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "30: callsub getAge"
-            ],
-            [
-              "76: getAge:",
-              "79: intc_0",
-              "80: bytec_0",
-              "81: app_global_get_ex",
-              "82: assert",
-              "85: retsub"
-            ],
-            [
-              "31: itob",
-              "32: pushbytes 0x151f7c75",
-              "33: swap",
-              "34: concat",
-              "35: log",
-              "36: intc_1",
-              "37: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
-            ],
-            [
-              "16: main_after_if_else@8:",
-              "19: intc_0",
-              "20: return"
+              "48: getAge:",
+              "51: pushint 0",
+              "54: bytec_0",
+              "57: app_global_get_ex",
+              "58: assert",
+              "61: itob",
+              "62: pushbytes 0x151f7c75",
+              "63: swap",
+              "64: concat",
+              "65: log",
+              "66: pushint 1",
+              "67: return"
             ]
           ]
         }
@@ -109,7 +52,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 3,
+      "count": 1,
       "description": "\nCheck: \"unprotected-updatable\", Impact: High, Confidence: High\nDescription: Unprotected Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#unprotected-updatable-application\n",
       "check": "unprotected-updatable",
       "impact": "High",
@@ -117,96 +60,39 @@
       "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
+              "6: bytecblock \"age\"",
+              "9: txn OnCompletion",
+              "10: !",
+              "11: assert",
+              "12: txn ApplicationID",
+              "13: bz main_create_NoOp@5"
             ],
             [
-              "12: pushbytess 0x483331ee 0xd26ce06c",
-              "13: txna ApplicationArgs 0",
-              "14: match main_custom_create_route@3 main_getAge_route@4"
+              "14: pushbytes 0xd26ce06c",
+              "15: txna ApplicationArgs 0",
+              "16: match getAge"
             ],
             [
-              "16: main_after_if_else@8:",
-              "19: intc_0",
-              "20: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 4 -> 9 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
-            ],
-            [
-              "12: pushbytess 0x483331ee 0xd26ce06c",
-              "13: txna ApplicationArgs 0",
-              "14: match main_custom_create_route@3 main_getAge_route@4"
-            ],
-            [
-              "22: main_getAge_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "30: callsub getAge"
-            ],
-            [
-              "76: getAge:",
-              "79: intc_0",
-              "80: bytec_0",
-              "81: app_global_get_ex",
-              "82: assert",
-              "85: retsub"
-            ],
-            [
-              "31: itob",
-              "32: pushbytes 0x151f7c75",
-              "33: swap",
-              "34: concat",
-              "35: log",
-              "36: intc_1",
-              "37: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
-            ],
-            [
-              "16: main_after_if_else@8:",
-              "19: intc_0",
-              "20: return"
+              "48: getAge:",
+              "51: pushint 0",
+              "54: bytec_0",
+              "57: app_global_get_ex",
+              "58: assert",
+              "61: itob",
+              "62: pushbytes 0x151f7c75",
+              "63: swap",
+              "64: concat",
+              "65: log",
+              "66: pushint 1",
+              "67: return"
             ]
           ]
         }
@@ -214,123 +100,27 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 2,
+      "count": 0,
       "description": "\nCheck: \"can-close-account\", Impact: High, Confidence: High\nDescription: Missing CloseRemainderTo field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-closeremainderto-field-validation\n",
       "check": "can-close-account",
       "impact": "High",
       "confidence": "High",
       "help": "Validate `CloseRemainderTo` field in the LogicSig.",
-      "paths": [
-        {
-          "short": "0 -> 1 -> 2 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
-            ],
-            [
-              "12: pushbytess 0x483331ee 0xd26ce06c",
-              "13: txna ApplicationArgs 0",
-              "14: match main_custom_create_route@3 main_getAge_route@4"
-            ],
-            [
-              "16: main_after_if_else@8:",
-              "19: intc_0",
-              "20: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
-            ],
-            [
-              "16: main_after_if_else@8:",
-              "19: intc_0",
-              "20: return"
-            ]
-          ]
-        }
-      ]
+      "paths": []
     },
     {
       "type": "ExecutionPaths",
-      "count": 2,
+      "count": 0,
       "description": "\nCheck: \"can-close-asset\", Impact: High, Confidence: High\nDescription: Missing AssetCloseTo Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-assetcloseto-field-validation\n",
       "check": "can-close-asset",
       "impact": "High",
       "confidence": "High",
       "help": "Validate `AssetCloseTo` field in the LogicSig.",
-      "paths": [
-        {
-          "short": "0 -> 1 -> 2 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
-            ],
-            [
-              "12: pushbytess 0x483331ee 0xd26ce06c",
-              "13: txna ApplicationArgs 0",
-              "14: match main_custom_create_route@3 main_getAge_route@4"
-            ],
-            [
-              "16: main_after_if_else@8:",
-              "19: intc_0",
-              "20: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
-            ],
-            [
-              "16: main_after_if_else@8:",
-              "19: intc_0",
-              "20: return"
-            ]
-          ]
-        }
-      ]
+      "paths": []
     },
     {
       "type": "ExecutionPaths",
-      "count": 3,
+      "count": 1,
       "description": "\nCheck: \"is-deletable\", Impact: High, Confidence: High\nDescription: Deletable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#deletable-application\n",
       "check": "is-deletable",
       "impact": "High",
@@ -338,96 +128,39 @@
       "help": "Do not approve `DeleteApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
+              "6: bytecblock \"age\"",
+              "9: txn OnCompletion",
+              "10: !",
+              "11: assert",
+              "12: txn ApplicationID",
+              "13: bz main_create_NoOp@5"
             ],
             [
-              "12: pushbytess 0x483331ee 0xd26ce06c",
-              "13: txna ApplicationArgs 0",
-              "14: match main_custom_create_route@3 main_getAge_route@4"
+              "14: pushbytes 0xd26ce06c",
+              "15: txna ApplicationArgs 0",
+              "16: match getAge"
             ],
             [
-              "16: main_after_if_else@8:",
-              "19: intc_0",
-              "20: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 4 -> 9 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
-            ],
-            [
-              "12: pushbytess 0x483331ee 0xd26ce06c",
-              "13: txna ApplicationArgs 0",
-              "14: match main_custom_create_route@3 main_getAge_route@4"
-            ],
-            [
-              "22: main_getAge_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "30: callsub getAge"
-            ],
-            [
-              "76: getAge:",
-              "79: intc_0",
-              "80: bytec_0",
-              "81: app_global_get_ex",
-              "82: assert",
-              "85: retsub"
-            ],
-            [
-              "31: itob",
-              "32: pushbytes 0x151f7c75",
-              "33: swap",
-              "34: concat",
-              "35: log",
-              "36: intc_1",
-              "37: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
-            ],
-            [
-              "16: main_after_if_else@8:",
-              "19: intc_0",
-              "20: return"
+              "48: getAge:",
+              "51: pushint 0",
+              "54: bytec_0",
+              "57: app_global_get_ex",
+              "58: assert",
+              "61: itob",
+              "62: pushbytes 0x151f7c75",
+              "63: swap",
+              "64: concat",
+              "65: log",
+              "66: pushint 1",
+              "67: return"
             ]
           ]
         }
@@ -435,7 +168,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 3,
+      "count": 1,
       "description": "\nCheck: \"is-updatable\", Impact: High, Confidence: High\nDescription: Upgradable Applications\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#upgradable-application\n",
       "check": "is-updatable",
       "impact": "High",
@@ -443,96 +176,39 @@
       "help": "Do not approve `UpdateApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
+              "6: bytecblock \"age\"",
+              "9: txn OnCompletion",
+              "10: !",
+              "11: assert",
+              "12: txn ApplicationID",
+              "13: bz main_create_NoOp@5"
             ],
             [
-              "12: pushbytess 0x483331ee 0xd26ce06c",
-              "13: txna ApplicationArgs 0",
-              "14: match main_custom_create_route@3 main_getAge_route@4"
+              "14: pushbytes 0xd26ce06c",
+              "15: txna ApplicationArgs 0",
+              "16: match getAge"
             ],
             [
-              "16: main_after_if_else@8:",
-              "19: intc_0",
-              "20: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 4 -> 9 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
-            ],
-            [
-              "12: pushbytess 0x483331ee 0xd26ce06c",
-              "13: txna ApplicationArgs 0",
-              "14: match main_custom_create_route@3 main_getAge_route@4"
-            ],
-            [
-              "22: main_getAge_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "30: callsub getAge"
-            ],
-            [
-              "76: getAge:",
-              "79: intc_0",
-              "80: bytec_0",
-              "81: app_global_get_ex",
-              "82: assert",
-              "85: retsub"
-            ],
-            [
-              "31: itob",
-              "32: pushbytes 0x151f7c75",
-              "33: swap",
-              "34: concat",
-              "35: log",
-              "36: intc_1",
-              "37: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
-            ],
-            [
-              "16: main_after_if_else@8:",
-              "19: intc_0",
-              "20: return"
+              "48: getAge:",
+              "51: pushint 0",
+              "54: bytec_0",
+              "57: app_global_get_ex",
+              "58: assert",
+              "61: itob",
+              "62: pushbytes 0x151f7c75",
+              "63: swap",
+              "64: concat",
+              "65: log",
+              "66: pushint 1",
+              "67: return"
             ]
           ]
         }
@@ -540,7 +216,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 4,
+      "count": 2,
       "description": "\nCheck: \"missing-fee-check\", Impact: High, Confidence: High\nDescription: Missing Fee Field Validation\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#missing-fee-field-validation\n",
       "check": "missing-fee-check",
       "impact": "High",
@@ -548,141 +224,73 @@
       "help": "Validate `Fee` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
+              "6: bytecblock \"age\"",
+              "9: txn OnCompletion",
+              "10: !",
+              "11: assert",
+              "12: txn ApplicationID",
+              "13: bz main_create_NoOp@5"
             ],
             [
-              "12: pushbytess 0x483331ee 0xd26ce06c",
-              "13: txna ApplicationArgs 0",
-              "14: match main_custom_create_route@3 main_getAge_route@4"
+              "14: pushbytes 0xd26ce06c",
+              "15: txna ApplicationArgs 0",
+              "16: match getAge"
             ],
             [
-              "16: main_after_if_else@8:",
-              "19: intc_0",
-              "20: return"
+              "48: getAge:",
+              "51: pushint 0",
+              "54: bytec_0",
+              "57: app_global_get_ex",
+              "58: assert",
+              "61: itob",
+              "62: pushbytes 0x151f7c75",
+              "63: swap",
+              "64: concat",
+              "65: log",
+              "66: pushint 1",
+              "67: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 8 -> 7",
+          "short": "0 -> 1 -> 4 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
+              "6: bytecblock \"age\"",
+              "9: txn OnCompletion",
+              "10: !",
+              "11: assert",
+              "12: txn ApplicationID",
+              "13: bz main_create_NoOp@5"
             ],
             [
-              "12: pushbytess 0x483331ee 0xd26ce06c",
-              "13: txna ApplicationArgs 0",
-              "14: match main_custom_create_route@3 main_getAge_route@4"
+              "19: main_create_NoOp@5:",
+              "22: pushbytes 0x483331ee",
+              "23: txna ApplicationArgs 0",
+              "24: match custom_create"
             ],
             [
-              "39: main_custom_create_route@3:",
-              "42: txn OnCompletion",
-              "43: !",
-              "44: assert",
-              "45: txn ApplicationID",
-              "46: !",
-              "47: assert",
-              "50: txna ApplicationArgs 1",
-              "51: btoi",
-              "54: callsub custom_create"
-            ],
-            [
-              "60: custom_create:",
-              "64: proto 1 0",
-              "67: bytec_0",
-              "70: frame_dig -1",
-              "71: app_global_put",
-              "72: retsub"
-            ],
-            [
-              "55: intc_1",
-              "56: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 4 -> 9 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
-            ],
-            [
-              "12: pushbytess 0x483331ee 0xd26ce06c",
-              "13: txna ApplicationArgs 0",
-              "14: match main_custom_create_route@3 main_getAge_route@4"
-            ],
-            [
-              "22: main_getAge_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "30: callsub getAge"
-            ],
-            [
-              "76: getAge:",
-              "79: intc_0",
-              "80: bytec_0",
-              "81: app_global_get_ex",
-              "82: assert",
-              "85: retsub"
-            ],
-            [
-              "31: itob",
-              "32: pushbytes 0x151f7c75",
-              "33: swap",
-              "34: concat",
-              "35: log",
-              "36: intc_1",
-              "37: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
-            ],
-            [
-              "16: main_after_if_else@8:",
-              "19: intc_0",
-              "20: return"
+              "29: custom_create:",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "36: bytec_0",
+              "39: swap",
+              "40: app_global_put",
+              "43: pushint 1",
+              "44: return"
             ]
           ]
         }
@@ -700,7 +308,7 @@
     },
     {
       "type": "ExecutionPaths",
-      "count": 4,
+      "count": 2,
       "description": "\nCheck: \"rekey-to\", Impact: High, Confidence: High\nDescription: Rekeyable Logic Signatures\n\nWiki: https://github.com/crytic/tealer/wiki/Detector-Documentation#rekeyable-logicsig\n",
       "check": "rekey-to",
       "impact": "High",
@@ -708,141 +316,73 @@
       "help": "Validate `RekeyTo` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 3",
+          "short": "0 -> 1 -> 2 -> 7",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
+              "6: bytecblock \"age\"",
+              "9: txn OnCompletion",
+              "10: !",
+              "11: assert",
+              "12: txn ApplicationID",
+              "13: bz main_create_NoOp@5"
             ],
             [
-              "12: pushbytess 0x483331ee 0xd26ce06c",
-              "13: txna ApplicationArgs 0",
-              "14: match main_custom_create_route@3 main_getAge_route@4"
+              "14: pushbytes 0xd26ce06c",
+              "15: txna ApplicationArgs 0",
+              "16: match getAge"
             ],
             [
-              "16: main_after_if_else@8:",
-              "19: intc_0",
-              "20: return"
+              "48: getAge:",
+              "51: pushint 0",
+              "54: bytec_0",
+              "57: app_global_get_ex",
+              "58: assert",
+              "61: itob",
+              "62: pushbytes 0x151f7c75",
+              "63: swap",
+              "64: concat",
+              "65: log",
+              "66: pushint 1",
+              "67: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 8 -> 7",
+          "short": "0 -> 1 -> 4 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
+              "6: bytecblock \"age\"",
+              "9: txn OnCompletion",
+              "10: !",
+              "11: assert",
+              "12: txn ApplicationID",
+              "13: bz main_create_NoOp@5"
             ],
             [
-              "12: pushbytess 0x483331ee 0xd26ce06c",
-              "13: txna ApplicationArgs 0",
-              "14: match main_custom_create_route@3 main_getAge_route@4"
+              "19: main_create_NoOp@5:",
+              "22: pushbytes 0x483331ee",
+              "23: txna ApplicationArgs 0",
+              "24: match custom_create"
             ],
             [
-              "39: main_custom_create_route@3:",
-              "42: txn OnCompletion",
-              "43: !",
-              "44: assert",
-              "45: txn ApplicationID",
-              "46: !",
-              "47: assert",
-              "50: txna ApplicationArgs 1",
-              "51: btoi",
-              "54: callsub custom_create"
-            ],
-            [
-              "60: custom_create:",
-              "64: proto 1 0",
-              "67: bytec_0",
-              "70: frame_dig -1",
-              "71: app_global_put",
-              "72: retsub"
-            ],
-            [
-              "55: intc_1",
-              "56: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 2 -> 4 -> 9 -> 5",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
-            ],
-            [
-              "12: pushbytess 0x483331ee 0xd26ce06c",
-              "13: txna ApplicationArgs 0",
-              "14: match main_custom_create_route@3 main_getAge_route@4"
-            ],
-            [
-              "22: main_getAge_route@4:",
-              "25: txn OnCompletion",
-              "26: !",
-              "27: assert",
-              "28: txn ApplicationID",
-              "29: assert",
-              "30: callsub getAge"
-            ],
-            [
-              "76: getAge:",
-              "79: intc_0",
-              "80: bytec_0",
-              "81: app_global_get_ex",
-              "82: assert",
-              "85: retsub"
-            ],
-            [
-              "31: itob",
-              "32: pushbytes 0x151f7c75",
-              "33: swap",
-              "34: concat",
-              "35: log",
-              "36: intc_1",
-              "37: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 3",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: intcblock 0 1",
-              "7: bytecblock \"age\"",
-              "10: txn NumAppArgs",
-              "11: bz main_after_if_else@8"
-            ],
-            [
-              "16: main_after_if_else@8:",
-              "19: intc_0",
-              "20: return"
+              "29: custom_create:",
+              "32: txna ApplicationArgs 1",
+              "33: btoi",
+              "36: bytec_0",
+              "39: swap",
+              "40: app_global_put",
+              "43: pushint 1",
+              "44: return"
             ]
           ]
         }

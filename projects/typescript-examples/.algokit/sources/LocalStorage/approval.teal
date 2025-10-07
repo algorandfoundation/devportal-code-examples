@@ -1,27 +1,21 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 
 main:
     intcblock 0 1
-    bytecblock "localString" "localBool" "localAccount" 0x151f7c75 "int" "localIntNoDefault" "localBytes"
+    bytecblock "localString" "localBool" "localAccount" "int" "localIntNoDefault" "localBytes" 0x151f7c75
 
 
 
     txn NumAppArgs
-    bz main_bare_routing@11
-    pushbytess 0x01a3a3ff 0xd0013fc5 0x02818b4c 0x2793c249 0x213631f5 0x5e58051a
+    bz main___algots__.defaultCreate@14
+    pushbytes 0x01a3a3ff
     txna ApplicationArgs 0
-    match main_optInToApplication_route@3 main_readLocalState_route@4 main_writeLocalState_route@5 main_writeDynamicLocalState_route@6 main_readDynamicLocalState_route@7 main_clearLocalState_route@8
+    match main_optInToApplication_route@3
 
-main_after_if_else@15:
+main_switch_case_next@4:
 
-
-
-    intc_0
-    return
-
-main_clearLocalState_route@8:
 
 
     txn OnCompletion
@@ -29,150 +23,10 @@ main_clearLocalState_route@8:
     assert
     txn ApplicationID
     assert
-    callsub clearLocalState
-    intc_1
-    return
-
-main_readDynamicLocalState_route@7:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-
-
-
-    txna ApplicationArgs 1
-    extract 2 0
-
-
-    callsub readDynamicLocalState
-    dup
-    len
-    itob
-    extract 6 2
-    swap
-    concat
-    bytec_3
-    swap
-    concat
-    log
-    intc_1
-    return
-
-main_writeDynamicLocalState_route@6:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-
-
-
-    txna ApplicationArgs 1
-    extract 2 0
-    txna ApplicationArgs 2
-    extract 2 0
-
-
-    callsub writeDynamicLocalState
-    dup
-    len
-    itob
-    extract 6 2
-    swap
-    concat
-    bytec_3
-    swap
-    concat
-    log
-    intc_1
-    return
-
-main_writeLocalState_route@5:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-
-
-
-    txna ApplicationArgs 1
-    extract 2 0
-    txna ApplicationArgs 2
-    intc_0
-    getbit
-    txna ApplicationArgs 3
-    btoi
-    txnas Accounts
-
-
-    callsub writeLocalState
-    intc_1
-    return
-
-main_readLocalState_route@4:
-
-
-    txn OnCompletion
-    !
-    assert
-    txn ApplicationID
-    assert
-    callsub readLocalState
-    uncover 5
-    itob
-    uncover 5
-    itob
-    dig 5
-    len
-    itob
-    extract 6 2
-    uncover 6
-    concat
-    dig 5
-    len
-    itob
-    extract 6 2
-    uncover 6
-    concat
-    pushbytes 0x00
-    intc_0
-    uncover 7
-    setbit
-    uncover 4
-    uncover 4
-    concat
-    pushbytes 0x0035
-    concat
-    dig 3
-    len
-    pushint 53
-    +
-    itob
-    extract 6 2
-    concat
-    swap
-    concat
-    uncover 3
-    concat
-    uncover 2
-    concat
-    swap
-    concat
-    bytec_3
-    swap
-    concat
-    log
-    intc_1
-    return
+    pushbytess 0xd0013fc5 0xa6b79c3d 0x2793c249 0x213631f5 0x5e58051a
+    txna ApplicationArgs 0
+    match readLocalState writeLocalState writeDynamicLocalState readDynamicLocalState clearLocalState
+    err
 
 main_optInToApplication_route@3:
 
@@ -180,23 +34,20 @@ main_optInToApplication_route@3:
     txn OnCompletion
     intc_1
     ==
-    assert
     txn ApplicationID
+    &&
     assert
-    callsub optInToApplication
-    intc_1
-    return
+    b optInToApplication
 
-main_bare_routing@11:
+main___algots__.defaultCreate@14:
 
 
 
     txn OnCompletion
-    bnz main_after_if_else@15
+    !
     txn ApplicationID
     !
-    assert
-    intc_1
+    &&
     return
 
 
@@ -207,7 +58,7 @@ optInToApplication:
     txn Sender
 
 
-    bytec 4
+    bytec_3
 
 
     pushint 100
@@ -217,7 +68,7 @@ optInToApplication:
     txn Sender
 
 
-    bytec 5
+    bytec 4
 
 
     pushint 200
@@ -227,7 +78,7 @@ optInToApplication:
     txn Sender
 
 
-    bytec 6
+    bytec 5
 
 
     pushbytes "Silvio"
@@ -262,7 +113,10 @@ optInToApplication:
 
     txn Sender
     app_local_put
-    retsub
+
+
+    intc_1
+    return
 
 
 
@@ -287,7 +141,7 @@ readLocalState:
     intc_0
 
 
-    bytec 4
+    bytec_3
 
 
     app_local_get_ex
@@ -298,7 +152,7 @@ readLocalState:
     intc_0
 
 
-    bytec 5
+    bytec 4
 
 
     app_local_get_ex
@@ -309,7 +163,7 @@ readLocalState:
     intc_0
 
 
-    bytec 6
+    bytec 5
 
 
     app_local_get_ex
@@ -345,15 +199,67 @@ readLocalState:
 
 
 
+    uncover 4
+    itob
+    uncover 4
+    itob
+    concat
+    dig 3
+    len
+    itob
+    extract 6 2
+    uncover 4
+    concat
+    swap
+    pushbytes 0x0035
+    concat
+    dig 1
+    len
+    pushint 53
+    +
+    dig 4
+    len
+    itob
+    extract 6 2
     uncover 5
-    retsub
+    concat
+    swap
+    itob
+    extract 6 2
+    uncover 2
+    swap
+    concat
+    pushbytes 0x00
+    intc_0
+    uncover 5
+    setbit
+    concat
+    uncover 3
+    concat
+    uncover 2
+    concat
+    swap
+    concat
+
+
+    bytec 6
+    swap
+    concat
+    log
+    intc_1
+    return
 
 
 
 writeLocalState:
 
 
-    proto 3 0
+    txna ApplicationArgs 1
+    extract 2 0
+    txna ApplicationArgs 2
+    intc_0
+    getbit
+    txna ApplicationArgs 3
 
 
     txn Sender
@@ -371,7 +277,7 @@ writeLocalState:
     bytec_0
 
 
-    frame_dig -3
+    dig 5
     app_local_put
 
 
@@ -381,7 +287,7 @@ writeLocalState:
     bytec_1
 
 
-    frame_dig -2
+    dig 4
     app_local_put
 
 
@@ -391,7 +297,7 @@ writeLocalState:
     bytec_2
 
 
-    frame_dig -1
+    uncover 3
     app_local_put
 
 
@@ -404,12 +310,11 @@ writeLocalState:
 
     app_local_get_ex
     assert
-    frame_dig -3
+    uncover 3
     ==
     assert
 
 
-    dup
     intc_0
 
 
@@ -418,30 +323,20 @@ writeLocalState:
 
     app_local_get_ex
     assert
-    frame_dig -2
     ==
-    assert
 
 
-    intc_0
-
-
-    bytec_2
-
-
-    app_local_get_ex
-    assert
-    frame_dig -1
-    ==
-    assert
-    retsub
+    return
 
 
 
 writeDynamicLocalState:
 
 
-    proto 2 1
+    txna ApplicationArgs 1
+    extract 2 0
+    txna ApplicationArgs 2
+    extract 2 0
 
 
     txn Sender
@@ -453,34 +348,31 @@ writeDynamicLocalState:
     assert
 
 
-    dup
-    frame_dig -2
-    frame_dig -1
+    uncover 2
+    dig 2
     app_local_put
 
 
     dup
-    intc_0
-    frame_dig -2
-    app_local_get_ex
-    assert
-    frame_dig -1
-    ==
-    assert
-
-
-    intc_0
-    frame_dig -2
-    app_local_get_ex
-    assert
-    retsub
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    bytec 6
+    swap
+    concat
+    log
+    intc_1
+    return
 
 
 
 readDynamicLocalState:
 
 
-    proto 1 1
+    txna ApplicationArgs 1
+    extract 2 0
 
 
     txn Sender
@@ -492,19 +384,24 @@ readDynamicLocalState:
     assert
 
 
+    intc_0
+    uncover 2
+    app_local_get_ex
+    assert
+
+
     dup
-    intc_0
-    frame_dig -1
-    app_local_get_ex
-    bury 1
-    assert
-
-
-    intc_0
-    frame_dig -1
-    app_local_get_ex
-    assert
-    retsub
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    bytec 6
+    swap
+    concat
+    log
+    intc_1
+    return
 
 
 
@@ -518,6 +415,15 @@ clearLocalState:
     global CurrentApplicationID
     app_opted_in
     assert
+
+
+    dup
+
+
+    bytec_3
+
+
+    app_local_del
 
 
     dup
@@ -541,15 +447,6 @@ clearLocalState:
     dup
 
 
-    bytec 6
-
-
-    app_local_del
-
-
-    dup
-
-
     bytec_0
 
 
@@ -569,4 +466,7 @@ clearLocalState:
 
 
     app_local_del
-    retsub
+
+
+    intc_1
+    return

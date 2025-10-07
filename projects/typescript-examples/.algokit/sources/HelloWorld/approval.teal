@@ -1,4 +1,4 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 
@@ -6,38 +6,38 @@ main:
 
 
     txn NumAppArgs
-    bz main_bare_routing@7
-    pushbytess 0x3aad6d86 0x3d25ae31
-    txna ApplicationArgs 0
-    match main_sayHello_route@3 main_sayBananas_route@4
-
-main_after_if_else@11:
-
-
-    pushint 0
-    return
-
-main_sayBananas_route@4:
-
-
+    bz main___algots__.defaultCreate@9
     txn OnCompletion
     !
     assert
     txn ApplicationID
     assert
+    pushbytess 0x3aad6d86 0x3d25ae31
+    txna ApplicationArgs 0
+    match sayHello main_sayBananas_route@5
+    err
+
+main_sayBananas_route@5:
+
+
     pushbytes 0x151f7c75000742616e616e6173
     log
     pushint 1
     return
 
-main_sayHello_route@3:
+main___algots__.defaultCreate@9:
 
 
     txn OnCompletion
     !
-    assert
     txn ApplicationID
-    assert
+    !
+    &&
+    return
+
+
+
+sayHello:
 
 
     txna ApplicationArgs 1
@@ -46,7 +46,15 @@ main_sayHello_route@3:
     extract 2 0
 
 
-    callsub sayHello
+    pushbytes "Hello "
+    uncover 2
+    concat
+    pushbytes " "
+    concat
+    swap
+    concat
+
+
     dup
     len
     itob
@@ -59,33 +67,3 @@ main_sayHello_route@3:
     log
     pushint 1
     return
-
-main_bare_routing@7:
-
-
-    txn OnCompletion
-    bnz main_after_if_else@11
-    txn ApplicationID
-    !
-    assert
-    pushint 1
-    return
-
-
-
-sayHello:
-
-
-    proto 2 1
-
-
-    pushbytes "Hello "
-    frame_dig -2
-    concat
-    pushbytes " "
-    concat
-    frame_dig -1
-    concat
-
-
-    retsub

@@ -319,7 +319,8 @@ def transaction_types() -> None:
     # example: APPLICATION_UPDATE_TRANSACTION
 
     """
-    Create a unsigned application update transaction updating the approval program and clear state program of an application
+    Create a unsigned application update transaction updating the approval program and
+    clear state program of an application
 
     Parameters for updating an application.
     - sender: The address of the account that will send the transaction

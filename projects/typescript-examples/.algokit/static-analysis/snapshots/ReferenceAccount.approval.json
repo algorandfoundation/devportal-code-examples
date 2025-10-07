@@ -12,96 +12,78 @@
       "help": "- Avoid deletable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algots__.defaultCreate@9"
             ],
             [
-              "11: pushbytess 0x55448e69 0x93b0416b",
-              "12: txna ApplicationArgs 0",
-              "13: match main_getAccountBalance_route@3 main_getAccountBalanceWithArgument_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x55448e69 0x6102e20b",
+              "17: txna ApplicationArgs 0",
+              "18: match getAccountBalance getAccountBalanceWithArgument"
             ],
             [
-              "45: main_getAccountBalance_route@3:",
-              "48: txn OnCompletion",
-              "49: !",
-              "50: assert",
-              "51: txn ApplicationID",
-              "52: assert",
-              "53: callsub getAccountBalance"
-            ],
-            [
-              "75: getAccountBalance:",
-              "78: pushbytes 0x8ed3ff306f25e04b06ba5c3c55c38fc0b90bb4e77a17a0df4a9169cb51a94b06",
-              "81: acct_params_get AcctBalance",
-              "82: assert",
-              "83: retsub"
-            ],
-            [
-              "54: itob",
-              "55: bytec_0",
-              "56: swap",
-              "57: concat",
-              "58: log",
-              "59: pushint 1",
-              "60: return"
+              "33: getAccountBalance:",
+              "36: pushbytes 0x8ed3ff306f25e04b06ba5c3c55c38fc0b90bb4e77a17a0df4a9169cb51a94b06",
+              "39: acct_params_get AcctBalance",
+              "40: assert",
+              "43: itob",
+              "44: bytec_0",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algots__.defaultCreate@9"
             ],
             [
-              "11: pushbytess 0x55448e69 0x93b0416b",
-              "12: txna ApplicationArgs 0",
-              "13: match main_getAccountBalance_route@3 main_getAccountBalanceWithArgument_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x55448e69 0x6102e20b",
+              "17: txna ApplicationArgs 0",
+              "18: match getAccountBalance getAccountBalanceWithArgument"
             ],
             [
-              "21: main_getAccountBalanceWithArgument_route@4:",
-              "24: txn OnCompletion",
-              "25: !",
-              "26: assert",
-              "27: txn ApplicationID",
-              "28: assert",
-              "31: txna ApplicationArgs 1",
-              "32: btoi",
-              "33: txnas Accounts",
-              "36: callsub getAccountBalanceWithArgument"
-            ],
-            [
-              "87: getAccountBalanceWithArgument:",
-              "91: proto 1 1",
-              "94: frame_dig -1",
-              "95: acct_params_get AcctBalance",
-              "96: assert",
-              "97: retsub"
-            ],
-            [
-              "37: itob",
-              "38: bytec_0",
-              "39: swap",
-              "40: concat",
-              "41: log",
-              "42: pushint 1",
-              "43: return"
+              "53: getAccountBalanceWithArgument:",
+              "56: txna ApplicationArgs 1",
+              "59: acct_params_get AcctBalance",
+              "60: assert",
+              "63: itob",
+              "64: bytec_0",
+              "65: swap",
+              "66: concat",
+              "67: log",
+              "68: pushint 1",
+              "69: return"
             ]
           ]
         }
@@ -117,96 +99,78 @@
       "help": "- Avoid upgradable applications.\n- Add access controls to the vulnerable method.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algots__.defaultCreate@9"
             ],
             [
-              "11: pushbytess 0x55448e69 0x93b0416b",
-              "12: txna ApplicationArgs 0",
-              "13: match main_getAccountBalance_route@3 main_getAccountBalanceWithArgument_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x55448e69 0x6102e20b",
+              "17: txna ApplicationArgs 0",
+              "18: match getAccountBalance getAccountBalanceWithArgument"
             ],
             [
-              "45: main_getAccountBalance_route@3:",
-              "48: txn OnCompletion",
-              "49: !",
-              "50: assert",
-              "51: txn ApplicationID",
-              "52: assert",
-              "53: callsub getAccountBalance"
-            ],
-            [
-              "75: getAccountBalance:",
-              "78: pushbytes 0x8ed3ff306f25e04b06ba5c3c55c38fc0b90bb4e77a17a0df4a9169cb51a94b06",
-              "81: acct_params_get AcctBalance",
-              "82: assert",
-              "83: retsub"
-            ],
-            [
-              "54: itob",
-              "55: bytec_0",
-              "56: swap",
-              "57: concat",
-              "58: log",
-              "59: pushint 1",
-              "60: return"
+              "33: getAccountBalance:",
+              "36: pushbytes 0x8ed3ff306f25e04b06ba5c3c55c38fc0b90bb4e77a17a0df4a9169cb51a94b06",
+              "39: acct_params_get AcctBalance",
+              "40: assert",
+              "43: itob",
+              "44: bytec_0",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algots__.defaultCreate@9"
             ],
             [
-              "11: pushbytess 0x55448e69 0x93b0416b",
-              "12: txna ApplicationArgs 0",
-              "13: match main_getAccountBalance_route@3 main_getAccountBalanceWithArgument_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x55448e69 0x6102e20b",
+              "17: txna ApplicationArgs 0",
+              "18: match getAccountBalance getAccountBalanceWithArgument"
             ],
             [
-              "21: main_getAccountBalanceWithArgument_route@4:",
-              "24: txn OnCompletion",
-              "25: !",
-              "26: assert",
-              "27: txn ApplicationID",
-              "28: assert",
-              "31: txna ApplicationArgs 1",
-              "32: btoi",
-              "33: txnas Accounts",
-              "36: callsub getAccountBalanceWithArgument"
-            ],
-            [
-              "87: getAccountBalanceWithArgument:",
-              "91: proto 1 1",
-              "94: frame_dig -1",
-              "95: acct_params_get AcctBalance",
-              "96: assert",
-              "97: retsub"
-            ],
-            [
-              "37: itob",
-              "38: bytec_0",
-              "39: swap",
-              "40: concat",
-              "41: log",
-              "42: pushint 1",
-              "43: return"
+              "53: getAccountBalanceWithArgument:",
+              "56: txna ApplicationArgs 1",
+              "59: acct_params_get AcctBalance",
+              "60: assert",
+              "63: itob",
+              "64: bytec_0",
+              "65: swap",
+              "66: concat",
+              "67: log",
+              "68: pushint 1",
+              "69: return"
             ]
           ]
         }
@@ -242,96 +206,78 @@
       "help": "Do not approve `DeleteApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algots__.defaultCreate@9"
             ],
             [
-              "11: pushbytess 0x55448e69 0x93b0416b",
-              "12: txna ApplicationArgs 0",
-              "13: match main_getAccountBalance_route@3 main_getAccountBalanceWithArgument_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x55448e69 0x6102e20b",
+              "17: txna ApplicationArgs 0",
+              "18: match getAccountBalance getAccountBalanceWithArgument"
             ],
             [
-              "45: main_getAccountBalance_route@3:",
-              "48: txn OnCompletion",
-              "49: !",
-              "50: assert",
-              "51: txn ApplicationID",
-              "52: assert",
-              "53: callsub getAccountBalance"
-            ],
-            [
-              "75: getAccountBalance:",
-              "78: pushbytes 0x8ed3ff306f25e04b06ba5c3c55c38fc0b90bb4e77a17a0df4a9169cb51a94b06",
-              "81: acct_params_get AcctBalance",
-              "82: assert",
-              "83: retsub"
-            ],
-            [
-              "54: itob",
-              "55: bytec_0",
-              "56: swap",
-              "57: concat",
-              "58: log",
-              "59: pushint 1",
-              "60: return"
+              "33: getAccountBalance:",
+              "36: pushbytes 0x8ed3ff306f25e04b06ba5c3c55c38fc0b90bb4e77a17a0df4a9169cb51a94b06",
+              "39: acct_params_get AcctBalance",
+              "40: assert",
+              "43: itob",
+              "44: bytec_0",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algots__.defaultCreate@9"
             ],
             [
-              "11: pushbytess 0x55448e69 0x93b0416b",
-              "12: txna ApplicationArgs 0",
-              "13: match main_getAccountBalance_route@3 main_getAccountBalanceWithArgument_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x55448e69 0x6102e20b",
+              "17: txna ApplicationArgs 0",
+              "18: match getAccountBalance getAccountBalanceWithArgument"
             ],
             [
-              "21: main_getAccountBalanceWithArgument_route@4:",
-              "24: txn OnCompletion",
-              "25: !",
-              "26: assert",
-              "27: txn ApplicationID",
-              "28: assert",
-              "31: txna ApplicationArgs 1",
-              "32: btoi",
-              "33: txnas Accounts",
-              "36: callsub getAccountBalanceWithArgument"
-            ],
-            [
-              "87: getAccountBalanceWithArgument:",
-              "91: proto 1 1",
-              "94: frame_dig -1",
-              "95: acct_params_get AcctBalance",
-              "96: assert",
-              "97: retsub"
-            ],
-            [
-              "37: itob",
-              "38: bytec_0",
-              "39: swap",
-              "40: concat",
-              "41: log",
-              "42: pushint 1",
-              "43: return"
+              "53: getAccountBalanceWithArgument:",
+              "56: txna ApplicationArgs 1",
+              "59: acct_params_get AcctBalance",
+              "60: assert",
+              "63: itob",
+              "64: bytec_0",
+              "65: swap",
+              "66: concat",
+              "67: log",
+              "68: pushint 1",
+              "69: return"
             ]
           ]
         }
@@ -347,96 +293,78 @@
       "help": "Do not approve `UpdateApplication` type application calls.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algots__.defaultCreate@9"
             ],
             [
-              "11: pushbytess 0x55448e69 0x93b0416b",
-              "12: txna ApplicationArgs 0",
-              "13: match main_getAccountBalance_route@3 main_getAccountBalanceWithArgument_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x55448e69 0x6102e20b",
+              "17: txna ApplicationArgs 0",
+              "18: match getAccountBalance getAccountBalanceWithArgument"
             ],
             [
-              "45: main_getAccountBalance_route@3:",
-              "48: txn OnCompletion",
-              "49: !",
-              "50: assert",
-              "51: txn ApplicationID",
-              "52: assert",
-              "53: callsub getAccountBalance"
-            ],
-            [
-              "75: getAccountBalance:",
-              "78: pushbytes 0x8ed3ff306f25e04b06ba5c3c55c38fc0b90bb4e77a17a0df4a9169cb51a94b06",
-              "81: acct_params_get AcctBalance",
-              "82: assert",
-              "83: retsub"
-            ],
-            [
-              "54: itob",
-              "55: bytec_0",
-              "56: swap",
-              "57: concat",
-              "58: log",
-              "59: pushint 1",
-              "60: return"
+              "33: getAccountBalance:",
+              "36: pushbytes 0x8ed3ff306f25e04b06ba5c3c55c38fc0b90bb4e77a17a0df4a9169cb51a94b06",
+              "39: acct_params_get AcctBalance",
+              "40: assert",
+              "43: itob",
+              "44: bytec_0",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algots__.defaultCreate@9"
             ],
             [
-              "11: pushbytess 0x55448e69 0x93b0416b",
-              "12: txna ApplicationArgs 0",
-              "13: match main_getAccountBalance_route@3 main_getAccountBalanceWithArgument_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x55448e69 0x6102e20b",
+              "17: txna ApplicationArgs 0",
+              "18: match getAccountBalance getAccountBalanceWithArgument"
             ],
             [
-              "21: main_getAccountBalanceWithArgument_route@4:",
-              "24: txn OnCompletion",
-              "25: !",
-              "26: assert",
-              "27: txn ApplicationID",
-              "28: assert",
-              "31: txna ApplicationArgs 1",
-              "32: btoi",
-              "33: txnas Accounts",
-              "36: callsub getAccountBalanceWithArgument"
-            ],
-            [
-              "87: getAccountBalanceWithArgument:",
-              "91: proto 1 1",
-              "94: frame_dig -1",
-              "95: acct_params_get AcctBalance",
-              "96: assert",
-              "97: retsub"
-            ],
-            [
-              "37: itob",
-              "38: bytec_0",
-              "39: swap",
-              "40: concat",
-              "41: log",
-              "42: pushint 1",
-              "43: return"
+              "53: getAccountBalanceWithArgument:",
+              "56: txna ApplicationArgs 1",
+              "59: acct_params_get AcctBalance",
+              "60: assert",
+              "63: itob",
+              "64: bytec_0",
+              "65: swap",
+              "66: concat",
+              "67: log",
+              "68: pushint 1",
+              "69: return"
             ]
           ]
         }
@@ -452,123 +380,102 @@
       "help": "Validate `Fee` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algots__.defaultCreate@9"
             ],
             [
-              "11: pushbytess 0x55448e69 0x93b0416b",
-              "12: txna ApplicationArgs 0",
-              "13: match main_getAccountBalance_route@3 main_getAccountBalanceWithArgument_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x55448e69 0x6102e20b",
+              "17: txna ApplicationArgs 0",
+              "18: match getAccountBalance getAccountBalanceWithArgument"
             ],
             [
-              "45: main_getAccountBalance_route@3:",
-              "48: txn OnCompletion",
-              "49: !",
-              "50: assert",
-              "51: txn ApplicationID",
-              "52: assert",
-              "53: callsub getAccountBalance"
-            ],
-            [
-              "75: getAccountBalance:",
-              "78: pushbytes 0x8ed3ff306f25e04b06ba5c3c55c38fc0b90bb4e77a17a0df4a9169cb51a94b06",
-              "81: acct_params_get AcctBalance",
-              "82: assert",
-              "83: retsub"
-            ],
-            [
-              "54: itob",
-              "55: bytec_0",
-              "56: swap",
-              "57: concat",
-              "58: log",
-              "59: pushint 1",
-              "60: return"
+              "33: getAccountBalance:",
+              "36: pushbytes 0x8ed3ff306f25e04b06ba5c3c55c38fc0b90bb4e77a17a0df4a9169cb51a94b06",
+              "39: acct_params_get AcctBalance",
+              "40: assert",
+              "43: itob",
+              "44: bytec_0",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algots__.defaultCreate@9"
             ],
             [
-              "11: pushbytess 0x55448e69 0x93b0416b",
-              "12: txna ApplicationArgs 0",
-              "13: match main_getAccountBalance_route@3 main_getAccountBalanceWithArgument_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x55448e69 0x6102e20b",
+              "17: txna ApplicationArgs 0",
+              "18: match getAccountBalance getAccountBalanceWithArgument"
             ],
             [
-              "21: main_getAccountBalanceWithArgument_route@4:",
+              "53: getAccountBalanceWithArgument:",
+              "56: txna ApplicationArgs 1",
+              "59: acct_params_get AcctBalance",
+              "60: assert",
+              "63: itob",
+              "64: bytec_0",
+              "65: swap",
+              "66: concat",
+              "67: log",
+              "68: pushint 1",
+              "69: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "9: txn NumAppArgs",
+              "10: bz main___algots__.defaultCreate@9"
+            ],
+            [
+              "21: main___algots__.defaultCreate@9:",
               "24: txn OnCompletion",
               "25: !",
-              "26: assert",
-              "27: txn ApplicationID",
-              "28: assert",
-              "31: txna ApplicationArgs 1",
-              "32: btoi",
-              "33: txnas Accounts",
-              "36: callsub getAccountBalanceWithArgument"
-            ],
-            [
-              "87: getAccountBalanceWithArgument:",
-              "91: proto 1 1",
-              "94: frame_dig -1",
-              "95: acct_params_get AcctBalance",
-              "96: assert",
-              "97: retsub"
-            ],
-            [
-              "37: itob",
-              "38: bytec_0",
-              "39: swap",
-              "40: concat",
-              "41: log",
-              "42: pushint 1",
-              "43: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 8 -> 9",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: bytecblock 0x151f7c75",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
-            ],
-            [
-              "62: main_bare_routing@7:",
-              "65: txn OnCompletion",
-              "66: bnz main_after_if_else@11"
-            ],
-            [
-              "67: txn ApplicationID",
-              "68: !",
-              "69: assert",
-              "70: pushint 1",
-              "71: return"
+              "26: txn ApplicationID",
+              "27: !",
+              "28: &&",
+              "29: return"
             ]
           ]
         }
@@ -594,123 +501,102 @@
       "help": "Validate `RekeyTo` field in the LogicSig.",
       "paths": [
         {
-          "short": "0 -> 1 -> 2 -> 6 -> 10 -> 7",
+          "short": "0 -> 1 -> 2 -> 5",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algots__.defaultCreate@9"
             ],
             [
-              "11: pushbytess 0x55448e69 0x93b0416b",
-              "12: txna ApplicationArgs 0",
-              "13: match main_getAccountBalance_route@3 main_getAccountBalanceWithArgument_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x55448e69 0x6102e20b",
+              "17: txna ApplicationArgs 0",
+              "18: match getAccountBalance getAccountBalanceWithArgument"
             ],
             [
-              "45: main_getAccountBalance_route@3:",
-              "48: txn OnCompletion",
-              "49: !",
-              "50: assert",
-              "51: txn ApplicationID",
-              "52: assert",
-              "53: callsub getAccountBalance"
-            ],
-            [
-              "75: getAccountBalance:",
-              "78: pushbytes 0x8ed3ff306f25e04b06ba5c3c55c38fc0b90bb4e77a17a0df4a9169cb51a94b06",
-              "81: acct_params_get AcctBalance",
-              "82: assert",
-              "83: retsub"
-            ],
-            [
-              "54: itob",
-              "55: bytec_0",
-              "56: swap",
-              "57: concat",
-              "58: log",
-              "59: pushint 1",
-              "60: return"
+              "33: getAccountBalance:",
+              "36: pushbytes 0x8ed3ff306f25e04b06ba5c3c55c38fc0b90bb4e77a17a0df4a9169cb51a94b06",
+              "39: acct_params_get AcctBalance",
+              "40: assert",
+              "43: itob",
+              "44: bytec_0",
+              "45: swap",
+              "46: concat",
+              "47: log",
+              "48: pushint 1",
+              "49: return"
             ]
           ]
         },
         {
-          "short": "0 -> 1 -> 2 -> 4 -> 11 -> 5",
+          "short": "0 -> 1 -> 2 -> 6",
           "blocks": [
             [
-              "1: #pragma version 10",
+              "1: #pragma version 11",
               "2: UNSUPPORTED #pragma typetrack false"
             ],
             [
               "5: main:",
               "6: bytecblock 0x151f7c75",
               "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
+              "10: bz main___algots__.defaultCreate@9"
             ],
             [
-              "11: pushbytess 0x55448e69 0x93b0416b",
-              "12: txna ApplicationArgs 0",
-              "13: match main_getAccountBalance_route@3 main_getAccountBalanceWithArgument_route@4"
+              "11: txn OnCompletion",
+              "12: !",
+              "13: assert",
+              "14: txn ApplicationID",
+              "15: assert",
+              "16: pushbytess 0x55448e69 0x6102e20b",
+              "17: txna ApplicationArgs 0",
+              "18: match getAccountBalance getAccountBalanceWithArgument"
             ],
             [
-              "21: main_getAccountBalanceWithArgument_route@4:",
+              "53: getAccountBalanceWithArgument:",
+              "56: txna ApplicationArgs 1",
+              "59: acct_params_get AcctBalance",
+              "60: assert",
+              "63: itob",
+              "64: bytec_0",
+              "65: swap",
+              "66: concat",
+              "67: log",
+              "68: pushint 1",
+              "69: return"
+            ]
+          ]
+        },
+        {
+          "short": "0 -> 1 -> 4",
+          "blocks": [
+            [
+              "1: #pragma version 11",
+              "2: UNSUPPORTED #pragma typetrack false"
+            ],
+            [
+              "5: main:",
+              "6: bytecblock 0x151f7c75",
+              "9: txn NumAppArgs",
+              "10: bz main___algots__.defaultCreate@9"
+            ],
+            [
+              "21: main___algots__.defaultCreate@9:",
               "24: txn OnCompletion",
               "25: !",
-              "26: assert",
-              "27: txn ApplicationID",
-              "28: assert",
-              "31: txna ApplicationArgs 1",
-              "32: btoi",
-              "33: txnas Accounts",
-              "36: callsub getAccountBalanceWithArgument"
-            ],
-            [
-              "87: getAccountBalanceWithArgument:",
-              "91: proto 1 1",
-              "94: frame_dig -1",
-              "95: acct_params_get AcctBalance",
-              "96: assert",
-              "97: retsub"
-            ],
-            [
-              "37: itob",
-              "38: bytec_0",
-              "39: swap",
-              "40: concat",
-              "41: log",
-              "42: pushint 1",
-              "43: return"
-            ]
-          ]
-        },
-        {
-          "short": "0 -> 1 -> 8 -> 9",
-          "blocks": [
-            [
-              "1: #pragma version 10",
-              "2: UNSUPPORTED #pragma typetrack false"
-            ],
-            [
-              "5: main:",
-              "6: bytecblock 0x151f7c75",
-              "9: txn NumAppArgs",
-              "10: bz main_bare_routing@7"
-            ],
-            [
-              "62: main_bare_routing@7:",
-              "65: txn OnCompletion",
-              "66: bnz main_after_if_else@11"
-            ],
-            [
-              "67: txn ApplicationID",
-              "68: !",
-              "69: assert",
-              "70: pushint 1",
-              "71: return"
+              "26: txn ApplicationID",
+              "27: !",
+              "28: &&",
+              "29: return"
             ]
           ]
         }

@@ -260,8 +260,10 @@ def app_client() -> None:
     # example: APP_CLIENT_CALL_METHOD
 
     # example: FULL_APP_CLIENT_EXAMPLE
-    # A similar working example can be seen in the AlgoKit init production smart contract templates, when using Python deployment
-    # In this case the generated factory is called `HelloWorldAppFactory` and is in `./artifacts/HelloWorldApp/client.py`
+    # A similar working example can be seen in the AlgoKit init production smart contract
+    # templates, when using Python deployment
+    # In this case the generated factory is called `HelloWorldAppFactory` and is in
+    # `./artifacts/HelloWorldApp/client.py`
     from algokit_utils import AlgorandClient
 
     from smart_contracts.artifacts.hello_world.hello_world_client import (
@@ -280,7 +282,8 @@ def app_client() -> None:
         default_sender=deployer.address,
     )
 
-    # Create the app and get a typed app client for the created app (note: this creates a new instance of the app every time,
+    # Create the app and get a typed app client for the created app
+    # (note: this creates a new instance of the app every time,
     #  you can use .deploy() to deploy idempotently if the app wasn't previously
     #  deployed or needs to be updated if that's allowed)
     app_client, create_response = factory.send.create.bare()

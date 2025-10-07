@@ -14,7 +14,6 @@ COUNTER_BOX_VALUE_LENGTH = 8
 
 
 class ReferenceAppBox(ARC4Contract):
-
     def __init__(self) -> None:
         # Define constants for box storage in global state
         self.key_length = GlobalState(

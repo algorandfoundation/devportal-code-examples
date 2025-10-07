@@ -1,6 +1,6 @@
 // example: REFERENCE_ACCOUNT_ASSET_EXAMPLE
 
-import { Contract, abimethod, Account, Asset, assert } from '@algorandfoundation/algorand-typescript'
+import { Contract, readonly, Account, Asset, assert } from '@algorandfoundation/algorand-typescript'
 import { Address } from '@algorandfoundation/algorand-typescript/arc4'
 
 /**
@@ -11,7 +11,7 @@ export default class ReferenceAccountAsset extends Contract {
    * Returns the balance of a specific asset in a hardcoded account
    * @returns The asset balance of the account
    */
-  @abimethod({ readonly: true })
+  @readonly
   public getAssetBalance() {
     const address = new Address('R3J76MDPEXQEWBV2LQ6FLQ4PYC4QXNHHPIL2BX2KSFU4WUNJJMDBTLRNEM') // Replace with your account address
     const addressBytes = address.bytes
@@ -29,7 +29,7 @@ export default class ReferenceAccountAsset extends Contract {
    * @param asset The asset to check the balance of
    * @returns The asset balance of the account
    */
-  @abimethod({ readonly: true })
+  @readonly
   public getAssetBalanceWithArg(account: Account, asset: Asset) {
     assert(account.isOptedIn(asset), 'Account is not opted in to the asset')
     // Get the asset balance

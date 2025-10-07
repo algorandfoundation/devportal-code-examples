@@ -1,120 +1,58 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
-// smart_contracts.arc4_types.contract.Arc4Struct.__algopy_entrypoint_with_init() -> uint64:
+// algopy.arc4.ARC4Contract.approval_program() -> uint64:
 main:
     intcblock 0 2 1
-    bytecblock "todos" 0x 0x0000 0x151f7c75 0x0002
+    bytecblock "todos" 0x 0x0000 0x151f7c75
     txn ApplicationID
     bnz main_after_if_else@2
-    // smart_contracts/arc4_types/contract.py:234
+    // smart_contracts/arc4_types/contract.py:229
     // self.todos = Todos()
     bytec_0 // "todos"
     bytec_2 // 0x0000
     app_global_put
 
 main_after_if_else@2:
-    // smart_contracts/arc4_types/contract.py:231
+    // smart_contracts/arc4_types/contract.py:227
     // class Arc4Struct(ARC4Contract):
     txn NumAppArgs
-    bz main_bare_routing@8
+    bz main___algopy_default_create@12
+    txn OnCompletion
+    !
+    assert // OnCompletion must be NoOp
+    txn ApplicationID
+    assert
     pushbytess 0xf618a255 0x11cfe2d8 0xea9e2d9d // method "add_todo(string)(string,bool)[]", method "complete_todo(string)void", method "return_todo(string)(string,bool)"
     txna ApplicationArgs 0
-    match main_add_todo_route@5 main_complete_todo_route@6 main_return_todo_route@7
+    match add_todo complete_todo return_todo
+    err
 
-main_after_if_else@10:
-    // smart_contracts/arc4_types/contract.py:231
-    // class Arc4Struct(ARC4Contract):
-    intc_0 // 0
-    return
-
-main_return_todo_route@7:
-    // smart_contracts/arc4_types/contract.py:255
-    // @abimethod()
+main___algopy_default_create@12:
     txn OnCompletion
     !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    // smart_contracts/arc4_types/contract.py:231
-    // class Arc4Struct(ARC4Contract):
-    txna ApplicationArgs 1
-    // smart_contracts/arc4_types/contract.py:255
-    // @abimethod()
-    callsub return_todo
-    bytec_3 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_2 // 1
-    return
-
-main_complete_todo_route@6:
-    // smart_contracts/arc4_types/contract.py:247
-    // @abimethod()
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    // smart_contracts/arc4_types/contract.py:231
-    // class Arc4Struct(ARC4Contract):
-    txna ApplicationArgs 1
-    // smart_contracts/arc4_types/contract.py:247
-    // @abimethod()
-    callsub complete_todo
-    intc_2 // 1
-    return
-
-main_add_todo_route@5:
-    // smart_contracts/arc4_types/contract.py:236
-    // @abimethod()
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    // smart_contracts/arc4_types/contract.py:231
-    // class Arc4Struct(ARC4Contract):
-    txna ApplicationArgs 1
-    // smart_contracts/arc4_types/contract.py:236
-    // @abimethod()
-    callsub add_todo
-    bytec_3 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_2 // 1
-    return
-
-main_bare_routing@8:
-    // smart_contracts/arc4_types/contract.py:231
-    // class Arc4Struct(ARC4Contract):
-    txn OnCompletion
-    bnz main_after_if_else@10
     txn ApplicationID
     !
-    assert // can only call when creating
-    intc_2 // 1
-    return
+    &&
+    return // on error: OnCompletion must be NoOp && can only call when creating
 
 
-// smart_contracts.arc4_types.contract.Arc4Struct.add_todo(task: bytes) -> bytes:
+// smart_contracts.arc4_types.contract.Arc4Struct.add_todo[routing]() -> void:
 add_todo:
-    // smart_contracts/arc4_types/contract.py:236-237
-    // @abimethod()
-    // def add_todo(self, task: arc4.String) -> Todos:
-    proto 1 1
     intc_0 // 0
     dupn 2
     bytec_1 // ""
     dupn 3
-    // smart_contracts/arc4_types/contract.py:238
+    // smart_contracts/arc4_types/contract.py:233
     // todo = Todo(task=task, completed=arc4.Bool(False))  # noqa: FBT003
     pushbytes 0x000300
-    frame_dig -1
+    // smart_contracts/arc4_types/contract.py:231
+    // @abimethod()
+    txna ApplicationArgs 1
+    // smart_contracts/arc4_types/contract.py:233
+    // todo = Todo(task=task, completed=arc4.Bool(False))  # noqa: FBT003
     concat
-    // smart_contracts/arc4_types/contract.py:240
+    // smart_contracts/arc4_types/contract.py:235
     // if not self.todos:
     intc_0 // 0
     bytec_0 // "todos"
@@ -122,63 +60,65 @@ add_todo:
     assert // check self.todos exists
     bytec_2 // 0x0000
     ==
-    bz add_todo_else_body@2
-    // smart_contracts/arc4_types/contract.py:241
+    bz add_todo_else_body@3
+    // smart_contracts/arc4_types/contract.py:236
     // self.todos = Todos(todo.copy())
-    bytec 4 // 0x0002
-    swap
-    concat
-    pushbytes 0x0001
+    pushbytes 0x00010002
     swap
     concat
     bytec_0 // "todos"
     swap
     app_global_put
 
-add_todo_after_if_else@3:
-    // smart_contracts/arc4_types/contract.py:245
+add_todo_after_if_else@4:
+    // smart_contracts/arc4_types/contract.py:240
     // return self.todos
     intc_0 // 0
     bytec_0 // "todos"
     app_global_get_ex
     assert // check self.todos exists
-    frame_bury 0
-    retsub
+    // smart_contracts/arc4_types/contract.py:231
+    // @abimethod()
+    bytec_3 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_2 // 1
+    return
 
-add_todo_else_body@2:
-    // smart_contracts/arc4_types/contract.py:243
+add_todo_else_body@3:
+    // smart_contracts/arc4_types/contract.py:238
     // self.todos.append(todo.copy())
     intc_0 // 0
     bytec_0 // "todos"
     app_global_get_ex
     assert // check self.todos exists
-    bytec 4 // 0x0002
+    dup
+    intc_0 // 0
+    extract_uint16
+    dup
+    cover 2
+    bury 7
+    extract 2 0
+    bury 9
+    pushbytes 0x0002
     uncover 2
     concat
-    frame_bury 2
-    dup
-    intc_0 // 0
-    extract_uint16
-    dup
-    cover 2
-    frame_bury 3
-    extract 2 0
-    frame_bury 0
+    bury 6
     bytec_1 // 0x
-    frame_bury 1
+    bury 7
     intc_1 // 2
     *
-    frame_bury 6
+    bury 1
     intc_0 // 0
-    frame_bury 4
+    bury 2
 
-add_todo_for_header@5:
-    frame_dig 4
-    frame_dig 6
+add_todo_for_header@6:
+    dup2
     <
-    bz add_todo_after_for@7
-    frame_dig 0
-    frame_dig 4
+    bz add_todo_after_for@8
+    dig 6
+    dig 2
     dup
     cover 2
     extract_uint16
@@ -186,86 +126,81 @@ add_todo_for_header@5:
     +
     itob
     extract 6 2
-    frame_dig 1
+    dig 7
     swap
     concat
-    frame_bury 1
+    bury 7
     intc_1 // 2
     +
-    frame_bury 4
-    b add_todo_for_header@5
+    bury 2
+    b add_todo_for_header@6
 
-add_todo_after_for@7:
-    frame_dig 0
+add_todo_after_for@8:
+    dig 6
     len
-    frame_bury 5
+    bury 3
     intc_0 // 0
-    frame_bury 4
+    bury 2
 
-add_todo_for_header@8:
-    frame_dig 4
+add_todo_for_header@9:
+    dig 1
     intc_1 // 2
     <
-    bz add_todo_after_for@10
-    frame_dig 2
-    frame_dig 4
+    bz add_todo_after_for@11
+    dig 4
+    dig 2
     dup
     cover 2
     extract_uint16
-    frame_dig 5
+    dig 4
     +
     itob
     extract 6 2
-    frame_dig 1
+    dig 7
     swap
     concat
-    frame_bury 1
+    bury 7
     intc_1 // 2
     +
-    frame_bury 4
-    b add_todo_for_header@8
+    bury 2
+    b add_todo_for_header@9
 
-add_todo_after_for@10:
-    frame_dig 3
-    // smart_contracts/arc4_types/contract.py:243
+add_todo_after_for@11:
+    dig 3
+    // smart_contracts/arc4_types/contract.py:238
     // self.todos.append(todo.copy())
     intc_2 // 1
     +
     itob
     extract 6 2
-    frame_dig 1
+    dig 6
     concat
-    frame_dig 0
-    frame_dig 6
-    frame_dig 5
+    dig 7
+    dig 2
+    dig 5
     substring3
     concat
-    frame_dig 2
-    dup
-    len
-    intc_1 // 2
-    swap
-    substring3
+    dig 5
+    extract 2 0
     concat
-    // smart_contracts/arc4_types/contract.py:243
+    // smart_contracts/arc4_types/contract.py:238
     // self.todos.append(todo.copy())
     bytec_0 // "todos"
     swap
     app_global_put
-    b add_todo_after_if_else@3
+    b add_todo_after_if_else@4
 
 
-// smart_contracts.arc4_types.contract.Arc4Struct.complete_todo(task: bytes) -> void:
+// smart_contracts.arc4_types.contract.Arc4Struct.complete_todo[routing]() -> void:
 complete_todo:
-    // smart_contracts/arc4_types/contract.py:247-248
-    // @abimethod()
-    // def complete_todo(self, task: arc4.String) -> None:
-    proto 1 0
     intc_0 // 0
     dup
     bytec_1 // ""
-    dupn 4
-    // smart_contracts/arc4_types/contract.py:250
+    dupn 5
+    // smart_contracts/arc4_types/contract.py:242
+    // @abimethod()
+    txna ApplicationArgs 1
+    // smart_contracts/arc4_types/contract.py:244
     // for index in urange(self.todos.length):
     intc_0 // 0
     bytec_0 // "todos"
@@ -275,14 +210,14 @@ complete_todo:
     extract_uint16
     intc_0 // 0
 
-complete_todo_for_header@1:
-    // smart_contracts/arc4_types/contract.py:250
+complete_todo_for_header@2:
+    // smart_contracts/arc4_types/contract.py:244
     // for index in urange(self.todos.length):
-    frame_dig 8
-    frame_dig 7
+    dup
+    dig 2
     <
-    bz complete_todo_after_for@6
-    // smart_contracts/arc4_types/contract.py:251
+    bz complete_todo_after_for@7
+    // smart_contracts/arc4_types/contract.py:245
     // if self.todos[index].task == task:
     intc_0 // 0
     bytec_0 // "todos"
@@ -290,34 +225,33 @@ complete_todo_for_header@1:
     assert // check self.todos exists
     dup
     extract 2 0
-    frame_dig 8
+    swap
+    intc_0 // 0
+    extract_uint16
+    dig 2
     dup
-    cover 3
     intc_1 // 2
     *
     dup
-    frame_bury 3
-    dig 1
+    bury 13
+    dig 3
     swap
     extract_uint16
-    uncover 2
-    intc_0 // 0
-    extract_uint16
-    uncover 3
+    swap
     intc_2 // 1
     +
     dup
     cover 4
-    swap
+    uncover 2
     dig 1
-    - // on error: Index access is out of bounds
+    - // on error: index access is out of bounds
     dig 3
     len
     uncover 2
     intc_1 // 2
     *
     dup
-    frame_bury 2
+    bury 14
     dig 4
     swap
     extract_uint16
@@ -330,10 +264,10 @@ complete_todo_for_header@1:
     dig 1
     len
     substring3
-    frame_dig -1
+    dig 4
     ==
-    bz complete_todo_after_if_else@4
-    // smart_contracts/arc4_types/contract.py:252
+    bz complete_todo_after_if_else@5
+    // smart_contracts/arc4_types/contract.py:246
     // self.todos[index].completed = arc4.Bool(True)  # noqa: FBT003
     intc_0 // 0
     bytec_0 // "todos"
@@ -341,36 +275,44 @@ complete_todo_for_header@1:
     assert // check self.todos exists
     dup
     extract 2 0
-    dup
-    frame_dig 3
-    extract_uint16
-    dig 2
+    dig 1
     intc_0 // 0
     extract_uint16
-    uncover 4
-    - // on error: Index access is out of bounds
-    dig 2
-    len
+    dig 1
+    dig 13
+    extract_uint16
+    dig 1
+    uncover 5
+    - // on error: index access is out of bounds
     dig 3
-    frame_dig 2
+    len
+    dig 4
+    dig 14
+    dup
+    cover 8
     extract_uint16
     dup2
     uncover 4
     select
-    dig 4
+    dig 5
     dig 4
     uncover 2
     substring3
     pushint 16 // 16
     intc_2 // 1
     setbit
-    uncover 5
+    dig 8
+    dup
+    uncover 6
+    <
+    assert // index access is out of bounds
+    uncover 6
     substring 0 2
     dup
-    frame_bury 1
+    bury 18
     btoi
     dup
-    frame_dig 8
+    uncover 2
     -
     intc_2 // 1
     -
@@ -381,10 +323,10 @@ complete_todo_for_header@1:
     dup
     dig 5
     -
-    frame_bury 5
+    bury 12
     dig 2
     len
-    frame_bury 4
+    bury 13
     dig 5
     intc_0 // 0
     uncover 6
@@ -396,69 +338,72 @@ complete_todo_for_header@1:
     uncover 4
     substring3
     concat
-    frame_bury 0
+    bury 13
     intc_1 // 2
     *
-    frame_bury 6
+    bury 5
+    bury 7
 
-complete_todo_for_header@8:
-    frame_dig 2
-    frame_dig 6
+complete_todo_for_header@9:
+    dig 6
+    dig 4
     <
-    bz complete_todo_after_for@10
-    frame_dig 0
+    bz complete_todo_after_for@11
+    dig 10
     dup
-    frame_dig 2
+    dig 8
     dup
     cover 3
     extract_uint16
-    frame_dig 4
+    dig 8
     +
-    frame_dig 5
+    dig 7
     -
     itob
     extract 6 2
     dig 2
     swap
     replace3
-    frame_bury 0
+    bury 12
     intc_1 // 2
     +
-    frame_bury 2
-    b complete_todo_for_header@8
+    bury 7
+    b complete_todo_for_header@9
 
-complete_todo_after_for@10:
-    frame_dig 1
-    frame_dig 0
+complete_todo_after_for@11:
+    dig 9
+    dig 11
     concat
-    // smart_contracts/arc4_types/contract.py:252
+    // smart_contracts/arc4_types/contract.py:246
     // self.todos[index].completed = arc4.Bool(True)  # noqa: FBT003
     bytec_0 // "todos"
     swap
     app_global_put
 
-complete_todo_after_for@6:
-    retsub
-
-complete_todo_after_if_else@4:
-    frame_bury 8
-    b complete_todo_for_header@1
-
-
-// smart_contracts.arc4_types.contract.Arc4Struct.return_todo(task: bytes) -> bytes:
-return_todo:
-    // smart_contracts/arc4_types/contract.py:255-256
+complete_todo_after_for@7:
+    // smart_contracts/arc4_types/contract.py:242
     // @abimethod()
-    // def return_todo(self, task: arc4.String) -> Todo:
-    proto 1 1
+    intc_2 // 1
+    return
+
+complete_todo_after_if_else@5:
+    bury 1
+    b complete_todo_for_header@2
+
+
+// smart_contracts.arc4_types.contract.Arc4Struct.return_todo[routing]() -> void:
+return_todo:
     bytec_1 // ""
-    dup
+    dupn 2
+    // smart_contracts/arc4_types/contract.py:249
+    // @abimethod()
+    txna ApplicationArgs 1
     intc_0 // 0
-    // smart_contracts/arc4_types/contract.py:259-260
+    // smart_contracts/arc4_types/contract.py:253-254
     // exist = False
     // for index in urange(self.todos.length):
     dupn 2
-    // smart_contracts/arc4_types/contract.py:260
+    // smart_contracts/arc4_types/contract.py:254
     // for index in urange(self.todos.length):
     bytec_0 // "todos"
     app_global_get_ex
@@ -467,14 +412,14 @@ return_todo:
     extract_uint16
     intc_0 // 0
 
-return_todo_for_header@1:
-    // smart_contracts/arc4_types/contract.py:260
+return_todo_for_header@2:
+    // smart_contracts/arc4_types/contract.py:254
     // for index in urange(self.todos.length):
-    frame_dig 5
-    frame_dig 4
+    dup
+    dig 2
     <
-    bz return_todo_after_for@6
-    // smart_contracts/arc4_types/contract.py:262
+    bz return_todo_after_for@7
+    // smart_contracts/arc4_types/contract.py:255
     // if self.todos[index].task == task:
     intc_0 // 0
     bytec_0 // "todos"
@@ -482,34 +427,33 @@ return_todo_for_header@1:
     assert // check self.todos exists
     dup
     extract 2 0
-    frame_dig 5
+    swap
+    intc_0 // 0
+    extract_uint16
+    dig 2
     dup
-    cover 3
     intc_1 // 2
     *
     dup
-    frame_bury 0
-    dig 1
+    bury 12
+    dig 3
     swap
     extract_uint16
-    uncover 2
-    intc_0 // 0
-    extract_uint16
-    uncover 3
+    swap
     intc_2 // 1
     +
     dup
-    frame_bury 5
-    swap
+    bury 11
+    uncover 2
     dig 1
-    - // on error: Index access is out of bounds
+    - // on error: index access is out of bounds
     dig 3
     len
     uncover 2
     intc_1 // 2
     *
     dup
-    frame_bury 1
+    bury 11
     dig 4
     swap
     extract_uint16
@@ -522,10 +466,10 @@ return_todo_for_header@1:
     dig 1
     len
     substring3
-    frame_dig -1
+    dig 5
     ==
-    bz return_todo_for_header@1
-    // smart_contracts/arc4_types/contract.py:263
+    bz return_todo_after_if_else@5
+    // smart_contracts/arc4_types/contract.py:256
     // todo_to_return = self.todos[index].copy()
     intc_0 // 0
     bytec_0 // "todos"
@@ -533,36 +477,44 @@ return_todo_for_header@1:
     assert // check self.todos exists
     dup
     extract 2 0
-    dup
-    frame_dig 0
-    extract_uint16
-    uncover 2
+    swap
     intc_0 // 0
     extract_uint16
-    frame_dig 5
-    - // on error: Index access is out of bounds
+    dig 1
+    dig 10
+    extract_uint16
+    swap
+    dig 9
+    - // on error: index access is out of bounds
     dig 2
     len
     dig 3
-    frame_dig 1
+    dig 10
     extract_uint16
     uncover 2
     select
     substring3
-    frame_bury 2
-    // smart_contracts/arc4_types/contract.py:264
+    bury 4
+    // smart_contracts/arc4_types/contract.py:257
     // exist = True
     intc_2 // 1
-    frame_bury 3
-    b return_todo_for_header@1
+    bury 3
 
-return_todo_after_for@6:
-    // smart_contracts/arc4_types/contract.py:266
+return_todo_after_if_else@5:
+    dig 6
+    bury 1
+    b return_todo_for_header@2
+
+return_todo_after_for@7:
+    // smart_contracts/arc4_types/contract.py:259
     // assert exist
-    frame_dig 3
+    dig 2
     assert
-    // smart_contracts/arc4_types/contract.py:268
-    // return todo_to_return
-    frame_dig 2
-    frame_bury 0
-    retsub
+    // smart_contracts/arc4_types/contract.py:249
+    // @abimethod()
+    bytec_3 // 0x151f7c75
+    dig 4
+    concat
+    log
+    intc_2 // 1
+    return

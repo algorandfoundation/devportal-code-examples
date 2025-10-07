@@ -1,137 +1,108 @@
-#pragma version 10
+#pragma version 11
 #pragma typetrack false
 
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
 main:
     intcblock 0 1
-    bytecblock 0x151f7c75 "my_counter"
-    // contracts/ReferenceAccountApp/contract.algo.ts:51
+    bytecblock "my_counter" 0x151f7c75
+    // contracts/ReferenceAccountApp/contract.algo.ts:50
     // export default class ReferenceAccountApp extends Contract {
     txn NumAppArgs
-    bz main_bare_routing@7
-    pushbytess 0x87ad70bf 0x31398f57 // method "getMyCounter()uint64", method "getMyCounterWithArg(account,application)uint64"
+    bz main___algots__.defaultCreate@9
+    txn OnCompletion
+    !
+    assert // OnCompletion must be NoOp
+    txn ApplicationID
+    assert
+    pushbytess 0x87ad70bf 0x605c4419 // method "getMyCounter()uint64", method "getMyCounterWithArg(address,uint64)uint64"
     txna ApplicationArgs 0
-    match main_getMyCounter_route@3 main_getMyCounterWithArg_route@4
+    match getMyCounter getMyCounterWithArg
+    err
 
-main_after_if_else@11:
-    // contracts/ReferenceAccountApp/contract.algo.ts:51
-    // export default class ReferenceAccountApp extends Contract {
-    intc_0 // 0
-    return
-
-main_getMyCounterWithArg_route@4:
-    // contracts/ReferenceAccountApp/contract.algo.ts:79
-    // @abimethod({ readonly: true })
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    // contracts/ReferenceAccountApp/contract.algo.ts:51
-    // export default class ReferenceAccountApp extends Contract {
-    txna ApplicationArgs 1
-    btoi
-    txnas Accounts
-    txna ApplicationArgs 2
-    btoi
-    txnas Applications
-    // contracts/ReferenceAccountApp/contract.algo.ts:79
-    // @abimethod({ readonly: true })
-    callsub getMyCounterWithArg
-    itob
-    bytec_0 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_1 // 1
-    return
-
-main_getMyCounter_route@3:
-    // contracts/ReferenceAccountApp/contract.algo.ts:56
-    // @abimethod({ readonly: true })
-    txn OnCompletion
-    !
-    assert // OnCompletion is not NoOp
-    txn ApplicationID
-    assert // can only call when not creating
-    callsub getMyCounter
-    itob
-    bytec_0 // 0x151f7c75
-    swap
-    concat
-    log
-    intc_1 // 1
-    return
-
-main_bare_routing@7:
-    // contracts/ReferenceAccountApp/contract.algo.ts:51
+main___algots__.defaultCreate@9:
+    // contracts/ReferenceAccountApp/contract.algo.ts:50
     // export default class ReferenceAccountApp extends Contract {
     txn OnCompletion
-    bnz main_after_if_else@11
+    !
     txn ApplicationID
     !
-    assert // can only call when creating
-    intc_1 // 1
-    return
+    &&
+    return // on error: OnCompletion must be NoOp && can only call when creating
 
 
-// contracts/ReferenceAccountApp/contract.algo.ts::ReferenceAccountApp.getMyCounter() -> uint64:
+// contracts/ReferenceAccountApp/contract.algo.ts::ReferenceAccountApp.getMyCounter[routing]() -> void:
 getMyCounter:
-    // contracts/ReferenceAccountApp/contract.algo.ts:56-57
-    // @abimethod({ readonly: true })
-    // public getMyCounter(): uint64 {
-    proto 0 1
     // contracts/ReferenceAccountApp/contract.algo.ts:58
-    // const address = new Address('WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M')
+    // const addressBytes = address.bytes
     pushbytes base32(WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRA) // addr WMHF4FLJNKY2BPFK7YPV5ID6OZ7LVDB2B66ZTXEAMLL2NX4WJZRJFVX66M
-    // contracts/ReferenceAccountApp/contract.algo.ts:61
+    // contracts/ReferenceAccountApp/contract.algo.ts:60
     // const app = Application(1717) // Replace with your application id
     pushint 1717 // 1717
-    // contracts/ReferenceAccountApp/contract.algo.ts:64
+    // contracts/ReferenceAccountApp/contract.algo.ts:63
     // const [value, hasValue] = op.AppLocal.getExUint64(account, app, Bytes('my_counter'))
-    bytec_1 // "my_counter"
+    bytec_0 // "my_counter"
     app_local_get_ex
+    // contracts/ReferenceAccountApp/contract.algo.ts:65
+    // if (!hasValue) {
+    bnz getMyCounter_after_if_else@3
     // contracts/ReferenceAccountApp/contract.algo.ts:66
-    // if (!hasValue) {
-    bnz getMyCounter_after_if_else@2
-    // contracts/ReferenceAccountApp/contract.algo.ts:67
     // return 0
     intc_0 // 0
+
+getMyCounter_after_inlined_contracts/ReferenceAccountApp/contract.algo.ts::ReferenceAccountApp.getMyCounter@4:
+    // contracts/ReferenceAccountApp/contract.algo.ts:55-56
+    // @readonly
+    // public getMyCounter(): uint64 {
+    itob
+    bytec_1 // 0x151f7c75
     swap
-    retsub
+    concat
+    log
+    intc_1 // 1
+    return
 
-getMyCounter_after_if_else@2:
-    // contracts/ReferenceAccountApp/contract.algo.ts:70
-    // return value
-    frame_dig 0
-    swap
-    retsub
+getMyCounter_after_if_else@3:
+    dup
+    // contracts/ReferenceAccountApp/contract.algo.ts:55-56
+    // @readonly
+    // public getMyCounter(): uint64 {
+    b getMyCounter_after_inlined_contracts/ReferenceAccountApp/contract.algo.ts::ReferenceAccountApp.getMyCounter@4
 
 
-// contracts/ReferenceAccountApp/contract.algo.ts::ReferenceAccountApp.getMyCounterWithArg(account: bytes, app: uint64) -> uint64:
+// contracts/ReferenceAccountApp/contract.algo.ts::ReferenceAccountApp.getMyCounterWithArg[routing]() -> void:
 getMyCounterWithArg:
-    // contracts/ReferenceAccountApp/contract.algo.ts:79-80
-    // @abimethod({ readonly: true })
+    // contracts/ReferenceAccountApp/contract.algo.ts:78-79
+    // @readonly
     // public getMyCounterWithArg(account: Account, app: Application): uint64 {
-    proto 2 1
-    // contracts/ReferenceAccountApp/contract.algo.ts:82
+    txna ApplicationArgs 1
+    txna ApplicationArgs 2
+    btoi
+    // contracts/ReferenceAccountApp/contract.algo.ts:81
     // const [value, hasValue] = op.AppLocal.getExUint64(account, app, Bytes('my_counter'))
-    frame_dig -2
-    frame_dig -1
-    bytec_1 // "my_counter"
+    bytec_0 // "my_counter"
     app_local_get_ex
-    // contracts/ReferenceAccountApp/contract.algo.ts:84
+    // contracts/ReferenceAccountApp/contract.algo.ts:83
     // if (!hasValue) {
-    bnz getMyCounterWithArg_after_if_else@2
-    // contracts/ReferenceAccountApp/contract.algo.ts:85
+    bnz getMyCounterWithArg_after_if_else@3
+    // contracts/ReferenceAccountApp/contract.algo.ts:84
     // return 0
     intc_0 // 0
-    swap
-    retsub
 
-getMyCounterWithArg_after_if_else@2:
-    // contracts/ReferenceAccountApp/contract.algo.ts:88
-    // return value
-    frame_dig 0
+getMyCounterWithArg_after_inlined_contracts/ReferenceAccountApp/contract.algo.ts::ReferenceAccountApp.getMyCounterWithArg@4:
+    // contracts/ReferenceAccountApp/contract.algo.ts:78-79
+    // @readonly
+    // public getMyCounterWithArg(account: Account, app: Application): uint64 {
+    itob
+    bytec_1 // 0x151f7c75
     swap
-    retsub
+    concat
+    log
+    intc_1 // 1
+    return
+
+getMyCounterWithArg_after_if_else@3:
+    dup
+    // contracts/ReferenceAccountApp/contract.algo.ts:78-79
+    // @readonly
+    // public getMyCounterWithArg(account: Account, app: Application): uint64 {
+    b getMyCounterWithArg_after_inlined_contracts/ReferenceAccountApp/contract.algo.ts::ReferenceAccountApp.getMyCounterWithArg@4
